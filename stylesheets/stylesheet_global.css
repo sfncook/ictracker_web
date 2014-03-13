@@ -1,0 +1,212 @@
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,400italic,700);
+@import url(http://fonts.googleapis.com/css?family=Carrois+Gothic+SC);
+
+/*
+ **** MAIN STYLES ****
+ */
+html {
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+h1 {
+    margin-top: 2px;
+    margin-left: 10px;
+}
+
+#title_icon {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #AAA;
+    border-radius: 3px;
+}
+
+#title_icon:hover {
+    cursor: pointer;
+}
+
+#time {
+    font-family: 'Carrois Gothic SC';
+    font-size: xx-large !important;
+    position: absolute;
+    right: 9px;
+    top: 90px;
+}
+
+body {
+    background: #CCC;
+    color: white;
+    font-family: 'Roboto', Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.header {
+    background: #AAA;
+    position: absolute;
+    right: 0;
+    top:0;
+    width: 90px;
+    height: 100%;
+}
+
+.footer {
+    background: #AAA;
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    height: 10px;
+}
+
+
+
+/*
+ **** BUTTONS ****
+ */
+.button {
+	text-align: center;
+	background: #999;
+	color: #EEE;
+	border: none;
+	border-radius: 3px;
+	padding: 2px 5px 5px 5px;
+	text-shadow: 1px 1px #AAA;
+}
+.button:hover {
+	background-color: #FFF;
+	cursor: pointer;
+}
+.button:active {
+	background-color: #BBB !important;
+	cursor: pointer;
+}
+
+
+/*
+ **** HEADER ITEMS ****
+ */
+#safety_btn_label {
+	position: absolute;
+	color: #FFF;
+	top: 135px;
+	left: 20px;
+	width: 60px;
+	border-top: 1px solid #888;
+}
+
+#safety_btn {
+	position: absolute;
+	top: 160px;
+	left: 10px;
+	width: 60px;
+}
+
+#mode_btn {
+	position: absolute;
+	top: 200px;
+	left: 10px;
+	width: 60px;
+}
+
+
+/*
+ **** T-BAR BOXES ****
+ */
+#tbar_container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.tbar {
+	position: absolute;
+	left: 5mm;
+	top: 5mm;
+	border:1px solid #999;
+	background: #DDD;
+	width: 70mm;
+	height: 70mm;
+	padding: 1mm;
+	border-radius: 3px;
+}
+
+.titleBtn {
+	position: absolute;
+	left: 10mm;
+	top: 1mm;
+	width:  45mm;
+	height: 5mm;
+    font-weight: 500;
+}
+
+.units {
+	background: #FFF;
+	position: absolute;
+	left: 0mm;
+	top: 9mm;
+	width: 31mm;
+	height: 63mm;
+}
+.unit_btn  {
+	background: #AAC7D1;
+	border-bottom: 2px dotted #888 !important;
+	border-radius: 10px;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 90px;
+}
+
+.actions {
+	background: #FFF;
+	position: absolute;
+	left: 31mm;
+	top: 9mm;
+	width: 154px;
+	height: 63mm;
+	border-left: 1px solid #888;
+}
+.action_btn {
+	background: rgba(170, 199, 209, 50);
+	border-bottom: 2px dotted #888 !important;
+	border-radius: 10px;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 130px;
+}
+
+.mayDayBtn {
+	background: #F67574 !important;
+	color: #EEE;
+	position: absolute;
+	left: 1mm;
+	top: 1mm;
+	text-shadow: none;
+	margin: 0px;
+	width:  5mm;
+	height: 5mm;
+}
+.mayDayBtn:hover {background-color: #ff6060 !important;}
+
+.psi_red {background-color: red;}
+.psi_yellow {background-color: yellow;}
+.psi_green {background-color: #3dff00;}
+.psiBtn {
+	position: absolute;
+	left: 59mm;
+	top: 1mm;
+	width:  5mm;
+	height: 5mm;
+	width: 9mm !important;
+	color: #666 !important;
+	font-weight: normal;
+}
