@@ -121,15 +121,12 @@ body {
  **** T-BAR BOXES ****
  */
 #tbar_container {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
 }
 
 .tbar {
-	position: absolute;
-	left: 5mm;
-	top: 5mm;
 	border:1px solid #999;
 	background: #DDD;
 	width: 70mm;
