@@ -22,7 +22,8 @@
 
 
 .tbar_title_container {
-	background: #DDD;
+	/*background: #DDD;*/
+	background: #999;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-around;

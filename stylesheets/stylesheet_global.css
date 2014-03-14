@@ -53,7 +53,7 @@ body {
 
 #ict_header {
     background: #AAA;
-    position: absolute;
+    position: fixed;
     right: 0;
     top:0;
     width: 90px;
@@ -62,7 +62,7 @@ body {
 
 .footer {
     background: #AAA;
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0px;
     width: 100%;
@@ -76,15 +76,16 @@ body {
  */
 .button {
 	text-align: center;
-	background: #999;
-	color: #EEE;
+	background: #DDD;
+	color: #666;
 	border: none;
 	border-radius: 3px;
 	padding: 4px;
 	text-shadow: 1px 1px #AAA;
 }
 .button:hover {
-	background-color: #FFF;
+	background-color: #EEE;
+    color: #999;
 	cursor: pointer;
 }
 .button:active {
