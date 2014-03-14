@@ -6,6 +6,7 @@
  **** MAIN STYLES ****
  */
 html {
+    font-size: 100%;
     overflow-y: scroll;
     margin: 0;
     padding: 0;
@@ -114,96 +115,4 @@ body {
 	top: 200px;
 	left: 10px;
 	width: 60px;
-}
-
-
-/*
- **** T-BAR BOXES ****
- */
-#tbar_container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-}
-
-.tbar {
-	border:1px solid #999;
-	background: #DDD;
-	width: 70mm;
-	height: 70mm;
-	padding: 1mm;
-	border-radius: 3px;
-}
-
-.titleBtn {
-	position: absolute;
-	left: 10mm;
-	top: 1mm;
-	width:  45mm;
-	height: 5mm;
-    font-weight: 500;
-}
-
-.units {
-	background: #FFF;
-	position: absolute;
-	left: 0mm;
-	top: 9mm;
-	width: 31mm;
-	height: 63mm;
-}
-.unit_btn  {
-	background: #AAC7D1;
-	border-bottom: 2px dotted #888 !important;
-	border-radius: 10px;
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 90px;
-}
-
-.actions {
-	background: #FFF;
-	position: absolute;
-	left: 31mm;
-	top: 9mm;
-	width: 154px;
-	height: 63mm;
-	border-left: 1px solid #888;
-}
-.action_btn {
-	background: rgba(170, 199, 209, 50);
-	border-bottom: 2px dotted #888 !important;
-	border-radius: 10px;
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 130px;
-}
-
-.mayDayBtn {
-	background: #F67574 !important;
-	color: #EEE;
-	position: absolute;
-	left: 1mm;
-	top: 1mm;
-	text-shadow: none;
-	margin: 0px;
-	width:  5mm;
-	height: 5mm;
-}
-.mayDayBtn:hover {background-color: #ff6060 !important;}
-
-.psi_red {background-color: red;}
-.psi_yellow {background-color: yellow;}
-.psi_green {background-color: #3dff00;}
-.psiBtn {
-	position: absolute;
-	left: 59mm;
-	top: 1mm;
-	width:  5mm;
-	height: 5mm;
-	width: 9mm !important;
-	color: #666 !important;
-	font-weight: normal;
 }
