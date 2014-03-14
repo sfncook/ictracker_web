@@ -7,4 +7,4 @@ function initTBars( ) {
 	$("#tbar_prototype").hide();
 }
 
-//$( document ).ready(initTBars);
+$( document ).ready(initTBars);

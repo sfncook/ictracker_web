@@ -47,14 +47,16 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    display: flex;
+    flex-flow: column;
 }
 
-.header {
+#ict_header {
     background: #AAA;
     position: absolute;
     right: 0;
     top:0;
-    width: 90px;
+    width: 10%;
     height: 100%;
 }
 
@@ -78,7 +80,7 @@ body {
 	color: #EEE;
 	border: none;
 	border-radius: 3px;
-	padding: 2px 5px 5px 5px;
+	padding: 4px;
 	text-shadow: 1px 1px #AAA;
 }
 .button:hover {
