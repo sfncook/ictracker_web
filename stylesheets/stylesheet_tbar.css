@@ -5,16 +5,15 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-	padding: 0;
+	padding: 10px;
 	width: 90%
 }
 
 .tbar {
 	border:1px solid #999;
-	background: #DDD;
 	width: 275px;
 	height: 275px;
-	margin: 15px;
+	margin: 5px;
 	padding: 0;
 	border-radius: 3px;
     display: flex;
@@ -23,6 +22,7 @@
 
 
 .tbar_title_container {
+	background: #DDD;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-around;
