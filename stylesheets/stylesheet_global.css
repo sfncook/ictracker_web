@@ -48,16 +48,23 @@ body {
     padding: 0;
     height: 100%;
     display: flex;
-    flex-flow: column;
+    flex-flow: row-reverse nowrap;
 }
 
+.header {
+    width: 90px;
+}
 #ict_header {
     background: #AAA;
     position: fixed;
     right: 0;
     top:0;
-    width: 90px;
     height: 100%;
+}
+#header_spacer {
+    background: red;
+    flex-basis: 90px;
+    flex-shrink: 0;
 }
 
 .footer {
