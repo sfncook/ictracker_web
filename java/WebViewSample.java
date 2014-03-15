@@ -36,7 +36,8 @@ class Browser extends Region {
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        webEngine.load("http://www.oracle.com/products/index.html");
+        //webEngine.load("/Users/shawn/Projects/FireIncidentReport/ICT2/index2.html");
+        webEngine.load("http://dreadfulbacon.com/ict/index.html");
         //add the web view to the scene
         getChildren().add(browser);
  
