@@ -1,23 +1,46 @@
-function init( ) {
+function showSectorDialog() {
+	$("#dialogContainer").show();
+}
+function initSectorDialog( ) {
+	var prototypeBtn = $("<div class=\"sector_dialog_btn button\">PROTOTYPE</div>");
+	sectors.forEach(function (element, index, array) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(element);
+		newBtn.appendTo("#sector_dialog");
+	});
+	//layoutSizeAndCenterDialog("sector_dialog", sectorBtns, 4, function(title) {callbackSetTitle(title);});
+}
+
+
+/**
+ * T-Bars
+ **/
+function initTbars() {
 	//Init T-Bars
 	for(var i=0; i<8; i++) {
 		var tbar = $("#tbar_prototype" ).clone().appendTo( "#tbar_container" );
 		var newId = "tbar_"+i;
 		tbar.attr("id",newId);
+		tbar.click(showSectorDialog);
 	}
 	$("#tbar_prototype").hide();
+}
+
+
+
+
+function init( ) {
+	initTbars();
 	
 	//Init Dialogs
-	//$("#windowDialogCancelBtn").hide();
+	initSectorDialog();
 	$("#dialogContainer").click(hideAllDialogs);
-	//$("#dialogContainer").hide();
+	$("#dialogContainer").hide();
 }
 
 //Call this to dismiss the dialogs
 function hideAllDialogs( ) {
 	$("#dialogContainer").hide();
-	$(".dialog").hide();
-	$(".dialog").children().hide();
 }
 
 $( document ).ready(init);
