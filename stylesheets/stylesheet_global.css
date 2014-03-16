@@ -47,7 +47,6 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    display: flex;
     flex-flow: row nowrap;
 }
 
@@ -84,7 +83,7 @@ body {
 	color: #666;
 	border: none;
 	border-radius: 3px;
-	padding: 1px 4px 4px 4px;
+	padding: 4px 4px 4px 4px;
 	text-shadow: 1px 1px #AAA;
     cursor: pointer;
 }
@@ -193,14 +192,14 @@ body {
 
 #sector_dialog {
     width: 760px;
-    height: 360px;
+    height: 340px;
 }
 #psi_dialog {
     width: 425px;
-    height: 235px;
+    height: 220px;
 }
 #actions_dialog {
     width: 600px;
-    height: 255px;
+    height: 240px;
 }
 
