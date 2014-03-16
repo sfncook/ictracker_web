@@ -114,6 +114,7 @@ body {
 	top: 160px;
 	left: 10px;
 	width: 60px;
+    z-index: 50;
 }
 
 #mode_btn {
@@ -121,6 +122,7 @@ body {
 	top: 200px;
 	left: 10px;
 	width: 60px;
+    z-index: 50;
 }
 
 
@@ -244,5 +246,9 @@ body {
     width:70px;
     height: 15px;
     padding: 2;
+}
+.unit_dialog_btn {
+    width: 80px;
+    height: 15px;
 }
 
