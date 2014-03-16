@@ -21,9 +21,9 @@ function initTbars() {
 		var tbar = $("#tbar_prototype" ).clone().appendTo( "#tbar_container" );
 		var newId = "tbar_"+i;
 		tbar.attr("id",newId);
-		tbar.click(showSectorDialog);
 	}
 	$("#tbar_prototype").hide();
+	$(".titleBtn").click(showSectorDialog);
 }
 
 

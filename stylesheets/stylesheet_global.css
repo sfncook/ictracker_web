@@ -143,17 +143,23 @@ body {
 
 
 /*
- **** Sector Dialog ****
+ **** Dialogs ****
  */
-#sector_dialog {
-    background: #666;
-    width: 80%;
-    height: 50%;
+.dialog {
+    background: #888;
     margin-top: 100px;
+    padding: 5px;
     display: flex;
-    flex-flow: column wrap;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    /*justify-content: space-between;
+    /*align-items: flex-start;
+    align-content: flex-start;*/
     border-radius: 3px;
+}
+
+#sector_dialog {
+    width: 760px;
+    height: 400px;
 }
 .sector_dialog_btn {
     width: 170px;
