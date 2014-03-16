@@ -203,3 +203,27 @@ body {
     height: 240px;
 }
 
+#units_dialog {
+    width: 800px;
+    height: 430px;
+}
+.unitsDlg_spacer {
+    background: blue;
+    width:90px;
+    height:40px;
+}
+.unitsDlg_cities {
+    background: red;
+    width: 700px;
+    height:40px;
+}
+.unitsDlg_types {
+    background: green;
+    width:90px;
+    height: 300px;
+}
+.unitsDlg_units {
+    background: yellow;
+    flex-grow: 1;
+}
+

@@ -10,6 +10,7 @@ function showSectorDialog(titleBtnId) {
 	$("#sector_dialog").show();
 	$("#psi_dialog").hide();
 	$("#actions_dialog").hide();
+	$("#units_dialog").hide();
 	$(".sector_dialog_btn").show();
 }
 function initSectorDialog( ) {
@@ -41,6 +42,7 @@ function showPsiDialog() {
 	$("#sector_dialog").hide();
 	$("#psi_dialog").show();
 	$("#actions_dialog").hide();
+	$("#units_dialog").hide();
 	$(".sector_dialog_btn").show();
 }
 function initPsiDialog( ) {
@@ -78,6 +80,7 @@ function showActionsDialog() {
 	$("#sector_dialog").hide();
 	$("#psi_dialog").hide();
 	$("#actions_dialog").show();
+	$("#units_dialog").hide();
 	$(".sector_dialog_btn").show();
 }
 function initActionsDialog( ) {
@@ -96,6 +99,50 @@ function initActionsDialog( ) {
 			hideAllDialogs();
 			});
 	});
+}
+
+
+
+/**
+ * Units Dialog
+ **/
+function showUnitsDialog() {
+	$("#dialogContainer").show();
+	$("#sector_dialog").hide();
+	$("#psi_dialog").hide();
+	$("#actions_dialog").hide();
+	$("#units_dialog").show();
+	$(".sector_dialog_btn").show();
+}
+function initUnitsDialog( ) {
+	/*
+	var unitsDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "units_dialog";
+	unitsDialog.attr("id",newId);
+	var unitsDialogBody = unitsDialog.children(".dialog_body");
+	var unitsTitleDiv = unitsDialog.children(".dialog_title").children(".dialog_title_text_container");
+	unitsTitleDiv.html("Units");
+	var prototypeBtn = $("<div class=\"unit_btn units_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeCityBtn = $("<div class=\"city_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeUnitTypeBtn = $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	*/
+	$.each(unitsByTypeByCity, function( city, unitsByType ) {
+		console.log("City:"+city);
+		$.each(unitsByType, function( type, units ) {
+			console.log(" Type:"+type);
+			units.forEach(function (unitName, index, array) {
+				console.log("  "+unitName);
+			});
+		});
+	});
+	/*units.forEach(function (actionName, index, array) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(actionName);
+		unitsDialogBody.append(newBtn);
+		newBtn.click(function() {
+			hideAllDialogs();
+			});
+	});*/
 }
 
 
@@ -119,6 +166,7 @@ function initTbars() {
 	$("#tbar_prototype").hide();
 	$(".psiBtn").click(showPsiDialog);
 	$(".action_btn").click(showActionsDialog);
+	$(".unit_btn").click(showUnitsDialog);
 }
 
 
@@ -131,9 +179,12 @@ function init( ) {
 	initSectorDialog();
 	initPsiDialog();
 	initActionsDialog();
+	initUnitsDialog();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(hideAllDialogs);
+	
+	$("#units_dialog").show();
 }
 
 //Call this to dismiss the dialogs
@@ -204,3 +255,90 @@ var sectors = [
 	"Transportation",
 	"Accountability",
 	"Triage"];
+
+
+var engine="Engine";
+var ladder="Ladder";
+var bc="BC";
+var squad="Squad";
+var unitsByTypeByCity = {
+	"Mesa":{
+		engine:[
+			"E201",
+			"E202",
+			"E203",
+			"E204",
+			"E205",
+			"E206",
+			"E207",
+			"E208",
+			"E209",
+			"E210",
+			"E211",
+			"E212",
+			"E213",
+			"E215",
+			"E216",
+			"E217",
+			"E218",
+			"E219",
+			"E220",
+			"E221",
+			"E222",
+			"E223",
+			"E224",
+			"E225",
+			"E226",
+			"E227",
+			"E228",
+			"E229"],
+		ladder:[
+			"L201",
+			"L204",
+			"L206",
+			"L209",
+			"L214",
+			"L220"],
+		bc:[
+			"BC201",
+			"BC202",
+			"BC203"],
+		squad:[
+			"SQ204",
+			"SQ206"],
+	},
+	
+	"Gilbert":{
+		engine:[
+			"E251",
+			"E252",		
+			"E253"],		
+		ladder:[
+			"L251",
+			"L252",],
+		bc:[
+			"BC291",],
+	},
+	
+	"Chandler":{
+		engine:[
+			"E282",
+			"E283",
+			"E284",
+			"E285",
+			"E286",
+			"E287",
+			"E288",
+			"E289"],
+		ladder:[
+			"L281",
+			"L283"],
+		bc:[
+			"BC281",
+			"BC282"],
+	},
+};
+
+
+
+
