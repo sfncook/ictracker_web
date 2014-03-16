@@ -62,6 +62,11 @@
 	height: 250px;
 	padding: 0px;
 }
+.blank_btn {
+	background: #AAC7D1;
+	border-bottom: 2px dotted #888 !important;
+	border-radius: 10px;
+}
 .units {
 	background: #FFF;
 	width: 40%;
@@ -70,9 +75,6 @@
     flex-flow: column;
 }
 .unit_btn  {
-	background: #AAC7D1;
-	border-bottom: 2px dotted #888 !important;
-	border-radius: 10px;
 	width: 90px;
 }
 
@@ -85,9 +87,9 @@
     flex-flow: column;
 }
 .action_btn {
-	background: rgba(170, 199, 209, 50);
-	border-bottom: 2px dotted #888 !important;
-	border-radius: 10px;
 	width: 130px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 

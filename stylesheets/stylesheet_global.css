@@ -148,7 +148,7 @@ body {
     flex-flow: column nowrap;
     border-radius: 3px;
     border: 1px solid #888;
-    box-shadow: 10px 10px 5px #888;
+    box-shadow: 0px 0px 15px #555;
 }
 .dialog_title {
     background: #AAA;
@@ -198,5 +198,9 @@ body {
 #psi_dialog {
     width: 425px;
     height: 235px;
+}
+#actions_dialog {
+    width: 600px;
+    height: 255px;
 }
 
