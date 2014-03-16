@@ -4,14 +4,18 @@
 /**
  * Sector Dialog
  **/
-var tbar_title_btn_clicked;
-function showSectorDialog(titleBtnId) {
+var titleBtnId_clicked;
+function showSectorDialog( titleBtnId ){
+  return function(){
+    //console.log(titleBtnId);
+	titleBtnId_clicked = titleBtnId;
 	$("#dialogContainer").show();
 	$("#sector_dialog").show();
 	$("#psi_dialog").hide();
 	$("#actions_dialog").hide();
 	$("#units_dialog").hide();
 	$(".sector_dialog_btn").show();
+  }
 }
 function initSectorDialog( ) {
 	
@@ -27,7 +31,7 @@ function initSectorDialog( ) {
 		newBtn.html(sectorName);
 		sectorDialogBody.append(newBtn);
 		newBtn.click(function() {
-			tbar_title_btn_clicked.html(sectorName);
+			$("#"+titleBtnId_clicked).html(sectorName);
 			hideAllDialogs();
 			});
 	});
@@ -156,10 +160,7 @@ function initTbars() {
 		var titleBtn = tbar.children(".tbar_title_container").children(".titleBtn");
 		var titleBtnId = "tbar_title_"+i;
 		titleBtn.attr("id", titleBtnId);
-		titleBtn.click(
-			function() {
-				showSectorDialog(titleBtn);
-			});
+		titleBtn.click(showSectorDialog(titleBtnId));
 	}
 	$("#tbar_prototype").hide();
 	$(".psiBtn").click(showPsiDialog);
