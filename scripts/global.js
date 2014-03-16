@@ -2,11 +2,11 @@ function showSectorDialog() {
 	$("#dialogContainer").show();
 }
 function initSectorDialog( ) {
-	var prototypeBtn = $("<div class=\"sector_dialog_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"titleBtn dialog_btn button\">PROTOTYPE</div>");
 	sectors.forEach(function (element, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(element);
-		newBtn.appendTo("#sector_dialog");
+		newBtn.appendTo("#sector_dialog_body");
 	});
 	//layoutSizeAndCenterDialog("sector_dialog", sectorBtns, 4, function(title) {callbackSetTitle(title);});
 }
