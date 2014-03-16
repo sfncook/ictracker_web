@@ -126,12 +126,28 @@ function initUnitsDialog( ) {
 	var prototypeCityBtn = $("<div class=\"city_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn = $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	*/
+	
+	var prototypeCityBtn = $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeUnitTypeBtn = $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+
+	unitTypes.forEach(function (unitTypeName, index, array) {
+		//console.log("  "+unitTypeName);
+		var unitTypeBtn = prototypeUnitTypeBtn.clone().appendTo( "#unitsDlg_types" );
+		unitTypeBtn.html(unitTypeName);
+		var newId = "unit_type_btn_"+unitTypeName;
+		unitTypeBtn.attr("id",newId);
+	});
+	
 	$.each(unitsByTypeByCity, function( city, unitsByType ) {
-		console.log("City:"+city);
+		//console.log("City:"+city);
+		var unitCityBtn = prototypeCityBtn.clone().appendTo( "#unitsDlg_cities" );
+		unitCityBtn.html(city);
+		var newId = "unit_city_btn_"+city;
+		unitCityBtn.attr("id",newId);
 		$.each(unitsByType, function( type, units ) {
-			console.log(" Type:"+type);
+			//console.log(" Type:"+type);
 			units.forEach(function (unitName, index, array) {
-				console.log("  "+unitName);
+				//console.log("  "+unitName);
 			});
 		});
 	});
@@ -261,6 +277,11 @@ var engine="Engine";
 var ladder="Ladder";
 var bc="BC";
 var squad="Squad";
+var unitTypes = [
+	engine,
+	ladder,
+	bc,
+	squad,];
 var unitsByTypeByCity = {
 	"Mesa":{
 		engine:[

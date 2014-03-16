@@ -47,6 +47,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    display: flex;
     flex-flow: row nowrap;
 }
 
@@ -207,23 +208,30 @@ body {
     width: 800px;
     height: 430px;
 }
-.unitsDlg_spacer {
-    background: blue;
+#unitsDlg_spacer {
+    /*background: #AAA;*/
     width:90px;
-    height:40px;
+    height:35px;
 }
-.unitsDlg_cities {
-    background: red;
+#unitsDlg_cities {
+    /*background: #AAA;*/
     width: 700px;
-    height:40px;
+    display: flex;
+    flex-flow: row nowrap;
 }
-.unitsDlg_types {
-    background: green;
+#unitsDlg_types {
+    /*background: #AAA;*/
     width:90px;
-    height: 300px;
+    height: 358px;
+    display: flex;
+    flex-flow: column nowrap;
 }
-.unitsDlg_units {
-    background: yellow;
+#unitsDlg_units {
+    background: #FEFEFE;
     flex-grow: 1;
+}
+.unitCity_dialog_btn {
+    width:70px;
+    
 }
 
