@@ -115,20 +115,9 @@ function showUnitsDialog() {
 	$(".sector_dialog_btn").show();
 }
 function initUnitsDialog( ) {
-	/*
-	var unitsDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
-	var newId = "units_dialog";
-	unitsDialog.attr("id",newId);
-	var unitsDialogBody = unitsDialog.children(".dialog_body");
-	var unitsTitleDiv = unitsDialog.children(".dialog_title").children(".dialog_title_text_container");
-	unitsTitleDiv.html("Units");
-	var prototypeBtn = $("<div class=\"unit_btn units_dialog_btn dialog_btn button\">PROTOTYPE</div>");
-	var prototypeCityBtn = $("<div class=\"city_dialog_btn dialog_btn button\">PROTOTYPE</div>");
-	var prototypeUnitTypeBtn = $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
-	*/
-	
 	var prototypeCityBtn = $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn = $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeUnitBtn = $("<div class=\"unit_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 
 	unitTypes.forEach(function (unitTypeName, index, array) {
 		//console.log("  "+unitTypeName);
@@ -139,26 +128,19 @@ function initUnitsDialog( ) {
 	});
 	
 	$.each(unitsByTypeByCity, function( city, unitsByType ) {
-		//console.log("City:"+city);
 		var unitCityBtn = prototypeCityBtn.clone().appendTo( "#unitsDlg_cities" );
 		unitCityBtn.html(city);
 		var newId = "unit_city_btn_"+city;
 		unitCityBtn.attr("id",newId);
 		$.each(unitsByType, function( type, units ) {
-			//console.log(" Type:"+type);
 			units.forEach(function (unitName, index, array) {
-				//console.log("  "+unitName);
+				var unitBtn = prototypeUnitBtn.clone().appendTo( "#unitsDlg_units" );
+				unitBtn.html(unitName);
+				var newId = "unit_city_btn_"+city;
+				unitBtn.attr("id",newId);
 			});
 		});
 	});
-	/*units.forEach(function (actionName, index, array) {
-		var newBtn = prototypeBtn.clone();
-		newBtn.html(actionName);
-		unitsDialogBody.append(newBtn);
-		newBtn.click(function() {
-			hideAllDialogs();
-			});
-	});*/
 }
 
 

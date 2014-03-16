@@ -205,33 +205,44 @@ body {
 }
 
 #units_dialog {
-    width: 800px;
-    height: 430px;
+    width: 600px;
+    height: 400px;
+}
+#units_dlg_row1 {
+    display: flex;
+    flex-flow: row nowrap;
+}
+#units_dlg_row2 {
+    display: flex;
+    flex-flow: row nowrap;
 }
 #unitsDlg_spacer {
     /*background: #AAA;*/
-    width:90px;
-    height:35px;
+    flex-basis: 90px;
+    flex-shrink: 0;
 }
 #unitsDlg_cities {
     /*background: #AAA;*/
     width: 700px;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
+    border-bottom: 1px solid #888;
 }
 #unitsDlg_types {
     /*background: #AAA;*/
-    width:90px;
-    height: 358px;
     display: flex;
     flex-flow: column nowrap;
+    flex-basis: 90px;
+    flex-shrink: 0;
+    border-right: 1px solid #888;
 }
 #unitsDlg_units {
-    background: #FEFEFE;
-    flex-grow: 1;
+    display: flex;
+    flex-flow: row wrap;
 }
 .unitCity_dialog_btn {
     width:70px;
-    
+    height: 15px;
+    padding: 2;
 }
 
