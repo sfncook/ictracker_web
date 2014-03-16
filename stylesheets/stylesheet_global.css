@@ -65,7 +65,6 @@ body {
     flex-basis: 90px;
     flex-shrink: 0;
 }
-
 .footer {
     background: #AAA;
     position: fixed;
@@ -152,11 +151,25 @@ body {
     box-shadow: 10px 10px 5px #888;
 }
 .dialog_title {
-    background: #888;
+    background: #AAA;
     flex-shrink: 0;
     height: 1.5rem;
     text-align: center;
     font-size: 110%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+}
+.dialog_title_text_container {
+    flex-grow: 1;
+}
+.dialog_close_btn {
+    height: 1.0rem;
+    flex-basis: 1.0rem;
+    flex-shrink: 0;
+    padding: 1px;
+    line-height: 1.0em;
+    margin: 2px;
 }
 .dialog_body {
     padding: 3px;
@@ -172,7 +185,3 @@ body {
     box-shadow: 1px 1px 1px #888;
 }
 
-/*#sector_dialog {
-    width: 760px;
-    height: 370px;
-}*/

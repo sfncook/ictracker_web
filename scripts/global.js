@@ -9,7 +9,7 @@ function initSectorDialog( ) {
 	sectorDialog.css("width", "760px");
 	sectorDialog.css("height", "360px");
 	var sectorDialogBody = sectorDialog.children(".dialog_body");
-	var sectorTitleDiv = sectorDialog.children(".dialog_title");
+	var sectorTitleDiv = sectorDialog.children(".dialog_title").children(".dialog_title_text_container");
 	sectorTitleDiv.html("Sectors");
 	var prototypeBtn = $("<div class=\"titleBtn dialog_btn button\">PROTOTYPE</div>");
 	sectors.forEach(function (element, index, array) {
@@ -42,9 +42,9 @@ function init( ) {
 	
 	//Init Dialogs
 	initSectorDialog();
-	$("#dialogContainer").click(hideAllDialogs);
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
+	$(".dialog_close_btn").click(hideAllDialogs);
 }
 
 //Call this to dismiss the dialogs
