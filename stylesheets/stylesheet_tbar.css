@@ -42,13 +42,17 @@
     font-weight: 500;
 	width:  170px;
 }
-.psi_red {background-color: red;}
-.psi_yellow {background-color: yellow;}
-.psi_green {background-color: #3dff00;}
+.psi_red {
+	background: red;
+	color: #DDD !important;
+}
+.psi_yellow {background: yellow;}
+.psi_green {background: #3dff00;}
 .psiBtn {
 	width:  34px;
 	color: #666;
 	font-weight: normal;
+	font-size: 90%;
 }
 
 

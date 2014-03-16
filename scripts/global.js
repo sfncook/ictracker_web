@@ -10,8 +10,6 @@ function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
-	sectorDialog.css("width", "760px");
-	sectorDialog.css("height", "360px");
 	var sectorDialogBody = sectorDialog.children(".dialog_body");
 	var sectorTitleDiv = sectorDialog.children(".dialog_title").children(".dialog_title_text_container");
 	sectorTitleDiv.html("Sectors");
@@ -21,15 +19,18 @@ function initSectorDialog( ) {
 		newBtn.html(element);
 		sectorDialogBody.append(newBtn);
 	});
-	//sectorDialogBody.hide();
 }
 
+function showPsiDialog() {
+	$("#dialogContainer").show();
+	$("#sector_dialog").hide();
+	$("#psi_dialog").show();
+	$(".sector_dialog_btn").show();
+}
 function initPsiDialog( ) {
 	var psiDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "psi_dialog";
 	psiDialog.attr("id",newId);
-	psiDialog.css("width", "760px");
-	psiDialog.css("height", "360px");
 	var psiDialogBody = psiDialog.children(".dialog_body");
 	var psiTitleDiv = psiDialog.children(".dialog_title").children(".dialog_title_text_container");
 	psiTitleDiv.html("PSI Values");
@@ -40,7 +41,6 @@ function initPsiDialog( ) {
 		updateBgColor(psiValue, newBtn);
 		psiDialogBody.append(newBtn);
 	}
-	psiDialogBody.hide();
 }
 function updateBgColor(psi_value, btn) {
 	if (psi_value>=3000) {
@@ -65,6 +65,7 @@ function initTbars() {
 	}
 	$("#tbar_prototype").hide();
 	$(".titleBtn").click(showSectorDialog);
+	$(".psiBtn").click(showPsiDialog);
 }
 
 

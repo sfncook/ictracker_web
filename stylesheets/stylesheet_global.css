@@ -191,3 +191,12 @@ body {
     box-shadow: 1px 1px 1px #888;
 }
 
+#sector_dialog {
+    width: 760px;
+    height: 360px;
+}
+#psi_dialog {
+    width: 425px;
+    height: 235px;
+}
+
