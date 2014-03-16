@@ -2,13 +2,21 @@ function showSectorDialog() {
 	$("#dialogContainer").show();
 }
 function initSectorDialog( ) {
+	
+	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "sector_dialog";
+	sectorDialog.attr("id",newId);
+	sectorDialog.css("width", "760px");
+	sectorDialog.css("height", "360px");
+	var sectorDialogBody = sectorDialog.children(".dialog_body");
+	var sectorTitleDiv = sectorDialog.children(".dialog_title");
+	sectorTitleDiv.html("Sectors");
 	var prototypeBtn = $("<div class=\"titleBtn dialog_btn button\">PROTOTYPE</div>");
 	sectors.forEach(function (element, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(element);
-		newBtn.appendTo("#sector_dialog_body");
+		sectorDialogBody.append(newBtn);
 	});
-	//layoutSizeAndCenterDialog("sector_dialog", sectorBtns, 4, function(title) {callbackSetTitle(title);});
 }
 
 
@@ -36,6 +44,7 @@ function init( ) {
 	initSectorDialog();
 	$("#dialogContainer").click(hideAllDialogs);
 	$("#dialogContainer").hide();
+	$("#dialog_prototype").hide();
 }
 
 //Call this to dismiss the dialogs

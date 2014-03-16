@@ -48,7 +48,7 @@ body {
     padding: 0;
     height: 100%;
     display: flex;
-    flex-flow: row-reverse nowrap;
+    flex-flow: row nowrap;
 }
 
 .header {
@@ -61,8 +61,7 @@ body {
     top:0;
     height: 100%;
 }
-#header_spacer {
-    background: red;
+.header_spacer {
     flex-basis: 90px;
     flex-shrink: 0;
 }
@@ -173,7 +172,7 @@ body {
     box-shadow: 1px 1px 1px #888;
 }
 
-#sector_dialog {
+/*#sector_dialog {
     width: 760px;
     height: 370px;
-}
+}*/
