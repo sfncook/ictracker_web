@@ -1,5 +1,9 @@
+
 function showSectorDialog() {
 	$("#dialogContainer").show();
+	$("#sector_dialog").show();
+	$("#psi_dialog").hide();
+	$(".sector_dialog_btn").show();
 }
 function initSectorDialog( ) {
 	
@@ -11,12 +15,41 @@ function initSectorDialog( ) {
 	var sectorDialogBody = sectorDialog.children(".dialog_body");
 	var sectorTitleDiv = sectorDialog.children(".dialog_title").children(".dialog_title_text_container");
 	sectorTitleDiv.html("Sectors");
-	var prototypeBtn = $("<div class=\"titleBtn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"titleBtn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	sectors.forEach(function (element, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(element);
 		sectorDialogBody.append(newBtn);
 	});
+	//sectorDialogBody.hide();
+}
+
+function initPsiDialog( ) {
+	var psiDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "psi_dialog";
+	psiDialog.attr("id",newId);
+	psiDialog.css("width", "760px");
+	psiDialog.css("height", "360px");
+	var psiDialogBody = psiDialog.children(".dialog_body");
+	var psiTitleDiv = psiDialog.children(".dialog_title").children(".dialog_title_text_container");
+	psiTitleDiv.html("PSI Values");
+	var prototypeBtn = $("<div class=\"psiBtn dialog_btn button\">PROTOTYPE</div>");
+	for(var psiValue=4500; psiValue>=0; psiValue-=100) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(psiValue);
+		updateBgColor(psiValue, newBtn);
+		psiDialogBody.append(newBtn);
+	}
+	psiDialogBody.hide();
+}
+function updateBgColor(psi_value, btn) {
+	if (psi_value>=3000) {
+		btn.removeClass("psi_red").removeClass("psi_yellow").addClass("psi_green");
+	} else if (psi_value>=1500) {
+		btn.removeClass("psi_red").addClass("psi_yellow").removeClass("psi_green");
+	} else {
+		btn.addClass("psi_red").removeClass("psi_yellow").removeClass("psi_green");
+	}
 }
 
 
@@ -42,6 +75,7 @@ function init( ) {
 	
 	//Init Dialogs
 	initSectorDialog();
+	initPsiDialog();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(hideAllDialogs);

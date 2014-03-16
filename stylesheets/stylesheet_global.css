@@ -164,12 +164,18 @@ body {
     flex-grow: 1;
 }
 .dialog_close_btn {
+    background: #F67574;
     height: 1.0rem;
     flex-basis: 1.0rem;
     flex-shrink: 0;
-    padding: 1px;
+    padding: 2px 1px 1px 1px;
     line-height: 1.0em;
     margin: 2px;
+    font-size:80%;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid #CCC;
+    text-shadow: none;
 }
 .dialog_body {
     padding: 3px;
