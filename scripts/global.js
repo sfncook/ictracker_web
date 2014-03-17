@@ -4,18 +4,18 @@
 /**
  * Sector Dialog
  **/
-var btnId_clicked;
-function showDialog( btnId, dialogId ){
+var btn_clicked;
+function showDialog( btn, dialogId ){
   return function(){
 	$(".dialog").hide();
-	btnId_clicked = btnId;
+	btn_clicked = btn;
 	$("#dialogContainer").show();
 	$(dialogId).show();
   }
 }
 function setBtnText( text ){
   return function(){
-	$("#"+btnId_clicked).html(text);
+	btn_clicked.html(text);
 	hideAllDialogs();
   }
 }
@@ -34,7 +34,7 @@ function initSectorDialog( ) {
 		newBtn.html(sectorName);
 		sectorDialogBody.append(newBtn);
 		newBtn.click(function() {
-			$("#"+btnId_clicked).html(sectorName);
+			btn_clicked.html(sectorName);
 			hideAllDialogs();
 			});
 	});
@@ -46,9 +46,9 @@ function initSectorDialog( ) {
  **/
 function setPsiText(text) {
 	return function(){
-		$("#"+btnId_clicked).html(text);
+		btn_clicked.html(text);
 		hideAllDialogs();
-		updateBgColor(text, $("#"+btnId_clicked));
+		updateBgColor(text, btn_clicked);
 	  }
 }
 function initPsiDialog( ) {
@@ -95,7 +95,7 @@ function initActionsDialog( ) {
 		newBtn.html(actionName);
 		actionsDialogBody.append(newBtn);
 		newBtn.click(function() {
-			$("#"+btnId_clicked).html(actionName);
+			btn_clicked.html(actionName);
 			hideAllDialogs();
 			});
 	});
@@ -131,8 +131,9 @@ function initUnitsDialog( ) {
 				var newId = "unit_city_btn_"+city;
 				unitBtn.attr("id",newId);
 				unitBtn.click(function() {
-					$("#"+btnId_clicked).html(unitName);
+					btn_clicked.html(unitName);
 					hideAllDialogs();
+					console.log("test:"+btn_clicked.test);
 					});
 			});
 		});
@@ -143,6 +144,7 @@ function initUnitsDialog( ) {
 /**
  * T-Bars
  **/
+var manyUnitsBySector = {};
 function initTbars() {
 	//Init T-Bars
 	for(var i=0; i<8; i++) {
@@ -154,13 +156,13 @@ function initTbars() {
 		var titleBtn = tbar.children(".tbar_title_container").children(".titleBtn");
 		var titleBtnId = "tbar_title_"+i;
 		titleBtn.attr("id", titleBtnId);
-		titleBtn.click(showDialog(titleBtn.attr("id"), "#sector_dialog"));
+		titleBtn.click(showDialog(titleBtn, "#sector_dialog"));
 		
 		//Psi Btn
 		var psiBtn = tbar.children(".tbar_title_container").children(".psiBtn");
 		var psiBtnId = "tbar_psi_"+i;
 		psiBtn.attr("id", psiBtnId);
-		psiBtn.click(showDialog(psiBtn.attr("id"), "#psi_dialog"));
+		psiBtn.click(showDialog(psiBtn, "#psi_dialog"));
 		
 		//Action Btn
 		var actionBtn = tbar.children(".tbar_body_container")
@@ -168,15 +170,15 @@ function initTbars() {
 							.children(".blank_btn.action_btn");
 		var actionBtnId = "tbar_action_"+i;
 		actionBtn.attr("id", actionBtnId);
-		actionBtn.click(showDialog(actionBtn.attr("id"), "#actions_dialog"));
+		actionBtn.click(showDialog(actionBtn, "#actions_dialog"));
 		
 		//Unit Btn
-		var unitBtn = tbar.children(".tbar_body_container")
-							.children(".units")
-							.children(".blank_btn.unit_btn");
+		var unitBtnContainer = tbar.children(".tbar_body_container").children(".units");
+		unitBtnContainer.manyUnitBtns = 0;
+		var unitBtn = unitBtnContainer.children(".blank_btn.unit_btn");
 		var unitBtnId = "tbar_unit_"+i;
 		unitBtn.attr("id", unitBtnId);
-		unitBtn.click(showDialog(unitBtnId, "#units_dialog"));
+		unitBtn.click(showDialog(unitBtn, "#units_dialog"));
 	}
 	$("#tbar_prototype").hide();
 }
