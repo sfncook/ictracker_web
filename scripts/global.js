@@ -201,7 +201,10 @@ function hideAllDialogs( ) {
 }
 
 $( document ).ready(init);
-
+//Esc Key Press
+$(document).keyup(function(e) {
+  if (e.keyCode == 27) { hideAllDialogs(); }
+});
 
 
 var actions = [
