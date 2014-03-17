@@ -131,9 +131,13 @@ function initUnitsDialog( ) {
 				var newId = "unit_city_btn_"+city;
 				unitBtn.attr("id",newId);
 				unitBtn.click(function() {
+					var isNewButton = btn_clicked.html()=="Unit";
 					btn_clicked.html(unitName);
 					hideAllDialogs();
-					console.log("test:"+btn_clicked.test);
+					if (isNewButton) {
+						var unitsContainer = btn_clicked.parent();
+						addUnitButton(unitsContainer);
+					}
 					});
 			});
 		});
@@ -144,7 +148,12 @@ function initUnitsDialog( ) {
 /**
  * T-Bars
  **/
-var manyUnitsBySector = {};
+function addUnitButton(unitsContainer) {
+	unitsContainer.children().removeClass("blank_btn");
+	var unitBtn = $("<div class=\"blank_btn unit_btn button\">Unit</div>").clone();
+	unitsContainer.append(unitBtn);
+	unitBtn.click(showDialog(unitBtn, "#units_dialog"));
+}
 function initTbars() {
 	//Init T-Bars
 	for(var i=0; i<8; i++) {
@@ -175,10 +184,7 @@ function initTbars() {
 		//Unit Btn
 		var unitBtnContainer = tbar.children(".tbar_body_container").children(".units");
 		unitBtnContainer.manyUnitBtns = 0;
-		var unitBtn = unitBtnContainer.children(".blank_btn.unit_btn");
-		var unitBtnId = "tbar_unit_"+i;
-		unitBtn.attr("id", unitBtnId);
-		unitBtn.click(showDialog(unitBtn, "#units_dialog"));
+		addUnitButton(unitBtnContainer);
 	}
 	$("#tbar_prototype").hide();
 }
