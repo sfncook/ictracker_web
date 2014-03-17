@@ -106,14 +106,6 @@ function initActionsDialog( ) {
 /**
  * Units Dialog
  **/
-function showUnitsDialog() {
-	$("#dialogContainer").show();
-	$("#sector_dialog").hide();
-	$("#psi_dialog").hide();
-	$("#actions_dialog").hide();
-	$("#units_dialog").show();
-	$(".sector_dialog_btn").show();
-}
 function initUnitsDialog( ) {
 	var prototypeCityBtn = $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn = $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -138,6 +130,10 @@ function initUnitsDialog( ) {
 				unitBtn.html(unitName);
 				var newId = "unit_city_btn_"+city;
 				unitBtn.attr("id",newId);
+				unitBtn.click(function() {
+					$("#"+btnId_clicked).html(unitName);
+					hideAllDialogs();
+					});
 			});
 		});
 	});
@@ -166,16 +162,23 @@ function initTbars() {
 		psiBtn.attr("id", psiBtnId);
 		psiBtn.click(showDialog(psiBtn.attr("id"), "#psi_dialog"));
 		
-		//Actions Btn
+		//Action Btn
 		var actionBtn = tbar.children(".tbar_body_container")
 							.children(".actions")
 							.children(".blank_btn.action_btn");
 		var actionBtnId = "tbar_action_"+i;
 		actionBtn.attr("id", actionBtnId);
 		actionBtn.click(showDialog(actionBtn.attr("id"), "#actions_dialog"));
+		
+		//Unit Btn
+		var unitBtn = tbar.children(".tbar_body_container")
+							.children(".units")
+							.children(".blank_btn.unit_btn");
+		var unitBtnId = "tbar_unit_"+i;
+		unitBtn.attr("id", unitBtnId);
+		unitBtn.click(showDialog(unitBtnId, "#units_dialog"));
 	}
 	$("#tbar_prototype").hide();
-	$(".unit_btn").click(showUnitsDialog);
 }
 
 
