@@ -22,7 +22,6 @@ function setBtnText( text ){
 
 
 function initSectorDialog( ) {
-	
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
@@ -83,14 +82,6 @@ function updateBgColor(psi_value, btn) {
 /**
  * Actions Dialog
  **/
-function showActionsDialog() {
-	$("#dialogContainer").show();
-	$("#sector_dialog").hide();
-	$("#psi_dialog").hide();
-	$("#actions_dialog").show();
-	$("#units_dialog").hide();
-	$(".sector_dialog_btn").show();
-}
 function initActionsDialog( ) {
 	var actionsDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "actions_dialog";
@@ -103,7 +94,10 @@ function initActionsDialog( ) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(actionName);
 		actionsDialogBody.append(newBtn);
-		newBtn.click(hideAllDialogs);
+		newBtn.click(function() {
+			$("#"+btnId_clicked).html(actionName);
+			hideAllDialogs();
+			});
 	});
 }
 
@@ -171,9 +165,16 @@ function initTbars() {
 		var psiBtnId = "tbar_psi_"+i;
 		psiBtn.attr("id", psiBtnId);
 		psiBtn.click(showDialog(psiBtn.attr("id"), "#psi_dialog"));
+		
+		//Actions Btn
+		var actionBtn = tbar.children(".tbar_body_container")
+							.children(".actions")
+							.children(".blank_btn.action_btn");
+		var actionBtnId = "tbar_action_"+i;
+		actionBtn.attr("id", actionBtnId);
+		actionBtn.click(showDialog(actionBtn.attr("id"), "#actions_dialog"));
 	}
 	$("#tbar_prototype").hide();
-	$(".action_btn").click(showActionsDialog);
 	$(".unit_btn").click(showUnitsDialog);
 }
 
