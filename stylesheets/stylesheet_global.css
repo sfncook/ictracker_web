@@ -205,6 +205,9 @@ body {
     width: 600px;
     height: 240px;
 }
+.actions_dialog_btn {
+    margin: 5px !important;
+}
 
 #units_dialog {
     width: 600px;

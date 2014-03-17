@@ -89,14 +89,19 @@ function initActionsDialog( ) {
 	var actionsDialogBody = actionsDialog.children(".dialog_body");
 	var actionsTitleDiv = actionsDialog.children(".dialog_title").children(".dialog_title_text_container");
 	actionsTitleDiv.html("Actions");
-	var prototypeBtn = $("<div class=\"action_btn actions_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"actions_dialog_btn action_btn dialog_btn button\">PROTOTYPE</div>");
 	actions.forEach(function (actionName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(actionName);
 		actionsDialogBody.append(newBtn);
 		newBtn.click(function() {
+			var isNewButton = btn_clicked.html()=="Action";
 			btn_clicked.html(actionName);
 			hideAllDialogs();
+			if (isNewButton) {
+				var actionsContainer = btn_clicked.parent();
+				addActionButton(actionsContainer);
+			}
 			});
 	});
 }
@@ -154,6 +159,12 @@ function addUnitButton(unitsContainer) {
 	unitsContainer.append(unitBtn);
 	unitBtn.click(showDialog(unitBtn, "#units_dialog"));
 }
+function addActionButton(actionsContainer) {
+	actionsContainer.children().removeClass("blank_btn");
+	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
+	actionsContainer.append(actionBtn);
+	actionBtn.click(showDialog(actionBtn, "#actions_dialog"));
+}
 function initTbars() {
 	//Init T-Bars
 	for(var i=0; i<8; i++) {
@@ -174,16 +185,13 @@ function initTbars() {
 		psiBtn.click(showDialog(psiBtn, "#psi_dialog"));
 		
 		//Action Btn
-		var actionBtn = tbar.children(".tbar_body_container")
-							.children(".actions")
-							.children(".blank_btn.action_btn");
-		var actionBtnId = "tbar_action_"+i;
-		actionBtn.attr("id", actionBtnId);
-		actionBtn.click(showDialog(actionBtn, "#actions_dialog"));
+		var actionBtnContainer = tbar.children(".tbar_body_container").children(".actions");
+		actionBtnContainer.manyBtns = 0;
+		addActionButton(actionBtnContainer);
 		
 		//Unit Btn
 		var unitBtnContainer = tbar.children(".tbar_body_container").children(".units");
-		unitBtnContainer.manyUnitBtns = 0;
+		unitBtnContainer.manyBtns = 0;
 		addUnitButton(unitBtnContainer);
 	}
 	$("#tbar_prototype").hide();
