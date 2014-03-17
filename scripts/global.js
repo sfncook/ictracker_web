@@ -4,19 +4,23 @@
 /**
  * Sector Dialog
  **/
-var titleBtnId_clicked;
-function showSectorDialog( titleBtnId ){
+var btnId_clicked;
+function showDialog( btnId, dialogId ){
   return function(){
-    //console.log(titleBtnId);
-	titleBtnId_clicked = titleBtnId;
+	$(".dialog").hide();
+	btnId_clicked = btnId;
 	$("#dialogContainer").show();
-	$("#sector_dialog").show();
-	$("#psi_dialog").hide();
-	$("#actions_dialog").hide();
-	$("#units_dialog").hide();
-	$(".sector_dialog_btn").show();
+	$(dialogId).show();
   }
 }
+function setBtnText( text ){
+  return function(){
+	$("#"+btnId_clicked).html(text);
+	hideAllDialogs();
+  }
+}
+
+
 function initSectorDialog( ) {
 	
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
@@ -31,7 +35,7 @@ function initSectorDialog( ) {
 		newBtn.html(sectorName);
 		sectorDialogBody.append(newBtn);
 		newBtn.click(function() {
-			$("#"+titleBtnId_clicked).html(sectorName);
+			$("#"+btnId_clicked).html(sectorName);
 			hideAllDialogs();
 			});
 	});
@@ -41,13 +45,12 @@ function initSectorDialog( ) {
 /**
  * Psi Dialog
  **/
-function showPsiDialog() {
-	$("#dialogContainer").show();
-	$("#sector_dialog").hide();
-	$("#psi_dialog").show();
-	$("#actions_dialog").hide();
-	$("#units_dialog").hide();
-	$(".sector_dialog_btn").show();
+function setPsiText(text) {
+	return function(){
+		$("#"+btnId_clicked).html(text);
+		hideAllDialogs();
+		updateBgColor(text, $("#"+btnId_clicked));
+	  }
 }
 function initPsiDialog( ) {
 	var psiDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
@@ -62,6 +65,7 @@ function initPsiDialog( ) {
 		newBtn.html(psiValue);
 		updateBgColor(psiValue, newBtn);
 		psiDialogBody.append(newBtn);
+		newBtn.click(setPsiText(psiValue));
 	}
 }
 function updateBgColor(psi_value, btn) {
@@ -99,9 +103,7 @@ function initActionsDialog( ) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(actionName);
 		actionsDialogBody.append(newBtn);
-		newBtn.click(function() {
-			hideAllDialogs();
-			});
+		newBtn.click(hideAllDialogs);
 	});
 }
 
@@ -157,13 +159,20 @@ function initTbars() {
 		var tbar = $("#tbar_prototype" ).clone().appendTo( "#tbar_container" );
 		var newId = "tbar_"+i;
 		tbar.attr("id",newId);
+		
+		//Title Btn
 		var titleBtn = tbar.children(".tbar_title_container").children(".titleBtn");
 		var titleBtnId = "tbar_title_"+i;
 		titleBtn.attr("id", titleBtnId);
-		titleBtn.click(showSectorDialog(titleBtnId));
+		titleBtn.click(showDialog(titleBtn.attr("id"), "#sector_dialog"));
+		
+		//Psi Btn
+		var psiBtn = tbar.children(".tbar_title_container").children(".psiBtn");
+		var psiBtnId = "tbar_psi_"+i;
+		psiBtn.attr("id", psiBtnId);
+		psiBtn.click(showDialog(psiBtn.attr("id"), "#psi_dialog"));
 	}
 	$("#tbar_prototype").hide();
-	$(".psiBtn").click(showPsiDialog);
 	$(".action_btn").click(showActionsDialog);
 	$(".unit_btn").click(showUnitsDialog);
 }
