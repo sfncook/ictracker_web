@@ -194,8 +194,11 @@ body {
 }
 
 #sector_dialog {
-    width: 760px;
-    height: 340px;
+    width: 700px;
+    height: 275px;
+}
+.sector_dialog_btn {
+    margin: 5px !important;
 }
 #psi_dialog {
     width: 425px;

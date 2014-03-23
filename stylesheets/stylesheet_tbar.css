@@ -11,7 +11,7 @@
 
 .tbar {
 	border:1px solid #999;
-	width: 330px;
+	min-width: 270px;
 	height: 275px;
 	margin: 5px 0 5px 10px;
 	padding: 0;
@@ -26,9 +26,14 @@
 	background: #999;
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: space-around;
+	justify-content: flex-start;
 	padding: 4px;
 	height: 25px;
+}
+.titleBtn {
+    font-weight: 500;
+	width:  120px;
+	margin: 0 4px 0 4px;
 }
 .sector_par_btn {
 	width:15px;
@@ -36,6 +41,12 @@
 	color: #666;
 	font-weight: normal;
 	text-shadow: none;
+}
+.sector_status_blank_btn {
+	width:20px;
+	background: #BBB;
+	border-bottom: 2px dotted #888 !important;
+	border-radius: 10px;
 }
 .psi_red {
 	background: red;
@@ -50,21 +61,22 @@
 	font-size: 90%;
 	text-shadow: none;
 }
-.sector_nsew_abc_btn {
-	width:15px;
-	border-radius: 50px;
+.benchmark_dots_container {
+	margin-right: 4px;
+	background: none;
+	padding: 0;
 }
-.titleBtn {
-    font-weight: 500;
-	width:  120px;
-}
-.sector_number_btn {
-	width:15px;
-	border-radius: 50px;
-}
-.benchmark_btn {
-	width:  34px;
-	font-size: 80%;
+.benchmark_dot_btn {
+	background: #666;
+	border: 1px solid #333;
+	width:10px;
+	border-radius: 10px;
+	font-size: 50%;
+	margin: 1px;
+	text-align: center;
+	text-shadow: none;
+	padding: 0;
+	color: #AAA;
 }
 
 .tbar_body_container {
