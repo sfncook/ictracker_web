@@ -11,7 +11,7 @@
 
 .tbar {
 	border:1px solid #999;
-	width: 275px;
+	width: 330px;
 	height: 275px;
 	margin: 5px 0 5px 10px;
 	padding: 0;
@@ -30,31 +30,42 @@
 	padding: 4px;
 	height: 25px;
 }
-.mayDayBtn {
-	background: #F67574 !important;
-	color: #EEE;
+.sector_par_btn {
+	width:15px;
+	border-radius: 50px;
+	color: #666;
+	font-weight: normal;
 	text-shadow: none;
-	margin: 0px;
-	width:  18px;
-}
-.mayDayBtn:hover {background-color: #ff6060 !important;}
-.titleBtn {
-    font-weight: 500;
-	width:  170px;
 }
 .psi_red {
 	background: red;
-	color: #DDD !important;
+	color: #FFF !important;
 }
 .psi_yellow {background: yellow;}
 .psi_green {background: #3dff00;}
-.psiBtn {
+.psi_btn {
 	width:  34px;
 	color: #666;
 	font-weight: normal;
 	font-size: 90%;
+	text-shadow: none;
 }
-
+.sector_nsew_abc_btn {
+	width:15px;
+	border-radius: 50px;
+}
+.titleBtn {
+    font-weight: 500;
+	width:  120px;
+}
+.sector_number_btn {
+	width:15px;
+	border-radius: 50px;
+}
+.benchmark_btn {
+	width:  34px;
+	font-size: 80%;
+}
 
 .tbar_body_container {
     display: flex;
@@ -69,21 +80,31 @@
 }
 .units {
 	background: #FFF;
-	width: 40%;
+	width: 75px;
 	padding: 4px;
     display: flex;
     flex-flow: column;
 }
 .unit_btn  {
-	width: 90px;
+	width: 65px;
 	margin: 1px 0 1px 0;
+}
+
+.tbar_body_rightcol {
+	width: 60%;
+	display: flex;
+    flex-flow: column;
+}
+.acct_unit_btn {
+	background: #AAC7D1;
+	border: 2px solid #FFFF10 !important;
+	border-radius: 10px;
 }
 
 .actions {
 	background: #FFF;
 	border-left: 1px solid #888;
 	padding: 4px;
-	width: 60%;
     display: flex;
     flex-flow: column;
 }

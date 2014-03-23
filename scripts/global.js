@@ -200,7 +200,7 @@ function initTbars() {
 		psiBtn.click(showDialog(psiBtn, "#psi_dialog"));
 		
 		//Action Btn
-		var actionBtnContainer = tbar.children(".tbar_body_container").children(".actions");
+		var actionBtnContainer = tbar.children(".tbar_body_container").children(".tbar_body_rightcol").children(".actions");
 		actionBtnContainer.manyBtns = 0;
 		addActionButton(actionBtnContainer);
 		
