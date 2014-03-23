@@ -78,6 +78,18 @@
 	padding: 0;
 	color: #AAA;
 }
+.benchmark_dot_btn_isset {
+	background: green !important;
+}
+.horiz_chkbox {
+    display: flex;
+    flex-flow: row;
+}
+.benchmark_chk_label_btn {
+	background: none;
+	padding: 4px 4px 4px 4px;
+	color: #666;
+}
 
 .tbar_body_container {
     display: flex;

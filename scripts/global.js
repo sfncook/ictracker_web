@@ -109,6 +109,62 @@ function initActionsDialog( ) {
 
 
 /**
+ * Benchmark Dialog
+ **/
+function setBenchmarkChkText(isSet, benchmarkClass) {
+	return function(){
+		btn_clicked.html(text);
+		hideAllDialogs();
+	  }
+}
+function createCheckBox(label) {
+	var chkContainer = $("<div class=\"horiz_chkbox\"></div>").clone();
+	var chkBtn = $("<input type=\"checkbox\" class=\"benchmark_chk_btn dialog_btn button\"\>").clone();
+	var labelBtn = $("<div class=\"benchmark_chk_label_btn\"\></div>").clone();
+	labelBtn.html(label);
+	chkContainer.append(chkBtn);
+	chkContainer.append(labelBtn);
+	return chkContainer;
+}
+function initBenchmarkDialog( ) {
+	var benchmarkDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "benchmark_dialog";
+	benchmarkDialog.attr("id",newId);
+	var benchmarkDialogBody = benchmarkDialog.children(".dialog_body");
+	var benchmarkTitleDiv = benchmarkDialog.children(".dialog_title").children(".dialog_title_text_container");
+	benchmarkTitleDiv.html("Benchmarks");
+	
+	var primarySearchChk = createCheckBox("Primary Search");
+	var secondarySearchChk = createCheckBox("Secondary Search");
+	var fireCtlSearchChk = createCheckBox("Fire Control");
+	var lossStopSearchChk = createCheckBox("Loss Stop");
+	
+	benchmarkDialogBody.append(primarySearchChk);
+	benchmarkDialogBody.append(secondarySearchChk);
+	benchmarkDialogBody.append(fireCtlSearchChk);
+	benchmarkDialogBody.append(lossStopSearchChk);
+	
+	primarySearchChk.click(setBenchmarkChkText(true, "benchmark_dot_1"));
+	
+	/*actions.forEach(function (actionName, index, array) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(actionName);
+		actionsDialogBody.append(newBtn);
+		newBtn.click(function() {
+			var isNewButton = btn_clicked.html()=="Action";
+			btn_clicked.html(actionName);
+			hideAllDialogs();
+			if (isNewButton) {
+				var actionsContainer = btn_clicked.parent();
+				addActionButton(actionsContainer);
+			}
+			});
+	});*/
+}
+
+
+
+/**
  * Units Dialog
  **/
 function showBtnClass(city) {
@@ -193,11 +249,17 @@ function initTbars() {
 		titleBtn.attr("id", titleBtnId);
 		titleBtn.click(showDialog(titleBtn, "#sector_dialog"));
 		
-		//Psi Btn
+		//Benchmark Btn
+		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_dots_container");
+		var benchmarkBtnId = "tbar_benchmark_"+i;
+		benchmarkBtn.attr("id", benchmarkBtnId);
+		benchmarkBtn.click(showDialog(benchmarkBtn, "#benchmark_dialog"));
+		
+		/* //Psi Btn
 		var psiBtn = tbar.children(".tbar_title_container").children(".psiBtn");
 		var psiBtnId = "tbar_psi_"+i;
 		psiBtn.attr("id", psiBtnId);
-		psiBtn.click(showDialog(psiBtn, "#psi_dialog"));
+		psiBtn.click(showDialog(psiBtn, "#psi_dialog"));*/
 		
 		//Action Btn
 		var actionBtnContainer = tbar.children(".tbar_body_container").children(".tbar_body_rightcol").children(".actions");
@@ -223,6 +285,7 @@ function init( ) {
 	initPsiDialog();
 	initActionsDialog();
 	initUnitsDialog();
+	initBenchmarkDialog();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(hideAllDialogs);
