@@ -255,7 +255,7 @@ function initTbars() {
 		titleBtn.click(showDialog(titleBtn, "#sector_dialog"));
 		
 		//Benchmark Btn
-		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_dots_container");
+		var benchmarkBtn = tbar.children(".benchmark_dots_container");
 		var benchmarkBtnId = "tbar_benchmark_"+i;
 		benchmarkBtn.attr("id", benchmarkBtnId);
 		benchmarkBtn.click(showDialog(benchmarkBtn, "#benchmark_dialog"));
