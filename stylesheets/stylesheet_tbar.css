@@ -62,6 +62,9 @@
 	text-shadow: none;
 }
 .benchmark_dots_container {
+	width:30px;
+	display: flex;
+	flex-flow: row wrap;
 	margin-right: 4px;
 	background: none;
 	padding: 0;
@@ -70,16 +73,20 @@
 	background: #666;
 	border: 1px solid #333;
 	width:10px;
+	height: 10px;
 	border-radius: 10px;
 	font-size: 50%;
-	margin: 1px;
+	margin: 0 1px 1px 1px;
 	text-align: center;
 	text-shadow: none;
 	padding: 0;
 	color: #AAA;
+	flex-shrink: 0;
+	flex-grow: 0;
 }
 .benchmark_dot_btn_isset {
-	background: green !important;
+	background: #0F0 !important;
+	color: #666;
 }
 .horiz_chkbox {
     display: flex;

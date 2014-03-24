@@ -111,12 +111,6 @@ function initActionsDialog( ) {
 /**
  * Benchmark Dialog
  **/
-function setBenchmarkChkText(isSet, benchmarkClass) {
-	return function(){
-		btn_clicked.html(text);
-		hideAllDialogs();
-	  }
-}
 function createCheckBox(label) {
 	var chkContainer = $("<div class=\"horiz_chkbox\"></div>").clone();
 	var chkBtn = $("<input type=\"checkbox\" class=\"benchmark_chk_btn dialog_btn button\"\>").clone();
@@ -144,7 +138,18 @@ function initBenchmarkDialog( ) {
 	benchmarkDialogBody.append(fireCtlSearchChk);
 	benchmarkDialogBody.append(lossStopSearchChk);
 	
-	primarySearchChk.click(setBenchmarkChkText(true, "benchmark_dot_1"));
+	primarySearchChk.click(function() {
+		btn_clicked.children(".benchmark_dot_1").addClass("benchmark_dot_btn_isset");
+		});
+	secondarySearchChk.click(function() {
+		btn_clicked.children(".benchmark_dot_2").addClass("benchmark_dot_btn_isset");
+		});
+	fireCtlSearchChk.click(function() {
+		btn_clicked.children(".benchmark_dot_F").addClass("benchmark_dot_btn_isset");
+		});
+	lossStopSearchChk.click(function() {
+		btn_clicked.children(".benchmark_dot_L").addClass("benchmark_dot_btn_isset");
+		});
 	
 	/*actions.forEach(function (actionName, index, array) {
 		var newBtn = prototypeBtn.clone();
@@ -254,12 +259,6 @@ function initTbars() {
 		var benchmarkBtnId = "tbar_benchmark_"+i;
 		benchmarkBtn.attr("id", benchmarkBtnId);
 		benchmarkBtn.click(showDialog(benchmarkBtn, "#benchmark_dialog"));
-		
-		/* //Psi Btn
-		var psiBtn = tbar.children(".tbar_title_container").children(".psiBtn");
-		var psiBtnId = "tbar_psi_"+i;
-		psiBtn.attr("id", psiBtnId);
-		psiBtn.click(showDialog(psiBtn, "#psi_dialog"));*/
 		
 		//Action Btn
 		var actionBtnContainer = tbar.children(".tbar_body_container").children(".tbar_body_rightcol").children(".actions");
