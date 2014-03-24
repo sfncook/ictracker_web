@@ -61,10 +61,17 @@
 	font-size: 90%;
 	text-shadow: none;
 }
-.benchmark_dots_container {
-	background: #999;
+.benchmark_dots_inline {
+	display: flex;
+	flex-flow: row wrap;
+	background: none;
+	padding: 0 0 2px 0;
+	width: 30px;
+}
+.benchmark_dots_horizontal {
 	display: flex;
 	flex-flow: row nowrap;
+	background: #999;
 	padding: 0 0 2px 6px;
 	border-bottom: 1px solid #666;
 	border-radius: 0;

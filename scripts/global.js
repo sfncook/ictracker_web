@@ -28,6 +28,11 @@ function initSectorDialog( ) {
 	var sectorDialogBody = sectorDialog.children(".dialog_body");
 	var sectorTitleDiv = sectorDialog.children(".dialog_title").children(".dialog_title_text_container");
 	sectorTitleDiv.html("Sectors");
+	
+	//Suplimental buttons
+	
+	
+	//Sector title buttons
 	var prototypeBtn = $("<div class=\"titleBtn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	sectors.forEach(function (sectorName, index, array) {
 		var newBtn = prototypeBtn.clone();
@@ -255,7 +260,7 @@ function initTbars() {
 		titleBtn.click(showDialog(titleBtn, "#sector_dialog"));
 		
 		//Benchmark Btn
-		var benchmarkBtn = tbar.children(".benchmark_dots_container");
+		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_dots_container");
 		var benchmarkBtnId = "tbar_benchmark_"+i;
 		benchmarkBtn.attr("id", benchmarkBtnId);
 		benchmarkBtn.click(showDialog(benchmarkBtn, "#benchmark_dialog"));
