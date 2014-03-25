@@ -165,6 +165,7 @@ body {
     justify-content: flex-end;
 }
 .dialog_title_text_container {
+    padding-top: 2px;
     flex-grow: 1;
 }
 .dialog_close_btn {
@@ -197,7 +198,18 @@ body {
 
 #sector_dialog {
     width: 700px;
-    height: 275px;
+    height: 300px;
+}
+#sector_dialog > .dialog_body {
+    flex-flow: column nowrap;
+}
+#sector_dlg_row1 {
+    display: flex;
+    flex-flow: row wrap;
+}
+#sector_dlg_row2 {
+    display: flex;
+    flex-flow: row wrap;
 }
 .sector_dialog_btn {
     margin: 5px !important;

@@ -25,19 +25,42 @@ function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
-	var sectorDialogBody = sectorDialog.children(".dialog_body");
 	var sectorTitleDiv = sectorDialog.children(".dialog_title").children(".dialog_title_text_container");
 	sectorTitleDiv.html("Sectors");
+	var sectorDialogBody = sectorDialog.children(".dialog_body");
+	
+	var row1Container = $("<div id=\"sector_dlg_row1\"></div>").clone();
+	var row2Container = $("<div id=\"sector_dlg_row2\"></div>").clone();
+	sectorDialogBody.append(row1Container);
+	sectorDialogBody.append(row2Container);
 	
 	//Suplimental buttons
-	
+	var prototypeBtn = $("<div class=\"dir_supl_info_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	["N","E","S","W"].forEach(function (btnText, index, array) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(btnText);
+		row1Container.append(newBtn);
+		newBtn.click(function() {
+			btn_clicked.html(btnText);
+			hideAllDialogs();
+			});
+	});
+	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(btnText);
+		row1Container.append(newBtn);
+		newBtn.click(function() {
+			btn_clicked.html(btnText);
+			hideAllDialogs();
+			});
+	});
 	
 	//Sector title buttons
 	var prototypeBtn = $("<div class=\"titleBtn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	sectors.forEach(function (sectorName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(sectorName);
-		sectorDialogBody.append(newBtn);
+		row2Container.append(newBtn);
 		newBtn.click(function() {
 			btn_clicked.html(sectorName);
 			hideAllDialogs();

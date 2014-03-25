@@ -35,6 +35,10 @@
 	width:  120px;
 	margin: 0 4px 0 4px;
 }
+.dir_supl_info_btn {
+	width:15px;
+	border-radius: 15px;
+}
 .sector_par_btn {
 	width:15px;
 	border-radius: 50px;
@@ -65,7 +69,8 @@
 	display: flex;
 	flex-flow: row wrap;
 	background: none;
-	padding: 0 0 2px 0;
+	padding: 0;
+	margin: 0 0 2px 0;
 	width: 30px;
 }
 .benchmark_dots_horizontal {
