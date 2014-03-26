@@ -331,6 +331,40 @@ function initTbars() {
 }
 
 
+/**
+ * Init Safety Dialog
+ **/
+function setSafetyText(text) {
+	return function(){
+		btn_clicked.html(text);
+		hideAllDialogs();
+		updateBgColor(text, btn_clicked);
+	  }
+}
+function showSideDialog( btn, dialogId ){
+  return function(){
+	hideAllDialogs();
+	btn_clicked = btn;
+	$(dialogId).show();
+	$(dialogId+"_arm").show();
+  }
+}
+function initSafetyDialog() {
+	var prototypeSafetyBtn = $("<div class=\"safety_btn dialog_btn button\">PROTOTYPE</div>");
+	safteyNames.forEach(function (safetyName, index, array) {
+		var safetyBtn = prototypeSafetyBtn.clone().appendTo( "#safety_side_dialog" );
+		safetyBtn.html(safetyName);
+		var newId = "safety_dialog_btn_"+safetyName;
+		safetyBtn.attr("id",newId);
+		safetyBtn.click(function() {
+			btn_clicked.html(safetyName);
+			hideAllDialogs();
+			});
+	});
+	$("#safety_btn").click(showSideDialog($("#safety_btn"), "#safety_side_dialog"));
+}
+
+
 
 
 function init( ) {
@@ -342,16 +376,22 @@ function init( ) {
 	initActionsDialog();
 	initUnitsDialog();
 	initBenchmarkDialog();
+	initSafetyDialog();
+	
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(hideAllDialogs);
 	
 	$("#units_dialog").show();
+	
+	hideAllDialogs();
 }
 
 //Call this to dismiss the dialogs
 function hideAllDialogs( ) {
 	$("#dialogContainer").hide();
+	$(".side_dialog").hide();
+	$(".side_dialog_arm").hide();
 }
 
 $( document ).ready(init);
@@ -509,6 +549,10 @@ var unitsByTypeByCity = {
 	},
 };
 
-
+var safteyNames = [
+	"Cross",
+	"Fox",
+	"Jones",
+	"Smith",];
 
 

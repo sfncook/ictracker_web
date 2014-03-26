@@ -1,6 +1,7 @@
-
+/*
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,400italic,700);
 @import url(http://fonts.googleapis.com/css?family=Carrois+Gothic+SC);
+*/
 
 /*
  **** MAIN STYLES ****
@@ -60,6 +61,7 @@ body {
     right: 0;
     top:0;
     height: 100%;
+    z-index: 50;
 }
 .header_spacer {
     flex-basis: 90px;
@@ -105,24 +107,39 @@ body {
 	color: #FFF;
 	top: 135px;
 	left: 20px;
-	width: 60px;
+	width: 100%;
 	border-top: 1px solid #888;
 }
-
 #safety_btn {
 	position: absolute;
 	top: 160px;
 	left: 10px;
 	width: 60px;
-    z-index: 50;
+    z-index: 100;
 }
-
 #mode_btn {
 	position: absolute;
 	top: 200px;
 	left: 10px;
 	width: 60px;
+}
+.side_dialog_arm {
+    background: #666;
+	position: absolute;
+	top: 157px;
+    height: 2rem;
+    width: 100px;
+	right: 0px;
+    z-index: 45;
+}
+#safety_side_dialog {
+    background: #666;
+	position: absolute;
+	top: 157px;
+    width: 90px;
+	right: 90px;
     z-index: 50;
+    border-radius: 10px;
 }
 
 
