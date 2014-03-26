@@ -44,6 +44,11 @@ function setBtnText( text ){
 function toggleClass(btn, class_to_toggle, class_category, set_prefix_dir, set_prefix_num) {
 	if (btn.hasClass(class_to_toggle)) {
 		$("."+class_category).removeClass(class_to_toggle);
+		if (set_prefix_dir) {
+			tbar_clicked.prefix_dir = 'X';
+		} else if (set_prefix_num) {
+			tbar_clicked.prefix_num = 'X';
+		}
 	} else {
 		$("."+class_category).removeClass(class_to_toggle);
 		btn.addClass(class_to_toggle);
