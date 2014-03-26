@@ -5,6 +5,20 @@
  * Sector Dialog
  **/
 var btn_clicked;
+var tbar_clicked;
+function showSectorDialog( tbar, btn, dialogId ){
+  return function(){
+	$(".dialog").hide();
+	btn_clicked = btn;
+	tbar_clicked = tbar;
+	$("#dialogContainer").show();
+	$(dialogId).show();
+	
+	//Toggle selected Sector button
+	$(".sector_dialog_btn").removeClass("sector_dialog_btn_on");
+	$( "div:contains('"+btn.html()+"').sector_dialog_btn" ).addClass("sector_dialog_btn_on");
+  }
+}
 function showDialog( btn, dialogId ){
   return function(){
 	$(".dialog").hide();
@@ -19,8 +33,14 @@ function setBtnText( text ){
 	hideAllDialogs();
   }
 }
-
-
+function toggleClass(btn, class_to_toggle, class_category) {
+	if (btn.hasClass(class_to_toggle)) {
+		$("."+class_category).removeClass(class_to_toggle);
+	} else {
+		$("."+class_category).removeClass(class_to_toggle);
+		btn.addClass(class_to_toggle);
+	}
+}
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
@@ -38,20 +58,23 @@ function initSectorDialog( ) {
 	var prototypeBtn = $("<div class=\"dir_supl_info_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	["N","E","S","W"].forEach(function (btnText, index, array) {
 		var newBtn = prototypeBtn.clone();
+		newBtn.addClass("dir_supl_info_dir_btn");
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
 		newBtn.click(function() {
-			btn_clicked.html(btnText);
-			hideAllDialogs();
+			toggleClass(newBtn, "dir_supl_info_btn_on", "dir_supl_info_dir_btn");
 			});
 	});
+	
+	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
+	
 	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
 		var newBtn = prototypeBtn.clone();
+		newBtn.addClass("dir_supl_info_num_btn");
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
 		newBtn.click(function() {
-			btn_clicked.html(btnText);
-			hideAllDialogs();
+			toggleClass(newBtn, "dir_supl_info_btn_on", "dir_supl_info_num_btn");
 			});
 	});
 	
@@ -178,21 +201,6 @@ function initBenchmarkDialog( ) {
 	lossStopSearchChk.click(function() {
 		btn_clicked.children(".benchmark_dot_L").addClass("benchmark_dot_btn_isset");
 		});
-	
-	/*actions.forEach(function (actionName, index, array) {
-		var newBtn = prototypeBtn.clone();
-		newBtn.html(actionName);
-		actionsDialogBody.append(newBtn);
-		newBtn.click(function() {
-			var isNewButton = btn_clicked.html()=="Action";
-			btn_clicked.html(actionName);
-			hideAllDialogs();
-			if (isNewButton) {
-				var actionsContainer = btn_clicked.parent();
-				addActionButton(actionsContainer);
-			}
-			});
-	});*/
 }
 
 
@@ -273,6 +281,8 @@ function initTbars() {
 	//Init T-Bars
 	for(var i=0; i<8; i++) {
 		var tbar = $("#tbar_prototype" ).clone().appendTo( "#tbar_container" );
+		tbar.prefix_dir = '';
+		tbar.prefix_num = '';
 		var newId = "tbar_"+i;
 		tbar.attr("id",newId);
 		
@@ -280,7 +290,7 @@ function initTbars() {
 		var titleBtn = tbar.children(".tbar_title_container").children(".titleBtn");
 		var titleBtnId = "tbar_title_"+i;
 		titleBtn.attr("id", titleBtnId);
-		titleBtn.click(showDialog(titleBtn, "#sector_dialog"));
+		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
 		
 		//Benchmark Btn
 		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_dots_container");

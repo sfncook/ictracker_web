@@ -1,8 +1,6 @@
 
-/*
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,400italic,700);
 @import url(http://fonts.googleapis.com/css?family=Carrois+Gothic+SC);
-*/
 
 /*
  **** MAIN STYLES ****
@@ -206,13 +204,33 @@ body {
 #sector_dlg_row1 {
     display: flex;
     flex-flow: row wrap;
+    border-bottom: 1px solid #DDD;
 }
 #sector_dlg_row2 {
     display: flex;
     flex-flow: row wrap;
 }
+.dir_supl_info_btn {
+	width:16px;
+	border-radius: 15px;
+}
+.dir_supl_info_btn_on {
+    background: #FFAD2C;
+}
+.dir_supl_info_btn_on:hover {
+    background: #FFAD2C;
+}
+.horiz_spacer {
+    flex-grow:99;
+}
 .sector_dialog_btn {
     margin: 5px !important;
+}
+.sector_dialog_btn_on {
+    background: #FFAD2C;
+}
+.sector_dialog_btn_on:hover {
+    background: #FFAD2C;
 }
 
 #benchmark_dialog {
