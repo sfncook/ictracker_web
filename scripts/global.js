@@ -9,6 +9,8 @@ var tbar_clicked;
 function showSectorDialog( tbar, btn, dialogId ){
   return function(){
 	$(".dialog").hide();
+	$(".side_dialog").hide();
+	$(".side_dialog_arm").hide();
 	btn_clicked = btn;
 	tbar_clicked = tbar;
 	$("#dialogContainer").show();
@@ -30,6 +32,8 @@ function showSectorDialog( tbar, btn, dialogId ){
 function showDialog( btn, dialogId ){
   return function(){
 	$(".dialog").hide();
+	$(".side_dialog").hide();
+	$(".side_dialog_arm").hide();
 	btn_clicked = btn;
 	$("#dialogContainer").show();
 	$(dialogId).show();
@@ -334,13 +338,6 @@ function initTbars() {
 /**
  * Init Safety Dialog
  **/
-function setSafetyText(text) {
-	return function(){
-		btn_clicked.html(text);
-		hideAllDialogs();
-		updateBgColor(text, btn_clicked);
-	  }
-}
 function showSideDialog( btn, dialogId ){
   return function(){
 	hideAllDialogs();
@@ -365,6 +362,22 @@ function initSafetyDialog() {
 }
 
 
+/**
+ * Init Mode Dialog
+ **/
+function initModeDialog() {
+	$("#offensive_btn").click(function() {
+			btn_clicked.html($("#offensive_btn").html());
+			hideAllDialogs();
+			});
+	$("#defensive_btn").click(function() {
+			btn_clicked.html($("#defensive_btn").html());
+			hideAllDialogs();
+			});
+	$("#mode_btn").click(showSideDialog($("#mode_btn"), "#mode_side_dialog"));
+}
+
+
 
 
 function init( ) {
@@ -377,6 +390,7 @@ function init( ) {
 	initUnitsDialog();
 	initBenchmarkDialog();
 	initSafetyDialog();
+	initModeDialog();
 	
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();

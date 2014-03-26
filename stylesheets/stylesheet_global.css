@@ -117,30 +117,45 @@ body {
 	width: 60px;
     z-index: 100;
 }
-#mode_btn {
+.side_dialog {
+    background: #666 ;
 	position: absolute;
-	top: 200px;
-	left: 10px;
-	width: 60px;
+	right: 90px;
+    z-index: 50;
+    border-radius: 10px;
 }
 .side_dialog_arm {
     background: #666;
 	position: absolute;
-	top: 157px;
     height: 2rem;
     width: 100px;
 	right: 0px;
     z-index: 45;
 }
 #safety_side_dialog {
-    background: #666;
-	position: absolute;
-	top: 157px;
+    top: 157px;
     width: 90px;
-	right: 90px;
-    z-index: 50;
-    border-radius: 10px;
 }
+#safety_side_dialog_arm {
+    top: 157px;
+}
+#mode_btn {
+	position: absolute;
+	top: 200px;
+	left: 10px;
+	width: 60px;
+    z-index: 100;
+}
+.mode_btn {
+	width: 60px;
+}
+#mode_side_dialog {
+    top: 197px;
+}
+#mode_side_dialog_arm {
+    top: 197px;
+}
+
 
 
 /*
