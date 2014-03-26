@@ -17,6 +17,14 @@ function showSectorDialog( tbar, btn, dialogId ){
 	//Toggle selected Sector button
 	$(".sector_dialog_btn").removeClass("sector_dialog_btn_on");
 	$( "div:contains('"+btn.html()+"').sector_dialog_btn" ).addClass("sector_dialog_btn_on");
+	
+	//Toggle prefix_dir buttons
+	$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
+	$( "div:contains('"+tbar.prefix_dir+"').dir_supl_info_dir_btn" ).addClass("dir_supl_info_btn_on");
+	
+	//Toggle prefix_num buttons
+	$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
+	$( "div:contains('"+tbar.prefix_num+"').dir_supl_info_num_btn" ).addClass("dir_supl_info_btn_on");
   }
 }
 function showDialog( btn, dialogId ){
@@ -33,12 +41,18 @@ function setBtnText( text ){
 	hideAllDialogs();
   }
 }
-function toggleClass(btn, class_to_toggle, class_category) {
+function toggleClass(btn, class_to_toggle, class_category, set_prefix_dir, set_prefix_num) {
 	if (btn.hasClass(class_to_toggle)) {
 		$("."+class_category).removeClass(class_to_toggle);
 	} else {
 		$("."+class_category).removeClass(class_to_toggle);
 		btn.addClass(class_to_toggle);
+		if (set_prefix_dir) {
+			tbar_clicked.prefix_dir = btn.html();
+		} else if (set_prefix_num) {
+			tbar_clicked.prefix_num = btn.html();
+		}
+		
 	}
 }
 function initSectorDialog( ) {
@@ -62,7 +76,7 @@ function initSectorDialog( ) {
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
 		newBtn.click(function() {
-			toggleClass(newBtn, "dir_supl_info_btn_on", "dir_supl_info_dir_btn");
+			toggleClass(newBtn, "dir_supl_info_btn_on", "dir_supl_info_dir_btn", true, false);
 			});
 	});
 	
@@ -74,7 +88,7 @@ function initSectorDialog( ) {
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
 		newBtn.click(function() {
-			toggleClass(newBtn, "dir_supl_info_btn_on", "dir_supl_info_num_btn");
+			toggleClass(newBtn, "dir_supl_info_btn_on", "dir_supl_info_num_btn", false, true);
 			});
 	});
 	
@@ -281,8 +295,8 @@ function initTbars() {
 	//Init T-Bars
 	for(var i=0; i<8; i++) {
 		var tbar = $("#tbar_prototype" ).clone().appendTo( "#tbar_container" );
-		tbar.prefix_dir = '';
-		tbar.prefix_num = '';
+		tbar.prefix_dir = 'X';
+		tbar.prefix_num = 'X';
 		var newId = "tbar_"+i;
 		tbar.attr("id",newId);
 		
