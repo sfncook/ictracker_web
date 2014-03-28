@@ -45,22 +45,33 @@ function setBtnText( text ){
 	hideAllDialogs();
   }
 }
+var suplInfoPrototypeBtn = $("<div class=\"dir_supl_info_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 function toggleDirBtn(btn) {
-	$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
+	var tbarDirBtn = tbar_clicked.children(".tbar_title_container").children(".dir_supl_info_dir_btn");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
+		$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = 'X';
+		tbarDirBtn.hide();
 	} else {
+		$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
 		btn.addClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = btn.html();
+		tbarDirBtn.show();
+		tbarDirBtn.html(btn.html());
 	}
 }
 function toggleNumBtn(btn) {
-	$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
+	var tbarNumBtn = tbar_clicked.children(".tbar_title_container").children(".dir_supl_info_num_btn");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
+		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = 'X';
+		tbarNumBtn.hide();
 	} else {
+		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
 		btn.addClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = btn.html();
+		tbarNumBtn.show();
+		tbarNumBtn.html(btn.html());
 	}
 }
 function initSectorDialog( ) {
@@ -79,9 +90,8 @@ function initSectorDialog( ) {
 	sectorDialogBody.append(row3Container);
 	
 	//Suplimental buttons
-	var prototypeBtn = $("<div class=\"dir_supl_info_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	["N","E","S","W"].forEach(function (btnText, index, array) {
-		var newBtn = prototypeBtn.clone();
+		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_dir_btn");
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
@@ -91,12 +101,17 @@ function initSectorDialog( ) {
 	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
 	
 	row1Container.append($("<div class=\"apt_label\">Apartment/Suite/Unit:</div>"));
-	row1Container.append($("<div class=\"apt_input\"><input type=\"text\" class=\"apt_input\"\></div>"));
+	var aptInput = $("<div class=\"apt_input\"><input type=\"text\" class=\"apt_input\"\></div>");
+	var inputBox = aptInput.children("input.apt_input");
+	row1Container.append(aptInput);
+	/*inputBox.keypress(function( event ) {
+		console.log(inputBox.val());
+	  });*/
 	
 	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
 	
 	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
-		var newBtn = prototypeBtn.clone();
+		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_num_btn");
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
@@ -317,6 +332,10 @@ function initTbars() {
 		var titleBtnId = "tbar_title_"+i;
 		titleBtn.attr("id", titleBtnId);
 		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
+		var tbarDirBtn = tbar.children(".tbar_title_container").children(".dir_supl_info_dir_btn");
+		var tbarNumBtn = tbar.children(".tbar_title_container").children(".dir_supl_info_num_btn");
+		tbarDirBtn.hide();
+		tbarNumBtn.hide();
 		
 		//Benchmark Btn
 		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_dots_container");

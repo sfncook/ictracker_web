@@ -30,10 +30,12 @@
 	padding: 4px;
 	height: 25px;
 }
+.tbar_title_container > * {
+	margin: 0 1px 0 1px;
+}
 .titleBtn {
     font-weight: 500;
 	width:  120px;
-	margin: 0 4px 0 4px;
 }
 .sector_par_btn {
 	width:15px;
