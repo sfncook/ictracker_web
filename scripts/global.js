@@ -249,7 +249,7 @@ function initBenchmarkDialog( ) {
 /**
  * Units Dialog
  **/
-function showBtnClass(city) {
+function toggleCity(city) {
 	return function(){
 		$(".unitCity_dialog_btn").removeClass("glow");
 		$("#unit_city_btn_"+city).addClass("glow");
@@ -257,27 +257,58 @@ function showBtnClass(city) {
 		$(".unit_dialog_btn."+city).show();
 	}
 }
+function toggleType(type) {
+	return function(){
+		if ($("#unit_type_btn_"+type).hasClass("glow")) {
+			$(".unitType_dialog_btn").removeClass("glow");
+			$(".unitTypeColumn").show();
+		} else {
+			$(".unitType_dialog_btn").removeClass("glow");
+			$("#unit_type_btn_"+type).addClass("glow");
+			$(".unitTypeColumn").hide();
+			$(".unit_type_"+type).show();
+		}
+	}
+}
 function initUnitsDialog( ) {
-	var prototypeCityBtn = $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
-	var prototypeUnitTypeBtn = $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
-	var prototypeUnitBtn = $("<div class=\"unit_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeUnitTypeBtn 	= $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeUnitBtn 		= $("<div class=\"unit_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeUnitDiv 		= $("<div class=\"unitsDlg_units\"></div>");
+	var prototypeUnitTypeColDiv = $("<div class=\"unitTypeColumn\"></div>");
+	//"<div id=\"Engine\" class=\"unit_type_engine_col unitTypeColumn\"></div>"
 
-	unitTypes.forEach(function (unitTypeName, index, array) {
+	//Create Unit Type Buttons
+	unitTypes.forEach(function (type, index, array) {
 		//console.log("  "+unitTypeName);
 		var unitTypeBtn = prototypeUnitTypeBtn.clone().appendTo( "#unitsDlg_types" );
-		unitTypeBtn.html(unitTypeName);
-		var newId = "unit_type_btn_"+unitTypeName;
+		unitTypeBtn.html(type);
+		var newId = "unit_type_btn_"+type;
 		unitTypeBtn.attr("id",newId);
+		unitTypeBtn.click(toggleType(type));
 	});
 	
+	//**** CITY *****
 	$.each(unitsByTypeByCity, function( city, unitsByType ) {
-		var unitCityBtn = prototypeCityBtn.clone().appendTo( "#unitsDlg_cities" );
+		//Unit button
+		var unitCityBtn = prototypeCityBtn.clone().appendTo("#unitsDlg_cities");
 		unitCityBtn.html(city);
-		var newId = "unit_city_btn_"+city;
-		unitCityBtn.attr("id",newId);
-		unitCityBtn.click(showBtnClass(city));
+		var unitCityBtnId = "unit_city_btn_"+city;
+		unitCityBtn.attr("id",unitCityBtnId);
+		unitCityBtn.click(toggleCity(city));
+		
+		//Unit div
+		var unitCityDiv = prototypeUnitDiv.clone().appendTo("#units_dlg_row2");
+		var unitCityDivId = "unit_city_div_"+city;
+		unitCityDiv.attr("id",unitCityDivId);
+		
+		//Populate unit div
+		//**** TYPE *****
 		$.each(unitsByType, function( type, units ) {
-			var unitTypeCol = $("#"+type+".unitTypeColumn");
+			var unitTypeCol = prototypeUnitTypeColDiv.clone().appendTo(unitCityDiv);
+			unitTypeCol.addClass("unit_type_"+type);
+			
+			//**** UNIT *****
 			units.forEach(function (unitName, index, array) {
 				var unitBtn = prototypeUnitBtn.clone();
 				unitTypeCol.append(unitBtn);
@@ -299,7 +330,7 @@ function initUnitsDialog( ) {
 		});
 	});
 	$(".unit_dialog_btn").hide();
-	showBtnClass("Mesa")();
+	toggleCity("Mesa")();
 }
 
 

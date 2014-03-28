@@ -220,6 +220,9 @@ body {
     justify-content: flex-start;
     align-content: space-around;
 }
+.dialog_body_units {
+    flex-flow: column nowrap;
+}
 .dialog_btn {
     background: #CCC;
     margin: 5px;
@@ -332,7 +335,7 @@ body {
     flex-shrink: 0;
     border-right: 1px solid #888;
 }
-#unitsDlg_units {
+.unitsDlg_units {
     display: flex;
     flex-flow: row nowrap;
 }
