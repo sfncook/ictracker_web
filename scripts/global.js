@@ -393,10 +393,16 @@ function initTbars() {
  **/
 function showSideDialog( btn, dialogId ){
   return function(){
+	var showMe = false;
+	if ($(dialogId).is(":hidden") ) {
+		showMe = true;
+	}
 	hideAllDialogs();
-	btn_clicked = btn;
-	$(dialogId).show();
-	$(dialogId+"_arm").show();
+	if (showMe) {
+		btn_clicked = btn;
+		$(dialogId).show();
+		$(dialogId+"_arm").show();
+	}
   }
 }
 function initSafetyDialog() {
