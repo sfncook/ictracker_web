@@ -301,7 +301,7 @@ body {
 }
 
 #units_dialog {
-    width: 600px;
+    width: 900px;
     height: 400px;
 }
 #units_dlg_row1 {
@@ -311,6 +311,7 @@ body {
 #units_dlg_row2 {
     display: flex;
     flex-flow: row nowrap;
+    border-top: 1px solid #888;
 }
 #unitsDlg_spacer {
     /*background: #AAA;*/
@@ -322,7 +323,6 @@ body {
     width: 700px;
     display: flex;
     flex-flow: row wrap;
-    border-bottom: 1px solid #888;
 }
 #unitsDlg_types {
     /*background: #AAA;*/
