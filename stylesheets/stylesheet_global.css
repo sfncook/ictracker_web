@@ -227,7 +227,7 @@ body {
 }
 
 #sector_dialog {
-    width: 700px;
+    width: 840px;
     height: 300px;
 }
 #sector_dialog > .dialog_body {
@@ -238,7 +238,15 @@ body {
     flex-flow: row wrap;
     border-bottom: 1px solid #DDD;
 }
+#sector_dlg_row1 > * {
+    padding: 4px;
+}
 #sector_dlg_row2 {
+    display: flex;
+    flex-flow: row wrap;
+    border-bottom: 1px solid #DDD;
+}
+#sector_dlg_row3 {
     display: flex;
     flex-flow: row wrap;
 }
@@ -263,6 +271,13 @@ body {
 }
 .sector_dialog_btn_on:hover {
     background: #FFAD2C;
+}
+.apt_label {
+    color: #666;
+    padding-top: 10px !important;
+}
+.apt_input {
+    width: 60px;
 }
 
 #benchmark_dialog {

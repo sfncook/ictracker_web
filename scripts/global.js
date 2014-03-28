@@ -45,23 +45,22 @@ function setBtnText( text ){
 	hideAllDialogs();
   }
 }
-function toggleClass(btn, class_to_toggle, class_category, set_prefix_dir, set_prefix_num) {
-	if (btn.hasClass(class_to_toggle)) {
-		$("."+class_category).removeClass(class_to_toggle);
-		if (set_prefix_dir) {
-			tbar_clicked.prefix_dir = 'X';
-		} else if (set_prefix_num) {
-			tbar_clicked.prefix_num = 'X';
-		}
+function toggleDirBtn(btn) {
+	$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
+	if (btn.hasClass("dir_supl_info_btn_on")) {
+		tbar_clicked.prefix_dir = 'X';
 	} else {
-		$("."+class_category).removeClass(class_to_toggle);
-		btn.addClass(class_to_toggle);
-		if (set_prefix_dir) {
-			tbar_clicked.prefix_dir = btn.html();
-		} else if (set_prefix_num) {
-			tbar_clicked.prefix_num = btn.html();
-		}
-		
+		btn.addClass("dir_supl_info_btn_on");
+		tbar_clicked.prefix_dir = btn.html();
+	}
+}
+function toggleNumBtn(btn) {
+	$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
+	if (btn.hasClass("dir_supl_info_btn_on")) {
+		tbar_clicked.prefix_dir = 'X';
+	} else {
+		btn.addClass("dir_supl_info_btn_on");
+		tbar_clicked.prefix_dir = btn.html();
 	}
 }
 function initSectorDialog( ) {
@@ -74,8 +73,10 @@ function initSectorDialog( ) {
 	
 	var row1Container = $("<div id=\"sector_dlg_row1\"></div>").clone();
 	var row2Container = $("<div id=\"sector_dlg_row2\"></div>").clone();
+	var row3Container = $("<div id=\"sector_dlg_row3\"></div>").clone();
 	sectorDialogBody.append(row1Container);
 	sectorDialogBody.append(row2Container);
+	sectorDialogBody.append(row3Container);
 	
 	//Suplimental buttons
 	var prototypeBtn = $("<div class=\"dir_supl_info_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -84,10 +85,13 @@ function initSectorDialog( ) {
 		newBtn.addClass("dir_supl_info_dir_btn");
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
-		newBtn.click(function() {
-			toggleClass(newBtn, "dir_supl_info_btn_on", "dir_supl_info_dir_btn", true, false);
-			});
+		newBtn.click(function() {toggleDirBtn(newBtn);});
 	});
+	
+	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
+	
+	row1Container.append($("<div class=\"apt_label\">Apartment/Suite/Unit:</div>"));
+	row1Container.append($("<div class=\"apt_input\"><input type=\"text\" class=\"apt_input\"\></div>"));
 	
 	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
 	
@@ -96,9 +100,7 @@ function initSectorDialog( ) {
 		newBtn.addClass("dir_supl_info_num_btn");
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
-		newBtn.click(function() {
-			toggleClass(newBtn, "dir_supl_info_btn_on", "dir_supl_info_num_btn", false, true);
-			});
+		newBtn.click(function() {toggleNumBtn(newBtn);});
 	});
 	
 	//Sector title buttons
@@ -112,6 +114,7 @@ function initSectorDialog( ) {
 			hideAllDialogs();
 			});
 	});
+	
 }
 
 
