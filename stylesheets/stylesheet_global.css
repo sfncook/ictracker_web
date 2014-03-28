@@ -155,7 +155,14 @@ body {
 #mode_side_dialog_arm {
     top: 197px;
 }
-
+.offensive_btn {
+    background: green !important;
+    color: white;
+}
+.defensive_btn {
+    background: #FF2B21 !important;
+    color: white;
+}
 
 
 /*

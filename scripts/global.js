@@ -421,13 +421,20 @@ function initSafetyDialog() {
 function initModeDialog() {
 	$("#offensive_btn").click(function() {
 			btn_clicked.html($("#offensive_btn").html());
+			btn_clicked.removeClass("defensive_btn");
+			btn_clicked.addClass("offensive_btn");
 			hideAllDialogs();
 			});
 	$("#defensive_btn").click(function() {
 			btn_clicked.html($("#defensive_btn").html());
+			btn_clicked.removeClass("offensive_btn");
+			btn_clicked.addClass("defensive_btn");
 			hideAllDialogs();
 			});
 	$("#mode_btn").click(showSideDialog($("#mode_btn"), "#mode_side_dialog"));
+	//init
+	$("#mode_btn").html($("#offensive_btn").html());
+	$("#mode_btn").addClass("offensive_btn");
 }
 
 
