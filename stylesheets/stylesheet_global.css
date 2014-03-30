@@ -233,7 +233,7 @@ body {
 }
 .dialog_btn {
     background: #CCC;
-    margin: 5px;
+    margin: 5px !important;
     box-shadow: 1px 1px 1px #888;
 }
 
@@ -314,7 +314,7 @@ body {
 }
 
 #units_dialog {
-    width: 900px;
+    width: 855px;
     height: 400px;
 }
 #units_dlg_row1 {
@@ -344,10 +344,11 @@ body {
     flex-basis: 90px;
     flex-shrink: 0;
     border-right: 1px solid #888;
+    height: 347px;
 }
 .unitsDlg_units {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: flex-start;
 }
 .unitCity_dialog_btn {
@@ -357,10 +358,9 @@ body {
 }
 .unitTypeColumn {
     display: flex;
-    flex-flow: column wrap;
-    flex-grow: 0;
-    height: 300px;
+    flex-flow: row wrap;
     justify-content: flex-start;
+    padding-bottom: 25px;
 }
 .unit_dialog_btn {
     width: 40px;

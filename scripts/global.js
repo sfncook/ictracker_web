@@ -274,10 +274,9 @@ function toggleType(type) {
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn 	= $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
-	var prototypeUnitBtn 		= $("<div class=\"unit_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeUnitBtn 		= $("<div class=\"unit_dialog_btn unit_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitDiv 		= $("<div class=\"unitsDlg_units\"></div>");
 	var prototypeUnitTypeColDiv = $("<div class=\"unitTypeColumn\"></div>");
-	//"<div id=\"Engine\" class=\"unit_type_engine_col unitTypeColumn\"></div>"
 
 	//Create Unit Type Buttons
 	unitTypes.forEach(function (type, index, array) {
