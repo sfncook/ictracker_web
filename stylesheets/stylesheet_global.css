@@ -42,7 +42,7 @@ h1 {
 }
 
 body {
-    background: #CCC;
+    background: white;
     color: white;
     font-family: 'Roboto', Helvetica, sans-serif;
     margin: 0;
@@ -56,7 +56,7 @@ body {
     width: 90px;
 }
 #ict_header {
-    background: #AAA;
+    background: #BBB;
     position: fixed;
     right: 0;
     top:0;
@@ -89,6 +89,7 @@ body {
 	padding: 4px 4px 4px 4px;
 	text-shadow: 1px 1px #AAA;
     cursor: pointer;
+    box-shadow: 1px 1px 2px #888;
 }
 .button:hover {
 	background-color: #EEE;
@@ -260,9 +261,11 @@ body {
     display: flex;
     flex-flow: row wrap;
 }
-.dir_supl_info_btn {
-	width:16px;
-	border-radius: 15px;
+.small_round_btn {
+	width:12px;
+	height: 12px;
+	border-radius: 12px;
+    padding-top:2px;
 }
 .dir_supl_info_btn_on {
     background: #FFAD2C;
@@ -345,6 +348,7 @@ body {
 .unitsDlg_units {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: flex-start;
 }
 .unitCity_dialog_btn {
     width:70px;
@@ -356,6 +360,7 @@ body {
     flex-flow: column wrap;
     flex-grow: 0;
     height: 300px;
+    justify-content: flex-start;
 }
 .unit_dialog_btn {
     width: 40px;

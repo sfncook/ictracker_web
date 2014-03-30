@@ -23,15 +23,16 @@
 
 
 .tbar_title_container {
-	background: #999;
+	background: #BBB;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: flex-start;
+	align-items: center;
 	padding: 4px;
 	height: 25px;
 }
 .tbar_title_container > * {
-	margin: 0 1px 0 1px;
+	margin: 0 2px 0 2px;
 }
 .titleBtn {
     font-weight: 500;
@@ -70,6 +71,7 @@
 	padding: 0;
 	margin: 0 0 2px 0;
 	width: 30px;
+	box-shadow: none;
 }
 .benchmark_dots_horizontal {
 	display: flex;
@@ -121,15 +123,29 @@
 }
 .units {
 	background: #FFF;
-	width: 75px;
+	width: 145px;
 	padding: 4px;
     display: flex;
     flex-flow: column;
 	border-right: 1px solid #888;
 }
+.single_unit_div {
+    display: flex;
+    flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
+}
 .unit_btn  {
-	width: 65px;
+	width: 45px;
 	margin: 1px 0 1px 0;
+	box-shadow: none;
+}
+.psi_btn {
+	width: 35px;
+	height: 12px;
+	margin: 1px 0 1px 0;
+	box-shadow: none;
+	padding-top: 2px;
 }
 
 .tbar_body_rightcol {
@@ -137,8 +153,8 @@
     flex-flow: column;
 }
 .acct_unit_btn {
-	background: #AAC7D1;
-	border: 2px solid #FFFF10 !important;
+	background: #FFFF10;
+	border: 2px solid #AAC7D1 !important;
 	border-radius: 10px;
 }
 
@@ -150,9 +166,14 @@
 }
 .action_btn {
 	width: 130px;
+	height: 16px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	margin: 1px 0 1px 0;
+	box-shadow: none;
+	font-size: 80%;
+	padding-top: 6px;
+	padding-bottom: 2px;
 }
 

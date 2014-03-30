@@ -88,7 +88,7 @@ function initSectorDialog( ) {
 	sectorDialogBody.append(row1Container);
 	sectorDialogBody.append(row2Container);
 	sectorDialogBody.append(row3Container);
-	
+	/*
 	//Suplimental buttons
 	["N","E","S","W"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();
@@ -96,10 +96,10 @@ function initSectorDialog( ) {
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
 		newBtn.click(function() {toggleDirBtn(newBtn);});
-	});
+	});*/
 	
 	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
-	
+	/*
 	row1Container.append($("<div class=\"apt_label\">Apartment/Suite/Unit:</div>"));
 	var aptInput = $("<div class=\"apt_input\"><input type=\"text\" class=\"apt_input\"\></div>");
 	var inputBox = aptInput.children("input.apt_input");
@@ -109,14 +109,14 @@ function initSectorDialog( ) {
 	  });*/
 	
 	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
-	
+	/*
 	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_num_btn");
 		newBtn.html(btnText);
 		row1Container.append(newBtn);
 		newBtn.click(function() {toggleNumBtn(newBtn);});
-	});
+	});*/
 	
 	//Sector title buttons
 	var prototypeBtn = $("<div class=\"titleBtn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -126,6 +126,7 @@ function initSectorDialog( ) {
 		row2Container.append(newBtn);
 		newBtn.click(function() {
 			btn_clicked.html(sectorName);
+			addTbar();
 			hideAllDialogs();
 			});
 	});
@@ -339,8 +340,16 @@ function initUnitsDialog( ) {
  **/
 function addUnitButton(unitsContainer) {
 	unitsContainer.children().removeClass("blank_btn");
+	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
+	var parBtn = $("<div class=\"par_btn small_round_btn button\">P</div>").clone();
+	var psiBtn = $("<div class=\"psi_btn button\">PSI</div>").clone();
 	var unitBtn = $("<div class=\"blank_btn unit_btn button\">Unit</div>").clone();
-	unitsContainer.append(unitBtn);
+	var clockBtn = $("<div class=\"clock_btn small_round_btn button\">#</div>").clone();
+	singleUnitContainer.append(parBtn);
+	singleUnitContainer.append(psiBtn);
+	singleUnitContainer.append(unitBtn);
+	singleUnitContainer.append(clockBtn);
+	unitsContainer.append(singleUnitContainer);
 	unitBtn.click(showDialog(unitBtn, "#units_dialog"));
 }
 function addActionButton(actionsContainer) {
@@ -349,28 +358,35 @@ function addActionButton(actionsContainer) {
 	actionsContainer.append(actionBtn);
 	actionBtn.click(showDialog(actionBtn, "#actions_dialog"));
 }
-function initTbars() {
+var tbarIndex = 1;
+function addTbar() {
+	console.log("addTbar");
 	//Init T-Bars
-	for(var i=0; i<8; i++) {
+	
+	for (tbarIndex=1; tbarIndex<=4; tbarIndex++) {
 		var tbar = $("#tbar_prototype" ).clone().appendTo( "#tbar_container" );
 		tbar.prefix_dir = 'X';
 		tbar.prefix_num = 'X';
-		var newId = "tbar_"+i;
+		var newId = "tbar_"+tbarIndex;
 		tbar.attr("id",newId);
 		
 		//Title Btn
 		var titleBtn = tbar.children(".tbar_title_container").children(".titleBtn");
-		var titleBtnId = "tbar_title_"+i;
+		var titleBtnId = "tbar_title_"+tbarIndex;
 		titleBtn.attr("id", titleBtnId);
 		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
 		var tbarDirBtn = tbar.children(".tbar_title_container").children(".dir_supl_info_dir_btn");
 		var tbarNumBtn = tbar.children(".tbar_title_container").children(".dir_supl_info_num_btn");
-		tbarDirBtn.hide();
-		tbarNumBtn.hide();
+		//tbarDirBtn.hide();
+		//tbarNumBtn.hide();
+		
+		//Accountability button
+		var acctBtn = tbar.children(".tbar_title_container").children(".acct_unit_btn");
+		acctBtn.click(showDialog(acctBtn, "#units_dialog"));
 		
 		//Benchmark Btn
 		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_dots_container");
-		var benchmarkBtnId = "tbar_benchmark_"+i;
+		var benchmarkBtnId = "tbar_benchmark_"+tbarIndex;
 		benchmarkBtn.attr("id", benchmarkBtnId);
 		benchmarkBtn.click(showDialog(benchmarkBtn, "#benchmark_dialog"));
 		
@@ -384,7 +400,6 @@ function initTbars() {
 		unitBtnContainer.manyBtns = 0;
 		addUnitButton(unitBtnContainer);
 	}
-	$("#tbar_prototype").hide();
 }
 
 
@@ -447,7 +462,8 @@ function initModeDialog() {
 
 
 function init( ) {
-	initTbars();
+	addTbar();
+	$("#tbar_prototype").hide();
 	
 	//Init Dialogs
 	initSectorDialog();
