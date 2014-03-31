@@ -328,7 +328,7 @@ function initUnitsDialog( ) {
 					btn_clicked.html(unitName);
 					hideAllDialogs();
 					if (isNewButton) {
-						var unitsContainer = btn_clicked.parent();
+						var unitsContainer = btn_clicked.parent().parent();
 						addUnitButton(unitsContainer);
 					}
 					});
@@ -344,18 +344,21 @@ function initUnitsDialog( ) {
  * T-Bars
  **/
 function addUnitButton(unitsContainer) {
-	unitsContainer.children().removeClass("blank_btn");
+	unitsContainer.children().children().removeClass("blank_btn");
 	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
-	var parBtn = $("<div class=\"par_btn small_round_btn button\">P</div>").clone();
-	var psiBtn = $("<div class=\"psi_btn button\">PSI</div>").clone();
-	var unitBtn = $("<div class=\"blank_btn unit_btn button\">Unit</div>").clone();
-	var clockBtn = $("<div class=\"clock_btn small_round_btn button\">#</div>").clone();
+	var parBtn = $("<div class=\"par_btn tbar_unit_btn small_round_btn button\">P</div>").clone();
+	var psiBtn = $("<div class=\"psi_btn tbar_unit_btn button\">PSI</div>").clone();
+	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
+	//var clockBtn = $("<div class=\"clock_btn small_round_btn button\">#</div>").clone();
 	singleUnitContainer.append(parBtn);
 	singleUnitContainer.append(psiBtn);
 	singleUnitContainer.append(unitBtn);
-	singleUnitContainer.append(clockBtn);
+	//singleUnitContainer.append("<div class=\"horiz_spacer\"></div>");
+	//singleUnitContainer.append(clockBtn);
 	unitsContainer.append(singleUnitContainer);
 	unitBtn.click(showDialog(unitBtn, "#units_dialog"));
+	
+	psiBtn.click(showDialog(psiBtn, "#psi_dialog"));
 }
 function addActionButton(actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");

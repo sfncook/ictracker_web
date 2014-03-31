@@ -302,8 +302,12 @@ body {
 }
 
 #psi_dialog {
-    width: 425px;
+    width: 430px;
     height: 220px;
+}
+.psiBtn {
+    font-size: 80%;
+    width: 35px;
 }
 #actions_dialog {
     width: 600px;
