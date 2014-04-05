@@ -20,27 +20,32 @@
     
     <body>
         <div id="ict_header" class="header">
-            <img id="title_icon" src="images/icon/ict_logo_100x100.png"/>
-            <div id="time">04:23</div>
-            <div id="safety_btn" class="safety_btn button">Cross</div>
-            <div id="mode_btn" class="mode_btn button"></div>
-			<div id="report_btn" class="button">
-				<img class="report_icon" src="images/report.png"/>
-				<div>Report</div>
-			</div>
-			<div id="cmd_term_btn" class="button">
+            <img id="title_icon" class="header_item" src="images/icon/ict_logo_100x100.png"/>
+            <div id="time" class="header_item">04:23</div>
+            <div id="safety_btn" class="safety_btn header_item button">Cross</div>
+            <div id="mode_btn" class="mode_btn header_item button"></div>
+			<div class="dir_spacer horiz_spacer"></div>
+			<div id="cmd_term_btn" class="header_item button">
 				<img class="terminate_icon" src="images/terminate.png"/>
 				<div>Command</div>
 				<div>Terminated</div>
 			</div>
+			<div id="report_btn" class="header_item button">
+				<img class="report_icon" src="images/report.png"/>
+				<div>Report</div>
+			</div>
 			
-			<div id="safety_side_dialog_arm" class="side_dialog_arm"></div>
-			<div id="safety_side_dialog" class="side_dialog"></div>
+			<div id="safety_side_dialog_container" class="side_dialog_container">
+				<div id="safety_side_dialog" class="side_dialog"></div>
+				<div id="safety_side_dialog_arm" class="side_dialog_arm"></div>
+			</div>
 			
-			<div id="mode_side_dialog_arm" class="side_dialog_arm"></div>
-			<div id="mode_side_dialog" class="side_dialog">
-				<div id="offensive_btn" class="offensive_btn mode_btn dialog_btn button">OFFNS</div>
-				<div id="defensive_btn" class="defensive_btn mode_btn dialog_btn button">DEFNS</div>
+			<div id="mode_side_dialog_container" class="side_dialog_container">
+				<div id="mode_side_dialog" class="side_dialog">
+					<div id="offensive_btn" class="offensive_btn mode_btn dialog_btn button">OFFNS</div>
+					<div id="defensive_btn" class="defensive_btn mode_btn dialog_btn button">DEFNS</div>
+				</div>
+				<div id="mode_side_dialog_arm" class="side_dialog_arm"></div>
 			</div>
 			
         </div>

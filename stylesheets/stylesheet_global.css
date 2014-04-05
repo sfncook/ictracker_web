@@ -20,9 +20,6 @@ h1 {
 }
 
 #title_icon {
-    position: absolute;
-    right: 5px;
-    top: 5px;
     width: 80px;
     height: 80px;
     border: 1px solid #AAA;
@@ -36,9 +33,7 @@ h1 {
 #time {
     font-family: 'Carrois Gothic SC';
     font-size: xx-large !important;
-    position: absolute;
-    right: 9px;
-    top: 90px;
+    color: #666;
 }
 
 body {
@@ -62,6 +57,11 @@ body {
     top:0;
     height: 100%;
     z-index: 50;
+    padding: 4px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 .header_spacer {
     flex-basis: 90px;
@@ -103,34 +103,33 @@ body {
 /*
  **** HEADER ITEMS ****
  */
+.header_item {
+    margin-bottom: 8px;
+}
 #safety_btn_label {
-	position: absolute;
 	color: #FFF;
-	top: 135px;
-	left: 20px;
 	width: 100%;
 	border-top: 1px solid #888;
 }
 #safety_btn {
-	position: absolute;
-	top: 160px;
-	left: 10px;
 	width: 60px;
     z-index: 100;
 }
+.side_dialog_container {
+    position: absolute;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
 .side_dialog {
     background: #666 ;
-	position: absolute;
-	right: 90px;
     z-index: 50;
-    border-radius: 10px;
 }
 .side_dialog_arm {
     background: #666;
-	position: absolute;
     height: 2rem;
     width: 100px;
-	right: 0px;
     z-index: 45;
 }
 #safety_side_dialog {
@@ -141,9 +140,6 @@ body {
     top: 157px;
 }
 #mode_btn {
-	position: absolute;
-	top: 194px;
-	left: 10px;
 	width: 60px;
     z-index: 100;
 }
@@ -165,9 +161,6 @@ body {
     color: white;
 }
 #report_btn {
-	position: absolute;
-	bottom: 15px;
-	left: 10px;
 	width: 60px;
     z-index: 100;
 }
@@ -176,9 +169,6 @@ body {
     height: 20px;
 }
 #cmd_term_btn {
-	position: absolute;
-	bottom: 70px;
-	left: 10px;
 	width: 60px;
     z-index: 100;
     font-size: 0.75rem;

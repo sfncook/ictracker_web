@@ -9,8 +9,7 @@ var tbar_clicked;
 function showSectorDialog( tbar, btn, dialogId ){
   return function(){
 	$(".dialog").hide();
-	$(".side_dialog").hide();
-	$(".side_dialog_arm").hide();
+	$(".side_dialog_container").hide();
 	btn_clicked = btn;
 	tbar_clicked = tbar;
 	$("#dialogContainer").show();
@@ -32,8 +31,7 @@ function showSectorDialog( tbar, btn, dialogId ){
 function showDialog( tbar, btn, dialogId ){
   return function(){
 	$(".dialog").hide();
-	$(".side_dialog").hide();
-	$(".side_dialog_arm").hide();
+	$(".side_dialog_container").hide();
 	btn_clicked = btn;
 	tbar_clicked = tbar;
 	$("#dialogContainer").show();
@@ -492,25 +490,24 @@ function addTbar() {
  **/
 function showSideDialog( btn, dialogId ){
   return function(){
-	var dlg = $(dialogId);
-	var dlg_arm = $(dialogId+"_arm");
+	var dlg_side_container = $(dialogId+"_container");
 	var showMe = false;
-	if (dlg.is(":hidden") ) {
+
+	if (dlg_side_container.is(":hidden") ) {
 		showMe = true;
 	}
+	
 	hideAllDialogs();
+	
 	if (showMe) {
 		btn_clicked = btn;
-		dlg.show();
-		dlg_arm.show();
+		dlg_side_container.show();
 		
 		// Reposition side dialog
 		var btn_top = btn.offset().top;
-		var dlg_left = dlg.offset().left;
-		var dlg_arm_left = dlg_arm.offset().left;
+		var btn_left = btn.offset().left;
 		
-		dlg.offset({ top: btn_top-3, left: dlg_left});
-		dlg_arm.offset({ top: btn_top-3, left: dlg_arm_left});
+		dlg_side_container.offset({ top:btn_top-3, left:btn_left-100});
 	}
   }
 }
@@ -618,8 +615,7 @@ function init( ) {
 //Call this to dismiss the dialogs
 function hideAllDialogs( ) {
 	$("#dialogContainer").hide();
-	$(".side_dialog").hide();
-	$(".side_dialog_arm").hide();
+	$(".side_dialog_container").hide();
 }
 
 $( document ).ready(init);
