@@ -326,6 +326,7 @@ function initUnitsDialog( ) {
 				unitBtn.click(function() {
 					var isNewButton = btn_clicked.html()=="Unit";
 					btn_clicked.html(unitName);
+					addEvent_unit_to_sector(unitName, "sector");
 					hideAllDialogs();
 					if (isNewButton) {
 						var unitsContainer = btn_clicked.parent().parent();
@@ -369,7 +370,6 @@ function addActionButton(actionsContainer) {
 }
 var tbarIndex = 1;
 function addTbar() {
-	console.log("addTbar");
 	//Init T-Bars
 	
 	for (tbarIndex=1; tbarIndex<=4; tbarIndex++) {
@@ -465,6 +465,9 @@ function initModeDialog() {
 	//init
 	$("#mode_btn").html($("#offensive_btn").html());
 	$("#mode_btn").addClass("offensive_btn");
+	
+	testMe="XXX";
+	$("#report_btn").click(generateReport);
 }
 
 

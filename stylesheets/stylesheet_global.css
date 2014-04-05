@@ -164,6 +164,13 @@ body {
     background: #FF2B21 !important;
     color: white;
 }
+#report_btn {
+	position: absolute;
+	bottom: 30px;
+	left: 10px;
+	width: 60px;
+    z-index: 100;
+}
 
 
 /*
