@@ -47,6 +47,36 @@ body {
     flex-flow: row nowrap;
 }
 
+#mayday_and_tbar_container {
+    display: flex;
+    flex-flow: column nowrap;
+}
+#mayday_container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+#mayday_btn {
+    background: red;
+    color: white;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: none;
+    border-right: 2px solid orange;
+    border-bottom: 2px solid orange;
+    border-left: 2px solid orange;
+    font-size: 1.25rem;
+}
+#mayday_btn:hover {
+	background-color: pink;
+}
+#mayday_btn:active {
+	background-color: #666;
+}
+
 .header {
     width: 90px;
 }
