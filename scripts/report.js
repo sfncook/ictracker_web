@@ -1,8 +1,4 @@
 
-/****
- Collect Events
-****/
-
 var testMe;
 var incident_number="000";
 var events = [];
@@ -23,7 +19,7 @@ function generateReport() {
 
 	while (!done) {
 		drawTitle(doc);
-		drawPageNumber(page_number, doc);
+		drawFooter(page_number, "1324 E. Flossmore Ave. Mesa, AZ 85206", doc);
 		drawOnePageOfEvents(doc, eventIndex);
 		if (eventIndex<events.length) {
 			page_number++;
@@ -43,10 +39,43 @@ function drawTitle(doc) {
 	doc.line(MARGIN, MARGIN+2, RIGHT_SIDE-MARGIN, MARGIN+2);
 }
 
-function drawPageNumber(page_number, doc) {
+var weekday=new Array(7);
+weekday[0]="Sunday";
+weekday[1]="Monday";
+weekday[2]="Tuesday";
+weekday[3]="Wednesday";
+weekday[4]="Thursday";
+weekday[5]="Friday";
+weekday[6]="Saturday";
+var month=new Array();
+month[0]="January";
+month[1]="February";
+month[2]="March";
+month[3]="April";
+month[4]="May";
+month[5]="June";
+month[6]="July";
+month[7]="August";
+month[8]="September";
+month[9]="October";
+month[10]="November";
+month[11]="December";
+function drawFooter(page_number, address, doc) {
+	var date = new Date();
+	var dayStr = weekday[date.getDay()];
+	var monthStr = month[date.getMonth()];
+	var dateStr = date.getDate();
+	var yearStr = date.getFullYear();
+	var fullDateStr = dayStr+" "+monthStr+" "+dateStr+", "+yearStr;
+	doc.text(fullDateStr, RIGHT_SIDE-MARGIN-60, BOTTOM_SIDE-MARGIN);
+	
 	doc.text("Page:"+page_number, MARGIN, BOTTOM_SIDE-MARGIN);
 	doc.line(MARGIN, BOTTOM_SIDE-MARGIN-6, RIGHT_SIDE-MARGIN, BOTTOM_SIDE-MARGIN-6);
+	doc.text(address, MARGIN, BOTTOM_SIDE-MARGIN-7);
 }
+
+
+
 
 /*
  * return:The last event Index
@@ -72,7 +101,19 @@ function renderPdf(doc) {
 
 //unit to sector
 function getDateStr(date) {
-	return date.toTimeString();
+	var hour = date.getHours();
+	var min = date.getMinutes();
+	var sec = date.getSeconds();
+	if (hour<10) {
+		hour = "0"+hour;
+	}
+	if (min<10) {
+		min = "0"+min;
+	}
+	if (sec<10) {
+		sec = "0"+sec;
+	}
+	return hour+":"+min+":"+sec;
 }
 function addEvent_unit_to_sector(unit_name, sector_name) {
 	events.push({"type":"unit_to_sector",
