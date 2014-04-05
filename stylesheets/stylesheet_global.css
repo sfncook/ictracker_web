@@ -212,6 +212,7 @@ body {
 .dialog_title_text_container {
     padding-top: 2px;
     flex-grow: 1;
+    color: #EEE;
 }
 .dialog_close_btn {
     background: #F67574;
@@ -315,6 +316,10 @@ body {
 .psiBtn {
     font-size: 80%;
     width: 35px;
+}
+#par_dialog {
+    width: 280px;
+    height: 55px;
 }
 #actions_dialog {
     width: 600px;

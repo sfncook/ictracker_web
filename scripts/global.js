@@ -142,6 +142,32 @@ function initSectorDialog( ) {
 
 
 /**
+ * PAR Dialog
+ **/
+function setParText(text) {
+	return function(){
+		btn_clicked.html(text);
+		hideAllDialogs();
+	  }
+}
+function initParDialog( ) {
+	var parDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "par_dialog";
+	parDialog.attr("id",newId);
+	var parDialogBody = parDialog.children(".dialog_body");
+	var parTitleDiv = parDialog.children(".dialog_title").children(".dialog_title_text_container");
+	parTitleDiv.html("PAR Values");
+	var prototypeBtn = $("<div class=\"par_btn dialog_btn small_round_btn button\">PROTOTYPE</div>");
+	for(var parValue=1; parValue<=9; parValue++) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(parValue);
+		parDialogBody.append(newBtn);
+		newBtn.click(setParText(parValue));
+	}
+}
+
+
+/**
  * Psi Dialog
  **/
 function setPsiText(text) {
@@ -373,6 +399,7 @@ function showActionsForUnitBtn(unitBtn) {
 		psiBtn.removeClass("par_psi_hidden");
 		
 		var parBtn = unitBtn.parent().children(".par_btn");
+		parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
 		parBtn.removeClass("par_psi_hidden");
 	  }
 }
@@ -423,6 +450,10 @@ function addTbar() {
 		var tbarNumBtn = tbar.children(".tbar_title_container").children(".dir_supl_info_num_btn");
 		tbarDirBtn.hide();
 		tbarNumBtn.hide();
+		
+		//PAR (Sector) button
+		var parBtn = tbar.children(".tbar_title_container").children(".par_btn");
+		parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
 		
 		//Accountability button
 		var acctBtn = tbar.children(".tbar_title_container").children(".acct_unit_btn");
@@ -514,6 +545,7 @@ function init( ) {
 	
 	//Init Dialogs
 	initSectorDialog();
+	initParDialog();
 	initPsiDialog();
 	initActionsDialog();
 	initUnitsDialog();
