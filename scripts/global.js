@@ -540,9 +540,40 @@ function initModeDialog() {
 	//init
 	$("#mode_btn").html($("#offensive_btn").html());
 	$("#mode_btn").addClass("offensive_btn");
+}
+
+
+/**
+ * Init Command Terminate Dialog
+ **/
+function terminateCommand() {
+	generateReport();
+	hideAllDialogs();
+}
+function dontTerminateCommand() {
+	hideAllDialogs();
+}
+function initCmdTerminateDialog( ) {
+	var cmdTrmDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "cmd_trm_dialog";
+	cmdTrmDialog.attr("id",newId);
+	var dialogBody = cmdTrmDialog.children(".dialog_body");
+	var titleDiv = cmdTrmDialog.children(".dialog_title").children(".dialog_title_text_container");
+	titleDiv.html("Terminate Command?");
+	var question_div = $("<div class=\"dialog_question\">Are you sure you want to terminate command of this incident?</div>");
+	var prototypeBtn = $("<div class=\"yes_no_btn dialog_btn button\">PROTOTYPE</div>");
+	var yesBtn = prototypeBtn.clone();
+	var noBtn = prototypeBtn.clone();
+	yesBtn.html("YES");
+	noBtn.html("NO");
+	dialogBody.append(question_div);
+	dialogBody.append(yesBtn);
+	dialogBody.append(noBtn);
+	yesBtn.click(terminateCommand);
+	noBtn.click(dontTerminateCommand);
 	
-	testMe="XXX";
-	$("#report_btn").click(generateReport);
+	var cmdTrmBtn = $("#cmd_term_btn");
+	cmdTrmBtn.click(showDialog(0, cmdTrmBtn, "#cmd_trm_dialog"));
 }
 
 
@@ -561,6 +592,8 @@ function init( ) {
 	initBenchmarkDialog();
 	initSafetyDialog();
 	initModeDialog();
+	$("#report_btn").click(generateReport);
+	initCmdTerminateDialog();
 	
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();

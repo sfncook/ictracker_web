@@ -171,6 +171,18 @@ body {
 	width: 60px;
     z-index: 100;
 }
+#cmd_term_btn {
+	position: absolute;
+	bottom: 60px;
+	left: 10px;
+	width: 60px;
+    z-index: 100;
+    font-size: 0.75rem;
+}
+.terminate_btn {
+    width: 20px;
+    height: 20px;
+}
 
 
 /*
@@ -391,3 +403,13 @@ body {
     background: #2A5071;
 }
 
+#cmd_trm_dialog {
+    width: 400px;
+    height: 100px;
+}
+.yes_no_btn {
+    width: 40px;
+}
+.dialog_question {
+    color: #666;
+}
