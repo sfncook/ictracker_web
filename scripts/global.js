@@ -351,20 +351,15 @@ function setUnitName(unitBtn, unitName) {
 	unitBtn.html(unitName);
 	var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
 	action_list_unit_name_title.html(unitName);
+	unitBtn.actions_list.addClass(unitName);
 }
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
-		/*var tbar = unitBtn.tbar;
+		console.log("showActionsForUnitBtn "+unitBtn.html());
+		var tbar = unitBtn.tbar;
 		var actionsParentContainer = tbar.children(".tbar_body_container").children(".actions_parent_container");
-		actionsParentContainer.children(".actions").hide();
+		actionsParentContainer.children(".actions_list").hide();
 		actionsParentContainer.children("."+unitBtn.html()).show();
-/*		$(".dialog").hide();
-		$(".side_dialog").hide();
-		$(".side_dialog_arm").hide();
-		btn_clicked = btn;
-		tbar_clicked = tbar;
-		$("#dialogContainer").show();
-		$(dialogId).show();*/
 	  }
 }
 function addUnitButton(unitsContainer, tbar) {
@@ -382,7 +377,6 @@ function addUnitButton(unitsContainer, tbar) {
 	
 	// Create the actions column for this unit
 	var actions_list = $("<div class=\"actions_list\"></div>");
-	actions_list.addClass(unitBtn.html());
 	actions_list.append($("<div class=\"action_list_unit_name_title\"></div>"));
 	//actionDiv.html(unitBtn.html());
 	tbar.children(".tbar_body_container").children(".actions_parent_container").append(actions_list);
