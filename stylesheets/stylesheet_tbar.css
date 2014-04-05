@@ -151,6 +151,12 @@
 	box-shadow: none;
 	padding-top: 2px;
 }
+.par_psi_hidden {
+	opacity: 0.0;
+}
+.par_psi_hidden:hover {
+	cursor: default;
+}
 .tbar_unit_btn {
 	margin-right: 4px;
 }
@@ -158,7 +164,7 @@
 .actions_parent_container {
 	background: #FFFF99;
 	display: flex;
-    flex-flow: column;
+    flex-flow: column;	
 }
 .acct_unit_btn {
 	background: #FFFF10;

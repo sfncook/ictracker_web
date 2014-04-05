@@ -363,16 +363,24 @@ function showActionsForUnitBtn(unitBtn) {
 		actionsParentContainer.children(".actions_list").hide();
 		actionsParentContainer.children("."+unitBtn.html()).show();
 		
-		//highlight select unit
+		// Highlight select unit
 		tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").removeClass("single_unit_div_on");
 		unitBtn.parent().addClass("single_unit_div_on");
+		
+		// Update PAR and PSI buttons
+		var psiBtn = unitBtn.parent().children(".psi_btn");
+		psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
+		psiBtn.removeClass("par_psi_hidden");
+		
+		var parBtn = unitBtn.parent().children(".par_btn");
+		parBtn.removeClass("par_psi_hidden");
 	  }
 }
 function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.children().children().removeClass("blank_btn");
 	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
-	var parBtn = $("<div class=\"par_btn tbar_unit_btn small_round_btn button\">P</div>").clone();
-	var psiBtn = $("<div class=\"psi_btn tbar_unit_btn button\">PSI</div>").clone();
+	var parBtn = $("<div class=\"par_btn par_psi_hidden tbar_unit_btn small_round_btn button\">P</div>").clone();
+	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
 	unitBtn.tbar = tbar;
 	singleUnitContainer.append(parBtn);
@@ -387,8 +395,6 @@ function addUnitButton(unitsContainer, tbar) {
 	//actionDiv.html(unitBtn.html());
 	tbar.children(".tbar_body_container").children(".actions_parent_container").append(actions_list);
 	unitBtn.actions_list = actions_list;
-	
-	psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
 }
 function addActionButton(tbar, actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");
