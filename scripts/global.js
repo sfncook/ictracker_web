@@ -492,15 +492,25 @@ function addTbar() {
  **/
 function showSideDialog( btn, dialogId ){
   return function(){
+	var dlg = $(dialogId);
+	var dlg_arm = $(dialogId+"_arm");
 	var showMe = false;
-	if ($(dialogId).is(":hidden") ) {
+	if (dlg.is(":hidden") ) {
 		showMe = true;
 	}
 	hideAllDialogs();
 	if (showMe) {
 		btn_clicked = btn;
-		$(dialogId).show();
-		$(dialogId+"_arm").show();
+		dlg.show();
+		dlg_arm.show();
+		
+		// Reposition side dialog
+		var btn_top = btn.offset().top;
+		var dlg_left = dlg.offset().left;
+		var dlg_arm_left = dlg_arm.offset().left;
+		
+		dlg.offset({ top: btn_top-3, left: dlg_left});
+		dlg_arm.offset({ top: btn_top-3, left: dlg_arm_left});
 	}
   }
 }
@@ -516,7 +526,8 @@ function initSafetyDialog() {
 			hideAllDialogs();
 			});
 	});
-	$("#safety_btn").click(showSideDialog($("#safety_btn"), "#safety_side_dialog"));
+	var safetyBtn = $("#safety_btn");
+	safetyBtn.click(showSideDialog(safetyBtn, "#safety_side_dialog"));
 }
 
 
