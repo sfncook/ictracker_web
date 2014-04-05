@@ -352,10 +352,10 @@ function setUnitName(unitBtn, unitName) {
 	var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
 	action_list_unit_name_title.html(unitName);
 	unitBtn.actions_list.addClass(unitName);
+	addActionButton(unitBtn.tbar, unitBtn.actions_list);
 }
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
-		console.log("showActionsForUnitBtn "+unitBtn.html());
 		var tbar = unitBtn.tbar;
 		var actionsParentContainer = tbar.children(".tbar_body_container").children(".actions_parent_container");
 		actionsParentContainer.children(".actions_list").hide();
@@ -384,12 +384,12 @@ function addUnitButton(unitsContainer, tbar) {
 	
 	psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
 }
-function addActionButton(actionsContainer) {
+function addActionButton(tbar, actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");
 	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
 	actionsContainer.append(actionBtn);
-	actionBtn.click(showDialog(actionBtn, "#actions_dialog"));
-	btn_clicked = actionBtn;
+	actionBtn.click(showDialog(tbar, actionBtn, "#actions_dialog"));
+	/*btn_clicked = actionBtn;*/
 }
 var tbarIndex = 1;
 function addTbar() {
