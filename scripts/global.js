@@ -2,6 +2,70 @@
 
 
 /**
+ * PAR Dialog
+ **/
+function setParText(text) {
+	return function(){
+		btn_clicked.html(text);
+		hideAllDialogs();
+	  }
+}
+function initParDialog( ) {
+	var parDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "par_dialog";
+	parDialog.attr("id",newId);
+	var parDialogBody = parDialog.children(".dialog_body");
+	var parTitleDiv = parDialog.children(".dialog_title").children(".dialog_title_text_container");
+	parTitleDiv.html("PAR Values");
+	var prototypeBtn = $("<div class=\"par_btn dialog_btn small_round_btn button\">PROTOTYPE</div>");
+	for(var parValue=1; parValue<=9; parValue++) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(parValue);
+		parDialogBody.append(newBtn);
+		newBtn.click(setParText(parValue));
+	}
+}
+
+
+/**
+ * Psi Dialog
+ **/
+function setPsiText(text) {
+	return function(){
+		btn_clicked.html(text);
+		hideAllDialogs();
+		updateBgColor(text, btn_clicked);
+	  }
+}
+function initPsiDialog( ) {
+	var psiDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "psi_dialog";
+	psiDialog.attr("id",newId);
+	var psiDialogBody = psiDialog.children(".dialog_body");
+	var psiTitleDiv = psiDialog.children(".dialog_title").children(".dialog_title_text_container");
+	psiTitleDiv.html("PSI Values");
+	var prototypeBtn = $("<div class=\"psiBtn dialog_btn button\">PROTOTYPE</div>");
+	for(var psiValue=4500; psiValue>=0; psiValue-=100) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(psiValue);
+		updateBgColor(psiValue, newBtn);
+		psiDialogBody.append(newBtn);
+		newBtn.click(setPsiText(psiValue));
+	}
+}
+function updateBgColor(psi_value, btn) {
+	if (psi_value>=3000) {
+		btn.removeClass("psi_red").removeClass("psi_yellow").addClass("psi_green");
+	} else if (psi_value>=1500) {
+		btn.removeClass("psi_red").addClass("psi_yellow").removeClass("psi_green");
+	} else {
+		btn.addClass("psi_red").removeClass("psi_yellow").removeClass("psi_green");
+	}
+}
+
+
+
+/**
  * Sector Dialog
  **/
 var btn_clicked;
@@ -145,69 +209,6 @@ function initSectorDialog( ) {
 		});
 	});
 	
-}
-
-
-/**
- * PAR Dialog
- **/
-function setParText(text) {
-	return function(){
-		btn_clicked.html(text);
-		hideAllDialogs();
-	  }
-}
-function initParDialog( ) {
-	var parDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
-	var newId = "par_dialog";
-	parDialog.attr("id",newId);
-	var parDialogBody = parDialog.children(".dialog_body");
-	var parTitleDiv = parDialog.children(".dialog_title").children(".dialog_title_text_container");
-	parTitleDiv.html("PAR Values");
-	var prototypeBtn = $("<div class=\"par_btn dialog_btn small_round_btn button\">PROTOTYPE</div>");
-	for(var parValue=1; parValue<=9; parValue++) {
-		var newBtn = prototypeBtn.clone();
-		newBtn.html(parValue);
-		parDialogBody.append(newBtn);
-		newBtn.click(setParText(parValue));
-	}
-}
-
-
-/**
- * Psi Dialog
- **/
-function setPsiText(text) {
-	return function(){
-		btn_clicked.html(text);
-		hideAllDialogs();
-		updateBgColor(text, btn_clicked);
-	  }
-}
-function initPsiDialog( ) {
-	var psiDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
-	var newId = "psi_dialog";
-	psiDialog.attr("id",newId);
-	var psiDialogBody = psiDialog.children(".dialog_body");
-	var psiTitleDiv = psiDialog.children(".dialog_title").children(".dialog_title_text_container");
-	psiTitleDiv.html("PSI Values");
-	var prototypeBtn = $("<div class=\"psiBtn dialog_btn button\">PROTOTYPE</div>");
-	for(var psiValue=4500; psiValue>=0; psiValue-=100) {
-		var newBtn = prototypeBtn.clone();
-		newBtn.html(psiValue);
-		updateBgColor(psiValue, newBtn);
-		psiDialogBody.append(newBtn);
-		newBtn.click(setPsiText(psiValue));
-	}
-}
-function updateBgColor(psi_value, btn) {
-	if (psi_value>=3000) {
-		btn.removeClass("psi_red").removeClass("psi_yellow").addClass("psi_green");
-	} else if (psi_value>=1500) {
-		btn.removeClass("psi_red").addClass("psi_yellow").removeClass("psi_green");
-	} else {
-		btn.addClass("psi_red").removeClass("psi_yellow").removeClass("psi_green");
-	}
 }
 
 
