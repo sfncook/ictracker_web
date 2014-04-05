@@ -151,7 +151,7 @@
 	margin-right: 4px;
 }
 
-.tbar_body_rightcol {
+.actions_parent_container {
 	display: flex;
     flex-flow: column;
 }

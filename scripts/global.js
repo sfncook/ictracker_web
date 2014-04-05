@@ -29,12 +29,14 @@ function showSectorDialog( tbar, btn, dialogId ){
 	$( "div:contains('"+tbar.prefix_num+"').dir_supl_info_num_btn" ).addClass("dir_supl_info_btn_on");
   }
 }
-function showDialog( btn, dialogId ){
+function showDialog( tbar, btn, dialogId ){
   return function(){
+	console.log(btn);
 	$(".dialog").hide();
 	$(".side_dialog").hide();
 	$(".side_dialog_arm").hide();
 	btn_clicked = btn;
+	tbar_clicked = tbar;
 	$("#dialogContainer").show();
 	$(dialogId).show();
   }
@@ -286,7 +288,6 @@ function initUnitsDialog( ) {
 
 	//Create Unit Type Buttons
 	unitTypes.forEach(function (type, index, array) {
-		//console.log("  "+unitTypeName);
 		var unitTypeBtn = prototypeUnitTypeBtn.clone().appendTo( "#unitsDlg_types" );
 		unitTypeBtn.html(type);
 		var newId = "unit_type_btn_"+type;
@@ -326,13 +327,16 @@ function initUnitsDialog( ) {
 				unitBtn.click(function() {
 					var isNewButton = btn_clicked.html()=="Unit";
 					btn_clicked.html(unitName);
+					btn_clicked.unbind( "click" );
+					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
 					addEvent_unit_to_sector(unitName, "sector");
 					hideAllDialogs();
 					if (isNewButton) {
 						var unitsContainer = btn_clicked.parent().parent();
-						addUnitButton(unitsContainer);
+						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_parent_container");
+						addUnitButton(unitsContainer, tbar_clicked);
 					}
-					});
+				});
 			});
 		});
 	});
@@ -344,22 +348,38 @@ function initUnitsDialog( ) {
 /**
  * T-Bars
  **/
-function addUnitButton(unitsContainer) {
+function showActionsForUnitBtn(unitBtn) {
+	return function(){
+		var tbar = unitBtn.tbar;
+		console.log(unitBtn);
+/*		$(".dialog").hide();
+		$(".side_dialog").hide();
+		$(".side_dialog_arm").hide();
+		btn_clicked = btn;
+		tbar_clicked = tbar;
+		$("#dialogContainer").show();
+		$(dialogId).show();*/
+	  }
+}
+function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.children().children().removeClass("blank_btn");
 	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
 	var parBtn = $("<div class=\"par_btn tbar_unit_btn small_round_btn button\">P</div>").clone();
 	var psiBtn = $("<div class=\"psi_btn tbar_unit_btn button\">PSI</div>").clone();
 	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
-	//var clockBtn = $("<div class=\"clock_btn small_round_btn button\">#</div>").clone();
+	unitBtn.tbar = tbar;
 	singleUnitContainer.append(parBtn);
 	singleUnitContainer.append(psiBtn);
 	singleUnitContainer.append(unitBtn);
-	//singleUnitContainer.append("<div class=\"horiz_spacer\"></div>");
-	//singleUnitContainer.append(clockBtn);
 	unitsContainer.append(singleUnitContainer);
-	unitBtn.click(showDialog(unitBtn, "#units_dialog"));
+	unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 	
-	psiBtn.click(showDialog(psiBtn, "#psi_dialog"));
+	// Create the actions column for this unit
+	var actionDiv = $("<div class=\"actions_list\">actions</div>");
+	tbar.children(".tbar_body_container").children(".actions_parent_container").append(actionDiv);
+	unitBtn.actionDiv = actionDiv;
+	
+	psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
 }
 function addActionButton(actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");
@@ -391,23 +411,24 @@ function addTbar() {
 		
 		//Accountability button
 		var acctBtn = tbar.children(".tbar_title_container").children(".acct_unit_btn");
-		acctBtn.click(showDialog(acctBtn, "#units_dialog"));
+		acctBtn.click(showDialog(tbar, acctBtn, "#units_dialog"));
 		
 		//Benchmark Btn
 		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_dots_container");
 		var benchmarkBtnId = "tbar_benchmark_"+tbarIndex;
 		benchmarkBtn.attr("id", benchmarkBtnId);
-		benchmarkBtn.click(showDialog(benchmarkBtn, "#benchmark_dialog"));
+		benchmarkBtn.click(showDialog(tbar, benchmarkBtn, "#benchmark_dialog"));
 		
 		//Action Btn
-		var actionBtnContainer = tbar.children(".tbar_body_container").children(".tbar_body_rightcol").children(".actions");
-		actionBtnContainer.manyBtns = 0;
-		addActionButton(actionBtnContainer);
+		//var actionBtnContainer = tbar.children(".tbar_body_container").children(".actions_parent_container").children(".actions");
+		//actionBtnContainer.manyBtns = 0;
+		//addActionButton(actionBtnContainer);
+		var actionsTopContainer = tbar.children(".tbar_body_container").children(".actions_parent_container");
 		
 		//Unit Btn
 		var unitBtnContainer = tbar.children(".tbar_body_container").children(".units");
 		unitBtnContainer.manyBtns = 0;
-		addUnitButton(unitBtnContainer);
+		addUnitButton(unitBtnContainer, tbar);
 	}
 }
 
