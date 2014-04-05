@@ -46,7 +46,7 @@ function setBtnText( text ){
 	hideAllDialogs();
   }
 }
-var suplInfoPrototypeBtn = $("<div class=\"small_round_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+
 function toggleDirBtn(btn) {
 	var tbarDirBtn = tbar_clicked.children(".tbar_title_container").children(".dir_supl_info_dir_btn");
 	var tbarDirSpacer = tbar_clicked.children(".tbar_title_container").children(".dir_spacer");
@@ -82,6 +82,7 @@ function toggleNumBtn(btn) {
 	}
 }
 function initSectorDialog( ) {
+	var suplInfoPrototypeBtn = $("<div class=\"small_round_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
@@ -135,7 +136,15 @@ function initSectorDialog( ) {
 			btn_clicked.html(sectorName);
 			addTbar();
 			hideAllDialogs();
-			});
+			
+			//REHAB sector has no acctBtn
+			var acctBtn = tbar_clicked.children(".tbar_title_container").children(".acct_unit_btn");
+			if (sectorName=="REHAB") {
+				acctBtn.hide();
+			} else {
+				acctBtn.show();
+			}
+		});
 	});
 	
 }
