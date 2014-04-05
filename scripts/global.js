@@ -31,7 +31,6 @@ function showSectorDialog( tbar, btn, dialogId ){
 }
 function showDialog( tbar, btn, dialogId ){
   return function(){
-	console.log(btn);
 	$(".dialog").hide();
 	$(".side_dialog").hide();
 	$(".side_dialog_arm").hide();
@@ -326,7 +325,7 @@ function initUnitsDialog( ) {
 				unitBtn.attr("id",newId);
 				unitBtn.click(function() {
 					var isNewButton = btn_clicked.html()=="Unit";
-					btn_clicked.html(unitName);
+					setUnitName(btn_clicked, unitName);
 					btn_clicked.unbind( "click" );
 					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
 					addEvent_unit_to_sector(unitName, "sector");
@@ -348,10 +347,17 @@ function initUnitsDialog( ) {
 /**
  * T-Bars
  **/
+function setUnitName(unitBtn, unitName) {
+	unitBtn.html(unitName);
+	var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
+	action_list_unit_name_title.html(unitName);
+}
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
-		var tbar = unitBtn.tbar;
-		console.log(unitBtn);
+		/*var tbar = unitBtn.tbar;
+		var actionsParentContainer = tbar.children(".tbar_body_container").children(".actions_parent_container");
+		actionsParentContainer.children(".actions").hide();
+		actionsParentContainer.children("."+unitBtn.html()).show();
 /*		$(".dialog").hide();
 		$(".side_dialog").hide();
 		$(".side_dialog_arm").hide();
@@ -375,9 +381,12 @@ function addUnitButton(unitsContainer, tbar) {
 	unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 	
 	// Create the actions column for this unit
-	var actionDiv = $("<div class=\"actions_list\">actions</div>");
-	tbar.children(".tbar_body_container").children(".actions_parent_container").append(actionDiv);
-	unitBtn.actionDiv = actionDiv;
+	var actions_list = $("<div class=\"actions_list\"></div>");
+	actions_list.addClass(unitBtn.html());
+	actions_list.append($("<div class=\"action_list_unit_name_title\"></div>"));
+	//actionDiv.html(unitBtn.html());
+	tbar.children(".tbar_body_container").children(".actions_parent_container").append(actions_list);
+	unitBtn.actions_list = actions_list;
 	
 	psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
 }
@@ -423,7 +432,6 @@ function addTbar() {
 		//var actionBtnContainer = tbar.children(".tbar_body_container").children(".actions_parent_container").children(".actions");
 		//actionBtnContainer.manyBtns = 0;
 		//addActionButton(actionBtnContainer);
-		var actionsTopContainer = tbar.children(".tbar_body_container").children(".actions_parent_container");
 		
 		//Unit Btn
 		var unitBtnContainer = tbar.children(".tbar_body_container").children(".units");
