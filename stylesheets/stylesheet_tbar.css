@@ -124,7 +124,7 @@
 .units {
 	background: #FFF;
 	width: 145px;
-	padding: 4px;
+	padding: 4px 0 4px 0;
     display: flex;
     flex-flow: column;
 	border-right: 1px solid #888;
@@ -134,6 +134,10 @@
     flex-flow: row nowrap;
 	align-items: center;
 	justify-content: flex-start;
+	z-index: 99;
+}
+.single_unit_div_on {
+	background: #FFFF99;
 }
 .unit_btn  {
 	width: 45px;
@@ -152,6 +156,7 @@
 }
 
 .actions_parent_container {
+	background: #FFFF99;
 	display: flex;
     flex-flow: column;
 }

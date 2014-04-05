@@ -200,7 +200,8 @@ function initActionsDialog( ) {
 			//hideAllDialogs();
 			if (isNewButton) {
 				var actionsContainer = btn_clicked.parent();
-				addActionButton(actionsContainer);
+				addActionButton(btn_clicked.tbar, actionsContainer);
+				btn_clicked = actionsContainer.children(".blank_btn");
 			}
 			});
 	});
@@ -328,6 +329,7 @@ function initUnitsDialog( ) {
 					setUnitName(btn_clicked, unitName);
 					btn_clicked.unbind( "click" );
 					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
+					showActionsForUnitBtn(btn_clicked)();
 					addEvent_unit_to_sector(unitName, "sector");
 					hideAllDialogs();
 					if (isNewButton) {
@@ -360,6 +362,10 @@ function showActionsForUnitBtn(unitBtn) {
 		var actionsParentContainer = tbar.children(".tbar_body_container").children(".actions_parent_container");
 		actionsParentContainer.children(".actions_list").hide();
 		actionsParentContainer.children("."+unitBtn.html()).show();
+		
+		//highlight select unit
+		tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").removeClass("single_unit_div_on");
+		unitBtn.parent().addClass("single_unit_div_on");
 	  }
 }
 function addUnitButton(unitsContainer, tbar) {
@@ -388,8 +394,8 @@ function addActionButton(tbar, actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");
 	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
 	actionsContainer.append(actionBtn);
+	actionBtn.tbar = tbar;
 	actionBtn.click(showDialog(tbar, actionBtn, "#actions_dialog"));
-	/*btn_clicked = actionBtn;*/
 }
 var tbarIndex = 1;
 function addTbar() {
