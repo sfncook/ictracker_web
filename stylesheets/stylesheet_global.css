@@ -221,13 +221,13 @@ body {
     width:100%;
     height: 100%;
     display: flex;
-    flex-flow: row;
+    flex-flow: row nowrap;
     justify-content: space-around;
+    align-items: center;
 }
 .dialog {
     z-index: 999;
     background: #EEE;
-    margin-top: 100px;
     padding: 0;
     display: flex;
     flex-flow: column nowrap;
@@ -436,4 +436,33 @@ body {
 }
 .dialog_question {
     color: #666;
+}
+
+#mayday_dialog {
+    width: 700px;
+}
+.mayday_dialog_title {
+    background: red;
+    color: white;
+}
+.mayday_dialog_body {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+.mayday_label_td {
+    text-align: right;
+    vertical-align: middle;
+}
+.mayday_td {
+    padding: 3px 3px 10px 3px;
+}
+#mayday_unit_list_div {
+    display: flex;
+    flex-flow: row wrap;
+}
+#mayday_sector_list_div {
+    display: flex;
+    flex-flow: row wrap;
 }

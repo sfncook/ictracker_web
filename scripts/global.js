@@ -64,6 +64,80 @@ function updateBgColor(psi_value, btn) {
 }
 
 
+/**
+ * Mayday Dialog
+ **/
+var unitsToTbarMap = {};
+var sectorsToTbarMap = {};
+function selectMaydayUnitBtn(unitBtn){
+	return function(){
+		$(".unit_mayday_btn").removeClass("glow");
+		unitBtn.addClass("glow");
+	}
+}
+function selectMaydaySectorBtn(sectorBtn){
+	return function(){
+		$(".sector_mayday_btn").removeClass("glow");
+		sectorBtn.addClass("glow");
+	}
+}
+function showMaydayDialog(){
+	var mayday_dialog = $("#mayday_dialog");
+	
+	
+	// Get lists of UNITS & SECTORS
+	$(".tbar").each(function( index ) {
+		var tbar = $(this);
+		if (tbar.attr("id")!="tbar_prototype") {
+			var unitBtns = tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").children(".unit_btn").not(".blank_btn");
+			unitBtns.each(function( i ) {
+				var unitBtn = $(this);
+				var unitData = new Object();
+				unitData.btn = unitBtn;
+				unitData.tbar = tbar;
+				unitsToTbarMap[unitBtn.html()] = unitData;
+			});
+			
+			var sectorTitle = tbar.children(".tbar_title_container").children(".titleBtn").html();
+			if (sectorTitle!="Sector Title") {
+				sectorsToTbarMap[sectorTitle] = tbar;
+			}
+		}
+	});
+	
+	// Units
+	var mayday_unit_list_div = $("#mayday_unit_list_div");
+	mayday_unit_list_div.empty();
+	var prototypeUnitBtn = $("<div class=\"unit_mayday_btn unit_btn dialog_btn button\">PROTOTYPE</div>");
+	$.each( unitsToTbarMap, function( unitName, unitData ) {
+		var unitBtn = prototypeUnitBtn.clone();
+		unitBtn.html(unitName);
+		unitBtn.click(selectMaydayUnitBtn(unitBtn));
+		mayday_unit_list_div.append(unitBtn);
+	});
+	
+	// Sectors
+	var mayday_sector_list_div = $("#mayday_sector_list_div");
+	mayday_sector_list_div.empty();
+	var prototypeSectorBtn = $("<div class=\"titleBtn sector_mayday_btn dialog_btn button\">PROTOTYPE</div>");
+	$.each( sectorsToTbarMap, function( sectorName, tbar ) {
+		var sectorBtn = prototypeSectorBtn.clone();
+		sectorBtn.html(sectorName);
+		sectorBtn.click(selectMaydaySectorBtn(sectorBtn));
+		mayday_sector_list_div.append(sectorBtn);
+	});
+	
+	$(".dialog").hide();
+	$(".side_dialog_container").hide();
+	$("#dialogContainer").show();
+	mayday_dialog.show();
+}
+function initMaydayDialog( ) {
+	var maydayBtn = $("#mayday_btn");
+	maydayBtn.click(showMaydayDialog);
+}
+
+
 
 /**
  * Sector Dialog
@@ -603,6 +677,7 @@ function init( ) {
 	initModeDialog();
 	$("#report_btn").click(generateReport);
 	initCmdTerminateDialog();
+	initMaydayDialog();
 	
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();

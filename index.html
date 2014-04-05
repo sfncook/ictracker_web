@@ -97,6 +97,8 @@
 				</div>
 			</div>
 			
+			
+			<!-- Units Dialog -->
 			<div id="units_dialog" class="dialog">
 				<div class="dialog_title">
 					<div class="dialog_title_text_container">Title</div>
@@ -110,6 +112,33 @@
 					<div id="units_dlg_row2">
 						<div id="unitsDlg_types"></div>
 					</div>
+				</div>
+			</div>
+			
+			
+			<!-- Mayday Dialog -->
+			<div id="mayday_dialog" class="dialog">
+				<div class="mayday_dialog_title dialog_title">
+					<div class="dialog_title_text_container">Title</div>
+					<div class="dialog_close_btn button">X</div>
+				</div>
+				<div class="mayday_dialog_body">
+					<table id="mayday_table">
+						<tr>
+							<td class="mayday_label_td mayday_td">Fire fighter:</td>
+							<td class="mayday_td"><input id="mayday_ffighter_name" type="text"\></td>
+						</tr>
+						<tr>
+							<td class="mayday_label_td mayday_td">Unit:</td>
+							<td id="mayday_unit_list_td" class="mayday_td">
+								<div id="mayday_unit_list_div"></div>
+							</td></tr>
+						<tr>
+							<td class="mayday_label_td mayday_td">Sector:</td>
+							<td class="mayday_td">
+								<div id="mayday_sector_list_div"></div>
+							</td></tr>
+					</table>
 				</div>
 			</div>
 		</div><!--dialogContainer-->
