@@ -256,11 +256,10 @@ function initSectorDialog( ) {
 		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_dir_btn");
 		newBtn.html(btnText);
-		row1Container.append(newBtn);
+		row2Container.append(newBtn);
 		newBtn.click(function() {toggleDirBtn(newBtn);});
 	});
 	
-	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
 	/*
 	row1Container.append($("<div class=\"apt_label\">Apartment/Suite/Unit:</div>"));
 	var aptInput = $("<div class=\"apt_input\"><input type=\"text\" class=\"apt_input\"\></div>");
@@ -270,15 +269,15 @@ function initSectorDialog( ) {
 		console.log(inputBox.val());
 	  });*/
 	
-	row1Container.append($("<div class=\"horiz_spacer\"></div>"));
-	
 	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_num_btn");
 		newBtn.html(btnText);
-		row1Container.append(newBtn);
+		row2Container.append(newBtn);
 		newBtn.click(function() {toggleNumBtn(newBtn);});
 	});
+	
+	row2Container.append($("<div class=\"horiz_spacer\"></div>"));
 	
 	//Sector title buttons
 	var prototypeBtn = $("<div class=\"title_btn dialog_btn button\">PROTOTYPE</div>");
