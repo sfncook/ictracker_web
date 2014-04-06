@@ -382,6 +382,44 @@ function initBenchmarkDialog( ) {
 
 
 /**
+ * Objectives Dialog
+ **/
+function initObjectivesDialog( ) {
+	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "objectives_dialog";
+	dialog.attr("id",newId);
+	var dialogBody = dialog.children(".dialog_body");
+	newId = "objectives_dialog_body";
+	dialogBody.attr("id",newId);
+	var titleDiv = dialog.children(".dialog_title").children(".dialog_title_text_container");
+	titleDiv.html("Objectives");
+	var objectives = ["All Clear",
+						"Under Control",
+						"Loss Stopped",
+						"Upgrade to full recue",
+						"Assing safety",
+						"Establish supply line",
+						"Secure utilities",
+						"Ventilation",
+						"Create \"On deck\"",
+						"Pressurize exposures",
+						"Monitor channel 16",
+						"Salvage",
+						"Establish rehab",
+						"Occupant services"];
+	
+	objectives.forEach(function (objectiveText, index, array) {
+		var chkBox = createCheckBox(objectiveText);
+		dialogBody.append(chkBox);
+	});
+	
+	var objectives_btn = $("#objectives_btn");
+	objectives_btn.click(showDialog(0, objectives_btn, "#objectives_dialog"));
+}
+
+
+
+/**
  * Units Dialog
  **/
 function toggleCity(city) {
@@ -696,6 +734,7 @@ function init( ) {
 	$("#report_btn").click(generateReport);
 	initCmdTerminateDialog();
 	initMaydayDialog();
+	initObjectivesDialog();
 	
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();

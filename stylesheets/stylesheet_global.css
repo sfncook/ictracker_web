@@ -338,8 +338,6 @@ body {
 }
 
 #benchmark_dialog {
-    width: 400px;
-    height: 200px;
 }
 #benchmark_dialog > .dialog_body{
     flex-flow:column;
@@ -481,4 +479,9 @@ body {
 }
 #cancel_mayday_btn:active {
     background: #003366;
+}
+
+#objectives_dialog_body {
+    display: flex;
+    flex-flow: column nowrap;
 }
