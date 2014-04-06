@@ -34,9 +34,23 @@
 .tbar_title_container > * {
 	margin: 0 2px 0 2px;
 }
-.titleBtn {
+.title_btn {
     font-weight: 500;
 	width:  120px;
+	height: 16px;
+}
+.title_btn_with_clock {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
+.clock_icon {
+    width: 10px;
+    height: 10px;
+}
+.fixed_title_spacer {
+	width: 10px;
 }
 .title_btn_mayday {
     background: red;

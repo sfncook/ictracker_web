@@ -98,7 +98,7 @@ function showMaydayDialog(){
 				unitsToTbarMap[unitBtn.html()] = unitData;
 			});
 			
-			var sectorTitle = tbar.children(".tbar_title_container").children(".titleBtn").html();
+			var sectorTitle = tbar.children(".tbar_title_container").children(".title_btn").html();
 			if (sectorTitle!="Sector Title") {
 				sectorsToTbarMap[sectorTitle] = tbar;
 			}
@@ -144,7 +144,7 @@ function createMayday() {
 	}
 	if (selectedSector.exists()) {
 		var sectorTbar = sectorsToTbarMap[selectedSector.html()];
-		sectorTbar.children(".tbar_title_container").children(".titleBtn").addClass("unit_btn_mayday");
+		sectorTbar.children(".tbar_title_container").children(".title_btn").addClass("unit_btn_mayday");
 	}
 	hideAllDialogs();
 }
@@ -281,11 +281,21 @@ function initSectorDialog( ) {
 	});
 	
 	//Sector title buttons
-	var prototypeBtn = $("<div class=\"titleBtn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"title_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeFixedTitleSpacer = $("<div class=\"fixed_title_spacer\"></div>");
+	var prototypeClockIcon = $("<img class=\"clock_icon\" src=\"images/clock.png\"/>");
 	sectors.forEach(function (sectorName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(sectorName);
 		row2Container.append(newBtn);
+		
+		var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
+		if (hasClock) {
+			newBtn.append(prototypeClockIcon.clone());
+			newBtn.prepend(prototypeFixedTitleSpacer.clone());
+			newBtn.addClass("title_btn_with_clock");
+		}
+		
 		newBtn.click(function() {
 			btn_clicked.html(sectorName);
 			addTbar();
@@ -617,7 +627,7 @@ function addTbar() {
 		tbar.attr("id",newId);
 		
 		//Title Btn
-		var titleBtn = tbar.children(".tbar_title_container").children(".titleBtn");
+		var titleBtn = tbar.children(".tbar_title_container").children(".title_btn");
 		var titleBtnId = "tbar_title_"+tbarIndex;
 		titleBtn.attr("id", titleBtnId);
 		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
@@ -823,6 +833,13 @@ var actions = [
 	"Charge the sprinkler system",
 	"Charge the stand pipe",
 	"Fan to the door"];
+
+var sectorsWithClock = [
+	"Interior",
+	"Medical",
+	"Safety",
+	"Cust Service",
+	];
 
 var sectors = [
 	"REHAB",

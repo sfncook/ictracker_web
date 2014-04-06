@@ -246,7 +246,6 @@ body {
 
 #sector_dialog {
     width: 840px;
-    height: 300px;
 }
 #sector_dialog > .dialog_body {
     flex-flow: column nowrap;
