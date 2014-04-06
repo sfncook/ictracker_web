@@ -38,6 +38,10 @@
     font-weight: 500;
 	width:  120px;
 }
+.title_btn_mayday {
+    background: red;
+	color: white;
+}
 .sector_par_btn {
 	width:15px;
 	border-radius: 50px;
@@ -144,6 +148,10 @@
 	margin: 1px 0 1px 0;
 	box-shadow: none;
 }
+.unit_btn_mayday {
+	background: red;
+	color: white;
+}
 .psi_btn {
 	width: 35px;
 	height: 12px;
@@ -165,6 +173,16 @@
 	background: #FFFF99;
 	display: flex;
     flex-flow: column;	
+}
+.action_list {
+	display: flex;
+    flex-flow: column nowrap;
+	align-content: center;
+}
+.action_list_unit_name_title {
+	text-align: center;
+	color: #666;
+	text-shadow: 1px 1px 1px #AAA;
 }
 .acct_unit_btn {
 	background: #FFFF10;

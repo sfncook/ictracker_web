@@ -447,7 +447,7 @@ body {
 }
 .mayday_dialog_body {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     justify-content: flex-start;
     align-content: flex-start;
 }
@@ -465,4 +465,20 @@ body {
 #mayday_sector_list_div {
     display: flex;
     flex-flow: row wrap;
+}
+.horiz_container {
+    display: flex;
+    flex-flow: row nowrap;
+}
+#ok_mayday_btn {
+    background: #00FF66;
+}
+#ok_mayday_btn:active {
+    background: #003300;
+}
+#cancel_mayday_btn {
+    background: #6699FF;
+}
+#cancel_mayday_btn:active {
+    background: #003366;
 }

@@ -113,6 +113,9 @@ function showMaydayDialog(){
 		var unitBtn = prototypeUnitBtn.clone();
 		unitBtn.html(unitName);
 		unitBtn.click(selectMaydayUnitBtn(unitBtn));
+		if (unitData.btn.hasClass("unit_btn_mayday")) {
+			unitBtn.addClass("unit_btn_mayday");
+		}
 		mayday_unit_list_div.append(unitBtn);
 	});
 	
@@ -132,9 +135,24 @@ function showMaydayDialog(){
 	$("#dialogContainer").show();
 	mayday_dialog.show();
 }
+function createMayday() {
+	var selectedUnit = $(".unit_mayday_btn.glow");
+	var selectedSector = $(".sector_mayday_btn.glow");
+	if (selectedUnit.exists()) {
+		var unitData = unitsToTbarMap[selectedUnit.html()];
+		unitData.btn.addClass("unit_btn_mayday");
+	}
+	if (selectedSector.exists()) {
+		var sectorTbar = sectorsToTbarMap[selectedSector.html()];
+		sectorTbar.children(".tbar_title_container").children(".titleBtn").addClass("unit_btn_mayday");
+	}
+	hideAllDialogs();
+}
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
 	maydayBtn.click(showMaydayDialog);
+	$("#ok_mayday_btn").click(createMayday);
+	$("#cancel_mayday_btn").click(hideAllDialogs);
 }
 
 
@@ -692,6 +710,10 @@ function init( ) {
 function hideAllDialogs( ) {
 	$("#dialogContainer").hide();
 	$(".side_dialog_container").hide();
+}
+
+$.fn.exists = function () {
+    return this.length !== 0;
 }
 
 $( document ).ready(init);
