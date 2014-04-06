@@ -20,8 +20,8 @@ h1 {
 }
 
 #title_icon {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border: 1px solid #AAA;
     border-radius: 3px;
 }
@@ -47,36 +47,6 @@ body {
     flex-flow: row nowrap;
 }
 
-#mayday_and_tbar_container {
-    display: flex;
-    flex-flow: column nowrap;
-}
-#mayday_container {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: flex-start;
-}
-#mayday_btn {
-    background: red;
-    color: white;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-top: none;
-    border-right: 2px solid orange;
-    border-bottom: 2px solid orange;
-    border-left: 2px solid orange;
-    font-size: 1.25rem;
-}
-#mayday_btn:hover {
-	background-color: pink;
-}
-#mayday_btn:active {
-	background-color: #666;
-}
-
 .header {
     width: 90px;
 }
@@ -91,7 +61,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
-    align-items: center;
+    align-items: stretch;
 }
 .header_spacer {
     flex-basis: 90px;
@@ -142,7 +112,6 @@ body {
 	border-top: 1px solid #888;
 }
 #safety_btn {
-	width: 60px;
     z-index: 100;
 }
 .side_dialog_container {
@@ -170,11 +139,7 @@ body {
     top: 157px;
 }
 #mode_btn {
-	width: 60px;
     z-index: 100;
-}
-.mode_btn {
-	width: 60px;
 }
 #mode_side_dialog {
     top: 197px;
@@ -191,7 +156,6 @@ body {
     color: white;
 }
 #report_btn {
-	width: 60px;
     z-index: 100;
 }
 .report_icon {
@@ -199,7 +163,6 @@ body {
     height: 20px;
 }
 #cmd_term_btn {
-	width: 60px;
     z-index: 100;
     font-size: 0.75rem;
 }
@@ -436,6 +399,37 @@ body {
     color: #666;
 }
 
+
+
+#mayday_and_tbar_container {
+    display: flex;
+    flex-flow: column nowrap;
+}
+#mayday_container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+#mayday_btn {
+    background: red;
+    color: white;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: none;
+    border-right: 2px solid orange;
+    border-bottom: 2px solid orange;
+    border-left: 2px solid orange;
+    font-size: 1.25rem;
+}
+#mayday_btn:hover {
+	background-color: pink;
+}
+#mayday_btn:active {
+	background-color: #666;
+}
 #mayday_dialog {
     width: 700px;
 }
@@ -482,6 +476,10 @@ body {
 }
 
 #objectives_dialog_body {
+    display: flex;
+    flex-flow: column nowrap;
+}
+#osr_dialog_body {
     display: flex;
     flex-flow: column nowrap;
 }

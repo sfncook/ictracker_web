@@ -420,6 +420,43 @@ function initObjectivesDialog( ) {
 
 
 /**
+ * OSR Dialog
+ **/
+function initOsrDialog( ) {
+	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var newId = "osr_dialog";
+	dialog.attr("id",newId);
+	var dialogBody = dialog.children(".dialog_body");
+	newId = "osr_dialog_body";
+	dialogBody.attr("id",newId);
+	var titleDiv = dialog.children(".dialog_title").children(".dialog_title_text_container");
+	titleDiv.html("OSR");
+	var osrs = ["Unit ID",
+				"Address",
+				"Occupancy",
+				"Construction",
+				"Conditions",
+				"Assume Command",
+				"Location(mobile/cab)",
+				"Strategy (off./def.)",
+				"Attack line",
+				"Water supply",
+				"IRIC",
+				"Accountability"];
+	
+	osrs.forEach(function (objectiveText, index, array) {
+		var chkBox = createCheckBox(objectiveText);
+		dialogBody.append(chkBox);
+	});
+	
+	var osr_btn = $("#osr_btn");
+	osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
+}
+
+
+
+
+/**
  * Units Dialog
  **/
 function toggleCity(city) {
@@ -638,7 +675,7 @@ function showSideDialog( btn, dialogId ){
 		var btn_top = btn.offset().top;
 		var btn_left = btn.offset().left;
 		
-		dlg_side_container.offset({ top:btn_top-3, left:btn_left-100});
+		dlg_side_container.offset({ top:btn_top-3, left:btn_left-90});
 	}
   }
 }
@@ -735,6 +772,7 @@ function init( ) {
 	initCmdTerminateDialog();
 	initMaydayDialog();
 	initObjectivesDialog();
+	initOsrDialog();
 	
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
