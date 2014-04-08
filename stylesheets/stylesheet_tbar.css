@@ -36,7 +36,7 @@
 }
 .title_btn {
     font-weight: 500;
-	width:  120px;
+	width:  160px;
 	height: 16px;
 }
 .title_btn_with_clock {
@@ -183,6 +183,10 @@
 	margin-right: 4px;
 }
 
+.actions_column {
+	display: flex;
+    flex-flow: column nowrap;
+}
 .actions_parent_container {
 	background: #FFFF99;
 	display: flex;

@@ -544,7 +544,7 @@ function initUnitsDialog( ) {
 					hideAllDialogs();
 					if (isNewButton) {
 						var unitsContainer = btn_clicked.parent().parent();
-						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_parent_container");
+						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
 						addUnitButton(unitsContainer, tbar_clicked);
 					}
 				});
@@ -561,30 +561,34 @@ function initUnitsDialog( ) {
  **/
 function setUnitName(unitBtn, unitName) {
 	unitBtn.html(unitName);
-	var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
-	action_list_unit_name_title.html(unitName);
-	unitBtn.actions_list.addClass(unitName);
-	addActionButton(unitBtn.tbar, unitBtn.actions_list);
+	if (typeof unitBtn.actions_list !== "undefined") {
+		var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
+		action_list_unit_name_title.html(unitName);
+		unitBtn.actions_list.addClass(unitName);
+		addActionButton(unitBtn.tbar, unitBtn.actions_list);
+	}
 }
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
-		var tbar = unitBtn.tbar;
-		var actionsParentContainer = tbar.children(".tbar_body_container").children(".actions_parent_container");
-		actionsParentContainer.children(".actions_list").hide();
-		actionsParentContainer.children("."+unitBtn.html()).show();
-		
-		// Highlight select unit
-		tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").removeClass("single_unit_div_on");
-		unitBtn.parent().addClass("single_unit_div_on");
-		
-		// Update PAR and PSI buttons
-		var psiBtn = unitBtn.parent().children(".psi_btn");
-		psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
-		psiBtn.removeClass("par_psi_hidden");
-		
-		var parBtn = unitBtn.parent().children(".par_btn");
-		parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
-		parBtn.removeClass("par_psi_hidden");
+		if (typeof tbar !== "undefined") {
+			var tbar = unitBtn.tbar;
+			var actionsParentContainer = tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
+			actionsParentContainer.children(".actions_list").hide();
+			actionsParentContainer.children("."+unitBtn.html()).show();
+			
+			// Highlight select unit
+			tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").removeClass("single_unit_div_on");
+			unitBtn.parent().addClass("single_unit_div_on");
+			
+			// Update PAR and PSI buttons
+			var psiBtn = unitBtn.parent().children(".psi_btn");
+			psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
+			psiBtn.removeClass("par_psi_hidden");
+			
+			var parBtn = unitBtn.parent().children(".par_btn");
+			parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
+			parBtn.removeClass("par_psi_hidden");
+		}
 	  }
 }
 function addUnitButton(unitsContainer, tbar) {
@@ -604,7 +608,7 @@ function addUnitButton(unitsContainer, tbar) {
 	var actions_list = $("<div class=\"actions_list\"></div>");
 	actions_list.append($("<div class=\"action_list_unit_name_title\"></div>"));
 	//actionDiv.html(unitBtn.html());
-	tbar.children(".tbar_body_container").children(".actions_parent_container").append(actions_list);
+	tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container").append(actions_list);
 	unitBtn.actions_list = actions_list;
 }
 function addActionButton(tbar, actionsContainer) {
@@ -640,7 +644,7 @@ function addTbar() {
 		parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
 		
 		//Accountability button
-		var acctBtn = tbar.children(".tbar_title_container").children(".acct_unit_btn");
+		var acctBtn = tbar.children(".tbar_body_container").children(".actions_column").children(".acct_unit_btn");
 		acctBtn.click(showDialog(tbar, acctBtn, "#units_dialog"));
 		
 		//Benchmark Btn
@@ -650,7 +654,7 @@ function addTbar() {
 		benchmarkBtn.click(showDialog(tbar, benchmarkBtn, "#benchmark_dialog"));
 		
 		//Action Btn
-		//var actionBtnContainer = tbar.children(".tbar_body_container").children(".actions_parent_container").children(".actions");
+		//var actionBtnContainer = tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container").children(".actions");
 		//actionBtnContainer.manyBtns = 0;
 		//addActionButton(actionBtnContainer);
 		

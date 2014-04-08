@@ -232,7 +232,7 @@ body {
     display: flex;
     flex-flow: row wrap;
     border-radius: 3px;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-content: space-around;
 }
 .dialog_body_units {
@@ -245,7 +245,7 @@ body {
 }
 
 #sector_dialog {
-    width: 840px;
+    width: 900px;
 }
 #sector_dialog > .dialog_body {
     flex-flow: column nowrap;
