@@ -52,6 +52,7 @@ function initPsiDialog( ) {
 		psiDialogBody.append(newBtn);
 		newBtn.click(setPsiText(psiValue));
 	}
+	psiDialogBody.append("<div class=\"horiz_spacer\"></div>");
 }
 function updateBgColor(psi_value, btn) {
 	if (psi_value>=3000) {
@@ -572,8 +573,8 @@ function setUnitName(unitBtn, unitName) {
 }
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
+		var tbar = unitBtn.tbar;
 		if (typeof tbar !== "undefined") {
-			var tbar = unitBtn.tbar;
 			var actionsParentContainer = tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
 			actionsParentContainer.children(".actions_list").hide();
 			actionsParentContainer.children("."+unitBtn.html()).show();
@@ -608,7 +609,7 @@ function addUnitButton(unitsContainer, tbar) {
 	
 	// Create the actions column for this unit
 	var actions_list = $("<div class=\"actions_list\"></div>");
-	actions_list.append($("<div class=\"action_list_unit_name_title\"></div>"));
+	//actions_list.append($("<div class=\"action_list_unit_name_title\"></div>"));
 	//actionDiv.html(unitBtn.html());
 	tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container").append(actions_list);
 	unitBtn.actions_list = actions_list;
