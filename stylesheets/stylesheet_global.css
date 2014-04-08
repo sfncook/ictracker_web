@@ -273,11 +273,23 @@ body {
 	border-radius: 12px;
     padding-top:2px;
 }
+.dir_supl_info_btn {
+    box-shadow: none;
+    padding: 0 0 4px 0;
+}
 .dir_supl_info_btn_on {
     background: #FFAD2C;
 }
 .dir_supl_info_btn_on:hover {
     background: #FFAD2C;
+}
+.dir_spacer {
+    width: 12px;
+    height: 12px;
+}
+.num_spacer {
+    width: 12px;
+    height: 12px;
 }
 .horiz_spacer {
     flex-grow:99;

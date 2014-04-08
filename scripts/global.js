@@ -202,8 +202,8 @@ function setBtnText( text ){
 }
 
 function toggleDirBtn(btn) {
-	var tbarDirBtn = tbar_clicked.children(".tbar_title_container").children(".dir_supl_info_dir_btn");
-	var tbarDirSpacer = tbar_clicked.children(".tbar_title_container").children(".dir_spacer");
+	var tbarDirBtn = btn_clicked.children(".dir_supl_info_dir_btn");
+	var tbarDirSpacer = btn_clicked.children(".dir_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
 		$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = 'X';
@@ -219,8 +219,8 @@ function toggleDirBtn(btn) {
 	}
 }
 function toggleNumBtn(btn) {
-	var tbarNumBtn = tbar_clicked.children(".tbar_title_container").children(".dir_supl_info_num_btn");
-	var tbarNumSpacer = tbar_clicked.children(".tbar_title_container").children(".num_spacer");
+	var tbarNumBtn = btn_clicked.children(".dir_supl_info_num_btn");
+	var tbarNumSpacer = btn_clicked.children(".num_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
 		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = 'X';
@@ -292,12 +292,14 @@ function initSectorDialog( ) {
 		if (hasClock) {
 			newBtn.append(prototypeClockIcon.clone());
 			newBtn.prepend(prototypeFixedTitleSpacer.clone());
-			newBtn.addClass("title_btn_with_clock");
+		} else {
+			newBtn.prepend(prototypeFixedTitleSpacer.clone());
+			newBtn.append(prototypeFixedTitleSpacer.clone());
 		}
 		
 		newBtn.click(function() {
-			btn_clicked.html(sectorName);
-			addTbar();
+			btn_clicked.children(".title_text").html(sectorName);
+			//addTbar();
 			hideAllDialogs();
 			
 			//REHAB sector has no acctBtn
@@ -634,10 +636,11 @@ function addTbar() {
 		var titleBtnId = "tbar_title_"+tbarIndex;
 		titleBtn.attr("id", titleBtnId);
 		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
-		var tbarDirBtn = tbar.children(".tbar_title_container").children(".dir_supl_info_dir_btn");
-		var tbarNumBtn = tbar.children(".tbar_title_container").children(".dir_supl_info_num_btn");
+		var tbarDirBtn = titleBtn.children(".dir_supl_info_dir_btn");
+		var tbarNumBtn = titleBtn.children(".dir_supl_info_num_btn");
 		tbarDirBtn.hide();
 		tbarNumBtn.hide();
+		
 		
 		//PAR (Sector) button
 		var parBtn = tbar.children(".tbar_title_container").children(".par_btn");

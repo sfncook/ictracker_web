@@ -38,8 +38,6 @@
     font-weight: 500;
 	width:  160px;
 	height: 16px;
-}
-.title_btn_with_clock {
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
