@@ -652,7 +652,7 @@ function addTbar() {
 		acctBtn.click(showDialog(tbar, acctBtn, "#units_dialog"));
 		
 		//Benchmark Btn
-		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_dots_container");
+		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_btn");
 		var benchmarkBtnId = "tbar_benchmark_"+tbarIndex;
 		benchmarkBtn.attr("id", benchmarkBtnId);
 		benchmarkBtn.click(showDialog(tbar, benchmarkBtn, "#benchmark_dialog"));
