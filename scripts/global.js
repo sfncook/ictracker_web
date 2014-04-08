@@ -165,12 +165,13 @@ var btn_clicked;
 var tbar_clicked;
 function showSectorDialog( tbar, btn, dialogId ){
   return function(){
+	var sectorDlg = $(dialogId);
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
 	btn_clicked = btn;
 	tbar_clicked = tbar;
 	$("#dialogContainer").show();
-	$(dialogId).show();
+	sectorDlg.show();
 	
 	//Toggle selected Sector button
 	$(".sector_dialog_btn").removeClass("sector_dialog_btn_on");
@@ -178,11 +179,11 @@ function showSectorDialog( tbar, btn, dialogId ){
 	
 	//Toggle prefix_dir buttons
 	$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
-	$( "div:contains('"+tbar.prefix_dir+"').dir_supl_info_dir_btn" ).addClass("dir_supl_info_btn_on");
+	$("."+tbar.prefix_dir+"_supl_btn").addClass("dir_supl_info_btn_on");
 	
 	//Toggle prefix_num buttons
 	$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
-	$( "div:contains('"+tbar.prefix_num+"').dir_supl_info_num_btn" ).addClass("dir_supl_info_btn_on");
+	$("."+tbar.prefix_num+"_supl_btn").addClass("dir_supl_info_btn_on");
   }
 }
 function showDialog( tbar, btn, dialogId ){
@@ -224,13 +225,13 @@ function toggleNumBtn(btn) {
 	var tbarNumSpacer = tbar_clicked.find(".num_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
 		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
-		tbar_clicked.prefix_dir = 'X';
+		tbar_clicked.prefix_num = 'X';
 		tbarNumBtn.hide();
 		tbarNumSpacer.show();
 	} else {
 		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
 		btn.addClass("dir_supl_info_btn_on");
-		tbar_clicked.prefix_dir = btn.html();
+		tbar_clicked.prefix_num = btn.html();
 		tbarNumBtn.show();
 		tbarNumSpacer.hide();
 		tbarNumBtn.html(btn.html());
@@ -256,6 +257,7 @@ function initSectorDialog( ) {
 	["N","E","S","W"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_dir_btn");
+		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
 		row2Container.append(newBtn);
 		newBtn.click(function() {toggleDirBtn(newBtn);});
@@ -273,6 +275,7 @@ function initSectorDialog( ) {
 	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_num_btn");
+		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
 		row2Container.append(newBtn);
 		newBtn.click(function() {toggleNumBtn(newBtn);});
