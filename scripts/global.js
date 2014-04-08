@@ -15,7 +15,7 @@ function initParDialog( ) {
 	var newId = "par_dialog";
 	parDialog.attr("id",newId);
 	var parDialogBody = parDialog.children(".dialog_body");
-	var parTitleDiv = parDialog.children(".dialog_title").children(".dialog_title_text_container");
+	var parTitleDiv = parDialog.find(".dialog_title_text_container");
 	parTitleDiv.html("PAR Values");
 	var prototypeBtn = $("<div class=\"par_btn dialog_btn small_round_btn button\">PROTOTYPE</div>");
 	for(var parValue=1; parValue<=9; parValue++) {
@@ -42,7 +42,7 @@ function initPsiDialog( ) {
 	var newId = "psi_dialog";
 	psiDialog.attr("id",newId);
 	var psiDialogBody = psiDialog.children(".dialog_body");
-	var psiTitleDiv = psiDialog.children(".dialog_title").children(".dialog_title_text_container");
+	var psiTitleDiv = psiDialog.find(".dialog_title_text_container");
 	psiTitleDiv.html("PSI Values");
 	var prototypeBtn = $("<div class=\"psiBtn dialog_btn button\">PROTOTYPE</div>");
 	for(var psiValue=4500; psiValue>=0; psiValue-=100) {
@@ -90,7 +90,7 @@ function showMaydayDialog(){
 	$(".tbar").each(function( index ) {
 		var tbar = $(this);
 		if (tbar.attr("id")!="tbar_prototype") {
-			var unitBtns = tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").children(".unit_btn").not(".blank_btn");
+			var unitBtns = tbar.find(".unit_btn").not(".blank_btn");
 			unitBtns.each(function( i ) {
 				var unitBtn = $(this);
 				var unitData = new Object();
@@ -99,7 +99,7 @@ function showMaydayDialog(){
 				unitsToTbarMap[unitBtn.html()] = unitData;
 			});
 			
-			var sectorTitle = tbar.children(".tbar_title_container").children(".title_btn").html();
+			var sectorTitle = tbar.find(".title_btn").html();
 			if (sectorTitle!="Sector Title") {
 				sectorsToTbarMap[sectorTitle] = tbar;
 			}
@@ -145,7 +145,7 @@ function createMayday() {
 	}
 	if (selectedSector.exists()) {
 		var sectorTbar = sectorsToTbarMap[selectedSector.html()];
-		sectorTbar.children(".tbar_title_container").children(".title_btn").addClass("unit_btn_mayday");
+		sectorTbar.find(".title_btn").addClass("unit_btn_mayday");
 	}
 	hideAllDialogs();
 }
@@ -203,8 +203,8 @@ function setBtnText( text ){
 }
 
 function toggleDirBtn(btn) {
-	var tbarDirBtn = btn_clicked.children(".dir_supl_info_dir_btn");
-	var tbarDirSpacer = btn_clicked.children(".dir_spacer");
+	var tbarDirBtn = tbar_clicked.find(".dir_supl_info_dir_btn");
+	var tbarDirSpacer = tbar_clicked.find(".dir_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
 		$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = 'X';
@@ -220,8 +220,8 @@ function toggleDirBtn(btn) {
 	}
 }
 function toggleNumBtn(btn) {
-	var tbarNumBtn = btn_clicked.children(".dir_supl_info_num_btn");
-	var tbarNumSpacer = btn_clicked.children(".num_spacer");
+	var tbarNumBtn = tbar_clicked.find(".dir_supl_info_num_btn");
+	var tbarNumSpacer = tbar_clicked.find(".num_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
 		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = 'X';
@@ -241,7 +241,7 @@ function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
-	var sectorTitleDiv = sectorDialog.children(".dialog_title").children(".dialog_title_text_container");
+	var sectorTitleDiv = sectorDialog.find(".dialog_title_text_container");
 	sectorTitleDiv.html("Sectors");
 	var sectorDialogBody = sectorDialog.children(".dialog_body");
 	
@@ -575,12 +575,12 @@ function showActionsForUnitBtn(unitBtn) {
 	return function(){
 		var tbar = unitBtn.tbar;
 		if (typeof tbar !== "undefined") {
-			var actionsParentContainer = tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
+			var actionsParentContainer = tbar.find(".actions_parent_container");
 			actionsParentContainer.children(".actions_list").hide();
 			actionsParentContainer.children("."+unitBtn.html()).show();
 			
 			// Highlight select unit
-			tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").removeClass("single_unit_div_on");
+			tbar.find(".single_unit_div").removeClass("single_unit_div_on");
 			unitBtn.parent().addClass("single_unit_div_on");
 			
 			// Update PAR and PSI buttons
@@ -611,7 +611,7 @@ function addUnitButton(unitsContainer, tbar) {
 	var actions_list = $("<div class=\"actions_list\"></div>");
 	//actions_list.append($("<div class=\"action_list_unit_name_title\"></div>"));
 	//actionDiv.html(unitBtn.html());
-	tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container").append(actions_list);
+	tbar.find(".actions_parent_container").append(actions_list);
 	unitBtn.actions_list = actions_list;
 }
 function addActionButton(tbar, actionsContainer) {
@@ -633,7 +633,7 @@ function addTbar() {
 		tbar.attr("id",newId);
 		
 		//Title Btn
-		var titleBtn = tbar.children(".tbar_title_container").children(".title_btn");
+		var titleBtn = tbar.find(".title_btn");
 		var titleBtnId = "tbar_title_"+tbarIndex;
 		titleBtn.attr("id", titleBtnId);
 		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
@@ -644,15 +644,15 @@ function addTbar() {
 		
 		
 		//PAR (Sector) button
-		var parBtn = tbar.children(".tbar_title_container").children(".par_btn");
+		var parBtn = tbar.find(".par_btn");
 		parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
 		
 		//Accountability button
-		var acctBtn = tbar.children(".tbar_body_container").children(".actions_column").children(".acct_unit_btn");
+		var acctBtn = tbar.find(".acct_unit_btn");
 		acctBtn.click(showDialog(tbar, acctBtn, "#units_dialog"));
 		
 		//Benchmark Btn
-		var benchmarkBtn = tbar.children(".tbar_title_container").children(".benchmark_btn");
+		var benchmarkBtn = tbar.find(".benchmark_btn");
 		var benchmarkBtnId = "tbar_benchmark_"+tbarIndex;
 		benchmarkBtn.attr("id", benchmarkBtnId);
 		benchmarkBtn.click(showDialog(tbar, benchmarkBtn, "#benchmark_dialog"));
@@ -663,7 +663,7 @@ function addTbar() {
 		//addActionButton(actionBtnContainer);
 		
 		//Unit Btn
-		var unitBtnContainer = tbar.children(".tbar_body_container").children(".units");
+		var unitBtnContainer = tbar.find(".units");
 		unitBtnContainer.manyBtns = 0;
 		addUnitButton(unitBtnContainer, tbar);
 	}
@@ -751,7 +751,7 @@ function initCmdTerminateDialog( ) {
 	var newId = "cmd_trm_dialog";
 	cmdTrmDialog.attr("id",newId);
 	var dialogBody = cmdTrmDialog.children(".dialog_body");
-	var titleDiv = cmdTrmDialog.children(".dialog_title").children(".dialog_title_text_container");
+	var titleDiv = cmdTrmDialog.find(".dialog_title_text_container");
 	titleDiv.html("Terminate Command?");
 	var question_div = $("<div class=\"dialog_question\">Are you sure you want to terminate command of this incident?</div>");
 	var prototypeBtn = $("<div class=\"yes_no_btn dialog_btn button\">PROTOTYPE</div>");
