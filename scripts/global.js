@@ -7,6 +7,7 @@
 function setParText(text) {
 	return function(){
 		btn_clicked.html(text);
+		btn_clicked.removeClass("par_btn_without_number");
 		hideAllDialogs();
 	  }
 }
@@ -17,7 +18,7 @@ function initParDialog( ) {
 	var parDialogBody = parDialog.children(".dialog_body");
 	var parTitleDiv = parDialog.find(".dialog_title_text_container");
 	parTitleDiv.html("PAR Values");
-	var prototypeBtn = $("<div class=\"par_btn dialog_btn small_round_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"par_btn dialog_btn button\">PROTOTYPE</div>");
 	for(var parValue=1; parValue<=9; parValue++) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(parValue);

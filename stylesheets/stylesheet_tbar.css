@@ -54,12 +54,20 @@
     background: red;
 	color: white;
 }
-.sector_par_btn {
-	width:15px;
-	border-radius: 50px;
-	color: #666;
-	font-weight: normal;
-	text-shadow: none;
+.benchmark_btn {
+	font-size: 0.7rem;
+	height: 14px;
+	padding-top: 6px;
+}
+.par_btn {
+	font-size: 1.0rem;
+	width: 22px;
+	padding-top: 6px;
+}
+.par_btn_without_number {
+	font-size: 0.7rem;
+	height: 14px;
+	padding-top: 6px;
 }
 .sector_status_blank_btn {
 	width:20px;
