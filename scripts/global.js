@@ -91,7 +91,7 @@ function showMaydayDialog(){
 	$(".tbar").each(function( index ) {
 		var tbar = $(this);
 		if (tbar.attr("id")!="tbar_prototype") {
-			var unitBtns = tbar.find(".unit_btn").not(".blank_btn");
+			var unitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
 			unitBtns.each(function( i ) {
 				var unitBtn = $(this);
 				var unitData = new Object();
@@ -100,7 +100,7 @@ function showMaydayDialog(){
 				unitsToTbarMap[unitBtn.html()] = unitData;
 			});
 			
-			var sectorTitle = tbar.find(".title_btn").html();
+			var sectorTitle = tbar.find(".title_text").html();
 			if (sectorTitle!="Sector Title") {
 				sectorsToTbarMap[sectorTitle] = tbar;
 			}
@@ -142,24 +142,27 @@ function createMayday() {
 	var selectedSector = $(".sector_mayday_btn.glow");
 	if (selectedUnit.exists()) {
 		var unitData = unitsToTbarMap[selectedUnit.html()];
-		window.setTimeout(blinkUnit, 500, unitData.btn);
+		btnsToBlink.push(unitData.btn);
 	}
 	if (selectedSector.exists()) {
 		var sectorTbar = sectorsToTbarMap[selectedSector.html()];
-		sectorTbar.find(".title_btn").addClass("unit_btn_mayday");
+		btnsToBlink.push(sectorTbar.find(".title_btn"));
 	}
 	hideAllDialogs();
 }
-
-function blinkUnit(unitBtn) {
-	if (unitBtn.hasClass("glowred")) {
-		unitBtn.removeClass("glowred");
-		unitBtn.addClass("glowpink");
-	} else {
-		unitBtn.addClass("glowred");
-		unitBtn.removeClass("glowpink");
-	}
-	window.setTimeout(blinkUnit, 500, unitBtn);
+var btnsToBlink = new Array();
+function blinkUnit() {
+	$.each( btnsToBlink, function( index, btn ) {
+		if (btn.hasClass("glowred")) {
+			btn.removeClass("glowred");
+			btn.addClass("glowpink");
+		} else {
+			btn.addClass("glowred");
+			btn.removeClass("glowpink");
+		}
+	});
+	
+	window.setTimeout(blinkUnit, 500);
 }
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
@@ -813,7 +816,8 @@ function init( ) {
 	$("#units_dialog").show();
 	
 	hideAllDialogs();
-		
+	
+	window.setTimeout(blinkUnit, 500);
 }
 
 //Call this to dismiss the dialogs
