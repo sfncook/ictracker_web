@@ -909,11 +909,14 @@ var engine="Engine";
 var ladder="Ladder";
 var bc="BC";
 var squad="Squad";
-var unitTypes = [
-	engine,
-	ladder,
-	bc,
-	squad,];
+var medic="Medic";
+var u="Util";
+var cv="CV";
+var wt="WtrTend";
+var hm="Haz Mat";
+var br="Brush";
+var rehab="Rehab";
+var unitTypes = [engine,ladder,bc,squad,medic,u,cv,wt,hm,br,rehab];
 var unitsByTypeByCity = {
 	"Mesa":{
 		engine:[
@@ -965,12 +968,33 @@ var unitsByTypeByCity = {
 		engine:[
 			"E251",
 			"E252",		
-			"E253"],		
+			"E254",		
+			"E256",		
+			"E257",		
+			"E258",		
+			"E2510",		
+			"E2511",		
+			"E2540"],		
 		ladder:[
 			"L251",
-			"L252",],
+			"L253",
+			"L252",
+			"Lt251",
+			"Lt253",
+			"Lt252",],
 		bc:[
-			"BC291",],
+			"BC251",
+			"BC252",],
+		u:[
+			"U251",],
+		cv:[
+			"CV251",],
+		wt:[
+			"WT256",],
+		hm:[
+			"HM258",],
+		br:[
+			"Br2511",],
 	},
 	
 	"Chandler":{
@@ -982,13 +1006,69 @@ var unitsByTypeByCity = {
 			"E286",
 			"E287",
 			"E288",
-			"E289"],
+			"E289",
+			"E2810",
+			"E2282"],
 		ladder:[
 			"L281",
-			"L283"],
+			"L283",
+			"Lt281",
+			"Lt283"],
 		bc:[
 			"BC281",
 			"BC282"],
+		squad:[
+			"SQ283",],
+		hm:[
+			"HM283",],
+		u:[
+			"U288",],
+		br:[
+			"Br284",],
+	},
+	
+	"Tempe":{
+		engine:[
+			"E271",
+			"E272",
+			"E273",
+			"E274",
+			"E275",
+			"E276",
+			"E277",
+			"E278"],
+		ladder:[
+			"L273",
+			"L276",
+			"Lt273",
+			"Lt276"],
+		bc:[
+			"BC271"],
+		medic:[
+			"Med271",
+			"Med272",
+			"Med276"]
+	},
+	
+	"Superstn":{
+		engine:[
+			"E261",
+			"E262",
+			"E265",],
+		ladder:[
+			"L263",
+			"L264",
+			"Lt263",
+			"Lt264"],
+		bc:[
+			"BC261",
+			"BC262"],
+		wt:[
+			"WT261",],
+		u:[
+			"U262",],
+		rehab:[
+			"RH264"],
 	},
 };
 

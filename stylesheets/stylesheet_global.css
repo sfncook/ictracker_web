@@ -337,7 +337,6 @@ body {
 
 #units_dialog {
     width: 855px;
-    height: 400px;
 }
 #units_dlg_row1 {
     display: flex;
