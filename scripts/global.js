@@ -142,13 +142,24 @@ function createMayday() {
 	var selectedSector = $(".sector_mayday_btn.glow");
 	if (selectedUnit.exists()) {
 		var unitData = unitsToTbarMap[selectedUnit.html()];
-		unitData.btn.addClass("unit_btn_mayday");
+		window.setTimeout(blinkUnit, 500, unitData.btn);
 	}
 	if (selectedSector.exists()) {
 		var sectorTbar = sectorsToTbarMap[selectedSector.html()];
 		sectorTbar.find(".title_btn").addClass("unit_btn_mayday");
 	}
 	hideAllDialogs();
+}
+
+function blinkUnit(unitBtn) {
+	if (unitBtn.hasClass("glowred")) {
+		unitBtn.removeClass("glowred");
+		unitBtn.addClass("glowpink");
+	} else {
+		unitBtn.addClass("glowred");
+		unitBtn.removeClass("glowpink");
+	}
+	window.setTimeout(blinkUnit, 500, unitBtn);
 }
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
@@ -802,6 +813,7 @@ function init( ) {
 	$("#units_dialog").show();
 	
 	hideAllDialogs();
+		
 }
 
 //Call this to dismiss the dialogs

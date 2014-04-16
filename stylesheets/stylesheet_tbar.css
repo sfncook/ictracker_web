@@ -168,9 +168,13 @@
 	margin: 1px 0 1px 0;
 	box-shadow: none;
 }
-.unit_btn_mayday {
+.glowred {
 	background: red;
 	color: white;
+}
+.glowpink {
+	background: pink;
+	color: #666;
 }
 .psi_btn {
 	width: 35px;
