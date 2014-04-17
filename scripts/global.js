@@ -11,6 +11,19 @@ function setParText(text) {
 		hideAllDialogs();
 	  }
 }
+function showParDialog( tbar, btn ){
+  return function(){
+	var curPar = btn.html();
+	$( "div.par_btn.dialog_btn" ).removeClass("sector_dialog_btn_on");
+	$( "div:contains('"+curPar+"').par_btn.dialog_btn" ).addClass("sector_dialog_btn_on");
+	$(".dialog").hide();
+	$(".side_dialog_container").hide();
+	btn_clicked = btn;
+	tbar_clicked = tbar;
+	$("#dialogContainer").show();
+	$("#par_dialog").show();
+  }
+}
 function initParDialog( ) {
 	var parDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "par_dialog";
@@ -189,8 +202,8 @@ function showSectorDialog( tbar, btn, dialogId ){
 	sectorDlg.show();
 	
 	//Toggle selected Sector button
-	$(".sector_dialog_btn").removeClass("sector_dialog_btn_on");
-	$( "div:contains('"+btn.html()+"').sector_dialog_btn" ).addClass("sector_dialog_btn_on");
+	$("div.title_btn.dialog_btn").removeClass("sector_dialog_btn_on");
+	$( "div:contains('"+btn.html()+"').title_btn.dialog_btn" ).addClass("sector_dialog_btn_on");
 	
 	//Toggle prefix_dir buttons
 	$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
@@ -673,7 +686,7 @@ function addTbar() {
 		
 		//PAR (Sector) button
 		var parBtn = tbar.find(".par_btn");
-		parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
+		parBtn.click(showParDialog(tbar, parBtn));
 		
 		//Accountability button
 		var acctBtn = tbar.find(".acct_unit_btn");
