@@ -551,6 +551,11 @@ function initUnitsDialog( ) {
 				var unitBtn = prototypeUnitBtn.clone();
 				unitTypeCol.append(unitBtn);
 				unitBtn.html(unitName);
+				if (unitName.length>5) {
+					unitBtn.addClass("btn_largetext");
+				} else if (unitName.length>4) {
+					unitBtn.addClass("btn_medtext");
+				}
 				unitBtn.addClass(city);
 				unitBtn.addClass(type);
 				var newId = "unit_city_btn_"+city;
@@ -582,6 +587,11 @@ function initUnitsDialog( ) {
  **/
 function setUnitName(unitBtn, unitName) {
 	unitBtn.html(unitName);
+	if (unitName.length>5) {
+		unitBtn.addClass("btn_largetext");
+	} else if (unitName.length>4) {
+		unitBtn.addClass("btn_medtext");
+	}
 	if (typeof unitBtn.actions_list !== "undefined") {
 		var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
 		action_list_unit_name_title.html(unitName);
@@ -916,7 +926,27 @@ var wt="WtrTend";
 var hm="Haz Mat";
 var br="Brush";
 var rehab="Rehab";
-var unitTypes = [engine,ladder,bc,squad,medic,u,cv,wt,hm,br,rehab];
+var specialIncident="Spec Inc";
+var sceneSupport="Scn Sup";
+var supportVehicle="Sup Veh";
+var fireBoat = "Fire Bt";
+var ambo = "Ambo";
+var unitTypes = [
+	engine,
+	ladder,
+	bc,
+	squad,
+	medic,
+	u,
+	cv,
+	wt,
+	hm,
+	br,
+	rehab,
+	specialIncident,
+	supportVehicle,
+	fireBoat,
+	ambo];
 var unitsByTypeByCity = {
 	"Mesa":{
 		engine:[
@@ -962,8 +992,31 @@ var unitsByTypeByCity = {
 		squad:[
 			"SQ204",
 			"SQ206"],
+		ambo:[
+			"SWA201",
+			"SWA202",
+			"SWA203",
+			"SWA204",
+			"SWA205",
+			"SWA206",
+			"SWA207",
+			"SWA208",
+			"SWA209",
+			"SWA210",
+			"SWA211",
+			"SWA212",
+			"SWA220",
+			"SWA221",
+			"SWA222",
+			"SWA223",
+			"SWA224",
+			"SWA225",
+			"SWA226",
+			"SWA227",
+			"SWA228",
+			"SWA229",
+		],
 	},
-	
 	"Gilbert":{
 		engine:[
 			"E251",
@@ -995,6 +1048,23 @@ var unitsByTypeByCity = {
 			"HM258",],
 		br:[
 			"Br2511",],
+		ambo:[
+			"SWA261",
+			"SWA262",
+			"SWA255",],
+	},
+	
+	"QC":{
+		ambo:[
+			"SWA411",],
+	},
+	
+	"AJ":{
+		ambo:[
+			"SWA251",
+			"SWA252",
+			"SWA253",
+			"SWA255",],
 	},
 	
 	"Chandler":{
@@ -1047,7 +1117,19 @@ var unitsByTypeByCity = {
 		medic:[
 			"Med271",
 			"Med272",
-			"Med276"]
+			"Med276"],
+		specialIncident:[
+			"SI272"
+		],
+		sceneSupport:[
+			"SS274"
+		],
+		supportVehicle:[
+			"SV276"
+		],
+		fireBoat:[
+			"FB271"
+		],
 	},
 	
 	"Superstn":{

@@ -365,7 +365,6 @@ body {
     flex-basis: 90px;
     flex-shrink: 0;
     border-right: 1px solid #888;
-    height: 347px;
 }
 .unitsDlg_units {
     display: flex;
@@ -386,6 +385,12 @@ body {
 .unit_dialog_btn {
     width: 40px;
     height: 15px;
+}
+.btn_largetext {
+    font-size:0.7rem;
+}
+.btn_medtext {
+    font-size:0.8rem;
 }
 .glow {
     background: #2A5071;
