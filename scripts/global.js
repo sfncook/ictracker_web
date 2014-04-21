@@ -716,6 +716,7 @@ function addTbar() {
  **/
 function showSideDialog( btn, dialogId ){
   return function(){
+	var dlg_side = $(dialogId);
 	var dlg_side_container = $(dialogId+"_container");
 	var showMe = false;
 
@@ -733,7 +734,7 @@ function showSideDialog( btn, dialogId ){
 		var btn_top = btn.offset().top;
 		var btn_left = btn.offset().left;
 		
-		dlg_side_container.offset({ top:btn_top-3, left:btn_left-90});
+		dlg_side_container.offset({ top:btn_top-3, left:btn_left-dlg_side.width()-3});
 	}
   }
 }
@@ -770,10 +771,11 @@ function initModeDialog() {
 			btn_clicked.addClass("defensive_btn");
 			hideAllDialogs();
 			});
-	$("#mode_btn").click(showSideDialog($("#mode_btn"), "#mode_side_dialog"));
+	var modeBtn = $("#mode_btn");
+	modeBtn.click(showSideDialog(modeBtn, "#mode_side_dialog"));
 	//init
-	$("#mode_btn").html($("#offensive_btn").html());
-	$("#mode_btn").addClass("offensive_btn");
+	modeBtn.html($("#offensive_btn").html());
+	modeBtn.addClass("offensive_btn");
 }
 
 
