@@ -861,6 +861,37 @@ function getHttpRequestByName(name) {
 }//getHttpRequestByName
 
 
+/**
+ * Init Timer
+ **/
+var t0;
+var hourRollOverDone = false;
+function startIncidentTimer() {
+	t0 = (new Date()).getTime();
+}
+function updateTimer() {
+	var t1 = (new Date()).getTime();
+	var elapsed = parseInt(t1-t0);
+	var elapsedSec = parseInt((elapsed/1000)%60);
+	var elapsedMin = parseInt((elapsed/(1000*60))%60);
+	var elapsedHr = parseInt((elapsed/(1000*60*60))%60);
+	
+	var secStr = (elapsedSec<10)?("0"+elapsedSec):elapsedSec;
+	var minStr = (elapsedMin<10)?("0"+elapsedMin):elapsedMin;
+	var hrStr = (elapsedHr<10)?("0"+elapsedHr):elapsedHr;
+	
+	if (elapsedHr>0) {
+		if (!hourRollOverDone) {
+			$("#time").removeClass("time_lg");
+			hourRollOverDone = true;
+		}
+		$("#time").html(hrStr+":"+minStr+":"+secStr);
+	} else {
+		$("#time").html(minStr+":"+secStr);
+	}
+}
+
+
 
 function init( ) {
 	addTbar();
@@ -891,6 +922,7 @@ function init( ) {
 	hideAllDialogs();
 	
 	window.setTimeout(blinkUnit, 500);
+	window.setInterval(updateTimer, 1000);
 }
 
 //Call this to dismiss the dialogs

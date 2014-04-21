@@ -31,9 +31,13 @@ h1 {
 }
 
 #time {
+    text-align: center;
     font-family: 'Carrois Gothic SC';
-    font-size: xx-large !important;
-    color: #666;
+    font-size: 1.45rem;
+    color: white;
+}
+.time_lg {
+    font-size: 2.3rem !important;
 }
 
 body {
