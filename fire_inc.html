@@ -1,0 +1,165 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>ICT</title>
+		<meta name="description" content="Incident #" />
+		<link href="images/icon/ict_logo_29x29.png" rel="icon" />
+		
+        <!--CSS-->
+		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet_reset.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet_global.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet_tbar.css" />
+        
+        <!--JS-->
+        <script src="scripts/jquery-1.11.0.js"></script>
+		<script src="scripts/jsPDF/jspdf.js"></script>
+		<script src="scripts/report.js"></script>
+		<script src="scripts/global.js"></script>
+    </head>
+    
+    <body>
+        <div id="ict_header" class="header">
+            <a href="index.html">
+				<img id="title_icon" class="header_item" src="images/icon/ict_logo_100x100.png"/>
+			</a>
+            <div id="time" class="header_item">04:23</div>
+            <div id="safety_btn" class="safety_btn header_item button">Cross</div>
+            <div id="mode_btn" class="mode_btn header_item button"></div>
+			<div class="horiz_spacer"></div>
+			<div id="osr_btn" class="osr_btn header_item button">OSR</div>
+			<div id="objectives_btn" class="objectives_btn header_item button">Objectives</div>
+			<div class="horiz_spacer"></div>
+			<div id="cmd_term_btn" class="header_item button">
+				<img class="terminate_icon" src="images/terminate.png"/>
+				<div>Command</div>
+				<div>Terminated</div>
+			</div>
+			<div id="report_btn" class="header_item button">
+				<img class="report_icon" src="images/report.png"/>
+				<div>Report</div>
+			</div>
+			
+			<div id="safety_side_dialog_container" class="side_dialog_container">
+				<div id="safety_side_dialog" class="side_dialog"></div>
+				<div id="safety_side_dialog_arm" class="side_dialog_arm"></div>
+			</div>
+			
+			<div id="mode_side_dialog_container" class="side_dialog_container">
+				<div id="mode_side_dialog" class="side_dialog">
+					<div id="offensive_btn" class="offensive_btn mode_btn dialog_btn button">OFFNS</div>
+					<div id="defensive_btn" class="defensive_btn mode_btn dialog_btn button">DEFNS</div>
+				</div>
+				<div id="mode_side_dialog_arm" class="side_dialog_arm"></div>
+			</div>
+        </div><!-- ict_header-->
+		
+		<div id="mayday_and_tbar_container">
+			<div id="mayday_container">
+				<div id="mayday_btn" class="button">Mayday</div>
+			</div>
+			<div id="tbar_container">
+				<!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
+				<div id="tbar_prototype" class="tbar">
+					<div class="tbar_title_container">
+						<div class="par_btn_without_number par_btn button">PAR</div>
+						<div class="horiz_spacer"></div>
+						<div class="title_btn button">
+							<div class="dir_supl_info_dir_btn dir_supl_info_btn small_round_btn button">N</div>
+							<div class="dir_spacer"></div>
+							<div class="title_text">Sector Title</div>
+							<div class="num_spacer"></div>
+							<div class="dir_supl_info_num_btn dir_supl_info_btn small_round_btn button">1</div>
+						</div>
+						<div class="horiz_spacer"></div>
+						<div class="benchmark_btn button">BNCH</div>
+					</div>
+					<div class="tbar_body_container">
+						<div class="units"></div>
+						<div class="actions_column">
+							<div class="acct_unit_btn unit_btn button">@acct</div>
+							<div class="actions_parent_container"></div>
+						</div>
+					</div>
+				</div><!--tbar-->
+			</div><!--tbar_container-->
+		</div>
+		
+		<div class="header_spacer header"></div>
+        
+        <!-- DIALOGS -->
+		<!-- This is a Dialog PROTOTYPE.  It will be hidden and
+				cloned for all T-Bar's.-->
+		<div id="dialogContainer">
+			<div id="dialog_prototype" class="dialog">
+				<div class="dialog_title">
+					<div class="dialog_title_text_container">Title</div>
+					<div class="dialog_close_btn button">X</div>
+				</div>
+				<div class="dialog_body">
+					<!-- Populated in global.js -->
+				</div>
+			</div>
+			
+			
+			<!-- Units Dialog -->
+			<div id="units_dialog" class="dialog">
+				<div class="dialog_title">
+					<div class="dialog_title_text_container">Title</div>
+					<div class="dialog_close_btn button">X</div>
+				</div>
+				<div class="dialog_body_units">
+					<div id="units_dlg_row1">
+						<div id="unitsDlg_spacer"></div>
+						<div id="unitsDlg_cities"></div>
+					</div>
+					<div id="units_dlg_row2">
+						<div id="unitsDlg_types"></div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- Mayday Dialog -->
+			<div id="mayday_dialog" class="dialog">
+				<div class="mayday_dialog_title dialog_title">
+					<div class="dialog_title_text_container">Mayday</div>
+					<div class="dialog_close_btn button">X</div>
+				</div>
+				<div class="mayday_dialog_body">
+					<table id="mayday_table">
+						<tr>
+							<td class="mayday_label_td mayday_td">Fire fighter:</td>
+							<td class="mayday_td"><input id="mayday_ffighter_name" type="text"\></td>
+						</tr>
+						<tr>
+							<td class="mayday_label_td mayday_td">Unit:</td>
+							<td id="mayday_unit_list_td" class="mayday_td">
+								<div id="mayday_unit_list_div"></div>
+							</td></tr>
+						<tr>
+							<td class="mayday_label_td mayday_td">Sector:</td>
+							<td class="mayday_td">
+								<div id="mayday_sector_list_div"></div>
+							</td></tr>
+					</table>
+					<div class="horiz_container">
+						<div class="horiz_spacer"></div>
+						<div id="ok_mayday_btn" class="dialog_btn button">
+							OK <img class="report_icon" src="images/ok.png"/>
+						</div>
+						<div id="cancel_mayday_btn" class="dialog_btn button">
+							Cancel <img class="report_icon" src="images/cancel.png"/>
+						</div>
+					</div>
+				</div>
+			</div><!-- Mayday Dialog -->
+			
+		</div><!--dialogContainer-->
+        
+        <div class="footer">
+			<div id="inc_num"></div>
+			<div id="address"></div>
+		</div>
+        
+    </body>
+</html>

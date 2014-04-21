@@ -1,6 +1,5 @@
 
 var testMe;
-var incident_number="000";
 var events = [];
 
 
@@ -18,8 +17,8 @@ function generateReport() {
 	var done = false;
 
 	while (!done) {
-		drawTitle(doc);
-		drawFooter(page_number, "1324 E. Flossmore Ave. Mesa, AZ 85206", doc);
+		drawTitle(doc, $("#inc_num").html());
+		drawFooter(doc, page_number, $("#address").html());
 		drawOnePageOfEvents(doc, eventIndex);
 		if (eventIndex<events.length) {
 			page_number++;
@@ -32,8 +31,8 @@ function generateReport() {
 	renderPdf(doc);
 }
 
-function drawTitle(doc) {
-	doc.text("Incident #"+incident_number, MARGIN, MARGIN);
+function drawTitle(doc, inc_num) {
+	doc.text("Incident #"+inc_num, MARGIN, MARGIN);
 	doc.text("Mesa Fire Department", RIGHT_SIDE-77, MARGIN);
 	doc.setLineWidth(0.5);
 	doc.line(MARGIN, MARGIN+2, RIGHT_SIDE-MARGIN, MARGIN+2);
@@ -60,7 +59,7 @@ month[8]="September";
 month[9]="October";
 month[10]="November";
 month[11]="December";
-function drawFooter(page_number, address, doc) {
+function drawFooter(doc, page_number, address) {
 	var date = new Date();
 	var dayStr = weekday[date.getDay()];
 	var monthStr = month[date.getMonth()];
