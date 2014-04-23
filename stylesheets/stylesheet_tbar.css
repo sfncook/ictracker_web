@@ -152,6 +152,7 @@
     display: flex;
     flex-flow: column;
 	border-right: 1px solid #888;
+	overflow-y: scroll;
 }
 .single_unit_div {
     display: flex;

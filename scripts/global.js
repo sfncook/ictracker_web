@@ -1141,16 +1141,28 @@ var unitsByTypeByCity = {
 	},
 	
 	"QC":{
+		engine:["E412"],
+		bc:["BC411"],
 		ambo:[
 			"SWA411",],
 	},
 	
 	"AJ":{
+		engine:[
+			"E262",
+			"E265"],
+		ladder:[
+			"L263",
+			"L264"],
+		bc:["BC261"],
 		ambo:[
 			"SWA251",
 			"SWA252",
 			"SWA253",
 			"SWA255",],
+		wt:["WT261"],
+		br:["BT261"],
+		rehab:["RH261"],
 	},
 	
 	"Chandler":{
