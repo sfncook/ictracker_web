@@ -13,31 +13,39 @@ function setParText(text) {
 }
 function showParDialog( tbar, btn ){
   return function(){
-	var curPar = btn.html();
-	$( "div.par_btn.dialog_btn" ).removeClass("sector_dialog_btn_on");
-	$( "div:contains('"+curPar+"').par_btn.dialog_btn" ).addClass("sector_dialog_btn_on");
+	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
+	var tbarTitle = tbar.find(".title_text").html();
+	if (tbarTitle=="Sector Title") {
+		par_dialog_sector_btn.hide();
+	} else {
+		par_dialog_sector_btn.html(tbarTitle);
+		par_dialog_sector_btn.show();
+	}
+	//var tbarTitle = tbar.children(".tbar_title_container").children(".title_btn").children("title_text").html();
+	//console.log(tbarTitle);
+	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
+	//par_dialog_sector_btn.html(tbarTitle);
+	
+	var par_dialog_units = $("#par_dialog_units");
+	par_dialog_units.empty();
+	var tbarUnitBtns = tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").children(".unit_btn").not(".blank_btn");
+	if (tbarUnitBtns.length>0) {
+		console.log(tbarUnitBtns);
+		tbarUnitBtns.each(function( index ) {
+			var unit_btn = $(this);
+			unit_btn.clone().appendTo(par_dialog_units);
+		});
+	}
+	
+	var parDialog = $("#par_dialog");
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
-	btn_clicked = btn;
-	tbar_clicked = tbar;
+	parDialog.show();
 	$("#dialogContainer").show();
-	$("#par_dialog").show();
   }
 }
 function initParDialog( ) {
-	var parDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
-	var newId = "par_dialog";
-	parDialog.attr("id",newId);
-	var parDialogBody = parDialog.children(".dialog_body");
-	var parTitleDiv = parDialog.find(".dialog_title_text_container");
-	parTitleDiv.html("PAR Values");
-	var prototypeBtn = $("<div class=\"par_btn dialog_btn button\">PROTOTYPE</div>");
-	for(var parValue=1; parValue<=9; parValue++) {
-		var newBtn = prototypeBtn.clone();
-		newBtn.html(parValue);
-		parDialogBody.append(newBtn);
-		newBtn.click(setParText(parValue));
-	}
+	
 }
 
 
@@ -638,11 +646,11 @@ function showActionsForUnitBtn(unitBtn) {
 function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.children().children().removeClass("blank_btn");
 	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
-	var parBtn = $("<div class=\"par_btn par_psi_hidden tbar_unit_btn small_round_btn button\">P</div>").clone();
+	//var parBtn = $("<div class=\"par_btn par_psi_hidden tbar_unit_btn small_round_btn button\">P</div>").clone();
 	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
 	unitBtn.tbar = tbar;
-	singleUnitContainer.append(parBtn);
+	//singleUnitContainer.append(parBtn);
 	singleUnitContainer.append(psiBtn);
 	singleUnitContainer.append(unitBtn);
 	unitsContainer.append(singleUnitContainer);

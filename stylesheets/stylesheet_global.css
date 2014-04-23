@@ -127,7 +127,6 @@ body.splashpage {
 	background-color: #BBB;
 }
 
-
 /*
  **** HEADER ITEMS ****
  */
@@ -354,6 +353,39 @@ body.splashpage {
     width: 35px;
 }
 #par_dialog {
+    width: 250px;
+}
+#par_dialog_body {
+    display: flex;
+    flex-flow: column nowrap;
+}
+#par_dialog_body > * {
+    border: 1px solid #666;
+}
+#par_dialog_sector {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+#par_dialog_sector_btn {
+    text-align: center;
+    display: block;
+}
+#par_dialog_units {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+#par_dialog_people {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.par_person_btn  {
+    width: 100px;
 }
 #actions_dialog {
     width: 600px;
