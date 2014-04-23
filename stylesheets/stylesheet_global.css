@@ -339,9 +339,13 @@ body.splashpage {
 }
 
 #benchmark_dialog {
+    width: 350px;
 }
 #benchmark_dialog > .dialog_body{
     flex-flow:column;
+}
+#benchmark_primary_checklist {
+    padding-left: 25px;
 }
 
 #psi_dialog {

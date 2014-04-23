@@ -399,35 +399,16 @@ function createCheckBox(label) {
 	return chkContainer;
 }
 function initBenchmarkDialog( ) {
-	var benchmarkDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
-	var newId = "benchmark_dialog";
-	benchmarkDialog.attr("id",newId);
-	var benchmarkDialogBody = benchmarkDialog.children(".dialog_body");
-	var benchmarkTitleDiv = benchmarkDialog.children(".dialog_title").children(".dialog_title_text_container");
-	benchmarkTitleDiv.html("Benchmarks");
+	$("#benchmark_primary_checklist").hide();
 	
-	var primarySearchChk = createCheckBox("Primary Search");
-	var secondarySearchChk = createCheckBox("Secondary Search");
-	var fireCtlSearchChk = createCheckBox("Fire Control");
-	var lossStopSearchChk = createCheckBox("Loss Stop");
-	
-	benchmarkDialogBody.append(primarySearchChk);
-	benchmarkDialogBody.append(secondarySearchChk);
-	benchmarkDialogBody.append(fireCtlSearchChk);
-	benchmarkDialogBody.append(lossStopSearchChk);
-	
-	primarySearchChk.click(function() {
-		btn_clicked.children(".benchmark_dot_1").addClass("benchmark_dot_btn_isset");
-		});
-	secondarySearchChk.click(function() {
-		btn_clicked.children(".benchmark_dot_2").addClass("benchmark_dot_btn_isset");
-		});
-	fireCtlSearchChk.click(function() {
-		btn_clicked.children(".benchmark_dot_F").addClass("benchmark_dot_btn_isset");
-		});
-	lossStopSearchChk.click(function() {
-		btn_clicked.children(".benchmark_dot_L").addClass("benchmark_dot_btn_isset");
-		});
+	var benchmark_primary_checkbox = $("#benchmark_primary_checkbox");
+	benchmark_primary_checkbox.click(function() {
+		if(benchmark_primary_checkbox.is(":checked")) {
+			$("#benchmark_primary_checklist").show();
+		} else {
+			$("#benchmark_primary_checklist").hide();
+		}
+	});
 }
 
 
