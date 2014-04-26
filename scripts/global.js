@@ -13,30 +13,28 @@ function setParText(text) {
 }
 function showParDialog( tbar, btn ){
   return function(){
+	// Sector PAR
 	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
 	var tbarTitle = tbar.find(".title_text").html();
-	if (tbarTitle=="Sector Title") {
-		par_dialog_sector_btn.hide();
-	} else {
-		par_dialog_sector_btn.html(tbarTitle);
-		par_dialog_sector_btn.show();
-	}
-	//var tbarTitle = tbar.children(".tbar_title_container").children(".title_btn").children("title_text").html();
-	//console.log(tbarTitle);
-	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
-	//par_dialog_sector_btn.html(tbarTitle);
+	par_dialog_sector_btn.html(tbarTitle);
 	
+	// Units PAR
 	var par_dialog_units = $("#par_dialog_units");
 	par_dialog_units.empty();
 	var tbarUnitBtns = tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").children(".unit_btn").not(".blank_btn");
 	if (tbarUnitBtns.length>0) {
-		console.log(tbarUnitBtns);
 		tbarUnitBtns.each(function( index ) {
-			var unit_btn = $(this);
-			unit_btn.clone().appendTo(par_dialog_units);
+			var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
+			par_dialog_unit.show();
+			var unit_name = $(this).html();
+			var unitBtn = par_dialog_unit.children(".par_unit_btn");
+			unitBtn.html(unit_name);
+			par_dialog_unit.css( "display", "flex");
+			par_dialog_unit.appendTo(par_dialog_units);
 		});
 	}
 	
+	// Show PAR dialog
 	var parDialog = $("#par_dialog");
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
@@ -45,7 +43,7 @@ function showParDialog( tbar, btn ){
   }
 }
 function initParDialog( ) {
-	
+	$("#par_dialog_unit_prototype").hide();
 }
 
 
