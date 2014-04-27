@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>ICT</title>
+		<meta name="description" content="Incident Command Tracker" />
+		<link href="../images/icon/ict_logo_29x29.png" rel="icon" />
+		
+        <!--CSS-->
+		<link rel="stylesheet" type="text/css" href="../css/ict/stylesheet_global.css" />
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    </head>
+    
+    <body class="splashpage">
+	  <img src="../images/icon/ict_logo_300x300.png"/>
+      <div class="container">
+		<div id="splash_title">Incident Command Tracker</div>
+		<form name="input" action="fire_inc.html" method="get">
+			<div class="incident_info_entry">
+				<div>Incident #:</div>
+				<input id="inc_num_input" name="inc_num_input" type="text"/>
+			</div>
+			<div class="incident_info_entry">
+				<div>Address:</div>
+				<input id="address_input" name="address_input" type="text"/>
+			</div>
+			<input class="button" type="submit" value="Start Fire Incident"/>
+		</form>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,165 @@
+/*
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,400italic,700);
+@import url(http://fonts.googleapis.com/css?family=Carrois+Gothic+SC);
+*/
+
+/*
+ **** MAIN STYLES ****
+ */
+html {
+    font-size: 100%;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body.splashpage {
+    background: #9ad1ff;
+    color: black;
+	text-align: center;
+}
+
+body {
+	overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#splash_title {
+    font-family: sans-serif;
+    font-size: 2.0rem;
+}
+
+#header_spacer_td {
+	width: 90px;
+}
+#ict_header {
+    background: #BBB;
+    position: fixed;
+    right: 0;
+    top:0;
+    height: 100%;
+    z-index: 50;
+    padding: 4px;
+}
+#title_icon {
+    width: 90px;
+    height: 90px;
+    border: 1px solid #AAA;
+    border-radius: 3px;
+}
+
+#title_icon:hover {
+    /*cursor: pointer;*/
+}
+
+.btn-ict {
+	background: #DDD;
+	color: #666;
+	text-shadow: 1px 1px #AAA;
+	box-shadow: 1px 1px 2px #888;
+	height: 22px;
+}
+
+/*
+ **** BUTTONS ****
+ */
+.button {
+	text-align: center;
+	background: #DDD;
+	color: #666;
+	border: none;
+	border-radius: 3px;
+	padding: 4px 4px 4px 4px;
+	text-shadow: 1px 1px #AAA;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px #888;
+}
+.button:hover {
+	background-color: #EEE;
+    color: #999;
+}
+.button:active {
+	background-color: #BBB;
+}
+
+
+/*
+ **** HEADER ITEMS ****
+ */
+.header_item {
+    margin-bottom: 8px;
+}
+#time {
+    text-align: center;
+    font-family: 'Carrois Gothic SC';
+    font-size: 1.45rem;
+    color: white;
+}
+.time_lg {
+    font-size: 2.3rem !important;
+}
+#safety_btn_label {
+	color: #FFF;
+	width: 100%;
+	border-top: 1px solid #888;
+}
+#safety_btn {
+    z-index: 100;
+}
+.side_dialog_container {
+    position: absolute;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+.side_dialog {
+    background: #666 ;
+    z-index: 50;
+}
+.side_dialog_arm {
+    background: #666;
+    height: 2rem;
+    width: 100px;
+    z-index: 45;
+}
+#safety_side_dialog {
+    top: 157px;
+    width: 90px;
+}
+#safety_side_dialog_arm {
+    top: 157px;
+}
+#mode_btn {
+    z-index: 100;
+}
+#mode_side_dialog {
+    top: 197px;
+}
+#mode_side_dialog_arm {
+    top: 197px;
+}
+.offensive_btn {
+    background: green !important;
+    color: white;
+}
+.defensive_btn {
+    background: #FF2B21 !important;
+    color: white;
+}
+#report_btn {
+    z-index: 100;
+}
+.report_icon {
+    width: 20px;
+    height: 20px;
+}
+#cmd_term_btn {
+    z-index: 100;
+    font-size: 0.75rem;
+}
+.terminate_icon {
+    width: 20px;
+    height: 20px;
+}

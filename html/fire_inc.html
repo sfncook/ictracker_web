@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>ICT</title>
+		<meta name="description" content="Incident #" />
+		<link href="../images/icon/ict_logo_29x29.png" rel="icon" />
+		
+        <!--CSS-->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/ict/stylesheet_global.css" />
+		<link rel="stylesheet" type="text/css" href="../css/ict/stylesheet_tbar.css" />
+        
+        <!--JS-->
+        <script src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/jsPDF/jspdf.js"></script>
+		<script src="../js/ict/report.js"></script>
+		<script src="../js/ict/global.js"></script>
+		<script>
+			startIncidentTimer();
+		</script>
+    </head>
+    
+    <body>
+		<div id="ict_header">
+            <a href="index.html">
+				<img id="title_icon" class="header_item" src="../images/icon/ict_logo_100x100.png"/>
+			</a>
+            <div id="time" class="time_lg header_item">00:00</div>
+            <div id="safety_btn" class="safety_btn header_item button">Cross</div>
+            <div id="mode_btn" class="mode_btn header_item button"></div>
+			<div class="horiz_spacer"></div>
+			<div id="osr_btn" class="osr_btn header_item button">OSR</div>
+			<div id="objectives_btn" class="objectives_btn header_item button">Objectives</div>
+			<div class="horiz_spacer"></div>
+			<div id="cmd_term_btn" class="header_item button">
+				<img class="terminate_icon" src="../images/terminate.png"/>
+				<div>Command</div>
+				<div>Terminated</div>
+			</div>
+			<div id="report_btn" class="header_item button">
+				<img class="report_icon" src="../images/report.png"/>
+				<div>Report</div>
+			</div>
+			
+			<div id="safety_side_dialog_container" class="side_dialog_container">
+				<div id="safety_side_dialog" class="side_dialog"></div>
+				<div id="safety_side_dialog_arm" class="side_dialog_arm"></div>
+			</div>
+			
+			<div id="mode_side_dialog_container" class="side_dialog_container">
+				<div id="mode_side_dialog" class="side_dialog">
+					<div id="offensive_btn" class="offensive_btn mode_btn dialog_btn button">OFFNS</div>
+					<div id="defensive_btn" class="defensive_btn mode_btn dialog_btn button">DEFNS</div>
+				</div>
+				<div id="mode_side_dialog_arm" class="side_dialog_arm"></div>
+			</div>
+        </div><!-- ict_header-->
+		
+		<div id="mayday_and_tbar_container">
+			<table style="width:100%;">
+				<tr>
+					<td style="text-align: center;"><button type="button" class="btn btn-danger btn-mayday">Mayday</button></td>
+					<td rowspan="2" id="header_spacer_td"></td>
+				</tr>
+				<tr>
+					<td>
+						<div id="tbar_container" class="container-fluid">
+							<!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
+							<div id="tbar_prototype" class="col-sm-4 col-lg-3 tbar">
+								<div class="tbar_title_container">
+									<table class="tbar_title_table">
+										<tr>
+											<td>
+												<button type="button" class="par_btn btn btn-xs btn-ict">PAR</button>
+											</td>
+											<td>
+												<div class="container btn btn-ict btn-title">
+													<div class="title_dir  col-xs-1 btn-title-comp">N</div>
+													<div class="title_text col-xs-8 col-xs-offset-1 btn-title-comp">Sector Title</div>
+													<div class="title_num  col-xs-1 col-xs-offset-1 btn-title-comp">8</div>
+												</div>
+											</td>
+											<td>
+												<button type="button" class="bnch_btn btn btn-xs btn-ict">BNCH</button>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<div class="tbar_body_container">
+									<table class="tbar_body_table">
+										<tr>
+											<td class="tbar_units_td">
+												<div class="units_container">asdf</div>
+											</td>
+											<td class="tbar_line_td">
+												
+											</td>
+											<td class="tbar_actions_td">
+												<button type="button" class="btn btn-xs btn-ict unit_btn acct_unit_btn">@acct</button>
+												<div class="actions_parent_container"></div>
+											</td>
+										</tr>
+									</table>	
+								</div>
+							</div><!--tbar-->
+						</div><!--tbar_container-->
+					</td>
+				</tr>
+			</table>
+		</div><!-- mayday_and_tbar_container -->
+        
+        <div class="footer">
+			<div id="inc_num"></div>
+			<div id="address"></div>
+		</div>
+        
+    </body>
+</html>

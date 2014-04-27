@@ -320,7 +320,7 @@ function initSectorDialog( ) {
 	//Sector title buttons
 	var prototypeBtn = $("<div class=\"title_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeFixedTitleSpacer = $("<div class=\"fixed_title_spacer\"></div>");
-	var prototypeClockIcon = $("<img class=\"clock_icon\" src=\"images/clock.png\"/>");
+	var prototypeClockIcon = $("<img class=\"clock_icon\" src=\"../images/clock.png\"/>");
 	sectors.forEach(function (sectorName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(sectorName);
