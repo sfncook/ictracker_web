@@ -202,3 +202,28 @@ body {
 	width: 94px;
 	padding: 2px;
 }
+
+
+/*
+ **** DIALOG ITEMS ****
+ */
+.dialog_title {
+    background: #AAA;
+    height: 1.5rem;
+    text-align: center;
+    font-size: 110%;
+}
+.dialog_close_btn {
+    background: #F67574;
+    height: 1.0rem;
+    padding: 3px 1px 1px 1px;
+    line-height: 1.0em;
+    margin: 2px;
+    font-size:80%;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid #CCC;
+    text-shadow: none;
+	width: 20px;
+	height: 20px;
+}

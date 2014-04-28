@@ -272,20 +272,23 @@ function toggleNumBtn(btn) {
 	}
 }
 function initSectorDialog( ) {
-	var suplInfoPrototypeBtn = $("<div class=\"small_round_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	var suplInfoPrototypeBtn = $("<div class=\"button dialog_btn col-xs-2\">PROTOTYPE</div>");
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
-	var sectorTitleDiv = sectorDialog.find(".dialog_title_text_container");
-	sectorTitleDiv.html("Sectors");
-	var sectorDialogBody = sectorDialog.children(".dialog_body");
+	var dialog_title_text = sectorDialog.find(".dialog_title_text");
+	dialog_title_text.html("Sectors");
+	var dialog_body = sectorDialog.find(".dialog_body");
 	
-	var row1Container = $("<div id=\"sector_dlg_row1\"></div>").clone();
-	var row2Container = $("<div id=\"sector_dlg_row2\"></div>").clone();
-	var row3Container = $("<div id=\"sector_dlg_row3\"></div>").clone();
-	sectorDialogBody.append(row1Container);
-	sectorDialogBody.append(row2Container);
-	sectorDialogBody.append(row3Container);
+	//var row1Container = $("<div id=\"sector_dlg_row1\"></div>").clone();
+	//var row2Container = $("<div id=\"sector_dlg_row2\"></div>").clone();
+	//var row3Container = $("<div id=\"sector_dlg_row3\"></div>").clone();
+	//sectorDialogBody.append(row1Container);
+	//sectorDialogBody.append(row2Container);
+	//sectorDialogBody.append(row3Container);
+	
+	var dir_bnts_container = $('<div class="container"/>').clone();
+	dialog_body.append(dir_bnts_container);
 	
 	//Suplimental buttons
 	["N","E","S","W"].forEach(function (btnText, index, array) {
@@ -293,19 +296,11 @@ function initSectorDialog( ) {
 		newBtn.addClass("dir_supl_info_dir_btn");
 		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
-		row2Container.append(newBtn);
+		dir_bnts_container.append(newBtn);
 		newBtn.click(function() {toggleDirBtn(newBtn);});
 	});
 	
 	/*
-	row1Container.append($("<div class=\"apt_label\">Apartment/Suite/Unit:</div>"));
-	var aptInput = $("<div class=\"apt_input\"><input type=\"text\" class=\"apt_input\"\></div>");
-	var inputBox = aptInput.children("input.apt_input");
-	row1Container.append(aptInput);
-	/*inputBox.keypress(function( event ) {
-		console.log(inputBox.val());
-	  });*/
-	
 	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_num_btn");
@@ -349,6 +344,7 @@ function initSectorDialog( ) {
 			}
 		});
 	});
+	*/
 	
 }
 
@@ -665,8 +661,8 @@ function addTbar() {
 		var titleBtnId = "tbar_title_"+tbarIndex;
 		titleBtn.attr("id", titleBtnId);
 		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
-		var tbarDirBtn = titleBtn.children(".dir_supl_info_dir_btn");
-		var tbarNumBtn = titleBtn.children(".dir_supl_info_num_btn");
+		var tbarDirBtn = $(".title_dir");
+		var tbarNumBtn = $(".title_num");
 		tbarDirBtn.hide();
 		tbarNumBtn.hide();
 		

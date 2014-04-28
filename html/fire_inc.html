@@ -88,10 +88,10 @@
 												<button type="button" class="par_btn btn btn-xs btn-ict">PAR</button>
 											</td>
 											<td>
-												<div class="container btn btn-ict btn-title">
-													<div class="title_dir  col-xs-1 btn-title-comp">N</div>
-													<div class="title_text col-xs-8 col-xs-offset-1 btn-title-comp">Sector Title</div>
-													<div class="title_num  col-xs-1 col-xs-offset-1 btn-title-comp">8</div>
+												<div class="container btn btn-ict title_btn">
+													<div class="title_dir  col-xs-1 title_btn_comp">N</div>
+													<div class="title_text col-xs-8 col-xs-offset-2 title_btn_comp">Sector Title</div>
+													<div class="title_num  col-xs-1 col-xs-offset-1 title_btn_comp">8</div>
 												</div>
 											</td>
 											<td>
@@ -128,13 +128,15 @@
 				cloned for all T-Bar's.-->
 		<div id="dialogContainer">
 			<div id="dialog_prototype" class="dialog">
-				<div class="dialog_title">
-					<div class="dialog_title_text_container">Title</div>
-					<div class="dialog_close_btn button">X</div>
-				</div>
-				<div class="dialog_body">
-					<!-- Populated in global.js -->
-				</div>
+				<table>
+					<tr class="dialog_title">
+						<td class="dialog_title_text">Title</td>
+						<td><div class="dialog_close_btn button">X</div></td>
+					</tr>
+					<tr><td colspan='2' class="dialog_body">
+						<!-- Populated in global.js -->
+					</td></tr>
+				</table>
 			</div>
 			
 			
@@ -182,10 +184,10 @@
 					<div class="horiz_container">
 						<div class="horiz_spacer"></div>
 						<div id="ok_mayday_btn" class="dialog_btn button">
-							OK <img class="report_icon" src="images/ok.png"/>
+							OK <img class="report_icon" src="../images/ok.png"/>
 						</div>
 						<div id="cancel_mayday_btn" class="dialog_btn button">
-							Cancel <img class="report_icon" src="images/cancel.png"/>
+							Cancel <img class="report_icon" src="../images/cancel.png"/>
 						</div>
 					</div>
 				</div>
