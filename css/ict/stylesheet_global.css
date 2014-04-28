@@ -106,20 +106,25 @@ body {
 	width: 100%;
 	border-top: 1px solid #888;
 }
-#safety_btn {
-    z-index: 999;
+.safety_btn {
+	width: 90px;
+	height: 25px;
+    z-index: 100;
 }
 .side_dialog_container {
     position: absolute;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-end;
-    align-items: flex-start;
 	z-index:-1;
+}
+.side_dialog_table tr {
+	vertical-align: top;
 }
 .side_dialog {
     background: #666 ;
     z-index: 50;
+	padding: 4px;
+}
+.side_dialog > div {
+    margin:0 0 4px 0;
 }
 .side_dialog_arm {
     background: #666;
@@ -129,7 +134,6 @@ body {
 }
 #safety_side_dialog {
     top: 157px;
-    width: 90px;
 }
 #safety_side_dialog_arm {
     top: 157px;
@@ -153,6 +157,7 @@ body {
 }
 #report_btn {
     z-index: 100;
+	height: 45px;
 }
 .report_icon {
     width: 20px;
@@ -161,6 +166,10 @@ body {
 #cmd_term_btn {
     z-index: 100;
     font-size: 0.75rem;
+	height: 53px;
+}
+#cmd_term_btn > div {
+	height:12px;
 }
 .terminate_icon {
     width: 20px;

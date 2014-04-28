@@ -721,12 +721,12 @@ function showSideDialog( btn, dialogId ){
 		var btn_top = btn.offset().top;
 		var btn_left = btn.offset().left;
 		
-		dlg_side_container.offset({ top:btn_top-3, left:btn_left-dlg_side.width()-3});
+		dlg_side_container.offset({ top:btn_top-3, left:btn_left-dlg_side.width()-12});
 	}
   }
 }
 function initSafetyDialog() {
-	var prototypeSafetyBtn = $("<div class=\"safety_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeSafetyBtn = $("<div class=\"safety_btn button\">PROTOTYPE</div>");
 	safteyNames.forEach(function (safetyName, index, array) {
 		var safetyBtn = prototypeSafetyBtn.clone().appendTo( "#safety_side_dialog" );
 		safetyBtn.html(safetyName);
