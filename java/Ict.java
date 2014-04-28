@@ -47,13 +47,13 @@ public class Ict extends Application {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         scene = new Scene(myBrowser, bounds.getWidth(), bounds.getHeight());
-        primaryStage.setX(bounds.getMinX());
-        primaryStage.setY(bounds.getMinY());
+        primaryStage.setX(0);
+        primaryStage.setY(0);
         primaryStage.setWidth(bounds.getWidth());
         primaryStage.setHeight(bounds.getHeight());
         
         webView.setPrefWidth(bounds.getWidth());
-        webView.setPrefHeight(bounds.getHeight());
+        webView.setPrefHeight(bounds.getHeight()-30);
         
         primaryStage.setScene(scene);
         primaryStage.show();

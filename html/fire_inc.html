@@ -28,18 +28,22 @@
             <div id="time" class="time_lg header_item">00:00</div>
             <div id="safety_btn" class="safety_btn header_item button">Cross</div>
             <div id="mode_btn" class="mode_btn header_item button"></div>
-			<div class="horiz_spacer"></div>
-			<div id="osr_btn" class="osr_btn header_item button">OSR</div>
-			<div id="objectives_btn" class="objectives_btn header_item button">Objectives</div>
-			<div class="horiz_spacer"></div>
-			<div id="cmd_term_btn" class="header_item button">
-				<img class="terminate_icon" src="../images/terminate.png"/>
-				<div>Command</div>
-				<div>Terminated</div>
+			
+			<div id="header_row2" class="header_row">
+				<div id="osr_btn" class="osr_btn header_item button">OSR</div>
+				<div id="objectives_btn" class="objectives_btn header_item button">Objectives</div>
 			</div>
-			<div id="report_btn" class="header_item button">
-				<img class="report_icon" src="../images/report.png"/>
-				<div>Report</div>
+			
+			<div id="header_row3" class="header_row">
+				<div id="cmd_term_btn" class="header_item button">
+					<img class="terminate_icon" src="../images/terminate.png"/>
+					<div>Command</div>
+					<div>Terminated</div>
+				</div>
+				<div id="report_btn" class="header_item button">
+					<img class="report_icon" src="../images/report.png"/>
+					<div>Report</div>
+				</div>
 			</div>
 			
 			<div id="safety_side_dialog_container" class="side_dialog_container">
@@ -120,8 +124,12 @@
 		</div><!-- mayday_and_tbar_container -->
         
         <div class="footer">
-			<div id="inc_num"></div>
-			<div id="address"></div>
+			<table>
+				<tr>
+					<td>INC:<div id="inc_num"></div></td>
+					<td>ADD:<div id="address"></div></td>
+				</tr>
+			</table>
 		</div>
         
     </body>
