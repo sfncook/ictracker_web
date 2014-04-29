@@ -639,11 +639,12 @@ function addUnitButton(unitsContainer, tbar) {
 	unitBtn.actions_list = actions_list;
 }
 function addActionButton(tbar, actionsContainer) {
+	console.log(actionsContainer);
 	actionsContainer.children().removeClass("blank_btn");
 	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
 	actionsContainer.append(actionBtn);
 	actionBtn.tbar = tbar;
-	actionBtn.click(showDialog(tbar, actionBtn, "#actions_dialog"));
+	//actionBtn.click(showDialog(tbar, actionBtn, "#actions_dialog"));
 }
 var tbarIndex = 1;
 function addTbar() {
@@ -682,12 +683,13 @@ function addTbar() {
 		benchmarkBtn.click(showDialog(tbar, benchmarkBtn, "#benchmark_dialog"));
 		
 		//Action Btn
-		//var actionBtnContainer = tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container").children(".actions");
+		//var actionBtnContainer = tbar.find(".actions_parent_container");
 		//actionBtnContainer.manyBtns = 0;
-		//addActionButton(actionBtnContainer);
+		//console.log(actionBtnContainer);
+		//addActionButton(tbar, actionBtnContainer);
 		
 		//Unit Btn
-		var unitBtnContainer = tbar.find(".units");
+		var unitBtnContainer = tbar.find(".units_container");
 		unitBtnContainer.manyBtns = 0;
 		addUnitButton(unitBtnContainer, tbar);
 	}
@@ -889,8 +891,8 @@ function init( ) {
 	//initActionsDialog();
 	//initUnitsDialog();
 	//initBenchmarkDialog();
-	//initSafetyDialog();
-	//initModeDialog();
+	initSafetyDialog();
+	initModeDialog();
 	//$("#report_btn").click(generateReport);
 	//initCmdTerminateDialog();
 	//initMaydayDialog();

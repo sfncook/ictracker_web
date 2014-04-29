@@ -90,9 +90,89 @@
 	height: 27px;
 	border-radius: 10px;
 	font-size: 1.0rem;
-	padding: 0 2px 4px 2px;
+	padding: 4px 0 0 0;
 }
 .acct_unit_btn {
 	background: yellow;
 	border: 2px #AAC7D1 solid;
+	padding: 0 4px 0 0;
+}
+.blank_btn {
+	background: #AAC7D1;
+	border-bottom: 2px dotted #888 !important;
+	border-radius: 10px;
+}
+
+.single_unit_div {
+    display: flex;
+    flex-flow: row nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	z-index: 99;
+}
+.single_unit_div_on {
+	background: #FFFF99;
+}
+.glowred {
+	background: red;
+	color: white;
+}
+.glowpink {
+	background: pink;
+	color: #666;
+}
+.psi_btn {
+	width: 35px;
+	height: 12px;
+	margin: 1px 0 1px 0;
+	box-shadow: none;
+	padding-top: 2px;
+}
+.par_psi_hidden {
+	opacity: 0.0;
+}
+.par_psi_hidden:hover {
+	cursor: default;
+}
+.tbar_unit_btn {
+	margin-right: 4px;
+}
+
+.actions_column {
+	display: flex;
+    flex-flow: column nowrap;
+}
+.actions_parent_container {
+	background: #FFFF99;
+	display: flex;
+    flex-flow: column;	
+}
+.action_list {
+	display: flex;
+    flex-flow: column nowrap;
+	align-content: center;
+}
+.action_list_unit_name_title {
+	text-align: center;
+	color: #666;
+	text-shadow: 1px 1px 1px #AAA;
+}
+
+.actions {
+	background: #FFF;
+	padding: 4px;
+    display: flex;
+    flex-flow: column;
+}
+.action_btn {
+	width: 130px;
+	height: 16px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 1px 0 1px 0;
+	box-shadow: none;
+	font-size: 80%;
+	padding-top: 6px;
+	padding-bottom: 2px;
 }
