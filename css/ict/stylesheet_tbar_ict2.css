@@ -1,0 +1,241 @@
+/*
+ **** T-BAR BOXES ****
+ */
+#tbar_container {
+    display: flex;
+    flex-flow: row wrap;
+	justify-content: flex-start;
+	align-content: flex-start;
+	padding: 0 0 0 5px;
+}
+
+.tbar {
+	background: #FFF;
+	border:1px solid #999;
+	min-width: 270px;
+	height: 275px;
+	margin: 5px 0 5px 10px;
+	padding: 0;
+	border-radius: 3px;
+    display: flex;
+    flex-flow: column;
+}
+
+
+.tbar_title_container {
+	background: #BBB;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 4px;
+	height: 25px;
+}
+.tbar_title_container > * {
+	margin: 0 2px 0 2px;
+}
+.title_btn {
+    font-weight: 500;
+	width:  160px;
+	height: 16px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
+.clock_icon {
+    width: 10px;
+    height: 10px;
+}
+.fixed_title_spacer {
+	width: 10px;
+}
+.title_btn_mayday {
+    background: red;
+	color: white;
+}
+.benchmark_btn {
+	font-size: 0.7rem;
+	height: 14px;
+	padding-top: 6px;
+}
+.par_btn {
+	font-size: 1.0rem;
+	width: 22px;
+	padding-top: 6px;
+}
+.par_btn_without_number {
+	font-size: 0.7rem;
+	height: 14px;
+	padding-top: 6px;
+}
+.sector_status_blank_btn {
+	width:20px;
+	background: #BBB;
+	border-bottom: 2px dotted #888 !important;
+	border-radius: 10px;
+}
+.psi_red {
+	background: red;
+	color: #FFF !important;
+}
+.psi_yellow {background: yellow;}
+.psi_green {background: #3dff00;}
+.psi_btn {
+	width:  34px;
+	color: #666;
+	font-weight: normal;
+	font-size: 90%;
+	text-shadow: none;
+}
+.benchmark_dots_inline {
+	display: flex;
+	flex-flow: row wrap;
+	background: none;
+	padding: 0;
+	margin: 0 0 2px 0;
+	width: 30px;
+	box-shadow: none;
+}
+.benchmark_dots_horizontal {
+	display: flex;
+	flex-flow: row nowrap;
+	background: #999;
+	padding: 0 0 2px 6px;
+	border-bottom: 1px solid #666;
+	border-radius: 0;
+}
+.benchmark_dot_btn {
+	background: #666;
+	border: 1px solid #333;
+	width:10px;
+	height: 10px;
+	border-radius: 10px;
+	font-size: 50%;
+	margin: 0 1px 1px 1px;
+	text-align: center;
+	text-shadow: none;
+	padding: 0;
+	color: #AAA;
+	flex-shrink: 0;
+	flex-grow: 0;
+}
+.benchmark_dot_btn_isset {
+	background: #0F0 !important;
+	color: #666;
+}
+.horiz_chkbox {
+    display: flex;
+    flex-flow: row;
+}
+.benchmark_chk_label_btn {
+	background: none;
+	padding: 4px 4px 4px 4px;
+	color: #666;
+}
+
+.tbar_body_container {
+    display: flex;
+    flex-flow: row;
+	height: 250px;
+	padding: 0px;
+}
+.blank_btn {
+	background: #AAC7D1;
+	border-bottom: 2px dotted #888 !important;
+	border-radius: 10px;
+}
+.units {
+	background: #FFF;
+	width: 145px;
+	padding: 4px 0 4px 0;
+    display: flex;
+    flex-flow: column;
+	border-right: 1px solid #888;
+	overflow-y: scroll;
+}
+.single_unit_div {
+    display: flex;
+    flex-flow: row nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	z-index: 99;
+}
+.single_unit_div_on {
+	background: #FFFF99;
+}
+.unit_btn  {
+	width: 45px;
+    height: 15px;
+	margin: 1px 0 1px 0;
+	box-shadow: none;
+}
+.glowred {
+	background: red;
+	color: white;
+}
+.glowpink {
+	background: pink;
+	color: #666;
+}
+.psi_btn {
+	width: 35px;
+	height: 12px;
+	margin: 1px 0 1px 0;
+	box-shadow: none;
+	padding-top: 2px;
+}
+.par_psi_hidden {
+	opacity: 0.0;
+}
+.par_psi_hidden:hover {
+	cursor: default;
+}
+.tbar_unit_btn {
+	margin-right: 4px;
+}
+
+.actions_column {
+	display: flex;
+    flex-flow: column nowrap;
+}
+.actions_parent_container {
+	background: #FFFF99;
+	display: flex;
+    flex-flow: column;	
+}
+.action_list {
+	display: flex;
+    flex-flow: column nowrap;
+	align-content: center;
+}
+.action_list_unit_name_title {
+	text-align: center;
+	color: #666;
+	text-shadow: 1px 1px 1px #AAA;
+}
+.acct_unit_btn {
+	background: #FFFF10;
+	border: 2px solid #AAC7D1 !important;
+	border-radius: 10px;
+}
+
+.actions {
+	background: #FFF;
+	padding: 4px;
+    display: flex;
+    flex-flow: column;
+}
+.action_btn {
+	width: 130px;
+	height: 16px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 1px 0 1px 0;
+	box-shadow: none;
+	font-size: 80%;
+	padding-top: 6px;
+	padding-bottom: 2px;
+}
+

@@ -241,13 +241,13 @@ function toggleDirBtn(btn) {
 	var tbarDirBtn = tbar_clicked.find(".dir_supl_info_dir_btn");
 	var tbarDirSpacer = tbar_clicked.find(".dir_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
-		$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
+		$(".dir_supl_info_dir_btn").removeClass("glow_orange");
 		tbar_clicked.prefix_dir = 'X';
 		tbarDirBtn.hide();
 		tbarDirSpacer.show();
 	} else {
-		$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
-		btn.addClass("dir_supl_info_btn_on");
+		$(".dir_supl_info_dir_btn").removeClass("glow_orange");
+		btn.addClass("glow_orange");
 		tbar_clicked.prefix_dir = btn.html();
 		tbarDirBtn.show();
 		tbarDirSpacer.hide();
@@ -258,13 +258,13 @@ function toggleNumBtn(btn) {
 	var tbarNumBtn = tbar_clicked.find(".dir_supl_info_num_btn");
 	var tbarNumSpacer = tbar_clicked.find(".num_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
-		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
+		$(".dir_supl_info_num_btn").removeClass("glow_orange");
 		tbar_clicked.prefix_num = 'X';
 		tbarNumBtn.hide();
 		tbarNumSpacer.show();
 	} else {
-		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
-		btn.addClass("dir_supl_info_btn_on");
+		$(".dir_supl_info_num_btn").removeClass("glow_orange");
+		btn.addClass("glow_orange");
 		tbar_clicked.prefix_num = btn.html();
 		tbarNumBtn.show();
 		tbarNumSpacer.hide();
@@ -272,7 +272,6 @@ function toggleNumBtn(btn) {
 	}
 }
 function initSectorDialog( ) {
-	var suplInfoPrototypeBtn = $("<div class=\"button dialog_btn col-xs-2\">PROTOTYPE</div>");
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
@@ -287,8 +286,9 @@ function initSectorDialog( ) {
 	//sectorDialogBody.append(row2Container);
 	//sectorDialogBody.append(row3Container);
 	
-	var dir_bnts_container = $('<div class="container"/>').clone();
+	var dir_bnts_container = $('<div id="dir_bnts_container" class="col-xs-12 container-fluid"/>').clone();
 	dialog_body.append(dir_bnts_container);
+	var suplInfoPrototypeBtn = $("<div class=\"button col-xs-3 sm_round_btn\">PROTOTYPE</div>");
 	
 	//Suplimental buttons
 	["N","E","S","W"].forEach(function (btnText, index, array) {
@@ -300,26 +300,27 @@ function initSectorDialog( ) {
 		newBtn.click(function() {toggleDirBtn(newBtn);});
 	});
 	
-	/*
 	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_num_btn");
 		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
-		row2Container.append(newBtn);
+		dir_bnts_container.append(newBtn);
 		newBtn.click(function() {toggleNumBtn(newBtn);});
 	});
 	
-	row2Container.append($("<div class=\"horiz_spacer\"></div>"));
+	
+	var title_bnts_container = $('<div id="title_bnts_container" class="col-xs-12 container-fluid"/>').clone();
+	dialog_body.append(title_bnts_container);
 	
 	//Sector title buttons
-	var prototypeBtn = $("<div class=\"title_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"title_btn button col-xs-3\">PROTOTYPE</div>");
 	var prototypeFixedTitleSpacer = $("<div class=\"fixed_title_spacer\"></div>");
 	var prototypeClockIcon = $("<img class=\"clock_icon\" src=\"../images/clock.png\"/>");
 	sectors.forEach(function (sectorName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(sectorName);
-		row2Container.append(newBtn);
+		title_bnts_container.append(newBtn);
 		
 		var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
 		if (hasClock) {
@@ -344,7 +345,6 @@ function initSectorDialog( ) {
 			}
 		});
 	});
-	*/
 	
 }
 
@@ -884,18 +884,18 @@ function init( ) {
 	
 	//Init Dialogs
 	initSectorDialog();
-	initParDialog();
-	initPsiDialog();
-	initActionsDialog();
-	initUnitsDialog();
-	initBenchmarkDialog();
-	initSafetyDialog();
-	initModeDialog();
-	$("#report_btn").click(generateReport);
-	initCmdTerminateDialog();
-	initMaydayDialog();
-	initObjectivesDialog();
-	initOsrDialog();
+	//initParDialog();
+	//initPsiDialog();
+	//initActionsDialog();
+	//initUnitsDialog();
+	//initBenchmarkDialog();
+	//initSafetyDialog();
+	//initModeDialog();
+	//$("#report_btn").click(generateReport);
+	//initCmdTerminateDialog();
+	//initMaydayDialog();
+	//initObjectivesDialog();
+	//initOsrDialog();
 	initIncidentInfo();
 	
 	$("#dialogContainer").hide();
