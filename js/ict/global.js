@@ -286,8 +286,8 @@ function initSectorDialog( ) {
 	//sectorDialogBody.append(row2Container);
 	//sectorDialogBody.append(row3Container);
 	
-	var dir_bnts_container = $('<div id="dir_bnts_container" class="col-xs-12 container-fluid"/>').clone();
-	dialog_body.append(dir_bnts_container);
+	var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
+	dialog_body.append(dir_btns_container);
 	var suplInfoPrototypeBtn = $("<div class=\"button col-xs-3 sm_round_btn\">PROTOTYPE</div>");
 	
 	//Suplimental buttons
@@ -296,7 +296,7 @@ function initSectorDialog( ) {
 		newBtn.addClass("dir_supl_info_dir_btn");
 		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
-		dir_bnts_container.append(newBtn);
+		dir_btns_container.append(newBtn);
 		newBtn.click(function() {toggleDirBtn(newBtn);});
 	});
 	
@@ -305,13 +305,13 @@ function initSectorDialog( ) {
 		newBtn.addClass("dir_supl_info_num_btn");
 		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
-		dir_bnts_container.append(newBtn);
+		dir_btns_container.append(newBtn);
 		newBtn.click(function() {toggleNumBtn(newBtn);});
 	});
 	
 	
-	var title_bnts_container = $('<div id="title_bnts_container" class="col-xs-12 container-fluid"/>').clone();
-	dialog_body.append(title_bnts_container);
+	var title_btns_container = $('<div id="title_btns_container" class="col-xs-12 container-fluid"/>').clone();
+	dialog_body.append(title_btns_container);
 	
 	//Sector title buttons
 	var prototypeBtn = $("<div class=\"title_btn button col-xs-3\">PROTOTYPE</div>");
@@ -320,7 +320,7 @@ function initSectorDialog( ) {
 	sectors.forEach(function (sectorName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(sectorName);
-		title_bnts_container.append(newBtn);
+		title_btns_container.append(newBtn);
 		
 		var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
 		if (hasClock) {

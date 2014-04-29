@@ -263,15 +263,18 @@ body {
 }
 
 #sector_dialog {
-    width: 900px;
+    width: 885px;
 }
-#dir_bnts_container {
+#dir_btns_container {
 	padding: 4px 0;
 	border-top: 1px solid #DDD;
 }
-#dir_bnts_container > .button {
+#dir_btns_container > .button {
 	margin: 0 4px;
 }
-#title_bnts_container > .button {
+#title_btns_container {
+	padding: 4px 0;
+}
+#title_btns_container > .button {
 	margin: 4px;
 }
