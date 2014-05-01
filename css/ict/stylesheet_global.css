@@ -278,3 +278,7 @@ body {
 #title_btns_container > .button {
 	margin: 4px;
 }
+
+.clear_float {
+	clear: both;
+}

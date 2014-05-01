@@ -621,11 +621,9 @@ function showActionsForUnitBtn(unitBtn) {
 function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.children().children().removeClass("blank_btn");
 	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
-	//var parBtn = $("<div class=\"par_btn par_psi_hidden tbar_unit_btn small_round_btn button\">P</div>").clone();
 	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
 	unitBtn.tbar = tbar;
-	//singleUnitContainer.append(parBtn);
 	singleUnitContainer.append(psiBtn);
 	singleUnitContainer.append(unitBtn);
 	unitsContainer.append(singleUnitContainer);
@@ -633,8 +631,6 @@ function addUnitButton(unitsContainer, tbar) {
 	
 	// Create the actions column for this unit
 	var actions_list = $("<div class=\"actions_list\"></div>");
-	//actions_list.append($("<div class=\"action_list_unit_name_title\"></div>"));
-	//actionDiv.html(unitBtn.html());
 	tbar.find(".actions_parent_container").append(actions_list);
 	unitBtn.actions_list = actions_list;
 }
@@ -644,7 +640,7 @@ function addActionButton(tbar, actionsContainer) {
 	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
 	actionsContainer.append(actionBtn);
 	actionBtn.tbar = tbar;
-	//actionBtn.click(showDialog(tbar, actionBtn, "#actions_dialog"));
+	actionBtn.click(showDialog(tbar, actionBtn, "#actions_dialog"));
 }
 var tbarIndex = 1;
 function addTbar() {

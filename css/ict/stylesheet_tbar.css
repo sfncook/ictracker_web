@@ -104,13 +104,9 @@
 }
 
 .single_unit_div {
-    display: flex;
-    flex-flow: row nowrap;
-	align-items: center;
-	justify-content: flex-start;
 	z-index: 99;
 }
-.single_unit_div_on {
+.glowlightyellow {
 	background: #FFFF99;
 }
 .glowred {
@@ -127,8 +123,13 @@
 	margin: 1px 0 1px 0;
 	box-shadow: none;
 	padding-top: 2px;
+	float: left;
 }
 .par_psi_hidden {
+	/*
+	 *Use opacity rather than show/hide
+	 *so the button maintains its space
+	*/
 	opacity: 0.0;
 }
 .par_psi_hidden:hover {
@@ -136,6 +137,7 @@
 }
 .tbar_unit_btn {
 	margin-right: 4px;
+	float: left;
 }
 
 .actions_column {
