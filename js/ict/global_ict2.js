@@ -241,13 +241,13 @@ function toggleDirBtn(btn) {
 	var tbarDirBtn = tbar_clicked.find(".dir_supl_info_dir_btn");
 	var tbarDirSpacer = tbar_clicked.find(".dir_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
-		$(".dir_supl_info_dir_btn").removeClass("glow_orange");
+		$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = 'X';
 		tbarDirBtn.hide();
 		tbarDirSpacer.show();
 	} else {
-		$(".dir_supl_info_dir_btn").removeClass("glow_orange");
-		btn.addClass("glow_orange");
+		$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
+		btn.addClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_dir = btn.html();
 		tbarDirBtn.show();
 		tbarDirSpacer.hide();
@@ -258,13 +258,13 @@ function toggleNumBtn(btn) {
 	var tbarNumBtn = tbar_clicked.find(".dir_supl_info_num_btn");
 	var tbarNumSpacer = tbar_clicked.find(".num_spacer");
 	if (btn.hasClass("dir_supl_info_btn_on")) {
-		$(".dir_supl_info_num_btn").removeClass("glow_orange");
+		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_num = 'X';
 		tbarNumBtn.hide();
 		tbarNumSpacer.show();
 	} else {
-		$(".dir_supl_info_num_btn").removeClass("glow_orange");
-		btn.addClass("glow_orange");
+		$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
+		btn.addClass("dir_supl_info_btn_on");
 		tbar_clicked.prefix_num = btn.html();
 		tbarNumBtn.show();
 		tbarNumSpacer.hide();
@@ -272,23 +272,20 @@ function toggleNumBtn(btn) {
 	}
 }
 function initSectorDialog( ) {
+	var suplInfoPrototypeBtn = $("<div class=\"small_round_btn sector_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
-	var dialog_title_text = sectorDialog.find(".dialog_title_text");
-	dialog_title_text.html("Sectors");
-	var dialog_body = sectorDialog.find(".dialog_body");
+	var sectorTitleDiv = sectorDialog.find(".dialog_title_text_container");
+	sectorTitleDiv.html("Sectors");
+	var sectorDialogBody = sectorDialog.children(".dialog_body");
 	
-	//var row1Container = $("<div id=\"sector_dlg_row1\"></div>").clone();
-	//var row2Container = $("<div id=\"sector_dlg_row2\"></div>").clone();
-	//var row3Container = $("<div id=\"sector_dlg_row3\"></div>").clone();
-	//sectorDialogBody.append(row1Container);
-	//sectorDialogBody.append(row2Container);
-	//sectorDialogBody.append(row3Container);
-	
-	var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
-	dialog_body.append(dir_btns_container);
-	var suplInfoPrototypeBtn = $("<div class=\"button col-xs-3 sm_round_btn\">PROTOTYPE</div>");
+	var row1Container = $("<div id=\"sector_dlg_row1\"></div>").clone();
+	var row2Container = $("<div id=\"sector_dlg_row2\"></div>").clone();
+	var row3Container = $("<div id=\"sector_dlg_row3\"></div>").clone();
+	sectorDialogBody.append(row1Container);
+	sectorDialogBody.append(row2Container);
+	sectorDialogBody.append(row3Container);
 	
 	//Suplimental buttons
 	["N","E","S","W"].forEach(function (btnText, index, array) {
@@ -296,31 +293,38 @@ function initSectorDialog( ) {
 		newBtn.addClass("dir_supl_info_dir_btn");
 		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
-		dir_btns_container.append(newBtn);
+		row2Container.append(newBtn);
 		newBtn.click(function() {toggleDirBtn(newBtn);});
 	});
+	
+	/*
+	row1Container.append($("<div class=\"apt_label\">Apartment/Suite/Unit:</div>"));
+	var aptInput = $("<div class=\"apt_input\"><input type=\"text\" class=\"apt_input\"\></div>");
+	var inputBox = aptInput.children("input.apt_input");
+	row1Container.append(aptInput);
+	/*inputBox.keypress(function( event ) {
+		console.log(inputBox.val());
+	  });*/
 	
 	["1","2","3","4","5","6","7","8","9"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();
 		newBtn.addClass("dir_supl_info_num_btn");
 		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
-		dir_btns_container.append(newBtn);
+		row2Container.append(newBtn);
 		newBtn.click(function() {toggleNumBtn(newBtn);});
 	});
 	
-	
-	var title_btns_container = $('<div id="title_btns_container" class="col-xs-12 container-fluid"/>').clone();
-	dialog_body.append(title_btns_container);
+	row2Container.append($("<div class=\"horiz_spacer\"></div>"));
 	
 	//Sector title buttons
-	var prototypeBtn = $("<div class=\"title_btn button col-xs-3\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"title_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeFixedTitleSpacer = $("<div class=\"fixed_title_spacer\"></div>");
-	var prototypeClockIcon = $("<img class=\"clock_icon\" src=\"../images/clock.png\"/>");
+	var prototypeClockIcon = $("<img class=\"clock_icon\" src=\"images/clock.png\"/>");
 	sectors.forEach(function (sectorName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(sectorName);
-		title_btns_container.append(newBtn);
+		row2Container.append(newBtn);
 		
 		var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
 		if (hasClock) {
@@ -487,22 +491,20 @@ function initOsrDialog( ) {
  **/
 function toggleCity(city) {
 	return function(){
-		$(".unitCity_dialog_btn").removeClass("glow_blue");
-		$("#unit_city_btn_"+city).addClass("glow_blue");
+		$(".unitCity_dialog_btn").removeClass("glow");
+		$("#unit_city_btn_"+city).addClass("glow");
 		$(".unit_dialog_btn").hide();
 		$(".unit_dialog_btn."+city).show();
-		$(".units_dialog_citybtns_div").hide();
-		$("#unit_city_div_"+city).show();
 	}
 }
 function toggleType(type) {
 	return function(){
-		if ($("#unit_type_btn_"+type).hasClass("glow_blue")) {
-			$(".unitType_dialog_btn").removeClass("glow_blue");
+		if ($("#unit_type_btn_"+type).hasClass("glow")) {
+			$(".unitType_dialog_btn").removeClass("glow");
 			$(".unitTypeColumn").show();
 		} else {
-			$(".unitType_dialog_btn").removeClass("glow_blue");
-			$("#unit_type_btn_"+type).addClass("glow_blue");
+			$(".unitType_dialog_btn").removeClass("glow");
+			$("#unit_type_btn_"+type).addClass("glow");
 			$(".unitTypeColumn").hide();
 			$(".unit_type_"+type).show();
 		}
@@ -512,22 +514,12 @@ function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn 	= $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitBtn 		= $("<div class=\"unit_dialog_btn unit_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeUnitDiv 		= $("<div class=\"unitsDlg_units\"></div>");
 	var prototypeUnitTypeColDiv = $("<div class=\"unitTypeColumn\"></div>");
-	
-	var unitsDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
-	var newId = "units_dialog";
-	unitsDialog.attr("id",newId);
-	var dialog_title_text = unitsDialog.find(".dialog_title_text");
-	dialog_title_text.html("Units");
-	var dialog_body = unitsDialog.find(".dialog_body");
-	
-	var citiesDiv = $('<div id="units_dialog_cities_div"></div>').appendTo(dialog_body);
-	var typesDiv = $('<div id="units_dialog_types_div"></div>').appendTo(dialog_body);;
-	var btnsDivProto = $('<div class="units_dialog_citybtns_div"></div>');
 
 	//Create Unit Type Buttons
 	unitTypes.forEach(function (type, index, array) {
-		var unitTypeBtn = prototypeUnitTypeBtn.clone().appendTo(typesDiv);
+		var unitTypeBtn = prototypeUnitTypeBtn.clone().appendTo( "#unitsDlg_types" );
 		unitTypeBtn.html(type);
 		var newId = "unit_type_btn_"+type;
 		unitTypeBtn.attr("id",newId);
@@ -537,14 +529,14 @@ function initUnitsDialog( ) {
 	//**** CITY *****
 	$.each(unitsByTypeByCity, function( city, unitsByType ) {
 		//Unit button
-		var unitCityBtn = prototypeCityBtn.clone().appendTo(citiesDiv);
+		var unitCityBtn = prototypeCityBtn.clone().appendTo("#unitsDlg_cities");
 		unitCityBtn.html(city);
 		var unitCityBtnId = "unit_city_btn_"+city;
 		unitCityBtn.attr("id",unitCityBtnId);
 		unitCityBtn.click(toggleCity(city));
 		
 		//Unit div
-		var unitCityDiv = btnsDivProto.clone().appendTo(dialog_body);
+		var unitCityDiv = prototypeUnitDiv.clone().appendTo("#units_dlg_row2");
 		var unitCityDivId = "unit_city_div_"+city;
 		unitCityDiv.attr("id",unitCityDivId);
 		
@@ -583,12 +575,8 @@ function initUnitsDialog( ) {
 					}
 				});
 			});
-			unitTypeCol.append($('<div class="clear_float"/>'));
 		});
 	});
-	
-	$('<div class="clear_float"/>').clone().appendTo(citiesDiv);
-	
 	$(".unit_dialog_btn").hide();
 	toggleCity("Mesa")();
 }
@@ -637,22 +625,24 @@ function showActionsForUnitBtn(unitBtn) {
 function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.children().children().removeClass("blank_btn");
 	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
+	//var parBtn = $("<div class=\"par_btn par_psi_hidden tbar_unit_btn small_round_btn button\">P</div>").clone();
 	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
 	unitBtn.tbar = tbar;
+	//singleUnitContainer.append(parBtn);
 	singleUnitContainer.append(psiBtn);
 	singleUnitContainer.append(unitBtn);
-	singleUnitContainer.append($('<div class="clear_float"/>'));
 	unitsContainer.append(singleUnitContainer);
 	unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 	
 	// Create the actions column for this unit
 	var actions_list = $("<div class=\"actions_list\"></div>");
+	//actions_list.append($("<div class=\"action_list_unit_name_title\"></div>"));
+	//actionDiv.html(unitBtn.html());
 	tbar.find(".actions_parent_container").append(actions_list);
 	unitBtn.actions_list = actions_list;
 }
 function addActionButton(tbar, actionsContainer) {
-	console.log(actionsContainer);
 	actionsContainer.children().removeClass("blank_btn");
 	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
 	actionsContainer.append(actionBtn);
@@ -675,8 +665,8 @@ function addTbar() {
 		var titleBtnId = "tbar_title_"+tbarIndex;
 		titleBtn.attr("id", titleBtnId);
 		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
-		var tbarDirBtn = $(".title_dir");
-		var tbarNumBtn = $(".title_num");
+		var tbarDirBtn = titleBtn.children(".dir_supl_info_dir_btn");
+		var tbarNumBtn = titleBtn.children(".dir_supl_info_num_btn");
 		tbarDirBtn.hide();
 		tbarNumBtn.hide();
 		
@@ -696,13 +686,12 @@ function addTbar() {
 		benchmarkBtn.click(showDialog(tbar, benchmarkBtn, "#benchmark_dialog"));
 		
 		//Action Btn
-		//var actionBtnContainer = tbar.find(".actions_parent_container");
+		//var actionBtnContainer = tbar.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container").children(".actions");
 		//actionBtnContainer.manyBtns = 0;
-		//console.log(actionBtnContainer);
-		//addActionButton(tbar, actionBtnContainer);
+		//addActionButton(actionBtnContainer);
 		
 		//Unit Btn
-		var unitBtnContainer = tbar.find(".units_container");
+		var unitBtnContainer = tbar.find(".units");
 		unitBtnContainer.manyBtns = 0;
 		addUnitButton(unitBtnContainer, tbar);
 	}
@@ -732,12 +721,12 @@ function showSideDialog( btn, dialogId ){
 		var btn_top = btn.offset().top;
 		var btn_left = btn.offset().left;
 		
-		dlg_side_container.offset({ top:btn_top-3, left:btn_left-dlg_side.width()-12});
+		dlg_side_container.offset({ top:btn_top-3, left:btn_left-dlg_side.width()-3});
 	}
   }
 }
 function initSafetyDialog() {
-	var prototypeSafetyBtn = $("<div class=\"safety_btn button\">PROTOTYPE</div>");
+	var prototypeSafetyBtn = $("<div class=\"safety_btn dialog_btn button\">PROTOTYPE</div>");
 	safteyNames.forEach(function (safetyName, index, array) {
 		var safetyBtn = prototypeSafetyBtn.clone().appendTo( "#safety_side_dialog" );
 		safetyBtn.html(safetyName);
@@ -899,23 +888,25 @@ function init( ) {
 	
 	//Init Dialogs
 	initSectorDialog();
-	//initParDialog();
-	//initPsiDialog();
-	//initActionsDialog();
+	initParDialog();
+	initPsiDialog();
+	initActionsDialog();
 	initUnitsDialog();
-	//initBenchmarkDialog();
+	initBenchmarkDialog();
 	initSafetyDialog();
 	initModeDialog();
-	//$("#report_btn").click(generateReport);
-	//initCmdTerminateDialog();
-	//initMaydayDialog();
-	//initObjectivesDialog();
-	//initOsrDialog();
+	$("#report_btn").click(generateReport);
+	initCmdTerminateDialog();
+	initMaydayDialog();
+	initObjectivesDialog();
+	initOsrDialog();
 	initIncidentInfo();
 	
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(hideAllDialogs);
+	
+	$("#units_dialog").show();
 	
 	hideAllDialogs();
 	

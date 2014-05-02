@@ -112,6 +112,14 @@ body {
 .glow_orange:hover {
     background: #FFAD2C;
 }
+.glow_blue {
+    background: #2A5071;
+    color: #DDD;
+    box-shadow: 2px 2px 2px #172C3E;
+}
+.glow_blue:hover {
+    background: #2A5071;
+}
 
 /*
  **** HEADER ITEMS ****
@@ -228,6 +236,11 @@ body {
     left:0px;
     width:100%;
     height: 100%;
+	display: table;
+}
+.dialog_vertical_align_cell {
+	display: table-cell;
+	vertical-align: middle
 }
 .dialog_window {
     z-index: 999;
@@ -236,7 +249,6 @@ body {
     border-radius: 3px;
     border: 1px solid #888;
     box-shadow: 0px 0px 15px #555;
-	margin-top: 150px;
 }
 .dialog_title {
     background: #AAA;
@@ -281,4 +293,51 @@ body {
 
 .clear_float {
 	clear: both;
+}
+
+#units_dialog {
+    width: 855px;
+}
+#units_dialog_cities_div {
+	display:block;
+	padding-left:70px;
+	border-bottom:1px solid #999;
+}
+#units_dialog_types_div {
+	display:block;
+	float:left;
+	width:80px;
+	border-right:1px solid #999;
+}
+.units_dialog_citybtns_div {
+	display:block;
+	width: 755px;
+	float: right;
+}
+.unitTypeColumn {
+    padding-bottom: 25px;
+}
+
+.unitCity_dialog_btn {
+    width:70px;
+    height: 20px;
+    padding: 2;
+	float: left;
+	margin: 5px;
+}
+.unit_dialog_btn {
+	float: left;
+	margin: 5px;
+}
+.btn_largetext {
+    font-size:0.7rem;
+}
+.btn_medtext {
+    font-size:0.8rem;
+}
+.unitType_dialog_btn {
+    width:70px;
+    height: 20px;
+    padding: 2;
+	margin: 5px;
 }
