@@ -297,6 +297,7 @@ body {
 
 #units_dialog {
     width: 855px;
+	height: 630px;
 }
 #units_dialog_cities_div {
 	display:block;
@@ -330,14 +331,14 @@ body {
 	margin: 5px;
 }
 .btn_largetext {
-    font-size:0.7rem;
+    font-size:0.7rem !important;
 }
 .btn_medtext {
-    font-size:0.8rem;
+    font-size:0.8rem !important;
 }
 .unitType_dialog_btn {
     width:70px;
     height: 20px;
-    padding: 2;
+    padding: 2px;
 	margin: 5px;
 }
