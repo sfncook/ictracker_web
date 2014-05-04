@@ -267,7 +267,7 @@ body {
     border: 1px solid #CCC;
     text-shadow: none;
 	height: 20px;
-	width: 70px;
+	width: 40px;
 	margin: 3px 0;
 }
 .dialog_body {
@@ -341,4 +341,8 @@ body {
     height: 20px;
     padding: 2px;
 	margin: 5px;
+}
+
+#psi_dialog {
+    width: 445px;
 }

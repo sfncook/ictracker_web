@@ -58,13 +58,13 @@ function setPsiText(text) {
 	  }
 }
 function initPsiDialog( ) {
-	var psiDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var psiDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "psi_dialog";
 	psiDialog.attr("id",newId);
 	var psiDialogBody = psiDialog.children(".dialog_body");
-	var psiTitleDiv = psiDialog.find(".dialog_title_text_container");
+	var psiTitleDiv = psiDialog.find(".dialog_title_text");
 	psiTitleDiv.html("PSI Values");
-	var prototypeBtn = $("<div class=\"psiBtn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"col-xs-12 psi_btn dialog_btn button\">PROTOTYPE</div>");
 	for(var psiValue=4500; psiValue>=0; psiValue-=100) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(psiValue);
@@ -358,7 +358,7 @@ function initActionsDialog( ) {
 	var newId = "actions_dialog";
 	actionsDialog.attr("id",newId);
 	var actionsDialogBody = actionsDialog.children(".dialog_body");
-	var actionsTitleDiv = actionsDialog.children(".dialog_title").children(".dialog_title_text_container");
+	var actionsTitleDiv = actionsDialog.find(".dialog_title_text");
 	actionsTitleDiv.html("Actions");
 	var prototypeBtn = $("<div class=\"actions_dialog_btn action_btn dialog_btn button\">PROTOTYPE</div>");
 	actions.forEach(function (actionName, index, array) {
@@ -417,7 +417,7 @@ function initObjectivesDialog( ) {
 	var dialogBody = dialog.children(".dialog_body");
 	newId = "objectives_dialog_body";
 	dialogBody.attr("id",newId);
-	var titleDiv = dialog.children(".dialog_title").children(".dialog_title_text_container");
+	var titleDiv = dialog.find(".dialog_title_text");
 	titleDiv.html("Objectives");
 	var objectives = ["All Clear",
 						"Under Control",
@@ -455,7 +455,7 @@ function initOsrDialog( ) {
 	var dialogBody = dialog.children(".dialog_body");
 	newId = "osr_dialog_body";
 	dialogBody.attr("id",newId);
-	var titleDiv = dialog.children(".dialog_title").children(".dialog_title_text_container");
+	var titleDiv = dialog.find(".dialog_title_text");
 	titleDiv.html("OSR");
 	var osrs = ["Unit ID",
 				"Address",
@@ -792,7 +792,7 @@ function initCmdTerminateDialog( ) {
 	var newId = "cmd_trm_dialog";
 	cmdTrmDialog.attr("id",newId);
 	var dialogBody = cmdTrmDialog.children(".dialog_body");
-	var titleDiv = cmdTrmDialog.find(".dialog_title_text_container");
+	var titleDiv = cmdTrmDialog.find(".dialog_title_text");
 	titleDiv.html("Terminate Command?");
 	var question_div = $("<div class=\"dialog_question\">Are you sure you want to terminate command of this incident?</div>");
 	var prototypeBtn = $("<div class=\"yes_no_btn dialog_btn button\">PROTOTYPE</div>");
@@ -900,7 +900,7 @@ function init( ) {
 	//Init Dialogs
 	initSectorDialog();
 	//initParDialog();
-	//initPsiDialog();
+	initPsiDialog();
 	//initActionsDialog();
 	initUnitsDialog();
 	//initBenchmarkDialog();
