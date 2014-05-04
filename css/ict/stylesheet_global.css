@@ -74,7 +74,7 @@ body {
  */
 .button {
 	text-align: center;
-	background: #DDD;
+	background: #CCC;
 	color: #666;
 	border: none;
 	border-radius: 3px;
@@ -261,14 +261,18 @@ body {
 }
 .dialog_close_btn {
     background: #F67574;
+    height: 20px;
+    flex-basis: 1.0rem;
+    flex-shrink: 0;
+    padding: 2px 1px 1px 1px;
     line-height: 1.0em;
-    font-size:80%;
+    margin: 2px;
     color: white;
+    border-radius: 15px;
     border: 1px solid #CCC;
     text-shadow: none;
-	height: 20px;
-	width: 40px;
-	margin: 3px 0;
+	width: 20px;
+	float: right;
 }
 .dialog_body {
 	padding: 4px 0;
@@ -345,4 +349,26 @@ body {
 
 #psi_dialog {
     width: 445px;
+}
+
+#actions_dialog {
+    width: 600px;
+}
+.actions_dialog_btn {
+    margin: 5px !important;
+}
+
+
+#mayday_btn {
+    background: red;
+    color: white;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: none;
+    border-right: 2px solid orange;
+    border-bottom: 2px solid orange;
+    border-left: 2px solid orange;
+    font-size: 1.25rem;
 }

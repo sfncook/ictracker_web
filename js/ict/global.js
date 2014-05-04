@@ -354,13 +354,13 @@ function initSectorDialog( ) {
  * Actions Dialog
  **/
 function initActionsDialog( ) {
-	var actionsDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var actionsDialog = $("#dialog_prototype" ).clone().appendTo("#dialog_vertical_align_cell");
 	var newId = "actions_dialog";
 	actionsDialog.attr("id",newId);
 	var actionsDialogBody = actionsDialog.children(".dialog_body");
 	var actionsTitleDiv = actionsDialog.find(".dialog_title_text");
 	actionsTitleDiv.html("Actions");
-	var prototypeBtn = $("<div class=\"actions_dialog_btn action_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"actions_dialog_btn col-xs-2 action_btn dialog_btn button\">PROTOTYPE</div>");
 	actions.forEach(function (actionName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(actionName);
@@ -620,8 +620,8 @@ function showActionsForUnitBtn(unitBtn) {
 			actionsParentContainer.children("."+unitBtn.html()).show();
 			
 			// Highlight select unit
-			tbar.find(".single_unit_div").removeClass("single_unit_div_on");
-			unitBtn.parent().addClass("single_unit_div_on");
+			tbar.find(".single_unit_div").removeClass("glowlightyellow");
+			unitBtn.parent().addClass("glowlightyellow");
 			
 			// Update PAR and PSI buttons
 			var psiBtn = unitBtn.parent().children(".psi_btn");
@@ -901,7 +901,7 @@ function init( ) {
 	initSectorDialog();
 	//initParDialog();
 	initPsiDialog();
-	//initActionsDialog();
+	initActionsDialog();
 	initUnitsDialog();
 	//initBenchmarkDialog();
 	initSafetyDialog();
