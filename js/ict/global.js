@@ -385,11 +385,12 @@ function initActionsDialog( ) {
  **/
 function createCheckBox(label) {
 	var chkContainer = $("<div class=\"horiz_chkbox\"></div>").clone();
-	var chkBtn = $("<input type=\"checkbox\" class=\"benchmark_chk_btn dialog_btn button\"\>").clone();
-	var labelBtn = $("<div class=\"benchmark_chk_label_btn\"\></div>").clone();
+	var chkBtn = $("<input type=\"checkbox\" class=\"chk_btn dialog_btn button\"\>").clone();
+	var labelBtn = $("<div class=\"chk_label\"\></div>").clone();
 	labelBtn.html(label);
 	chkContainer.append(chkBtn);
 	chkContainer.append(labelBtn);
+	chkContainer.append($('<div class="clear_float"/>'));
 	return chkContainer;
 }
 function initBenchmarkDialog( ) {
@@ -411,7 +412,7 @@ function initBenchmarkDialog( ) {
  * Objectives Dialog
  **/
 function initObjectivesDialog( ) {
-	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "objectives_dialog";
 	dialog.attr("id",newId);
 	var dialogBody = dialog.children(".dialog_body");
@@ -449,7 +450,7 @@ function initObjectivesDialog( ) {
  * OSR Dialog
  **/
 function initOsrDialog( ) {
-	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "osr_dialog";
 	dialog.attr("id",newId);
 	var dialogBody = dialog.children(".dialog_body");
@@ -788,7 +789,7 @@ function dontTerminateCommand() {
 	hideAllDialogs();
 }
 function initCmdTerminateDialog( ) {
-	var cmdTrmDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var cmdTrmDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "cmd_trm_dialog";
 	cmdTrmDialog.attr("id",newId);
 	var dialogBody = cmdTrmDialog.children(".dialog_body");
@@ -899,18 +900,18 @@ function init( ) {
 	
 	//Init Dialogs
 	initSectorDialog();
-	//initParDialog();
+	initParDialog();
 	initPsiDialog();
 	initActionsDialog();
 	initUnitsDialog();
-	//initBenchmarkDialog();
+	initBenchmarkDialog();
 	initSafetyDialog();
 	initModeDialog();
 	$("#report_btn").click(generateReport);
-	//initCmdTerminateDialog();
-	//initMaydayDialog();
-	//initObjectivesDialog();
-	//initOsrDialog();
+	initCmdTerminateDialog();
+	initMaydayDialog();
+	initObjectivesDialog();
+	initOsrDialog();
 	initIncidentInfo();
 	
 	$("#dialogContainer").hide();

@@ -42,6 +42,7 @@ body {
     z-index: 50;
     padding: 4px;
 }
+
 #title_icon {
     width: 90px;
     height: 90px;
@@ -214,7 +215,11 @@ body {
 }
 
 #header_row2 {
-	margin-top:100px;
+	display: table;
+	height: -moz-calc(100% - 350px);
+	height: -webkit-calc(100% - 350px);
+	height: calc(100% - 350px);
+	width: 92px;
 }
 #header_row3 {
 	position: absolute;
@@ -371,4 +376,16 @@ body {
     border-bottom: 2px solid orange;
     border-left: 2px solid orange;
     font-size: 1.25rem;
+}
+
+#osr_dialog {
+	width: 350px;
+}
+#objectives_dialog {
+	width: 350px;
+}
+
+.chk_btn {
+	float: left;
+	margin: 5px !important;
 }
