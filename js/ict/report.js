@@ -94,7 +94,8 @@ function drawOnePageOfEvents(doc) {
 }
 
 function renderPdf(doc) {
-	doc.output('dataurlnewwindow', {});
+	//doc.output('dataurlnewwindow', {});
+	doc.output('datauri', {});
 }
 
 

@@ -272,7 +272,7 @@ function toggleNumBtn(btn) {
 	}
 }
 function initSectorDialog( ) {
-	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialogContainer" );
+	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
 	var dialog_title_text = sectorDialog.find(".dialog_title_text");
@@ -906,7 +906,7 @@ function init( ) {
 	//initBenchmarkDialog();
 	initSafetyDialog();
 	initModeDialog();
-	//$("#report_btn").click(generateReport);
+	$("#report_btn").click(generateReport);
 	//initCmdTerminateDialog();
 	//initMaydayDialog();
 	//initObjectivesDialog();
