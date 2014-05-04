@@ -2,3 +2,9 @@
 *.swp
 *.tgz
 *class
+/ide/ict/nbproject/private/
+/ide/ict/build/
+/ide/ict/dist/
+/java/Ict/nbproject/private/
+/java/Ict/dist/
+/java/Ict/build/
