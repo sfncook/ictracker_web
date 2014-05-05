@@ -21,10 +21,6 @@ import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 
  
-/**
-*
-* @web http://java-buddy.blogspot.com/
-*/
 public class Ict extends Application {
  
     private Scene scene;
@@ -34,12 +30,8 @@ public class Ict extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Thread t = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                Acme.Serve.Main.main(new String[]{"-a","aliases.properties","-p","8080","-l"});
-            }
+        Thread t = new Thread(() -> {
+            Acme.Serve.Main.main(new String[]{"-a","aliases.properties","-p","8080","-l"});
         });
         t.start();
         launch(args);
@@ -52,14 +44,6 @@ public class Ict extends Application {
         WebView webView = new WebView();
         
         myBrowser = new MyBrowser(webView);
-        myBrowser.getChildrenUnmodifiable().addListener(new ListChangeListener<Node>() {
-            @Override public void onChanged(ListChangeListener.Change<? extends Node> change) {
-              Set<Node> deadSeaScrolls = myBrowser.lookupAll(".scroll-bar");
-              for (Node scroll : deadSeaScrolls) {
-                scroll.setVisible(false);
-              }
-            }
-          });
         
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
@@ -75,35 +59,14 @@ public class Ict extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent t) {
-                Platform.exit();
-                try {
-                    Acme.Serve.Main.stop();
-                } catch (IOException ex) {
-                    Logger.getLogger(Ict.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        primaryStage.setOnCloseRequest((WindowEvent t) -> {
+            Platform.exit();
+            try {
+                Acme.Serve.Main.stop();
+            } catch (IOException ex) {
+                Logger.getLogger(Ict.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
-//        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//            public void handle(WindowEvent e){
-////              ModalDialog dialog = new ModalDialog( mainStage, "Question" );
-////              Button yes = new Button( "Yes" );
-////              Button no  = new Button( "No" );
-////              ArrayList<Button> buttons = new ArrayList<>();
-////              buttons.add(yes); buttons.add(no);
-////              Label msg = new Label( "Really Exit ?" );
-////              Group groupInDialog = new Group();
-////              groupInDialog.getChildren().add( msg );
-////              dialog.setContents( groupInDialog, buttons );
-////              int ans = dialog.show( 300, 300 );
-////              System.out.println("returned from a modal dialog");
-////              if( ans == 1 ){
-////                e.consume(); // this blocks window closing
-////              }
-//            }
-//          });
         
     }
      
@@ -112,16 +75,8 @@ public class Ict extends Application {
         public MyBrowser(WebView webView){
             WebEngine webEngine = webView.getEngine();
             
-//            final String html = "http://localhost:8888/ICT3/html/splash.html";
             String html = "http://localhost:8080/html/splash.html";
             webEngine.load(html);
-            
-//            URL url = Ict.class.getResource("html/splash.html");
-//            if(url!=null) {
-//                webEngine.load(url.toExternalForm());
-//            } else {
-//                System.out.println("url is NULL!");
-//            }
          
             getChildren().add(webView);
         }
