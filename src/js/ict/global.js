@@ -893,7 +893,6 @@ function updateTimer() {
 }
 
 
-
 function init( ) {
 	addTbar();
 	$("#tbar_prototype").hide();
@@ -907,7 +906,7 @@ function init( ) {
 	initBenchmarkDialog();
 	initSafetyDialog();
 	initModeDialog();
-	$("#report_btn").click(generateReport);
+	$("#report_btn").click(function(){alert("TESTING");});
 	initCmdTerminateDialog();
 	initMaydayDialog();
 	initObjectivesDialog();

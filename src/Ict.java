@@ -18,7 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.web.WebEvent;
 import javafx.stage.WindowEvent;
+import netscape.javascript.JSObject;
 
  
 public class Ict extends Application {
@@ -42,6 +44,14 @@ public class Ict extends Application {
         String html = "http://localhost:8080/html/splash.html";
         webEngine.load(html);
         
+        webEngine.setOnAlert(new EventHandler<WebEvent<String>>() {
+            @Override
+            public void handle(WebEvent<String> t) {
+                System.out.println("Alert: "+t.getData());
+            }
+        });
+        
+        //Set window size
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         Scene scene = new Scene(webView, bounds.getWidth(), bounds.getHeight());
@@ -65,6 +75,22 @@ public class Ict extends Application {
             }
         });
         
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                JSObject window = (JSObject) webEngine.executeScript("window");
+                window.setMember("ictJavaCode", this);
+            }
+            
+            public void test() {
+                System.out.println("runnable.test()");
+            }
+        });
+        
+    }
+    
+    public void renderPdf() {
+        System.out.println("Ict.renderPdf()");
     }
     
 }
