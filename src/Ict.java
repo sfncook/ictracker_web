@@ -22,10 +22,6 @@ import javafx.stage.WindowEvent;
 
  
 public class Ict extends Application {
- 
-    private Scene scene;
-    MyBrowser myBrowser;
-     
     /**
      * @param args the command line arguments
      */
@@ -42,12 +38,13 @@ public class Ict extends Application {
         primaryStage.setTitle("ICT");
      
         WebView webView = new WebView();
-        
-        myBrowser = new MyBrowser(webView);
+        WebEngine webEngine = webView.getEngine();
+        String html = "http://localhost:8080/html/splash.html";
+        webEngine.load(html);
         
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
-        scene = new Scene(myBrowser, bounds.getWidth(), bounds.getHeight());
+        Scene scene = new Scene(webView, bounds.getWidth(), bounds.getHeight());
         primaryStage.setX(0);
         primaryStage.setY(0);
         primaryStage.setWidth(bounds.getWidth());
@@ -69,16 +66,5 @@ public class Ict extends Application {
         });
         
     }
-     
-    class MyBrowser extends Region{
-             
-        public MyBrowser(WebView webView){
-            WebEngine webEngine = webView.getEngine();
-            
-            String html = "http://localhost:8080/html/splash.html";
-            webEngine.load(html);
-         
-            getChildren().add(webView);
-        }
-    }
+    
 }
