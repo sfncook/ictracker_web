@@ -8,3 +8,7 @@
 /java/Ict/nbproject/private/
 /java/Ict/dist/
 /java/Ict/build/
+/build/
+/dist/
+*.log
+
