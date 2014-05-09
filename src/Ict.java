@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.EventListener;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
@@ -17,6 +18,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.web.WebEvent;
 import javafx.stage.WindowEvent;
@@ -75,17 +77,27 @@ public class Ict extends Application {
             }
         });
         
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                JSObject window = (JSObject) webEngine.executeScript("window");
-                window.setMember("ictJavaCode", this);
+        EventListener listener = new EventListener() {
+            public void handleEvent(Event ev) {
+                Platform.exit();
             }
-            
-            public void test() {
-                System.out.println("runnable.test()");
-            }
-        });
+        };
+
+//        Document doc = webEngine.getDocument();
+//        Element el = doc.getElementById("exit-app");
+//        ((EventTarget) el).addEventListener("click", listener, false);
+        
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                JSObject window = (JSObject) webEngine.executeScript("window");
+//                window.setMember("ictJavaCode", this);
+//            }
+//            
+//            public void test() {
+//                System.out.println("runnable.test()");
+//            }
+//        });
         
     }
     
