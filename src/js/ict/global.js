@@ -13,21 +13,34 @@ function setParText(text) {
 		hideAllDialogs();
 	  }
 }
+function startTbarParTimer(tbar) {
+    var parDialog = $("#par_dialog");
+    tbar.find('.par_btn').addClass('glow_green');
+    tbar['par_timer'] = setTimeout(function(){cancelTbarParTimer(tbar);},(5*60*1000));
+    tbar['par']='sector';
+}
+function cancelTbarParTimer(tbar) {
+    var parDialog = $("#par_dialog");
+    tbar.find('.par_btn').removeClass('glow_green');
+    tbar['par']='';
+    if(typeof tbar['par_timer'] != 'undefined') {
+        window.clearTimeout(tbar['par_timer']);
+    }
+}
 function clickButtonInParDialog() {
     return function() {
-//        console.log(tbar_clicked.attr("id"));
-//        console.log(tbar_clicked['par']);
         var parDialog = $("#par_dialog");
+
         if(typeof tbar_clicked['par'] != 'undefined') {
             if(tbar_clicked['par']!='sector') {
-                tbar_clicked['par']='sector';
+                startTbarParTimer(tbar_clicked);
                 parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
             } else {
-                tbar_clicked['par']='';
+                cancelTbarParTimer(tbar_clicked);
                 parDialog.find('.button:not(.dialog_close_btn)').removeClass('glow_green');
             }
         } else {
-            tbar_clicked['par']='sector';
+            startTbarParTimer(tbar_clicked);
             parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
         }
     };
