@@ -442,16 +442,15 @@ function initBenchmarkDialog( ) {
         chkBox_primary['right_col'] = right_col;
         benchmark.secondaries.forEach(function (benchmark_2, index, array) {
             var chkBox_2 = createCheckBox(benchmark_2.label, benchmark_2.id);
-            chkBox_2.click(clickBenchmark(chkBox_2));
+            chkBox_2.find(".chk_btn").click(clickBenchmark(chkBox_2));
             right_col.append(chkBox_2);
         });
 
-        chkBox_primary.click(clickBenchmark(chkBox_primary));
+        chkBox_primary.find(".chk_btn").click(clickBenchmark(chkBox_primary));
 	});
 }
 function clickBenchmark(chkbox_container) {
     return function() {
-        console.log("clickBenchmark");
         var chkbox = chkbox_container.find(".chk_btn")[0];
         tbar_clicked[chkbox_container.attr('id')] = chkbox.checked;
 
@@ -464,6 +463,9 @@ function clickBenchmark(chkbox_container) {
             chkbox_container.nextAll().each(function (index) {
                 $(this).find(".chk_btn").attr("checked",false);
             });
+            if(typeof chkbox_container['right_col'] !='undefined') {
+                chkbox_container['right_col'].find(".chk_btn").prop('checked', false);
+            }
         }
 
         updateBenchmarkButtons();
