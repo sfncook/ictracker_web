@@ -13,8 +13,31 @@ function setParText(text) {
 		hideAllDialogs();
 	  }
 }
+function clickButtonInParDialog() {
+    return function() {
+//        console.log(tbar_clicked.attr("id"));
+//        console.log(tbar_clicked['par']);
+        var parDialog = $("#par_dialog");
+        if(typeof tbar_clicked['par'] != 'undefined') {
+            if(tbar_clicked['par']!='sector') {
+                tbar_clicked['par']='sector';
+                parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
+            } else {
+                tbar_clicked['par']='';
+                parDialog.find('.button:not(.dialog_close_btn)').removeClass('glow_green');
+            }
+        } else {
+            tbar_clicked['par']='sector';
+            parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
+        }
+    };
+}
 function showParDialog( tbar, btn ){
   return function(){
+    btn_clicked = btn;
+	tbar_clicked = tbar;
+    var parDialog = $("#par_dialog");
+
 	// Sector PAR
 	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
 	var tbarTitle = tbar.find(".title_text").html();
@@ -24,7 +47,6 @@ function showParDialog( tbar, btn ){
 	var par_dialog_units = $("#par_dialog_units");
 	par_dialog_units.empty();
 	var tbarUnitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
-	console.log(tbarUnitBtns);
 	if (tbarUnitBtns.length>0) {
 		tbarUnitBtns.each(function( index ) {
 			var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
@@ -36,9 +58,15 @@ function showParDialog( tbar, btn ){
 			par_dialog_unit.appendTo(par_dialog_units);
 		});
 	}
+
+    parDialog.find('.button:not(.dialog_close_btn)').removeClass('glow_green');
+	if(typeof tbar['par'] != 'undefined') {
+	    if(tbar['par']=='sector') {
+	        parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
+	    }
+	}
 	
 	// Show PAR dialog
-	var parDialog = $("#par_dialog");
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
 	parDialog.show();
@@ -56,6 +84,8 @@ function initParDialog( ) {
 
 	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text title_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
 	parbody_containers.appendTo(parDialogBody);
+	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
+	par_dialog_sector_btn.click(clickButtonInParDialog());
 
 	$("#par_dialog_unit_prototype").hide();
 }

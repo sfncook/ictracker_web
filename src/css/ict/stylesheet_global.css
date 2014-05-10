@@ -153,6 +153,16 @@ body {
 .glow_blue:hover {
     background: #2A5071;
 }
+.glow_green {
+    background: lightgreen !important;
+}
+.glow_green:hover {
+    background: green !important;
+}
+
+.glow_green:active {
+    background: #555 !important;
+}
 
 /*
  **** HEADER ITEMS ****
@@ -435,7 +445,7 @@ body {
 }
 
 #par_dialog {
-    width: 325px;
+    width: 305px;
 }
 #par_dialog_sector_btn {
     text-align: center;
