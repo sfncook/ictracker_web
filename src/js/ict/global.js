@@ -1,5 +1,7 @@
 
 
+var btn_clicked;
+var tbar_clicked;
 
 /**
  * PAR Dialog
@@ -195,8 +197,6 @@ function initMaydayDialog( ) {
 /**
  * Sector Dialog
  **/
-var btn_clicked;
-var tbar_clicked;
 function showSectorDialog( tbar, btn, dialogId ){
   return function(){
 	var sectorDlg = $(dialogId);
@@ -222,7 +222,6 @@ function showSectorDialog( tbar, btn, dialogId ){
 }
 function showDialog( tbar, btn, dialogId ){
   return function(){
-    console.log("showDialog");
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
 	btn_clicked = btn;
@@ -384,8 +383,8 @@ function initActionsDialog( ) {
 /**
  * Benchmark Dialog
  **/
-function createCheckBox(label) {
-	var chkContainer = $("<div class=\"horiz_chkbox\"></div>").clone();
+function createCheckBox(label, id) {
+	var chkContainer = $("<div id=\""+id+"\" class=\"horiz_chkbox\"></div>").clone();
 	var chkBtn = $("<input type=\"checkbox\" class=\"chk_btn dialog_btn button\"\>").clone();
 	var labelBtn = $("<div class=\"chk_label\"\></div>").clone();
 	labelBtn.html(label);
@@ -418,10 +417,10 @@ function initBenchmarkDialog( ) {
     right_col_lossstop.appendTo(dialogBody);
     $('<div class="clear_float"/>').appendTo(dialogBody);
 
-	var chkBox_primary = createCheckBox("Primary All Clear");
-	var chkBox_underctl = createCheckBox("Under Control");
-	var chkBox_secondary = createCheckBox("Secondary All Clear");
-	var chkBox_lossstop = createCheckBox("Loss Stop");
+	var chkBox_primary = createCheckBox("Primary All Clear", "bnch_primary");
+	var chkBox_underctl = createCheckBox("Under Control", "bnch_underctl");
+	var chkBox_secondary = createCheckBox("Secondary All Clear", "bnch_secondary");
+	var chkBox_lossstop = createCheckBox("Loss Stop", "bnch_lossstop");
 
 	chkBox_primary.addClass("benchmark_checkbox_container");
 	chkBox_underctl.addClass("benchmark_checkbox_container");
@@ -445,22 +444,22 @@ function initBenchmarkDialog( ) {
                             "Notify Alarm"];
 
 	primary_benchmarks.forEach(function (checkText, index, array) {
-        var chkBox = createCheckBox(checkText);
+        var chkBox = createCheckBox(checkText, "bnch_"+checkText);
         right_col_primary.append(chkBox);
     });
 
     underctl_benchmarks.forEach(function (checkText, index, array) {
-        var chkBox = createCheckBox(checkText);
+        var chkBox = createCheckBox(checkText, "bnch_"+checkText);
         right_col_underctl.append(chkBox);
     });
 
     secondary_benchmarks.forEach(function (checkText, index, array) {
-        var chkBox = createCheckBox(checkText);
+        var chkBox = createCheckBox(checkText, "bnch_"+checkText);
         right_col_secondary.append(chkBox);
     });
 
     lossstop_benchmarks.forEach(function (checkText, index, array) {
-        var chkBox = createCheckBox(checkText);
+        var chkBox = createCheckBox(checkText, "bnch_"+checkText);
         right_col_lossstop.append(chkBox);
     });
 
@@ -491,13 +490,25 @@ function clickBenchmark(chkbox_container, right_col) {
                 var next_chkbox_container = chkbox_container.next();
                 next_chkbox_container.find(".chk_btn").attr("disabled", false);
                 next_chkbox_container.find(".chk_label").removeClass("disabled");
+                tbar_clicked[chkbox_container.attr('id')] = true;
             } else {
                 $(".benchmark_checkbox_container").removeClass("glow_orange");
                 $(".benchmark_2nd_col_container").hide();
                 var next_chkbox_container = chkbox_container.next();
                 next_chkbox_container.find(".chk_btn").attr("disabled", true);
                 next_chkbox_container.find(".chk_label").addClass("disabled");
+                tbar_clicked[chkbox_container.attr('id')] = false;
             }
+    };
+}
+function setBenchmarkButtons(tbar, benchmarkBtn) {
+    return function() {
+        tbar["bnch_primary"]
+        tbar["bnch_underctl"]
+        tbar["bnch_secondary"]
+        tbar["bnch_lossstop"]
+        $('#bnch_primary').find(".chk_btn").prop('checked', tbar.attr("bnch_primary"));
+        showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
     };
 }
 
@@ -531,7 +542,7 @@ function initObjectivesDialog( ) {
 						"Occupant services"];
 	
 	objectives.forEach(function (objectiveText, index, array) {
-		var chkBox = createCheckBox(objectiveText);
+		var chkBox = createCheckBox(objectiveText, "objectives_"+objectiveText);
 		dialogBody.append(chkBox);
 	});
 	
@@ -567,7 +578,7 @@ function initOsrDialog( ) {
 				"Accountability"];
 	
 	osrs.forEach(function (objectiveText, index, array) {
-		var chkBox = createCheckBox(objectiveText);
+		var chkBox = createCheckBox(objectiveText, "osr_"+objectiveText);
 		dialogBody.append(chkBox);
 	});
 	
@@ -789,7 +800,7 @@ function addTbar() {
 		var benchmarkBtn = tbar.find(".benchmark_btn");
 		var benchmarkBtnId = "tbar_benchmark_"+tbarIndex;
 		benchmarkBtn.attr("id", benchmarkBtnId);
-		benchmarkBtn.click(showDialog(tbar, benchmarkBtn, "#benchmarks_dialog"));
+		benchmarkBtn.click(setBenchmarkButtons(tbar, benchmarkBtn));
 		
 		//Action Btn
 		//var actionBtnContainer = tbar.find(".actions_parent_container");
