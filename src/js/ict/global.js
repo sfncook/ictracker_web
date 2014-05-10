@@ -439,45 +439,33 @@ function initBenchmarkDialog( ) {
         var right_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
         right_col.appendTo(dialogBody);
         right_col.hide();
+        chkBox_primary['right_col'] = right_col;
         benchmark.secondaries.forEach(function (benchmark_2, index, array) {
             var chkBox_2 = createCheckBox(benchmark_2.label, benchmark_2.id);
-            chkBox_2.click(clickSecondaryBenchmark(chkBox_2));
+            chkBox_2.click(clickBenchmark(chkBox_2));
             right_col.append(chkBox_2);
         });
 
-        chkBox_primary.click(clickPrimaryBenchmark(chkBox_primary, right_col));
+        chkBox_primary.click(clickBenchmark(chkBox_primary));
 	});
 }
-function clickSecondaryBenchmark(chkbox_container) {
+function clickBenchmark(chkbox_container) {
     return function() {
-        var chkbox = chkbox_container.find(".chk_btn");
-        tbar_clicked[chkbox_container.attr('id')] = chkbox[0].checked;
-    };
-}
-function clickPrimaryBenchmark(chkbox_container, right_col) {
-    return function() {
-        var chkbox = chkbox_container.find(".chk_btn");
-        tbar_clicked[chkbox_container.attr('id')] = chkbox[0].checked;
+        var chkbox = chkbox_container.find(".chk_btn")[0];
+        tbar_clicked[chkbox_container.attr('id')] = chkbox.checked;
+
+        if(typeof chkbox_container['right_col'] !='undefined') {
+            $('.benchmark_2nd_col_container').hide();
+            chkbox_container['right_col'].show();
+        }
+
+        if(!chkbox.checked) {
+            chkbox_container.nextAll().each(function (index) {
+                $(this).find(".chk_btn").attr("checked",false);
+            });
+        }
+
         updateBenchmarkButtons();
-//            var chkbox = chkbox_container.find(".chk_btn");
-//            if(chkbox[0].checked) {
-//                $(".benchmark_checkbox_container").removeClass("glow_orange");
-//                chkbox_container.addClass("glow_orange");
-//                $(".benchmark_2nd_col_container").hide();
-//                right_col.show();
-//                $(".benchmark_1st_col_container > .chk_btn").attr("disabled", true);
-//                var next_chkbox_container = chkbox_container.next();
-//                next_chkbox_container.find(".chk_btn").attr("disabled", false);
-//                next_chkbox_container.find(".chk_label").removeClass("disabled");
-//                tbar_clicked[chkbox_container.attr('id')] = true;
-//            } else {
-//                $(".benchmark_checkbox_container").removeClass("glow_orange");
-//                $(".benchmark_2nd_col_container").hide();
-//                var next_chkbox_container = chkbox_container.next();
-//                next_chkbox_container.find(".chk_btn").attr("disabled", true);
-//                next_chkbox_container.find(".chk_label").addClass("disabled");
-//                tbar_clicked[chkbox_container.attr('id')] = false;
-//            }
     };
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
@@ -493,8 +481,6 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
 
         updateBenchmarkButtons();
 
-        //TODO: What if 1,2,3 are checked and I uncheck #2?
-
         // Show the dialog box
         showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
     };
@@ -503,7 +489,6 @@ function updateBenchmarkButtons() {
     // Update all disabled/selection states
     var last_checked_chkbox = $(".benchmark_1st_col_container").children().find(".chk_btn:checked").last();
     if(last_checked_chkbox.length>0) {
-        console.log(last_checked_chkbox);
         var last_checked_benchmark_container = last_checked_chkbox.parents(".horiz_chkbox");
 
         last_checked_benchmark_container.find(".chk_btn").attr("disabled", false);
