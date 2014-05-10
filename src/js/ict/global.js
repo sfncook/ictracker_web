@@ -451,6 +451,7 @@ function initBenchmarkDialog( ) {
 }
 function clickBenchmark(chkbox_container) {
     return function() {
+        console.log("clickBenchmark");
         var chkbox = chkbox_container.find(".chk_btn")[0];
         tbar_clicked[chkbox_container.attr('id')] = chkbox.checked;
 
@@ -510,9 +511,9 @@ function updateBenchmarkButtons() {
     } else {
         // No benchmarks are checked - disable all but the top one
         $(".benchmark_2nd_col_container").hide();
-        $(".horiz_chkbox").removeClass("glow_orange");
-        $(".horiz_chkbox").find(".chk_btn").prop("disabled",true);
-        $(".horiz_chkbox").find(".chk_label").addClass("disabled");
+        $(".benchmark_1st_col_container").children(".horiz_chkbox").removeClass("glow_orange");
+        $(".benchmark_1st_col_container").children(".horiz_chkbox").find(".chk_btn").prop("disabled",true);
+        $(".benchmark_1st_col_container").children(".horiz_chkbox").find(".chk_label").addClass("disabled");
         $(".benchmark_1st_col_container").children().first().find(".chk_btn").prop("disabled",false);
         $(".benchmark_1st_col_container").children().first().find(".chk_label").removeClass("disabled");
     }
