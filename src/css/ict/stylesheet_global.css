@@ -433,3 +433,25 @@ body {
 .benchmark_1st_col_container {
     border-right: 1px solid #666;
 }
+
+#par_dialog {
+    width: 325px;
+}
+#par_dialog_sector_btn {
+    text-align: center;
+    display: block;
+    margin: 5px auto;
+}
+.par_dialog_unit {
+    border: 1px solid #666 !important;
+    margin: 5px;
+}
+.par_person_btn  {
+    width: 100px;
+    margin: 5px;
+}
+.par_unit_btn {
+    background: #CCC;
+    margin: 5px;
+}
+

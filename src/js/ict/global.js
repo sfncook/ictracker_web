@@ -23,7 +23,8 @@ function showParDialog( tbar, btn ){
 	// Units PAR
 	var par_dialog_units = $("#par_dialog_units");
 	par_dialog_units.empty();
-	var tbarUnitBtns = tbar.children(".tbar_body_container").children(".units").children(".single_unit_div").children(".unit_btn").not(".blank_btn");
+	var tbarUnitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
+	console.log(tbarUnitBtns);
 	if (tbarUnitBtns.length>0) {
 		tbarUnitBtns.each(function( index ) {
 			var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
@@ -45,6 +46,17 @@ function showParDialog( tbar, btn ){
   }
 }
 function initParDialog( ) {
+	var parDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
+	var newId = "par_dialog";
+	parDialog.attr("id",newId);
+	var parDialogBody = parDialog.children(".dialog_body");
+	parDialog.addClass("par_dialog_body");
+	var parTitleDiv = parDialog.find(".dialog_title_text");
+	parTitleDiv.html("Sector PAR");
+
+	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text title_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
+	parbody_containers.appendTo(parDialogBody);
+
 	$("#par_dialog_unit_prototype").hide();
 }
 
@@ -768,7 +780,6 @@ function addUnitButton(unitsContainer, tbar) {
 	unitBtn.actions_list = actions_list;
 }
 function addActionButton(tbar, actionsContainer) {
-	console.log(actionsContainer);
 	actionsContainer.children().removeClass("blank_btn");
 	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
 	actionsContainer.append(actionBtn);
