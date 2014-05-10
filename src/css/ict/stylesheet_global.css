@@ -17,17 +17,44 @@ html {
 body.splashpage {
     background: #9ad1ff;
     color: black;
-	text-align: center;
+    text-align: center;
+    height: 100%;
 }
 
 body {
-	overflow-x: hidden;
+    overflow-x: hidden;
     overflow-y: hidden;
 }
 
+#splash_table {
+    text-align: center;
+    vertical-align: middle;
+    width: 1200px;
+    margin-left:auto;
+    margin-right: auto;
+}
+#splash_row1 {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#splash_title_logo_img {
+    float: left;
+}
+#splash_inc_info_container {
+    padding-top: 50px;
+    float: left;
+}
 #splash_title {
     font-family: sans-serif;
     font-size: 2.0rem;
+}
+.splash_start_btn {
+    height: 50px;
+    width: 200px;
+    margin: 10px;
+    font-size: 2.0rem;
+    padding-top: 10px !important;
 }
 
 #header_spacer_td {
@@ -90,6 +117,11 @@ body {
 }
 .button:active {
 	background-color: #BBB;
+}
+.disabled, .disabled:hover, .disabled:active {
+    background: #DDD !important;
+    color: #AAA;
+    cursor: default;
 }
 
 .btn-ict {
@@ -302,6 +334,7 @@ body {
 
 .clear_float {
 	clear: both;
+        width:0px;
 }
 
 #units_dialog {

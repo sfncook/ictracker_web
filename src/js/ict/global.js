@@ -862,6 +862,12 @@ function getHttpRequestByName(name) {
 }//getHttpRequestByName
 
 
+
+function init_splash_buttons() {
+    
+}
+
+
 /**
  * Init Timer
  **/
