@@ -46,6 +46,20 @@ function clickButtonInParDialog(btnSelector) {
         }
     };
 }
+function togglePar(btn, btnSelector) {
+    return function() {
+        var parDialog = $("#par_dialog");
+        if(btn.hasClass("has_par")) {
+            $(btnSelector).removeClass("has_par");
+            btn.removeClass("has_par");
+            parDialog.find(btnSelector).removeClass('glow_green');
+        } else {
+            $(btnSelector).addClass("has_par");
+            btn.addClass("has_par");
+            parDialog.find(btnSelector).addClass('glow_green');
+        }
+    };
+}
 function showParDialog( tbar, btn ){
   return function(){
     btn_clicked = btn;
@@ -56,23 +70,47 @@ function showParDialog( tbar, btn ){
 	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
 	var tbarTitle = tbar.find(".title_text").html();
 	par_dialog_sector_btn.html(tbarTitle);
-	
+
 	// Units PAR
 	var par_dialog_units = $("#par_dialog_units");
 	par_dialog_units.empty();
 	var tbarUnitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
 	if (tbarUnitBtns.length>0) {
+	    var unitNames = new Array();
+	    var unitBtns = new Array();
 		tbarUnitBtns.each(function( index ) {
 			var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
 			par_dialog_unit.show();
-			var unit_name = $(this).html();
-			var unitBtn = par_dialog_unit.children(".par_unit_btn");
-			unitBtn.html(unit_name);
-			par_dialog_unit.css( "display", "flex");
 			par_dialog_unit.appendTo(par_dialog_units);
-			par_dialog_unit.find(".par_unit_btn").addClass("par_unit_btn_"+unit_name);
-			unitBtn.click(clickButtonInParDialog(".par_unit_btn_"+unit_name));
+			var unit_name = $(this).html();
+			unitNames.push(unit_name);
+
+			var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
+			unitBtns.push(unitBtn);
+
+			unitBtn.html(unit_name);
+            unitBtn.click(togglePar(unitBtn, ".par_unit_btn_"+unit_name));
 		});
+		//Fucking JQuery bug.  Goddamn stupid fucking asshole mother fuckers.
+		for (var i = 0; i < unitBtns.length; i++) {
+		    var captain_btn = unitBtns[i].next().find(".captain_btn");
+		    var engineer_btn = unitBtns[i].next().find(".engineer_btn");
+		    var firefighter1_btn = unitBtns[i].next().find(".firefighter1_btn");
+		    var firefighter2_btn = unitBtns[i].next().find(".firefighter2_btn");
+
+		    unitBtns[i].next().find(".par_unit_btn").addClass("par_unit_btn_"+unitNames[i]);
+
+		    unitBtns[i].addClass("par_unit_btn_"+unitNames[i]);
+		    captain_btn.addClass("captain_btn"+unitNames[i]);
+		    engineer_btn.addClass("engineer_btn"+unitNames[i]);
+		    firefighter1_btn.addClass("firefighter1_btn"+unitNames[i]);
+		    firefighter2_btn.addClass("firefighter2_btn"+unitNames[i]);
+
+		    captain_btn.click(togglePar(captain_btn, ".captain_btn"+unitNames[i]));
+		    engineer_btn.click(togglePar(engineer_btn, ".engineer_btn"+unitNames[i]));
+		    firefighter1_btn.click(togglePar(firefighter1_btn, ".firefighter1_btn"+unitNames[i]));
+		    firefighter2_btn.click(togglePar(firefighter2_btn, ".firefighter2_btn"+unitNames[i]));
+		}
 	}
 
     parDialog.find('.button:not(.dialog_close_btn)').removeClass('glow_green');
@@ -81,7 +119,7 @@ function showParDialog( tbar, btn ){
 	        parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
 	    }
 	}
-	
+
 	// Show PAR dialog
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
@@ -101,7 +139,7 @@ function initParDialog( ) {
 	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text title_btn par_dialog_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
 	parbody_containers.appendTo(parDialogBody);
 	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
-	par_dialog_sector_btn.click(clickButtonInParDialog(".par_dialog_btn"));
+    par_dialog_sector_btn.click(togglePar(par_dialog_sector_btn, ".par_dialog_btn"));
 
 	$("#par_dialog_unit_prototype").hide();
 }
