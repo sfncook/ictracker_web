@@ -122,6 +122,7 @@ function showParDialog( tbar, btn ){
 		    firefighter1_btn.click(togglePar(firefighter1_btn, "#firefighter1_btn"+unitNames[i]));
 		    firefighter2_btn.click(togglePar(firefighter2_btn, "#firefighter2_btn"+unitNames[i]));
 		}
+		$(".mayday_par_btn").click(showMaydayDialog);
 	}
 
     parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
@@ -212,6 +213,7 @@ function selectMaydaySectorBtn(sectorBtn){
 	}
 }
 function showMaydayDialog(){
+    console.log("showMaydayDialog");
 	var mayday_dialog = $("#mayday_dialog");
 	
 	

@@ -445,7 +445,7 @@ body {
 }
 
 #par_dialog {
-    width: 305px;
+    width: 345px;
 }
 #par_dialog_sector_btn {
     text-align: center;
@@ -467,6 +467,15 @@ body {
 }
 .par_dialog_people {
     float:left;
+}
+.mayday_par_btn {
+    background: red;
+    color: white;
+    float: left;
+    padding: 4px 0 0 0;
+    margin: 5px;
+    height: 27px;
+    width: 25px;
 }
 
 ul {
