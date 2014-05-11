@@ -153,14 +153,14 @@ body {
 .glow_blue:hover {
     background: #2A5071;
 }
-.glow_green {
+.has_par {
     background: lightgreen !important;
 }
-.glow_green:hover {
+.has_par:hover {
     background: green !important;
 }
 
-.glow_green:active {
+.has_par:active {
     background: #555 !important;
 }
 

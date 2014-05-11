@@ -15,48 +15,48 @@ function setParText(text) {
 }
 function startTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
-    tbar.find('.par_btn').addClass('glow_green');
+    tbar.find('.par_btn').addClass('has_par');
     tbar['par_timer'] = setTimeout(function(){cancelTbarParTimer(tbar);},(5*60*1000));
 }
 function cancelTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
-    tbar.find('.par_btn').removeClass('glow_green');
+    tbar.find('.par_btn').removeClass('has_par');
     if(typeof tbar['par_timer'] != 'undefined') {
         window.clearTimeout(tbar['par_timer']);
     }
 }
 function togglePar(btn, btnSelector) {
     return function() {
-        var parDialog = $("#par_dialog");
         if(btn.hasClass("has_par")) {
+            // Turn OFF PAR
             $(btnSelector).removeClass("has_par");
-            btn.removeClass("has_par");
-            parDialog.find(btnSelector).removeClass('glow_green');
         } else {
+            // Turn ON PAR
             $(btnSelector).addClass("has_par");
-            btn.addClass("has_par");
-            parDialog.find(btnSelector).addClass('glow_green');
         }
 
-        // If all items have PAR then start the TBar PAR timer
-        var btnsNoPar = parDialog.find(".par_dialog_btn:not(.glow_green)");
+        // If all items have PAR (i.e. *NONE are NOT has_par*) then start the TBar PAR timer
+        var btnsNoPar = $("#par_dialog").find(".par_dialog_btn:not(.has_par)");
         if(btnsNoPar.length==0) {
             startTbarParTimer(tbar_clicked);
         } else {
+            $('#par_dialog_sector_btn').removeClass('has_par');
             cancelTbarParTimer(tbar_clicked);
         }
 
-        // Save the btnsPar to the TBar object for next time PAR dialog is opened for this TBar
-        var btnsPar = parDialog.find(".par_dialog_btn.glow_green");
-        console.log(btnsPar);
-        tbar_clicked['btns_par'] = btnsPar;
+        // Save all items w/ PAR for next time this TBar opens PAR dialog
+        var btn_ids_with_par = new Array();
+        var btnsWithPar = $("#par_dialog").find(".par_dialog_btn.has_par");
+        btnsWithPar.each(function( index ) {
+            btn_ids_with_par.push($(this).attr('id'));
+        });
+        tbar_clicked['btn_ids_with_par'] = btn_ids_with_par;
     };
 }
 function showParDialog( tbar, btn ){
   return function(){
     btn_clicked = btn;
 	tbar_clicked = tbar;
-	console.log(tbar_clicked);
     var parDialog = $("#par_dialog");
 
 	// Sector PAR
@@ -82,7 +82,7 @@ function showParDialog( tbar, btn ){
 			unitBtns.push(unitBtn);
 
 			unitBtn.html(unit_name);
-            unitBtn.click(togglePar(unitBtn, ".par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
+            unitBtn.click(togglePar(unitBtn, "#par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
 		});
 		//Fucking JQuery bug.  Goddamn stupid fucking asshole mother fuckers.
 		for (var i = 0; i < unitBtns.length; i++) {
@@ -91,29 +91,29 @@ function showParDialog( tbar, btn ){
 		    var firefighter1_btn = unitBtns[i].next().find(".firefighter1_btn");
 		    var firefighter2_btn = unitBtns[i].next().find(".firefighter2_btn");
 
-		    unitBtns[i].addClass("par_unit_btn_"+unitNames[i]);
-		    captain_btn.addClass("captain_btn"+unitNames[i]);
-		    engineer_btn.addClass("engineer_btn"+unitNames[i]);
-		    firefighter1_btn.addClass("firefighter1_btn"+unitNames[i]);
-		    firefighter2_btn.addClass("firefighter2_btn"+unitNames[i]);
+		    unitBtns[i].attr("id", "par_unit_btn_"+unitNames[i]);
+		    captain_btn.attr("id", "captain_btn"+unitNames[i]);
+		    engineer_btn.attr("id", "engineer_btn"+unitNames[i]);
+		    firefighter1_btn.attr("id", "firefighter1_btn"+unitNames[i]);
+		    firefighter2_btn.attr("id", "firefighter2_btn"+unitNames[i]);
 
 		    captain_btn.addClass("par_person_btn_"+unitNames[i]);
 		    engineer_btn.addClass("par_person_btn_"+unitNames[i]);
 		    firefighter1_btn.addClass("par_person_btn_"+unitNames[i]);
 		    firefighter2_btn.addClass("par_person_btn_"+unitNames[i]);
 
-		    captain_btn.click(togglePar(captain_btn, ".captain_btn"+unitNames[i]));
-		    engineer_btn.click(togglePar(engineer_btn, ".engineer_btn"+unitNames[i]));
-		    firefighter1_btn.click(togglePar(firefighter1_btn, ".firefighter1_btn"+unitNames[i]));
-		    firefighter2_btn.click(togglePar(firefighter2_btn, ".firefighter2_btn"+unitNames[i]));
+		    captain_btn.click(togglePar(captain_btn, "#captain_btn"+unitNames[i]));
+		    engineer_btn.click(togglePar(engineer_btn, "#engineer_btn"+unitNames[i]));
+		    firefighter1_btn.click(togglePar(firefighter1_btn, "#firefighter1_btn"+unitNames[i]));
+		    firefighter2_btn.click(togglePar(firefighter2_btn, "#firefighter2_btn"+unitNames[i]));
 		}
 	}
 
-    parDialog.find('.button:not(.dialog_close_btn)').removeClass('glow_green');
-	if(typeof tbar['par'] != 'undefined') {
-	    if(tbar['par']=='sector') {
-	        parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
-	    }
+    parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
+	if(typeof tbar['btn_ids_with_par'] != 'undefined') {
+	    $.each( tbar['btn_ids_with_par'], function(index, btnId) {
+	        $('#'+btnId).addClass('has_par');
+        });
 	}
 
 	// Show PAR dialog
