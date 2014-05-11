@@ -25,27 +25,6 @@ function cancelTbarParTimer(tbar) {
         window.clearTimeout(tbar['par_timer']);
     }
 }
-function clickButtonInParDialog(btnSelector) {
-    return function() {
-        var parDialog = $("#par_dialog");
-
-        if(typeof tbar_clicked['par'] != 'undefined') {
-            if(tbar_clicked['par']=='') {
-                startTbarParTimer(tbar_clicked);
-                parDialog.find(btnSelector).addClass('glow_green');
-                tbar_clicked['par']=btnSelector;
-            } else {
-                cancelTbarParTimer(tbar_clicked);
-                parDialog.find(btnSelector).removeClass('glow_green');
-                tbar_clicked['par']='';
-            }
-        } else {
-            startTbarParTimer(tbar_clicked);
-            parDialog.find(btnSelector).addClass('glow_green');
-            tbar_clicked['par']=btnSelector;
-        }
-    };
-}
 function togglePar(btn, btnSelector) {
     return function() {
         var parDialog = $("#par_dialog");
@@ -58,12 +37,26 @@ function togglePar(btn, btnSelector) {
             btn.addClass("has_par");
             parDialog.find(btnSelector).addClass('glow_green');
         }
+
+        // If all items have PAR then start the TBar PAR timer
+        var btnsNoPar = parDialog.find(".par_dialog_btn:not(.glow_green)");
+        if(btnsNoPar.length==0) {
+            startTbarParTimer(tbar_clicked);
+        } else {
+            cancelTbarParTimer(tbar_clicked);
+        }
+
+        // Save the btnsPar to the TBar object for next time PAR dialog is opened for this TBar
+        var btnsPar = parDialog.find(".par_dialog_btn.glow_green");
+        console.log(btnsPar);
+        tbar_clicked['btns_par'] = btnsPar;
     };
 }
 function showParDialog( tbar, btn ){
   return function(){
     btn_clicked = btn;
 	tbar_clicked = tbar;
+	console.log(tbar_clicked);
     var parDialog = $("#par_dialog");
 
 	// Sector PAR
@@ -89,7 +82,7 @@ function showParDialog( tbar, btn ){
 			unitBtns.push(unitBtn);
 
 			unitBtn.html(unit_name);
-            unitBtn.click(togglePar(unitBtn, ".par_unit_btn_"+unit_name));
+            unitBtn.click(togglePar(unitBtn, ".par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
 		});
 		//Fucking JQuery bug.  Goddamn stupid fucking asshole mother fuckers.
 		for (var i = 0; i < unitBtns.length; i++) {
@@ -98,13 +91,16 @@ function showParDialog( tbar, btn ){
 		    var firefighter1_btn = unitBtns[i].next().find(".firefighter1_btn");
 		    var firefighter2_btn = unitBtns[i].next().find(".firefighter2_btn");
 
-		    unitBtns[i].next().find(".par_unit_btn").addClass("par_unit_btn_"+unitNames[i]);
-
 		    unitBtns[i].addClass("par_unit_btn_"+unitNames[i]);
 		    captain_btn.addClass("captain_btn"+unitNames[i]);
 		    engineer_btn.addClass("engineer_btn"+unitNames[i]);
 		    firefighter1_btn.addClass("firefighter1_btn"+unitNames[i]);
 		    firefighter2_btn.addClass("firefighter2_btn"+unitNames[i]);
+
+		    captain_btn.addClass("par_person_btn_"+unitNames[i]);
+		    engineer_btn.addClass("par_person_btn_"+unitNames[i]);
+		    firefighter1_btn.addClass("par_person_btn_"+unitNames[i]);
+		    firefighter2_btn.addClass("par_person_btn_"+unitNames[i]);
 
 		    captain_btn.click(togglePar(captain_btn, ".captain_btn"+unitNames[i]));
 		    engineer_btn.click(togglePar(engineer_btn, ".engineer_btn"+unitNames[i]));

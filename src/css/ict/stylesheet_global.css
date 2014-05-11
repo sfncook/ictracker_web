@@ -463,5 +463,9 @@ body {
 .par_unit_btn {
     background: #CCC;
     margin: 5px;
+    float:left;
+}
+.par_dialog_people {
+    float:left;
 }
 
