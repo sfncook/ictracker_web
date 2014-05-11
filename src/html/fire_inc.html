@@ -148,23 +148,45 @@
                             <tr class="mayday_dialog_row1">
                                 <td><table>
                                     <tr><td style="border:2px red solid">
-                                        <ul id="mayday_list">
-                                            <li class="mayday_square_off list_med_font_size">Ascertain from Mayday Caller:</li>
-                                                <li class="mayday_circle_off list_level_2 red_font list_med_font_size underlined">Name:</li>
-                                                <li class="mayday_circle_off list_level_2 red_font list_med_font_size underlined">UNIT:</li>
-                                                <li class="mayday_circle_off list_level_2 red_font list_med_font_size underlined">Location:</li>
-                                                <li class="mayday_circle_off list_level_2 red_font list_med_font_size underlined">Assignment:</li>
-                                                <li class="mayday_circle_off list_level_2 red_font list_med_font_size">RESOURCES NEEDED FOR RESCUE</li>
-                                            <li class="mayday_square_off list_med_font_size">Activate Grab-lives procedures</li>
+                                        <ul class="mayday_list">
+                                            <li class="list_med_font_size">Ascertain from Mayday Caller:</li>
+                                                <li class="red_font list_med_font_size underlined list_level_2">Name:<input id="mayday_name_input" type="text"/></li>
+                                                <li class="red_font list_med_font_size underlined list_level_2">UNIT:<div id="mayday_unit_btn" class="blank_btn unit_btn button">Unit</div></li>
+                                                <li class="red_font list_med_font_size underlined list_level_2">Sector:<div id="mayday_sector_btn" class="blank_btn button title_btn">Sector</div></li>
+                                                <li class="red_font list_med_font_size underlined list_level_2">Location:</li>
+                                                <li class="red_font list_med_font_size">RESOURCES list_level_2NEEDED FOR RESCUE</li>
+                                            <li class="list_med_font_size">Activate Grab-lives procedures</li>
                                         </ul>
                                     </td></tr>
-                                    <tr><td>Radio Transition and Alert</td></tr>
+                                    <tr><td>
+                                        <ul class="mayday_list">
+                                            <li class="list_med_font_size">Radio Transition and Alert</li>
+                                            <li class="">Emergency Traffic Declaration: Alert fireground that a MAYDAY has been declared</li>
+                                            <li class="">If needed move non-affected units to secondary radio channel</li>
+                                            <li class="list_level_2">Support officer/runs ongiong operations</li>
+                                            <li class="list_level_2">Fireground channel/command directs rescue</li>
+                                            <li class="">PAR conducted by Operations on secondary channel</li>
+                                            <li class="">Immediately request additional alarm(s)</li>
+                                        </ul>
+                                    </td></tr>
                                 </table></td>
                                 <td>
-                                    GRAB-LIVES
+                                    <ul id="mayday_list_grablives" class="mayday_list">
+                                        <li class="list_space_below red_font list_med_font_size">GRAB-LIVES</li>
+                                        <li class="first_char_red list_med_font_size">Gauge</li>
+                                        <li class="first_char_red list_med_font_size">Radio</li>
+                                        <li class="first_char_red list_med_font_size">Activate</li>
+                                        <li class="list_space_below first_char_red list_med_font_size">Breathing</li>
+                                        <li class="first_char_red list_med_font_size">Low</li>
+                                        <li class="first_char_red list_med_font_size">Illuminate</li>
+                                        <li class="first_char_red list_med_font_size">Volume</li>
+                                        <li class="first_char_red list_med_font_size">Exit</li>
+                                        <li class="list_space_below first_char_red list_med_font_size">Shield Airway</li>
+                                        <li class="first_char_red list_med_font_size">Air Level:_______</li>
+                                    </ul>
                                 </td>
                             </tr>
-                            <trclass="mayday_dialog_row2">
+                            <tr class="mayday_dialog_row2">
                                 <td colspan="2">
                                     Deployment Considerations
                                 </td>

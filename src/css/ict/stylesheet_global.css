@@ -473,7 +473,7 @@ ul {
  padding: 0px;
 }
 #mayday_dialog {
-    width: 700px;
+    width: 600px;
     background: white;
 }
 #mayday_table_main li {
@@ -483,27 +483,11 @@ ul {
     vertical-align:top;
     padding: 10px;
 }
-#mayday_list li {
+.mayday_list li {
     margin: 0;
-    padding: 2px 0 0px 20px;
-    list-style: none;
-    cursor: pointer;
-}
-#mayday_list li:hover {
-    /*background-color: rgba(100, 100, 100, 0.3);*/
-    color: rgba(100, 100, 100, 0.3);
-}
-.mayday_square_off {
-    background: url('../../images/bullets/bullet_square_off.png') no-repeat left center;
-}
-.mayday_square_on {
-    background: url('../../images/bullets/bullet_square_on.png') no-repeat left center;
-}
-.mayday_circle_off {
-    background: url('../../images/bullets/bullet_circle_off.png') no-repeat left center;
-}
-.mayday_circle_on {
-    background: url('../../images/bullets/bullet_circle_on.png') no-repeat left center;
+    list-style: none !important;
+    cursor: default;
+    padding-top: 5px;
 }
 .list_level_2 {
     margin-left: 15px !important;
@@ -518,3 +502,38 @@ ul {
 .underlined {
     border-bottom: 1px #666 dashed;
 }
+#mayday_name_input {
+    width: 278px;
+    margin-left: 4px;
+    border-left: #EEE 2px solid;
+    border-top: #EEE 2px solid;
+    border-right: #EEE 2px solid;
+    color: black;
+}
+#mayday_unit_btn {
+    display: inline-block;
+    margin-left: 10px;
+    height: 25px;
+    margin-bottom: 4px;
+}
+#mayday_sector_btn {
+    text-align: center;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 4px;
+    height: 25px;
+    padding-top: 4px;
+}
+#mayday_list_grablives li {
+    padding: 0px;
+}
+#mayday_list_grablives {
+    background: #CCFFCC;
+}
+.first_char_red::first-letter {
+    color: red;
+}
+.list_space_below {
+    margin-bottom: 10px !important;
+}
+

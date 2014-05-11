@@ -280,27 +280,25 @@ function createMayday() {
 }
 function clickMaydayChkbox(btn) {
     return function() {
-        if(btn.hasClass("mayday_square_off")) {
-            btn.removeClass("mayday_square_off");
-            btn.addClass("mayday_square_on");
-        } else if(btn.hasClass("mayday_square_on")) {
-            btn.removeClass("mayday_square_on");
-            btn.addClass("mayday_square_off");
-        } else  if(btn.hasClass("mayday_circle_off")) {
-            btn.removeClass("mayday_circle_off");
-            btn.addClass("mayday_circle_on");
-        } else if(btn.hasClass("mayday_circle_on")) {
-            btn.removeClass("mayday_circle_on");
-            btn.addClass("mayday_circle_off");
-        }
+//        if(btn.hasClass("mayday_square_off")) {
+//            btn.removeClass("mayday_square_off");
+//            btn.addClass("mayday_square_on");
+//        } else if(btn.hasClass("mayday_square_on")) {
+//            btn.removeClass("mayday_square_on");
+//            btn.addClass("mayday_square_off");
+//        } else  if(btn.hasClass("mayday_circle_off")) {
+//            btn.removeClass("mayday_circle_off");
+//            btn.addClass("mayday_circle_on");
+//        } else if(btn.hasClass("mayday_circle_on")) {
+//            btn.removeClass("mayday_circle_on");
+//            btn.addClass("mayday_circle_off");
+//        }
     }
 }
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
 	maydayBtn.click(showMaydayDialog);
-	$("#mayday_list li").each(function( index ) {
-        $(this).click(clickMaydayChkbox($(this)));
-    });
+    $("#mayday_unit_btn").click(function(){});
 }
 
 
