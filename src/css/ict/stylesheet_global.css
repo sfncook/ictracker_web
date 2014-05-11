@@ -469,3 +469,52 @@ body {
     float:left;
 }
 
+ul {
+ padding: 0px;
+}
+#mayday_dialog {
+    width: 700px;
+    background: white;
+}
+#mayday_table_main li {
+    list-style: disc;
+}
+#mayday_table_main td {
+    vertical-align:top;
+    padding: 10px;
+}
+#mayday_list li {
+    margin: 0;
+    padding: 2px 0 0px 20px;
+    list-style: none;
+    cursor: pointer;
+}
+#mayday_list li:hover {
+    /*background-color: rgba(100, 100, 100, 0.3);*/
+    color: rgba(100, 100, 100, 0.3);
+}
+.mayday_square_off {
+    background: url('../../images/bullets/bullet_square_off.png') no-repeat left center;
+}
+.mayday_square_on {
+    background: url('../../images/bullets/bullet_square_on.png') no-repeat left center;
+}
+.mayday_circle_off {
+    background: url('../../images/bullets/bullet_circle_off.png') no-repeat left center;
+}
+.mayday_circle_on {
+    background: url('../../images/bullets/bullet_circle_on.png') no-repeat left center;
+}
+.list_level_2 {
+    margin-left: 15px !important;
+}
+.red_font {
+    color: red;
+}
+.list_med_font_size {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+.underlined {
+    border-bottom: 1px #666 dashed;
+}

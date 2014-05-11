@@ -3,6 +3,21 @@
 var btn_clicked;
 var tbar_clicked;
 
+var btnsToBlink = new Array();
+function blinkUnit() {
+	$.each( btnsToBlink, function( index, btn ) {
+		if (btn.hasClass("glowred")) {
+			btn.removeClass("glowred");
+			btn.addClass("glowpink");
+		} else {
+			btn.addClass("glowred");
+			btn.removeClass("glowpink");
+		}
+	});
+
+	window.setTimeout(blinkUnit, 500);
+}
+
 /**
  * PAR Dialog
  **/
@@ -263,25 +278,29 @@ function createMayday() {
 	}
 	hideAllDialogs();
 }
-var btnsToBlink = new Array();
-function blinkUnit() {
-	$.each( btnsToBlink, function( index, btn ) {
-		if (btn.hasClass("glowred")) {
-			btn.removeClass("glowred");
-			btn.addClass("glowpink");
-		} else {
-			btn.addClass("glowred");
-			btn.removeClass("glowpink");
-		}
-	});
-	
-	window.setTimeout(blinkUnit, 500);
+function clickMaydayChkbox(btn) {
+    return function() {
+        if(btn.hasClass("mayday_square_off")) {
+            btn.removeClass("mayday_square_off");
+            btn.addClass("mayday_square_on");
+        } else if(btn.hasClass("mayday_square_on")) {
+            btn.removeClass("mayday_square_on");
+            btn.addClass("mayday_square_off");
+        } else  if(btn.hasClass("mayday_circle_off")) {
+            btn.removeClass("mayday_circle_off");
+            btn.addClass("mayday_circle_on");
+        } else if(btn.hasClass("mayday_circle_on")) {
+            btn.removeClass("mayday_circle_on");
+            btn.addClass("mayday_circle_off");
+        }
+    }
 }
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
 	maydayBtn.click(showMaydayDialog);
-	$("#ok_mayday_btn").click(createMayday);
-	$("#cancel_mayday_btn").click(hideAllDialogs);
+	$("#mayday_list li").each(function( index ) {
+        $(this).click(clickMaydayChkbox($(this)));
+    });
 }
 
 
