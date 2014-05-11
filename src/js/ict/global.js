@@ -17,31 +17,32 @@ function startTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
     tbar.find('.par_btn').addClass('glow_green');
     tbar['par_timer'] = setTimeout(function(){cancelTbarParTimer(tbar);},(5*60*1000));
-    tbar['par']='sector';
 }
 function cancelTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
     tbar.find('.par_btn').removeClass('glow_green');
-    tbar['par']='';
     if(typeof tbar['par_timer'] != 'undefined') {
         window.clearTimeout(tbar['par_timer']);
     }
 }
-function clickButtonInParDialog() {
+function clickButtonInParDialog(btnSelector) {
     return function() {
         var parDialog = $("#par_dialog");
 
         if(typeof tbar_clicked['par'] != 'undefined') {
-            if(tbar_clicked['par']!='sector') {
+            if(tbar_clicked['par']=='') {
                 startTbarParTimer(tbar_clicked);
-                parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
+                parDialog.find(btnSelector).addClass('glow_green');
+                tbar_clicked['par']=btnSelector;
             } else {
                 cancelTbarParTimer(tbar_clicked);
-                parDialog.find('.button:not(.dialog_close_btn)').removeClass('glow_green');
+                parDialog.find(btnSelector).removeClass('glow_green');
+                tbar_clicked['par']='';
             }
         } else {
             startTbarParTimer(tbar_clicked);
-            parDialog.find('.button:not(.dialog_close_btn)').addClass('glow_green');
+            parDialog.find(btnSelector).addClass('glow_green');
+            tbar_clicked['par']=btnSelector;
         }
     };
 }
@@ -69,6 +70,8 @@ function showParDialog( tbar, btn ){
 			unitBtn.html(unit_name);
 			par_dialog_unit.css( "display", "flex");
 			par_dialog_unit.appendTo(par_dialog_units);
+			par_dialog_unit.find(".par_unit_btn").addClass("par_unit_btn_"+unit_name);
+			unitBtn.click(clickButtonInParDialog(".par_unit_btn_"+unit_name));
 		});
 	}
 
@@ -95,10 +98,10 @@ function initParDialog( ) {
 	var parTitleDiv = parDialog.find(".dialog_title_text");
 	parTitleDiv.html("Sector PAR");
 
-	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text title_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
+	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text title_btn par_dialog_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
 	parbody_containers.appendTo(parDialogBody);
 	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
-	par_dialog_sector_btn.click(clickButtonInParDialog());
+	par_dialog_sector_btn.click(clickButtonInParDialog(".par_dialog_btn"));
 
 	$("#par_dialog_unit_prototype").hide();
 }
@@ -503,6 +506,8 @@ function initBenchmarkDialog( ) {
 
         chkBox_primary.find(".chk_btn").click(clickBenchmark(chkBox_primary));
 	});
+
+	btnsToBlink.push($("#bnch_primary_challenge"));
 }
 function clickBenchmark(chkbox_container) {
     return function() {
