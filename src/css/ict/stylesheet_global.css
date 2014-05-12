@@ -478,11 +478,9 @@ body {
     width: 25px;
 }
 
-ul {
- padding: 0px;
-}
+
 #mayday_dialog {
-    width: 600px;
+    width: 900px;
     background: white;
 }
 #mayday_table_main li {
@@ -498,6 +496,9 @@ ul {
     cursor: default;
     padding-top: 5px;
 }
+ul {
+ padding: 0px;
+}
 .list_level_2 {
     margin-left: 15px !important;
 }
@@ -507,6 +508,10 @@ ul {
 .list_med_font_size {
     font-size: 1.25rem;
     font-weight: 500;
+}
+.sm_font {
+    font-size: 0.8rem;
+    font-weight: 300;
 }
 .underlined {
     border-bottom: 1px #666 dashed;
