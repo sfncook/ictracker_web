@@ -428,6 +428,36 @@ body {
 	width: 350px;
 }
 
+#iap_dialog {
+    width: 600px;
+}
+#iap_table_main td {
+    padding: 5px;
+}
+.iap_label_td {
+    text-align: right;
+}
+.iap_red_label {
+    font-size: 1.25rem;
+    color: red;
+}
+.iap_blue_label {
+    font-size: 1.25rem;
+    color: blue;
+}
+.iap_input {
+    border: #999 2px solid;
+    color: black;
+    width: 300px;
+    height: 60px;
+}
+.iap_toggle_btn {
+    width: 100px;
+    float: left;
+    font-size: 0.8rem;
+    margin: 2px;
+}
+
 .chk_btn {
 	float: left;
 	margin: 5px !important;

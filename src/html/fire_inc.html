@@ -30,8 +30,9 @@
 			
 			<div id="header_row2" class="header_row">
 				<div class="dialog_vertical_align_cell">
-					<div id="osr_btn" class="osr_btn header_item button">OSR</div>
-					<div id="objectives_btn" class="objectives_btn header_item button">Objectives</div>
+					<div id="osr_btn" class="header_item button">OSR</div>
+					<div id="objectives_btn" class="header_item button">Objectives</div>
+                    <div id="iap_btn" class="header_item button">IAP</div>
 				</div>
 			</div>
 			
@@ -112,6 +113,49 @@
                     </div>
                     <div class="dialog_body col-xs-12 container-fluid"></div>
                 </div>
+
+                <!-- IAP Dialog -->
+                <div id="iap_dialog" class="dialog dialog_window container-fluid">
+                    <div class="dialog_title col-xs-12 container-fluid">
+                        <div class="dialog_title_text col-xs-11">Action Plan = Offensive or Defensive?</div>
+                        <div class="dialog_close_btn button">X</div>
+                    </div>
+                    <div class="dialog_body col-xs-12">
+                        <table id="iap_table_main">
+                            <tr>
+                                <td class="iap_label_td">Critical Fireground Factors:</td>
+                                <td>
+                                    <div class="iap_toggle_btn button">Building</div>
+                                    <div class="iap_toggle_btn button">Fire</div>
+                                    <div class="iap_toggle_btn button">Occupancy</div>
+                                    <div class="iap_toggle_btn button">Life Hazard</div>
+                                    <div class="iap_toggle_btn button">Arrangement</div>
+                                    <div class="iap_toggle_btn button">Resources</div>
+                                    <div class="iap_toggle_btn button">Action Effect</div>
+                                    <div class="iap_toggle_btn button">Special</div>
+                                    <div class="clear_float"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="iap_red_label iap_label_td">Rescue:</td>
+                                <td><textarea class="iap_input">Primary search</textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="iap_blue_label iap_label_td">Fire Control:</td>
+                                <td><textarea class="iap_input">Supply line, attack +2</textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="iap_blue_label iap_label_td">Property/People:</td>
+                                <td><textarea class="iap_input">Salvage</textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="iap_red_label iap_label_td">Firefighter Safety:</td>
+                                <td><textarea class="iap_input">IRIC to Recue, Acct. locations, Safety, Rehab +1 unit</textarea></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- IAP Dialog -->
 
                 <!-- Mayday Dialog -->
                 <div id="mayday_dialog" class="dialog dialog_window container-fluid">

@@ -710,6 +710,30 @@ function initOsrDialog( ) {
 
 
 
+/**
+ * IAP Dialog
+ **/
+function clickIapToggleBtn(btn) {
+    return function() {
+        if(btn.hasClass("glow_orange")) {
+            btn.removeClass("glow_orange");
+        } else {
+            btn.addClass("glow_orange");
+        }
+    };
+}
+function initIapDialog( ) {
+
+    $.each($(".iap_toggle_btn"), function( index, stuff) {
+        $(this).click(clickIapToggleBtn($(this)));
+    });
+
+    var iap_btn = $("#iap_btn");
+	iap_btn.click(showDialog(0, iap_btn, "#iap_dialog"));
+}
+
+
+
 
 /**
  * Units Dialog
@@ -1092,6 +1116,7 @@ function init( ) {
 	initMaydayDialog();
 	initObjectivesDialog();
 	initOsrDialog();
+	initIapDialog();
 	initIncidentInfo();
 	
 	$("#dialogContainer").hide();
