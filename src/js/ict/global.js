@@ -1160,8 +1160,8 @@ $(document).keyup(function(e) {
 
 var actions = [
 	"Search & Rescue",
-	"Fire Control",
-	"Secure Utilities",
+	"Fire attack",
+	"Secure utilities",
 	"Vertically ventilation",
 	"Horizontal ventilation",
 	"Open the building",
@@ -1179,8 +1179,11 @@ var actions = [
 	"Elevated master stream",
 	"Deck Gun",
 	"Charge the sprinkler system",
-	"Charge the stand pipe",
-	"Fan to the door"];
+	"Charge the standpipe",
+	"Fan to the door",
+	"Check for extension",
+	"Horizontal standpipe",
+	"Shelter in place"];
 
 var sectorsWithClock = [
 	"Interior",

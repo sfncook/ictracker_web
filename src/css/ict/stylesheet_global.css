@@ -400,7 +400,7 @@ body {
 }
 
 #actions_dialog {
-    width: 600px;
+    width: 708px;
 }
 .actions_dialog_btn {
     margin: 5px !important;
@@ -459,8 +459,14 @@ body {
     font-size: 0.8rem;
     margin: 2px;
 }
+#iap_sprinkler_toggle_btn {
+    width: 120px;
+    float: left;
+    font-size: 0.8rem;
+    margin: 2px;
+}
 #iap_btn_evacloc {
-    width: 100px;
+    width: 120px;
     float: left;
     font-size: 0.8rem;
     margin: 2px;
