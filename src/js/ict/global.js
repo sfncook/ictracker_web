@@ -1303,7 +1303,11 @@ var unitsByTypeByCity = {
 		bc:[
 			"BC201",
 			"BC202",
-			"BC203"],
+			"BC203",
+			"BSO201",
+			"BSO202",
+			"BSO203",
+			"ED"],
 		squad:[
 			"SQ204",
 			"SQ206"],
@@ -1346,10 +1350,10 @@ var unitsByTypeByCity = {
 		ladder:[
 			"L251",
 			"L253",
-			"L252",
+			"L255",
 			"Lt251",
 			"Lt253",
-			"Lt252",],
+			"Lt255",],
 		bc:[
 			"BC251",
 			"BC252",],
@@ -1358,14 +1362,16 @@ var unitsByTypeByCity = {
 		cv:[
 			"CV251",],
 		wt:[
-			"WT256",],
+			"WT256",
+			"WT2511",],
 		hm:[
 			"HM258",],
 		br:[
 			"Br2511",],
 		ambo:[
-			"SWA261",
-			"SWA262",
+			"SWA251",
+			"SWA252",
+			"SWA253",
 			"SWA255",],
 	},
 	
@@ -1385,10 +1391,9 @@ var unitsByTypeByCity = {
 			"L264"],
 		bc:["BC261"],
 		ambo:[
-			"SWA251",
-			"SWA252",
-			"SWA253",
-			"SWA255",],
+			"SWA261",
+			"SWA262",
+			"SWA265",],
 		wt:["WT261"],
 		br:["BT261"],
 		rehab:["RH261"],
@@ -1457,27 +1462,12 @@ var unitsByTypeByCity = {
 		fireBoat:[
 			"FB271"
 		],
-	},
-	
-	"Superstn":{
-		engine:[
-			"E261",
-			"E262",
-			"E265",],
-		ladder:[
-			"L263",
-			"L264",
-			"Lt263",
-			"Lt264"],
-		bc:[
-			"BC261",
-			"BC262"],
-		wt:[
-			"WT261",],
-		u:[
-			"U262",],
-		rehab:[
-			"RH264"],
+		squad:[
+		    "SQ271"
+		],
+		hm:[
+		    "HM272"
+		],
 	},
 };
 
