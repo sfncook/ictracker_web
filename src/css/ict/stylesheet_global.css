@@ -450,12 +450,33 @@ body {
     color: black;
     width: 300px;
     height: 60px;
+    font-size:0.9rem;
+    float: left;
 }
 .iap_toggle_btn {
     width: 100px;
     float: left;
     font-size: 0.8rem;
     margin: 2px;
+}
+#iap_btn_evacloc {
+    width: 100px;
+    float: left;
+    font-size: 0.8rem;
+    margin: 2px;
+}
+#iap_evacloc_dialog {
+    width: 300px;
+}
+#iap_evacloc_input_container {
+    float: left;
+}
+#iap_evacloc_input {
+    border: #999 2px solid;
+    color: black;
+    width: 300px;
+    height: 60px;
+    font-size:0.9rem;
 }
 
 .chk_btn {

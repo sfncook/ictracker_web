@@ -728,6 +728,18 @@ function initIapDialog( ) {
         $(this).click(clickIapToggleBtn($(this)));
     });
 
+    $("#iap_evacloc_input_container").hide();
+    $("#iap_btn_evacloc").click(
+        function() {
+            $("#iap_evacloc_input_container").toggle();
+            if($("#iap_evacloc_input_container").is(":visible")) {
+                $("#iap_btn_evacloc").html("Hide Evacuation Location");
+            } else {
+                $("#iap_btn_evacloc").html("Show Evacuation Location");
+            }
+        }
+    );
+
     var iap_btn = $("#iap_btn");
 	iap_btn.click(showDialog(0, iap_btn, "#iap_dialog"));
 }
