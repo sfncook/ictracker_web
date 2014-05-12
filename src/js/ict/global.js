@@ -938,74 +938,6 @@ function addTbar() {
 
 
 /**
- * Init Safety Dialog
- **/
-function showSideDialog( btn, dialogId ){
-  return function(){
-	var dlg_side = $(dialogId);
-	var dlg_side_container = $(dialogId+"_container");
-	var showMe = false;
-
-	if (dlg_side_container.is(":hidden") ) {
-		showMe = true;
-	}
-	
-	hideAllDialogs();
-	
-	if (showMe) {
-		btn_clicked = btn;
-		dlg_side_container.show();
-		
-		// Reposition side dialog
-		var btn_top = btn.offset().top;
-		var btn_left = btn.offset().left;
-		
-		dlg_side_container.offset({ top:btn_top-3, left:btn_left-dlg_side.width()-12});
-	}
-  }
-}
-function initSafetyDialog() {
-	var prototypeSafetyBtn = $("<div class=\"safety_btn button\">PROTOTYPE</div>");
-	safteyNames.forEach(function (safetyName, index, array) {
-		var safetyBtn = prototypeSafetyBtn.clone().appendTo( "#safety_side_dialog" );
-		safetyBtn.html(safetyName);
-		var newId = "safety_dialog_btn_"+safetyName;
-		safetyBtn.attr("id",newId);
-		safetyBtn.click(function() {
-			btn_clicked.html(safetyName);
-			hideAllDialogs();
-			});
-	});
-	var safetyBtn = $("#safety_btn");
-	safetyBtn.click(showSideDialog(safetyBtn, "#safety_side_dialog"));
-}
-
-
-/**
- * Init Mode Dialog
- **/
-function initModeDialog() {
-	$("#offensive_btn").click(function() {
-			btn_clicked.html($("#offensive_btn").html());
-			btn_clicked.removeClass("defensive_btn");
-			btn_clicked.addClass("offensive_btn");
-			hideAllDialogs();
-			});
-	$("#defensive_btn").click(function() {
-			btn_clicked.html($("#defensive_btn").html());
-			btn_clicked.removeClass("offensive_btn");
-			btn_clicked.addClass("defensive_btn");
-			hideAllDialogs();
-			});
-	var modeBtn = $("#mode_btn");
-	modeBtn.click(showSideDialog(modeBtn, "#mode_side_dialog"));
-	//init
-	modeBtn.html($("#offensive_btn").html());
-	modeBtn.addClass("offensive_btn");
-}
-
-
-/**
  * Init Command Terminate Dialog
  **/
 function terminateCommand() {
@@ -1137,8 +1069,6 @@ function init( ) {
 	initActionsDialog();
 	initUnitsDialog();
 	initBenchmarkDialog();
-	initSafetyDialog();
-	initModeDialog();
 	$("#report_btn").click(function(){alert("TESTING");});
 	initCmdTerminateDialog();
 	initMaydayDialog();
@@ -1207,6 +1137,7 @@ var sectorsWithClock = [
 var sectors = [
 	"REHAB",
 	"RESCUE",
+	"SAFETY",
 	"Sector 1",
 	"Sector 2",
 	"Sector 3",
