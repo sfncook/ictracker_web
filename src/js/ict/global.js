@@ -971,6 +971,22 @@ function initCmdTerminateDialog( ) {
 }
 
 
+
+function clickModeButton() {
+    var mode_btn = $("#mode_btn");
+
+    if(mode_btn.hasClass("offensive_btn")) {
+        mode_btn.addClass("defensive_btn");
+        mode_btn.removeClass("offensive_btn");
+        mode_btn.html("DEFNS");
+    } else {
+        mode_btn.addClass("offensive_btn");
+        mode_btn.removeClass("defensive_btn");
+        mode_btn.html("OFFNS");
+    }
+}
+
+
 /**
  * Init Incident Info
  **/
@@ -1061,7 +1077,9 @@ function updateTimer() {
 function init( ) {
 	addTbar();
 	$("#tbar_prototype").hide();
-	
+
+	$("#mode_btn").click(clickModeButton);
+
 	//Init Dialogs
 	initSectorDialog();
 	initParDialog();
