@@ -553,36 +553,65 @@ function initBenchmarkDialog( ) {
         chkBox_primary['right_col'] = right_col;
         benchmark.secondaries.forEach(function (benchmark_2, index, array) {
             var chkBox_2 = createCheckBox(benchmark_2.label, benchmark_2.id);
-            chkBox_2.find(".chk_btn").click(clickBenchmark(chkBox_2));
+            chkBox_2.find(".chk_btn").click(clickSecondaryBenchmark(chkBox_2));
             right_col.append(chkBox_2);
         });
 
-        chkBox_primary.find(".chk_btn").click(clickBenchmark(chkBox_primary));
+        chkBox_primary.find(".chk_btn").click(clickPrimaryBenchmark(chkBox_primary));
 	});
 
 	btnsToBlink.push($("#bnch_primary_challenge"));
 }
-function clickBenchmark(chkbox_container) {
+function clickPrimaryBenchmark(chkbox_container) {
+    return function() {
+        tbar_clicked['primary_benchmark'] = chkbox_container.attr('id');
+
+        var chk_btn = chkbox_container.find(".chk_btn")[0];
+        if(chk_btn.checked) {
+            // If user Checked the box
+            setBenchmark(chkbox_container);
+        } else {
+            // If user UN-checked the box
+            setBenchmark(chkbox_container.prev());
+        }
+    };
+}
+function clickSecondaryBenchmark(chkbox_container) {
     return function() {
         var chkbox = chkbox_container.find(".chk_btn")[0];
         tbar_clicked[chkbox_container.attr('id')] = chkbox.checked;
-
-        if(typeof chkbox_container['right_col'] !='undefined') {
-            $('.benchmark_2nd_col_container').hide();
-            chkbox_container['right_col'].show();
-        }
-
-        if(!chkbox.checked) {
-            chkbox_container.nextAll().each(function (index) {
-                $(this).find(".chk_btn").attr("checked",false);
-            });
-            if(typeof chkbox_container['right_col'] !='undefined') {
-                chkbox_container['right_col'].find(".chk_btn").prop('checked', false);
-            }
-        }
-
-        updateBenchmarkButtons();
+//        updateBenchmarkButtons();
     };
+}
+function setBenchmark(chkbox_container) {
+    var chk_btn = $(chkbox_container.find(".chk_btn")[0]);
+    var chk_label = $(chkbox_container.find(".chk_btn")[0]);
+
+    chk_btn.attr("disabled", false);
+    chk_label.removeClass("disabled");
+    chkbox_container.addClass("glow_orange");
+
+    // Show right-side
+    $('.benchmark_2nd_col_container').hide();
+    chkbox_container['right_col'].show();
+
+    // Remove glow_orange from previous
+    chkbox_container.prevAll().each(function (index) {
+        $(this).find(".chk_btn").attr("disabled", false);
+        $(this).find(".chk_label").removeClass("disabled");
+        $(this).removeClass("glow_orange");
+    });
+
+    // Disable ALL next
+    chkbox_container.nextAll().each(function (index) {
+        $(this).find(".chk_btn").attr("disabled", true);
+        $(this).find(".chk_label").addClass("disabled");
+        $(this).removeClass("glow_orange");
+    });
+
+    chkbox_container.next().find(".chk_btn").attr("disabled", false);
+    chkbox_container.next().find(".chk_label").removeClass("disabled");
+    chkbox_container.next().removeClass("glow_orange");
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
     return function() {
@@ -595,7 +624,7 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             }
         });
 
-        updateBenchmarkButtons();
+//        setBenchmark($('#'+tbar['primary_benchmark']));
 
         // Show the dialog box
         showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
