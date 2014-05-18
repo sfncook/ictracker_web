@@ -495,7 +495,7 @@ function initActionsDialog( ) {
  * Benchmark Dialog
  **/
 function createCheckBox(label, id) {
-	var chkContainer = $("<div id=\""+id+"\" class=\"chk_container horiz_chkbox\"></div>").clone();
+	var chkContainer = $("<div id=\""+id+"\" class=\"horiz_chkbox\"></div>").clone();
 	var chkBtn = $("<input type=\"checkbox\" class=\"chk_btn dialog_btn button\"\>").clone();
 	var labelBtn = $("<div class=\"chk_label\"\></div>").clone();
 	labelBtn.html(label);
@@ -572,11 +572,11 @@ function clickPrimaryBenchmark(chkbox_container) {
             setBenchmark(chkbox_container);
         } else {
             // If user UN-checked the box
-            if(!chkbox_container.prev().hasClass('chk_container')){
-                tbar_clicked['primary_benchmark'] = chkbox_container.attr('id');
-                setBenchmark(chkbox_container);
+            if(chkbox_container.attr('id')=='bnch_primary'){
+                tbar_clicked['primary_benchmark'] = '';
+                resetBenchmarks();
             } else {
-                tbar_clicked['primary_benchmark'] = chkbox_container.prev().attr('id');
+                tbar_clicked['primary_benchmark'] = chkbox_container.prev();
                 setBenchmark(chkbox_container.prev());
             }
         }
@@ -587,6 +587,20 @@ function clickSecondaryBenchmark(chkbox_container) {
         var chkbox = chkbox_container.find(".chk_btn")[0];
         tbar_clicked[chkbox_container.attr('id')] = chkbox.checked;
     };
+}
+function resetBenchmarks() {
+    // Disable ALL
+    $('.benchmark_checkbox_container').each(function (index) {
+        $(this).find(".chk_btn").attr("disabled", true);
+        $(this).find(".chk_btn").attr("checked", false);
+        $(this).find(".chk_label").addClass("disabled");
+        $(this).removeClass("glow_orange");
+    });
+    $('.benchmark_2nd_col_container').hide();
+
+    // Enable but do not check, nor select first chkbox
+    $("#bnch_primary").find(".chk_btn").attr("disabled", false);
+    $("#bnch_primary").find(".chk_label").removeClass("disabled");
 }
 function setBenchmark(chkbox_container) {
     var chk_btn = $(chkbox_container.find(".chk_btn")[0]);
@@ -635,9 +649,9 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         // Show the dialog box
         showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
         if(typeof tbar['primary_benchmark'] != 'undefined') {
-            setBenchmark();
+            setBenchmark(tbar['primary_benchmark']);
         } else {
-            
+            resetBenchmarks();
         }
     };
 }
