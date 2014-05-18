@@ -569,15 +569,15 @@ function clickPrimaryBenchmark(chkbox_container) {
         if(chk_btn.checked) {
             // If user Checked the box
             tbar_clicked['primary_benchmark'] = chkbox_container.attr('id');
-            setBenchmark(chkbox_container);
+            setBenchmark(chkbox_container.attr('id'));
         } else {
             // If user UN-checked the box
             if(chkbox_container.attr('id')=='bnch_primary'){
                 tbar_clicked['primary_benchmark'] = '';
                 resetBenchmarks();
             } else {
-                tbar_clicked['primary_benchmark'] = chkbox_container.prev();
-                setBenchmark(chkbox_container.prev());
+                tbar_clicked['primary_benchmark'] = chkbox_container.prev().attr('id');
+                setBenchmark(chkbox_container.prev().attr('id'));
             }
         }
     };
@@ -592,7 +592,7 @@ function resetBenchmarks() {
     // Disable ALL
     $('.benchmark_checkbox_container').each(function (index) {
         $(this).find(".chk_btn").attr("disabled", true);
-        $(this).find(".chk_btn").attr("checked", false);
+        $(this).find(".chk_btn").prop("checked", false);
         $(this).find(".chk_label").addClass("disabled");
         $(this).removeClass("glow_orange");
     });
@@ -602,11 +602,13 @@ function resetBenchmarks() {
     $("#bnch_primary").find(".chk_btn").attr("disabled", false);
     $("#bnch_primary").find(".chk_label").removeClass("disabled");
 }
-function setBenchmark(chkbox_container) {
+function setBenchmark(chkbox_container_id) {
+    var chkbox_container = $("#"+chkbox_container_id);
     var chk_btn = $(chkbox_container.find(".chk_btn")[0]);
     var chk_label = $(chkbox_container.find(".chk_btn")[0]);
 
     chk_btn.attr("disabled", false);
+    chk_btn.prop("checked", true);
     chk_label.removeClass("disabled");
     chkbox_container.addClass("glow_orange");
 
@@ -618,7 +620,7 @@ function setBenchmark(chkbox_container) {
     // Remove glow_orange from previous
     chkbox_container.prevAll().each(function (index) {
         $(this).find(".chk_btn").attr("disabled", false);
-        $(this).find(".chk_btn").attr("checked", true);
+        $(this).find(".chk_btn").prop("checked", true);
         $(this).find(".chk_label").removeClass("disabled");
         $(this).removeClass("glow_orange");
     });
@@ -626,7 +628,7 @@ function setBenchmark(chkbox_container) {
     // Disable ALL next
     chkbox_container.nextAll().each(function (index) {
         $(this).find(".chk_btn").attr("disabled", true);
-        $(this).find(".chk_btn").attr("checked", false);
+        $(this).find(".chk_btn").prop("checked", false);
         $(this).find(".chk_label").addClass("disabled");
         $(this).removeClass("glow_orange");
     });
