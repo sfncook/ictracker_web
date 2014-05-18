@@ -495,7 +495,7 @@ function initActionsDialog( ) {
  * Benchmark Dialog
  **/
 function createCheckBox(label, id) {
-	var chkContainer = $("<div id=\""+id+"\" class=\"horiz_chkbox\"></div>").clone();
+	var chkContainer = $("<div id=\""+id+"\" class=\"chk_container horiz_chkbox\"></div>").clone();
 	var chkBtn = $("<input type=\"checkbox\" class=\"chk_btn dialog_btn button\"\>").clone();
 	var labelBtn = $("<div class=\"chk_label\"\></div>").clone();
 	labelBtn.html(label);
@@ -504,6 +504,7 @@ function createCheckBox(label, id) {
 	chkContainer.append($('<div class="clear_float"/>'));
 	return chkContainer;
 }
+var right_cols = {};
 var benchmarks = [
         {
             id:"bnch_primary", label:"Primary All Clear",
@@ -550,7 +551,7 @@ function initBenchmarkDialog( ) {
         var right_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
         right_col.appendTo(dialogBody);
         right_col.hide();
-        chkBox_primary['right_col'] = right_col;
+        right_cols[benchmark.id] = right_col;
         benchmark.secondaries.forEach(function (benchmark_2, index, array) {
             var chkBox_2 = createCheckBox(benchmark_2.label, benchmark_2.id);
             chkBox_2.find(".chk_btn").click(clickSecondaryBenchmark(chkBox_2));
@@ -564,15 +565,20 @@ function initBenchmarkDialog( ) {
 }
 function clickPrimaryBenchmark(chkbox_container) {
     return function() {
-        tbar_clicked['primary_benchmark'] = chkbox_container.attr('id');
-
         var chk_btn = chkbox_container.find(".chk_btn")[0];
         if(chk_btn.checked) {
             // If user Checked the box
+            tbar_clicked['primary_benchmark'] = chkbox_container.attr('id');
             setBenchmark(chkbox_container);
         } else {
             // If user UN-checked the box
-            setBenchmark(chkbox_container.prev());
+            if(!chkbox_container.prev().hasClass('chk_container')){
+                tbar_clicked['primary_benchmark'] = chkbox_container.attr('id');
+                setBenchmark(chkbox_container);
+            } else {
+                tbar_clicked['primary_benchmark'] = chkbox_container.prev().attr('id');
+                setBenchmark(chkbox_container.prev());
+            }
         }
     };
 }
@@ -580,7 +586,6 @@ function clickSecondaryBenchmark(chkbox_container) {
     return function() {
         var chkbox = chkbox_container.find(".chk_btn")[0];
         tbar_clicked[chkbox_container.attr('id')] = chkbox.checked;
-//        updateBenchmarkButtons();
     };
 }
 function setBenchmark(chkbox_container) {
@@ -593,11 +598,13 @@ function setBenchmark(chkbox_container) {
 
     // Show right-side
     $('.benchmark_2nd_col_container').hide();
-    chkbox_container['right_col'].show();
+    var right_col = right_cols[chkbox_container.attr('id')];
+    right_col.show();
 
     // Remove glow_orange from previous
     chkbox_container.prevAll().each(function (index) {
         $(this).find(".chk_btn").attr("disabled", false);
+        $(this).find(".chk_btn").attr("checked", true);
         $(this).find(".chk_label").removeClass("disabled");
         $(this).removeClass("glow_orange");
     });
@@ -605,6 +612,7 @@ function setBenchmark(chkbox_container) {
     // Disable ALL next
     chkbox_container.nextAll().each(function (index) {
         $(this).find(".chk_btn").attr("disabled", true);
+        $(this).find(".chk_btn").attr("checked", false);
         $(this).find(".chk_label").addClass("disabled");
         $(this).removeClass("glow_orange");
     });
@@ -624,43 +632,14 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             }
         });
 
-//        setBenchmark($('#'+tbar['primary_benchmark']));
-
         // Show the dialog box
         showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
+        if(typeof tbar['primary_benchmark'] != 'undefined') {
+            setBenchmark();
+        } else {
+            
+        }
     };
-}
-function updateBenchmarkButtons() {
-    // Update all disabled/selection states
-    var last_checked_chkbox = $(".benchmark_1st_col_container").children().find(".chk_btn:checked").last();
-    if(last_checked_chkbox.length>0) {
-        var last_checked_benchmark_container = last_checked_chkbox.parents(".horiz_chkbox");
-
-        last_checked_benchmark_container.find(".chk_btn").attr("disabled", false);
-        last_checked_benchmark_container.find(".chk_label").removeClass("disabled");
-        last_checked_benchmark_container.addClass("glow_orange");
-
-        last_checked_benchmark_container.prevAll().each(function (index) {
-            $(this).find(".chk_btn").attr("disabled", false);
-            $(this).find(".chk_label").removeClass("disabled");
-            $(this).removeClass("glow_orange");
-        });
-        last_checked_benchmark_container.nextAll().each(function (index) {
-            $(this).find(".chk_btn").attr("disabled", true);
-            $(this).find(".chk_label").addClass("disabled");
-            $(this).removeClass("glow_orange");
-        });
-        last_checked_benchmark_container.next().find(".chk_btn").attr("disabled", false);
-        last_checked_benchmark_container.next().find(".chk_label").removeClass("disabled");
-    } else {
-        // No benchmarks are checked - disable all but the top one
-        $(".benchmark_2nd_col_container").hide();
-        $(".benchmark_1st_col_container").children(".horiz_chkbox").removeClass("glow_orange");
-        $(".benchmark_1st_col_container").children(".horiz_chkbox").find(".chk_btn").prop("disabled",true);
-        $(".benchmark_1st_col_container").children(".horiz_chkbox").find(".chk_label").addClass("disabled");
-        $(".benchmark_1st_col_container").children().first().find(".chk_btn").prop("disabled",false);
-        $(".benchmark_1st_col_container").children().first().find(".chk_label").removeClass("disabled");
-    }
 }
 
 
