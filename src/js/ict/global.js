@@ -605,7 +605,7 @@ function resetBenchmarks() {
 function setBenchmark(chkbox_container_id) {
     var chkbox_container = $("#"+chkbox_container_id);
     var chk_btn = $(chkbox_container.find(".chk_btn")[0]);
-    var chk_label = $(chkbox_container.find(".chk_btn")[0]);
+    var chk_label = $(chkbox_container.find(".chk_label")[0]);
 
     chk_btn.attr("disabled", false);
     chk_btn.prop("checked", true);
@@ -614,7 +614,7 @@ function setBenchmark(chkbox_container_id) {
 
     // Show right-side
     $('.benchmark_2nd_col_container').hide();
-    var right_col = right_cols[chkbox_container.attr('id')];
+    var right_col = right_cols[chkbox_container_id];
     right_col.show();
 
     // Remove glow_orange from previous
@@ -633,9 +633,11 @@ function setBenchmark(chkbox_container_id) {
         $(this).removeClass("glow_orange");
     });
 
-    chkbox_container.next().find(".chk_btn").attr("disabled", false);
-    chkbox_container.next().find(".chk_label").removeClass("disabled");
-    chkbox_container.next().removeClass("glow_orange");
+    if(chkbox_container.next().hasClass("benchmark_checkbox_container")) {
+        chkbox_container.next().find(".chk_btn").attr("disabled", false);
+        chkbox_container.next().find(".chk_label").removeClass("disabled");
+        chkbox_container.next().removeClass("glow_orange");
+    }
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
     return function() {
