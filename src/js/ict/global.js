@@ -572,6 +572,7 @@ function clickPrimaryBenchmark(chkbox_container) {
             setBenchmark(chkbox_container.attr('id'));
         } else {
             // If user UN-checked the box
+            resetSecondaryBenchmarks(tbar_clicked, chkbox_container.attr('id'));
             if(chkbox_container.attr('id')=='bnch_primary'){
                 tbar_clicked['primary_benchmark'] = '';
                 resetBenchmarks();
@@ -580,12 +581,6 @@ function clickPrimaryBenchmark(chkbox_container) {
                 setBenchmark(chkbox_container.prev().attr('id'));
             }
         }
-    };
-}
-function clickSecondaryBenchmark(chkbox_container) {
-    return function() {
-        var chkbox = chkbox_container.find(".chk_btn")[0];
-        tbar_clicked[chkbox_container.attr('id')] = chkbox.checked;
     };
 }
 function resetBenchmarks() {
@@ -638,6 +633,25 @@ function setBenchmark(chkbox_container_id) {
         chkbox_container.next().find(".chk_label").removeClass("disabled");
         chkbox_container.next().removeClass("glow_orange");
     }
+}
+function clickSecondaryBenchmark(chkBox_2) {
+    return function() {
+        var chkbox = chkBox_2.find(".chk_btn")[0];
+        tbar_clicked[chkBox_2.attr('id')] = chkbox.checked;
+    };
+}
+function resetSecondaryBenchmarks(tbar, chkbox_container_id) {
+    return function() {
+        var right_col = right_cols[chkbox_container.attr('id')];
+
+        right_col.find(".chk_btn").each(function (index) {
+            $(this).prop("checked", false);
+        });
+
+        right_col.find(".horiz_chkbox").each(function (index) {
+            tbar[$(this).attr('id')] = false;
+        });
+    };
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
     return function() {
