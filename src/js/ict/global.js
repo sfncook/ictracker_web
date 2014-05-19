@@ -50,9 +50,21 @@ function togglePar(btn, btnSelector) {
             $(btnSelector).addClass("has_par");
         }
 
+        // If this is a person button, then check if all sibling person buttons are green or if any are missing
+        if(btn.hasClass("par_person_btn")) {
+            var par_dialog_people = btn.parents(".par_dialog_people");
+            var peopleWithOutPar = par_dialog_people.find(".par_person_btn:not(.has_par)");
+            if(peopleWithOutPar.length==0) {
+                btn.parents(".par_dialog_unit").find(".par_unit_btn").addClass("has_par");
+            } else {
+                btn.parents(".par_dialog_unit").find(".par_unit_btn").removeClass("has_par");
+            }
+        }
+
         // If all items have PAR (i.e. *NONE are NOT has_par*) then start the TBar PAR timer
         var btnsNoPar = $("#par_dialog").find(".par_dialog_btn:not(.has_par)");
-        if(btnsNoPar.length==0) {
+        if(btnsNoPar.length<=1) {
+            $("#par_dialog_sector_btn").addClass("has_par");
             startTbarParTimer(tbar_clicked);
         } else {
             $('#par_dialog_sector_btn').removeClass('has_par');
