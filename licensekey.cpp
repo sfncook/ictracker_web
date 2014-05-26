@@ -16,6 +16,8 @@ bool LicenseKey::getOrSetLicenseKey() {
     bool isLicenseKeyValid = false;
 
     QSettings settings;
+    QString settingPath = settings.fileName();
+    qDebug()<<"LicenseKey::getOrSetLicenseKey() INFO - settings.filename:"<<settingPath;
     QVariant qVarLicenseKey = settings.value("app_license_key");
     if(!qVarLicenseKey.isNull()) {
         qDebug()<<"LicenseKey::getOrSetLicenseKey() INFO - qVarLicenseKey:"<<qVarLicenseKey;
@@ -33,8 +35,11 @@ bool LicenseKey::getOrSetLicenseKey() {
         }
         qDebug()<<"LicenseKey::getOrSetLicenseKey() INFO - licenseKey:"<<licenseKey;
         isLicenseKeyValid = validateLicenseKey(licenseKey);
+        if(isLicenseKeyValid) {
+            qDebug()<<"LicenseKey::getOrSetLicenseKey() INFO - storing new licenseKey:"<<licenseKey;
+            settings.setValue("app_license_key", licenseKey);
+        }
     }
-
     return isLicenseKeyValid;
 }
 
