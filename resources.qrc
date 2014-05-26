@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>images/icon/ict_logo_29x29.png</file>
+        <file>images/icon/ict_logo_100x100.png</file>
+        <file>images/icon/ict_logo_300x300.png</file>
+        <file>images/icon/ict_logo_600x600.png</file>
+        <file>images/cancel.png</file>
+        <file>images/clock.png</file>
+        <file>images/ok.png</file>
+        <file>images/report.png</file>
+        <file>images/terminate.png</file>
+        <file>images/terminate.xcf</file>
+        <file>css/bootstrap-theme.css.map</file>
+        <file>css/bootstrap-theme.min.css</file>
+        <file>css/bootstrap.css.map</file>
+        <file>css/bootstrap.min.css</file>
+        <file>css/offcanvas.css</file>
+        <file>css/ict/stylesheet_global_ict2.css</file>
+        <file>css/ict/stylesheet_global.css</file>
+        <file>css/ict/stylesheet_reset.css</file>
+        <file>css/ict/stylesheet_tbar_ict2.css</file>
+        <file>css/ict/stylesheet_tbar.css</file>
+    </qresource>
+</RCC>
