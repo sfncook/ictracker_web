@@ -353,7 +353,7 @@ body {
 }
 #units_dialog_cities_div {
 	display:block;
-	padding-left:70px;
+	padding-left:80px;
 	border-bottom:1px solid #999;
 }
 #units_dialog_types_div {
@@ -371,7 +371,7 @@ body {
 	overflow: scroll;
 }
 .unitTypeColumn {
-    padding-bottom: 25px;
+    padding-bottom: 15px;
 }
 
 .unitCity_dialog_btn {

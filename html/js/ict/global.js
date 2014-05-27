@@ -39,6 +39,8 @@ function cancelTbarParTimer(tbar) {
     if(typeof tbar['par_timer'] != 'undefined') {
         window.clearTimeout(tbar['par_timer']);
     }
+    tbar.find(".has_par").removeClass("has_par");
+    tbar['btn_ids_with_par'] = new Array();
 }
 function togglePar(btn, btnSelector) {
     return function() {
@@ -1314,7 +1316,73 @@ var unitTypes = [
 	fireBoat,
 	ambo];
 var unitsByTypeByCity = {
-    "Phoenix":{},
+    "Chandler":{
+		engine:[
+			"E282",
+			"E283",
+			"E284",
+			"E285",
+			"E286",
+			"E287",
+			"E288",
+			"E289",
+			"E2810",
+			"E2282"],
+		ladder:[
+			"L281",
+			"L283",
+			"Lt281",
+			"Lt283"],
+		bc:[
+			"BC281",
+			"BC282"],
+		squad:[
+			"SQ283",],
+		hm:[
+			"HM283",],
+		u:[
+			"U288",],
+		br:[
+			"Br284",],
+	},
+	"Gilbert":{
+		engine:[
+			"E251",
+			"E252",
+			"E254",
+			"E256",
+			"E257",
+			"E258",
+			"E2510",
+			"E2511",
+			"E2540"],
+		ladder:[
+			"L251",
+			"L253",
+			"L255",
+			"Lt251",
+			"Lt253",
+			"Lt255",],
+		bc:[
+			"BC251",
+			"BC252",],
+		u:[
+			"U251",],
+		cv:[
+			"CV251",],
+		wt:[
+			"WT256",
+			"WT2511",],
+		hm:[
+			"HM258",],
+		br:[
+			"Br2511",],
+		ambo:[
+			"SWA251",
+			"SWA252",
+			"SWA253",
+			"SWA255",],
+	},
 	"Mesa":{
 		engine:[
 			"E201",
@@ -1388,52 +1456,13 @@ var unitsByTypeByCity = {
 			"SWA229",
 		],
 	},
-	"Gilbert":{
-		engine:[
-			"E251",
-			"E252",		
-			"E254",		
-			"E256",		
-			"E257",		
-			"E258",		
-			"E2510",		
-			"E2511",		
-			"E2540"],		
-		ladder:[
-			"L251",
-			"L253",
-			"L255",
-			"Lt251",
-			"Lt253",
-			"Lt255",],
-		bc:[
-			"BC251",
-			"BC252",],
-		u:[
-			"U251",],
-		cv:[
-			"CV251",],
-		wt:[
-			"WT256",
-			"WT2511",],
-		hm:[
-			"HM258",],
-		br:[
-			"Br2511",],
-		ambo:[
-			"SWA251",
-			"SWA252",
-			"SWA253",
-			"SWA255",],
-	},
-	
 	"QC":{
 		engine:["E412"],
 		bc:["BC411"],
 		ambo:[
 			"SWA411",],
 	},
-	
+    "Phoenix":{},
 	"Suprstion":{
 		engine:[
 			"E262",
@@ -1450,37 +1479,6 @@ var unitsByTypeByCity = {
 		br:["BT261"],
 		rehab:["RH261"],
 	},
-	
-	"Chandler":{
-		engine:[
-			"E282",
-			"E283",
-			"E284",
-			"E285",
-			"E286",
-			"E287",
-			"E288",
-			"E289",
-			"E2810",
-			"E2282"],
-		ladder:[
-			"L281",
-			"L283",
-			"Lt281",
-			"Lt283"],
-		bc:[
-			"BC281",
-			"BC282"],
-		squad:[
-			"SQ283",],
-		hm:[
-			"HM283",],
-		u:[
-			"U288",],
-		br:[
-			"Br284",],
-	},
-	
 	"Tempe":{
 		engine:[
 			"E271",
@@ -1521,6 +1519,9 @@ var unitsByTypeByCity = {
 		    "HM272"
 		],
 	},
+
+
+
 };
 
 var safteyNames = [
