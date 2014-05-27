@@ -1315,6 +1315,7 @@ var unitTypes = [
 	fireBoat,
 	ambo];
 var unitsByTypeByCity = {
+    "Phoenix":{},
 	"Mesa":{
 		engine:[
 			"E201",
@@ -1434,7 +1435,7 @@ var unitsByTypeByCity = {
 			"SWA411",],
 	},
 	
-	"AJ":{
+	"Suprstion":{
 		engine:[
 			"E262",
 			"E265"],
