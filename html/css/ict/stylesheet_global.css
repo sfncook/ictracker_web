@@ -349,7 +349,6 @@ body {
 
 #units_dialog {
     width: 855px;
-	height: 630px;
 }
 #units_dialog_cities_div {
 	display:block;
@@ -360,12 +359,15 @@ body {
 	display:block;
 	float:left;
 	width:80px;
+	height: 420px;
 	border-right:1px solid #999;
 }
 .units_dialog_citybtns_div {
 	display:block;
 	width: 755px;
+	height: 420px;
 	float: right;
+	overflow: scroll;
 }
 .unitTypeColumn {
     padding-bottom: 25px;
