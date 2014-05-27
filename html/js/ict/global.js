@@ -225,7 +225,6 @@ function selectMaydaySectorBtn(sectorBtn){
 	}
 }
 function showMaydayDialog(){
-    console.log("showMaydayDialog");
 	var mayday_dialog = $("#mayday_dialog");
 	
 	

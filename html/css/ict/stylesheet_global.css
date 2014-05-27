@@ -550,16 +550,16 @@ body {
 }
 #mayday_table_main td {
     vertical-align:top;
-    padding: 10px;
+    padding: 5;
 }
 .mayday_list li {
     margin: 0;
-    list-style: none !important;
     cursor: default;
-    padding-top: 5px;
+    padding-top: 2px;
 }
 ul {
- padding: 0px;
+ /*padding: 10px;*/
+ margin: 4px;
 }
 .list_level_2 {
     margin-left: 15px !important;
@@ -568,7 +568,7 @@ ul {
     color: red;
 }
 .list_med_font_size {
-    font-size: 1.25rem;
+    font-size: 0.85rem;
     font-weight: 500;
 }
 .sm_font {
@@ -609,7 +609,22 @@ ul {
 .first_char_red::first-letter {
     color: red;
 }
-.list_space_below {
-    margin-bottom: 10px !important;
+.yellow_bg {
+    background: #E7E5B0;
+}
+.tan_bg {
+    background: #E7C9B0;
+}
+.green_bg {
+    background: #B0E7B0;
+}
+.gray_bg {
+    background: #D6D6D6;
+}
+.blue_bg {
+    background: #BDDFFC;
+}
+.mayday_list_title {
+    font-weight:bold;
 }
 
