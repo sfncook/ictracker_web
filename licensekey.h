@@ -16,7 +16,7 @@ public slots:
 
 private:
     QString getLicenseKeyFromUser(bool *ok);
-    bool validateLicenseKey(QString licenseKey);
+    bool validateLicenseKey(QString licenseKey, QString *errorMsg);
 
 };
 
