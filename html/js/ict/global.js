@@ -1299,12 +1299,12 @@ var sceneSupport="ScnSup";
 var supportVehicle="SupVeh";
 var fireBoat = "FireBt";
 var ambo = "Ambo";
+var heilo = "Heilo"
 var unitTypes = [
 	engine,
 	ladder,
 	bc,
 	squad,
-	medic,
 	u,
 	cv,
 	wt,
@@ -1314,7 +1314,9 @@ var unitTypes = [
 	specialIncident,
 	supportVehicle,
 	fireBoat,
-	ambo];
+	ambo,
+	medic,
+	heilo];
 var unitsByTypeByCity = {
     "Chandler":{
 		engine:[
@@ -1335,7 +1337,9 @@ var unitsByTypeByCity = {
 			"Lt283"],
 		bc:[
 			"BC281",
-			"BC282"],
+			"BC282",
+			"BSO281",
+			"BSO282"],
 		squad:[
 			"SQ283",],
 		hm:[
@@ -1365,7 +1369,9 @@ var unitsByTypeByCity = {
 			"Lt255",],
 		bc:[
 			"BC251",
-			"BC252",],
+			"BC252",
+			"BSO251",
+			"BSO252",],
 		u:[
 			"U251",],
 		cv:[
@@ -1419,7 +1425,13 @@ var unitsByTypeByCity = {
 			"L206",
 			"L209",
 			"L214",
-			"L220"],
+			"L220",
+			"Lt201",
+			"Lt204",
+			"Lt206",
+			"Lt209",
+			"Lt214",
+			"Lt220"],
 		bc:[
 			"BC201",
 			"BC202",
@@ -1457,20 +1469,27 @@ var unitsByTypeByCity = {
 		],
 	},
 	"QC":{
-		engine:["E412"],
-		bc:["BC411"],
+		engine:[
+		    "E411",
+		    "E412"],
+		bc:["BC411", "BSO411"],
 		ambo:[
 			"SWA411",],
 	},
     "Phoenix":{},
 	"Suprstion":{
 		engine:[
+		    "E261",
 			"E262",
 			"E265"],
 		ladder:[
 			"L263",
-			"L264"],
-		bc:["BC261"],
+			"L264",
+			"Lt263",
+			"Lt264"],
+		bc:[
+		    "BC261",
+		    "BSO261"],
 		ambo:[
 			"SWA261",
 			"SWA262",
@@ -1495,7 +1514,8 @@ var unitsByTypeByCity = {
 			"Lt273",
 			"Lt276"],
 		bc:[
-			"BC271"],
+			"BC271",
+			"BSO271"],
 		medic:[
 			"Med271",
 			"Med272",
