@@ -41,6 +41,7 @@
 	font-size: 1.0rem;
 }
 .title_btn_comp {
+    float:left;
 	padding: 0;
 	height: 20px;
 }
@@ -50,7 +51,7 @@
     height: 10px;
 }
 .fixed_title_spacer {
-	width: 10px;
+	width: 40px;
 }
 
 .btn-mayday {
