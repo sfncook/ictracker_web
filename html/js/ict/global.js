@@ -1347,6 +1347,14 @@ var FireBt = "FireBt";
 var Ambo = "Ambo";
 var Heilo = "Heilo";
 var Util = "Util";
+var Foam = "Foam";
+var Hose = "Hose";
+var Vent = "Vent";
+var Crisis = "Crisis";
+var HighRise = "HighRise";
+var PIO = "PIO";
+var Attack = "Attack";
+
 var unitTypes = [
 	Engine,
 	Ladder,
@@ -1357,13 +1365,20 @@ var unitTypes = [
 	WtrTend,
 	HazMat,
 	Brush,
+	Foam,
+	Hose,
 	Rehab,
 	SpecInc,
 	SupVeh,
 	FireBt,
+	Vent,
+	Crisis,
+	PIO,
+	Attack,
 	Ambo,
 	Medic,
 	Heilo];
+
 var unitsByTypeByCity = {
     "Chandler":{
 		Engine:[
@@ -1694,13 +1709,62 @@ var unitsByTypeByCity = {
             "BT58",
         ],
         HazMat:[
-            "HM4"
+            "HM4",
+            "HM38",
+            "HM41"
         ],
         Util:[
-            "U10"
+            "U10",
+            "U29",
+            "U50",
         ],
         Squad:[
-            "SQ44"
+            "SQ8",
+            "SQ44",
+            "SQ72",
+        ],
+        SupVeh:[
+            "SV8",
+            "SV12",
+            "SV45",
+        ],
+        Foam:[
+            "Foam1",
+            "Foam2",
+            "Foam3",
+            "Foam34",
+            "Foam44",
+        ],
+        WtrTend :[
+            "WT23",
+            "WT36",
+            "WT52",
+            "WT54",
+            "WT56",
+            "WT58",
+        ],
+        CV:[
+            "CV1",
+            "CV2"
+        ],
+        Hose:[
+            "Hose34",
+            "Hose58"
+        ],
+        Vent:[
+            "Vent3"
+        ],
+        Crisis:[
+            "Cris16"
+        ],
+        HighRise:[
+            "HiRi1"
+        ],
+        PIO:[
+            "PI3"
+        ],
+        Attack:[
+            "Att19"
         ]
     },
 
