@@ -229,3 +229,9 @@
 	padding-top: 6px;
 	padding-bottom: 2px;
 }
+
+.hidden_sector_btn, .hidden_sector_btn:hover, .hidden_sector_btn:active {
+    height: 22px;
+    opacity:0;
+    cursor: default;
+}

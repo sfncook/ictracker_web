@@ -446,6 +446,10 @@ function initSectorDialog( ) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(sectorName);
 		title_btns_container.append(newBtn);
+
+		if(sectorName=="") {
+		    newBtn.addClass("hidden_sector_btn");
+		}
 		
 		var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
 		if (hasClock) {
@@ -457,10 +461,12 @@ function initSectorDialog( ) {
 		}
 		
 		newBtn.click(function() {
-		    setTbarSectorTitle(tbar_clicked, sectorName);
-		    if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
-                addTbar($("#tbar_container"));
-		    }
+		    if(!newBtn.hasClass("hidden_sector_btn")) {
+                setTbarSectorTitle(tbar_clicked, sectorName);
+                if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
+                    addTbar($("#tbar_container"));
+                }
+            }
 		});
 	});
 	
@@ -1261,42 +1267,48 @@ var sectorsWithClock = [
 	];
 
 var sectors = [
-	"REHAB",
-	"RESCUE",
-	"SAFETY",
+	"Interior",
+	"Roof",
+	"Ventilation",
+	"Evac",
+	"IRIC",
+
 	"Sector 1",
 	"Sector 2",
 	"Sector 3",
 	"Sector 4",
-	"A Sector",
-	"B Sector",
-	"C Sector",
-	"D Sector",
+	"RIC",
+
 	"North Sector",
 	"East Sector",
 	"South Sector",
 	"West Sector",
-	"Interior",
-	"Roof",
-	"Ventilation",
-	"Salvage",
-	"Cust Service",
-	"Sprinkler",
-	"Stand-pipe",
-	"On Deck",
-	"IRIC",
-	"RIC",
-	"Medical",
+	"Rescue",
+
+	"A Side",
+	"B Side",
+	"C Side",
+	"D Side",
 	"Safety",
+
+	"On Deck",
 	"Staging",
 	"Lobby",
-	"Treatment",
-	"Evacuation",
-	"Resource",
-	"Transportation",
 	"Accountability",
-	"Triage"];
+	"ReHab",
 
+	"Overhaul",
+	"Salvage",
+	"Cust Service",
+	"Resource",
+	"",
+
+	"Medical",
+	"Triage",
+	"Treatment",
+	"Transportation",
+	"",
+	];
 
 var engine="Engine";
 var ladder="Ladder";
