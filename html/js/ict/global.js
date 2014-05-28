@@ -990,12 +990,12 @@ function initTbars() {
     addTbar(tbar_container);
 
     var rehab_tbar_container = $("#rehab_tbar_container");
-    var rehab_tbar = addTbar(rehab_tbar_container);
     var rescue_tbar = addTbar(rehab_tbar_container);
     var safety_tbar = addTbar(rehab_tbar_container);
-    setTbarSectorTitle(rehab_tbar, "REHAB");
+    var rehab_tbar = addTbar(rehab_tbar_container);
     setTbarSectorTitle(rescue_tbar, "RESCUE");
     setTbarSectorTitle(safety_tbar, "Safety");
+    setTbarSectorTitle(rehab_tbar, "REHAB");
 }
 var tbarIndex = 1;
 function addTbar(tbarContainer) {
