@@ -988,6 +988,9 @@ function initTbars() {
     addTbar(tbar_container);
     addTbar(tbar_container);
     addTbar(tbar_container);
+    addTbar(tbar_container);
+    addTbar(tbar_container);
+    addTbar(tbar_container);
 
     var rehab_tbar_container = $("#rehab_tbar_container");
     var rescue_tbar = addTbar(rehab_tbar_container);
