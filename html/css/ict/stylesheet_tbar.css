@@ -77,6 +77,7 @@
 .clock_icon {
     width: 10px;
     height: 10px;
+    margin-left: 10px;
 }
 .fixed_title_spacer {
 	width: 40px;
@@ -225,8 +226,8 @@
 	text-overflow: ellipsis;
 	margin: 1px 0 1px 0;
 	box-shadow: none;
-	font-size: 80%;
-	padding-top: 6px;
+	font-size: 100%;
+	padding-top: 2px;
 	padding-bottom: 2px;
 }
 

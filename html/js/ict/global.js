@@ -488,17 +488,24 @@ function initActionsDialog( ) {
 	actions.forEach(function (actionName, index, array) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(actionName);
+
+		if(actionName=="") {
+		    newBtn.addClass("hidden_sector_btn");
+		}
+
 		actionsDialogBody.append(newBtn);
 		newBtn.click(function() {
-			var isNewButton = btn_clicked.html()=="Action";
-			btn_clicked.html(actionName);
-			//hideAllDialogs();
-			if (isNewButton) {
-				var actionsContainer = btn_clicked.parent();
-				addActionButton(btn_clicked.tbar, actionsContainer);
-				btn_clicked = actionsContainer.children(".blank_btn");
-			}
-			});
+		    if(!newBtn.hasClass("hidden_sector_btn")) {
+                var isNewButton = btn_clicked.html()=="Action";
+                btn_clicked.html(actionName);
+                //hideAllDialogs();
+                if (isNewButton) {
+                    var actionsContainer = btn_clicked.parent();
+                    addActionButton(btn_clicked.tbar, actionsContainer);
+                    btn_clicked = actionsContainer.children(".blank_btn");
+                }
+            }
+        });
 	});
 }
 
@@ -1030,12 +1037,6 @@ function addTbar(tbarContainer) {
 		benchmarkBtn.attr("id", benchmarkBtnId);
 		benchmarkBtn.click(showBenchmarkDialog(tbar, benchmarkBtn));
 		
-		//Action Btn
-		//var actionBtnContainer = tbar.find(".actions_parent_container");
-		//actionBtnContainer.manyBtns = 0;
-		//console.log(actionBtnContainer);
-		//addActionButton(tbar, actionBtnContainer);
-		
 		//Unit Btn
 		var unitBtnContainer = tbar.find(".units_container");
 		unitBtnContainer.manyBtns = 0;
@@ -1231,39 +1232,56 @@ $(document).keyup(function(e) {
   if (e.keyCode == 27) { hideAllDialogs(); }
 });
 
-
 var actions = [
-	"Search & Rescue",
-	"Fire attack",
-	"Secure utilities",
-	"Vertically ventilation",
-	"Horizontal ventilation",
-	"Open the building",
-	"Soften the building",
-	"360 of the building",
-	"Recon",
-	"Supply line",
-	"Take a line",
-	"1-1/2",
-	"1-3/4",
-	"2",
-	"2-1/2",
-	"3",
-	"Portable master stream",
-	"Elevated master stream",
-	"Deck Gun",
-	"Charge the sprinkler system",
-	"Charge the standpipe",
-	"Fan to the door",
-	"Check for extension",
-	"Horizontal standpipe",
-	"Shelter in place"];
+    "Take a Line",
+    "Secure Util",
+    "360",
+    "",
+    "1-1/2\"",
+
+    "Search/Rescue",
+    "Vert Vent",
+    "Open Build",
+    "",
+    "1-3/4",
+
+    "Fire Attack",
+    "Roof Prof",
+    "Soften build",
+    "",
+    "2\"",
+
+    "Supply",
+    "Fan to Door",
+    "Sprinkler",
+    "",
+    "2-1/2\"",
+
+    "Check Ext",
+    "Salvage",
+    "Overhaul",
+    "",
+    "3\"",
+
+    "Deck Gun",
+    "Elev Master",
+    "Standpipe",
+    "Horz Standpipe",
+    "Piercing Nozzle",
+    ];
+
+
+
 
 var sectorsWithClock = [
 	"Interior",
-	"Medical",
-	"Safety",
-	"Cust Service",
+	"Roof",
+	"Ventilation",
+	"Sector 1",
+	"Sector 2",
+	"Sector 3",
+	"Sector 4",
+	"Rescue"
 	];
 
 var sectors = [
