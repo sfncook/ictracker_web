@@ -470,6 +470,9 @@ function initSectorDialog( ) {
 		
 		newBtn.click(function() {
 		    setTbarSectorTitle(tbar_clicked, sectorName);
+		    if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
+                addTbar($("#tbar_container"));
+		    }
 		});
 	});
 	
@@ -1039,6 +1042,8 @@ function addTbar(tbarContainer) {
 		var unitBtnContainer = tbar.find(".units_container");
 		unitBtnContainer.manyBtns = 0;
 		addUnitButton(unitBtnContainer, tbar);
+
+		tbar.show();
 //	}
     return tbar;
 }
