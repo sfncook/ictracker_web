@@ -54,6 +54,25 @@
 	padding: 0;
 	height: 20px;
 }
+.title_dir {
+    width:15px;
+}
+.title_num {
+    width:15px;
+}
+.tbar_title_dir_td {
+    width:17px;
+}
+.tbar_title_num_td {
+    width:17px;
+}
+.tbar_title_td {
+    width: 130px;
+}
+.tbar_title_td div {
+    width: 100%;
+    text-align:center;
+}
 
 .clock_icon {
     width: 10px;
