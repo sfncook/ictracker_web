@@ -901,6 +901,7 @@ function initUnitsDialog( ) {
 					addEvent_unit_to_sector(unitName, "sector");
 					hideAllDialogs();
 					if (isNewButton) {
+					    tbar_clicked.find(".par_btn").removeClass("disabled");
 						var unitsContainer = btn_clicked.parent().parent();
 						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
 						addUnitButton(unitsContainer, tbar_clicked);
