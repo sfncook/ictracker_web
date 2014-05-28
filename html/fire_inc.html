@@ -51,13 +51,15 @@
 			<table style="width:100%;">
 				<tr>
 					<td style="text-align: center;"><button type="button" id="mayday_btn" class="btn btn-danger">Mayday</button></td>
-					<td rowspan="2" id="header_spacer_td"></td>
+					<td rowspan="3" id="header_spacer_td"></td>
 				</tr>
 				<tr>
 					<td>
-						<div id="tbar_container" class="container-fluid">
+                        <div id="tbar_container" class="container-fluid">
+                            <div id="rehab_tbar_container"></div>
+
 							<!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
-							<div id="tbar_prototype" class="col-xs-4 tbar">
+							<div id="tbar_prototype" class="col-xs-4 tbar_full_size tbar">
 								<div class="tbar_title_container">
 									<table class="tbar_title_table">
 										<tr>
@@ -98,6 +100,9 @@
 							</div><!--tbar-->
 						</div><!--tbar_container-->
 					</td>
+				</tr>
+                <tr>
+					<td id="footer_spacer_td"></td>
 				</tr>
 			</table>
 		</div><!-- mayday_and_tbar_container -->

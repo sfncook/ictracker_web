@@ -395,6 +395,19 @@ function toggleNumBtn(btn) {
 		tbarNumBtn.html(btn.html());
 	}
 }
+function setTbarSectorTitle(tbar, sectorName) {
+    tbar.find(".title_text").html(sectorName);
+    //addTbar();
+    hideAllDialogs();
+
+    //REHAB sector has no acctBtn
+    var acctBtn = tbar.find(".tbar_title_container").children(".acct_unit_btn");
+    if (sectorName=="REHAB") {
+        acctBtn.hide();
+    } else {
+        acctBtn.show();
+    }
+}
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "sector_dialog";
@@ -456,17 +469,7 @@ function initSectorDialog( ) {
 		}
 		
 		newBtn.click(function() {
-			btn_clicked.children(".title_text").html(sectorName);
-			//addTbar();
-			hideAllDialogs();
-			
-			//REHAB sector has no acctBtn
-			var acctBtn = tbar_clicked.children(".tbar_title_container").children(".acct_unit_btn");
-			if (sectorName=="REHAB") {
-				acctBtn.hide();
-			} else {
-				acctBtn.show();
-			}
+		    setTbarSectorTitle(tbar_clicked, sectorName);
 		});
 	});
 	
@@ -976,12 +979,26 @@ function addActionButton(tbar, actionsContainer) {
 	actionBtn.tbar = tbar;
 	actionBtn.click(showDialog(tbar, actionBtn, "#actions_dialog"));
 }
+function initTbars() {
+    var tbar_container = $("#tbar_container");
+    addTbar(tbar_container);
+    addTbar(tbar_container);
+    addTbar(tbar_container);
+
+    var rehab_tbar_container = $("#rehab_tbar_container");
+    var rehab_tbar = addTbar(rehab_tbar_container);
+    var rescue_tbar = addTbar(rehab_tbar_container);
+    var safety_tbar = addTbar(rehab_tbar_container);
+    setTbarSectorTitle(rehab_tbar, "REHAB");
+    setTbarSectorTitle(rescue_tbar, "RESCUE");
+    setTbarSectorTitle(safety_tbar, "Safety");
+}
 var tbarIndex = 1;
-function addTbar() {
+function addTbar(tbarContainer) {
 	//Init T-Bars
 	
-	for (tbarIndex=1; tbarIndex<=4; tbarIndex++) {
-		var tbar = $("#tbar_prototype" ).clone().appendTo( "#tbar_container" );
+//	for (tbarIndex=1; tbarIndex<=4; tbarIndex++) {
+		var tbar = $("#tbar_prototype" ).clone().appendTo(tbarContainer);
 		tbar.prefix_dir = 'X';
 		tbar.prefix_num = 'X';
 		var newId = "tbar_"+tbarIndex;
@@ -1022,7 +1039,8 @@ function addTbar() {
 		var unitBtnContainer = tbar.find(".units_container");
 		unitBtnContainer.manyBtns = 0;
 		addUnitButton(unitBtnContainer, tbar);
-	}
+//	}
+    return tbar;
 }
 
 
@@ -1164,10 +1182,8 @@ function updateTimer() {
 
 
 function init( ) {
-	addTbar();
-	$("#tbar_prototype").hide();
 
-	$("#mode_btn").click(clickModeButton);
+    initTbars();
 
 	//Init Dialogs
 	initSectorDialog();
@@ -1183,10 +1199,12 @@ function init( ) {
 	initOsrDialog();
 	initIapDialog();
 	initIncidentInfo();
-	
+
+	$("#tbar_prototype").hide();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(hideAllDialogs);
+	$("#mode_btn").click(clickModeButton);
 	
 	hideAllDialogs();
 	

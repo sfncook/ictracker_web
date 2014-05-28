@@ -59,7 +59,10 @@ body {
 }
 
 #header_spacer_td {
-	width: 90px;
+	width: 100px;
+}
+#footer_spacer_td {
+    height: 20px;
 }
 #ict_header {
     background: #BBB;
@@ -624,6 +627,9 @@ ul {
 }
 .blue_bg {
     background: #BDDFFC;
+}
+.red_bg {
+    background: #F27272;
 }
 .mayday_list_title {
     font-weight:bold;

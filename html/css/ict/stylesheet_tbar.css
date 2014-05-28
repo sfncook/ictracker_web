@@ -2,21 +2,30 @@
  **** T-BAR BOXES ****
  */
 #tbar_container {
-    display: flex;
-    flex-flow: row wrap;
-	justify-content: flex-start;
-	align-content: flex-start;
 	padding: 0 0 0 5px;
+}
+#rehab_tbar_container {
+    width:280px;
+    height: 855px;
+    float:right;
+    margin: 0 15px 0 0;
+    padding: 0;
 }
 
 .tbar {
 	background: #FFF;
 	border:1px solid #999;
-	width: 270px;
-	height: 275px;
 	margin: 5px 0 5px 10px;
 	padding: 0;
 	border-radius: 3px;
+}
+.tbar_full_size {
+    width: 270px;
+	height: 275px;
+}
+.tbar_small_size {
+    width: 270px;
+	height: 275px;
 }
 
 .tbar_title_table {
