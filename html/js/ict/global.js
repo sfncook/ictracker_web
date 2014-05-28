@@ -1286,7 +1286,8 @@ var sectorsWithClock = [
 	"Sector 2",
 	"Sector 3",
 	"Sector 4",
-	"Rescue"
+	"Rescue",
+	"Sector"
 	];
 
 var sectors = [
@@ -1330,7 +1331,7 @@ var sectors = [
 	"Triage",
 	"Treatment",
 	"Transportation",
-	"",
+	"Sector",
 	];
 
 var Engine="Engine";
