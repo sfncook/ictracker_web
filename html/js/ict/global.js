@@ -826,6 +826,7 @@ function toggleType(type) {
 			$(".unitType_dialog_btn").removeClass("glow_blue");
 			$(".unitTypeColumn").show();
 		} else {
+		    console.log(type);
 			$(".unitType_dialog_btn").removeClass("glow_blue");
 			$("#unit_type_btn_"+type).addClass("glow_blue");
 			$(".unitTypeColumn").hide();
@@ -1328,43 +1329,44 @@ var sectors = [
 	"",
 	];
 
-var engine="Engine";
-var ladder="Ladder";
-var bc="BC";
-var squad="Squad";
-var medic="Medic";
-var u="Util";
-var cv="CV";
-var wt="WtrTend";
-var hm="HazMat";
-var br="Brush";
-var rehab="Rehab";
-var specialIncident="SpecInc";
-var sceneSupport="ScnSup";
-var supportVehicle="SupVeh";
-var fireBoat = "FireBt";
-var ambo = "Ambo";
-var heilo = "Heilo"
+var Engine="Engine";
+var Ladder="Ladder";
+var BC="BC";
+var Squad="Squad";
+var Medic="Medic";
+var Util="Util";
+var CV="CV";
+var WtrTend="WtrTend";
+var HazMat="HazMat";
+var Brush="Brush";
+var Rehab="Rehab";
+var SpecInc="SpecInc";
+var ScnSup="ScnSup";
+var SupVeh="SupVeh";
+var FireBt = "FireBt";
+var Ambo = "Ambo";
+var Heilo = "Heilo";
+var Util = "Util";
 var unitTypes = [
-	engine,
-	ladder,
-	bc,
-	squad,
-	u,
-	cv,
-	wt,
-	hm,
-	br,
-	rehab,
-	specialIncident,
-	supportVehicle,
-	fireBoat,
-	ambo,
-	medic,
-	heilo];
+	Engine,
+	Ladder,
+	BC,
+	Squad,
+	Util,
+	CV,
+	WtrTend,
+	HazMat,
+	Brush,
+	Rehab,
+	SpecInc,
+	SupVeh,
+	FireBt,
+	Ambo,
+	Medic,
+	Heilo];
 var unitsByTypeByCity = {
     "Chandler":{
-		engine:[
+		Engine:[
 			"E282",
 			"E283",
 			"E284",
@@ -1375,27 +1377,27 @@ var unitsByTypeByCity = {
 			"E289",
 			"E2810",
 			"E2282"],
-		ladder:[
+		Ladder:[
 			"L281",
 			"L283",
 			"Lt281",
 			"Lt283"],
-		bc:[
+		BC:[
 			"BC281",
 			"BC282",
 			"BSO281",
 			"BSO282"],
-		squad:[
+		Squad:[
 			"SQ283",],
-		hm:[
+		HazMat:[
 			"HM283",],
-		u:[
+		Util:[
 			"U288",],
-		br:[
+		Brush:[
 			"Br284",],
 	},
 	"Gilbert":{
-		engine:[
+		Engine:[
 			"E251",
 			"E252",
 			"E254",
@@ -1405,37 +1407,37 @@ var unitsByTypeByCity = {
 			"E2510",
 			"E2511",
 			"E2540"],
-		ladder:[
+		Ladder:[
 			"L251",
 			"L253",
 			"L255",
 			"Lt251",
 			"Lt253",
 			"Lt255",],
-		bc:[
+		BC:[
 			"BC251",
 			"BC252",
 			"BSO251",
 			"BSO252",],
-		u:[
+		Util:[
 			"U251",],
-		cv:[
+		CV:[
 			"CV251",],
-		wt:[
+		WtrTend:[
 			"WT256",
 			"WT2511",],
-		hm:[
+		HazMat:[
 			"HM258",],
-		br:[
+		Brush:[
 			"Br2511",],
-		ambo:[
+		Ambo:[
 			"SWA251",
 			"SWA252",
 			"SWA253",
 			"SWA255",],
 	},
 	"Mesa":{
-		engine:[
+		Engine:[
 			"E201",
 			"E202",
 			"E203",
@@ -1464,7 +1466,7 @@ var unitsByTypeByCity = {
 			"E227",
 			"E228",
 			"E229"],
-		ladder:[
+		Ladder:[
 			"L201",
 			"L204",
 			"L206",
@@ -1477,7 +1479,7 @@ var unitsByTypeByCity = {
 			"Lt209",
 			"Lt214",
 			"Lt220"],
-		bc:[
+		BC:[
 			"BC201",
 			"BC202",
 			"BC203",
@@ -1485,10 +1487,10 @@ var unitsByTypeByCity = {
 			"BSO202",
 			"BSO203",
 			"ED"],
-		squad:[
+		Squad:[
 			"SQ204",
 			"SQ206"],
-		ambo:[
+		Ambo:[
 			"SWA201",
 			"SWA202",
 			"SWA203",
@@ -1514,15 +1516,15 @@ var unitsByTypeByCity = {
 		],
 	},
 	"QC":{
-		engine:[
+		Engine:[
 		    "E411",
 		    "E412"],
-		bc:["BC411", "BSO411"],
-		ambo:[
+		BC:["BC411", "BSO411"],
+		Ambo:[
 			"SWA411",],
 	},
     "Phoenix":{
-        engine:[
+        Engine:[
             "E1",
             "E3",
             "E4",
@@ -1584,11 +1586,12 @@ var unitsByTypeByCity = {
             "E910",
             "E918",
             "E925",
+            "E929",
             "E930",
             "E935",
             "E960",
         ],
-        ladder:[
+        Ladder:[
             "L1",
             "L4",
             "L9",
@@ -1618,7 +1621,7 @@ var unitsByTypeByCity = {
             "Lt43",
             "Lt50",
         ],
-        bc:[
+        BC:[
             "BC1",
             "BC2",
             "BC3",
@@ -1638,7 +1641,7 @@ var unitsByTypeByCity = {
             "BSOC8",
             "BSOC19",
         ],
-        ambo:[
+        Ambo:[
             "RES3",
             "RES5",
             "RES7",
@@ -1675,7 +1678,7 @@ var unitsByTypeByCity = {
             "RES918",
             "RES942",
         ],
-        br:[
+        Brush:[
             "BT23",
             "BT28",
             "BT33",
@@ -1690,40 +1693,40 @@ var unitsByTypeByCity = {
             "BT57",
             "BT58",
         ],
-        hm:[
+        HazMat:[
             "HM4"
         ],
-        u:[
+        Util:[
             "U10"
         ],
-        squad:[
+        Squad:[
             "SQ44"
         ]
     },
 
 	"Suprstion":{
-		engine:[
+		Engine:[
 		    "E261",
 			"E262",
 			"E265"],
-		ladder:[
+		Ladder:[
 			"L263",
 			"L264",
 			"Lt263",
 			"Lt264"],
-		bc:[
+		BC:[
 		    "BC261",
 		    "BSO261"],
-		ambo:[
+		Ambo:[
 			"SWA261",
 			"SWA262",
 			"SWA265",],
-		wt:["WT261"],
-		br:["BT261"],
-		rehab:["RH261"],
+		WtrTend:["WT261"],
+		Brush:["BT261"],
+		Rehab:["RH261"],
 	},
 	"Tempe":{
-		engine:[
+		Engine:[
 			"E271",
 			"E272",
 			"E273",
@@ -1732,34 +1735,34 @@ var unitsByTypeByCity = {
 			"E276",
 			"E277",
 			"E278"],
-		ladder:[
+		Ladder:[
 			"L273",
 			"L276",
 			"Lt273",
 			"Lt276"],
-		bc:[
+		BC:[
 			"BC271",
 			"BSO271"],
-		medic:[
+		Medic:[
 			"Med271",
 			"Med272",
 			"Med276"],
-		specialIncident:[
+		SpecInc:[
 			"SI272"
 		],
-		sceneSupport:[
+		ScnSup:[
 			"SS274"
 		],
-		supportVehicle:[
+		SupVeh:[
 			"SV276"
 		],
-		fireBoat:[
+		FireBt:[
 			"FB271"
 		],
-		squad:[
+		Squad:[
 		    "SQ271"
 		],
-		hm:[
+		HazMat:[
 		    "HM272"
 		],
 	},
