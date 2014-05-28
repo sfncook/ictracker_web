@@ -1359,6 +1359,7 @@ var Crisis = "Crisis";
 var HighRise = "HighRise";
 var PIO = "PIO";
 var Attack = "Attack";
+var AirVac = "AirVac";
 
 var unitTypes = [
 	Engine,
@@ -1382,7 +1383,8 @@ var unitTypes = [
 	Attack,
 	Ambo,
 	Medic,
-	Heilo];
+	Heilo,
+	AirVac];
 
 var unitsByTypeByCity = {
     "Chandler":{
@@ -1415,6 +1417,11 @@ var unitsByTypeByCity = {
 			"U288",],
 		Brush:[
 			"Br284",],
+		AirVac:[
+		    "Native Air",
+		    "Life Net",
+		    "Ranger 41"
+		]
 	},
 	"Gilbert":{
 		Engine:[
@@ -1455,6 +1462,11 @@ var unitsByTypeByCity = {
 			"SWA252",
 			"SWA253",
 			"SWA255",],
+		AirVac:[
+		    "Native Air",
+		    "Life Net",
+		    "Ranger 41"
+		]
 	},
 	"Mesa":{
 		Engine:[
@@ -1534,6 +1546,11 @@ var unitsByTypeByCity = {
 			"SWA228",
 			"SWA229",
 		],
+		AirVac:[
+		    "Native Air",
+		    "Life Net",
+		    "Ranger 41"
+		]
 	},
 	"QC":{
 		Engine:[
@@ -1542,6 +1559,11 @@ var unitsByTypeByCity = {
 		BC:["BC411", "BSO411"],
 		Ambo:[
 			"SWA411",],
+		AirVac:[
+		    "Native Air",
+		    "Life Net",
+		    "Ranger 41"
+		]
 	},
     "Phoenix":{
         Engine:[
@@ -1770,7 +1792,12 @@ var unitsByTypeByCity = {
         ],
         Attack:[
             "Att19"
-        ]
+        ],
+		AirVac:[
+		    "Native Air",
+		    "Life Net",
+		    "Ranger 41"
+		]
     },
 
 	"Suprstion":{
@@ -1793,6 +1820,11 @@ var unitsByTypeByCity = {
 		WtrTend:["WT261"],
 		Brush:["BT261"],
 		Rehab:["RH261"],
+		AirVac:[
+		    "Native Air",
+		    "Life Net",
+		    "Ranger 41"
+		]
 	},
 	"Tempe":{
 		Engine:[
@@ -1834,6 +1866,11 @@ var unitsByTypeByCity = {
 		HazMat:[
 		    "HM272"
 		],
+		AirVac:[
+		    "Native Air",
+		    "Life Net",
+		    "Ranger 41"
+		]
 	},
 
 
