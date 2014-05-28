@@ -810,7 +810,7 @@ function initIapDialog( ) {
 /**
  * Units Dialog
  **/
-function toggleCity(city) {
+function toggleCity(city, unitsByType) {
 	return function(){
 		$(".unitCity_dialog_btn").removeClass("glow_blue");
 		$("#unit_city_btn_"+city).addClass("glow_blue");
@@ -818,6 +818,12 @@ function toggleCity(city) {
 		$(".unit_dialog_btn."+city).show();
 		$(".units_dialog_citybtns_div").hide();
 		$("#unit_city_div_"+city).show();
+
+        $(".unitType_dialog_btn").hide();
+		$.each(unitsByType, function( type, units ) {
+		    console.log("#unit_type_btn_"+type);
+		    $("#unit_type_btn_"+type).show();
+		});
 	}
 }
 function toggleType(type) {
@@ -867,7 +873,7 @@ function initUnitsDialog( ) {
 		unitCityBtn.html(city);
 		var unitCityBtnId = "unit_city_btn_"+city;
 		unitCityBtn.attr("id",unitCityBtnId);
-		unitCityBtn.click(toggleCity(city));
+		unitCityBtn.click(toggleCity(city, unitsByType));
 		
 		//Unit div
 		var unitCityDiv = btnsDivProto.clone().appendTo(dialog_body);
@@ -917,7 +923,7 @@ function initUnitsDialog( ) {
 	$('<div class="clear_float"/>').clone().appendTo(citiesDiv);
 	
 	$(".unit_dialog_btn").hide();
-	toggleCity("Mesa")();
+	toggleCity("Mesa", unitsByTypeByCity["Mesa"])();
 }
 
 
