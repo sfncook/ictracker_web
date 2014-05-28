@@ -107,6 +107,8 @@ function showParDialog( tbar, btn ){
 			var unit_name = $(this).html();
 			unitNames.push(unit_name);
 
+			par_dialog_unit.attr("id", "par_dialog_unit_"+unit_name);
+
 			var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
 			unitBtns.push(unitBtn);
 
