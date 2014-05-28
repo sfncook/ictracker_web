@@ -336,12 +336,13 @@ function showSectorDialog( tbar, btn, dialogId ){
 	$( "div:contains('"+btn.html()+"').title_btn.dialog_btn" ).addClass("sector_dialog_btn_on");
 	
 	//Toggle prefix_dir buttons
-	$(".dir_supl_info_dir_btn").removeClass("dir_supl_info_btn_on");
-	$("."+tbar.prefix_dir+"_supl_btn").addClass("dir_supl_info_btn_on");
+	tbar_clicked.prefix_dir
+	$(".dir_supl_info_dir_btn").removeClass("glow_orange");
+	$("."+tbar.prefix_dir+"_supl_btn").addClass("glow_orange");
 	
 	//Toggle prefix_num buttons
-	$(".dir_supl_info_num_btn").removeClass("dir_supl_info_btn_on");
-	$("."+tbar.prefix_num+"_supl_btn").addClass("dir_supl_info_btn_on");
+	$(".dir_supl_info_num_btn").removeClass("glow_orange");
+	$("."+tbar.prefix_num+"_supl_btn").addClass("glow_orange");
   }
 }
 function showDialog( tbar, btn, dialogId ){
@@ -409,13 +410,6 @@ function initSectorDialog( ) {
 	var dialog_title_text = sectorDialog.find(".dialog_title_text");
 	dialog_title_text.html("Sectors");
 	var dialog_body = sectorDialog.find(".dialog_body");
-	
-	//var row1Container = $("<div id=\"sector_dlg_row1\"></div>").clone();
-	//var row2Container = $("<div id=\"sector_dlg_row2\"></div>").clone();
-	//var row3Container = $("<div id=\"sector_dlg_row3\"></div>").clone();
-	//sectorDialogBody.append(row1Container);
-	//sectorDialogBody.append(row2Container);
-	//sectorDialogBody.append(row3Container);
 	
 	var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
 	dialog_body.append(dir_btns_container);
