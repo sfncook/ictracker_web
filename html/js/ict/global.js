@@ -112,30 +112,28 @@ function showParDialog( tbar, btn ){
 
 			unitBtn.html(unit_name);
             unitBtn.click(togglePar(unitBtn, "#par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
+
+            var captain_btn = par_dialog_unit.find(".captain_btn").first();
+            var engineer_btn = par_dialog_unit.find(".engineer_btn").first();
+		    var firefighter1_btn = par_dialog_unit.find(".firefighter1_btn").first();
+		    var firefighter2_btn = par_dialog_unit.find(".firefighter2_btn").first();
+
+		    unitBtn.attr("id", "par_unit_btn_"+unit_name);
+		    captain_btn.attr("id", "captain_btn"+unit_name);
+		    engineer_btn.attr("id", "engineer_btn"+unit_name);
+		    firefighter1_btn.attr("id", "firefighter1_btn"+unit_name);
+		    firefighter2_btn.attr("id", "firefighter2_btn"+unit_name);
+
+		    captain_btn.addClass("par_person_btn_"+unit_name);
+		    engineer_btn.addClass("par_person_btn_"+unit_name);
+		    firefighter1_btn.addClass("par_person_btn_"+unit_name);
+		    firefighter2_btn.addClass("par_person_btn_"+unit_name);
+
+		    captain_btn.click(togglePar(captain_btn, "#captain_btn"+unit_name));
+		    engineer_btn.click(togglePar(engineer_btn, "#engineer_btn"+unit_name));
+		    firefighter1_btn.click(togglePar(firefighter1_btn, "#firefighter1_btn"+unit_name));
+		    firefighter2_btn.click(togglePar(firefighter2_btn, "#firefighter2_btn"+unit_name));
 		});
-		//Fucking JQuery bug.  Goddamn stupid fucking asshole mother fuckers.
-		for (var i = 0; i < unitBtns.length; i++) {
-		    var captain_btn = unitBtns[i].next().find(".captain_btn");
-		    var engineer_btn = unitBtns[i].next().find(".engineer_btn");
-		    var firefighter1_btn = unitBtns[i].next().find(".firefighter1_btn");
-		    var firefighter2_btn = unitBtns[i].next().find(".firefighter2_btn");
-
-		    unitBtns[i].attr("id", "par_unit_btn_"+unitNames[i]);
-		    captain_btn.attr("id", "captain_btn"+unitNames[i]);
-		    engineer_btn.attr("id", "engineer_btn"+unitNames[i]);
-		    firefighter1_btn.attr("id", "firefighter1_btn"+unitNames[i]);
-		    firefighter2_btn.attr("id", "firefighter2_btn"+unitNames[i]);
-
-		    captain_btn.addClass("par_person_btn_"+unitNames[i]);
-		    engineer_btn.addClass("par_person_btn_"+unitNames[i]);
-		    firefighter1_btn.addClass("par_person_btn_"+unitNames[i]);
-		    firefighter2_btn.addClass("par_person_btn_"+unitNames[i]);
-
-		    captain_btn.click(togglePar(captain_btn, "#captain_btn"+unitNames[i]));
-		    engineer_btn.click(togglePar(engineer_btn, "#engineer_btn"+unitNames[i]));
-		    firefighter1_btn.click(togglePar(firefighter1_btn, "#firefighter1_btn"+unitNames[i]));
-		    firefighter2_btn.click(togglePar(firefighter2_btn, "#firefighter2_btn"+unitNames[i]));
-		}
 		$(".mayday_par_btn").click(showMaydayDialog);
 	}
 
@@ -821,7 +819,6 @@ function toggleCity(city, unitsByType) {
 
         $(".unitType_dialog_btn").hide();
 		$.each(unitsByType, function( type, units ) {
-		    console.log("#unit_type_btn_"+type);
 		    $("#unit_type_btn_"+type).show();
 		});
 	}
@@ -832,7 +829,6 @@ function toggleType(type) {
 			$(".unitType_dialog_btn").removeClass("glow_blue");
 			$(".unitTypeColumn").show();
 		} else {
-		    console.log(type);
 			$(".unitType_dialog_btn").removeClass("glow_blue");
 			$("#unit_type_btn_"+type).addClass("glow_blue");
 			$(".unitTypeColumn").hide();
