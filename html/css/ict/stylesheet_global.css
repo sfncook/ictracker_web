@@ -495,9 +495,12 @@ body {
 	float: left;
 	margin: 5px !important;
 }
+.chk_label {
+    font-size: 1.1rem;
+}
 
 #benchmarks_dialog {
-    width: 400px;
+    width: 500px;
 }
 .benchmark_col_container {
     float: left;
