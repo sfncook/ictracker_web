@@ -175,6 +175,12 @@ body {
     margin-bottom: 8px;
 	height: 25px;
 }
+#objectives_btn {
+    margin-top: 20px;
+}
+#iap_btn {
+    margin-top: 20px;
+}
 #time {
     text-align: center;
     font-family: 'Carrois Gothic SC';
