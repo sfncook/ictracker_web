@@ -463,6 +463,7 @@ function initSectorDialog( ) {
 		newBtn.click(function() {
 		    if(!newBtn.hasClass("hidden_sector_btn")) {
                 setTbarSectorTitle(tbar_clicked, sectorName);
+                addClockToUnitsIfNeeded(tbar_clicked);
                 if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
                     addTbar($("#tbar_container"));
                 }
@@ -912,6 +913,7 @@ function initUnitsDialog( ) {
 						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
 						addUnitButton(unitsContainer, tbar_clicked);
 					}
+					addClockToUnitsIfNeeded(tbar_clicked);
 				});
 			});
 			unitTypeCol.append($('<div class="clear_float"/>'));
@@ -965,14 +967,28 @@ function showActionsForUnitBtn(unitBtn) {
 		}
 	  }
 }
+function addClockToUnitsIfNeeded(tbar) {
+    var sectorName = tbar.find(".title_text").html();
+	var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
+
+    var unit_timer_div = tbar.find(".tbar_unit_btn.unit_btn:not(.blank_btn)").siblings(".unit_timer_div");
+    if (hasClock) {
+        unit_timer_div.show();
+	} else {
+	    unit_timer_div.hide();
+	}
+}
 function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.children().children().removeClass("blank_btn");
 	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
 	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
+	var clockDiv = $("<div class=\"unit_timer_div\"><img style=\"margin:0\" class=\"clock_icon\" src=\"images/clock.png\"/></div>").clone();
 	unitBtn.tbar = tbar;
 	singleUnitContainer.append(psiBtn);
 	singleUnitContainer.append(unitBtn);
+	singleUnitContainer.append(clockDiv);
+	clockDiv.hide();
 	singleUnitContainer.append($('<div class="clear_float"/>'));
 	unitsContainer.append(singleUnitContainer);
 	unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
@@ -1674,14 +1690,14 @@ var unitsByTypeByCity = {
             "BC19",
             "No Dep",
             "So Dep",
-            "BSOC1",
-            "BSOC2",
-            "BSOC3",
-            "BSOC4",
-            "BSOC5",
-            "BSOC6",
-            "BSOC8",
-            "BSOC19",
+            "BSO1",
+            "BSO2",
+            "BSO3",
+            "BSO4",
+            "BSO5",
+            "BSO6",
+            "BSO8",
+            "BSO19",
         ],
         Ambo:[
             "RES3",
