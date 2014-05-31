@@ -239,7 +239,6 @@ function showMaydayDialog(){
 				var unitBtn = $(this);
 				var unitData = new Object();
 				unitData.btn = unitBtn;
-				unitData.tbar = tbar;
 				unitsToTbarMap[unitBtn.html()] = unitData;
 			});
 			
@@ -494,7 +493,7 @@ function initActionsDialog( ) {
                 //hideAllDialogs();
                 if (isNewButton) {
                     var actionsContainer = btn_clicked.parent();
-                    addActionButton(btn_clicked.tbar, actionsContainer);
+                    addActionButton(btn_clicked.parents(".tbar"), actionsContainer);
                     btn_clicked = actionsContainer.children(".blank_btn");
                 }
             }
@@ -968,12 +967,14 @@ function setUnitName(unitBtn, unitName) {
 		var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
 		action_list_unit_name_title.html(unitName);
 		unitBtn.actions_list.addClass(unitName);
-		addActionButton(unitBtn.tbar, unitBtn.actions_list);
+		addActionButton(unitBtn.parents(".tbar"), unitBtn.actions_list);
 	}
 }
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
-		var tbar = unitBtn.tbar;
+		var tbar = unitBtn.parents(".tbar");
+//		console.log(unitBtn);
+		console.log(tbar);
 		if (typeof tbar !== "undefined") {
 			var actionsParentContainer = tbar.find(".actions_parent_container");
 			actionsParentContainer.children(".actions_list").hide();
@@ -1038,7 +1039,6 @@ function addUnitButton(unitsContainer, tbar) {
 	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
 	var clockDiv = $("<div class=\"unit_timer_div\"><img style=\"margin:0\" class=\"clock_icon\" src=\"images/clock.png\"/></div>").clone();
-	unitBtn.tbar = tbar;
 	singleUnitContainer.append(psiBtn);
 	singleUnitContainer.append(unitBtn);
 	singleUnitContainer.append(clockDiv);
@@ -1058,7 +1058,6 @@ function addActionButton(tbar, actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");
 	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
 	actionsContainer.append(actionBtn);
-	actionBtn.tbar = tbar;
 	actionBtn.click(showDialog(tbar, actionBtn, "#actions_dialog"));
 }
 function initTbars() {
@@ -1149,7 +1148,6 @@ function addTbar(tbarContainer) {
                 // Move unit_btn (and parent and siblings) to new TBar
                 var last_unit_div = tbar.find(".units_container").children().last();
                 jQuery(single_unit_div).detach().insertBefore(last_unit_div);
-                unitBtn.tbar = dest_tbar;
             }
         });
 
