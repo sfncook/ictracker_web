@@ -1268,7 +1268,7 @@ var actions = [
     "Take a Line",
     "Secure Util",
     "360",
-    "",
+    "Protect Exposure",
     "1-1/2\"",
 
     "Search/Rescue",
@@ -1290,20 +1290,20 @@ var actions = [
     "2-1/2\"",
 
     "IRIC",
-    "Salvage",
+    "Throw Ladders",
     "Overhaul",
     "",
     "3\"",
 
     "Check Ext",
-    "Elev Master",
+    "Salvage",
     "Standpipe",
-    "Horz Standpipe",
+    "",
     "Piercing Nozzle",
 
     "Deck Gun",
-    "",
-    "",
+    "Elev Master",
+    "Horz Standpipe",
     "",
     "",
     ];
