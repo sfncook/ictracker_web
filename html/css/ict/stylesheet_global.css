@@ -683,6 +683,7 @@ ul {
 }
 #osr_right_col {
     float:left;
+    padding-top: 15px;
 }
 #osr_left_col {
     float:left;
@@ -695,18 +696,14 @@ ul {
 #osr_floors {
     float:left;
 }
-#osr_occupancy_basement_div {
+.osr_toggle_container_div {
     margin: 10px 0 15px 0;
     height: 25px;
 }
-#osr_occupancy_basement_btn {
+.osr_toggle_btn  {
     width: 100px;
-    float:left
-}
-#osr_occupancy_nobasement_btn {
-    width: 100px;
-    float:right;
-    margin-left: 15px;
+    float:left;
+    margin:0 5px;
 }
 #osr_occupancy_floors_div {
     margin: 10px 0 15px 0;
