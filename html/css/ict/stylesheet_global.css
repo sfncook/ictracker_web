@@ -506,7 +506,7 @@ body {
 }
 
 #benchmarks_dialog {
-    width: 500px;
+    width: 350px;
 }
 .benchmark_col_container {
     float: left;
@@ -514,6 +514,10 @@ body {
 }
 .benchmark_1st_col_container {
     border-right: 1px solid #666;
+}
+.benchmark_item_btn {
+    width: 150px;
+    margin:5px 0 5px 10px;
 }
 
 #par_dialog {
@@ -674,3 +678,4 @@ ul {
     margin-top: 10px;
     width: 100px;
 }
+

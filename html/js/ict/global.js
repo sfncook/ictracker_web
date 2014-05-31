@@ -542,6 +542,11 @@ var benchmarks = [
                 {id:"bnch_lossstop_par", label:"PAR"},
                 {id:"bnch_lossstop_notify", label:"Notify Alarm"}]
         }];
+function toggleBenchmarkBtn(btn) {
+    return function() {
+        btn.toggleClass("glowlightgreen");
+    }
+}
 function initBenchmarkDialog( ) {
     var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "benchmarks_dialog";
@@ -555,26 +560,34 @@ function initBenchmarkDialog( ) {
 	var left_col = $('<div class="benchmark_col_container benchmark_1st_col_container"/>');
 	left_col.appendTo(dialogBody);
 
+    var benchmark_item_prototype = $('<div class="benchmark_btn_parent_div"><div class="benchmark_item_btn button"></div></div>')
 
     benchmarks.forEach(function (benchmark, index, array) {
-        var chkBox_primary = createCheckBox(benchmark.label, benchmark.id);
-        chkBox_primary.addClass("benchmark_checkbox_container");
-        left_col.append(chkBox_primary);
+//        var chkBox_primary = createCheckBox(benchmark.label, benchmark.id);
+        var benchmark_item = benchmark_item_prototype.clone();
+        left_col.append(benchmark_item);
 
-        var right_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
-        right_col.appendTo(dialogBody);
-        right_col.hide();
-        right_cols[benchmark.id] = right_col;
-        benchmark.secondaries.forEach(function (benchmark_2, index, array) {
-            var chkBox_2 = createCheckBox(benchmark_2.label, benchmark_2.id);
-            chkBox_2.find(".chk_btn").click(clickSecondaryBenchmark(chkBox_2));
-            right_col.append(chkBox_2);
-        });
+        var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
+        benchmark_item_btn.click(toggleBenchmarkBtn(benchmark_item_btn));
+        benchmark_item_btn.html(benchmark.label);
+//        benchmark_item_btn.click(clickPrimaryBenchmark(benchmark_item));
 
-        chkBox_primary.find(".chk_btn").click(clickPrimaryBenchmark(chkBox_primary));
+//        chkBox_primary.addClass("benchmark_checkbox_container");
+
+//        var right_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
+//        right_col.appendTo(dialogBody);
+//        right_col.hide();
+//        right_cols[benchmark.id] = right_col;
+//        benchmark.secondaries.forEach(function (benchmark_2, index, array) {
+//            var chkBox_2 = createCheckBox(benchmark_2.label, benchmark_2.id);
+//            chkBox_2.find(".chk_btn").click(clickSecondaryBenchmark(chkBox_2));
+//            right_col.append(chkBox_2);
+//        });
+
+//        chkBox_primary.find(".chk_btn").click(clickPrimaryBenchmark(chkBox_primary));
 	});
 
-	btnsToBlink.push($("#bnch_primary_challenge"));
+//	btnsToBlink.push($("#bnch_primary_challenge"));
 }
 function clickPrimaryBenchmark(chkbox_container) {
     return function() {
