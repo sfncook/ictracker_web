@@ -321,8 +321,8 @@
                     </div>
                     <div id="osr_right_col">
                         <div id="osr_occupancy_right_col">
-                            <select>
-                                <option disabled="disabled">Type of building</option>
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Type of building</option>
                                 <option>Residential home</option>
                                 <option>Duplex</option>
                                 <option>Apartment</option>
@@ -333,16 +333,39 @@
                                 <option>Specialized/Other</option>
                             </select>
 
-                            <div id="osr_occupancy_floors_div">
-                                <div id="osr_occupancy_right_col_label">Number of floors:</div>
-                                <input type="number" name="osr_floors" id="osr_floors" min="1" max="50" step="1" value="1">
-                            </div>
-
-                            <select>
-                                <option disabled="disabled">Size of building</option>
-                                <option>Small</option>
-                                <option>Medium</option>
-                                <option>Large</option>
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Number of floors</option>
+                                <option>1 floor</option>
+                                <option>2 floors</option>
+                                <option>3 floors</option>
+                                <option>4 floors</option>
+                                <option>5 floors</option>
+                                <option>6 floors</option>
+                                <option>7 floors</option>
+                                <option>8 floors</option>
+                                <option>9 floors</option>
+                                <option>10 floors</option>
+                                <option>11 floors</option>
+                                <option>12 floors</option>
+                                <option>13 floors</option>
+                                <option>14 floors</option>
+                                <option>15 floors</option>
+                                <option>16 floors</option>
+                                <option>17 floors</option>
+                                <option>18 floors</option>
+                                <option>19 floors</option>
+                                <option>20 floors</option>
+                                <option>21 floors</option>
+                                <option>22 floors</option>
+                                <option>23 floors</option>
+                                <option>24 floors</option>
+                                <option>25 floors</option>
+                            </select>
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Size of building</option>
+                                <option>Small building</option>
+                                <option>Medium building</option>
+                                <option>Large building</option>
                             </select>
 
                             <div class="osr_toggle_container_div">
@@ -350,31 +373,41 @@
                                 <div id="osr_occupancy_nobasement_btn" class="osr_toggle_btn button">No Basement</div>
                             </div>
 
-                            <select>
-                                <option disabled="disabled">Construction type</option>
-                                <option>Light weight</option>
-                                <option>Wood frame</option>
-                                <option>Block</option>
-                                <option>Brick</option>
-                                <option>Tilt slab</option>
-                                <option>Specialized/Other</option>
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Construction type</option>
+                                <option>Light weight construction</option>
+                                <option>Wood frame construction</option>
+                                <option>Block construction</option>
+                                <option>Brick construction</option>
+                                <option>Tilt slab construction</option>
+                                <option>Specialized/Other construction</option>
                             </select>
 
-                            <select>
-                                <option disabled="disabled">Roof</option>
-                                <option>Pitched - tile</option>
-                                <option>Pitched - asphalt</option>
-                                <option>Pitched - wood shingle</option>
-                                <option>Flat</option>
-                                <option>Arched</option>
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Roof</option>
+                                <option>Pitched - tile roof</option>
+                                <option>Pitched - asphalt roof</option>
+                                <option>Pitched - wood shingle roof</option>
+                                <option>Flat roof</option>
+                                <option>Arched roof</option>
                             </select>
 
-                            <select>
-                                <option disabled="disabled">Conditions</option>
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Conditions</option>
                                 <option>Nothing showing</option>
                                 <option>Smoke showing</option>
                                 <option>Smoke & Fire showing</option>
                             </select>
+
+                            <div class="osr_toggle_container_div">
+                                <div id="osr_occupancy_off_btn" class="osr_toggle_btn button">Offensive</div>
+                                <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
+                            </div>
+
+                            <div class="osr_toggle_container_div">
+                                <div id="osr_occupancy_mob_btn" class="osr_toggle_btn button">Mobile</div>
+                                <div id="osr_occupancy_stat_btn" class="osr_toggle_btn button">Stationary</div>
+                            </div>
                         </div>
                     </div>
                     <div style="width=100%" class="clear_float"></div>

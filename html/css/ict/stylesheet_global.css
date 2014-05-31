@@ -718,7 +718,7 @@ ul {
     width: 450px;
 }
 
-select {
+.osr_select {
 	text-align: center;
 	background: #CCC;
 	color: #666;

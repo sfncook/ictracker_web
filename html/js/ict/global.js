@@ -778,6 +778,31 @@ function initOsrDialog( ) {
         $("#osr_occupancy_nobasement_btn").addClass("glowlightgreen");
     });
 
+    $("#osr_occupancy_off_btn").click(function(){
+        $("#osr_occupancy_off_btn").addClass("glowlightgreen");
+        $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
+    });
+    $("#osr_occupancy_def_btn").click(function(){
+        $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
+        $("#osr_occupancy_def_btn").addClass("glowlightgreen");
+    });
+
+    $("#osr_occupancy_mob_btn").click(function(){
+        $("#osr_occupancy_mob_btn").addClass("glowlightgreen");
+        $("#osr_occupancy_stat_btn").removeClass("glowlightgreen");
+    });
+    $("#osr_occupancy_stat_btn").click(function(){
+        $("#osr_occupancy_mob_btn").removeClass("glowlightgreen");
+        $("#osr_occupancy_stat_btn").addClass("glowlightgreen");
+    });
+
+
+    $(".osr_select").change(
+        function() {
+            $(this).addClass("glowlightgreen");
+        }
+    );
+
 	
 	var osr_btn = $("#osr_btn");
 	osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
