@@ -692,37 +692,45 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
 /**
  * Objectives Dialog
  **/
+function toggleObjBtn(btn) {
+    return function() {
+        btn.toggleClass("glowlightgreen");
+    }
+}
 function initObjectivesDialog( ) {
-	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
-	var objectiveBtnPrototype = $("<div class=\"objective_btn button\"></div>");
-	var newId = "objectives_dialog";
-	dialog.attr("id",newId);
-	var dialogBody = dialog.children(".dialog_body");
-	newId = "objectives_dialog_body";
-	dialogBody.attr("id",newId);
-	var titleDiv = dialog.find(".dialog_title_text");
-	titleDiv.html("Objectives");
-	var objectives = ["All Clear",
-						"Under Control",
-						"Loss Stopped",
-						"Upgrade to full recue",
-						"Assing safety",
-						"Establish supply line",
-						"Secure utilities",
-						"Ventilation",
-						"Create \"On deck\"",
-						"Pressurize exposures",
-						"Monitor channel 16",
-						"Salvage",
-						"Establish rehab",
-						"Occupant services"];
-	
-	objectives.forEach(function (objectiveText, index, array) {
-        var btn = objectiveBtnPrototype.clone().html(objectiveText);
-		dialogBody.append(btn);
-		btn.click(function() {btn.toggleClass("glowlightgreen");});
-	});
-	
+//	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
+//	var objectiveBtnPrototype = $("");
+//	var newId = "objectives_dialog";
+//	dialog.attr("id",newId);
+//	var dialogBody = dialog.children(".dialog_body");
+//	newId = "objectives_dialog_body";
+//	dialogBody.attr("id",newId);
+//	var titleDiv = dialog.find(".dialog_title_text");
+//	titleDiv.html("Objectives");
+//	var objectives = ["All Clear",
+//						"Under Control",
+//						"Loss Stopped",
+//						"Upgrade to full recue",
+//						"Assing safety",
+//						"Establish supply line",
+//						"Secure utilities",
+//						"Ventilation",
+//						"Create \"On deck\"",
+//						"Pressurize exposures",
+//						"Monitor channel 16",
+//						"Salvage",
+//						"Establish rehab",
+//						"Occupant services"];
+//
+//	objectives.forEach(function (objectiveText, index, array) {
+//        var btn = objectiveBtnPrototype.clone().html(objectiveText);
+//		dialogBody.append(btn);
+//		btn.click(function() {btn.toggleClass("glowlightgreen");});
+//	});
+
+    $(".objective_btn").each(function() {
+        $(this).click(toggleObjBtn($(this)));
+    });
 	var objectives_header_btn = $("#objectives_header_btn");
 	objectives_header_btn.click(showDialog(0, objectives_header_btn, "#objectives_dialog"));
 }
