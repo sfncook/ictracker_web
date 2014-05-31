@@ -931,7 +931,9 @@ function initUnitsDialog( ) {
                                     btn_clicked.trigger(event);
                                 }, 1000);
                         }).bind('mouseup mouseleave', function() {
-                            clearTimeout(timeoutId);
+                            if(typeof timeoutId!='undefined') {
+                                clearTimeout(timeoutId);
+                            }
                         });
 					}
 					updateTbar(tbar_clicked);
@@ -1127,10 +1129,23 @@ function addTbar(tbarContainer) {
                 $(event.target).removeClass("glowlightblue");
             },
             drop: function( event, ui ) {
-                $(event.target).removeClass("glowlightblue");
-                var single_unit_div = ui.draggable.parent();
-                var last_unit_div = $(event.target).find(".units_container").children().last();
+                var unitBtn = ui.draggable;
+                var single_unit_div = unitBtn.parent();
+                var dest_tbar = $(event.target);
+                var source_tbar = unitBtn.parents(".tbar");
+
+                dest_tbar.removeClass("glowlightblue");
+
+                // Move actions list
+                var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
+                var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
+                var actionList = source_actionsParentContainer.children("."+unitBtn.html());
+                jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
+
+                // Move unit_btn (and parent and siblings) to new TBar
+                var last_unit_div = tbar.find(".units_container").children().last();
                 jQuery(single_unit_div).detach().insertBefore(last_unit_div);
+                unitBtn.tbar = dest_tbar;
             }
         });
 
