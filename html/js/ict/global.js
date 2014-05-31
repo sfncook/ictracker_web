@@ -964,6 +964,7 @@ function updateTbar(tbar) {
 	var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
 	var hasAcctBtn = !(sectorsWithOutAcctBtn.indexOf(sectorName)>-1);
 	var hasPsiBtn = !(sectorsWithOutAPsiBtn.indexOf(sectorName)>-1);
+	var hasActions = !(sectorsWithOutActions.indexOf(sectorName)>-1);
 
     var unit_timer_divs = tbar.find(".unit_btn:not(.blank_btn)").siblings(".unit_timer_div");
     if (hasClock) {
@@ -973,6 +974,8 @@ function updateTbar(tbar) {
 	}
 
 	var acctBtn = tbar.find(".acct_unit_btn");
+	console.log(hasAcctBtn);
+	console.log(acctBtn);
 	if (hasAcctBtn) {
         acctBtn.show();
 	} else {
@@ -987,6 +990,13 @@ function updateTbar(tbar) {
 	} else {
 	    psiBtns.hide();
 	    unitBtns.addClass("unit_btn_no_psi");
+	}
+
+	var actions_parent_container = tbar.find(".actions_parent_container");
+	if(hasActions) {
+	    actions_parent_container.show();
+	} else {
+	    actions_parent_container.hide();
 	}
 }
 function addUnitButton(unitsContainer, tbar) {
@@ -1032,6 +1042,10 @@ function initTbars() {
     setTbarSectorTitle(rescue_tbar, "RESCUE");
     setTbarSectorTitle(safety_tbar, "Safety");
     setTbarSectorTitle(rehab_tbar, "ReHab");
+
+    updateTbar(rescue_tbar);
+    updateTbar(safety_tbar);
+    updateTbar(rehab_tbar);
 }
 var tbarIndex = 1;
 function addTbar(tbarContainer) {
@@ -1322,12 +1336,13 @@ var sectorsWithClock = [
 	"Rescue",
 	"Sector"
 	];
-
 var sectorsWithOutAcctBtn = [
 	"ReHab",
 	];
-
 var sectorsWithOutAPsiBtn = [
+	"ReHab",
+	];
+var sectorsWithOutActions = [
 	"ReHab",
 	];
 
