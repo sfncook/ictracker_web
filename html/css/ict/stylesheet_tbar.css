@@ -63,8 +63,17 @@
 .tbar_title_dir_td {
     width:17px;
 }
-.tbar_title_num_td {
+.tbar_title_num_td_1char {
     width:17px;
+}
+.tbar_title_num_td_2char {
+    width:25px;
+}
+.tbar_title_num_td_3char {
+    width:30px;
+}
+.tbar_title_num_td_4char {
+    width:35px;
 }
 .tbar_title_td {
     width: 130px;
@@ -156,6 +165,10 @@
 .glowpink {
 	background: pink;
 	color: #666;
+}
+.glowpink:hover {
+	background: red;
+	color: white;
 }
 .glowlightblue {
     background: DeepSkyBlue;

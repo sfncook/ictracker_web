@@ -436,6 +436,16 @@ body {
     border-left: 2px solid orange;
     font-size: 1.25rem;
 }
+#hoseline_mayday_btn {
+    width: 120px;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+#injured_mayday_btn {
+    width: 120px;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
 
 #osr_dialog {
 	width: 350px;

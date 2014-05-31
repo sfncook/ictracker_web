@@ -313,6 +313,30 @@ function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
 	maydayBtn.click(showMaydayDialog);
     $("#mayday_unit_btn").click(function(){});
+
+    $("#hoseline_mayday_btn").click(
+        function() {
+            $("#hoseline_mayday_btn").toggleClass("glowlightgreen");
+            $("#hoseline_mayday_btn").toggleClass("glowpink");
+            if($("#hoseline_mayday_btn").hasClass("glowlightgreen")) {
+                $("#hoseline_mayday_btn").html("On Hoseline");
+            } else {
+                $("#hoseline_mayday_btn").html("OFF Hoseline");
+            }
+        }
+    );
+
+    $("#injured_mayday_btn").click(
+        function() {
+            $("#injured_mayday_btn").toggleClass("glowlightgreen");
+            $("#injured_mayday_btn").toggleClass("glowpink");
+            if($("#injured_mayday_btn").hasClass("glowlightgreen")) {
+                $("#injured_mayday_btn").html("UNinjured");
+            } else {
+                $("#injured_mayday_btn").html("Injured");
+            }
+        }
+    );
 }
 
 
@@ -375,7 +399,7 @@ function toggleDirBtn(btn) {
 		tbarDirBtn.html(btn.html());
 	}
 }
-function toggleNumBtn(btn) {
+function clickNumBtn(btn) {
 	var tbarNumBtn = tbar_clicked.find(".title_num");
 	if (btn.hasClass("glow_orange")) {
 		$(".dir_supl_info_num_btn").removeClass("glow_orange");
@@ -417,7 +441,7 @@ function initSectorDialog( ) {
 		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
 		dir_btns_container.append(newBtn);
-		newBtn.click(function() {toggleNumBtn(newBtn);});
+		newBtn.click(function() {clickNumBtn(newBtn);});
 	});
 	
 	
