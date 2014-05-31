@@ -1289,17 +1289,23 @@ var actions = [
     "",
     "2-1/2\"",
 
-    "Check Ext",
+    "IRIC",
     "Salvage",
     "Overhaul",
     "",
     "3\"",
 
-    "Deck Gun",
+    "Check Ext",
     "Elev Master",
     "Standpipe",
     "Horz Standpipe",
     "Piercing Nozzle",
+
+    "Deck Gun",
+    "",
+    "",
+    "",
+    "",
     ];
 
 
