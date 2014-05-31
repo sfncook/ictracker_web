@@ -1121,7 +1121,16 @@ function initCmdTerminateDialog( ) {
 }
 
 
-
+function toggleEmergTrafficBtn(btn) {
+    return function() {
+        btn.toggleClass("glowlightgreen");
+    }
+}
+function initEmergTrafficDialog() {
+    $(".emergency_traffic_item_btn").each(function() {
+        $(this).click(toggleEmergTrafficBtn($(this)));
+    });
+}
 function clickModeButton() {
     var mode_btn = $("#mode_btn");
 
@@ -1129,6 +1138,7 @@ function clickModeButton() {
         mode_btn.addClass("defensive_btn");
         mode_btn.removeClass("offensive_btn");
         mode_btn.html("DEFNS");
+        showDialog(0, mode_btn, "#emergency_traffic_dialog")();
     } else {
         mode_btn.addClass("offensive_btn");
         mode_btn.removeClass("defensive_btn");
@@ -1242,6 +1252,7 @@ function init( ) {
 	initOsrDialog();
 	initIapDialog();
 	initIncidentInfo();
+	initEmergTrafficDialog();
 
 	$("#tbar_prototype").hide();
 	$("#dialogContainer").hide();

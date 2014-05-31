@@ -686,3 +686,10 @@ ul {
     width: 100px;
 }
 
+#emergency_traffic_dialog {
+    width: 475px;
+}
+.emergency_traffic_item_btn {
+    margin: 5px 0 5px 10px;
+    width: 450px;
+}
