@@ -770,8 +770,14 @@ function initOsrDialog( ) {
     });
 
     $("#osr_occupancy_basement_btn").click(function(){
-        $(this).html() == "Basement" ? $(this).html('No Basement') : $(this).html('Basement');
+        $("#osr_occupancy_basement_btn").addClass("glowlightgreen");
+        $("#osr_occupancy_nobasement_btn").removeClass("glowlightgreen");
     });
+    $("#osr_occupancy_nobasement_btn").click(function(){
+        $("#osr_occupancy_basement_btn").removeClass("glowlightgreen");
+        $("#osr_occupancy_nobasement_btn").addClass("glowlightgreen");
+    });
+
 	
 	var osr_btn = $("#osr_btn");
 	osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));

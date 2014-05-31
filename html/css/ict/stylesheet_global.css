@@ -448,7 +448,7 @@ body {
 }
 
 #osr_dialog {
-	width: 350px;
+	width: 450px;
 }
 #objectives_dialog {
 	width: 350px;
@@ -682,18 +682,35 @@ ul {
     margin: 5px 10px 5px 10px;
 }
 #osr_right_col {
-    float:right;
-    width: 160px;
+    float:left;
 }
 #osr_left_col {
     float:left;
 }
-.osr_occupancy_right_col_label {
+#osr_occupancy_right_col_label {
     margin-top: 10px;
+    margin-right: 5px;
+    float:left;
+}
+#osr_floors {
+    float:left;
+}
+#osr_occupancy_basement_div {
+    margin: 10px 0 15px 0;
+    height: 25px;
 }
 #osr_occupancy_basement_btn {
-    margin-top: 10px;
     width: 100px;
+    float:left
+}
+#osr_occupancy_nobasement_btn {
+    width: 100px;
+    float:right;
+    margin-left: 15px;
+}
+#osr_occupancy_floors_div {
+    margin: 10px 0 15px 0;
+    height: 25px;
 }
 
 #emergency_traffic_dialog {
@@ -702,4 +719,19 @@ ul {
 .emergency_traffic_item_btn {
     margin: 5px 0 5px 10px;
     width: 450px;
+}
+
+select {
+	text-align: center;
+	background: #CCC;
+	color: #666;
+	border: none;
+	border-radius: 3px;
+	padding: 4px 4px 4px 4px;
+	text-shadow: 1px 1px #AAA;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px #888;
+    width: 220px;
+    display:block;
+    margin-bottom:15px;
 }
