@@ -175,7 +175,7 @@ body {
     margin-bottom: 8px;
 	height: 25px;
 }
-#objectives_btn {
+#objectives_header_btn {
     margin-top: 20px;
 }
 #iap_btn {
@@ -644,4 +644,7 @@ ul {
     font-weight:bold;
 }
 
-
+.objective_btn {
+    width: 165px;
+    margin: 5px 10px 5px 10px;
+}

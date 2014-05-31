@@ -694,6 +694,7 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
  **/
 function initObjectivesDialog( ) {
 	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
+	var objectiveBtnPrototype = $("<div class=\"objective_btn button\"></div>");
 	var newId = "objectives_dialog";
 	dialog.attr("id",newId);
 	var dialogBody = dialog.children(".dialog_body");
@@ -717,12 +718,13 @@ function initObjectivesDialog( ) {
 						"Occupant services"];
 	
 	objectives.forEach(function (objectiveText, index, array) {
-		var chkBox = createCheckBox(objectiveText, "objectives_"+objectiveText);
-		dialogBody.append(chkBox);
+        var btn = objectiveBtnPrototype.clone().html(objectiveText);
+		dialogBody.append(btn);
+		btn.click(function() {btn.toggleClass("glowlightgreen");});
 	});
 	
-	var objectives_btn = $("#objectives_btn");
-	objectives_btn.click(showDialog(0, objectives_btn, "#objectives_dialog"));
+	var objectives_header_btn = $("#objectives_header_btn");
+	objectives_header_btn.click(showDialog(0, objectives_header_btn, "#objectives_dialog"));
 }
 
 
@@ -752,8 +754,8 @@ function initOsrDialog( ) {
 				"IRIC",
 				"Accountability"];
 	
-	osrs.forEach(function (objectiveText, index, array) {
-		var chkBox = createCheckBox(objectiveText, "osr_"+objectiveText);
+	osrs.forEach(function (osrText, index, array) {
+		var chkBox = createCheckBox(osrText, "osr_"+osrText);
 		dialogBody.append(chkBox);
 	});
 	
@@ -974,8 +976,6 @@ function updateTbar(tbar) {
 	}
 
 	var acctBtn = tbar.find(".acct_unit_btn");
-	console.log(hasAcctBtn);
-	console.log(acctBtn);
 	if (hasAcctBtn) {
         acctBtn.show();
 	} else {
