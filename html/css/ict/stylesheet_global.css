@@ -655,3 +655,15 @@ ul {
 #objective_left_col {
     float:left;
 }
+
+.osr_btn {
+    width: 165px;
+    margin: 5px 10px 5px 10px;
+}
+#osr_right_col {
+    float:right;
+    width: 160px;
+}
+#osr_left_col {
+    float:left;
+}

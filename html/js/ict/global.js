@@ -698,36 +698,6 @@ function toggleObjBtn(btn) {
     }
 }
 function initObjectivesDialog( ) {
-//	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
-//	var objectiveBtnPrototype = $("");
-//	var newId = "objectives_dialog";
-//	dialog.attr("id",newId);
-//	var dialogBody = dialog.children(".dialog_body");
-//	newId = "objectives_dialog_body";
-//	dialogBody.attr("id",newId);
-//	var titleDiv = dialog.find(".dialog_title_text");
-//	titleDiv.html("Objectives");
-//	var objectives = ["All Clear",
-//						"Under Control",
-//						"Loss Stopped",
-//						"Upgrade to full recue",
-//						"Assing safety",
-//						"Establish supply line",
-//						"Secure utilities",
-//						"Ventilation",
-//						"Create \"On deck\"",
-//						"Pressurize exposures",
-//						"Monitor channel 16",
-//						"Salvage",
-//						"Establish rehab",
-//						"Occupant services"];
-//
-//	objectives.forEach(function (objectiveText, index, array) {
-//        var btn = objectiveBtnPrototype.clone().html(objectiveText);
-//		dialogBody.append(btn);
-//		btn.click(function() {btn.toggleClass("glowlightgreen");});
-//	});
-
     $(".objective_btn").each(function() {
         $(this).click(toggleObjBtn($(this)));
     });
@@ -740,32 +710,17 @@ function initObjectivesDialog( ) {
 /**
  * OSR Dialog
  **/
+ function toggleOsrBtn(btn) {
+    return function() {
+        btn.toggleClass("glowlightgreen");
+    }
+}
 function initOsrDialog( ) {
-	var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
-	var newId = "osr_dialog";
-	dialog.attr("id",newId);
-	var dialogBody = dialog.children(".dialog_body");
-	newId = "osr_dialog_body";
-	dialogBody.attr("id",newId);
-	var titleDiv = dialog.find(".dialog_title_text");
-	titleDiv.html("OSR");
-	var osrs = ["Unit ID",
-				"Address",
-				"Occupancy",
-				"Construction",
-				"Conditions",
-				"Assume Command",
-				"Location(mobile/cab)",
-				"Strategy (off./def.)",
-				"Attack line",
-				"Water supply",
-				"IRIC",
-				"Accountability"];
-	
-	osrs.forEach(function (osrText, index, array) {
-		var chkBox = createCheckBox(osrText, "osr_"+osrText);
-		dialogBody.append(chkBox);
-	});
+    osr_occupancy.hide();
+
+    $(".osr_btn").each(function() {
+        $(this).click(toggleOsrBtn($(this)));
+    });
 	
 	var osr_btn = $("#osr_btn");
 	osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
