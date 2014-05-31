@@ -900,23 +900,30 @@ function initUnitsDialog( ) {
 						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
 						addUnitButton(unitsContainer, tbar_clicked);
 
-						//Click and hold handler
-						btn_clicked.mousedown(function(event) {
+						//Dragable handler
+                        btn_clicked.mousedown(function(event) {
                             timeoutId = setTimeout(
                                 function(){
+                                    // Start dragging
                                     btn_clicked.draggable('enable');
                                     btn_clicked.addClass("unit_btn_dragging");
                                     btn_clicked.draggable({
                                       start: function( event, ui ) {
-                                        console.log("start");
                                         $(event.target).addClass("glowlightblue");
                                         $(event.target).css("z-index", 10);
+                                        $(event.target).data({
+                                            'originalLeft': $(event.target).css('left'),
+                                            'origionalTop': $(event.target).css('top')
+                                        });
                                       },
                                       stop: function( event, ui ) {
-                                        console.log("stop");
                                         $(event.target).removeClass("glowlightblue");
                                         $(event.target).removeClass("unit_btn_dragging");
                                         $(event.target).draggable('disable');
+                                        $(event.target).css({
+                                            'left': $(event.target).data('originalLeft'),
+                                            'top': $(event.target).data('origionalTop')
+                                        });
                                       }
                                     });
 
@@ -1034,6 +1041,7 @@ function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.append(singleUnitContainer);
 	unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 	unitBtn.draggable();
+	unitBtn.draggable('disable');
 	
 	// Create the actions column for this unit
 	var actions_list = $("<div class=\"actions_list\"></div>");
@@ -1109,13 +1117,21 @@ function addTbar(tbarContainer) {
 		unitBtnContainer.manyBtns = 0;
 		addUnitButton(unitBtnContainer, tbar);
 
-		//Make Units column droppable
-		var tbar_units_td = $('.tbar_units_td');
-		tbar.droppable();
-		tbar.droppable({
-          over: function( event, ui ) {$(event.target).addClass("glowlightblue")},
-          out: function( event, ui ) {$(event.target).removeClass("glowlightblue")},
-          drop: function( event, ui ) {$(event.target).removeClass("glowlightblue")}
+		// Droppable handler
+        tbar.droppable();
+        tbar.droppable({
+            over: function( event, ui ) {
+                $(event.target).addClass("glowlightblue");
+            },
+            out: function( event, ui ) {
+                $(event.target).removeClass("glowlightblue");
+            },
+            drop: function( event, ui ) {
+                $(event.target).removeClass("glowlightblue");
+                var single_unit_div = ui.draggable.parent();
+                var last_unit_div = $(event.target).find(".units_container").children().last();
+                jQuery(single_unit_div).detach().insertBefore(last_unit_div);
+            }
         });
 
 		tbar.show();
