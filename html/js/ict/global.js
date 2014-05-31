@@ -826,6 +826,35 @@ function toggleType(type) {
 		}
 	}
 }
+function startDraggingUnit(unitBtn, event){
+    return function() {
+        // Start dragging
+        unitBtn.draggable('enable');
+        unitBtn.addClass("unit_btn_dragging");
+        unitBtn.draggable({
+          start: function( event, ui ) {
+            $(event.target).addClass("glowlightblue");
+            $(event.target).css("z-index", 10);
+            $(event.target).data({
+                'originalLeft': $(event.target).css('left'),
+                'origionalTop': $(event.target).css('top')
+            });
+          },
+          stop: function( event, ui ) {
+            $(event.target).removeClass("glowlightblue");
+            $(event.target).removeClass("unit_btn_dragging");
+            $(event.target).draggable('disable');
+            $(event.target).css({
+                'left': $(event.target).data('originalLeft'),
+                'top': $(event.target).data('origionalTop')
+            });
+          }
+        });
+
+        // Start dragging
+        unitBtn.trigger(event);
+    }
+}
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn 	= $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -901,35 +930,10 @@ function initUnitsDialog( ) {
 						addUnitButton(unitsContainer, tbar_clicked);
 
 						//Dragable handler
-                        btn_clicked.mousedown(function(event) {
-                            timeoutId = setTimeout(
-                                function(){
-                                    // Start dragging
-                                    btn_clicked.draggable('enable');
-                                    btn_clicked.addClass("unit_btn_dragging");
-                                    btn_clicked.draggable({
-                                      start: function( event, ui ) {
-                                        $(event.target).addClass("glowlightblue");
-                                        $(event.target).css("z-index", 10);
-                                        $(event.target).data({
-                                            'originalLeft': $(event.target).css('left'),
-                                            'origionalTop': $(event.target).css('top')
-                                        });
-                                      },
-                                      stop: function( event, ui ) {
-                                        $(event.target).removeClass("glowlightblue");
-                                        $(event.target).removeClass("unit_btn_dragging");
-                                        $(event.target).draggable('disable');
-                                        $(event.target).css({
-                                            'left': $(event.target).data('originalLeft'),
-                                            'top': $(event.target).data('origionalTop')
-                                        });
-                                      }
-                                    });
-
-                                    // Start dragging
-                                    btn_clicked.trigger(event);
-                                }, 1000);
+                        btn_clicked.mousedown(btn_clicked, function(event) {
+//                            console.log(event.data);
+                            var unitBtn = event.data;
+                            timeoutId = setTimeout(startDraggingUnit(unitBtn, event), 1000);
                         }).bind('mouseup mouseleave', function() {
                             if(typeof timeoutId!='undefined') {
                                 clearTimeout(timeoutId);
