@@ -667,3 +667,10 @@ ul {
 #osr_left_col {
     float:left;
 }
+.osr_occupancy_right_col_label {
+    margin-top: 10px;
+}
+#osr_occupancy_basement_btn {
+    margin-top: 10px;
+    width: 100px;
+}

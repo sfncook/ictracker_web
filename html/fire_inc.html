@@ -294,7 +294,7 @@
                     <div id="osr_left_col">
                         <div class="osr_btn button">Unit ID</div>
                         <div class="osr_btn button">Address</div>
-                        <div class="osr_btn button">Occupancy</div>
+                        <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
                         <div class="osr_btn button">Construction</div>
                         <div class="osr_btn button">Conditions</div>
                         <div class="osr_btn button">Assume Command</div>
@@ -306,8 +306,30 @@
                         <div class="osr_btn button">Accountability</div>
                     </div>
                     <div id="osr_right_col">
-                        <div id="osr_occupancy">
-                            XYZ
+                        <div id="osr_occupancy_right_col">
+                            <div class="osr_occupancy_right_col_label">Type of building:</div>
+                            <select>
+                                <option>Residential home</option>
+                                <option>Duplex</option>
+                                <option>Apartment</option>
+                                <option>Hotel</option>
+                                <option>Strip mall</option>
+                                <option>Office complex</option>
+                                <option>Big box retail</option>
+                                <option>Specialized/Other</option>
+                            </select>
+
+                            <div class="osr_occupancy_right_col_label">Number of floors:</div>
+                            <input type="number" name="age" id="age" min="1" max="50" step="1" value="18">
+
+                            <div class="osr_occupancy_right_col_label">Size of building:</div>
+                            <select>
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Large</option>
+                            </select>
+
+                            <div id="osr_occupancy_basement_btn" class="button">Basement</div>
                         </div>
                     </div>
                 </div>

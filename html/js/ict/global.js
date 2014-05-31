@@ -713,13 +713,24 @@ function initObjectivesDialog( ) {
  function toggleOsrBtn(btn) {
     return function() {
         btn.toggleClass("glowlightgreen");
+        if(btn.attr("id")=="occupancy_osr_btn") {
+            if(btn.hasClass("glowlightgreen")) {
+                $("#osr_occupancy_right_col").show();
+            } else {
+                $("#osr_occupancy_right_col").hide();
+            }
+        }
     }
 }
 function initOsrDialog( ) {
-    osr_occupancy.hide();
+    $("#osr_occupancy_right_col").hide();
 
     $(".osr_btn").each(function() {
         $(this).click(toggleOsrBtn($(this)));
+    });
+
+    $("#osr_occupancy_basement_btn").click(function(){
+        $(this).html() == "Basement" ? $(this).html('No Basement') : $(this).html('Basement');
     });
 	
 	var osr_btn = $("#osr_btn");
