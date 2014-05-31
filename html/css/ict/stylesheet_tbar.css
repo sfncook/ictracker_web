@@ -133,6 +133,9 @@
 	border-bottom: 2px dotted #888 !important;
 	border-radius: 10px;
 }
+.unit_btn_no_psi {
+    margin-left: 40px;
+}
 
 .single_unit_div {
 	z-index: 99;
@@ -246,3 +249,4 @@
     padding: 8px 1px 8px 2px;
     border-radius:2px;
 }
+

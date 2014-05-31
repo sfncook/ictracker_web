@@ -394,14 +394,6 @@ function setTbarSectorTitle(tbar, sectorName) {
     tbar.find(".title_text").html(sectorName);
     //addTbar();
     hideAllDialogs();
-
-    //REHAB sector has no acctBtn
-    var acctBtn = tbar.find(".tbar_title_container").children(".acct_unit_btn");
-    if (sectorName=="REHAB") {
-        acctBtn.hide();
-    } else {
-        acctBtn.show();
-    }
 }
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
@@ -463,7 +455,7 @@ function initSectorDialog( ) {
 		newBtn.click(function() {
 		    if(!newBtn.hasClass("hidden_sector_btn")) {
                 setTbarSectorTitle(tbar_clicked, sectorName);
-                addClockToUnitsIfNeeded(tbar_clicked);
+                updateTbar(tbar_clicked);
                 if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
                     addTbar($("#tbar_container"));
                 }
@@ -913,7 +905,7 @@ function initUnitsDialog( ) {
 						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
 						addUnitButton(unitsContainer, tbar_clicked);
 					}
-					addClockToUnitsIfNeeded(tbar_clicked);
+					updateTbar(tbar_clicked);
 				});
 			});
 			unitTypeCol.append($('<div class="clear_float"/>'));
@@ -967,15 +959,34 @@ function showActionsForUnitBtn(unitBtn) {
 		}
 	  }
 }
-function addClockToUnitsIfNeeded(tbar) {
+function updateTbar(tbar) {
     var sectorName = tbar.find(".title_text").html();
 	var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
+	var hasAcctBtn = !(sectorsWithOutAcctBtn.indexOf(sectorName)>-1);
+	var hasPsiBtn = !(sectorsWithOutAPsiBtn.indexOf(sectorName)>-1);
 
-    var unit_timer_div = tbar.find(".tbar_unit_btn.unit_btn:not(.blank_btn)").siblings(".unit_timer_div");
+    var unit_timer_divs = tbar.find(".unit_btn:not(.blank_btn)").siblings(".unit_timer_div");
     if (hasClock) {
-        unit_timer_div.show();
+        unit_timer_divs.show();
 	} else {
-	    unit_timer_div.hide();
+	    unit_timer_divs.hide();
+	}
+
+	var acctBtn = tbar.find(".acct_unit_btn");
+	if (hasAcctBtn) {
+        acctBtn.show();
+	} else {
+	    acctBtn.hide();
+	}
+
+	var psiBtns = tbar.find(".psi_btn");
+	var unitBtns = tbar.find(".unit_btn");
+	if (hasPsiBtn) {
+        psiBtns.show();
+        unitBtns.removeClass("unit_btn_no_psi");
+	} else {
+	    psiBtns.hide();
+	    unitBtns.addClass("unit_btn_no_psi");
 	}
 }
 function addUnitButton(unitsContainer, tbar) {
@@ -1020,7 +1031,7 @@ function initTbars() {
     var rehab_tbar = addTbar(rehab_tbar_container);
     setTbarSectorTitle(rescue_tbar, "RESCUE");
     setTbarSectorTitle(safety_tbar, "Safety");
-    setTbarSectorTitle(rehab_tbar, "REHAB");
+    setTbarSectorTitle(rehab_tbar, "ReHab");
 }
 var tbarIndex = 1;
 function addTbar(tbarContainer) {
@@ -1304,6 +1315,14 @@ var sectorsWithClock = [
 	"Sector 4",
 	"Rescue",
 	"Sector"
+	];
+
+var sectorsWithOutAcctBtn = [
+	"ReHab",
+	];
+
+var sectorsWithOutAPsiBtn = [
+	"ReHab",
 	];
 
 var sectors = [
