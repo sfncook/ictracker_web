@@ -389,11 +389,6 @@ function toggleNumBtn(btn) {
 		tbarNumBtn.html(btn.html());
 	}
 }
-function setTbarSectorTitle(tbar, sectorName) {
-    tbar.find(".title_text").html(sectorName);
-    //addTbar();
-    hideAllDialogs();
-}
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "sector_dialog";
@@ -453,7 +448,10 @@ function initSectorDialog( ) {
 		
 		newBtn.click(function() {
 		    if(!newBtn.hasClass("hidden_sector_btn")) {
-                setTbarSectorTitle(tbar_clicked, sectorName);
+		        tbar_clicked.find(".title_text").html(sectorName);
+		        if(sectorName!="Sector") {
+		            hideAllDialogs();
+		        }
                 updateTbar(tbar_clicked);
                 if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
                     addTbar($("#tbar_container"));
@@ -1073,9 +1071,10 @@ function initTbars() {
     var rescue_tbar = addTbar(rehab_tbar_container);
     var safety_tbar = addTbar(rehab_tbar_container);
     var rehab_tbar = addTbar(rehab_tbar_container);
-    setTbarSectorTitle(rescue_tbar, "RESCUE");
-    setTbarSectorTitle(safety_tbar, "Safety");
-    setTbarSectorTitle(rehab_tbar, "ReHab");
+
+    rescue_tbar.find(".title_text").html("RESCUE");
+    safety_tbar.find(".title_text").html("Safety");
+    rehab_tbar.find(".title_text").html("ReHab");
 
     updateTbar(rescue_tbar);
     updateTbar(safety_tbar);
