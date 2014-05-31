@@ -685,13 +685,15 @@ function resetSecondaryBenchmarks(tbar, chkbox_container_id) {
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
     return function() {
-        // Update all checkboxes
+        // Update all benchmarks for this tbar
         benchmarks.forEach(function (benchmark, index, array) {
-            if(typeof tbar[benchmark.id] != 'undefined' && tbar[benchmark.id]) {
-                $('#'+benchmark.id).find(".chk_btn").prop('checked', true);
-            } else {
-                $('#'+benchmark.id).find(".chk_btn").prop('checked', false);
-            }
+            benchmark.secondaries.forEach(function (benchmark_2, index, array) {
+                if(typeof tbar[benchmark_2.id] != 'undefined' && tbar[benchmark_2.id]) {
+                    $('#'+benchmark_2.id).find(".benchmark_item_btn").addClass("glowlightgreen");
+                } else {
+                    $('#'+benchmark_2.id).find(".benchmark_item_btn").removeClass("glowlightgreen");
+                }
+            });
         });
 
         // Show the dialog box
