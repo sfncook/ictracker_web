@@ -304,17 +304,18 @@ body {
     background: #EEE;
     padding: 0;
     border-radius: 3px;
-    border: 1px solid #888;
+    border: 1px solid #666;
     box-shadow: 0px 0px 15px #555;
 }
 .dialog_title {
     background: #AAA;
 	padding: 2px 0;
+	border: 1px solid #666;
 }
 .dialog_title_text {
 	text-align: center;
 	font-size: 1.1rem;
-    color: #EEE;
+    color: white;
 }
 .dialog_close_btn {
     background: #F67574;
@@ -333,6 +334,9 @@ body {
 }
 .dialog_body {
 	padding: 4px 0;
+	border-right: 1px solid #666;
+	border-bottom: 1px solid #666;
+	border-left: 1px solid #666;
 }
 
 #sector_dialog {
