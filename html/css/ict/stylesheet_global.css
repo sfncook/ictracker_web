@@ -517,7 +517,10 @@ body {
 }
 .benchmark_item_btn {
     width: 150px;
-    margin:5px 0 5px 10px;
+    margin:0 0 0 10px;
+}
+.benchmark_btn_parent_div {
+    padding: 5px 0 5px 0;
 }
 
 #par_dialog {

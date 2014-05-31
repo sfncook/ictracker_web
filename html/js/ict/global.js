@@ -565,19 +565,20 @@ function initBenchmarkDialog( ) {
     benchmarks.forEach(function (benchmark, index, array) {
 //        var chkBox_primary = createCheckBox(benchmark.label, benchmark.id);
         var benchmark_item = benchmark_item_prototype.clone();
+        benchmark_item.attr("id", benchmark.id);
         left_col.append(benchmark_item);
 
         var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
         benchmark_item_btn.click(toggleBenchmarkBtn(benchmark_item_btn));
         benchmark_item_btn.html(benchmark.label);
-//        benchmark_item_btn.click(clickPrimaryBenchmark(benchmark_item));
+        benchmark_item_btn.click(clickPrimaryBenchmark(benchmark_item));
 
 //        chkBox_primary.addClass("benchmark_checkbox_container");
 
-//        var right_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
-//        right_col.appendTo(dialogBody);
-//        right_col.hide();
-//        right_cols[benchmark.id] = right_col;
+        var right_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
+        right_col.appendTo(dialogBody);
+        right_col.hide();
+        right_cols[benchmark.id] = right_col;
 //        benchmark.secondaries.forEach(function (benchmark_2, index, array) {
 //            var chkBox_2 = createCheckBox(benchmark_2.label, benchmark_2.id);
 //            chkBox_2.find(".chk_btn").click(clickSecondaryBenchmark(chkBox_2));
@@ -589,75 +590,69 @@ function initBenchmarkDialog( ) {
 
 //	btnsToBlink.push($("#bnch_primary_challenge"));
 }
-function clickPrimaryBenchmark(chkbox_container) {
+function clickPrimaryBenchmark(benchmark_item) {
     return function() {
-        var chk_btn = chkbox_container.find(".chk_btn")[0];
-        if(chk_btn.checked) {
+        var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
+        if(benchmark_item_btn.hasClass("glowlightgreen")) {
             // If user Checked the box
-            tbar_clicked['primary_benchmark'] = chkbox_container.attr('id');
-            setBenchmark(chkbox_container.attr('id'));
+            tbar_clicked['primary_benchmark'] = benchmark_item.attr('id');
+            setBenchmark(benchmark_item.attr('id'));
         } else {
             // If user UN-checked the box
-            resetSecondaryBenchmarks(tbar_clicked, chkbox_container.attr('id'));
-            if(chkbox_container.attr('id')=='bnch_primary'){
+            resetSecondaryBenchmarks(tbar_clicked, benchmark_item.attr('id'));
+            if(benchmark_item.attr('id')=='bnch_primary'){
                 tbar_clicked['primary_benchmark'] = '';
                 resetBenchmarks();
             } else {
-                tbar_clicked['primary_benchmark'] = chkbox_container.prev().attr('id');
-                setBenchmark(chkbox_container.prev().attr('id'));
+                tbar_clicked['primary_benchmark'] = benchmark_item.prev().attr('id');
+                setBenchmark(benchmark_item.prev().attr('id'));
             }
         }
     };
 }
 function resetBenchmarks() {
     // Disable ALL
-    $('.benchmark_checkbox_container').each(function (index) {
-        $(this).find(".chk_btn").attr("disabled", true);
-        $(this).find(".chk_btn").prop("checked", false);
-        $(this).find(".chk_label").addClass("disabled");
+    $('.benchmark_btn_parent_div').each(function (index) {
+        $(this).find(".benchmark_item_btn").addClass("disabled");
+        $(this).find(".benchmark_item_btn").removeClass("glowlightgreen");
         $(this).removeClass("glow_orange");
     });
     $('.benchmark_2nd_col_container').hide();
 
     // Enable but do not check, nor select first chkbox
-    $("#bnch_primary").find(".chk_btn").attr("disabled", false);
-    $("#bnch_primary").find(".chk_label").removeClass("disabled");
+    $("#bnch_primary").find(".benchmark_item_btn").removeClass("disabled");
 }
-function setBenchmark(chkbox_container_id) {
-    var chkbox_container = $("#"+chkbox_container_id);
-    var chk_btn = $(chkbox_container.find(".chk_btn")[0]);
-    var chk_label = $(chkbox_container.find(".chk_label")[0]);
+function setBenchmark(benchmark_item_id) {
+    var benchmark_item = $("#"+benchmark_item_id);
+    var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
+    var chk_btn = $(benchmark_item.find(".chk_btn")[0]);
 
-    chk_btn.attr("disabled", false);
-    chk_btn.prop("checked", true);
-    chk_label.removeClass("disabled");
-    chkbox_container.addClass("glow_orange");
+    benchmark_item_btn.removeClass("disabled");
+    benchmark_item_btn.addClass("glowlightgreen");
+    benchmark_item.addClass("glow_orange");
 
     // Show right-side
     $('.benchmark_2nd_col_container').hide();
-    var right_col = right_cols[chkbox_container_id];
+    var right_col = right_cols[benchmark_item_id];
     right_col.show();
 
     // Remove glow_orange from previous
-    chkbox_container.prevAll().each(function (index) {
-        $(this).find(".chk_btn").attr("disabled", false);
-        $(this).find(".chk_btn").prop("checked", true);
-        $(this).find(".chk_label").removeClass("disabled");
+    benchmark_item.prevAll().each(function (index) {
+        $(this).find(".benchmark_item_btn").removeClass("disabled");
+        $(this).find(".benchmark_item_btn").addClass("glowlightgreen");
         $(this).removeClass("glow_orange");
     });
 
     // Disable ALL next
-    chkbox_container.nextAll().each(function (index) {
-        $(this).find(".chk_btn").attr("disabled", true);
-        $(this).find(".chk_btn").prop("checked", false);
-        $(this).find(".chk_label").addClass("disabled");
+    benchmark_item.nextAll().each(function (index) {
+        $(this).find(".benchmark_item_btn").addClass("disabled");
+        $(this).find(".benchmark_item_btn").removeClass("glowlightgreen");
         $(this).removeClass("glow_orange");
     });
 
-    if(chkbox_container.next().hasClass("benchmark_checkbox_container")) {
-        chkbox_container.next().find(".chk_btn").attr("disabled", false);
-        chkbox_container.next().find(".chk_label").removeClass("disabled");
-        chkbox_container.next().removeClass("glow_orange");
+    if(benchmark_item.next().hasClass("benchmark_btn_parent_div")) {
+        benchmark_item.next().find(".benchmark_item_btn").removeClass("disabled");
+        benchmark_item.next().removeClass("glow_orange");
     }
 }
 function clickSecondaryBenchmark(chkBox_2) {
