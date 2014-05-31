@@ -136,6 +136,11 @@
 .unit_btn_no_psi {
     margin-left: 40px;
 }
+.unit_btn_dragging {
+    border: 4px lightblue solid;
+    width: 65px;
+    height: 35px;
+}
 
 .single_unit_div {
 	z-index: 99;
