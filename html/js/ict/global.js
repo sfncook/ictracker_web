@@ -209,18 +209,36 @@ function updateBgColor(psi_value, btn) {
 	}
 }
 function clickPersonnelBtn(btn) {
-	var tbarNumBtn = tbar_clicked.find(".title_num");
+	var personnel_btn = btn_clicked.find(".personnel_btn");
 	if (btn.hasClass("glow_orange")) {
-		$(".dir_supl_info_num_btn").removeClass("glow_orange");
-		tbar_clicked.prefix_num = 'X';
-		tbarNumBtn.hide();
+		$(".unit_people_dialog_btn").removeClass("glow_orange");
+		tbar_clicked['personnel'] = 'X';
+		personnel_btn.html("P");
 	} else {
-		$(".dir_supl_info_num_btn").removeClass("glow_orange");
+		$(".unit_people_dialog_btn").removeClass("glow_orange");
 		btn.addClass("glow_orange");
-		tbar_clicked.prefix_num = btn.html();
-		tbarNumBtn.show();
-		tbarNumBtn.html(btn.html());
+		tbar_clicked['personnel'] = btn.html();
+		personnel_btn.html(btn.html());
 	}
+}
+function showUnitPeopleDialog( tbar, btn ){
+  return function(){
+    var unit_people_dialog = $("#unit_people_dialog");
+
+    var unit_people_dialog_btn = unit_people_dialog.find(".unit_people_dialog_btn:contains('"+tbar['personnel']+"')");
+    $(".unit_people_dialog_btn").removeClass("glow_orange");
+    if(unit_people_dialog_btn!=null) {
+        unit_people_dialog_btn.addClass("glow_orange");
+    }
+
+
+	$(".dialog").hide();
+	$(".side_dialog_container").hide();
+	btn_clicked = btn;
+	tbar_clicked = tbar;
+	$("#dialogContainer").show();
+	unit_people_dialog.show();
+  }
 }
 function initUnitPeopleDialog() {
     var unit_people_dialog = $("#unit_people_dialog" );
@@ -234,7 +252,7 @@ function initUnitPeopleDialog() {
 		newBtn.addClass(btnText+"_supl_btn");
 		newBtn.html(btnText);
 		row1.append(newBtn);
-//		newBtn.click(function() {clickNumBtn(newBtn);});
+		newBtn.click(function() {clickPersonnelBtn(newBtn);});
 	});
 	row1.append($("<div class='clear_float'></div>"));
 
@@ -1140,7 +1158,9 @@ function addUnitButton(unitsContainer, tbar) {
     var unitBtn = unit_side_container.find(".unit_btn");
     unit_side_container.show();
     unit_side_container.appendTo(unitsContainer);
-	unit_side_container.find(".unit_side_container_left_side").click(showDialog(tbar, unit_side_container, "#unit_people_dialog"));
+
+    var unit_side_container_left_side = unit_side_container.find(".unit_side_container_left_side");
+	unit_side_container_left_side.click(showUnitPeopleDialog(tbar, unit_side_container_left_side));
 
 //	singleUnitContainer.append(unit_side_container);
 //	singleUnitContainer.append(unitBtn);
