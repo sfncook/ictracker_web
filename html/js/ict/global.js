@@ -176,9 +176,10 @@ function initParDialog( ) {
  **/
 function setPsiText(text) {
 	return function(){
-		btn_clicked.html(text);
+	    var psi_btn = btn_clicked.find(".psi_btn");
+		psi_btn.html(text);
 		hideAllDialogs();
-		updateBgColor(text, btn_clicked);
+		updateBgColor(text, psi_btn);
 	  }
 }
 function initPsiDialog( ) {
@@ -206,6 +207,47 @@ function updateBgColor(psi_value, btn) {
 	} else {
 		btn.addClass("psi_red").removeClass("psi_yellow").removeClass("psi_green");
 	}
+}
+function clickPersonnelBtn(btn) {
+	var tbarNumBtn = tbar_clicked.find(".title_num");
+	if (btn.hasClass("glow_orange")) {
+		$(".dir_supl_info_num_btn").removeClass("glow_orange");
+		tbar_clicked.prefix_num = 'X';
+		tbarNumBtn.hide();
+	} else {
+		$(".dir_supl_info_num_btn").removeClass("glow_orange");
+		btn.addClass("glow_orange");
+		tbar_clicked.prefix_num = btn.html();
+		tbarNumBtn.show();
+		tbarNumBtn.html(btn.html());
+	}
+}
+function initUnitPeopleDialog() {
+    var unit_people_dialog = $("#unit_people_dialog" );
+    var row1 = unit_people_dialog.find("#unit_people_dialog_row1");
+    var row2 = unit_people_dialog.find("#unit_people_dialog_row2");
+
+    var personnelPrototypeBtn = $("<div class=\"unit_people_dialog_btn button sm_round_btn\">PROTOTYPE</div>");
+    ["1","2","3","4","5"].forEach(function (btnText, index, array) {
+		var newBtn = personnelPrototypeBtn.clone();
+		newBtn.addClass("dir_supl_info_num_btn");
+		newBtn.addClass(btnText+"_supl_btn");
+		newBtn.html(btnText);
+		row1.append(newBtn);
+//		newBtn.click(function() {clickNumBtn(newBtn);});
+	});
+	row1.append($("<div class='clear_float'></div>"));
+
+    // PSI Buttons
+    var prototypeBtn = $("<div class=\"psi_btn unit_people_dialog_btn dialog_btn button\">PROTOTYPE</div>");
+	for(var psiValue=4500; psiValue>=0; psiValue-=100) {
+		var newBtn = prototypeBtn.clone();
+		newBtn.html(psiValue);
+		updateBgColor(psiValue, newBtn);
+		row2.append(newBtn);
+		newBtn.click(setPsiText(psiValue));
+	}
+	row2.append("<div class=\"clear_float\"></div>");
 }
 
 
@@ -1098,6 +1140,7 @@ function addUnitButton(unitsContainer, tbar) {
     var unitBtn = unit_side_container.find(".unit_btn");
     unit_side_container.show();
     unit_side_container.appendTo(unitsContainer);
+	unit_side_container.find(".unit_side_container_left_side").click(showDialog(tbar, unit_side_container, "#unit_people_dialog"));
 
 //	singleUnitContainer.append(unit_side_container);
 //	singleUnitContainer.append(unitBtn);
@@ -1108,11 +1151,12 @@ function addUnitButton(unitsContainer, tbar) {
 	unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 	unitBtn.draggable();
 	unitBtn.draggable('disable');
-	
+
 	// Create the actions column for this unit
 	var actions_list = $("<div class=\"actions_list\"></div>");
 	tbar.find(".actions_parent_container").append(actions_list);
 	unitBtn.actions_list = actions_list;
+
 }
 function addActionButton(tbar, actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");
@@ -1375,6 +1419,7 @@ function init( ) {
 	initPsiDialog();
 	initActionsDialog();
 	initUnitsDialog();
+	initUnitPeopleDialog();
 	initBenchmarkDialog();
 	$("#report_btn").click(function(){alert("TESTING");});
 	initCmdTerminateDialog();

@@ -231,7 +231,7 @@
     background:red !important;
 }
 .tbar_unit_btn {
-    margin: 2px 0 0 1px;
+    margin: 2px 0 0 3px;
 	float: left;
 }
 
@@ -319,7 +319,7 @@
 img.show_actions_btn {
     width: 8px;
     height: 13px;
-    margin: 9px 0 0 5px;
+    margin: 9px 0 0 8px;
 }
 img.show_actions_btn:hover {
     cursor: pointer;

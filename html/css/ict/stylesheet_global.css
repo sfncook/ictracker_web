@@ -748,3 +748,11 @@ ul {
     display:block;
     margin-bottom:15px;
 }
+
+#unit_people_dialog {
+    width:400px;
+}
+.unit_people_dialog_btn {
+    float:left;
+    margin:4px !important;
+}
