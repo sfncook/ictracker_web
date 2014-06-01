@@ -1042,6 +1042,7 @@ function initUnitsDialog( ) {
 						var unitsContainer = btn_clicked.parents(".units_container");
 						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
 						addUnitButton(unitsContainer, tbar_clicked);
+						btn_clicked.parents(".unit_side_container").find(".unit_side_container_left_side").removeClass("hidden_div");
 						btn_clicked.parents(".unit_side_container").find(".psi_btn").removeClass("hidden_div");
 						btn_clicked.parents(".unit_side_container").find(".personnel_btn").removeClass("hidden_div");
 						btn_clicked.parents(".unit_side_container").find(".show_actions_btn").removeClass("hidden_div");

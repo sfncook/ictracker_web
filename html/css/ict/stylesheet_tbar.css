@@ -207,7 +207,8 @@
 	opacity: 0.0;
 }
 .hidden_div:hover {
-	cursor: default;
+	cursor: default !important;
+	opacity: 0.0;
 }
 .unit_side_container {
     border:transparent 2px solid;
