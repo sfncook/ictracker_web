@@ -137,8 +137,8 @@
 .acct_unit_btn {
 	background: yellow;
 	border: 2px #AAC7D1 solid;
-	padding: 0 4px 0 0;
-	margin-bottom: 5px;
+	padding: 0;
+	margin: 2px 5px;
 }
 .blank_btn {
 	background: #AAC7D1;
@@ -199,33 +199,28 @@
 	margin: 3px 0;
 	padding: 4px 0;
 }
-.par_psi_hidden {
+.hidden_div {
 	/*
 	 *Use opacity rather than show/hide
 	 *so the button maintains its space
-	*
-	opacity: 0.0;*/
+	*/
+	opacity: 0.0;
 }
-.par_psi_hidden:hover {
+.hidden_div:hover {
 	cursor: default;
 }
 .unit_side_container {
-    border:transparent 3 solid;
+    border:transparent 2px solid;
 }
 .unit_side_container td {
     padding: 0;
     float:left;
 }
-.unit_side_container_left_side {
-    border: transparent 2 solid;
-}
 .unit_side_container_left_side:hover {
-    border: #9ad1ff 2 solid;
     background:#9ad1ff;
     cursor: pointer;
 }
 .unit_side_container_left_side:active {
-    border: #6BACE3 2 solid;
     background:#6BACE3;
     cursor: pointer;
 }
@@ -236,7 +231,7 @@
     background:red !important;
 }
 .tbar_unit_btn {
-    margin: 5px 0;
+    margin: 2px 0 0 1px;
 	float: left;
 }
 
@@ -311,4 +306,24 @@
     padding: 0;
     margin: 0 0 0 4px;
     border-radius: 15px;
+}
+
+/*.show_actions_btn {
+    width: 16px;
+    height: 16px;
+    border-radius:10px;
+    padding: 1px 0 0 1px;
+    margin: 9px 0 0 5px;
+    border: 1px #666 solid;
+}*/
+img.show_actions_btn {
+    width: 8px;
+    height: 13px;
+    margin: 9px 0 0 5px;
+}
+img.show_actions_btn:hover {
+    cursor: pointer;
+}
+img.show_actions_btn:active {
+    cursor: pointer;
 }

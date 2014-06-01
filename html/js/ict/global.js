@@ -970,27 +970,31 @@ function initUnitsDialog( ) {
 				unitBtn.click(function() {
 					var isNewButton = btn_clicked.html()=="Unit";
 					setUnitName(btn_clicked, unitName);
-					btn_clicked.unbind( "click" );
-					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
+//					btn_clicked.unbind( "click" );
+//					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
 					showActionsForUnitBtn(btn_clicked)();
 					addEvent_unit_to_sector(unitName, "sector");
 					hideAllDialogs();
 					if (isNewButton) {
 					    tbar_clicked.find(".par_btn").removeClass("disabled");
-						var unitsContainer = btn_clicked.parent().parent();
+						var unitsContainer = btn_clicked.parents(".units_container");
 						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
 						addUnitButton(unitsContainer, tbar_clicked);
+						btn_clicked.parents(".unit_side_container").find(".psi_btn").removeClass("hidden_div");
+						btn_clicked.parents(".unit_side_container").find(".personnel_btn").removeClass("hidden_div");
+						btn_clicked.parents(".unit_side_container").find(".show_actions_btn").removeClass("hidden_div");
+						btn_clicked.parents(".unit_side_container").find(".show_actions_btn").click(showActionsForUnitBtn(btn_clicked));
+//						unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 
 						//Dragable handler
-                        btn_clicked.mousedown(btn_clicked, function(event) {
-//                            console.log(event.data);
-                            var unitBtn = event.data;
-                            timeoutId = setTimeout(startDraggingUnit(unitBtn, event), 1000);
-                        }).bind('mouseup mouseleave', function() {
-                            if(typeof timeoutId!='undefined') {
-                                clearTimeout(timeoutId);
-                            }
-                        });
+//                        btn_clicked.mousedown(btn_clicked, function(event) {
+//                            var unitBtn = event.data;
+//                            timeoutId = setTimeout(startDraggingUnit(unitBtn, event), 1000);
+//                        }).bind('mouseup mouseleave', function() {
+//                            if(typeof timeoutId!='undefined') {
+//                                clearTimeout(timeoutId);
+//                            }
+//                        });
 					}
 					updateTbar(tbar_clicked);
 				});
@@ -1026,23 +1030,21 @@ function setUnitName(unitBtn, unitName) {
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
 		var tbar = unitBtn.parents(".tbar");
-//		console.log(unitBtn);
-		console.log(tbar);
 		if (typeof tbar !== "undefined") {
 			var actionsParentContainer = tbar.find(".actions_parent_container");
 			actionsParentContainer.children(".actions_list").hide();
 			actionsParentContainer.children("."+unitBtn.html()).show();
 			
 			// Highlight select unit
-			tbar.find(".single_unit_div").removeClass("glowlightyellow");
-			unitBtn.parent().addClass("glowlightyellow");
+			tbar.find(".unit_side_container").removeClass("glowlightyellow");
+			unitBtn.parents(".unit_side_container").addClass("glowlightyellow");
 			
 			// Update PAR and PSI buttons
-			var psiBtn = unitBtn.parent().children(".psi_btn");
+			var psiBtn = unitBtn.parents(".unit_side_container").children(".psi_btn");
 			psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
 			psiBtn.removeClass("par_psi_hidden");
 			
-			var parBtn = unitBtn.parent().children(".par_btn");
+			var parBtn = unitBtn.parents(".unit_side_container").children(".par_btn");
 			parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
 			parBtn.removeClass("par_psi_hidden");
 		}
@@ -1055,11 +1057,11 @@ function updateTbar(tbar) {
 	var hasPsiBtn = !(sectorsWithOutAPsiBtn.indexOf(sectorName)>-1);
 	var hasActions = !(sectorsWithOutActions.indexOf(sectorName)>-1);
 
-    var unit_timer_divs = tbar.find(".unit_btn:not(.blank_btn)").siblings(".unit_timer_div");
+    var clock_icon = tbar.find(".unit_btn:not(.blank_btn)").parents(".unit_side_container").find(".clock_icon");
     if (hasClock) {
-        unit_timer_divs.show();
+        clock_icon.removeClass("hidden_div");
 	} else {
-	    unit_timer_divs.hide();
+	    clock_icon.addClass("hidden_div");
 	}
 
 	var acctBtn = tbar.find(".acct_unit_btn");
@@ -1087,17 +1089,17 @@ function updateTbar(tbar) {
 	}
 }
 function addUnitButton(unitsContainer, tbar) {
-	unitsContainer.children().children().removeClass("blank_btn");
+	unitsContainer.find(".blank_btn").removeClass("blank_btn");
 //	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
 //	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 //	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
 //	var clockDiv = $("<div class=\"unit_timer_div\"><img style=\"margin:0\" class=\"clock_icon\" src=\"images/clock.png\"/></div>").clone();
-    var unit_side_container_prototype = $("#unit_side_container_prototype").clone();
-    var unitBtn = unit_side_container_prototype.find(".unit_btn");
+    var unit_side_container = $("#unit_side_container_prototype").clone();
+    var unitBtn = unit_side_container.find(".unit_btn");
+    unit_side_container.show();
+    unit_side_container.appendTo(unitsContainer);
 
-    unit_side_container_prototype.appendTo(unitsContainer);
-
-//	singleUnitContainer.append(unit_side_container_prototype);
+//	singleUnitContainer.append(unit_side_container);
 //	singleUnitContainer.append(unitBtn);
 //	singleUnitContainer.append(clockDiv);
 //	clockDiv.hide();
@@ -1192,7 +1194,7 @@ function addTbar(tbarContainer) {
             },
             drop: function( event, ui ) {
                 var unitBtn = ui.draggable;
-                var single_unit_div = unitBtn.parent();
+                var unit_side_container = unitBtn.parents(".unit_side_container");
                 var dest_tbar = $(event.target);
                 var source_tbar = unitBtn.parents(".tbar");
 
@@ -1206,7 +1208,7 @@ function addTbar(tbarContainer) {
 
                 // Move unit_btn (and parent and siblings) to new TBar
                 var last_unit_div = tbar.find(".units_container").children().last();
-                jQuery(single_unit_div).detach().insertBefore(last_unit_div);
+                jQuery(unit_side_container).detach().insertBefore(last_unit_div);
             }
         });
 
