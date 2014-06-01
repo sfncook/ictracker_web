@@ -122,6 +122,22 @@ body {
 .button:active {
 	background-color: #BBB;
 }
+
+.button_no_hover {
+	text-align: center;
+	background: #CCC;
+	color: #666;
+	border: none;
+	border-radius: 3px;
+	padding: 4px 4px 4px 4px;
+	text-shadow: 1px 1px #AAA;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px #888;
+}
+.button_no_hover:hover {
+    cursor:pointer !important;
+}
+
 .disabled, .disabled:hover, .disabled:active {
     background: #DDD !important;
     color: #AAA;

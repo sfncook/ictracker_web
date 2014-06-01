@@ -1088,16 +1088,21 @@ function updateTbar(tbar) {
 }
 function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.children().children().removeClass("blank_btn");
-	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
-	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
-	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
-	var clockDiv = $("<div class=\"unit_timer_div\"><img style=\"margin:0\" class=\"clock_icon\" src=\"images/clock.png\"/></div>").clone();
-	singleUnitContainer.append(psiBtn);
-	singleUnitContainer.append(unitBtn);
-	singleUnitContainer.append(clockDiv);
-	clockDiv.hide();
-	singleUnitContainer.append($('<div class="clear_float"/>'));
-	unitsContainer.append(singleUnitContainer);
+//	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
+//	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
+//	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
+//	var clockDiv = $("<div class=\"unit_timer_div\"><img style=\"margin:0\" class=\"clock_icon\" src=\"images/clock.png\"/></div>").clone();
+    var unit_side_container_prototype = $("#unit_side_container_prototype").clone();
+    var unitBtn = unit_side_container_prototype.find(".unit_btn");
+
+    unit_side_container_prototype.appendTo(unitsContainer);
+
+//	singleUnitContainer.append(unit_side_container_prototype);
+//	singleUnitContainer.append(unitBtn);
+//	singleUnitContainer.append(clockDiv);
+//	clockDiv.hide();
+//	singleUnitContainer.append($('<div class="clear_float"/>'));
+//	unitsContainer.append(singleUnitContainer);
 	unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 	unitBtn.draggable();
 	unitBtn.draggable('disable');
@@ -1378,6 +1383,7 @@ function init( ) {
 	initIncidentInfo();
 	initEmergTrafficDialog();
 
+    $("#unit_side_container_prototype").hide();
 	$("#tbar_prototype").hide();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
