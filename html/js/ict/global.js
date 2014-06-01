@@ -254,6 +254,8 @@ function initUnitPeopleDialog() {
 		row1.append(newBtn);
 		newBtn.click(function() {clickPersonnelBtn(newBtn);});
 	});
+
+	var resetClockBtn = $("<div id='reset_clock_btn' class='disabled reset_clock_btn button'>Reset <img class='clock_icon' src='images/clock.png'/></div>").clone().appendTo(row1);
 	row1.append($("<div class='clear_float'></div>"));
 
     // PSI Buttons
