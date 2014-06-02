@@ -1034,11 +1034,11 @@ function initUnitsDialog( ) {
 				var newId = "unit_city_btn_"+city;
 				unitBtn.attr("id",newId);
 				unitBtn.click(function() {
-					var isNewButton = btn_clicked.html()=="Unit";
+				    var prevUnitName = btn_clicked.html();
+					var isNewButton = btn_clicked.hasClass("blank_btn");
 					setUnitName(btn_clicked, unitName);
 //					btn_clicked.unbind( "click" );
 //					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
-					showActionsForUnitBtn(btn_clicked)();
 					addEvent_unit_to_sector(unitName, "sector");
 					hideAllDialogs();
 					if (isNewButton) {
@@ -1051,6 +1051,10 @@ function initUnitsDialog( ) {
 						btn_clicked.parents(".unit_side_container").find(".personnel_btn").removeClass("hidden_div");
 						btn_clicked.parents(".unit_side_container").find(".show_actions_btn").removeClass("hidden_div");
 						btn_clicked.parents(".unit_side_container").find(".show_actions_btn").click(showActionsForUnitBtn(btn_clicked));
+
+						// Add action list
+		                addActionButton(btn_clicked.parents(".tbar"), btn_clicked.actions_list);
+
 //						unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 
 						//Dragable handler
@@ -1063,6 +1067,11 @@ function initUnitsDialog( ) {
 //                            }
 //                        });
 					}
+					// Update action list class
+					btn_clicked.actions_list.removeClass(prevUnitName);
+					btn_clicked.actions_list.addClass(unitName);
+					showActionsForUnitBtn(btn_clicked)();
+
 					updateTbar(tbar_clicked);
 				});
 			});
@@ -1087,12 +1096,12 @@ function setUnitName(unitBtn, unitName) {
 	} else if (unitName.length>4) {
 		unitBtn.addClass("btn_medtext");
 	}
-	if (typeof unitBtn.actions_list !== "undefined") {
-		var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
-		action_list_unit_name_title.html(unitName);
-		unitBtn.actions_list.addClass(unitName);
-		addActionButton(unitBtn.parents(".tbar"), unitBtn.actions_list);
-	}
+//	if (typeof unitBtn.actions_list !== "undefined") {
+//		var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
+//		action_list_unit_name_title.html(unitName);
+//		unitBtn.actions_list.addClass(unitName);
+//		addActionButton(unitBtn.parents(".tbar"), unitBtn.actions_list);
+//	}
 }
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
