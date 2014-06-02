@@ -626,11 +626,6 @@ var benchmarks = [
                 {id:"bnch_lossstop_par", label:"PAR"},
                 {id:"bnch_lossstop_notify", label:"Notify Alarm"}]
         }];
-function toggleBenchmarkBtn(btn) {
-    return function() {
-        btn.toggleClass("glowlightgreen");
-    }
-}
 function initBenchmarkDialog( ) {
     var dialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "benchmarks_dialog";
@@ -653,7 +648,6 @@ function initBenchmarkDialog( ) {
         left_col.append(benchmark_item);
 
         var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
-        benchmark_item_btn.click(toggleBenchmarkBtn(benchmark_item_btn));
         benchmark_item_btn.html(benchmark.label);
         benchmark_item_btn.data("img_name",benchmark.img_name);
         benchmark_item_btn.click(clickPrimaryBenchmark(benchmark_item));
@@ -684,24 +678,27 @@ function initBenchmarkDialog( ) {
 function clickPrimaryBenchmark(benchmark_item) {
     return function() {
         var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
-        if(benchmark_item_btn.hasClass("glowlightgreen")) {
-            // If user Checked the box
-            tbar_clicked['primary_benchmark'] = benchmark_item.attr('id');
-            setBenchmark(benchmark_item.attr('id'));
-            var img_name = benchmark_item_btn.data("img_name");
-            tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
-        } else {
-            // If user UN-checked the box
-            resetSecondaryBenchmarks(tbar_clicked, benchmark_item.attr('id'));
-            if(benchmark_item.attr('id')=='bnch_primary'){
-                tbar_clicked['primary_benchmark'] = '';
-                resetBenchmarks();
-                tbar_clicked.find(".benchmarks_icon").attr("src", "images/benchmarks_0.png");
-            } else {
-                tbar_clicked['primary_benchmark'] = benchmark_item.prev().attr('id');
-                setBenchmark(benchmark_item.prev().attr('id'));
-                var img_name = benchmark_item.prev().find(".benchmark_item_btn").data("img_name");
+        if(!benchmark_item_btn.hasClass("disabled")) {
+            benchmark_item_btn.toggleClass("glowlightgreen");
+            if(benchmark_item_btn.hasClass("glowlightgreen")) {
+                // If user Checked the box
+                tbar_clicked['primary_benchmark'] = benchmark_item.attr('id');
+                setBenchmark(benchmark_item.attr('id'));
+                var img_name = benchmark_item_btn.data("img_name");
                 tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
+            } else {
+                // If user UN-checked the box
+                resetSecondaryBenchmarks(tbar_clicked, benchmark_item.attr('id'));
+                if(benchmark_item.attr('id')=='bnch_primary'){
+                    tbar_clicked['primary_benchmark'] = '';
+                    resetBenchmarks();
+                    tbar_clicked.find(".benchmarks_icon").attr("src", "images/benchmarks_0.png");
+                } else {
+                    tbar_clicked['primary_benchmark'] = benchmark_item.prev().attr('id');
+                    setBenchmark(benchmark_item.prev().attr('id'));
+                    var img_name = benchmark_item.prev().find(".benchmark_item_btn").data("img_name");
+                    tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
+                }
             }
         }
     };
@@ -788,7 +785,7 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
 
         // Show the dialog box
         showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
-        if(typeof tbar['primary_benchmark'] != 'undefined') {
+        if(typeof tbar['primary_benchmark'] != 'undefined' && tbar['primary_benchmark']!='') {
             setBenchmark(tbar['primary_benchmark']);
         } else {
             resetBenchmarks();
