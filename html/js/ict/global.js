@@ -774,6 +774,14 @@ function resetSecondaryBenchmarks(tbar, chkbox_container_id) {
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
     return function() {
+        // Change benchmark dialog title
+        var title = tbar.find(".title_text").html();
+        if(title!="Sector Title") {
+            $("#benchmarks_dialog").find(".dialog_title_text").html(title+" Benchmarks");
+        } else {
+            $("#benchmarks_dialog").find(".dialog_title_text").html("Benchmarks");
+        }
+
         // Update all benchmarks for this tbar
         benchmarks.forEach(function (benchmark, index, array) {
             benchmark.secondaries.forEach(function (benchmark_2, index, array) {
