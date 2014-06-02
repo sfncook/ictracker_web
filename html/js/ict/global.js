@@ -1034,45 +1034,47 @@ function initUnitsDialog( ) {
 				var newId = "unit_city_btn_"+city;
 				unitBtn.attr("id",newId);
 				unitBtn.click(function() {
-				    var prevUnitName = btn_clicked.html();
-					var isNewButton = btn_clicked.hasClass("blank_btn");
-					setUnitName(btn_clicked, unitName);
-//					btn_clicked.unbind( "click" );
-//					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
-					addEvent_unit_to_sector(unitName, "sector");
-					hideAllDialogs();
-					if (isNewButton) {
-					    tbar_clicked.find(".par_btn").removeClass("disabled");
-						var unitsContainer = btn_clicked.parents(".units_container");
-						var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
-						addUnitButton(unitsContainer, tbar_clicked);
-						btn_clicked.parents(".unit_side_container").find(".unit_side_container_left_side").removeClass("hidden_div");
-						btn_clicked.parents(".unit_side_container").find(".psi_btn").removeClass("hidden_div");
-						btn_clicked.parents(".unit_side_container").find(".personnel_btn").removeClass("hidden_div");
-						btn_clicked.parents(".unit_side_container").find(".show_actions_btn").removeClass("hidden_div");
-						btn_clicked.parents(".unit_side_container").find(".show_actions_btn").click(showActionsForUnitBtn(btn_clicked));
+				    if(!$(this).hasClass("disabled")) {
+                        var prevUnitName = btn_clicked.html();
+                        var isNewButton = btn_clicked.hasClass("blank_btn");
+                        setUnitName(btn_clicked, unitName);
+    //					btn_clicked.unbind( "click" );
+    //					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
+                        addEvent_unit_to_sector(unitName, "sector");
+                        hideAllDialogs();
+                        if (isNewButton) {
+                            tbar_clicked.find(".par_btn").removeClass("disabled");
+                            var unitsContainer = btn_clicked.parents(".units_container");
+                            var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
+                            addUnitButton(unitsContainer, tbar_clicked);
+                            btn_clicked.parents(".unit_side_container").find(".unit_side_container_left_side").removeClass("hidden_div");
+                            btn_clicked.parents(".unit_side_container").find(".psi_btn").removeClass("hidden_div");
+                            btn_clicked.parents(".unit_side_container").find(".personnel_btn").removeClass("hidden_div");
+                            btn_clicked.parents(".unit_side_container").find(".show_actions_btn").removeClass("hidden_div");
+                            btn_clicked.parents(".unit_side_container").find(".show_actions_btn").click(showActionsForUnitBtn(btn_clicked));
 
-						// Add action list
-		                addActionButton(btn_clicked.parents(".tbar"), btn_clicked.actions_list);
+                            // Add action list
+                            addActionButton(btn_clicked.parents(".tbar"), btn_clicked.actions_list);
 
-//						unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
+    //						unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
 
-						//Dragable handler
-//                        btn_clicked.mousedown(btn_clicked, function(event) {
-//                            var unitBtn = event.data;
-//                            timeoutId = setTimeout(startDraggingUnit(unitBtn, event), 1000);
-//                        }).bind('mouseup mouseleave', function() {
-//                            if(typeof timeoutId!='undefined') {
-//                                clearTimeout(timeoutId);
-//                            }
-//                        });
-					}
-					// Update action list class
-					btn_clicked.actions_list.removeClass(prevUnitName);
-					btn_clicked.actions_list.addClass(unitName);
-					showActionsForUnitBtn(btn_clicked)();
+                            //Dragable handler
+    //                        btn_clicked.mousedown(btn_clicked, function(event) {
+    //                            var unitBtn = event.data;
+    //                            timeoutId = setTimeout(startDraggingUnit(unitBtn, event), 1000);
+    //                        }).bind('mouseup mouseleave', function() {
+    //                            if(typeof timeoutId!='undefined') {
+    //                                clearTimeout(timeoutId);
+    //                            }
+    //                        });
+                        }
+                        // Update action list class
+                        btn_clicked.actions_list.removeClass(prevUnitName);
+                        btn_clicked.actions_list.addClass(unitName);
+                        showActionsForUnitBtn(btn_clicked)();
 
-					updateTbar(tbar_clicked);
+                        updateTbar(tbar_clicked);
+                    }
 				});
 			});
 			unitTypeCol.append($('<div class="clear_float"/>'));
@@ -1164,6 +1166,24 @@ function updateTbar(tbar) {
 	    actions_parent_container.hide();
 	}
 }
+function showUnitsDialog( tbar, btn ){
+  return function(){
+
+    // Disable all units that are already present in this TBar
+    $(".unit_dialog_btn").removeClass("disabled");
+    $.each(tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn"), function( index, tbarUnitBtn ) {
+        var html = $(tbarUnitBtn).html();
+        $(".unit_dialog_btn:contains('"+html+"')").addClass("disabled");
+    });
+
+	$(".dialog").hide();
+	$(".side_dialog_container").hide();
+	btn_clicked = btn;
+	tbar_clicked = tbar;
+	$("#dialogContainer").show();
+	$("#units_dialog").show();
+  }
+}
 function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.find(".blank_btn").removeClass("blank_btn");
 //	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
@@ -1186,7 +1206,7 @@ function addUnitButton(unitsContainer, tbar) {
 //	clockDiv.hide();
 //	singleUnitContainer.append($('<div class="clear_float"/>'));
 //	unitsContainer.append(singleUnitContainer);
-	unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
+	unitBtn.click(showUnitsDialog(tbar, unitBtn));
 	unitBtn.draggable();
 	unitBtn.draggable('disable');
 
