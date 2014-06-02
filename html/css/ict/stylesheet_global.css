@@ -561,8 +561,9 @@ td {
     width: 325px;
 }
 #par_dialog_sector_btn {
+	width:168px;
+	height: 24px;
     text-align: center;
-    display: block;
     margin: 5px auto;
 }
 .par_dialog_unit {

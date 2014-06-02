@@ -164,7 +164,7 @@ function initParDialog( ) {
 	var parTitleDiv = parDialog.find(".dialog_title_text");
 	parTitleDiv.html("Sector PAR");
 
-	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text title_btn par_dialog_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
+	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text par_title_btn par_dialog_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
 	parbody_containers.appendTo(parDialogBody);
 	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
     par_dialog_sector_btn.click(togglePar(par_dialog_sector_btn, ".par_dialog_btn"));
