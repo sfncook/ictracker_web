@@ -1069,9 +1069,11 @@ function initUnitsDialog( ) {
     //                        });
                         }
                         // Update action list class
-                        btn_clicked.actions_list.removeClass(prevUnitName);
-                        btn_clicked.actions_list.addClass(unitName);
-                        showActionsForUnitBtn(btn_clicked)();
+                        if(typeof btn_clicked.actions_list != "undefined") {
+                            btn_clicked.actions_list.removeClass(prevUnitName);
+                            btn_clicked.actions_list.addClass(unitName);
+                            showActionsForUnitBtn(btn_clicked)();
+                        }
 
                         updateTbar(tbar_clicked);
                     }
@@ -1171,10 +1173,12 @@ function showUnitsDialog( tbar, btn ){
 
     // Disable all units that are already present in this TBar
     $(".unit_dialog_btn").removeClass("disabled");
-    $.each(tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn"), function( index, tbarUnitBtn ) {
-        var html = $(tbarUnitBtn).html();
-        $(".unit_dialog_btn:contains('"+html+"')").addClass("disabled");
-    });
+    if(!btn.hasClass("acct_unit_btn")) {
+        $.each(tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn"), function( index, tbarUnitBtn ) {
+            var html = $(tbarUnitBtn).html();
+            $(".unit_dialog_btn:contains('"+html+"')").addClass("disabled");
+        });
+    }
 
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
@@ -1272,7 +1276,7 @@ function addTbar(tbarContainer) {
 		
 		//Accountability button
 		var acctBtn = tbar.find(".acct_unit_btn");
-		acctBtn.click(showDialog(tbar, acctBtn, "#units_dialog"));
+		acctBtn.click(showUnitsDialog(tbar, acctBtn));
 		
 		//Benchmark Btn
 		var benchmarkBtn = tbar.find(".benchmark_btn");
