@@ -269,9 +269,6 @@ function initUnitPeopleDialog() {
 		newBtn.click(setPsiText(psiValue));
 	}
 	row2.append("<div class=\"clear_float\"></div>");
-
-	var deleteBtn = $("<div id='delete_unit_btn' class='glowpink button'>Delete Unit <img class='delete_icon' src='images/delete.png'/></div>").clone().appendTo(row3);
-	row3.append($("<div class='clear_float'></div>"));
 }
 
 

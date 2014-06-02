@@ -767,6 +767,24 @@ ul {
 }
 #delete_unit_btn {
     width: 108px;
+    float:left;
+    margin: 10px;
+}
+.move_icon {
+    width: 14px;
+    height: 14px;
+    margin-left: 7px;
+}
+.move_icon:hover {
+    cursor: pointer !important;
+}
+#move_unit_btn {
+    width: 108px;
+    float:left;
+    margin: 10px;
+}
+#unit_people_dialog_row3_center_div {
+    width: 270px;
     display: block;
     margin: 10px auto;
 }
