@@ -105,6 +105,7 @@
 }*/
 .tbar_units_td {
 	width: 145px;
+	vertical-align: top;
 }
 .tbar_line_td {
 	width:1px;
@@ -113,6 +114,7 @@
 }
 .tbar_actions_td {
 	width: 138px;
+	vertical-align: top;
 }
 
 .units_container {

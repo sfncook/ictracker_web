@@ -26,6 +26,10 @@ body {
     overflow-y: hidden;
 }
 
+td {
+    vertical-align: middle;
+}
+
 #splash_table {
     text-align: center;
     vertical-align: middle;
