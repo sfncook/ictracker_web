@@ -36,7 +36,7 @@
 .title_btn {
 	width:168px;
 	height: 24px;
-	padding: 0;
+	padding: 0 0 0 2px;
 	font-size: 1.0rem;
 	float:left;
 	margin:2px;
@@ -68,7 +68,7 @@
     width:35px;
 }
 .tbar_title_td {
-    width: 130px;
+    width: 134px;
 }
 .tbar_title_td div {
     width: 100%;
