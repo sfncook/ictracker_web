@@ -6,9 +6,10 @@
                 <link href="images/icon/ict_logo_29x29.png" rel="icon" />
 		
         <!--CSS-->
-                <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-                <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_global.css" />
-                <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_tbar.css" />
+        <link rel="stylesheet" type="text/css" href="css/ict/reset.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_global.css" />
+        <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_tbar.css" />
         
         <!--JS-->
         <script src="js/jquery-1.11.0.js"></script>
@@ -62,27 +63,18 @@
 							<!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
 							<div id="tbar_prototype" class="col-xs-4 tbar_full_size tbar">
 								<div class="tbar_title_container">
-									<table class="tbar_title_table">
-										<tr>
-											<td>
-												<button type="button" class="disabled par_btn button">PAR</button>
-											</td>
-											<td>
-												<div class="btn btn-ict title_btn">
-                                                    <table>
-                                                        <tr>
-                                                            <td class="tbar_title_dir_td"><div class="title_dir  title_btn_comp">N</div></td>
-                                                            <td class="tbar_title_td">    <div class="title_text title_btn_comp">Sector Title</div></td>
-                                                            <td class="tbar_title_num_td_1char"><div class="title_num  title_btn_comp">8</div></td>
-                                                        </tr>
-                                                    </table>
-												</div>
-											</td>
-											<td>
-												<button type="button" class="benchmark_btn button"><img class='benchmarks_icon' src='images/benchmarks_0.png'/>BNCH</button>
-											</td>
-										</tr>
-									</table>
+                                    <button type="button" class="disabled par_btn button">PAR</button>
+                                    <div class="title_btn button">
+                                        <table>
+                                            <tr>
+                                                <td class="tbar_title_dir_td"><div class="title_dir  title_btn_comp">N</div></td>
+                                                <td class="tbar_title_td">    <div class="title_text title_btn_comp">Sector Title</div></td>
+                                                <td class="tbar_title_num_td_1char"><div class="title_num  title_btn_comp">8</div></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <button type="button" class="benchmark_btn button"><img class='benchmarks_icon' src='images/benchmarks_0.png'/>BNCH</button>
+                                    <div class="clear_float"></div>
 								</div>
 								<div class="tbar_body_container">
 									<table class="tbar_body_table">
