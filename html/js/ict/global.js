@@ -83,75 +83,77 @@ function togglePar(btn, btnSelector) {
     };
 }
 function showParDialog( tbar, btn ){
-  return function(){
-    btn_clicked = btn;
-	tbar_clicked = tbar;
-    var parDialog = $("#par_dialog");
+    return function(){
+        if(!btn.hasClass("disabled")) {
+            btn_clicked = btn;
+            tbar_clicked = tbar;
+            var parDialog = $("#par_dialog");
 
-	// Sector PAR
-	var par_dialog_sector_btn = $("#par_dialog_sector_btn");
-	var tbarTitle = tbar.find(".title_text").html();
-	par_dialog_sector_btn.html(tbarTitle);
+            // Sector PAR
+            var par_dialog_sector_btn = $("#par_dialog_sector_btn");
+            var tbarTitle = tbar.find(".title_text").html();
+            par_dialog_sector_btn.html(tbarTitle);
 
-	// Units PAR
-	var par_dialog_units = $("#par_dialog_units");
-	par_dialog_units.empty();
-	var tbarUnitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
-	if (tbarUnitBtns.length>0) {
-	    var unitNames = new Array();
-	    var unitBtns = new Array();
-		tbarUnitBtns.each(function( index ) {
-			var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
-			par_dialog_unit.show();
-			par_dialog_unit.appendTo(par_dialog_units);
-			var unit_name = $(this).html();
-			unitNames.push(unit_name);
+            // Units PAR
+            var par_dialog_units = $("#par_dialog_units");
+            par_dialog_units.empty();
+            var tbarUnitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
+            if (tbarUnitBtns.length>0) {
+                var unitNames = new Array();
+                var unitBtns = new Array();
+                tbarUnitBtns.each(function( index ) {
+                    var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
+                    par_dialog_unit.show();
+                    par_dialog_unit.appendTo(par_dialog_units);
+                    var unit_name = $(this).html();
+                    unitNames.push(unit_name);
 
-			par_dialog_unit.attr("id", "par_dialog_unit_"+unit_name);
+                    par_dialog_unit.attr("id", "par_dialog_unit_"+unit_name);
 
-			var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
-			unitBtns.push(unitBtn);
+                    var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
+                    unitBtns.push(unitBtn);
 
-			unitBtn.html(unit_name);
-            unitBtn.click(togglePar(unitBtn, "#par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
+                    unitBtn.html(unit_name);
+                    unitBtn.click(togglePar(unitBtn, "#par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
 
-            var captain_btn = par_dialog_unit.find(".captain_btn").first();
-            var engineer_btn = par_dialog_unit.find(".engineer_btn").first();
-		    var firefighter1_btn = par_dialog_unit.find(".firefighter1_btn").first();
-		    var firefighter2_btn = par_dialog_unit.find(".firefighter2_btn").first();
+                    var captain_btn = par_dialog_unit.find(".captain_btn").first();
+                    var engineer_btn = par_dialog_unit.find(".engineer_btn").first();
+                    var firefighter1_btn = par_dialog_unit.find(".firefighter1_btn").first();
+                    var firefighter2_btn = par_dialog_unit.find(".firefighter2_btn").first();
 
-		    unitBtn.attr("id", "par_unit_btn_"+unit_name);
-		    captain_btn.attr("id", "captain_btn"+unit_name);
-		    engineer_btn.attr("id", "engineer_btn"+unit_name);
-		    firefighter1_btn.attr("id", "firefighter1_btn"+unit_name);
-		    firefighter2_btn.attr("id", "firefighter2_btn"+unit_name);
+                    unitBtn.attr("id", "par_unit_btn_"+unit_name);
+                    captain_btn.attr("id", "captain_btn"+unit_name);
+                    engineer_btn.attr("id", "engineer_btn"+unit_name);
+                    firefighter1_btn.attr("id", "firefighter1_btn"+unit_name);
+                    firefighter2_btn.attr("id", "firefighter2_btn"+unit_name);
 
-		    captain_btn.addClass("par_person_btn_"+unit_name);
-		    engineer_btn.addClass("par_person_btn_"+unit_name);
-		    firefighter1_btn.addClass("par_person_btn_"+unit_name);
-		    firefighter2_btn.addClass("par_person_btn_"+unit_name);
+                    captain_btn.addClass("par_person_btn_"+unit_name);
+                    engineer_btn.addClass("par_person_btn_"+unit_name);
+                    firefighter1_btn.addClass("par_person_btn_"+unit_name);
+                    firefighter2_btn.addClass("par_person_btn_"+unit_name);
 
-		    captain_btn.click(togglePar(captain_btn, "#captain_btn"+unit_name));
-		    engineer_btn.click(togglePar(engineer_btn, "#engineer_btn"+unit_name));
-		    firefighter1_btn.click(togglePar(firefighter1_btn, "#firefighter1_btn"+unit_name));
-		    firefighter2_btn.click(togglePar(firefighter2_btn, "#firefighter2_btn"+unit_name));
-		});
-		$(".mayday_par_btn").click(showMaydayDialog);
-	}
+                    captain_btn.click(togglePar(captain_btn, "#captain_btn"+unit_name));
+                    engineer_btn.click(togglePar(engineer_btn, "#engineer_btn"+unit_name));
+                    firefighter1_btn.click(togglePar(firefighter1_btn, "#firefighter1_btn"+unit_name));
+                    firefighter2_btn.click(togglePar(firefighter2_btn, "#firefighter2_btn"+unit_name));
+                });
+                $(".mayday_par_btn").click(showMaydayDialog);
+            }
 
-    parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
-	if(typeof tbar['btn_ids_with_par'] != 'undefined') {
-	    $.each( tbar['btn_ids_with_par'], function(index, btnId) {
-	        $('#'+btnId).addClass('has_par');
-        });
-	}
+            parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
+            if(typeof tbar['btn_ids_with_par'] != 'undefined') {
+                $.each( tbar['btn_ids_with_par'], function(index, btnId) {
+                    $('#'+btnId).addClass('has_par');
+                });
+            }
 
-	// Show PAR dialog
-	$(".dialog").hide();
-	$(".side_dialog_container").hide();
-	parDialog.show();
-	$("#dialogContainer").show();
-  }
+            // Show PAR dialog
+            $(".dialog").hide();
+            $(".side_dialog_container").hide();
+            parDialog.show();
+            $("#dialogContainer").show();
+        }
+    }
 }
 function initParDialog( ) {
 	var parDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
