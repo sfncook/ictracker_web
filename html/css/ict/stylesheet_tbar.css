@@ -329,3 +329,17 @@ img.show_actions_btn:active {
     cursor: pointer;
 }
 
+.par_btn {
+    width:28px;
+    font-size: 0.6rem;
+}
+
+.benchmarks_icon {
+    width: 14px;
+    height: 15px;
+    margin-right: 4px;
+}
+.benchmark_btn {
+    width: 60px;
+    font-size: 0.7rem;
+}
