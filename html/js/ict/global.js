@@ -604,24 +604,24 @@ function createCheckBox(label, id) {
 var right_cols = {};
 var benchmarks = [
         {
-            id:"bnch_primary", label:"Primary All Clear",
+            id:"bnch_primary", label:"Primary All Clear", img_name:"images/benchmarks_1.png",
             secondaries:[
                 {id:"bnch_primary_par", label:"PAR"},
                 {id:"bnch_primary_notify", label:"Notify Alarm"},
                 {id:"bnch_primary_challenge", label:"Challenge Strategy"}]
         },{
-            id:"bnch_underctl", label:"Under Control",
+            id:"bnch_underctl", label:"Under Control", img_name:"images/benchmarks_2.png",
             secondaries:[
                 {id:"bnch_underctl_par", label:"PAR"},
                 {id:"bnch_underctl_notify", label:"Notify Alarm"},
                 {id:"bnch_underctl_obtain", label:"Obtain Secondary"}]
         },{
-            id:"bnch_secondary", label:"Secondary All Clear",
+            id:"bnch_secondary", label:"Secondary All Clear", img_name:"images/benchmarks_3.png",
             secondaries:[
                 {id:"bnch_secondary_par", label:"PAR"},
                 {id:"bnch_secondary_notify", label:"Notify Alarm"}]
         },{
-            id:"bnch_lossstop", label:"Loss Stop",
+            id:"bnch_lossstop", label:"Loss Stop", img_name:"images/benchmarks_4.png",
             secondaries:[
                 {id:"bnch_lossstop_par", label:"PAR"},
                 {id:"bnch_lossstop_notify", label:"Notify Alarm"}]
@@ -655,6 +655,7 @@ function initBenchmarkDialog( ) {
         var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
         benchmark_item_btn.click(toggleBenchmarkBtn(benchmark_item_btn));
         benchmark_item_btn.html(benchmark.label);
+        benchmark_item_btn.data("img_name",benchmark.img_name);
         benchmark_item_btn.click(clickPrimaryBenchmark(benchmark_item));
         benchmark_item_btn.addClass("benchmark_item_btn_primary");
 
@@ -687,15 +688,20 @@ function clickPrimaryBenchmark(benchmark_item) {
             // If user Checked the box
             tbar_clicked['primary_benchmark'] = benchmark_item.attr('id');
             setBenchmark(benchmark_item.attr('id'));
+            var img_name = benchmark_item_btn.data("img_name");
+            tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
         } else {
             // If user UN-checked the box
             resetSecondaryBenchmarks(tbar_clicked, benchmark_item.attr('id'));
             if(benchmark_item.attr('id')=='bnch_primary'){
                 tbar_clicked['primary_benchmark'] = '';
                 resetBenchmarks();
+                tbar_clicked.find(".benchmarks_icon").attr("src", "images/benchmarks_0.png");
             } else {
                 tbar_clicked['primary_benchmark'] = benchmark_item.prev().attr('id');
                 setBenchmark(benchmark_item.prev().attr('id'));
+                var img_name = benchmark_item.prev().find(".benchmark_item_btn").data("img_name");
+                tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
             }
         }
     };
