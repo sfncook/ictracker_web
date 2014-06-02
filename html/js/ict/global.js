@@ -1156,7 +1156,7 @@ function updateTbar(tbar) {
 	}
 }
 function addUnitButton(unitsContainer, tbar) {
-	//unitsContainer.find(".blank_btn").removeClass("blank_btn");
+	unitsContainer.find(".blank_btn").removeClass("blank_btn");
 //	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
 //	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 //	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
@@ -1165,6 +1165,7 @@ function addUnitButton(unitsContainer, tbar) {
     unit_side_container.attr("id",tbar.attr("id")+"_unit_side_container");
     var unitBtn = unit_side_container.find(".unit_btn");
     unit_side_container.show();
+    unit_side_container.children().show();
     unit_side_container.appendTo(unitsContainer);
 
     var unit_side_container_left_side = unit_side_container.find(".unit_side_container_left_side");
