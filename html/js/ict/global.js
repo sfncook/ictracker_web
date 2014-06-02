@@ -244,6 +244,7 @@ function initUnitPeopleDialog() {
     var unit_people_dialog = $("#unit_people_dialog" );
     var row1 = unit_people_dialog.find("#unit_people_dialog_row1");
     var row2 = unit_people_dialog.find("#unit_people_dialog_row2");
+    var row3 = unit_people_dialog.find("#unit_people_dialog_row3");
 
     var personnelPrototypeBtn = $("<div class=\"unit_people_dialog_btn button sm_round_btn\">PROTOTYPE</div>");
     ["1","2","3","4","5"].forEach(function (btnText, index, array) {
@@ -255,7 +256,7 @@ function initUnitPeopleDialog() {
 		newBtn.click(function() {clickPersonnelBtn(newBtn);});
 	});
 
-	var resetClockBtn = $("<div id='reset_clock_btn' class='disabled reset_clock_btn button'>Reset <img class='clock_icon' src='images/clock.png'/></div>").clone().appendTo(row1);
+	var resetClockBtn = $("<div id='reset_clock_btn' class='disabled reset_clock_btn button'><img class='clock_icon' src='images/clock.png'/>Reset Clock</div>").clone().appendTo(row1);
 	row1.append($("<div class='clear_float'></div>"));
 
     // PSI Buttons
@@ -268,6 +269,9 @@ function initUnitPeopleDialog() {
 		newBtn.click(setPsiText(psiValue));
 	}
 	row2.append("<div class=\"clear_float\"></div>");
+
+	var deleteBtn = $("<div id='delete_unit_btn' class='glowpink button'>Delete Unit <img class='delete_icon' src='images/delete.png'/></div>").clone().appendTo(row3);
+	row3.append($("<div class='clear_float'></div>"));
 }
 
 
@@ -1152,12 +1156,13 @@ function updateTbar(tbar) {
 	}
 }
 function addUnitButton(unitsContainer, tbar) {
-	unitsContainer.find(".blank_btn").removeClass("blank_btn");
+	//unitsContainer.find(".blank_btn").removeClass("blank_btn");
 //	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
 //	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
 //	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
 //	var clockDiv = $("<div class=\"unit_timer_div\"><img style=\"margin:0\" class=\"clock_icon\" src=\"images/clock.png\"/></div>").clone();
     var unit_side_container = $("#unit_side_container_prototype").clone();
+    unit_side_container.attr("id",tbar.attr("id")+"_unit_side_container");
     var unitBtn = unit_side_container.find(".unit_btn");
     unit_side_container.show();
     unit_side_container.appendTo(unitsContainer);
@@ -1454,6 +1459,7 @@ function init( ) {
 	initEmergTrafficDialog();
 
     $("#unit_side_container_prototype").hide();
+    $("#unit_side_container_prototype>*").hide();
 	$("#tbar_prototype").hide();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
