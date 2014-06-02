@@ -829,18 +829,9 @@ function initObjectivesDialog( ) {
  function toggleOsrBtn(btn) {
     return function() {
         btn.toggleClass("glowlightgreen");
-        if(btn.attr("id")=="occupancy_osr_btn") {
-            if(btn.hasClass("glowlightgreen")) {
-                $("#osr_occupancy_right_col").show();
-            } else {
-                $("#osr_occupancy_right_col").hide();
-            }
-        }
     }
 }
 function initOsrDialog( ) {
-    $("#osr_occupancy_right_col").hide();
-
     $(".osr_btn").each(function() {
         $(this).click(toggleOsrBtn($(this)));
     });
@@ -878,6 +869,14 @@ function initOsrDialog( ) {
             $(this).addClass("glowlightgreen");
         }
     );
+
+    $("#osr_select_type_of_building").change(function() {$("#occupancy_osr_btn").addClass("glowlightgreen");});
+    $("#osr_select_type_of_construction").change(function() {$("#construction_osr_btn").addClass("glowlightgreen");});
+    $("#osr_select_conditions").change(function() {$("#conditions_osr_btn").addClass("glowlightgreen");});
+    $("#osr_occupancy_off_btn").click(function() {$("#mode_osr_btn").addClass("glowlightgreen");});
+    $("#osr_occupancy_def_btn").click(function() {$("#mode_osr_btn").addClass("glowlightgreen");});
+    $("#osr_occupancy_mob_btn").click(function() {$("#location_osr_btn").addClass("glowlightgreen");});
+    $("#osr_occupancy_stat_btn").click(function() {$("#location_osr_btn").addClass("glowlightgreen");});
 
 	
 	var osr_btn = $("#osr_btn");
