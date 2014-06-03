@@ -224,23 +224,25 @@ function clickPersonnelBtn(btn) {
 	}
 }
 function showUnitPeopleDialog( tbar, btn ){
-  return function(){
-    var unit_people_dialog = $("#unit_people_dialog");
+    return function(){
+        if(!btn.hasClass("hidden_div")) {
+            var unit_people_dialog = $("#unit_people_dialog");
 
-    var unit_people_dialog_btn = unit_people_dialog.find(".unit_people_dialog_btn:contains('"+tbar['personnel']+"')");
-    $(".unit_people_dialog_btn").removeClass("glow_orange");
-    if(unit_people_dialog_btn!=null) {
-        unit_people_dialog_btn.addClass("glow_orange");
+            var unit_people_dialog_btn = unit_people_dialog.find(".unit_people_dialog_btn:contains('"+tbar['personnel']+"')");
+            $(".unit_people_dialog_btn").removeClass("glow_orange");
+            if(unit_people_dialog_btn!=null) {
+                unit_people_dialog_btn.addClass("glow_orange");
+            }
+
+
+            $(".dialog").hide();
+            $(".side_dialog_container").hide();
+            btn_clicked = btn;
+            tbar_clicked = tbar;
+            $("#dialogContainer").show();
+            unit_people_dialog.show();
+        }
     }
-
-
-	$(".dialog").hide();
-	$(".side_dialog_container").hide();
-	btn_clicked = btn;
-	tbar_clicked = tbar;
-	$("#dialogContainer").show();
-	unit_people_dialog.show();
-  }
 }
 function initUnitPeopleDialog() {
     var unit_people_dialog = $("#unit_people_dialog" );
@@ -873,10 +875,27 @@ function initOsrDialog( ) {
     $("#osr_select_type_of_building").change(function() {$("#occupancy_osr_btn").addClass("glowlightgreen");});
     $("#osr_select_type_of_construction").change(function() {$("#construction_osr_btn").addClass("glowlightgreen");});
     $("#osr_select_conditions").change(function() {$("#conditions_osr_btn").addClass("glowlightgreen");});
-    $("#osr_occupancy_off_btn").click(function() {$("#mode_osr_btn").addClass("glowlightgreen");});
-    $("#osr_occupancy_def_btn").click(function() {$("#mode_osr_btn").addClass("glowlightgreen");});
     $("#osr_occupancy_mob_btn").click(function() {$("#location_osr_btn").addClass("glowlightgreen");});
     $("#osr_occupancy_stat_btn").click(function() {$("#location_osr_btn").addClass("glowlightgreen");});
+    $("#osr_occupancy_off_btn").click(
+        function() {
+            $("#mode_osr_btn").addClass("glowlightgreen");
+            var mode_btn = $("#mode_btn");
+            mode_btn.addClass("offensive_btn");
+            mode_btn.removeClass("defensive_btn");
+            mode_btn.html("OFFNS");
+        }
+    );
+    $("#osr_occupancy_def_btn").click(
+        function() {
+            $("#mode_osr_btn").addClass("glowlightgreen");
+            var mode_btn = $("#mode_btn");
+            mode_btn.addClass("defensive_btn");
+            mode_btn.removeClass("offensive_btn");
+            mode_btn.html("DEFNS");
+            showDialog(0, mode_btn, "#emergency_traffic_dialog")();
+        }
+    );
 
 	
 	var osr_btn = $("#osr_btn");
@@ -1384,11 +1403,15 @@ function clickModeButton() {
         mode_btn.addClass("defensive_btn");
         mode_btn.removeClass("offensive_btn");
         mode_btn.html("DEFNS");
+        $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
+        $("#osr_occupancy_def_btn").addClass("glowlightgreen");
         showDialog(0, mode_btn, "#emergency_traffic_dialog")();
     } else {
         mode_btn.addClass("offensive_btn");
         mode_btn.removeClass("defensive_btn");
         mode_btn.html("OFFNS");
+        $("#osr_occupancy_off_btn").addClass("glowlightgreen");
+        $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
     }
 }
 
