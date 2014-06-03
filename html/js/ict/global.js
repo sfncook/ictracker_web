@@ -383,25 +383,36 @@ function initMaydayDialog( ) {
 
     $("#hoseline_mayday_btn").click(
         function() {
-            $("#hoseline_mayday_btn").toggleClass("glowlightgreen");
-            $("#hoseline_mayday_btn").toggleClass("glowpink");
-            if($("#hoseline_mayday_btn").hasClass("glowlightgreen")) {
-                $("#hoseline_mayday_btn").html("On Hoseline");
-            } else {
-                $("#hoseline_mayday_btn").html("OFF Hoseline");
-            }
+            $("#hoseline_mayday_btn").removeClass("glowlightgreen");
+            $("#hoseline_mayday_btn").addClass("glowgreen");
+            $("#offhoseline_mayday_btn").addClass("glowpink");
+            $("#offhoseline_mayday_btn").removeClass("glowred");
+        }
+    );
+    $("#offhoseline_mayday_btn").click(
+        function() {
+            $("#hoseline_mayday_btn").addClass("glowlightgreen");
+            $("#hoseline_mayday_btn").removeClass("glowgreen");
+            $("#offhoseline_mayday_btn").removeClass("glowpink");
+            $("#offhoseline_mayday_btn").addClass("glowred");
         }
     );
 
+
+    $("#uninjured_mayday_btn").click(
+        function() {
+            $("#uninjured_mayday_btn").removeClass("glowlightgreen");
+            $("#uninjured_mayday_btn").addClass("glowgreen");
+            $("#injured_mayday_btn").addClass("glowpink");
+            $("#injured_mayday_btn").removeClass("glowred");
+        }
+    );
     $("#injured_mayday_btn").click(
         function() {
-            $("#injured_mayday_btn").toggleClass("glowlightgreen");
-            $("#injured_mayday_btn").toggleClass("glowpink");
-            if($("#injured_mayday_btn").hasClass("glowlightgreen")) {
-                $("#injured_mayday_btn").html("UNinjured");
-            } else {
-                $("#injured_mayday_btn").html("Injured");
-            }
+            $("#uninjured_mayday_btn").addClass("glowlightgreen");
+            $("#uninjured_mayday_btn").removeClass("glowgreen");
+            $("#injured_mayday_btn").removeClass("glowpink");
+            $("#injured_mayday_btn").addClass("glowred");
         }
     );
 }

@@ -456,16 +456,6 @@ td {
     border-left: 2px solid orange;
     font-size: 1.25rem;
 }
-#hoseline_mayday_btn {
-    width: 120px;
-    font-size: 0.9rem;
-    margin-top: 5px;
-}
-#injured_mayday_btn {
-    width: 120px;
-    font-size: 0.9rem;
-    margin-top: 5px;
-}
 
 #osr_dialog {
 	width: 420px;
@@ -612,9 +602,18 @@ td {
     cursor: default;
     padding-top: 2px;
 }
+.mayday_toggle {
+    display: inline-block;
+    float: left;
+    padding: 0;
+    height: 20px;
+    width: 120px;
+    font-size: 0.9rem;
+    margin: 4px;
+}
 ul {
  /*padding: 10px;*/
- margin: 4px;
+ margin: 15px;
 }
 .list_level_2 {
     margin-left: 15px !important;

@@ -159,12 +159,24 @@
 	background: red;
 	color: white;
 }
+.glowred:hover {
+	background: darkred;
+	color: white;
+}
+.glowred:active {
+	background: #666;
+	color: white;
+}
 .glowpink {
 	background: pink;
 	color: #666;
 }
 .glowpink:hover {
 	background: red;
+	color: white;
+}
+.glowpink:hover {
+	background: #666;
 	color: white;
 }
 .glowlightblue {
@@ -175,6 +187,18 @@
 }
 .glowlightgreen:hover {
     background: DarkGreen;
+    color: white;
+}
+.glowgreen {
+    background: green;
+    color: white;
+}
+.glowgreen:hover {
+    background: DarkGreen;
+    color: white;
+}
+.glowgreen:active {
+    background: #666;
     color: white;
 }
 
