@@ -283,7 +283,7 @@
 }
 
 .hidden_sector_btn, .hidden_sector_btn:hover, .hidden_sector_btn:active {
-    height: 22px;
+    height: 24px;
     opacity:0;
     cursor: default;
 }
