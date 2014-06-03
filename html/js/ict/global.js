@@ -2,6 +2,7 @@
 
 var btn_clicked;
 var tbar_clicked;
+var parentDialog = 0;
 
 var btnsToBlink = new Array();
 function blinkUnit() {
@@ -178,10 +179,15 @@ function initParDialog( ) {
  **/
 function setPsiText(text) {
 	return function(){
-	    var psi_btn = btn_clicked.find(".psi_btn");
-		psi_btn.html(text);
-		hideAllDialogs();
-		updateBgColor(text, psi_btn);
+		btn_clicked.html(text);
+		updateBgColor(text, btn_clicked);
+		if(parentDialog!=0) {
+            $("#psi_dialog").hide();
+            $("#mayday_dialog").show();
+            parentDialog = 0;
+		} else {
+		    hideAllDialogs();
+		}
 	  }
 }
 function initPsiDialog( ) {
@@ -191,7 +197,7 @@ function initPsiDialog( ) {
 	var psiDialogBody = psiDialog.children(".dialog_body");
 	var psiTitleDiv = psiDialog.find(".dialog_title_text");
 	psiTitleDiv.html("PSI Values");
-	var prototypeBtn = $("<div class=\"col-xs-12 psi_btn dialog_btn button\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"psi_dialog_btn button\">PROTOTYPE</div>");
 	for(var psiValue=4500; psiValue>=0; psiValue-=100) {
 		var newBtn = prototypeBtn.clone();
 		newBtn.html(psiValue);
@@ -415,6 +421,8 @@ function initMaydayDialog( ) {
             $("#injured_mayday_btn").addClass("glowred");
         }
     );
+
+    $("#mayday_psi_btn").click(showDialog( 0, $("#mayday_psi_btn"), "#psi_dialog" , $("#mayday_dialog")));
 }
 
 
@@ -446,12 +454,13 @@ function showSectorDialog( tbar, btn, dialogId ){
 	$("."+tbar.prefix_num+"_supl_btn").addClass("glow_orange");
   }
 }
-function showDialog( tbar, btn, dialogId ){
+function showDialog( tbar, btn, dialogId, parentDialog_ ){
   return function(){
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
 	btn_clicked = btn;
 	tbar_clicked = tbar;
+	parentDialog = parentDialog_;
 	$("#dialogContainer").show();
 	$(dialogId).show();
   }
