@@ -179,8 +179,14 @@ function initParDialog( ) {
  **/
 function setPsiText(text) {
 	return function(){
-		btn_clicked.html(text);
-		updateBgColor(text, btn_clicked);
+	    var btn;
+	    if(btn_clicked.hasClass("psi_btn")) {
+		    btn = btn_clicked;
+	    } else  {
+	        btn = btn_clicked.find(".psi_btn");
+	    }
+	    btn.html(text);
+		updateBgColor(text, btn);
 		if(typeof parentDialog!='undefined' && parentDialog!=0) {
             $("#psi_dialog").hide();
             parentDialog.show();
