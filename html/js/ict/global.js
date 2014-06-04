@@ -181,9 +181,9 @@ function setPsiText(text) {
 	return function(){
 		btn_clicked.html(text);
 		updateBgColor(text, btn_clicked);
-		if(parentDialog!=0) {
+		if(typeof parentDialog!='undefined' && parentDialog!=0) {
             $("#psi_dialog").hide();
-            $("#mayday_dialog").show();
+            parentDialog.show();
             parentDialog = 0;
 		} else {
 		    hideAllDialogs();
@@ -300,6 +300,7 @@ function selectMaydaySectorBtn(sectorBtn){
 	}
 }
 function showMaydayDialog(){
+    parentDialog = 0;
 	var mayday_dialog = $("#mayday_dialog");
 	
 	
@@ -323,29 +324,35 @@ function showMaydayDialog(){
 	});
 	
 	// Units
-	var mayday_unit_list_div = $("#mayday_unit_list_div");
-	mayday_unit_list_div.empty();
-	var prototypeUnitBtn = $("<div class=\"unit_mayday_btn unit_btn dialog_btn button\">PROTOTYPE</div>");
-	$.each( unitsToTbarMap, function( unitName, unitData ) {
-		var unitBtn = prototypeUnitBtn.clone();
-		unitBtn.html(unitName);
-		unitBtn.click(selectMaydayUnitBtn(unitBtn));
-		if (unitData.btn.hasClass("unit_btn_mayday")) {
-			unitBtn.addClass("unit_btn_mayday");
-		}
-		mayday_unit_list_div.append(unitBtn);
-	});
+	console.log($(".tbar > .unit_btn").not(".blank_btn").not(".acct_unit_btn"));
+	if($(".tbar > .unit_btn").not(".blank_btn").not(".acct_unit_btn").length>0) {
+	    $("#mayday_unit_btn").removeClass("disabled");
+	} else {
+	    $("#mayday_unit_btn").addClass("disabled");
+	}
+//	var mayday_unit_list_div = $("#mayday_unit_list_div");
+//	mayday_unit_list_div.empty();
+//	var prototypeUnitBtn = $("<div class=\"unit_mayday_btn unit_btn dialog_btn button\">PROTOTYPE</div>");
+//	$.each( unitsToTbarMap, function( unitName, unitData ) {
+//		var unitBtn = prototypeUnitBtn.clone();
+//		unitBtn.html(unitName);
+//		unitBtn.click(selectMaydayUnitBtn(unitBtn));
+//		if (unitData.btn.hasClass("unit_btn_mayday")) {
+//			unitBtn.addClass("unit_btn_mayday");
+//		}
+//		mayday_unit_list_div.append(unitBtn);
+//	});
 	
 	// Sectors
-	var mayday_sector_list_div = $("#mayday_sector_list_div");
-	mayday_sector_list_div.empty();
-	var prototypeSectorBtn = $("<div class=\"titleBtn sector_mayday_btn dialog_btn button\">PROTOTYPE</div>");
-	$.each( sectorsToTbarMap, function( sectorName, tbar ) {
-		var sectorBtn = prototypeSectorBtn.clone();
-		sectorBtn.html(sectorName);
-		sectorBtn.click(selectMaydaySectorBtn(sectorBtn));
-		mayday_sector_list_div.append(sectorBtn);
-	});
+//	var mayday_sector_list_div = $("#mayday_sector_list_div");
+//	mayday_sector_list_div.empty();
+//	var prototypeSectorBtn = $("<div class=\"titleBtn sector_mayday_btn dialog_btn button\">PROTOTYPE</div>");
+//	$.each( sectorsToTbarMap, function( sectorName, tbar ) {
+//		var sectorBtn = prototypeSectorBtn.clone();
+//		sectorBtn.html(sectorName);
+//		sectorBtn.click(selectMaydaySectorBtn(sectorBtn));
+//		mayday_sector_list_div.append(sectorBtn);
+//	});
 	
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
@@ -385,7 +392,6 @@ function clickMaydayChkbox(btn) {
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
 	maydayBtn.click(showMaydayDialog);
-    $("#mayday_unit_btn").click(function(){});
 
     $("#hoseline_mayday_btn").click(
         function() {
@@ -423,6 +429,14 @@ function initMaydayDialog( ) {
     );
 
     $("#mayday_psi_btn").click(showDialog( 0, $("#mayday_psi_btn"), "#psi_dialog" , $("#mayday_dialog")));
+    $("#mayday_unit_btn").click(
+        function() {
+            if(!$("#mayday_unit_btn").hasClass("disabled")) {
+                showDialog( 0, $("#mayday_unit_btn"), "#units_assigned_dialog" , $("#mayday_dialog"));
+            }
+        }
+    );
+
 }
 
 
@@ -1021,6 +1035,16 @@ function startDraggingUnit(unitBtn, event){
         unitBtn.trigger(event);
     }
 }
+function initUnitsAssignedDialog( ) {
+    var prototypeUnitBtn = $("<div class=\"unit_dialog_btn unit_btn dialog_btn button\">PROTOTYPE</div>");
+
+    var unitsDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
+	var newId = "units_assigned_dialog";
+	unitsDialog.attr("id",newId);
+	var dialog_title_text = unitsDialog.find(".dialog_title_text");
+	dialog_title_text.html("Units");
+	var dialog_body = unitsDialog.find(".dialog_body");
+}
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn 	= $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -1534,6 +1558,7 @@ function init( ) {
 	initActionsDialog();
 	initUnitsDialog();
 	initUnitPeopleDialog();
+	initUnitsAssignedDialog();
 	initBenchmarkDialog();
 	$("#report_btn").click(function(){alert("TESTING");});
 	initCmdTerminateDialog();

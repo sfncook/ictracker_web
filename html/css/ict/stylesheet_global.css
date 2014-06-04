@@ -808,3 +808,6 @@ ul {
     padding: 0 4px;
 }
 
+#units_assigned_dialog {
+    width:350px;
+}
