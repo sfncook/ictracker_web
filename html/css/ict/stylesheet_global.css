@@ -572,7 +572,7 @@ td {
 }
 .par_unit_btn {
     background: #CCC;
-    margin: 5px;
+    margin: 5px 15px;
     float:left;
 }
 .par_dialog_people {
@@ -583,9 +583,17 @@ td {
     color: white;
     float: left;
     padding: 4px 0 0 0;
-    margin: 5px 0 5px 20px;
+    margin: 5px 0 5px 5px;
     height: 27px;
     width: 25px;
+}
+.personnel_par_btn {
+    float: left;
+    margin: 10px 5px !important;
+}
+.psi_par_btn {
+    float: left;
+    margin-top: 7px !important;
 }
 .par_dialog_unit_leftcol {
     margin-right: 15px;

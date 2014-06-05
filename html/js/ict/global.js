@@ -94,6 +94,11 @@ function showParDialog( tbar, btn ){
             var par_dialog_sector_btn = $("#par_dialog_sector_btn");
             var tbarTitle = tbar.find(".title_text").html();
             par_dialog_sector_btn.html(tbarTitle);
+            if(tbarTitle!="Sector Title") {
+                $("#par_dialog_title_text").html(tbarTitle+" PAR");
+            } else {
+                $("#par_dialog_title_text").html("Sector PAR");
+            }
 
             // Units PAR
             var par_dialog_units = $("#par_dialog_units");
@@ -164,6 +169,7 @@ function initParDialog( ) {
 	parDialog.addClass("par_dialog_body");
 	var parTitleDiv = parDialog.find(".dialog_title_text");
 	parTitleDiv.html("Sector PAR");
+	parTitleDiv.attr("id", "par_dialog_title_text");
 
 	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text par_title_btn par_dialog_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
 	parbody_containers.appendTo(parDialogBody);
