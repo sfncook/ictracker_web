@@ -176,6 +176,10 @@
 	color: white;
 }
 .glowpink:hover {
+	background: red;
+	color: white;
+}
+.glowpink:active {
 	background: #666;
 	color: white;
 }

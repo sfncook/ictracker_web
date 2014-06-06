@@ -234,34 +234,41 @@
                         <div class="dialog_close_btn button">X</div>
                     </div>
                     <div id="mayday_dialog_body" class="dialog_body col-xs-12">
-                        <table id="mayday_table_main"><tr>
-                            <td id="mayday_td_left" class="yellow_bg">
-                                <div class="mayday_box_title">Ascertain from Mayday Caller</div>
-                                <div>
-                                    <span id="mayday_name_label">Name:</span>
-                                    <input id="mayday_name_input" type="text"/>
-                                    <div id="mayday_psi_btn" class="psi_btn button">PSI</div>
-                                    <div class="clear_float"></div>
-                                </div>
+                        <table id="mayday_table_main">
+                            <tr>
+                                <td id="mayday_left_td">
+                                    <div id="mayday_scroll_div">
+                                        <div id="new_mayday_btn" class="glowpink button">
+                                            <img id="new_mayday_btn_icon" class='plus_icon' src='images/plus.png'/>
+                                            <div id="new_mayday_btn_text">New Mayday</div>
+                                            <div class="clear_float"></div>
+                                        </div>
+                                        <div id="mayday_info_div_prototype" class="yellow_bg mayday_info_div">
+                                            <div class="mayday_box_title">Mayday #</div>
+                                            <div>
+                                                <span class="mayday_name_label">Name:</span>
+                                                <input class="mayday_name_input" type="text"/>
+                                                <div class="mayday_psi_btn psi_btn button">PSI</div>
+                                                <div class="clear_float"></div>
+                                            </div>
 
-                                <select id="mayday_sector_select" class="mayday_select"></select>
-                                <div id="mayday_units_div"></div>
+                                            <select class="mayday_sector_select mayday_select"></select>
+                                            <div id="mayday_units_div"></div>
 
-                                <div id="hoseline_mayday_btn" class="glowgreen mayday_toggle button">ON Hoseline</div>
-                                <div id="offhoseline_mayday_btn" class="mayday_toggle button">OFF Hoseline</div>
-                                <div class="clear_float"></div>
+                                            <div id="hoseline_mayday_btn" class="glowgreen mayday_toggle button">ON Hoseline</div>
+                                            <div id="offhoseline_mayday_btn" class="mayday_toggle button">OFF Hoseline</div>
+                                            <div class="clear_float"></div>
 
-                                <div id="uninjured_mayday_btn" class="glowgreen mayday_toggle button">UNinjured</div>
-                                <div id="injured_mayday_btn" class="mayday_toggle button">Injured</div>
-                                <div class="clear_float"></div>
+                                            <div id="uninjured_mayday_btn" class="glowgreen mayday_toggle button">UNinjured</div>
+                                            <div id="injured_mayday_btn" class="mayday_toggle button">Injured</div>
+                                            <div class="clear_float"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td id="mayday_right_td"></td>
+                            </tr>
+                        </table>
 
-                                <!--<div>RESOURCES NEEDED FOR RESCUE</div>
-                                <div>Activate Grab-lives procedures</div>-->
-                            </td>
-                            <td>
-
-                            </td>
-                        </tr></table>
                         <!--<table id="mayday_table_main">
                             <tr class="mayday_dialog_row1">
                                 <td><table>

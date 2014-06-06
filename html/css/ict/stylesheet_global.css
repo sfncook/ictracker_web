@@ -608,17 +608,20 @@ td {
 #mayday_dialog_body {
     padding: 0;
 }
-#mayday_table_main li {
-    list-style: disc;
-}
-#mayday_table_main td {
-    vertical-align:top;
-    padding: 5;
+#mayday_scroll_div {
+    height:500px;
+    overflow:scroll;
 }
 .mayday_list li {
     margin: 0;
     cursor: default;
     padding-top: 2px;
+}
+#new_mayday_btn_icon {
+    float:left;
+}
+#new_mayday_btn_text {
+    float:left;
 }
 .mayday_toggle {
     display: inline-block;
@@ -643,15 +646,18 @@ td {
     display:block;
     margin:10px 4px 5px 4px;
 }
+#mayday_left_td {
+    padding:0;
+}
 #mayday_units_div {
     margin: 4px 4px 10px 4px;
     min-height:1px;
 }
-#mayday_name_label {
+.mayday_name_label {
     padding-top:3px;
     float:left;
 }
-#mayday_psi_btn {
+.mayday_psi_btn {
     margin-top:1px;
     float:left;
 }
@@ -660,6 +666,20 @@ td {
     color: #666;
     margin-bottom:5px;
     text-align:center;
+}
+#new_mayday_btn {
+    width:116px;
+    margin:4px;
+}
+#new_mayday_btn_icon {
+    height: 12px;
+    width: 12px;
+    margin:4px;
+}
+.mayday_info_div {
+    padding: 5px;
+    border: 1px solid #666;
+    margin: 4px 4;
 }
 ul {
  /*padding: 10px;*/
@@ -685,7 +705,7 @@ ul {
 #mayday_td_left {
     width:270px;
 }
-#mayday_name_input {
+.mayday_name_input {
     width: 175px;
     margin: 0 4px;
     border-left: #EEE 2px solid;
