@@ -324,6 +324,22 @@ function selectMaydaySectorBtn(sectorBtn){
 function showMaydayDialog(){
     parentDialog = 0;
 	var mayday_dialog = $("#mayday_dialog");
+
+	// Sectors
+	$(".tbar").not("#tbar_prototype").find(".title_text").not(":contains(Sector Title)").each(function( i ) {
+	    var sectorTitle = $(this).html();
+	    $(".mayday_sector_select").each(function(i){
+	        if($(this).find("option:contains("+sectorTitle+")").length==0) {
+	            $(this).append($("<option>"+sectorTitle+"</option>"));
+	        }
+	    });
+	});
+//	var mayday_sector_select = newMaydayTd.find(".mayday_sector_select");
+//	mayday_sector_select.removeClass("glowlightgreen");
+//	mayday_sector_select.empty();
+//	mayday_sector_select.append($("<option id='mayday_sector_select_default_item' disabled='disabled' selected='selected'>Sector</option>"));
+
+
 	
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
@@ -355,17 +371,6 @@ function addMaydayEvent() {
     // PSI button
     var mayday_psi_btn = newMaydayTd.find(".mayday_psi_btn");
     mayday_psi_btn.click(showDialog( 0, mayday_psi_btn, "#psi_dialog" , $("#mayday_dialog")));
-
-    // Sectors
-	var mayday_sector_select = newMaydayTd.find(".mayday_sector_select");
-	mayday_sector_select.removeClass("glowlightgreen");
-	mayday_sector_select.empty();
-	mayday_sector_select.append($("<option id='mayday_sector_select_default_item' disabled='disabled' selected='selected'>Sector</option>"));
-	$(".tbar").not("#tbar_prototype").find(".title_text").not(":contains(Sector Title)").each(function( i ) {
-	    mayday_sector_select.append($("<option>"+$(this).html()+"</option>"));
-	});
-
-
 
 	// Units
 	var mayday_units_div = newMaydayTd.find(".mayday_units_div");
