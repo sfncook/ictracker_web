@@ -103,45 +103,70 @@ function showParDialog( tbar, btn ){
             // Units PAR
             var par_dialog_units = $("#par_dialog_units");
             par_dialog_units.empty();
-            var tbarUnitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
-            if (tbarUnitBtns.length>0) {
+            var unit_side_containers = tbar.find(".unit_side_container");
+            if (unit_side_containers.length>0) {
                 var unitNames = new Array();
                 var unitBtns = new Array();
-                tbarUnitBtns.each(function( index ) {
-                    var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
-                    par_dialog_unit.show();
-                    par_dialog_unit.appendTo(par_dialog_units);
-                    var unit_name = $(this).html();
-                    unitNames.push(unit_name);
+                unit_side_containers.each(function( index ) {
+//                    var tbarUnitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
+                    var tbarUnitBtn = $(this).find(".unit_btn");
+                    if(!tbarUnitBtn.hasClass("blank_btn")) {
+                        var tbarPersonnelBtn = $(this).find(".personnel_btn");
+                        var tbarPsiBtn = $(this).find(".psi_btn");
+                        var manyPeople = 0;
+                        if(tbarPersonnelBtn.html()!='P') {
+                            manyPeople = tbarPersonnelBtn.html();
+                        }
+                        var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
+                        par_dialog_unit.show();
+                        par_dialog_unit.appendTo(par_dialog_units);
+                        var unit_name = tbarUnitBtn.html();
+                        unitNames.push(unit_name);
 
-                    par_dialog_unit.attr("id", "par_dialog_unit_"+unit_name);
+                        par_dialog_unit.attr("id", "par_dialog_unit_"+unit_name);
 
-                    var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
-                    unitBtns.push(unitBtn);
+                        // Personnel Btn
+                        var personnelBtn = par_dialog_unit.find(".personnel_btn")
+                        personnelBtn.html(tbarPersonnelBtn.html());
 
-                    unitBtn.html(unit_name);
-                    unitBtn.click(togglePar(unitBtn, "#par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
+                        // PSI Btn
+                        var psiBtn = par_dialog_unit.find(".psi_btn")
+                        psiBtn.html(tbarPsiBtn.html());
+                        updateBgColor(tbarPsiBtn.html(), psiBtn)
 
-                    var captain_btn = par_dialog_unit.find(".captain_btn").first();
-                    var engineer_btn = par_dialog_unit.find(".engineer_btn").first();
-                    var firefighter1_btn = par_dialog_unit.find(".firefighter1_btn").first();
-                    var firefighter2_btn = par_dialog_unit.find(".firefighter2_btn").first();
+                        // Unit Btn
+                        var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
+                        unitBtns.push(unitBtn);
+                        unitBtn.html(unit_name);
+                        unitBtn.click(togglePar(unitBtn, "#par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
 
-                    unitBtn.attr("id", "par_unit_btn_"+unit_name);
-                    captain_btn.attr("id", "captain_btn"+unit_name);
-                    engineer_btn.attr("id", "engineer_btn"+unit_name);
-                    firefighter1_btn.attr("id", "firefighter1_btn"+unit_name);
-                    firefighter2_btn.attr("id", "firefighter2_btn"+unit_name);
-
-                    captain_btn.addClass("par_person_btn_"+unit_name);
-                    engineer_btn.addClass("par_person_btn_"+unit_name);
-                    firefighter1_btn.addClass("par_person_btn_"+unit_name);
-                    firefighter2_btn.addClass("par_person_btn_"+unit_name);
-
-                    captain_btn.click(togglePar(captain_btn, "#captain_btn"+unit_name));
-                    engineer_btn.click(togglePar(engineer_btn, "#engineer_btn"+unit_name));
-                    firefighter1_btn.click(togglePar(firefighter1_btn, "#firefighter1_btn"+unit_name));
-                    firefighter2_btn.click(togglePar(firefighter2_btn, "#firefighter2_btn"+unit_name));
+                        // People Btns
+                        var par_dialog_people = par_dialog_unit.find(".par_dialog_people");
+                        var personBtnPrototype = $("<div class='par_person_btn par_dialog_btn dialog_btn button'>Firefighter</div>");
+                        for (var i = 0; i < manyPeople; i++) {
+                            personBtnPrototype.clone().appendTo(par_dialog_people);
+                        }
+//                        var captain_btn = par_dialog_unit.find(".captain_btn").first();
+//                        var engineer_btn = par_dialog_unit.find(".engineer_btn").first();
+//                        var firefighter1_btn = par_dialog_unit.find(".firefighter1_btn").first();
+//                        var firefighter2_btn = par_dialog_unit.find(".firefighter2_btn").first();
+//
+//                        unitBtn.attr("id", "par_unit_btn_"+unit_name);
+//                        captain_btn.attr("id", "captain_btn"+unit_name);
+//                        engineer_btn.attr("id", "engineer_btn"+unit_name);
+//                        firefighter1_btn.attr("id", "firefighter1_btn"+unit_name);
+//                        firefighter2_btn.attr("id", "firefighter2_btn"+unit_name);
+//
+//                        captain_btn.addClass("par_person_btn_"+unit_name);
+//                        engineer_btn.addClass("par_person_btn_"+unit_name);
+//                        firefighter1_btn.addClass("par_person_btn_"+unit_name);
+//                        firefighter2_btn.addClass("par_person_btn_"+unit_name);
+//
+//                        captain_btn.click(togglePar(captain_btn, "#captain_btn"+unit_name));
+//                        engineer_btn.click(togglePar(engineer_btn, "#engineer_btn"+unit_name));
+//                        firefighter1_btn.click(togglePar(firefighter1_btn, "#firefighter1_btn"+unit_name));
+//                        firefighter2_btn.click(togglePar(firefighter2_btn, "#firefighter2_btn"+unit_name));
+                    }
                 });
                 $(".mayday_par_btn").click(showMaydayDialog);
             }

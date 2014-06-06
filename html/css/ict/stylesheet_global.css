@@ -554,7 +554,7 @@ td {
 }
 
 #par_dialog {
-    width: 325px;
+    width: 335px;
 }
 #par_dialog_sector_btn {
 	width:168px;
@@ -562,13 +562,10 @@ td {
     text-align: center;
     margin: 5px auto;
 }
-.par_dialog_unit {
-    border: 1px solid #666 !important;
-    margin: 5px;
-}
 .par_person_btn  {
     width: 100px;
     margin: 5px;
+    float: left;
 }
 .par_unit_btn {
     background: #CCC;
@@ -596,8 +593,12 @@ td {
     margin-top: 7px !important;
 }
 .par_dialog_unit_leftcol {
-    margin-right: 15px;
     float: left;
+    border-top:1px solid #666;
+    width:100%;
+}
+.par_dialog_unit_leftcol td {
+    vertical-align:top;
 }
 
 #mayday_dialog {
