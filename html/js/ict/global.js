@@ -242,12 +242,10 @@ function clickPersonnelBtn(btn) {
 	var personnel_btn = btn_clicked.find(".personnel_btn");
 	if (btn.hasClass("glow_orange")) {
 		$(".unit_people_dialog_btn").removeClass("glow_orange");
-		tbar_clicked['personnel'] = 'X';
 		personnel_btn.html("P");
 	} else {
 		$(".unit_people_dialog_btn").removeClass("glow_orange");
 		btn.addClass("glow_orange");
-		tbar_clicked['personnel'] = btn.html();
 		personnel_btn.html(btn.html());
 	}
 }
@@ -256,9 +254,11 @@ function showUnitPeopleDialog( tbar, btn ){
         if(!btn.hasClass("hidden_div")) {
             var unit_people_dialog = $("#unit_people_dialog");
 
-            var unit_people_dialog_btn = unit_people_dialog.find(".unit_people_dialog_btn:contains('"+tbar['personnel']+"')");
+            var personnel_btn = btn.find(".personnel_btn");
+
+            var unit_people_dialog_btn = unit_people_dialog.find(".unit_people_dialog_btn:contains('"+personnel_btn.html()+"')");
             $(".unit_people_dialog_btn").removeClass("glow_orange");
-            if(unit_people_dialog_btn!=null) {
+            if(personnel_btn.html()!="P") {
                 unit_people_dialog_btn.addClass("glow_orange");
             }
 
@@ -346,7 +346,6 @@ function showMaydayDialog(){
 	});
 	
 	// Units
-	console.log($(".tbar > .unit_btn").not(".blank_btn").not(".acct_unit_btn"));
 	if($(".tbar > .unit_btn").not(".blank_btn").not(".acct_unit_btn").length>0) {
 	    $("#mayday_unit_btn").removeClass("disabled");
 	} else {
@@ -1251,7 +1250,6 @@ function updateTbar(tbar) {
     $( ".tbar" ).each(function( index ) {
         var manyUnitButtons = $(this).find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length;
         var sectorTitle = $(this).find(".title_text").html();
-        console.log(sectorTitle+" - "+manyUnitButtons);
         if(manyUnitButtons>0) {
             if(sectorTitle=="RESCUE") {
                 $("#rescue_objective_btn").addClass("glowlightgreen");
