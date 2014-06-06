@@ -327,6 +327,7 @@ function showMaydayDialog(){
 
 	// Sectors
 	var mayday_sector_select = $("#mayday_sector_select");
+	mayday_sector_select.removeClass("glowlightgreen");
 	mayday_sector_select.empty();
 	mayday_sector_select.append($("<option id='mayday_sector_select_default_item' disabled='disabled' selected='selected'>Sector</option>"));
 	$(".tbar").not("#tbar_prototype").find(".title_text").not(":contains(Sector Title)").each(function( i ) {
@@ -340,6 +341,10 @@ function showMaydayDialog(){
 	    var unitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+$(this).html()+"</div>");
 	    mayday_units_div.append(unitBtn);
 	    unitBtn.hide();
+	    unitBtn.click(function() {
+	        $(".mayday_unit_btn").removeClass("glowlightgreen");
+	        unitBtn.toggleClass("glowlightgreen");
+	    });
 	});
 	mayday_units_div.append($("<div class='clear_float'></div>"));
 	
@@ -367,17 +372,13 @@ function initMaydayDialog( ) {
 
     $("#hoseline_mayday_btn").click(
         function() {
-            $("#hoseline_mayday_btn").removeClass("glowlightgreen");
             $("#hoseline_mayday_btn").addClass("glowgreen");
-            $("#offhoseline_mayday_btn").addClass("glowpink");
             $("#offhoseline_mayday_btn").removeClass("glowred");
         }
     );
     $("#offhoseline_mayday_btn").click(
         function() {
-            $("#hoseline_mayday_btn").addClass("glowlightgreen");
             $("#hoseline_mayday_btn").removeClass("glowgreen");
-            $("#offhoseline_mayday_btn").removeClass("glowpink");
             $("#offhoseline_mayday_btn").addClass("glowred");
         }
     );
@@ -385,17 +386,13 @@ function initMaydayDialog( ) {
 
     $("#uninjured_mayday_btn").click(
         function() {
-            $("#uninjured_mayday_btn").removeClass("glowlightgreen");
             $("#uninjured_mayday_btn").addClass("glowgreen");
-            $("#injured_mayday_btn").addClass("glowpink");
             $("#injured_mayday_btn").removeClass("glowred");
         }
     );
     $("#injured_mayday_btn").click(
         function() {
-            $("#uninjured_mayday_btn").addClass("glowlightgreen");
             $("#uninjured_mayday_btn").removeClass("glowgreen");
-            $("#injured_mayday_btn").removeClass("glowpink");
             $("#injured_mayday_btn").addClass("glowred");
         }
     );

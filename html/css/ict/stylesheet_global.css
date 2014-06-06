@@ -641,11 +641,25 @@ td {
     box-shadow: 1px 1px 2px #888;
     width: 250px;
     display:block;
-    margin:15px 4px 5px 4px;
+    margin:10px 4px 5px 4px;
 }
 #mayday_units_div {
     margin: 4px 4px 10px 4px;
     min-height:1px;
+}
+#mayday_name_label {
+    padding-top:3px;
+    float:left;
+}
+#mayday_psi_btn {
+    margin-top:1px;
+    float:left;
+}
+.mayday_box_title {
+    font-size:1.1rem;
+    color: #666;
+    margin-bottom:5px;
+    text-align:center;
 }
 ul {
  /*padding: 10px;*/
@@ -672,12 +686,13 @@ ul {
     width:270px;
 }
 #mayday_name_input {
-    width: 210px;
-    margin-left: 4px;
+    width: 175px;
+    margin: 0 4px;
     border-left: #EEE 2px solid;
     border-top: #EEE 2px solid;
     border-right: #EEE 2px solid;
     color: black;
+    float:left;
 }
 .mayday_unit_btn {
     float:left;
