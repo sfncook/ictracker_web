@@ -605,6 +605,9 @@ td {
     width: 900px;
     background: white;
 }
+#mayday_dialog_body {
+    padding: 0;
+}
 #mayday_table_main li {
     list-style: disc;
 }
@@ -625,6 +628,24 @@ td {
     width: 120px;
     font-size: 0.9rem;
     margin: 4px;
+}
+.mayday_select {
+	text-align: center;
+	background: #CCC;
+	color: #666;
+	border: none;
+	border-radius: 3px;
+	padding: 4px 4px 4px 4px;
+	text-shadow: 1px 1px #AAA;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px #888;
+    width: 250px;
+    display:block;
+    margin:15px 4px 5px 4px;
+}
+#mayday_units_div {
+    margin: 4px 4px 10px 4px;
+    min-height:1px;
 }
 ul {
  /*padding: 10px;*/
@@ -647,27 +668,20 @@ ul {
 .underlined {
     border-bottom: 1px #666 dashed;
 }
+#mayday_td_left {
+    width:270px;
+}
 #mayday_name_input {
-    width: 278px;
+    width: 210px;
     margin-left: 4px;
     border-left: #EEE 2px solid;
     border-top: #EEE 2px solid;
     border-right: #EEE 2px solid;
     color: black;
 }
-#mayday_unit_btn {
-    display: inline-block;
-    margin-left: 10px;
-    height: 25px;
-    margin-bottom: 4px;
-}
-#mayday_sector_btn {
-    text-align: center;
-    display: inline-block;
-    margin-left: 10px;
-    margin-bottom: 4px;
-    height: 25px;
-    padding-top: 4px;
+.mayday_unit_btn {
+    float:left;
+    margin:4px;
 }
 #mayday_list_grablives li {
     padding: 0px;
