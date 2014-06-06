@@ -725,10 +725,6 @@ function initBenchmarkDialog( ) {
             benchmark_item_btn_2.html(benchmark_2.label);
             benchmark_item_btn_2.click(clickSecondaryBenchmark(benchmark_item_2));
             right_col.append(benchmark_item_2);
-
-//            var chkBox_2 = createCheckBox(benchmark_2.label, benchmark_2.id);
-//            chkBox_2.find(".chk_btn").click(clickSecondaryBenchmark(chkBox_2));
-//            right_col.append(chkBox_2);
         });
 
 	});
@@ -768,7 +764,7 @@ function resetBenchmarks() {
     $('.benchmark_btn_parent_div').each(function (index) {
         $(this).find(".benchmark_item_btn_primary").addClass("disabled");
         $(this).find(".benchmark_item_btn_primary").removeClass("glowlightgreen");
-        $(this).removeClass("glow_orange");
+        $(this).removeClass("glowlightyellow");
     });
     $('.benchmark_2nd_col_container').hide();
 
@@ -782,30 +778,30 @@ function setBenchmark(benchmark_item_id) {
 
     benchmark_item_btn_primary.removeClass("disabled");
     benchmark_item_btn_primary.addClass("glowlightgreen");
-    benchmark_item.addClass("glow_orange");
+    benchmark_item.addClass("glowlightyellow");
 
     // Show right-side
     $('.benchmark_2nd_col_container').hide();
     var right_col = right_cols[benchmark_item_id];
     right_col.show();
 
-    // Remove glow_orange from previous
+    // Remove glowlightyellow from previous
     benchmark_item.prevAll().each(function (index) {
         $(this).find(".benchmark_item_btn_primary").removeClass("disabled");
         $(this).find(".benchmark_item_btn_primary").addClass("glowlightgreen");
-        $(this).removeClass("glow_orange");
+        $(this).removeClass("glowlightyellow");
     });
 
     // Disable ALL next
     benchmark_item.nextAll().each(function (index) {
         $(this).find(".benchmark_item_btn_primary").addClass("disabled");
         $(this).find(".benchmark_item_btn_primary").removeClass("glowlightgreen");
-        $(this).removeClass("glow_orange");
+        $(this).removeClass("glowlightyellow");
     });
 
     if(benchmark_item.next().hasClass("benchmark_btn_parent_div")) {
         benchmark_item.next().find(".benchmark_item_btn_primary").removeClass("disabled");
-        benchmark_item.next().removeClass("glow_orange");
+        benchmark_item.next().removeClass("glowlightyellow");
     }
 }
 function clickSecondaryBenchmark(benchmark_item_2) {
@@ -813,8 +809,6 @@ function clickSecondaryBenchmark(benchmark_item_2) {
         var benchmark_item_btn_2 = benchmark_item_2.find(".benchmark_item_btn");
         benchmark_item_btn_2.toggleClass("glowlightgreen");
         tbar_clicked[benchmark_item_2.attr('id')] = benchmark_item_btn_2.hasClass("glowlightgreen");
-//        var chkbox = chkBox_2.find(".chk_btn")[0];
-//        tbar_clicked[chkBox_2.attr('id')] = chkbox.checked;
     };
 }
 function resetSecondaryBenchmarks(tbar, chkbox_container_id) {
