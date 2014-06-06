@@ -1132,8 +1132,6 @@ function initUnitsDialog( ) {
                         var prevUnitName = btn_clicked.html();
                         var isNewButton = btn_clicked.hasClass("blank_btn");
                         setUnitName(btn_clicked, unitName);
-    //					btn_clicked.unbind( "click" );
-    //					btn_clicked.click(showActionsForUnitBtn(btn_clicked));
                         addEvent_unit_to_sector(unitName, "sector");
                         hideAllDialogs();
                         if (isNewButton) {
@@ -1149,18 +1147,6 @@ function initUnitsDialog( ) {
 
                             // Add action list
                             addActionButton(btn_clicked.parents(".tbar"), btn_clicked.actions_list);
-
-    //						unitBtn.click(showDialog(tbar, unitBtn, "#units_dialog"));
-
-                            //Dragable handler
-    //                        btn_clicked.mousedown(btn_clicked, function(event) {
-    //                            var unitBtn = event.data;
-    //                            timeoutId = setTimeout(startDraggingUnit(unitBtn, event), 1000);
-    //                        }).bind('mouseup mouseleave', function() {
-    //                            if(typeof timeoutId!='undefined') {
-    //                                clearTimeout(timeoutId);
-    //                            }
-    //                        });
                         }
                         // Update action list class
                         if(typeof btn_clicked.actions_list != "undefined") {
@@ -1261,6 +1247,32 @@ function updateTbar(tbar) {
 	} else {
 	    actions_parent_container.hide();
 	}
+
+
+    // Update Objectives dialog for assigned/deassigned titles
+    $("#rescue_objective_btn").removeClass("glowlightgreen");
+    $("#safety_objective_btn").removeClass("glowlightgreen");
+    $("#ondeck_objective_btn").removeClass("glowlightgreen");
+    $("#rehab_objective_btn").removeClass("glowlightgreen");
+    $( ".tbar" ).each(function( index ) {
+        var manyUnitButtons = $(this).find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length;
+        var sectorTitle = $(this).find(".title_text").html();
+        console.log(sectorTitle+" - "+manyUnitButtons);
+        if(manyUnitButtons>0) {
+            if(sectorTitle=="RESCUE") {
+                $("#rescue_objective_btn").addClass("glowlightgreen");
+            }
+            if(sectorTitle=="Safety") {
+                $("#safety_objective_btn").addClass("glowlightgreen");
+            }
+            if(sectorTitle=="On Deck") {
+                $("#ondeck_objective_btn").addClass("glowlightgreen");
+            }
+            if(sectorTitle=="ReHab") {
+                $("#rehab_objective_btn").addClass("glowlightgreen");
+            }
+        }
+    });
 }
 function showUnitsDialog( tbar, btn ){
   return function(){
@@ -1284,10 +1296,6 @@ function showUnitsDialog( tbar, btn ){
 }
 function addUnitButton(unitsContainer, tbar) {
 	unitsContainer.find(".blank_btn").removeClass("blank_btn");
-//	var singleUnitContainer = $("<div class=\"single_unit_div\"></div>").clone();
-//	var psiBtn = $("<div class=\"psi_btn par_psi_hidden tbar_unit_btn button\">PSI</div>").clone();
-//	var unitBtn = $("<div class=\"blank_btn tbar_unit_btn unit_btn button\">Unit</div>").clone();
-//	var clockDiv = $("<div class=\"unit_timer_div\"><img style=\"margin:0\" class=\"clock_icon\" src=\"images/clock.png\"/></div>").clone();
     var unit_side_container = $("#unit_side_container_prototype").clone();
     unit_side_container.attr("id",tbar.attr("id")+"_unit_side_container");
     var unitBtn = unit_side_container.find(".unit_btn");
@@ -1298,12 +1306,6 @@ function addUnitButton(unitsContainer, tbar) {
     var unit_side_container_left_side = unit_side_container.find(".unit_side_container_left_side");
 	unit_side_container_left_side.click(showUnitPeopleDialog(tbar, unit_side_container_left_side));
 
-//	singleUnitContainer.append(unit_side_container);
-//	singleUnitContainer.append(unitBtn);
-//	singleUnitContainer.append(clockDiv);
-//	clockDiv.hide();
-//	singleUnitContainer.append($('<div class="clear_float"/>'));
-//	unitsContainer.append(singleUnitContainer);
 	unitBtn.click(showUnitsDialog(tbar, unitBtn));
 	unitBtn.draggable();
 	unitBtn.draggable('disable');
@@ -1312,7 +1314,6 @@ function addUnitButton(unitsContainer, tbar) {
 	var actions_list = $("<div class=\"actions_list\"></div>");
 	tbar.find(".actions_parent_container").append(actions_list);
 	unitBtn.actions_list = actions_list;
-
 }
 function addActionButton(tbar, actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");
@@ -1676,7 +1677,7 @@ var sectorsWithClock = [
 	"Sector 2",
 	"Sector 3",
 	"Sector 4",
-	"Rescue",
+	"RESCUE",
 	"Sector"
 	];
 var sectorsWithOutAcctBtn = [
@@ -1706,7 +1707,7 @@ var sectors = [
 	"East Sector",
 	"South Sector",
 	"West Sector",
-	"Rescue",
+	"RESCUE",
 
 	"A Side",
 	"B Side",
