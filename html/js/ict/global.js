@@ -468,12 +468,33 @@ function addMaydayEvent() {
 
     updateMaydayEvents();
 }
+function selectMaydayTab(tab, color) {
+    var tabEl = $("#mayday_right_tab_"+tab);
+    var tabDivEl = $("#mayday_tab_div_"+tab);
+
+    $(".mayday_tab_div").hide();
+    tabDivEl.show();
+
+    $("#mayday_right_td").removeClass("tan_bg");
+    $("#mayday_right_td").removeClass("green_bg");
+    $("#mayday_right_td").removeClass("gray_bg");
+    $("#mayday_right_td").removeClass("blue_bg");
+    $("#mayday_right_td").addClass(color);
+}
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
 	maydayBtn.click(showMaydayDialog);
 
     $("#mayday_info_div_prototype").hide();
     $("#new_mayday_btn").click(addMaydayEvent);
+
+    $(".mayday_tab_div").hide();
+    selectMaydayTab("radio", "tan_bg");
+
+    $("#mayday_right_tab_radio").click(function(){selectMaydayTab("radio", "tan_bg")});
+    $("#mayday_right_tab_grab").click(function(){selectMaydayTab("grab", "green_bg")});
+    $("#mayday_right_tab_deploy").click(function(){selectMaydayTab("deploy", "gray_bg")});
+    $("#mayday_right_tab_build").click(function(){selectMaydayTab("build", "blue_bg")});
 }
 
 

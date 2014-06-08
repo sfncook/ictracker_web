@@ -609,7 +609,7 @@ td {
     padding: 0;
 }
 #mayday_scroll_div {
-    height:500px;
+    min-height:370px;
     overflow:scroll;
 }
 .mayday_list li {
@@ -688,22 +688,35 @@ td {
     margin: 4px 4;
     width:275px;
 }
+#mayday_right_td {
+    width: 613px;
+    height: 100%;
+}
+.mayday_tab_div {
+    height:100%;
+    width: 100%;
+    padding: 10px;
+}
 #mayday_right_tab_div {
     width:100%;
+    background: #EEE;
 }
 .mayday_right_tab_text {
     float:left;
-    margin: 1px 4px;
+    margin: 3px 8px 0 0;
+    box-shadow: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
-#mayday_right_tab_radio {
-
+.select_on {
+    border:3px #4863A0 solid;
 }
-#mayday_right_tab_grab {
-
+.select_off {
+    border:3px transparent solid;
 }
 ul {
  /*padding: 10px;*/
- margin: 15px;
+ margin: 5px 15px;
 }
 .list_level_2 {
     margin-left: 15px !important;
