@@ -646,8 +646,13 @@ td {
     display:block;
     margin:10px 4px 5px 4px;
 }
+#mayday_table_main td {
+    vertical-align: top;
+}
 #mayday_left_td {
     padding:0;
+    width:285px;
+    background: #EEE;
 }
 #mayday_units_div {
     width:100%;
@@ -682,6 +687,19 @@ td {
     border: 1px solid #666;
     margin: 4px 4;
     width:275px;
+}
+#mayday_right_tab_div {
+    width:100%;
+}
+.mayday_right_tab_text {
+    float:left;
+    margin: 1px 4px;
+}
+#mayday_right_tab_radio {
+
+}
+#mayday_right_tab_grab {
+
 }
 ul {
  /*padding: 10px;*/
