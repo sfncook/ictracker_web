@@ -1106,6 +1106,15 @@ function initUnitsAssignedDialog( ) {
 	dialog_title_text.html("Units");
 	var dialog_body = unitsDialog.find(".dialog_body");
 }
+function unitTimeout(btn, count) {
+    return function() {
+        count--;
+        btn.attr("src", "images/timer_bars_"+count+".png");
+        if(count>1) {
+            window.setTimeout(unitTimeout(btn, count), 3*1000);
+        }
+    }
+}
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn 	= $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -1183,6 +1192,10 @@ function initUnitsDialog( ) {
                             btn_clicked.parents(".unit_side_container").find(".personnel_btn").removeClass("hidden_div");
                             btn_clicked.parents(".unit_side_container").find(".show_actions_btn").removeClass("hidden_div");
                             btn_clicked.parents(".unit_side_container").find(".show_actions_btn").click(showActionsForUnitBtn(btn_clicked));
+
+                            // Unit Timer
+                            btn_clicked.parents(".unit_side_container").find(".timer_bars").show();
+                            unitTimeout(btn_clicked.parents(".unit_side_container").find(".timer_bars"), 4)();
 
                             // Add action list
                             addActionButton(btn_clicked.parents(".tbar"), btn_clicked.actions_list);
@@ -1347,6 +1360,8 @@ function addUnitButton(unitsContainer, tbar) {
 	unitBtn.click(showUnitsDialog(tbar, unitBtn));
 	unitBtn.draggable();
 	unitBtn.draggable('disable');
+
+	unit_side_container.find(".timer_bars").hide();
 
 	// Create the actions column for this unit
 	var actions_list = $("<div class=\"actions_list\"></div>");
