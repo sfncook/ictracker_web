@@ -420,30 +420,35 @@ function addMaydayEvent() {
     var mayday_psi_btn = newMaydayTd.find(".mayday_psi_btn");
     mayday_psi_btn.click(showDialog( 0, mayday_psi_btn, "#psi_dialog" , $("#mayday_dialog")));
 
-    $("#hoseline_mayday_btn").click(
+    var hoseline_mayday_btn = newMaydayTd.find(".hoseline_mayday_btn");
+    var offhoseline_mayday_btn = newMaydayTd.find(".offhoseline_mayday_btn");
+    var uninjured_mayday_btn = newMaydayTd.find(".uninjured_mayday_btn");
+    var injured_mayday_btn = newMaydayTd.find(".injured_mayday_btn");
+
+    hoseline_mayday_btn.click(
         function() {
-            $("#hoseline_mayday_btn").addClass("glowgreen");
-            $("#offhoseline_mayday_btn").removeClass("glowred");
+            hoseline_mayday_btn.addClass("glowgreen");
+            offhoseline_mayday_btn.removeClass("glowred");
         }
     );
-    $("#offhoseline_mayday_btn").click(
+    offhoseline_mayday_btn.click(
         function() {
-            $("#hoseline_mayday_btn").removeClass("glowgreen");
-            $("#offhoseline_mayday_btn").addClass("glowred");
+            hoseline_mayday_btn.removeClass("glowgreen");
+            offhoseline_mayday_btn.addClass("glowred");
         }
     );
 
 
-    $("#uninjured_mayday_btn").click(
+    uninjured_mayday_btn.click(
         function() {
-            $("#uninjured_mayday_btn").addClass("glowgreen");
-            $("#injured_mayday_btn").removeClass("glowred");
+            uninjured_mayday_btn.addClass("glowgreen");
+            injured_mayday_btn.removeClass("glowred");
         }
     );
-    $("#injured_mayday_btn").click(
+    injured_mayday_btn.click(
         function() {
-            $("#uninjured_mayday_btn").removeClass("glowgreen");
-            $("#injured_mayday_btn").addClass("glowred");
+            uninjured_mayday_btn.removeClass("glowgreen");
+            injured_mayday_btn.addClass("glowred");
         }
     );
 
