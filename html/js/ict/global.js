@@ -133,7 +133,8 @@ function showParDialog( tbar, btn ){
                         // PSI Btn
                         var psiBtn = par_dialog_unit.find(".psi_btn")
                         psiBtn.html(tbarPsiBtn.html());
-                        updateBgColor(tbarPsiBtn.html(), psiBtn)
+                        updateBgColor(tbarPsiBtn.html(), psiBtn);
+                        psiBtn.click(showDialog( 0, [psiBtn,tbarPsiBtn], "#psi_dialog" , $("#par_dialog")));
 
                         // Unit Btn
                         var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
@@ -193,24 +194,34 @@ function initParDialog( ) {
 /**
  * Psi Dialog
  **/
+function setPsiText_WithBtn(text, btn_) {
+    var btn;
+    if(btn_.hasClass("psi_btn")) {
+        btn = btn_;
+    } else  {
+        btn = btn_.find(".psi_btn");
+    }
+    btn.html(text);
+    updateBgColor(text, btn);
+}
 function setPsiText(text) {
 	return function(){
-	    var btn;
-	    if(btn_clicked.hasClass("psi_btn")) {
-		    btn = btn_clicked;
-	    } else  {
-	        btn = btn_clicked.find(".psi_btn");
+	    if(Array.isArray(btn_clicked)) {
+            btn_clicked.forEach(function(btn_clicked_, index, array){
+                setPsiText_WithBtn(text, btn_clicked_);
+            });
+	    } else {
+            setPsiText_WithBtn(text, btn_clicked);
 	    }
-	    btn.html(text);
-		updateBgColor(text, btn);
-		if(typeof parentDialog!='undefined' && parentDialog!=0) {
+
+	    if(typeof parentDialog!='undefined' && parentDialog!=0) {
             $("#psi_dialog").hide();
             parentDialog.show();
             parentDialog = 0;
-		} else {
-		    hideAllDialogs();
-		}
-	  }
+        } else {
+            hideAllDialogs();
+        }
+    }
 }
 function initPsiDialog( ) {
 	var psiDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
@@ -326,25 +337,6 @@ function showMaydayDialog(){
 	var mayday_dialog = $("#mayday_dialog");
 
 	updateMaydayEvents();
-
-//	var mayday_sector_select = newMaydayTd.find(".mayday_sector_select");
-//	mayday_sector_select.removeClass("glowlightgreen");
-//	mayday_sector_select.empty();
-//	mayday_sector_select.append($("<option id='mayday_sector_select_default_item' disabled='disabled' selected='selected'>Sector</option>"));
-
-    // Units
-//	var mayday_units_div = newMaydayTd.find(".mayday_units_div");
-//	mayday_units_div.empty();
-//	$(".tbar").find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").each(function( i ) {
-//	    var unitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+$(this).html()+"</div>");
-//	    mayday_units_div.append(unitBtn);
-//	    unitBtn.hide();
-//	    unitBtn.click(function() {
-//	        $(".mayday_unit_btn").removeClass("glowlightgreen");
-//	        unitBtn.toggleClass("glowlightgreen");
-//	    });
-//	});
-//	mayday_units_div.append($("<div class='clear_float'></div>"));
 	
 	$(".dialog").hide();
 	$(".side_dialog_container").hide();
@@ -424,7 +416,7 @@ function addMaydayEvent() {
 
     // PSI button
     var mayday_psi_btn = newMaydayTd.find(".mayday_psi_btn");
-    mayday_psi_btn.click(showDialog( 0, mayday_psi_btn, "#psi_dialog" , $("#mayday_dialog")));
+    mayday_psi_btn.click(showDialog( 0, [mayday_psi_btn], "#psi_dialog" , $("#mayday_dialog")));
 
     var mayday_clear_btn = newMaydayTd.find(".mayday_clear_btn");
     mayday_clear_btn.click(clearMayday(newMaydayTd));
@@ -1244,7 +1236,7 @@ function showActionsForUnitBtn(unitBtn) {
 			
 			// Update PAR and PSI buttons
 			var psiBtn = unitBtn.parents(".unit_side_container").children(".psi_btn");
-			psiBtn.click(showDialog(tbar, psiBtn, "#psi_dialog"));
+			psiBtn.click(showDialog(tbar, [psiBtn], "#psi_dialog"));
 			psiBtn.removeClass("par_psi_hidden");
 			
 			var parBtn = unitBtn.parents(".unit_side_container").children(".par_btn");
