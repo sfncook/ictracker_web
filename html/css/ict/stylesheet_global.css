@@ -30,18 +30,27 @@ td {
     vertical-align: middle;
 }
 
-#splash_table {
-    text-align: center;
-    vertical-align: middle;
-    width: 1200px;
-    margin-left:auto;
-    margin-right: auto;
-    margin-top: 100px;
+#splash_outer_outer_div {
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+	display: table;
+}
+#splash_outer_inner_div {
+	display: table-cell;
+	vertical-align: middle
 }
 #splash_row1 {
     width: 700px;
     margin-left: auto;
     margin-right: auto;
+}
+#splash_row2 {
+}
+#splash_row3 {
+    height:300px;
 }
 #splash_title_logo_img {
     float: left;
@@ -56,10 +65,19 @@ td {
 }
 .splash_start_btn {
     height: 50px;
-    width: 200px;
+    width: 220px;
     margin: 10px;
     font-size: 2.0rem;
-    padding-top: 10px !important;
+    padding-top: 5px !important;
+    float: left;
+}
+.splash_start_btn_icon {
+    width: 40px;
+    height: 40px;
+}
+.splash_start_btn_text {
+    margin-left:10px;
+    font-size: 1.4rem;
 }
 
 #header_spacer_td {
