@@ -354,15 +354,18 @@ function showMaydayDialog(){
 function updateMaydayEvents() {
     // Get all TBar sector and unit data
     var tbarDataObjs = [];
-    $(".tbar").not("#tbar_prototype").find(".title_text").not(":contains(Sector Title)").parents(".tbar").each(function( i ) {
+    $(".tbar").not("#tbar_prototype").each(function( i ) {
         var tbarDataObj = {};
 	    var tbar = $(this);
-	    tbarDataObj.sectorTitle = tbar.find(".title_text").html();
-	    tbarDataObj.unitTexts = [];
-	    tbar.find(".unit_btn:not(.blank_btn):not(.acct_unit_btn)").each(function(){
-	        tbarDataObj.unitTexts.push($(this).html());
-	    });
-	    tbarDataObjs.push(tbarDataObj);
+	    var titleText = tbar.find(".title_text").html();
+	    if(titleText!="ReHab" && titleText!="Sector Title") {
+            tbarDataObj.sectorTitle = tbar.find(".title_text").html();
+            tbarDataObj.unitTexts = [];
+            tbar.find(".unit_btn:not(.blank_btn):not(.acct_unit_btn)").each(function(){
+                tbarDataObj.unitTexts.push($(this).html());
+            });
+            tbarDataObjs.push(tbarDataObj);
+        }
 	});
 
     // For each Mayday
@@ -402,14 +405,6 @@ function updateMaydayEvents() {
             }
         });
     });
-
-    // Rebuild all Section selectors
-//    var maydaySectorSelectEls = $(".mayday_info_div:not(#mayday_info_div_prototype)").find(".mayday_sector_select");
-//    maydaySectorSelectEls.empty();
-//    maydaySectorSelectEls.append("<option disabled='disabled' selected='selected' class='default_option'>Sector</option>");
-//    maydaySectorSelectEls.removeClass("glowlightgreen");
-//    console.log(maydaySectorSelectEls);
-
 }
 var manyMaydays = 0;
 function addMaydayEvent() {
