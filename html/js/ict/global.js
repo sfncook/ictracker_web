@@ -639,6 +639,11 @@ function initSectorDialog( ) {
 		        if(sectorName!="Sector") {
 		            hideAllDialogs();
 		        }
+		        if(sectorName=="ReHab") {
+		            tbar_clicked.find(".benchmark_btn").hide();
+		        } else {
+		            tbar_clicked.find(".benchmark_btn").show();
+		        }
                 updateTbar(tbar_clicked);
                 if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
                     addTbar($("#tbar_container"));
@@ -1375,79 +1380,80 @@ function initTbars() {
     updateTbar(rescue_tbar);
     updateTbar(safety_tbar);
     updateTbar(rehab_tbar);
+
+    rehab_tbar.find(".benchmark_btn").hide();
 }
 var tbarIndex = 1;
 function addTbar(tbarContainer) {
 	//Init T-Bars
-	
-//	for (tbarIndex=1; tbarIndex<=4; tbarIndex++) {
-		var tbar = $("#tbar_prototype" ).clone().appendTo(tbarContainer);
-		tbar.prefix_dir = 'X';
-		tbar.prefix_num = 'X';
-		var newId = "tbar_"+tbarIndex;
-		tbar.attr("id",newId);
-		
-		//Title Btn
-		var titleBtn = tbar.find(".title_btn");
-		var titleBtnId = "tbar_title_"+tbarIndex;
-		titleBtn.attr("id", titleBtnId);
-		titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
-		var tbarDirBtn = $(".title_dir");
-		var tbarNumBtn = $(".title_num");
-		tbarDirBtn.hide();
-		tbarNumBtn.hide();
-		
-		
-		//PAR (Sector) button
-		var parBtn = tbar.find(".par_btn");
-		parBtn.click(showParDialog(tbar, parBtn));
-		
-		//Accountability button
-		var acctBtn = tbar.find(".acct_unit_btn");
-		acctBtn.click(showUnitsDialog(tbar, acctBtn));
-		
-		//Benchmark Btn
-		var benchmarkBtn = tbar.find(".benchmark_btn");
-		var benchmarkBtnId = "tbar_benchmark_"+tbarIndex;
-		benchmarkBtn.attr("id", benchmarkBtnId);
-		benchmarkBtn.click(showBenchmarkDialog(tbar, benchmarkBtn));
-		
-		//Unit Btn
-		var unitBtnContainer = tbar.find(".units_container");
-		unitBtnContainer.manyBtns = 0;
-		addUnitButton(unitBtnContainer, tbar);
 
-		// Droppable handler
-        tbar.droppable();
-        tbar.droppable({
-            over: function( event, ui ) {
-                $(event.target).addClass("glowlightblue");
-            },
-            out: function( event, ui ) {
-                $(event.target).removeClass("glowlightblue");
-            },
-            drop: function( event, ui ) {
-                var unitBtn = ui.draggable;
-                var unit_side_container = unitBtn.parents(".unit_side_container");
-                var dest_tbar = $(event.target);
-                var source_tbar = unitBtn.parents(".tbar");
+    var tbar = $("#tbar_prototype" ).clone().appendTo(tbarContainer);
+    tbar.prefix_dir = 'X';
+    tbar.prefix_num = 'X';
+    var newId = "tbar_"+tbarIndex;
+    tbar.attr("id",newId);
 
-                dest_tbar.removeClass("glowlightblue");
+    //Title Btn
+    var titleBtn = tbar.find(".title_btn");
+    var titleBtnId = "tbar_title_"+tbarIndex;
+    titleBtn.attr("id", titleBtnId);
+    titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
+    var tbarDirBtn = $(".title_dir");
+    var tbarNumBtn = $(".title_num");
+    tbarDirBtn.hide();
+    tbarNumBtn.hide();
 
-                // Move actions list
-                var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
-                var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
-                var actionList = source_actionsParentContainer.children("."+unitBtn.html());
-                jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
 
-                // Move unit_btn (and parent and siblings) to new TBar
-                var last_unit_div = tbar.find(".units_container").children().last();
-                jQuery(unit_side_container).detach().insertBefore(last_unit_div);
-            }
-        });
+    //PAR (Sector) button
+    var parBtn = tbar.find(".par_btn");
+    parBtn.click(showParDialog(tbar, parBtn));
 
-		tbar.show();
-//	}
+    //Accountability button
+    var acctBtn = tbar.find(".acct_unit_btn");
+    acctBtn.click(showUnitsDialog(tbar, acctBtn));
+
+    //Benchmark Btn
+    var benchmarkBtn = tbar.find(".benchmark_btn");
+    var benchmarkBtnId = "tbar_benchmark_"+tbarIndex;
+    benchmarkBtn.attr("id", benchmarkBtnId);
+    benchmarkBtn.click(showBenchmarkDialog(tbar, benchmarkBtn));
+
+    //Unit Btn
+    var unitBtnContainer = tbar.find(".units_container");
+    unitBtnContainer.manyBtns = 0;
+    addUnitButton(unitBtnContainer, tbar);
+
+    // Droppable handler
+    tbar.droppable();
+    tbar.droppable({
+        over: function( event, ui ) {
+            $(event.target).addClass("glowlightblue");
+        },
+        out: function( event, ui ) {
+            $(event.target).removeClass("glowlightblue");
+        },
+        drop: function( event, ui ) {
+            var unitBtn = ui.draggable;
+            var unit_side_container = unitBtn.parents(".unit_side_container");
+            var dest_tbar = $(event.target);
+            var source_tbar = unitBtn.parents(".tbar");
+
+            dest_tbar.removeClass("glowlightblue");
+
+            // Move actions list
+            var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
+            var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
+            var actionList = source_actionsParentContainer.children("."+unitBtn.html());
+            jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
+
+            // Move unit_btn (and parent and siblings) to new TBar
+            var last_unit_div = tbar.find(".units_container").children().last();
+            jQuery(unit_side_container).detach().insertBefore(last_unit_div);
+        }
+    });
+
+    tbar.show();
+
     return tbar;
 }
 
