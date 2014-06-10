@@ -43,14 +43,21 @@ td {
 	vertical-align: middle
 }
 #splash_row1 {
-    width: 700px;
+    width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 #splash_row2 {
+    width:410px;
+    margin: 0 auto;
 }
 #splash_row3 {
-    height:300px;
+    width:800px;
+    margin: 0 auto;
+}
+#splash_row4 {
+    width:800px;
+    margin: 0 auto;
 }
 #splash_title_logo_img {
     float: left;
@@ -64,8 +71,8 @@ td {
     font-size: 2.0rem;
 }
 .splash_start_btn {
-    height: 50px;
-    width: 220px;
+    height: 70px;
+    width: 180px;
     margin: 10px;
     font-size: 2.0rem;
     padding-top: 5px !important;
