@@ -205,6 +205,15 @@
     background: #666;
     color: white;
 }
+.glowbabyblue {
+    background: #99e5ff;
+}
+.glowbabyblue:hover {
+    background: #77ddff;
+}
+.glowbabyblue:active {
+    background: #66aaff;
+}
 
 .psi_red {
 	background: red;

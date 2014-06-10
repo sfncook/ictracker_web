@@ -227,6 +227,20 @@
                 </div>
                 <!-- IAP Dialog -->
 
+
+                <!-- Mayday Clear Dialog -->
+                <div id="mayday_clear_dialog" class="dialog dialog_window container-fluid">
+                    <div class="dialog_title col-xs-12 container-fluid">
+                        <div class="dialog_title_text col-xs-11">Clear Mayday</div>
+                        <div class="dialog_close_btn button">X</div>
+                    </div>
+                    <div class="dialog_body col-xs-12 container-fluid">
+                        <div class="mayday_clear_item_btn button">"Firefighter self rescued"</div>
+                        <div class="mayday_clear_item_btn button">"Firefighter rescued"</div>
+                        <div class="mayday_clear_item_btn button">"Firefighter MIA"</div>
+                    </div>
+                </div>
+
                 <!-- Mayday Dialog -->
                 <div id="mayday_dialog" class="dialog dialog_window container-fluid">
                     <div class="dialog_title col-xs-12 container-fluid">
@@ -241,27 +255,6 @@
                                         <div id="new_mayday_btn" class="glowpink button">
                                             <img id="new_mayday_btn_icon" class='plus_icon' src='images/plus.png'/>
                                             <div id="new_mayday_btn_text">New Mayday</div>
-                                            <div class="clear_float"></div>
-                                        </div>
-                                        <div id="mayday_info_div_prototype" class="yellow_bg mayday_info_div">
-                                            <div class="mayday_box_title">Mayday #</div>
-                                            <div>
-                                                <span class="mayday_name_label">Name:</span>
-                                                <input class="mayday_name_input" type="text"/>
-                                                <div class="mayday_psi_btn psi_btn button">PSI</div>
-                                                <div class="clear_float"></div>
-                                            </div>
-
-                                            <select class="mayday_sector_select mayday_select"></select>
-                                            <div class="mayday_units_div"></div>
-                                            <div class="clear_float"></div>
-
-                                            <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
-                                            <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
-                                            <div class="clear_float"></div>
-
-                                            <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
-                                            <div class="injured_mayday_btn mayday_toggle button">Injured</div>
                                             <div class="clear_float"></div>
                                         </div>
                                     </div>
@@ -330,228 +323,172 @@
                                 </td>
                             </tr>
                         </table>
-
-                        <!--<table id="mayday_table_main">
-                            <tr class="mayday_dialog_row1">
-                                <td><table>
-                                    <tr><td class="yellow_bg">
-                                        <ul class="mayday_list">
-                                            <li class="list_med_font_size">Ascertain from Mayday Caller:</li>
-                                                <li class="red_font list_med_font_size list_level_2">Name:<input id="mayday_name_input" type="text"/></li>
-                                                <li class="red_font list_med_font_size list_level_2"><div id="mayday_unit_btn" class="blank_btn unit_btn button">Unit</div></li>
-                                                <li class="red_font list_med_font_size list_level_2">Sector:</li>
-                                            <li class="red_font list_med_font_size list_level_2">Location:</li>
-                                            <div id="hoseline_mayday_btn" class="glowgreen mayday_toggle button">ON Hoseline</div>
-                                            <div id="offhoseline_mayday_btn" class="glowpink mayday_toggle button">OFF Hoseline</div>
-                                            <div class="clear_float"></div>
-                                            <div id="uninjured_mayday_btn" class="glowgreen mayday_toggle button">UNinjured</div>
-                                            <div id="injured_mayday_btn" class="glowpink mayday_toggle button">Injured</div>
-                                            <div class="clear_float"></div>
-                                            <div id="mayday_psi_btn" class="psi_btn button">PSI</div>
-                                            <li class="red_font list_med_font_size">RESOURCES NEEDED FOR RESCUE</li>
-                                            <li class="list_med_font_size">Activate Grab-lives procedures</li>
-                                        </ul>
-                                    </td></tr>
-                                    <tr><td class="tan_bg">
-                                        <span class="mayday_list_title">Radio Transition and Alert</span>
-                                        <ul class="mayday_list">
-                                            <li class="">Emergency Traffic Declaration: Alert fireground that a MAYDAY has been declared</li>
-                                            <li class="">If needed move non-affected units to secondary radio channel</li>
-                                            <li class="list_level_2">Support officer/runs ongiong operations</li>
-                                            <li class="list_level_2">Fireground channel/command directs rescue</li>
-                                            <li class="">PAR conducted by Operations on secondary channel</li>
-                                            <li class="">Immediately request additional alarm(s)</li>
-                                        </ul>
-                                    </td></tr>
-                                </table></td>
-                                <td class="green_bg">
-                                    <span class="mayday_list_title">GRAB-LIVES</span>
-                                    <ul id="mayday_list_grablives" class="mayday_list">
-                                        <li class="first_char_red list_med_font_size">Gauge <span class="sm_font">(CHECK AIR)</span></li>
-                                        <li class="first_char_red list_med_font_size">Radio <span class="sm_font">(CALL for Help)</span></li>
-                                        <li class="first_char_red list_med_font_size">Activate <span class="sm_font">(Pass)</span></li>
-                                        <li class="list_space_below first_char_red list_med_font_size">Breathing <span class="sm_font">(Control)</span></li>
-                                        <li class="first_char_red list_med_font_size">Low <span class="sm_font">(Stay Low)</span></li>
-                                        <li class="first_char_red list_med_font_size">Illuminate <span class="sm_font">(Flashlight)</span></li>
-                                        <li class="first_char_red list_med_font_size">Volume <span class="sm_font">(Make Noise)</span></li>
-                                        <li class="first_char_red list_med_font_size">Exit <span class="sm_font">(Find Exit)</span></li>
-                                        <li class="list_space_below first_char_red list_med_font_size">Shield Airway</li>
-                                        <li class="first_char_red list_med_font_size">Air Level:_______</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr class="mayday_dialog_row2">
-                                <td class="gray_bg">
-                                    <span class="mayday_list_title">Deployment Considerations</span>
-                                    <ul class="mayday_list">
-                                        <li class="list_space_below list_med_font_size">Deploy Rescue</li>
-                                        <li class="list_space_below list_med_font_size">Commit additional resources to the Rapid Intervention Team</li>
-                                        <li class="list_space_below list_med_font_size">Change Plan to a high priority rescue effort</li>
-                                        <li class="list_space_below list_med_font_size">Consider withdrawing companies from affected areas</li>
-                                        <li class="list_space_below list_med_font_size">Re-enforce firefighting positions</li>
-                                        <li class="list_space_below list_med_font_size">Open / Unlock all doors</li>
-                                        <li class="list_space_below list_med_font_size">Ventilate - maintain tenability</li>
-                                        <li class="list_space_below list_med_font_size">Provide additional lighting</li>
-                                        <li class="list_space_below list_med_font_size">Closely coordinate and control search efforts</li>
-                                        <li class="list_space_below list_med_font_size">Special call for TRT teams if needed</li>
-                                        <li class="list_space_below list_med_font_size">Monitor structural stability</li>
-                                        <li class="list_space_below list_med_font_size">Maintain strong supervision and control of crews</li>
-                                        <li class="list_space_below list_med_font_size">Assign additional chief officers to area of rescue</li>
-                                    </ul>
-                                </td>
-                                <td class="blue_bg">
-                                    <span class="mayday_list_title">Build out command and Control</span>
-                                    <ul class="mayday_list">
-                                        <li class="list_space_below list_med_font_size">Use chief officers is critical location, fill out command team</li>
-                                        <li class="list_space_below list_med_font_size">Build/effective rehab</li>
-                                        <li class="list_space_below list_med_font_size">Control the media</li>
-                                        <li class="list_space_below list_med_font_size">Put medical sector in place</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>-->
                     </div>
+                </div>
+
+                <div id="mayday_info_div_prototype" class="yellow_bg mayday_info_div">
+                    <div class="mayday_box_title">Mayday #</div>
+                    <div class="glowbabyblue mayday_clear_btn button">Clear</div>
+                    <div class="clear_float"></div>
+                    <div>
+                        <span class="mayday_name_label">Name:</span>
+                        <input class="mayday_name_input" type="text"/>
+                        <div class="mayday_psi_btn psi_btn button">PSI</div>
+                        <div class="clear_float"></div>
+                    </div>
+
+                    <select class="mayday_sector_select mayday_select"></select>
+                    <div class="mayday_units_div"></div>
+                    <div class="clear_float"></div>
+
+                    <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
+                    <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
+                    <div class="clear_float"></div>
+
+                    <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
+                    <div class="injured_mayday_btn mayday_toggle button">Injured</div>
+                    <div class="clear_float"></div>
                 </div>
                 <!-- Mayday Dialog -->
 
-            <!-- Objectives Dialog Unit Component Prototype -->
-            <div id="objectives_dialog" class="dialog dialog_window container-fluid">
-                <div class="dialog_title col-xs-12 container-fluid">
-                    <div class="dialog_title_text col-xs-10">Objectives</div>
-                    <div class="dialog_close_btn button">X</div>
-                </div>
-                <div id="objectives_dialog_body" class="dialog_body col-xs-12 container-fluid">
-                    <div id="objective_left_col">
-                        <div id="rescue_objective_btn" class="objective_btn button">Upgrade to full recue</div>
-                        <div id="safety_objective_btn" class="objective_btn button">Assing safety</div>
-                        <div class="objective_btn button">Establish supply line</div>
-                        <div class="objective_btn button">Secure utilities</div>
-                        <div class="objective_btn button">Ventilation</div>
-                        <div id="ondeck_objective_btn" class="objective_btn button">Create "On deck"</div>
-                        <div class="objective_btn button">Pressurize exposures</div>
-                        <div class="objective_btn button">Monitor channel 16</div>
-                        <div class="objective_btn button">Salvage</div>
-                        <div id="rehab_objective_btn" class="objective_btn button">Establish rehab</div>
-                        <div class="objective_btn button">Occupant services</div>
+                <!-- Objectives Dialog Unit Component Prototype -->
+                <div id="objectives_dialog" class="dialog dialog_window container-fluid">
+                    <div class="dialog_title col-xs-12 container-fluid">
+                        <div class="dialog_title_text col-xs-10">Objectives</div>
+                        <div class="dialog_close_btn button">X</div>
                     </div>
-                    <div id="objective_right_col">
-                    </div>
-                </div>
-            </div>
-
-            <!-- OSR Dialog Unit Component Prototype -->
-            <div id="osr_dialog" class="dialog dialog_window container-fluid">
-                <div class="dialog_title col-xs-12 container-fluid">
-                    <div class="dialog_title_text col-xs-11">On Scene Report (OSR)</div>
-                    <div class="dialog_close_btn button">X</div>
-                </div>
-                <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
-                    <div id="osr_left_col">
-                        <div class="osr_btn button">Unit ID</div>
-                        <div class="osr_btn button">Address</div>
-                        <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
-                        <div id="construction_osr_btn" class="osr_btn button">Construction</div>
-                        <div id="conditions_osr_btn" class="osr_btn button">Conditions</div>
-                        <div class="osr_btn button">Assume Command</div>
-                        <div id="location_osr_btn" class="osr_btn button">Location(mobile/cab)</div>
-                        <div id="mode_osr_btn" class="osr_btn button">Strategy (off./def.)</div>
-                        <div class="osr_btn button">Attack line</div>
-                        <div class="osr_btn button">Water supply</div>
-                        <div class="osr_btn button">IRIC</div>
-                        <div class="osr_btn button">Accountability</div>
-                    </div>
-                    <div id="osr_right_col">
-                        <select id="osr_select_type_of_building" class="osr_select">
-                            <option disabled="disabled" selected="selected">Type of building</option>
-                            <option>Residential home</option>
-                            <option>Duplex</option>
-                            <option>Apartment</option>
-                            <option>Hotel</option>
-                            <option>Strip mall</option>
-                            <option>Office complex</option>
-                            <option>Big box retail</option>
-                            <option>Specialized/Other</option>
-                        </select>
-
-                        <select class="osr_select">
-                            <option disabled="disabled" selected="selected">Number of floors</option>
-                            <option>1 floor</option>
-                            <option>2 floors</option>
-                            <option>3 floors</option>
-                            <option>4 floors</option>
-                            <option>5 floors</option>
-                            <option>6 floors</option>
-                            <option>7 floors</option>
-                            <option>8 floors</option>
-                            <option>9 floors</option>
-                            <option>10 floors</option>
-                            <option>11 floors</option>
-                            <option>12 floors</option>
-                            <option>13 floors</option>
-                            <option>14 floors</option>
-                            <option>15 floors</option>
-                            <option>16 floors</option>
-                            <option>17 floors</option>
-                            <option>18 floors</option>
-                            <option>19 floors</option>
-                            <option>20 floors</option>
-                            <option>21 floors</option>
-                            <option>22 floors</option>
-                            <option>23 floors</option>
-                            <option>24 floors</option>
-                            <option>25 floors</option>
-                        </select>
-                        <select class="osr_select">
-                            <option disabled="disabled" selected="selected">Size of building</option>
-                            <option>Small building</option>
-                            <option>Medium building</option>
-                            <option>Large building</option>
-                        </select>
-
-                        <div class="osr_toggle_container_div">
-                            <div id="osr_occupancy_basement_btn" class="osr_toggle_btn button">Basement</div>
-                            <div id="osr_occupancy_nobasement_btn" class="osr_toggle_btn button">No Basement</div>
+                    <div id="objectives_dialog_body" class="dialog_body col-xs-12 container-fluid">
+                        <div id="objective_left_col">
+                            <div id="rescue_objective_btn" class="objective_btn button">Upgrade to full recue</div>
+                            <div id="safety_objective_btn" class="objective_btn button">Assing safety</div>
+                            <div class="objective_btn button">Establish supply line</div>
+                            <div class="objective_btn button">Secure utilities</div>
+                            <div class="objective_btn button">Ventilation</div>
+                            <div id="ondeck_objective_btn" class="objective_btn button">Create "On deck"</div>
+                            <div class="objective_btn button">Pressurize exposures</div>
+                            <div class="objective_btn button">Monitor channel 16</div>
+                            <div class="objective_btn button">Salvage</div>
+                            <div id="rehab_objective_btn" class="objective_btn button">Establish rehab</div>
+                            <div class="objective_btn button">Occupant services</div>
                         </div>
-
-                        <select id="osr_select_type_of_construction" class="osr_select">
-                            <option disabled="disabled" selected="selected">Construction type</option>
-                            <option>Light weight construction</option>
-                            <option>Wood frame construction</option>
-                            <option>Block construction</option>
-                            <option>Brick construction</option>
-                            <option>Tilt slab construction</option>
-                            <option>Specialized/Other construction</option>
-                        </select>
-
-                        <select class="osr_select">
-                            <option disabled="disabled" selected="selected">Roof</option>
-                            <option>Pitched - tile roof</option>
-                            <option>Pitched - asphalt roof</option>
-                            <option>Pitched - wood shingle roof</option>
-                            <option>Flat roof</option>
-                            <option>Arched roof</option>
-                        </select>
-
-                        <select id="osr_select_conditions" class="osr_select">
-                            <option disabled="disabled" selected="selected">Conditions</option>
-                            <option>Nothing showing</option>
-                            <option>Smoke showing</option>
-                            <option>Smoke & Fire showing</option>
-                        </select>
-
-                        <div class="osr_toggle_container_div">
-                            <div id="osr_occupancy_mob_btn" class="osr_toggle_btn button">Mobile</div>
-                            <div id="osr_occupancy_stat_btn" class="osr_toggle_btn button">Stationary</div>
-                        </div>
-
-                        <div class="osr_toggle_container_div">
-                            <div id="osr_occupancy_off_btn" class="osr_toggle_btn button">Offensive</div>
-                            <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
+                        <div id="objective_right_col">
                         </div>
                     </div>
-                    <div style="width=100%" class="clear_float"></div>
                 </div>
-            </div>
+
+                <!-- OSR Dialog Unit Component Prototype -->
+                <div id="osr_dialog" class="dialog dialog_window container-fluid">
+                    <div class="dialog_title col-xs-12 container-fluid">
+                        <div class="dialog_title_text col-xs-11">On Scene Report (OSR)</div>
+                        <div class="dialog_close_btn button">X</div>
+                    </div>
+                    <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
+                        <div id="osr_left_col">
+                            <div class="osr_btn button">Unit ID</div>
+                            <div class="osr_btn button">Address</div>
+                            <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
+                            <div id="construction_osr_btn" class="osr_btn button">Construction</div>
+                            <div id="conditions_osr_btn" class="osr_btn button">Conditions</div>
+                            <div class="osr_btn button">Assume Command</div>
+                            <div id="location_osr_btn" class="osr_btn button">Location(mobile/cab)</div>
+                            <div id="mode_osr_btn" class="osr_btn button">Strategy (off./def.)</div>
+                            <div class="osr_btn button">Attack line</div>
+                            <div class="osr_btn button">Water supply</div>
+                            <div class="osr_btn button">IRIC</div>
+                            <div class="osr_btn button">Accountability</div>
+                        </div>
+                        <div id="osr_right_col">
+                            <select id="osr_select_type_of_building" class="osr_select">
+                                <option disabled="disabled" selected="selected">Type of building</option>
+                                <option>Residential home</option>
+                                <option>Duplex</option>
+                                <option>Apartment</option>
+                                <option>Hotel</option>
+                                <option>Strip mall</option>
+                                <option>Office complex</option>
+                                <option>Big box retail</option>
+                                <option>Specialized/Other</option>
+                            </select>
+
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Number of floors</option>
+                                <option>1 floor</option>
+                                <option>2 floors</option>
+                                <option>3 floors</option>
+                                <option>4 floors</option>
+                                <option>5 floors</option>
+                                <option>6 floors</option>
+                                <option>7 floors</option>
+                                <option>8 floors</option>
+                                <option>9 floors</option>
+                                <option>10 floors</option>
+                                <option>11 floors</option>
+                                <option>12 floors</option>
+                                <option>13 floors</option>
+                                <option>14 floors</option>
+                                <option>15 floors</option>
+                                <option>16 floors</option>
+                                <option>17 floors</option>
+                                <option>18 floors</option>
+                                <option>19 floors</option>
+                                <option>20 floors</option>
+                                <option>21 floors</option>
+                                <option>22 floors</option>
+                                <option>23 floors</option>
+                                <option>24 floors</option>
+                                <option>25 floors</option>
+                            </select>
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Size of building</option>
+                                <option>Small building</option>
+                                <option>Medium building</option>
+                                <option>Large building</option>
+                            </select>
+
+                            <div class="osr_toggle_container_div">
+                                <div id="osr_occupancy_basement_btn" class="osr_toggle_btn button">Basement</div>
+                                <div id="osr_occupancy_nobasement_btn" class="osr_toggle_btn button">No Basement</div>
+                            </div>
+
+                            <select id="osr_select_type_of_construction" class="osr_select">
+                                <option disabled="disabled" selected="selected">Construction type</option>
+                                <option>Light weight construction</option>
+                                <option>Wood frame construction</option>
+                                <option>Block construction</option>
+                                <option>Brick construction</option>
+                                <option>Tilt slab construction</option>
+                                <option>Specialized/Other construction</option>
+                            </select>
+
+                            <select class="osr_select">
+                                <option disabled="disabled" selected="selected">Roof</option>
+                                <option>Pitched - tile roof</option>
+                                <option>Pitched - asphalt roof</option>
+                                <option>Pitched - wood shingle roof</option>
+                                <option>Flat roof</option>
+                                <option>Arched roof</option>
+                            </select>
+
+                            <select id="osr_select_conditions" class="osr_select">
+                                <option disabled="disabled" selected="selected">Conditions</option>
+                                <option>Nothing showing</option>
+                                <option>Smoke showing</option>
+                                <option>Smoke & Fire showing</option>
+                            </select>
+
+                            <div class="osr_toggle_container_div">
+                                <div id="osr_occupancy_mob_btn" class="osr_toggle_btn button">Mobile</div>
+                                <div id="osr_occupancy_stat_btn" class="osr_toggle_btn button">Stationary</div>
+                            </div>
+
+                            <div class="osr_toggle_container_div">
+                                <div id="osr_occupancy_off_btn" class="osr_toggle_btn button">Offensive</div>
+                                <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
+                            </div>
+                        </div>
+                        <div style="width=100%" class="clear_float"></div>
+                    </div>
+                </div>
 
             </div>
 			
@@ -575,19 +512,6 @@
                         </td>
                     </tr>
                 </table>
-				<!--<div class="par_dialog_people">
-                    <table>
-                        <tr>
-                            <td><div class="captain_btn par_person_btn par_dialog_btn dialog_btn button">Captain</div></td>
-                            <td><div class="engineer_btn par_person_btn par_dialog_btn dialog_btn button">Engineer</div></td>
-                        </tr>
-                        <tr>
-                            <td><div class="firefighter1_btn par_person_btn par_dialog_btn dialog_btn button">Firefighter</div></td>
-                            <td><div class="firefighter2_btn par_person_btn par_dialog_btn dialog_btn button">Firefighter</div></td>
-                        </tr>
-                    </table>
-				</div>
-                <div class="clear_float"></div>-->
 			</div>
 			
 		</div><!--dialogContainer-->

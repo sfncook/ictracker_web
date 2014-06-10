@@ -406,6 +406,12 @@ function updateMaydayEvents() {
         });
     });
 }
+function clearMayday(maydayTd) {
+    return function() {
+        maydayTd.hide();
+        showDialog(0, maydayTd.find(".mayday_clear_btn"), "#mayday_clear_dialog")();
+    }
+}
 var manyMaydays = 0;
 function addMaydayEvent() {
     manyMaydays++;
@@ -419,6 +425,9 @@ function addMaydayEvent() {
     // PSI button
     var mayday_psi_btn = newMaydayTd.find(".mayday_psi_btn");
     mayday_psi_btn.click(showDialog( 0, mayday_psi_btn, "#psi_dialog" , $("#mayday_dialog")));
+
+    var mayday_clear_btn = newMaydayTd.find(".mayday_clear_btn");
+    mayday_clear_btn.click(clearMayday(newMaydayTd));
 
     var hoseline_mayday_btn = newMaydayTd.find(".hoseline_mayday_btn");
     var offhoseline_mayday_btn = newMaydayTd.find(".offhoseline_mayday_btn");
@@ -466,6 +475,8 @@ function addMaydayEvent() {
         }
     );
 
+
+
     updateMaydayEvents();
 }
 function selectMaydayTab(tab, color) {
@@ -495,6 +506,8 @@ function initMaydayDialog( ) {
     $("#mayday_right_tab_grab").click(function(){selectMaydayTab("grab", "green_bg")});
     $("#mayday_right_tab_deploy").click(function(){selectMaydayTab("deploy", "gray_bg")});
     $("#mayday_right_tab_build").click(function(){selectMaydayTab("build", "blue_bg")});
+
+    $(".mayday_clear_item_btn").click(function(){hideAllDialogs()});
 }
 
 

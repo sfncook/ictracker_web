@@ -480,6 +480,13 @@ td {
     border-left: 2px solid orange;
     font-size: 1.25rem;
 }
+#mayday_clear_dialog {
+    width: 350px;
+}
+.mayday_clear_item_btn {
+    margin: 5px 0 5px 10px;
+    width: 325px;
+}
 
 #osr_dialog {
 	width: 420px;
@@ -690,6 +697,13 @@ td {
     color: #666;
     margin-bottom:5px;
     text-align:center;
+    float:left;
+}
+.mayday_clear_btn {
+    height: 24px;
+    padding: 2px;
+    margin-right: 6px;
+    float:right;
 }
 #new_mayday_btn {
     width:116px;
@@ -704,7 +718,7 @@ td {
     padding: 5px;
     border: 1px solid #666;
     margin: 4px 4;
-    width:275px;
+    width:272px;
 }
 #mayday_right_td {
     width: 613px;
