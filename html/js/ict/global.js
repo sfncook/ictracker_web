@@ -259,6 +259,9 @@ function clickPersonnelBtn(btn) {
 		personnel_btn.html(btn.html());
 	}
 }
+function clickResetClockBtn() {
+	unitTimeout(btn_clicked.parents(".unit_side_container").find(".timer_bars"), 4)();
+}
 function showUnitPeopleDialog( tbar, btn ){
     return function(){
         if(!btn.hasClass("hidden_div")) {
@@ -298,7 +301,8 @@ function initUnitPeopleDialog() {
 		newBtn.click(function() {clickPersonnelBtn(newBtn);});
 	});
 
-	var resetClockBtn = $("<div id='reset_clock_btn' class='disabled reset_clock_btn button'><img class='clock_icon' src='images/clock.png'/>Reset Clock</div>").clone().appendTo(row1);
+	var resetClockBtn = $("<div id='reset_clock_btn' class='reset_clock_btn button'><img class='clock_icon' src='images/clock.png'/>Reset Clock</div>").clone().appendTo(row1);
+	resetClockBtn.click(function(){clickResetClockBtn()});
 	row1.append($("<div class='clear_float'></div>"));
 
     // PSI Buttons
@@ -1108,10 +1112,13 @@ function initUnitsAssignedDialog( ) {
 }
 function unitTimeout(btn, count) {
     return function() {
+        console.log(btn);
+        clearTimeout(btn.timer_id);
         count--;
         btn.attr("src", "images/timer_bars_"+count+".png");
         if(count>1) {
-            window.setTimeout(unitTimeout(btn, count), 3*1000);
+            btn.timer_id = setTimeout(unitTimeout(btn, count), 10*1000);
+            console.log("set:"+btn.timer_id);
         }
     }
 }
