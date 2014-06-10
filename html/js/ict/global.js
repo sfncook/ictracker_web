@@ -32,8 +32,7 @@ function setParText(text) {
 function startTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
     tbar.find('.par_btn').addClass('has_par');
-//    tbar['par_timer'] = setTimeout(function(){cancelTbarParTimer(tbar);},(5*60*1000));
-    tbar['par_timer'] = setTimeout(function(){cancelTbarParTimer(tbar);},(5*1000));
+    tbar['par_timer'] = setTimeout(function(){cancelTbarParTimer(tbar);},(5*60*1000));
 }
 function cancelTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
