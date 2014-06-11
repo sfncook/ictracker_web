@@ -987,9 +987,16 @@ function initObjectivesDialog( ) {
 /**
  * OSR Dialog
  **/
+ function updateOsrPercentComplete() {
+    var many_osr_btn = $(".osr_btn").length;
+    var many_osr_btn_green = $(".osr_btn.glowlightgreen").length;
+    var percent_complete = Math.floor((many_osr_btn_green/many_osr_btn)*100);
+    $("#osr_btn_perccomplete").html("("+percent_complete+"% Complete)");
+}
  function toggleOsrBtn(btn) {
     return function() {
         btn.toggleClass("glowlightgreen");
+        updateOsrPercentComplete();
     }
 }
 function initOsrDialog( ) {
@@ -1000,28 +1007,34 @@ function initOsrDialog( ) {
     $("#osr_occupancy_basement_btn").click(function(){
         $("#osr_occupancy_basement_btn").addClass("glowlightgreen");
         $("#osr_occupancy_nobasement_btn").removeClass("glowlightgreen");
+        updateOsrPercentComplete();
     });
     $("#osr_occupancy_nobasement_btn").click(function(){
         $("#osr_occupancy_basement_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_nobasement_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
     });
 
     $("#osr_occupancy_off_btn").click(function(){
         $("#osr_occupancy_off_btn").addClass("glowlightgreen");
         $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
+        updateOsrPercentComplete();
     });
     $("#osr_occupancy_def_btn").click(function(){
         $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_def_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
     });
 
     $("#osr_occupancy_mob_btn").click(function(){
         $("#osr_occupancy_mob_btn").addClass("glowlightgreen");
         $("#osr_occupancy_stat_btn").removeClass("glowlightgreen");
+        updateOsrPercentComplete();
     });
     $("#osr_occupancy_stat_btn").click(function(){
         $("#osr_occupancy_mob_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_stat_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
     });
 
 
@@ -1031,16 +1044,28 @@ function initOsrDialog( ) {
         }
     );
 
-    $("#osr_select_type_of_building").change(function() {$("#occupancy_osr_btn").addClass("glowlightgreen");});
-    $("#osr_select_type_of_construction").change(function() {$("#construction_osr_btn").addClass("glowlightgreen");});
-    $("#osr_select_conditions").change(function() {$("#conditions_osr_btn").addClass("glowlightgreen");});
+    $("#osr_select_type_of_building").change(function() {
+        $("#occupancy_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        });
+    $("#osr_select_type_of_construction").change(function() {
+        $("#construction_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        });
+    $("#osr_select_conditions").change(function() {
+        $("#conditions_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        });
     $("#osr_occupancy_mob_btn").click(function() {
         $("#location_osr_btn").addClass("glowlightgreen");
         $("#assumecmd_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
         });
     $("#osr_occupancy_stat_btn").click(function() {
         $("#location_osr_btn").addClass("glowlightgreen");
-        $("#assumecmd_osr_btn").addClass("glowlightgreen");});
+        $("#assumecmd_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        });
     $("#osr_occupancy_off_btn").click(
         function() {
             $("#mode_osr_btn").addClass("glowlightgreen");
@@ -1048,6 +1073,7 @@ function initOsrDialog( ) {
             mode_btn.addClass("offensive_btn");
             mode_btn.removeClass("defensive_btn");
             mode_btn.html("OFFNS");
+            updateOsrPercentComplete();
         }
     );
     $("#osr_occupancy_def_btn").click(
@@ -1057,12 +1083,13 @@ function initOsrDialog( ) {
             mode_btn.addClass("defensive_btn");
             mode_btn.removeClass("offensive_btn");
             mode_btn.html("DEFNS");
+            updateOsrPercentComplete();
             showDialog(0, mode_btn, "#emergency_traffic_dialog")();
         }
     );
 
 	
-	var osr_btn = $("#osr_btn");
+	var osr_btn = $("#osr_header_btn");
 	osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
 }
 
@@ -1591,8 +1618,10 @@ function toggleEmergTrafficBtn(btn) {
 }
 function initEmergTrafficDialog() {
     $(".emergency_traffic_item_btn").each(function() {
-        $(this).click(toggleEmergTrafficBtn($(this)));
-    });
+        $(this).click(function() {
+            toggleEmergTrafficBtn($(this));
+            hideAllDialogs();
+        })});
 }
 function clickModeButton() {
     var mode_btn = $("#mode_btn");

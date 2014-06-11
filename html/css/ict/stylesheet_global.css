@@ -220,9 +220,6 @@ td {
     margin-bottom: 8px;
 	height: 25px;
 }
-#objectives_header_btn {
-    margin-top: 20px;
-}
 #iap_btn {
     margin-top: 20px;
 }
@@ -830,6 +827,7 @@ ul {
     margin: 5px 10px 5px 10px;
 }
 #objectives_header_btn {
+    margin-top: 20px;
     height: 45px;
 }
 #objective_right_col {
@@ -843,6 +841,12 @@ ul {
     font-size:0.6rem;
 }
 
+#osr_header_btn {
+    height: 45px;
+}
+#osr_btn_perccomplete {
+    font-size:0.6rem;
+}
 .osr_btn {
     width: 165px;
     margin: 5px 10px 5px 10px;
