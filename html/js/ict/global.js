@@ -2349,13 +2349,13 @@ var unitsByTypeByCity = {
 		BC:[
 		    "BC261",
 		    "BSO261"],
+		WtrTend:["WT261"],
+		Brush:["BT261"],
+		Rehab:["RH261"],
 		Ambo:[
 			"SWA261",
 			"SWA262",
 			"SWA265",],
-		WtrTend:["WT261"],
-		Brush:["BT261"],
-		Rehab:["RH261"],
 		AirVac:[
 		    "Native Air",
 		    "Life Net",
@@ -2380,10 +2380,6 @@ var unitsByTypeByCity = {
 		BC:[
 			"BC271",
 			"BSO271"],
-		Medic:[
-			"Med271",
-			"Med272",
-			"Med276"],
 		SpecInc:[
 			"SI272"
 		],
@@ -2402,6 +2398,10 @@ var unitsByTypeByCity = {
 		HazMat:[
 		    "HM272"
 		],
+		Medic:[
+			"Med271",
+			"Med272",
+			"Med276"],
 		AirVac:[
 		    "Native Air",
 		    "Life Net",
