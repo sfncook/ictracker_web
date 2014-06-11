@@ -1481,10 +1481,13 @@ function addTbar(tbarContainer) {
             dest_tbar.removeClass("glowbabyblue");
 
             // Move actions list
-            var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
+//            var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
+//            var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
+//            var actionList = source_actionsParentContainer.children("."+unitBtn.html());
+//            jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
             var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
             var actionList = source_actionsParentContainer.children("."+unitBtn.html());
-            jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
+            jQuery(actionList).detach();
 
             // Move unit_btn (and parent and siblings) to new TBar
             var last_unit_div = tbar.find(".units_container").children().last();
