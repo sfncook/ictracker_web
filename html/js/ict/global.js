@@ -1115,7 +1115,7 @@ function unitTimeout(btn, count) {
         count--;
         btn.attr("src", "images/timer_bars_"+count+".png");
         if(count>1) {
-            timer_id = setTimeout(unitTimeout(btn, count), 10*1000);
+            timer_id = setTimeout(unitTimeout(btn, count), 3.33*60*1000);
             btn.data({'timer_id': timer_id});
         }
     }
@@ -1684,7 +1684,17 @@ function init( ) {
 	$("#tbar_prototype").hide();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
-	$(".dialog_close_btn").click(hideAllDialogs);
+	$(".dialog_close_btn").click(function(){
+	    hideAllDialogs();
+	    $(".dialog").hide();
+	    $(".side_dialog_container").hide();
+	    if(typeof parentDialog!='undefined' && parentDialog!=0) {
+	        $("#dialogContainer").show();
+            parentDialog.show();
+            parentDialog = 0;
+        }
+	});
+
 	$("#mode_btn").click(clickModeButton);
 	
 	hideAllDialogs();
