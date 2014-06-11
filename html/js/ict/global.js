@@ -1569,17 +1569,25 @@ function addTbar(tbarContainer) {
             dest_tbar.removeClass("glowbabyblue");
 
             // Move actions list
-//            var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
-//            var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
-//            var actionList = source_actionsParentContainer.children("."+unitBtn.html());
-//            jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
+            var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
             var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
             var actionList = source_actionsParentContainer.children("."+unitBtn.html());
-            jQuery(actionList).detach();
+            jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
+//            var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
+//            var actionList = source_actionsParentContainer.children("."+unitBtn.html());
+//            jQuery(actionList).detach();
 
             // Move unit_btn (and parent and siblings) to new TBar
             var last_unit_div = tbar.find(".units_container").children().last();
             jQuery(unit_side_container).detach().insertBefore(last_unit_div);
+
+            // Select actions
+            // In source_tbar - select previous unit actions or none
+            var srcFirstUnitBtn = source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").first();
+            if(srcFirstUnitBtn!=unitBtn) {
+                showActionsForUnitBtn(srcFirstUnitBtn)();
+            }
+            showActionsForUnitBtn(unitBtn)();
         }
     });
 
