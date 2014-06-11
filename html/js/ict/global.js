@@ -1111,14 +1111,12 @@ function initUnitsAssignedDialog( ) {
 }
 function unitTimeout(btn, count) {
     return function() {
-        console.log("clear:"+ btn.data('timer_id'));
         clearTimeout(btn.data('timer_id'));
         count--;
         btn.attr("src", "images/timer_bars_"+count+".png");
         if(count>1) {
             timer_id = setTimeout(unitTimeout(btn, count), 10*1000);
             btn.data({'timer_id': timer_id});
-            console.log("set:"+btn.data('timer_id'));
         }
     }
 }
