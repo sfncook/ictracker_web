@@ -1759,25 +1759,26 @@ $(document).keyup(function(e) {
 });
 
 var actions = [
-    "Take a Line",
+    "Supply",
     "Secure Util",
     "360",
     "Protect Exposure",
     "1-1/2\"",
 
-    "Search/Rescue",
+    "Take a Line",
     "Vert Vent",
     "Open Build",
     "",
     "1-3/4",
 
-    "Fire Attack",
+
+    "Search/Rescue",
     "Roof Prof",
     "Soften build",
     "",
     "2\"",
 
-    "Supply",
+    "Fire Attack",
     "Fan to Door",
     "Sprinkler",
     "",
