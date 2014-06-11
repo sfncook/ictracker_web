@@ -952,8 +952,18 @@ ul {
 }
 
 #delete_unit_confirm_dialog {
-    width: 150px;
+    width: 360px;
+}
+#delete_unit_confirm_dialog_text {
+    padding:8px;
+    font-size:1.1rem;
+    color: #666;
+}
+#delete_unit_confirm_dialog_btns {
+    width: 200px;
+    margin: 0 auto;
 }
 .confirm_btn {
     float:left;
+    margin: 10px 20px;
 }

@@ -23,10 +23,6 @@
     </head>
     
     <body>
-        <div id="delete_unit_confirm_dialog" title="Delete Unit?">
-            Are you sure you want to delete this unit?
-        </div>
-
 		<div id="ict_header">
             <img id="title_icon" class="header_item" src="images/icon/ict_logo_100x100.png"/>
             <div id="time" class="time_lg header_item">00:00</div>
@@ -159,6 +155,23 @@
                         <div class="dialog_close_btn button">X</div>
                     </div>
                     <div class="dialog_body col-xs-12 container-fluid"></div>
+                </div>
+
+
+                <!-- Delete Unit Confirm Dialog -->
+                <div id="delete_unit_confirm_dialog" class="dialog dialog_window container-fluid">
+                    <div class="dialog_title col-xs-12 container-fluid">
+                        <div class="dialog_title_text col-xs-11">Confirm Delete</div>
+                        <div class="dialog_close_btn button">X</div>
+                    </div>
+                    <div class="dialog_body col-xs-12">
+                        <div id="delete_unit_confirm_dialog_text">Are you sure you want to delete this unit?</div>
+                        <div id="delete_unit_confirm_dialog_btns">
+                            <div class="ok_confirm_btn confirm_btn button">Delete</div>
+                            <div class="cancel_confirm_btn confirm_btn button">Cancel</div>
+                            <div class="clear_float"></div>
+                        </div>
+                    </div>
                 </div>
 
 

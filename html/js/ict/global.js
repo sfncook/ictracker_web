@@ -282,6 +282,25 @@ function showUnitPeopleDialog( tbar, btn ){
             tbar_clicked = tbar;
             $("#dialogContainer").show();
             unit_people_dialog.show();
+
+            // Delete Unit button
+            $("#delete_unit_btn").click(showDialog( 0, btn, "#delete_unit_confirm_dialog" , $("#unit_people_dialog")));
+            $("#delete_unit_confirm_dialog").find(".ok_confirm_btn").click(function(){
+                // Delete Actions
+                var actionsParentContainer = btn.parents(".tbar").find(".actions_parent_container");
+                var unit_btn = btn.parents(".unit_side_container").find(".unit_btn");
+                var actionList = actionsParentContainer.find("."+unit_btn.html());
+                jQuery(actionList).detach();
+
+                // Delete unit side container
+                var unit_side_container = btn.parents(".unit_side_container");
+                jQuery(unit_side_container).detach();
+
+                hideAllDialogs();
+            });
+            $("#delete_unit_confirm_dialog").find(".cancel_confirm_btn").click(function(){
+                hideAllDialogs();
+            });
         }
     }
 }
@@ -343,19 +362,6 @@ function initUnitPeopleDialog() {
 		newBtn.click(setPsiText(psiValue));
 	}
 	row2.append("<div class=\"clear_float\"></div>");
-
-	// Delete Unit button
-	$("#delete_unit_btn").click(function(){
-	    console.log("delete");
-        $("#delete_unit_confirm_dialog").dialog({
-            buttons : {
-                "Confirm" : function() {console.log("confirm")},
-                "Cancel" : function() {console.log("cancel");}
-            }
-        });
-
-        $("#delete_unit_confirm_dialog").dialog("open");
-    });
 }
 
 
@@ -1729,11 +1735,6 @@ function init( ) {
 	});
 
 	$("#mode_btn").click(clickModeButton);
-
-	$("#delete_unit_confirm_dialog").dialog({
-        autoOpen: true,
-        modal: true
-    });
 	
 	hideAllDialogs();
 	
