@@ -285,6 +285,34 @@ function showUnitPeopleDialog( tbar, btn ){
         }
     }
 }
+function startDraggingUnit(draggableBtn, event){
+    // Start dragging
+    draggableBtn.draggable();
+    draggableBtn.draggable('enable');
+//    draggableBtn.addClass("unit_btn_dragging");
+//    draggableBtn.draggable({
+//      start: function( event, ui ) {
+//        $(event.target).addClass("glowlightblue");
+//        $(event.target).css("z-index", 10);
+//        $(event.target).data({
+//            'originalLeft': $(event.target).css('left'),
+//            'origionalTop': $(event.target).css('top')
+//        });
+//      },
+//      stop: function( event, ui ) {
+//        $(event.target).removeClass("glowlightblue");
+//        $(event.target).removeClass("unit_btn_dragging");
+//        $(event.target).draggable('disable');
+//        $(event.target).css({
+//            'left': $(event.target).data('originalLeft'),
+//            'top': $(event.target).data('origionalTop')
+//        });
+//      }
+//    });
+//
+//    // Start dragging
+    draggableBtn.trigger(event);
+}
 function initUnitPeopleDialog() {
     var unit_people_dialog = $("#unit_people_dialog" );
     var row1 = unit_people_dialog.find("#unit_people_dialog_row1");
@@ -315,6 +343,10 @@ function initUnitPeopleDialog() {
 		newBtn.click(setPsiText(psiValue));
 	}
 	row2.append("<div class=\"clear_float\"></div>");
+
+    $("#move_unit_btn").click(btn_clicked, function(event) {
+        startDraggingUnit(btn_clicked, event);
+    });
 }
 
 
@@ -1071,35 +1103,6 @@ function toggleType(type) {
 		}
 	}
 }
-function startDraggingUnit(unitBtn, event){
-    return function() {
-        // Start dragging
-        unitBtn.draggable('enable');
-        unitBtn.addClass("unit_btn_dragging");
-        unitBtn.draggable({
-          start: function( event, ui ) {
-            $(event.target).addClass("glowlightblue");
-            $(event.target).css("z-index", 10);
-            $(event.target).data({
-                'originalLeft': $(event.target).css('left'),
-                'origionalTop': $(event.target).css('top')
-            });
-          },
-          stop: function( event, ui ) {
-            $(event.target).removeClass("glowlightblue");
-            $(event.target).removeClass("unit_btn_dragging");
-            $(event.target).draggable('disable');
-            $(event.target).css({
-                'left': $(event.target).data('originalLeft'),
-                'top': $(event.target).data('origionalTop')
-            });
-          }
-        });
-
-        // Start dragging
-        unitBtn.trigger(event);
-    }
-}
 function initUnitsAssignedDialog( ) {
     var prototypeUnitBtn = $("<div class=\"unit_dialog_btn unit_btn dialog_btn button\">PROTOTYPE</div>");
 
@@ -1112,13 +1115,13 @@ function initUnitsAssignedDialog( ) {
 }
 function unitTimeout(btn, count) {
     return function() {
-        console.log(btn);
+//        console.log(btn);
         clearTimeout(btn.timer_id);
         count--;
         btn.attr("src", "images/timer_bars_"+count+".png");
         if(count>1) {
             btn.timer_id = setTimeout(unitTimeout(btn, count), 10*1000);
-            console.log("set:"+btn.timer_id);
+//            console.log("set:"+btn.timer_id);
         }
     }
 }
@@ -1365,8 +1368,23 @@ function addUnitButton(unitsContainer, tbar) {
 	unit_side_container_left_side.click(showUnitPeopleDialog(tbar, unit_side_container_left_side));
 
 	unitBtn.click(showUnitsDialog(tbar, unitBtn));
-	unitBtn.draggable();
-	unitBtn.draggable('disable');
+	unitBtn.draggable({
+	    start: function(event, ui) {
+            $(event.target).addClass("unit_btn_dragging");
+            $(event.target).css("z-index", 10);
+            $(event.target).data({
+                'originalLeft': $(event.target).css('left'),
+                'origionalTop': $(event.target).css('top')
+            });
+        },
+        stop: function(event, ui) {
+            $(event.target).removeClass("unit_btn_dragging");
+            $(event.target).css({
+                'left': $(event.target).data('originalLeft'),
+                'top': $(event.target).data('origionalTop')
+            });
+        },
+        delay: 1000 });
 
 	unit_side_container.find(".timer_bars").hide();
 
@@ -1449,10 +1467,10 @@ function addTbar(tbarContainer) {
     tbar.droppable();
     tbar.droppable({
         over: function( event, ui ) {
-            $(event.target).addClass("glowlightblue");
+            $(event.target).addClass("glowbabyblue");
         },
         out: function( event, ui ) {
-            $(event.target).removeClass("glowlightblue");
+            $(event.target).removeClass("glowbabyblue");
         },
         drop: function( event, ui ) {
             var unitBtn = ui.draggable;
@@ -1460,7 +1478,7 @@ function addTbar(tbarContainer) {
             var dest_tbar = $(event.target);
             var source_tbar = unitBtn.parents(".tbar");
 
-            dest_tbar.removeClass("glowlightblue");
+            dest_tbar.removeClass("glowbabyblue");
 
             // Move actions list
             var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
