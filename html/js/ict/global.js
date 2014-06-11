@@ -826,6 +826,11 @@ function initBenchmarkDialog( ) {
             var benchmark_item_btn_2 = benchmark_item_2.find(".benchmark_item_btn");
             benchmark_item_btn_2.html(benchmark_2.label);
             benchmark_item_btn_2.click(clickSecondaryBenchmark(benchmark_item_2));
+
+            if(benchmark_2.label=="PAR") {
+                benchmark_item_btn_2.addClass("par_benchmark_btn");
+            }
+
             right_col.append(benchmark_item_2);
         });
 
@@ -953,6 +958,13 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             setBenchmark(tbar['primary_benchmark']);
         } else {
             resetBenchmarks();
+        }
+
+        // Par buttons
+        if(tbar.find(".par_btn").hasClass("has_par")) {
+            $("#benchmarks_dialog").find(".par_benchmark_btn").addClass("glowlightgreen");
+        } else {
+            $("#benchmarks_dialog").find(".par_benchmark_btn").removeClass("glowlightgreen");
         }
     };
 }
