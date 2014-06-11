@@ -343,10 +343,6 @@ function initUnitPeopleDialog() {
 		newBtn.click(setPsiText(psiValue));
 	}
 	row2.append("<div class=\"clear_float\"></div>");
-
-    $("#move_unit_btn").click(btn_clicked, function(event) {
-        startDraggingUnit(btn_clicked, event);
-    });
 }
 
 
@@ -1207,6 +1203,8 @@ function initUnitsDialog( ) {
                             btn_clicked.parents(".unit_side_container").find(".timer_bars").show();
                             unitTimeout(btn_clicked.parents(".unit_side_container").find(".timer_bars"), 4)();
 
+                            btn_clicked.draggable('enable');
+
                             // Add action list
                             addActionButton(btn_clicked.parents(".tbar"), btn_clicked.actions_list);
                         }
@@ -1369,6 +1367,7 @@ function addUnitButton(unitsContainer, tbar) {
 
 	unitBtn.click(showUnitsDialog(tbar, unitBtn));
 	unitBtn.draggable({
+	    cursorAt: { top: 13, left: 23 },
 	    start: function(event, ui) {
             $(event.target).addClass("unit_btn_dragging");
             $(event.target).css("z-index", 10);
@@ -1385,6 +1384,7 @@ function addUnitButton(unitsContainer, tbar) {
             });
         },
         delay: 1000 });
+    unitBtn.draggable('disable');
 
 	unit_side_container.find(".timer_bars").hide();
 
