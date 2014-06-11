@@ -1256,13 +1256,19 @@ function showActionsForUnitBtn(unitBtn) {
 			actionsParentContainer.children("."+unitBtn.html()).show();
 			
 			// Highlight select unit
-			tbar.find(".unit_side_container").removeClass("glowlightyellow");
-			unitBtn.parents(".unit_side_container").addClass("glowlightyellow");
+//			tbar.find(".unit_side_container").removeClass("glowlightyellow");
+//			unitBtn.parents(".unit_side_container").addClass("glowlightyellow");
 			
 			// Update PAR and PSI buttons
 			var psiBtn = unitBtn.parents(".unit_side_container").children(".psi_btn");
 			psiBtn.click(showDialog(tbar, [psiBtn], "#psi_dialog"));
 			psiBtn.removeClass("par_psi_hidden");
+
+			// Show selected arrows
+			tbar.find(".arrow_notselected").show();
+			tbar.find(".arrow_selected").hide();
+			unitBtn.parents(".unit_side_container").find(".arrow_notselected").hide();
+			unitBtn.parents(".unit_side_container").find(".arrow_selected").show();
 			
 			var parBtn = unitBtn.parents(".unit_side_container").children(".par_btn");
 			parBtn.click(showDialog(tbar, parBtn, "#par_dialog"));
