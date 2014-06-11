@@ -676,6 +676,11 @@ function initSectorDialog( ) {
 		        } else {
 		            tbar_clicked.find(".benchmark_btn").show();
 		        }
+
+		        // Customer Service
+                if(sectorName=="Cust Service" && tbar_clicked.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length>0) {
+                    $("#custsvc_objective_btn").addClass("glowlightgreen");
+                }
                 updateTbar(tbar_clicked);
                 if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
                     addTbar($("#tbar_container"));
@@ -1206,6 +1211,12 @@ function initUnitsDialog( ) {
 
                             // Add action list
                             addActionButton(btn_clicked.parents(".tbar"), btn_clicked.actions_list);
+
+                            // Customer Service
+                            var sectorName = tbar_clicked.find(".title_text").html();
+                            if(sectorName=="Cust Service") {
+                                $("#custsvc_objective_btn").addClass("glowlightgreen");
+                            }
                         }
                         // Update action list class
                         if(typeof btn_clicked.actions_list != "undefined") {
