@@ -1034,8 +1034,13 @@ function initOsrDialog( ) {
     $("#osr_select_type_of_building").change(function() {$("#occupancy_osr_btn").addClass("glowlightgreen");});
     $("#osr_select_type_of_construction").change(function() {$("#construction_osr_btn").addClass("glowlightgreen");});
     $("#osr_select_conditions").change(function() {$("#conditions_osr_btn").addClass("glowlightgreen");});
-    $("#osr_occupancy_mob_btn").click(function() {$("#location_osr_btn").addClass("glowlightgreen");});
-    $("#osr_occupancy_stat_btn").click(function() {$("#location_osr_btn").addClass("glowlightgreen");});
+    $("#osr_occupancy_mob_btn").click(function() {
+        $("#location_osr_btn").addClass("glowlightgreen");
+        $("#assumecmd_osr_btn").addClass("glowlightgreen");
+        });
+    $("#osr_occupancy_stat_btn").click(function() {
+        $("#location_osr_btn").addClass("glowlightgreen");
+        $("#assumecmd_osr_btn").addClass("glowlightgreen");});
     $("#osr_occupancy_off_btn").click(
         function() {
             $("#mode_osr_btn").addClass("glowlightgreen");
