@@ -680,6 +680,7 @@ function initSectorDialog( ) {
 		        // Customer Service
                 if(sectorName=="Cust Service" && tbar_clicked.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length>0) {
                     $("#custsvc_objective_btn").addClass("glowlightgreen");
+                    updateObjectivePercentComplete();
                 }
                 updateTbar(tbar_clicked);
                 if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
@@ -942,9 +943,16 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
 /**
  * Objectives Dialog
  **/
+function updateObjectivePercentComplete() {
+    var many_objective_btn = $(".objective_btn").length;
+    var many_objective_btn_green = $(".objective_btn.glowlightgreen").length;
+    var percent_complete = Math.floor((many_objective_btn_green/many_objective_btn)*100);
+    $("#objectives_btn_perccomplete").html("("+percent_complete+"% Complete)");
+}
 function toggleObjBtn(btn) {
     return function() {
         btn.toggleClass("glowlightgreen");
+        updateObjectivePercentComplete();
     }
 }
 function initObjectivesDialog( ) {
@@ -1216,6 +1224,7 @@ function initUnitsDialog( ) {
                             var sectorName = tbar_clicked.find(".title_text").html();
                             if(sectorName=="Cust Service") {
                                 $("#custsvc_objective_btn").addClass("glowlightgreen");
+                                updateObjectivePercentComplete();
                             }
                         }
                         // Update action list class

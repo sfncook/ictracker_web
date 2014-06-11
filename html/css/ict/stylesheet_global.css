@@ -828,12 +828,18 @@ ul {
     width: 165px;
     margin: 5px 10px 5px 10px;
 }
+#objectives_header_btn {
+    height: 45px;
+}
 #objective_right_col {
     float:right;
     width: 150px;
 }
 #objective_left_col {
     float:left;
+}
+#objectives_btn_perccomplete {
+    font-size:0.6rem;
 }
 
 .osr_btn {
