@@ -611,11 +611,12 @@ td {
 .mayday_par_btn {
     background: red;
     color: white;
+    text-shadow:none;
     float: left;
     padding: 4px 0 0 0;
-    margin: 5px 0 5px 5px;
+    margin: 5px 0 5px 20px;
     height: 27px;
-    width: 25px;
+    width: 60px;
 }
 .personnel_par_btn {
     float: left;
