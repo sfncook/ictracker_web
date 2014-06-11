@@ -933,7 +933,7 @@ ul {
     margin: 10px;
 }
 #unit_people_dialog_row3_center_div {
-    width: 270px;
+    width: 130px;
     display: block;
     margin: 10px auto;
 }
@@ -949,4 +949,11 @@ ul {
 
 #units_assigned_dialog {
     width:350px;
+}
+
+#delete_unit_confirm_dialog {
+    width: 150px;
+}
+.confirm_btn {
+    float:left;
 }

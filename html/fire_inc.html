@@ -13,7 +13,7 @@
         
         <!--JS-->
         <script src="js/jquery-1.11.0.js"></script>
-        <script src="js/jquery-ui-1.10.4.custom.js"></script>
+        <script src="js/jquery-ui-1.10.4.js"></script>
         <script src="js/jsPDF/jspdf.js"></script>
         <script src="js/ict/report.js"></script>
         <script src="js/ict/global.js"></script>
@@ -23,6 +23,10 @@
     </head>
     
     <body>
+        <div id="delete_unit_confirm_dialog" title="Delete Unit?">
+            Are you sure you want to delete this unit?
+        </div>
+
 		<div id="ict_header">
             <img id="title_icon" class="header_item" src="images/icon/ict_logo_100x100.png"/>
             <div id="time" class="time_lg header_item">00:00</div>
@@ -507,7 +511,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> <!-- dialogContainer -->
 			
 			
 			<!-- PAR Dialog Unit Component Prototype -->

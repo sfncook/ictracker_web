@@ -343,6 +343,19 @@ function initUnitPeopleDialog() {
 		newBtn.click(setPsiText(psiValue));
 	}
 	row2.append("<div class=\"clear_float\"></div>");
+
+	// Delete Unit button
+	$("#delete_unit_btn").click(function(){
+	    console.log("delete");
+        $("#delete_unit_confirm_dialog").dialog({
+            buttons : {
+                "Confirm" : function() {console.log("confirm")},
+                "Cancel" : function() {console.log("cancel");}
+            }
+        });
+
+        $("#delete_unit_confirm_dialog").dialog("open");
+    });
 }
 
 
@@ -1716,6 +1729,11 @@ function init( ) {
 	});
 
 	$("#mode_btn").click(clickModeButton);
+
+	$("#delete_unit_confirm_dialog").dialog({
+        autoOpen: true,
+        modal: true
+    });
 	
 	hideAllDialogs();
 	
