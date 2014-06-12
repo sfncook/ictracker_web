@@ -628,6 +628,27 @@ function clickNumBtn(btn) {
 		tbarNumBtn.html(btn.html());
 	}
 }
+function setTbarTitle(tbar, title) {
+    tbar.find(".title_text").html(title);
+    if(title!="Sector") {
+        hideAllDialogs();
+    }
+    if(title=="ReHab") {
+        tbar.find(".benchmark_btn").hide();
+    } else {
+        tbar.find(".benchmark_btn").show();
+    }
+
+    // Customer Service
+    if(title=="Cust Service" && tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length>0) {
+        $("#custsvc_objective_btn").addClass("glowlightgreen");
+        updateObjectivePercentComplete();
+    }
+    updateTbar(tbar);
+    if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
+        addTbar($("#tbar_container"));
+    }
+}
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
 	var newId = "sector_dialog";
@@ -688,27 +709,11 @@ function initSectorDialog( ) {
 		newBtn.click(function() {
 		    if(!newBtn.hasClass("hidden_sector_btn")) {
 		        if(sectorName=="Sector ####") {
+		            key_replace_char_at_index = 7;
+		            $("#key_output_value").html("Sector ####");
 		            showDialog(tbar_clicked, btn_clicked, "#key_dialog")();
 		        } else {
-                    tbar_clicked.find(".title_text").html(sectorName);
-                    if(sectorName!="Sector") {
-                        hideAllDialogs();
-                    }
-                    if(sectorName=="ReHab") {
-                        tbar_clicked.find(".benchmark_btn").hide();
-                    } else {
-                        tbar_clicked.find(".benchmark_btn").show();
-                    }
-
-                    // Customer Service
-                    if(sectorName=="Cust Service" && tbar_clicked.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length>0) {
-                        $("#custsvc_objective_btn").addClass("glowlightgreen");
-                        updateObjectivePercentComplete();
-                    }
-                    updateTbar(tbar_clicked);
-                    if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
-                        addTbar($("#tbar_container"));
-                    }
+                    setTbarTitle(tbar_clicked, sectorName);
 		        }
             }
 		});
@@ -742,6 +747,16 @@ function init10KeyDialog( ) {
             key_output_value = key_output_value.substr(0, key_replace_char_at_index) + '#' + key_output_value.substr(key_replace_char_at_index+1, key_output_value.length);
             $("#key_output_value").html(key_output_value);
         }
+    });
+
+    $("#key_ok_btn").click(function(){
+        if(key_replace_char_at_index>7) {
+            var key_output_value = $("#key_output_value").html();
+            key_output_value = key_output_value.substr(0, key_replace_char_at_index);
+            setTbarTitle(tbar_clicked, key_output_value);
+        }
+
+        hideAllDialogs();
     });
 }
 
