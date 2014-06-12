@@ -2009,6 +2009,8 @@ var unitsByTypeByCity = {
 			"U288",],
 		Brush:[
 			"Br284",],
+		Ambo:[
+			"Ambo",],
 		AirVac:[
 		    "Native Air",
 		    "Life Net",
