@@ -1241,9 +1241,9 @@ function startUnitTimerAnim(el) {
     el.css("width","131px").css("background","lightgreen");
 
     el
-      .animate({width:"88px"}, 5*1000, "linear", function(){el.css("background","yellow")})
-      .animate({width:"44px"}, 5*1000, "linear", function(){el.css("background","red")})
-      .animate({width:"0"},    5*1000, "linear");
+      .animate({width:"88px"}, 3.33*60*1000, "linear", function(){el.css("background","yellow")})
+      .animate({width:"44px"}, 3.33*60*1000, "linear", function(){el.css("background","red")})
+      .animate({width:"0"},    3.33*60*1000, "linear");
 }
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
