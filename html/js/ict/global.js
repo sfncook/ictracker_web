@@ -1823,7 +1823,7 @@ var actions = [
     "Take a Line",
     "Vert Vent",
     "Open Build",
-    "",
+    "Grab RIC Bag",
     "1-3/4",
 
 
