@@ -2016,6 +2016,7 @@ var HighRise = "HighRise";
 var PIO = "PIO";
 var Attack = "Attack";
 var AirVac = "AirVac";
+var Con = "Con";
 
 var unitTypes = [
 	Engine,
@@ -2024,6 +2025,7 @@ var unitTypes = [
 	Squad,
 	Util,
 	CV,
+	Con,
 	WtrTend,
 	HazMat,
 	Brush,
@@ -2170,16 +2172,46 @@ var unitsByTypeByCity = {
 			"Lt214",
 			"Lt220"],
 		BC:[
+		    "ED200",
 			"BC201",
 			"BC202",
 			"BC203",
+			"BSO200",
 			"BSO201",
 			"BSO202",
-			"BSO203",
-			"ED"],
+			"BSO203"],
 		Squad:[
 			"SQ204",
 			"SQ206"],
+        ScnSup:[
+            "SS208",
+        ],
+		WtrTend:[
+			"WT213",
+		],
+		Brush:[
+			"Br212",
+			"Br214",
+			"Br216",
+			"Br219",
+        ],
+        Foam:[
+            "FO21",
+            "FO22",
+            "FO23",
+        ],
+		Con:[
+		    "Con201",
+		    "Con202",
+		    "Con203"
+		],
+		Util:[
+			"U202",],
+		CV:[
+		    "CV201"
+		],
+		HazMat:[
+			"HM206",],
 		Ambo:[
 			"SWA201",
 			"SWA202",
@@ -2472,7 +2504,7 @@ var unitsByTypeByCity = {
 		    "BC261",
 		    "BSO261"],
 		WtrTend:["WT261"],
-		Brush:["BT261"],
+		Brush:["BR261"],
 		Rehab:["RH261"],
 		Ambo:[
 			"SWA261",
