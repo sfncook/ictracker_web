@@ -687,29 +687,62 @@ function initSectorDialog( ) {
 		
 		newBtn.click(function() {
 		    if(!newBtn.hasClass("hidden_sector_btn")) {
-		        tbar_clicked.find(".title_text").html(sectorName);
-		        if(sectorName!="Sector") {
-		            hideAllDialogs();
-		        }
-		        if(sectorName=="ReHab") {
-		            tbar_clicked.find(".benchmark_btn").hide();
+		        if(sectorName=="Sector ####") {
+		            showDialog(tbar_clicked, btn_clicked, "#key_dialog")();
 		        } else {
-		            tbar_clicked.find(".benchmark_btn").show();
-		        }
+                    tbar_clicked.find(".title_text").html(sectorName);
+                    if(sectorName!="Sector") {
+                        hideAllDialogs();
+                    }
+                    if(sectorName=="ReHab") {
+                        tbar_clicked.find(".benchmark_btn").hide();
+                    } else {
+                        tbar_clicked.find(".benchmark_btn").show();
+                    }
 
-		        // Customer Service
-                if(sectorName=="Cust Service" && tbar_clicked.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length>0) {
-                    $("#custsvc_objective_btn").addClass("glowlightgreen");
-                    updateObjectivePercentComplete();
-                }
-                updateTbar(tbar_clicked);
-                if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
-                    addTbar($("#tbar_container"));
-                }
+                    // Customer Service
+                    if(sectorName=="Cust Service" && tbar_clicked.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length>0) {
+                        $("#custsvc_objective_btn").addClass("glowlightgreen");
+                        updateObjectivePercentComplete();
+                    }
+                    updateTbar(tbar_clicked);
+                    if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
+                        addTbar($("#tbar_container"));
+                    }
+		        }
             }
 		});
 	});
 	
+}
+
+
+
+/**
+ * Actions Dialog
+ **/
+var key_replace_char_at_index = 7;
+//String.prototype.replaceAt=function(index, character) {
+//    return this.substr(0, index) + character + this.substr(index+character.length);
+//}
+function init10KeyDialog( ) {
+    $(".key_number_btn").click(function(){
+        if(key_replace_char_at_index<=10) {
+            var key_output_value = $("#key_output_value").html();
+            key_output_value = key_output_value.substr(0, key_replace_char_at_index) + $(this).html() + key_output_value.substr(key_replace_char_at_index+1, key_output_value.length);
+            $("#key_output_value").html(key_output_value);
+            key_replace_char_at_index++;
+        }
+    });
+
+    $("#key_del_btn").click(function(){
+        if(key_replace_char_at_index>7) {
+            key_replace_char_at_index--;
+            var key_output_value = $("#key_output_value").html();
+            key_output_value = key_output_value.substr(0, key_replace_char_at_index) + '#' + key_output_value.substr(key_replace_char_at_index+1, key_output_value.length);
+            $("#key_output_value").html(key_output_value);
+        }
+    });
 }
 
 
@@ -1103,7 +1136,7 @@ function initOsrDialog( ) {
             showDialog(0, mode_btn, "#emergency_traffic_dialog")();
         }
     );
-	
+
 	var osr_btn = $("#osr_header_btn");
 	osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
 }
@@ -1787,6 +1820,7 @@ function init( ) {
 	initIapDialog();
 	initIncidentInfo();
 	initEmergTrafficDialog();
+	init10KeyDialog();
 
     $("#unit_side_container_prototype").hide();
     $("#unit_side_container_prototype>*").hide();
@@ -1932,7 +1966,7 @@ var sectors = [
 	"Salvage",
 	"Cust Service",
 	"Resource",
-	"",
+	"Sector ####",
 
 	"Medical",
 	"Triage",

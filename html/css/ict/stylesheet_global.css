@@ -984,3 +984,43 @@ ul {
     height:100%;
     background:LightGreen;
 }
+
+#key_dialog {
+    width: 175px;
+}
+#key_dialog > .dialog_body {
+    padding: 10px;
+}
+.key_btn {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 5px;
+    font-size: 1.3rem;
+    padding:5px;
+}
+#key_output_value {
+    font-size:1.5rem;
+    color:#666;
+    height: 40px;
+    background: #DDD;
+    padding: 0 10px;
+    text-align:right;
+}
+#key_input {
+    width: 75px;
+    margin: 5px auto;
+}
+#key_ok_btn {
+    background: lightblue;
+}
+#key_ok_btn:hover {
+    background: blue;
+}
+#key_ok_btn:active {
+    background: darkblue;
+}
+#key_del_btn {
+    font-size:0.9rem;
+    padding-top: 10px;
+}
