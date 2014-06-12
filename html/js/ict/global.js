@@ -1637,13 +1637,17 @@ function addTbar(tbarContainer) {
             var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
             var actionList = source_actionsParentContainer.children("."+unitBtn.html());
             jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
-//            var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
-//            var actionList = source_actionsParentContainer.children("."+unitBtn.html());
-//            jQuery(actionList).detach();
 
-            // Move unit_btn (and parent and siblings) to new TBar
-            var last_unit_div = tbar.find(".units_container").children().last();
+            // Move Unit to new TBar
+            var last_unit_div = dest_tbar.find(".units_container").children().last();
             jQuery(unit_side_container).detach().insertBefore(last_unit_div);
+
+            // PAR button
+            dest_tbar.find(".par_btn").removeClass("disabled");
+            console.log(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length);
+            if(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length==0) {
+                source_tbar.find(".par_btn").addClass("disabled");
+            }
 
             // Select actions
             // In source_tbar - select previous unit actions or none
