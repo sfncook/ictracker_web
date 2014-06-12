@@ -972,3 +972,15 @@ ul {
     float:left;
     margin: 10px 20px;
 }
+
+#test_div {
+    width: 200px;
+    height: 20px;
+    border: 2px solid black;
+    background: black;
+}
+#test_bar {
+    width:196px;
+    height:100%;
+    background:LightGreen;
+}

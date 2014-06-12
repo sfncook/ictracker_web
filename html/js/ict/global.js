@@ -260,7 +260,8 @@ function clickPersonnelBtn(btn) {
 	}
 }
 function clickResetClockBtn() {
-	unitTimeout(btn_clicked.parents(".unit_side_container").find(".timer_bars"), 4)();
+    startUnitTimerAnim(btn_clicked.parents(".unit_side_container").find(".unit_timer_bar"));
+    hideAllDialogs();
 }
 function showUnitPeopleDialog( tbar, btn ){
     return function(){
@@ -1185,16 +1186,14 @@ function initUnitsAssignedDialog( ) {
 	dialog_title_text.html("Units");
 	var dialog_body = unitsDialog.find(".dialog_body");
 }
-function unitTimeout(btn, count) {
-    return function() {
-        clearTimeout(btn.data('timer_id'));
-        count--;
-        btn.attr("src", "images/timer_bars_"+count+".png");
-        if(count>1) {
-            timer_id = setTimeout(unitTimeout(btn, count), 3.33*60*1000);
-            btn.data({'timer_id': timer_id});
-        }
-    }
+function startUnitTimerAnim(el) {
+    el.stop(true);
+    el.css("width","131px").css("background","lightgreen");
+
+    el
+      .animate({width:"88px"}, 5*1000, "linear", function(){el.css("background","yellow")})
+      .animate({width:"44px"}, 5*1000, "linear", function(){el.css("background","red")})
+      .animate({width:"0"},    5*1000, "linear");
 }
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -1275,8 +1274,10 @@ function initUnitsDialog( ) {
                             btn_clicked.parents(".unit_side_container").find(".show_actions_btn").click(showActionsForUnitBtn(btn_clicked));
 
                             // Unit Timer
-                            btn_clicked.parents(".unit_side_container").find(".timer_bars").show();
-                            unitTimeout(btn_clicked.parents(".unit_side_container").find(".timer_bars"), 4)();
+//                            btn_clicked.parents(".unit_side_container").find(".timer_bars").show();
+//                            unitTimeout(btn_clicked.parents(".unit_side_container").find(".timer_bars"), 4)();
+                            btn_clicked.parents(".unit_side_container").find(".unit_timer_bg").show();
+                            startUnitTimerAnim(btn_clicked.parents(".unit_side_container").find(".unit_timer_bar"))
 
                             btn_clicked.draggable('enable');
 
@@ -1474,7 +1475,7 @@ function addUnitButton(unitsContainer, tbar) {
         delay: 1000 });
     unitBtn.draggable('disable');
 
-	unit_side_container.find(".timer_bars").hide();
+	unit_side_container.find(".unit_timer_bg").hide();
 
 	// Create the actions column for this unit
 	var actions_list = $("<div class=\"actions_list\"></div>");

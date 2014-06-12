@@ -136,7 +136,7 @@
 	background: yellow;
 	border: 2px #AAC7D1 solid;
 	padding: 0;
-	margin: 2px 5px;
+	margin: 4px 5px;
 }
 .blank_btn {
 	background: #AAC7D1;
@@ -384,4 +384,16 @@ img.show_actions_btn:active {
     font-size: 0.7rem;
     float:left;
     margin:2px;
+}
+
+.unit_timer_bg {
+    width: 133px;
+    height: 4px;
+    background: black;
+    border:1px black solid;
+}
+.unit_timer_bar {
+    width: 131px;
+    height: 2px;
+    background: lightgreen;
 }
