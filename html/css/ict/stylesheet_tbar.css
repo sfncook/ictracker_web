@@ -119,6 +119,9 @@
 
 .units_container {
 	padding-right: 1px solid #999;
+	max-height: 242px;
+	height: 242px;
+	overflow-y: scroll;
 }
 .timer_bars {
     width:100%;
@@ -278,9 +281,9 @@
     flex-flow: column nowrap;
 }
 .actions_parent_container {
-	background: #FFFF99;
-	display: flex;
-    flex-flow: column;	
+	max-height: 209px;
+	height: 209px;
+	overflow-y: scroll;
 }
 .action_list {
 	display: flex;
