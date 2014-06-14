@@ -1428,9 +1428,16 @@ function updateTbar(tbar) {
 	// PAR btn
 	if(manyUnits>0) {
 	    tbar.find(".par_btn").removeClass("disabled");
+	} else {
+	    tbar.find(".par_btn").addClass("disabled");
 	}
 
     // TODO: Actions
+    if(manyUnits>0) {
+	    tbar.find(".action_add_btn").show();
+	} else {
+	    tbar.find(".action_add_btn").hide();
+	}
 //	var actions_parent_container = tbar.find(".actions_parent_container");
 //	if(hasActions) {
 //	    actions_parent_container.show();
@@ -1632,12 +1639,13 @@ function addTbar(tbarContainer) {
 
     // Add Unit Btn
     var unitAddBtn = tbar.find(".unit_add_btn");
-//    unitAddBtn.click(showUnitsDialog(tbar));
+    unitAddBtn.attr("id", "unit_add_btn_"+tbarIndex);
     unitAddBtn.click(showDialog_withCallbacks("#units_dialog", openUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(tbar)));
 
     // Add Action Btn
     var action_add_btn = tbar.find(".action_add_btn");
-    action_add_btn.hide();
+    action_add_btn.attr("id", "action_add_btn_"+tbarIndex);
+    action_add_btn.hide();//Button is shown once units have been added
 
     // Droppable handler
     tbar.droppable();
