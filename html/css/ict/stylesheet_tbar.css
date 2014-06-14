@@ -168,11 +168,11 @@
 	padding: 4px 0;
 }
 
-.unit_side_container {
+.unit_row_div {
     border:transparent 2px solid;
     margin-bottom:3px;
 }
-.unit_side_container td {
+.unit_row_div td {
     padding: 0;
     float:left;
 }
