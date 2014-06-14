@@ -1245,6 +1245,46 @@ function startUnitTimerAnim(el) {
       .animate({width:"44px"}, 3.33*60*1000, "linear", function(){el.css("background","red")})
       .animate({width:"0"},    3.33*60*1000, "linear");
 }
+function addUnitButton(unitsContainer, tbar) {
+	unitsContainer.find(".blank_btn").removeClass("blank_btn");
+    var unit_side_container = $("#unit_side_container_prototype").clone();
+    unit_side_container.attr("id",tbar.attr("id")+"_unit_side_container");
+    var unitBtn = unit_side_container.find(".unit_btn");
+    unit_side_container.show();
+    unit_side_container.children().show();
+    unit_side_container.appendTo(unitsContainer);
+
+    var unit_side_container_left_side = unit_side_container.find(".unit_side_container_left_side");
+	unit_side_container_left_side.click(showUnitPeopleDialog(tbar, unit_side_container_left_side));
+
+	unitBtn.click(showUnitsDialog(tbar, unitBtn));
+	unitBtn.draggable({
+	    cursorAt: { top: 13, left: 23 },
+	    start: function(event, ui) {
+            $(event.target).addClass("unit_btn_dragging");
+            $(event.target).css("z-index", 10);
+            $(event.target).data({
+                'originalLeft': $(event.target).css('left'),
+                'origionalTop': $(event.target).css('top')
+            });
+        },
+        stop: function(event, ui) {
+            $(event.target).removeClass("unit_btn_dragging");
+            $(event.target).css({
+                'left': $(event.target).data('originalLeft'),
+                'top': $(event.target).data('origionalTop')
+            });
+        },
+        delay: 1000 });
+    unitBtn.draggable('disable');
+
+	unit_side_container.find(".unit_timer_bg").hide();
+
+	// Create the actions column for this unit
+	var actions_list = $("<div class=\"actions_list\"></div>");
+	tbar.find(".actions_parent_container").append(actions_list);
+	unitBtn.actions_list = actions_list;
+}
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn 	= $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -1385,12 +1425,6 @@ function setUnitName(unitBtn, unitName) {
 	} else if (unitName.length>4) {
 		unitBtn.addClass("btn_medtext");
 	}
-//	if (typeof unitBtn.actions_list !== "undefined") {
-//		var action_list_unit_name_title = unitBtn.actions_list.children(".action_list_unit_name_title");
-//		action_list_unit_name_title.html(unitName);
-//		unitBtn.actions_list.addClass(unitName);
-//		addActionButton(unitBtn.parents(".tbar"), unitBtn.actions_list);
-//	}
 }
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
@@ -1505,46 +1539,6 @@ function showUnitsDialog( tbar, btn, parentDialog_ ){
 	$("#units_dialog").show();
   }
 }
-function addUnitButton(unitsContainer, tbar) {
-	unitsContainer.find(".blank_btn").removeClass("blank_btn");
-    var unit_side_container = $("#unit_side_container_prototype").clone();
-    unit_side_container.attr("id",tbar.attr("id")+"_unit_side_container");
-    var unitBtn = unit_side_container.find(".unit_btn");
-    unit_side_container.show();
-    unit_side_container.children().show();
-    unit_side_container.appendTo(unitsContainer);
-
-    var unit_side_container_left_side = unit_side_container.find(".unit_side_container_left_side");
-	unit_side_container_left_side.click(showUnitPeopleDialog(tbar, unit_side_container_left_side));
-
-	unitBtn.click(showUnitsDialog(tbar, unitBtn));
-	unitBtn.draggable({
-	    cursorAt: { top: 13, left: 23 },
-	    start: function(event, ui) {
-            $(event.target).addClass("unit_btn_dragging");
-            $(event.target).css("z-index", 10);
-            $(event.target).data({
-                'originalLeft': $(event.target).css('left'),
-                'origionalTop': $(event.target).css('top')
-            });
-        },
-        stop: function(event, ui) {
-            $(event.target).removeClass("unit_btn_dragging");
-            $(event.target).css({
-                'left': $(event.target).data('originalLeft'),
-                'top': $(event.target).data('origionalTop')
-            });
-        },
-        delay: 1000 });
-    unitBtn.draggable('disable');
-
-	unit_side_container.find(".unit_timer_bg").hide();
-
-	// Create the actions column for this unit
-	var actions_list = $("<div class=\"actions_list\"></div>");
-	tbar.find(".actions_parent_container").append(actions_list);
-	unitBtn.actions_list = actions_list;
-}
 function addActionButton(tbar, actionsContainer) {
 	actionsContainer.children().removeClass("blank_btn");
 	var actionBtn = $("<div class=\"blank_btn action_btn button\">Action</div>").clone();
@@ -1590,8 +1584,8 @@ function addTbar(tbarContainer) {
     var titleBtnId = "tbar_title_"+tbarIndex;
     titleBtn.attr("id", titleBtnId);
     titleBtn.click(showSectorDialog(tbar, titleBtn, "#sector_dialog"));
-    var tbarDirBtn = $(".title_dir");
-    var tbarNumBtn = $(".title_num");
+    var tbarDirBtn = tbar.find(".title_dir");
+    var tbarNumBtn = tbar.find(".title_num");
     tbarDirBtn.hide();
     tbarNumBtn.hide();
 
@@ -1610,10 +1604,9 @@ function addTbar(tbarContainer) {
     benchmarkBtn.attr("id", benchmarkBtnId);
     benchmarkBtn.click(showBenchmarkDialog(tbar, benchmarkBtn));
 
-    //Unit Btn
-    var unitBtnContainer = tbar.find(".units_container");
-    unitBtnContainer.manyBtns = 0;
-    addUnitButton(unitBtnContainer, tbar);
+    // Add Unit Btn
+    var unitAddBtn = tbar.find(".unit_add_btn");
+    unitAddBtn.click(showUnitsDialog(tbar));
 
     // Droppable handler
     tbar.droppable();

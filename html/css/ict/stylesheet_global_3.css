@@ -173,18 +173,6 @@ td {
     cursor: default;
 }
 
-.hidden_div {
-	/*
-	 *Use opacity rather than show/hide
-	 *so the button maintains its space
-	*/
-	opacity: 0.0;
-}
-.hidden_div:hover {
-	cursor: default !important;
-	opacity: 0.0;
-}
-
 .btn-ict {
 	background: #DDD;
 	color: #666;
@@ -214,69 +202,6 @@ td {
 .glow_blue:hover {
     background: #2A5071;
 }
-.glowlightyellow {
-	background: #FFFF99;
-}
-.glowred {
-	background: red;
-	color: white;
-}
-.glowred:hover {
-	background: darkred;
-	color: white;
-}
-.glowred:active {
-	background: #666;
-	color: white;
-}
-.glowpink {
-	background: pink;
-	color: #666;
-}
-.glowpink:hover {
-	background: red;
-	color: white;
-}
-.glowpink:hover {
-	background: red;
-	color: white;
-}
-.glowpink:active {
-	background: #666;
-	color: white;
-}
-.glowlightblue {
-    background: DeepSkyBlue;
-}
-.glowlightgreen {
-    background: LightGreen;
-}
-.glowlightgreen:hover {
-    background: DarkGreen;
-    color: white;
-}
-.glowgreen {
-    background: green;
-    color: white;
-}
-.glowgreen:hover {
-    background: DarkGreen;
-    color: white;
-}
-.glowgreen:active {
-    background: #666;
-    color: white;
-}
-.glowbabyblue {
-    background: #99e5ff;
-}
-.glowbabyblue:hover {
-    background: #77ddff;
-}
-.glowbabyblue:active {
-    background: #66aaff;
-}
-
 .has_par {
     background: lightgreen !important;
 }
@@ -437,6 +362,8 @@ td {
 .dialog_close_btn {
     background: #F67574;
     height: 20px;
+    flex-basis: 1.0rem;
+    flex-shrink: 0;
     padding: 2px 1px 1px 1px;
     line-height: 1.0em;
     margin: 2px;
