@@ -1068,9 +1068,18 @@ function initObjectivesDialog( ) {
         btn.toggleClass("glowlightgreen");
         if(btn.attr("id")=="unit_osr_btn" && btn.hasClass("glowlightgreen")){
 //            showUnitsDialog(0, $("#unit_osr_btn"), $("#osr_dialog"))();
-            showUnitsDialog(function(){
-                // TODO: update $("#unit_osr_btn"), hide units_dialog and show osr_dialog again.
-            });
+            showDialog_withCallbacks(
+                "#units_dialog",
+                function(){
+                    $(".unit_dialog_btn").removeClass("glowlightgreen");
+                    $(".unit_dialog_btn:contains('"+btn.html()+"')").addClass("glowlightgreen");
+                },
+                function(unitName){
+                    btn.html(unitName);
+                    $("#units_dialog").hide();
+                    $("#osr_dialog").show();
+                }
+            )();
         }
         updateOsrPercentComplete();
     }
