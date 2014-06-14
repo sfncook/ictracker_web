@@ -1531,50 +1531,70 @@ function openUnitsDialogFromTbar(tbar) {
         });
     }
 }
-var unitRowDivSerialId = 1;
-function addUnitButtonToTbar(tbar) {
+function toggleUnitButtonForTbar(tbar) {
     return function(unitName) {
-        unitRowDivSerialId++;
-
-        var unit_container_div = tbar.find(".unit_container_div");
-
-        // Update Units Dialog
-        $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
-
-        // Unit row div
-        var unit_row_div = $("#unit_row_div_prototype").clone();
-        unit_row_div.appendTo(unit_container_div);
-        unit_row_div.show();
-        unit_row_div.children().show();
-        unit_row_div.attr("id",unitRowDivSerialId+"_unit_row_div");
-
-        // Unit Info Btn ('P' and PSI buttons)
-        var tbar_unit_info_btn = unit_row_div.find(".tbar_unit_info_btn");
-        tbar_unit_info_btn.attr("id", unitRowDivSerialId+"_unit_row_div");
-        tbar_unit_info_btn.click(showUnitPeopleDialog(tbar, tbar_unit_info_btn));
-        tbar_unit_info_btn.show();
-        tbar_unit_info_btn.children().show();
-
-        // Unit button
-        var unitBtn = unit_row_div.find(".unit_btn");
-        unitBtn.html(unitName);
-        //TODO: unitBtn.click(showActionsForUnit...)
-
-        //TODO: Actionlist
-        // Update action list class
-        //    if(typeof btn_clicked.actions_list != "undefined") {
-        //        btn_clicked.actions_list.removeClass(prevUnitName);
-        //        btn_clicked.actions_list.addClass(unitName);
-        //        showActionsForUnitBtn(btn_clicked)();
-        //    }
-
-        // Unit Timer
-        // I think we'll need to show/hide the timer in the updateTbar function, but start it here.
-        //    btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
-        //    startUnitTimerAnim(btn_clicked.parents(".unit_row_div").find(".unit_timer_bar"));
-
-        updateTbar(tbar);
+        if($(".unit_dialog_btn:contains('"+unitName+"')").hasClass("glowlightgreen")) {
+            removeUnitButtonToTbar(tbar, unitName);
+        } else {
+            addUnitButtonToTbar(tbar, unitName);
+        }
     }
+}
+function removeUnitButtonToTbar(tbar, unitName) {
+
+    // Update Units Dialog
+    $(".unit_dialog_btn:contains('"+unitName+"')").removeClass("glowlightgreen");
+
+    // Remove unit row from TBar
+    var unit_row_div = tbar.find(".unit_btn:contains('"+unitName+"')").parents(".unit_row_div");
+    jQuery(unit_row_div).detach();
+
+    // TODO: Remove/hide actions
+
+    updateTbar(tbar);
+}
+var unitRowDivSerialId = 1;
+function addUnitButtonToTbar(tbar, unitName) {
+    unitRowDivSerialId++;
+
+    var unit_container_div = tbar.find(".unit_container_div");
+
+    // Update Units Dialog
+    $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
+
+    // Unit row div
+    var unit_row_div = $("#unit_row_div_prototype").clone();
+    unit_row_div.appendTo(unit_container_div);
+    unit_row_div.show();
+    unit_row_div.children().show();
+    unit_row_div.attr("id",unitRowDivSerialId+"_unit_row_div");
+
+    // Unit Info Btn ('P' and PSI buttons)
+    var tbar_unit_info_btn = unit_row_div.find(".tbar_unit_info_btn");
+    tbar_unit_info_btn.attr("id", unitRowDivSerialId+"_unit_row_div");
+    tbar_unit_info_btn.click(showUnitPeopleDialog(tbar, tbar_unit_info_btn));
+    tbar_unit_info_btn.show();
+    tbar_unit_info_btn.children().show();
+
+    // Unit button
+    var unitBtn = unit_row_div.find(".unit_btn");
+    unitBtn.html(unitName);
+    //TODO: unitBtn.click(showActionsForUnit...)
+
+    //TODO: Actionlist
+    // Update action list class
+    //    if(typeof btn_clicked.actions_list != "undefined") {
+    //        btn_clicked.actions_list.removeClass(prevUnitName);
+    //        btn_clicked.actions_list.addClass(unitName);
+    //        showActionsForUnitBtn(btn_clicked)();
+    //    }
+
+    // Unit Timer
+    // I think we'll need to show/hide the timer in the updateTbar function, but start it here.
+    //    btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
+    //    startUnitTimerAnim(btn_clicked.parents(".unit_row_div").find(".unit_timer_bar"));
+
+    updateTbar(tbar);
 }
 var tbarIndex = 1;
 function addTbar(tbarContainer) {
@@ -1613,7 +1633,7 @@ function addTbar(tbarContainer) {
     // Add Unit Btn
     var unitAddBtn = tbar.find(".unit_add_btn");
 //    unitAddBtn.click(showUnitsDialog(tbar));
-    unitAddBtn.click(showDialog_withCallbacks("#units_dialog", openUnitsDialogFromTbar(tbar), addUnitButtonToTbar(tbar)));
+    unitAddBtn.click(showDialog_withCallbacks("#units_dialog", openUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(tbar)));
 
     // Add Action Btn
     var action_add_btn = tbar.find(".action_add_btn");
