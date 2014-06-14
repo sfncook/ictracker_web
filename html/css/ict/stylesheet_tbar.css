@@ -68,6 +68,7 @@
     width:130px;
     height:213px;
     overflow-y:scroll;
+    margin-top: 2px;
 }
 .tbar_col_left_div {
     border-right: 1px solid #999;
@@ -167,11 +168,10 @@
 }
 
 .unit_row_div {
-    border:transparent 2px solid;
     margin-bottom:3px;
 }
 .tbar_unit_btn {
-    margin: 2px 0 0 3px;
+    margin: 2px 2px 0 3px;
 	float: right;
 }
 .timer_bars {
