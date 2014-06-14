@@ -1,4 +1,4 @@
-/*
+                                                                                                                                                                                                                                                                                                                                                                                                        /*
  **** T-BAR BOXES ****
  */
 #tbar_container {
@@ -16,15 +16,23 @@
 	background: #FFF;
 	border:1px solid #999;
 	margin: 5px 0 5px 10px;
-    width: 270px;
-	height: 275px;
 	padding: 0;
 	border-radius: 3px;
 }
+.tbar_full_size {
+    width: 270px;
+	height: 275px;
+}
+.tbar_small_size {
+    width: 270px;
+	height: 275px;
+}
+
 .tbar_title_container {
 	background: #BBB;
 	height: 29px;
 }
+
 .title_btn {
 	width:168px;
 	height: 24px;
@@ -47,8 +55,17 @@
 .tbar_title_dir_td {
     width:17px;
 }
-.tbar_title_num_td {
+.tbar_title_num_td_1char {
     width:17px;
+}
+.tbar_title_num_td_2char {
+    width:25px;
+}
+.tbar_title_num_td_3char {
+    width:30px;
+}
+.tbar_title_num_td_4char {
+    width:35px;
 }
 .tbar_title_td {
     width: 134px;
@@ -57,6 +74,26 @@
     width: 100%;
     text-align:center;
 }
+
+.clock_icon {
+    width: 10px;
+    height: 10px;
+    margin: 0 7px;
+}
+.clock_icon:hover {
+    cursor: pointer !important;
+}
+.fixed_title_spacer {
+	width: 40px;
+}
+
+.btn-mayday {
+	margin: 0 auto;
+	font-size: 1.1rem;
+	padding: 2px 4px;
+	border: 2px solid orange;
+}
+
 .tbar_body_table {
 	height: 242px;
 }
@@ -79,33 +116,13 @@
 	width: 138px;
 	vertical-align: top;
 }
+
 .units_container {
 	padding-right: 1px solid #999;
 	/*max-height: 210px;*/
 	max-height: 242px;
 	overflow-y: scroll;
 }
-
-.clock_icon {
-    width: 10px;
-    height: 10px;
-    margin: 0 7px;
-}
-.clock_icon:hover {
-    cursor: pointer !important;
-}
-.fixed_title_spacer {
-	width: 40px;
-}
-
-.btn-mayday {
-	margin: 0 auto;
-	font-size: 1.1rem;
-	padding: 2px 4px;
-	border: 2px solid orange;
-}
-
-
 .timer_bars {
     width:100%;
     height: 4px;
