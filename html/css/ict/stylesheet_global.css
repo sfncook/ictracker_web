@@ -316,10 +316,6 @@ td {
 	height: 25px;
     z-index: 100;
 }
-.side_dialog_container {
-    position: absolute;
-	z-index:-1;
-}
 .side_dialog_table tr {
 	vertical-align: top;
 }

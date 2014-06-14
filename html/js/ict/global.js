@@ -165,7 +165,6 @@ function showParDialog( tbar, btn ){
 
             // Show PAR dialog
             $(".dialog").hide();
-            $(".side_dialog_container").hide();
             parDialog.show();
             $("#dialogContainer").show();
         }
@@ -278,7 +277,6 @@ function showUnitPeopleDialog( tbar, btn ){
 
 
             $(".dialog").hide();
-            $(".side_dialog_container").hide();
             btn_clicked = btn;
             tbar_clicked = tbar;
             $("#dialogContainer").show();
@@ -390,7 +388,6 @@ function showMaydayDialog(){
 	updateMaydayEvents();
 	
 	$(".dialog").hide();
-	$(".side_dialog_container").hide();
 	$("#dialogContainer").show();
 	mayday_dialog.show();
 }
@@ -562,7 +559,6 @@ function showSectorDialog( tbar, btn, dialogId ){
   return function(){
 	var sectorDlg = $(dialogId);
 	$(".dialog").hide();
-	$(".side_dialog_container").hide();
 	btn_clicked = btn;
 	tbar_clicked = tbar;
 	$("#dialogContainer").show();
@@ -582,10 +578,23 @@ function showSectorDialog( tbar, btn, dialogId ){
 	$("."+tbar.prefix_num+"_supl_btn").addClass("glow_orange");
   }
 }
+
+// onClickCallback(btnClicked_html)
+var onClickCallback;
+function showDialog_withCallbacks( dialogId, onOpenCallback_, onClickCallback_ ){
+  return function(){
+    onOpenCallback_();
+
+	onClickCallback = onClickCallback_;
+
+	$(".dialog").hide();
+	$("#dialogContainer").show();
+	$(dialogId).show();
+  }
+}
 function showDialog( tbar, btn, dialogId, parentDialog_ ){
   return function(){
 	$(".dialog").hide();
-	$(".side_dialog_container").hide();
 	btn_clicked = btn;
 	tbar_clicked = tbar;
 	parentDialog = parentDialog_;
@@ -1058,7 +1067,10 @@ function initObjectivesDialog( ) {
     return function() {
         btn.toggleClass("glowlightgreen");
         if(btn.attr("id")=="unit_osr_btn" && btn.hasClass("glowlightgreen")){
-            showUnitsDialog(0, $("#unit_osr_btn"), $("#osr_dialog"))();
+//            showUnitsDialog(0, $("#unit_osr_btn"), $("#osr_dialog"))();
+            showUnitsDialog(function(){
+                // TODO: update $("#unit_osr_btn"), hide units_dialog and show osr_dialog again.
+            });
         }
         updateOsrPercentComplete();
     }
@@ -1245,44 +1257,6 @@ function startUnitTimerAnim(el) {
       .animate({width:"44px"}, 3.33*60*1000, "linear", function(){el.css("background","red")})
       .animate({width:"0"},    3.33*60*1000, "linear");
 }
-function addUnitButton(tbar, unitName) {
-    var unit_row_div = $("#unit_row_div_prototype").clone();
-    unit_row_div.attr("id",tbar.attr("id")+"_unit_side_container");
-    var unitBtn = unit_row_div.find(".unit_btn");
-    unit_row_div.show();
-    unit_row_div.children().show();
-
-    var unit_side_container_left_side = unit_row_div.find(".unit_side_container_left_side");
-	unit_side_container_left_side.click(showUnitPeopleDialog(tbar, unit_side_container_left_side));
-
-	unitBtn.click(showUnitsDialog(tbar, unitBtn));
-	unitBtn.draggable({
-	    cursorAt: { top: 13, left: 23 },
-	    start: function(event, ui) {
-            $(event.target).addClass("unit_btn_dragging");
-            $(event.target).css("z-index", 10);
-            $(event.target).data({
-                'originalLeft': $(event.target).css('left'),
-                'origionalTop': $(event.target).css('top')
-            });
-        },
-        stop: function(event, ui) {
-            $(event.target).removeClass("unit_btn_dragging");
-            $(event.target).css({
-                'left': $(event.target).data('originalLeft'),
-                'top': $(event.target).data('origionalTop')
-            });
-        },
-        delay: 1000 });
-    unitBtn.draggable('disable');
-
-	unit_row_div.find(".unit_timer_bg").hide();
-
-	// Create the actions column for this unit
-	var actions_list = $("<div class=\"actions_list\"></div>");
-	tbar.find(".actions_parent_container").append(actions_list);
-	unitBtn.actions_list = actions_list;
-}
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
 	var prototypeUnitTypeBtn 	= $("<div class=\"unitType_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -1344,60 +1318,30 @@ function initUnitsDialog( ) {
 				var newId = "unit_city_btn_"+city;
 				unitBtn.attr("id",newId);
 				unitBtn.click(function() {
-				    if(!$(this).hasClass("disabled")) {
-				        if(btn_clicked.hasClass("osr_btn")) {
-				            btn_clicked.html(unitName);
-				            hideAllDialogs();
-                            $(".dialog").hide();
-                            $(".side_dialog_container").hide();
-                            if(typeof parentDialog!='undefined' && parentDialog!=0) {
-                                $("#dialogContainer").show();
-                                parentDialog.show();
-                                parentDialog = 0;
-                            }
-                        } else {
-                            var prevUnitName = btn_clicked.html();
-                            var isNewButton = btn_clicked.hasClass("blank_btn");
-                            setUnitName(btn_clicked, unitName);
-                            addEvent_unit_to_sector(unitName, "sector");
-                            hideAllDialogs();
-                            if (isNewButton) {
-                                addUnitButton(tbar_clicked, unitName);
-                                tbar_clicked.find(".par_btn").removeClass("disabled");
-                                var unitsContainer = btn_clicked.parents(".units_container");
-                                var actionsTopContainer = tbar_clicked.children(".tbar_body_container").children(".actions_column").children(".actions_parent_container");
-                                btn_clicked.parents(".unit_row_div").find(".unit_side_container_left_side").removeClass("hidden_div");
-                                btn_clicked.parents(".unit_row_div").find(".psi_btn").removeClass("hidden_div");
-                                btn_clicked.parents(".unit_row_div").find(".personnel_btn").removeClass("hidden_div");
-                                btn_clicked.parents(".unit_row_div").find(".show_actions_btn").removeClass("hidden_div");
-                                btn_clicked.parents(".unit_row_div").find(".show_actions_btn").click(showActionsForUnitBtn(btn_clicked));
-
-                                // Unit Timer
-                                btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
-                                startUnitTimerAnim(btn_clicked.parents(".unit_row_div").find(".unit_timer_bar"))
-
-                                btn_clicked.draggable('enable');
-
-                                // Add action list
-                                addActionButton(btn_clicked.parents(".tbar"), btn_clicked.actions_list);
-
-                                // Customer Service
-                                var sectorName = tbar_clicked.find(".title_text").html();
-                                if(sectorName=="Cust Service") {
-                                    $("#custsvc_objective_btn").addClass("glowlightgreen");
-                                    updateObjectivePercentComplete();
-                                }
-                            }
-                            // Update action list class
-                            if(typeof btn_clicked.actions_list != "undefined") {
-                                btn_clicked.actions_list.removeClass(prevUnitName);
-                                btn_clicked.actions_list.addClass(unitName);
-                                showActionsForUnitBtn(btn_clicked)();
-                            }
-
-                            updateTbar(tbar_clicked);
-                        }
-                    }
+				    onClickCallback(unitName);
+//				    addUnitButtonToTbar(tbar_clicked, unitName);
+				    // TODO: Need one-shot version for acct_btn and OSR unit_btn dialog
+//				    if(!$(this).hasClass("disabled")) {
+//				        if(btn_clicked.hasClass("osr_btn")) {
+//				            btn_clicked.html(unitName);
+//				            hideAllDialogs();
+//                            $(".dialog").hide();
+//                            if(typeof parentDialog!='undefined' && parentDialog!=0) {
+//                                $("#dialogContainer").show();
+//                                parentDialog.show();
+//                                parentDialog = 0;
+//                            }
+//                        } else {
+//                            var prevUnitName = btn_clicked.html();
+//                            var isNewButton = btn_clicked.hasClass("blank_btn");
+//                            setUnitName(btn_clicked, unitName);
+//                            addEvent_unit_to_sector(unitName, "sector");
+//                            hideAllDialogs();
+//                            if (isNewButton) {
+//                                addUnitButton(tbar_clicked, unitName);
+//                            }
+//                        }
+//                    }
 				});
 			});
 			unitTypeCol.append($('<div class="clear_float"/>'));
@@ -1448,19 +1392,24 @@ function showActionsForUnitBtn(unitBtn) {
 	  }
 }
 function updateTbar(tbar) {
+    // Get current state of TBar
     var sectorName = tbar.find(".title_text").html();
 	var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
 	var hasAcctBtn = !(sectorsWithOutAcctBtn.indexOf(sectorName)>-1);
 	var hasPsiBtn = !(sectorsWithOutAPsiBtn.indexOf(sectorName)>-1);
 	var hasActions = !(sectorsWithOutActions.indexOf(sectorName)>-1);
+	var unitBtns = tbar.find(".unit_btn");
+	var manyUnits = unitBtns.length;
 
-    var clock_icon = tbar.find(".unit_btn:not(.blank_btn)").parents(".unit_row_div").find(".clock_icon");
-    if (hasClock) {
-        clock_icon.removeClass("hidden_div");
-	} else {
-	    clock_icon.addClass("hidden_div");
-	}
+    // TODO: Show timer if TBar is 'hasClock'
+//    var timer_bar = tbar.find(".unit_btn").find(".timer_bar");
+//    if (hasClock) {
+//        timer_bar.removeClass("hidden_div");
+//	} else {
+//	    timer_bar.addClass("hidden_div");
+//	}
 
+    // Acct Btn
 	var acctBtn = tbar.find(".acct_unit_btn");
 	if (hasAcctBtn) {
         acctBtn.show();
@@ -1468,49 +1417,65 @@ function updateTbar(tbar) {
 	    acctBtn.hide();
 	}
 
+    // PSI btn
 	var psiBtns = tbar.find(".psi_btn");
-	var unitBtns = tbar.find(".unit_btn");
 	if (hasPsiBtn) {
         psiBtns.show();
-        unitBtns.removeClass("unit_btn_no_psi");
 	} else {
 	    psiBtns.hide();
-	    unitBtns.addClass("unit_btn_no_psi");
 	}
 
-	var actions_parent_container = tbar.find(".actions_parent_container");
-	if(hasActions) {
-	    actions_parent_container.show();
-	} else {
-	    actions_parent_container.hide();
+	// PAR btn
+	if(manyUnits>0) {
+	    tbar.find(".par_btn").removeClass("disabled");
 	}
 
+    // TODO: Actions
+//	var actions_parent_container = tbar.find(".actions_parent_container");
+//	if(hasActions) {
+//	    actions_parent_container.show();
+//	} else {
+//	    actions_parent_container.hide();
+//	}
+
+    // TODO: updateObjectives()
+    // TODO: updateOsr()
 
     // Update Objectives dialog for assigned/deassigned titles
-    $("#rescue_objective_btn").removeClass("glowlightgreen");
-    $("#safety_objective_btn").removeClass("glowlightgreen");
-    $("#ondeck_objective_btn").removeClass("glowlightgreen");
-    $("#rehab_objective_btn").removeClass("glowlightgreen");
-    $( ".tbar" ).each(function( index ) {
-        var manyUnitButtons = $(this).find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length;
-        var sectorTitle = $(this).find(".title_text").html();
-        if(manyUnitButtons>0) {
-            if(sectorTitle=="RESCUE") {
-                $("#rescue_objective_btn").addClass("glowlightgreen");
-            }
-            if(sectorTitle=="Safety") {
-                $("#safety_objective_btn").addClass("glowlightgreen");
-            }
-            if(sectorTitle=="On Deck") {
-                $("#ondeck_objective_btn").addClass("glowlightgreen");
-            }
-            if(sectorTitle=="ReHab") {
-                $("#rehab_objective_btn").addClass("glowlightgreen");
-            }
-        }
-    });
+//    $("#rescue_objective_btn").removeClass("glowlightgreen");
+//    $("#safety_objective_btn").removeClass("glowlightgreen");
+//    $("#ondeck_objective_btn").removeClass("glowlightgreen");
+//    $("#rehab_objective_btn").removeClass("glowlightgreen");
+//    $( ".tbar" ).each(function( index ) {
+//        var manyUnitButtons = $(this).find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length;
+//        var sectorTitle = $(this).find(".title_text").html();
+//        if(manyUnitButtons>0) {
+//            if(sectorTitle=="RESCUE") {
+//                $("#rescue_objective_btn").addClass("glowlightgreen");
+//            }
+//            if(sectorTitle=="Safety") {
+//                $("#safety_objective_btn").addClass("glowlightgreen");
+//            }
+//            if(sectorTitle=="On Deck") {
+//                $("#ondeck_objective_btn").addClass("glowlightgreen");
+//            }
+//            if(sectorTitle=="ReHab") {
+//                $("#rehab_objective_btn").addClass("glowlightgreen");
+//            }
+//        }
+//    });
+//    // Customer Service
+//    var sectorName = tbar_clicked.find(".title_text").html();
+//    if(sectorName=="Cust Service") {
+//        $("#custsvc_objective_btn").addClass("glowlightgreen");
+//        updateObjectivePercentComplete();
+//    }
+
+
+
 }
-function showUnitsDialog( tbar, parentDialog_ ){
+var unitClickFunction;
+function showUnitsDialog( tbar, unitClickFunction_ ){
   return function(){
 
     // Disable all units that are already present in this TBar
@@ -1521,10 +1486,8 @@ function showUnitsDialog( tbar, parentDialog_ ){
     });
 
 	$(".dialog").hide();
-	$(".side_dialog_container").hide();
-	btn_clicked = 0;
 	tbar_clicked = tbar;
-	parentDialog = parentDialog_;
+	unitClickFunction = unitClickFunction_;
 	$("#dialogContainer").show();
 	$("#units_dialog").show();
   }
@@ -1559,6 +1522,60 @@ function initTbars() {
 
     rehab_tbar.find(".benchmark_btn").hide();
 }
+function openUnitsDialogFromTbar(tbar) {
+    return function() {
+        $(".unit_dialog_btn").removeClass("glowlightgreen");
+        $.each(tbar.find(".unit_btn"), function( index, tbarUnitBtn ) {
+            var html = $(tbarUnitBtn).html();
+            $(".unit_dialog_btn:contains('"+html+"')").addClass("glowlightgreen");
+        });
+    }
+}
+var unitRowDivSerialId = 1;
+function addUnitButtonToTbar(tbar) {
+    return function(unitName) {
+        unitRowDivSerialId++;
+
+        var unit_container_div = tbar.find(".unit_container_div");
+
+        // Update Units Dialog
+        $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
+
+        // Unit row div
+        var unit_row_div = $("#unit_row_div_prototype").clone();
+        unit_row_div.appendTo(unit_container_div);
+        unit_row_div.show();
+        unit_row_div.children().show();
+        unit_row_div.attr("id",unitRowDivSerialId+"_unit_row_div");
+
+        // Unit Info Btn ('P' and PSI buttons)
+        var tbar_unit_info_btn = unit_row_div.find(".tbar_unit_info_btn");
+        tbar_unit_info_btn.attr("id", unitRowDivSerialId+"_unit_row_div");
+        tbar_unit_info_btn.click(showUnitPeopleDialog(tbar, tbar_unit_info_btn));
+        tbar_unit_info_btn.show();
+        tbar_unit_info_btn.children().show();
+
+        // Unit button
+        var unitBtn = unit_row_div.find(".unit_btn");
+        unitBtn.html(unitName);
+        //TODO: unitBtn.click(showActionsForUnit...)
+
+        //TODO: Actionlist
+        // Update action list class
+        //    if(typeof btn_clicked.actions_list != "undefined") {
+        //        btn_clicked.actions_list.removeClass(prevUnitName);
+        //        btn_clicked.actions_list.addClass(unitName);
+        //        showActionsForUnitBtn(btn_clicked)();
+        //    }
+
+        // Unit Timer
+        // I think we'll need to show/hide the timer in the updateTbar function, but start it here.
+        //    btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
+        //    startUnitTimerAnim(btn_clicked.parents(".unit_row_div").find(".unit_timer_bar"));
+
+        updateTbar(tbar);
+    }
+}
 var tbarIndex = 1;
 function addTbar(tbarContainer) {
 	//Init T-Bars
@@ -1579,7 +1596,6 @@ function addTbar(tbarContainer) {
     tbarDirBtn.hide();
     tbarNumBtn.hide();
 
-
     //PAR (Sector) button
     var parBtn = tbar.find(".par_btn");
     parBtn.click(showParDialog(tbar, parBtn));
@@ -1596,7 +1612,8 @@ function addTbar(tbarContainer) {
 
     // Add Unit Btn
     var unitAddBtn = tbar.find(".unit_add_btn");
-    unitAddBtn.click(showUnitsDialog(tbar));
+//    unitAddBtn.click(showUnitsDialog(tbar));
+    unitAddBtn.click(showDialog_withCallbacks("#units_dialog", openUnitsDialogFromTbar(tbar), addUnitButtonToTbar(tbar)));
 
     // Add Action Btn
     var action_add_btn = tbar.find(".action_add_btn");
@@ -1828,15 +1845,14 @@ function init( ) {
 	initEmergTrafficDialog();
 	init10KeyDialog();
 
-//    $("#unit_row_div_prototype").hide();
-//    $("#unit_row_div_prototype>*").hide();
+    $("#unit_row_div_prototype").hide();
+    $("#unit_row_div_prototype>*").hide();
 	$("#tbar_prototype").hide();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(function(){
 	    hideAllDialogs();
 	    $(".dialog").hide();
-	    $(".side_dialog_container").hide();
 	    if(typeof parentDialog!='undefined' && parentDialog!=0) {
 	        $("#dialogContainer").show();
             parentDialog.show();
@@ -1855,7 +1871,7 @@ function init( ) {
 //Call this to dismiss the dialogs
 function hideAllDialogs( ) {
 	$("#dialogContainer").hide();
-	$(".side_dialog_container").hide();
+	$(".dialog").hide();
 }
 
 $.fn.exists = function () {
