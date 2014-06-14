@@ -1828,8 +1828,8 @@ function init( ) {
 	initEmergTrafficDialog();
 	init10KeyDialog();
 
-    $("#unit_row_div_prototype").hide();
-    $("#unit_row_div_prototype>*").hide();
+//    $("#unit_row_div_prototype").hide();
+//    $("#unit_row_div_prototype>*").hide();
 	$("#tbar_prototype").hide();
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
