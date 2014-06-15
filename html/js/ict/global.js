@@ -1597,6 +1597,10 @@ function addUnitButtonToTbar(tbar, unitName) {
     unitBtn.html(unitName);
     unitBtn.click(showActionsForUnitBtn(unitBtn));
 
+    // Move checkbox
+    tbar.find(".unit_move_btn").removeClass("disabled");
+    unit_row_div.find(".unit_move_checkbox").hide();
+
     // Unit Timer
     // I think we'll need to show/hide the timer in the updateTbar function, but start it here.
     //    btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
@@ -1605,10 +1609,9 @@ function addUnitButtonToTbar(tbar, unitName) {
     updateTbar(tbar);
 }
 
-var tbarIndex = 1;
+var tbarIndex = 0;
 function addTbar(tbarContainer) {
-	//Init T-Bars
-
+    tbarIndex++;
     var tbar = $("#tbar_prototype" ).clone().appendTo(tbarContainer);
     tbar.prefix_dir = 'X';
     tbar.prefix_num = 'X';
@@ -1663,6 +1666,34 @@ function addTbar(tbarContainer) {
     action_add_btn.attr("id", "action_add_btn_"+tbarIndex);
     action_add_btn.hide();//Button is shown once units have been added
     action_add_btn.click(showDialog_withCallbacks("#actions_dialog", onOpenActionsDialogFromTbar(tbar), toggleActionButtonForTbar(tbar)));
+
+    // Move Btn
+    var unit_move_btn = tbar.find(".unit_move_btn");
+    var unit_move_cancel_btn = tbar.find(".unit_move_cancel_btn");
+    unit_move_btn.click(function(){
+//        $("#move_unit_screen_cover").fadeIn(100);
+        tbar.find(".tbar_unit_info_btn").fadeOut(100, "linear", function(){tbar.find(".unit_move_checkbox").fadeIn(100)});
+        $(".tbar:not(#tbar_prototype):not(#"+tbar.attr('id')+")").each(function(){
+            unit_move_btn.hide();
+            unit_move_cancel_btn.show();
+            var tbar_cover = $("<div class='tbar_move_unit_cover'></div>");
+            tbar_cover.appendTo($('#tbar_container'));
+            tbar_cover.width($(this).width()+3);
+            tbar_cover.height($(this).height()+3);
+            tbar_cover.offset($(this).offset());
+        });
+    });
+
+    // Move Cancel Btn
+    unit_move_cancel_btn.hide();
+    unit_move_cancel_btn.click(function(){
+//        $("#move_unit_screen_cover").hide();
+        jQuery($(".tbar_move_unit_cover")).detach();
+        unit_move_btn.show();
+        unit_move_cancel_btn.hide();
+        tbar.find(".unit_move_checkbox").hide();
+        tbar.find(".tbar_unit_info_btn").show();
+    });
 
     // Droppable handler
     tbar.droppable();
@@ -1905,6 +1936,7 @@ function init( ) {
         }
 	});
 
+    $("#move_unit_screen_cover").hide();
 	$("#mode_btn").click(clickModeButton);
 	
 	hideAllDialogs();
@@ -1928,6 +1960,12 @@ $( document ).ready(init);
 $(document).keyup(function(e) {
   if (e.keyCode == 27) { hideAllDialogs(); }
 });
+
+document.addEventListener('click', function(event) {
+    if($(event.target).hasClass("disabled") || $(event.target).parents(".disabled").length>0) {
+        event.stopPropagation();
+    }
+}, true);
 
 var actions = [
     "Supply",
