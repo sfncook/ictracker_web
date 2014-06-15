@@ -216,6 +216,10 @@ td {
 	/*background: #FFFF99;*/
 	background: #FFFF88;
 }
+.unit_row_div.glowlightyellow>.unit_btn{
+    margin-right:2px;
+}
+
 .glowred {
 	background: red;
 	color: white;
