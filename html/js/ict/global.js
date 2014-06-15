@@ -1590,7 +1590,7 @@ function addUnitButtonToTbar(tbar, unitName) {
     // I think we'll need to show/hide the timer in the updateTbar function, but start it here.
     //    btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
     var unit_timer_bg = unitBtn.find(".unit_timer_bg");
-    startUnitTimerAnim(unit_timer_bg);
+    startUnitTimerAnim(unit_timer_bg.find(".unit_timer_bar"));
 
     updateTbar(tbar);
 }
