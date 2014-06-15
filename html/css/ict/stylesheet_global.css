@@ -213,7 +213,8 @@ td {
     background: #2A5071;
 }
 .glowlightyellow {
-	background: #FFFF99;
+	/*background: #FFFF99;*/
+	background: #FFFF88;
 }
 .glowred {
 	background: red;
