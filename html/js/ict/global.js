@@ -1311,11 +1311,11 @@ function initUnitsAssignedDialog( ) {
 }
 function startUnitTimerAnim(el) {
     el.stop(true);
-    el.css("width","131px").css("background","lightgreen");
+    el.css("width","48px").css("background","lightgreen");
 
     el
-      .animate({width:"88px"}, 3.33*60*1000, "linear", function(){el.css("background","yellow")})
-      .animate({width:"44px"}, 3.33*60*1000, "linear", function(){el.css("background","red")})
+      .animate({width:"32px"}, 3.33*60*1000, "linear", function(){el.css("background","yellow")})
+      .animate({width:"16px"}, 3.33*60*1000, "linear", function(){el.css("background","red")})
       .animate({width:"0"},    3.33*60*1000, "linear");
 }
 function initUnitsDialog( ) {
@@ -1433,12 +1433,12 @@ function updateTbar(tbar) {
 	var manyUnits = unitBtns.length;
 
     // TODO: Show timer if TBar is 'hasClock'
-//    var timer_bar = tbar.find(".unit_btn").find(".timer_bar");
-//    if (hasClock) {
-//        timer_bar.removeClass("hidden_div");
-//	} else {
-//	    timer_bar.addClass("hidden_div");
-//	}
+    var timer_bar = tbar.find(".unit_timer_bg");
+    if (hasClock) {
+        timer_bar.show();
+	} else {
+	    timer_bar.hide();
+	}
 
     // Acct Btn
 	var acctBtn = tbar.find(".acct_unit_btn");
@@ -1478,41 +1478,25 @@ function updateTbar(tbar) {
         action_container_div.removeClass("glowlightyellow");
 	}
 
-    // TODO: updateObjectives()
-    // TODO: updateOsr()
-
-    // Update Objectives dialog for assigned/deassigned titles
-//    $("#rescue_objective_btn").removeClass("glowlightgreen");
-//    $("#safety_objective_btn").removeClass("glowlightgreen");
-//    $("#ondeck_objective_btn").removeClass("glowlightgreen");
-//    $("#rehab_objective_btn").removeClass("glowlightgreen");
-//    $( ".tbar" ).each(function( index ) {
-//        var manyUnitButtons = $(this).find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length;
-//        var sectorTitle = $(this).find(".title_text").html();
-//        if(manyUnitButtons>0) {
-//            if(sectorTitle=="RESCUE") {
-//                $("#rescue_objective_btn").addClass("glowlightgreen");
-//            }
-//            if(sectorTitle=="Safety") {
-//                $("#safety_objective_btn").addClass("glowlightgreen");
-//            }
-//            if(sectorTitle=="On Deck") {
-//                $("#ondeck_objective_btn").addClass("glowlightgreen");
-//            }
-//            if(sectorTitle=="ReHab") {
-//                $("#rehab_objective_btn").addClass("glowlightgreen");
-//            }
-//        }
-//    });
-//    // Customer Service
-//    var sectorName = tbar_clicked.find(".title_text").html();
-//    if(sectorName=="Cust Service") {
-//        $("#custsvc_objective_btn").addClass("glowlightgreen");
-//        updateObjectivePercentComplete();
-//    }
-
-
-
+    if(manyUnits>0) {
+        if(sectorName=="RESCUE") {
+            $("#rescue_objective_btn").addClass("glowlightgreen");
+        }
+        if(sectorName=="Safety") {
+            $("#safety_objective_btn").addClass("glowlightgreen");
+        }
+        if(sectorName=="On Deck") {
+            $("#ondeck_objective_btn").addClass("glowlightgreen");
+        }
+        if(sectorName=="ReHab") {
+            $("#rehab_objective_btn").addClass("glowlightgreen");
+        }
+        if(sectorName=="Cust Service") {
+            $("#custsvc_objective_btn").addClass("glowlightgreen");
+        }
+    }
+    updateOsrPercentComplete();
+    updateObjectivePercentComplete();
 }
 function initTbars() {
     var tbar_container = $("#tbar_container");
@@ -1594,8 +1578,9 @@ function addUnitButtonToTbar(tbar, unitName) {
 
     // Unit button
     var unitBtn = unit_row_div.find(".unit_btn");
-    unitBtn.html(unitName);
     unitBtn.click(showActionsForUnitBtn(unitBtn));
+    var unit_text = unitBtn.find(".unit_text");
+    unit_text.html(unitName);
 
     // Move checkbox
     tbar.find(".unit_move_btn").removeClass("disabled");
@@ -1604,7 +1589,8 @@ function addUnitButtonToTbar(tbar, unitName) {
     // Unit Timer
     // I think we'll need to show/hide the timer in the updateTbar function, but start it here.
     //    btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
-    //    startUnitTimerAnim(btn_clicked.parents(".unit_row_div").find(".unit_timer_bar"));
+    var unit_timer_bg = unitBtn.find(".unit_timer_bg");
+    startUnitTimerAnim(unit_timer_bg);
 
     updateTbar(tbar);
 }
@@ -1792,6 +1778,7 @@ function initEmergTrafficDialog() {
         })});
 }
 function clickModeButton() {
+    // TODO: Update OSR button percentage when toggle mode button to OFF
     var mode_btn = $("#mode_btn");
 
     if(mode_btn.hasClass("offensive_btn")) {

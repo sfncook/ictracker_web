@@ -297,13 +297,14 @@
 }
 
 .unit_timer_bg {
-    width: 133px;
+    width: 50px;
     height: 4px;
     background: black;
     border:1px black solid;
+    margin-left:4px;
 }
 .unit_timer_bar {
-    width: 131px;
+    width: 48px;
     height: 2px;
     background: lightgreen;
 }

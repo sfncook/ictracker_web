@@ -216,9 +216,13 @@ td {
 	/*background: #FFFF99;*/
 	background: #FFFF88;
 }
-.unit_row_div.glowlightyellow>.unit_btn{
-    margin-right:2px;
+.glowlightyellow.unit_row_div {
+    border-top:1px solid #999;
+    border-bottom:1px solid #999;
 }
+/*.unit_row_div.glowlightyellow>.unit_btn{
+    margin-right:2px;
+}*/
 
 .glowred {
 	background: red;
