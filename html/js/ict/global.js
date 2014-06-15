@@ -1514,24 +1514,6 @@ function updateTbar(tbar) {
 
 
 }
-//var unitClickFunction;
-//function showUnitsDialog( tbar, unitClickFunction_ ){
-//  return function(){
-//
-//    // Disable all units that are already present in this TBar
-//    $(".unit_dialog_btn").removeClass("glowlightgreen");
-//    $.each(tbar.find(".unit_btn"), function( index, tbarUnitBtn ) {
-//        var html = $(tbarUnitBtn).html();
-//        $(".unit_dialog_btn:contains('"+html+"')").addClass("glowlightgreen");
-//    });
-//
-//	$(".dialog").hide();
-//	tbar_clicked = tbar;
-//	unitClickFunction = unitClickFunction_;
-//	$("#dialogContainer").show();
-//	$("#units_dialog").show();
-//  }
-//}
 function initTbars() {
     var tbar_container = $("#tbar_container");
     addTbar(tbar_container);
@@ -1614,14 +1596,6 @@ function addUnitButtonToTbar(tbar, unitName) {
     var unitBtn = unit_row_div.find(".unit_btn");
     unitBtn.html(unitName);
     unitBtn.click(showActionsForUnitBtn(unitBtn));
-
-    //TODO: Actionlist
-    // Update action list class
-    //    if(typeof btn_clicked.actions_list != "undefined") {
-    //        btn_clicked.actions_list.removeClass(prevUnitName);
-    //        btn_clicked.actions_list.addClass(unitName);
-    //        showActionsForUnitBtn(btn_clicked)();
-    //    }
 
     // Unit Timer
     // I think we'll need to show/hide the timer in the updateTbar function, but start it here.

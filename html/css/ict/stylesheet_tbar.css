@@ -75,11 +75,15 @@
 }
 
 .unit_move_btn {
-    width:57px;
-    height:27px;
+    width:25px;
+    height:25px;
     margin: 2px 5px;
     float:left;
-    border-radius: 10px;
+    padding: 3px 0;
+}
+.move_btn_img {
+    width: 20px;
+    height: 20px;
 }
 .unit_add_btn {
     width:57px;
