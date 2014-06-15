@@ -75,15 +75,24 @@
 }
 
 .unit_move_btn {
-    width:25px;
+    /*width:25px;
     height:25px;
     margin: 2px 5px;
     float:left;
-    padding: 3px 0;
+    padding: 3px 0;*/
+    width:33px;
+    height:27px;
+    margin: 2px 4px;
+    float:left;
+	background: #AAC7D1;
+	border-bottom: 2px dotted #888 !important;
+	border-radius: 10px;
+	font-size: 1.0rem;
+	padding:6px 0;
 }
 .move_btn_img {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
 }
 .unit_add_btn {
     width:57px;
