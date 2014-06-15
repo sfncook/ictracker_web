@@ -157,6 +157,7 @@
     border:1px solid #EEE;
     float:left;
     border-radius: 5px;
+    margin-left: 4px;
 }
 .tbar_unit_info_btn:hover {
     background:#9ad1ff;
@@ -193,15 +194,14 @@
 
 
 .action_btn {
-	width: 130px;
-	height: 16px;
+	width: 126px;
+	height: 26px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	margin: 1px 0 1px 0;
+	margin: 4px;
 	box-shadow: none;
-	font-size: 80%;
-	padding-top: 6px;
+	font-size: 100%;
 	padding-bottom: 2px;
 }
 
