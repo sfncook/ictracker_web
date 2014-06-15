@@ -1380,29 +1380,6 @@ function initUnitsDialog( ) {
 				unitBtn.attr("id",newId);
 				unitBtn.click(function() {
 				    onClickCallback(unitName);
-//				    addUnitButtonToTbar(tbar_clicked, unitName);
-				    // TODO: Need one-shot version for acct_btn and OSR unit_btn dialog
-//				    if(!$(this).hasClass("disabled")) {
-//				        if(btn_clicked.hasClass("osr_btn")) {
-//				            btn_clicked.html(unitName);
-//				            hideAllDialogs();
-//                            $(".dialog").hide();
-//                            if(typeof parentDialog!='undefined' && parentDialog!=0) {
-//                                $("#dialogContainer").show();
-//                                parentDialog.show();
-//                                parentDialog = 0;
-//                            }
-//                        } else {
-//                            var prevUnitName = btn_clicked.html();
-//                            var isNewButton = btn_clicked.hasClass("blank_btn");
-//                            setUnitName(btn_clicked, unitName);
-//                            addEvent_unit_to_sector(unitName, "sector");
-//                            hideAllDialogs();
-//                            if (isNewButton) {
-//                                addUnitButton(tbar_clicked, unitName);
-//                            }
-//                        }
-//                    }
 				});
 			});
 			unitTypeCol.append($('<div class="clear_float"/>'));
@@ -1486,7 +1463,7 @@ function updateTbar(tbar) {
 	    tbar.find(".par_btn").addClass("disabled");
 	}
 
-    // TODO: Actions
+    // Actions
     if(manyUnits>0) {
 	    tbar.find(".action_add_btn").show();
 
@@ -1496,13 +1473,10 @@ function updateTbar(tbar) {
         }
 	} else {
 	    tbar.find(".action_add_btn").hide();
+	    var action_container_div = tbar.find(".action_container_div");
+        action_container_div.empty();
+        action_container_div.removeClass("glowlightyellow");
 	}
-//	var actions_parent_container = tbar.find(".actions_parent_container");
-//	if(hasActions) {
-//	    actions_parent_container.show();
-//	} else {
-//	    actions_parent_container.hide();
-//	}
 
     // TODO: updateObjectives()
     // TODO: updateOsr()
@@ -1610,8 +1584,6 @@ function removeUnitButtonToTbar(tbar, unitName) {
     // Remove unit row from TBar
     var unit_row_div = tbar.find(".unit_btn:contains('"+unitName+"')").parents(".unit_row_div");
     jQuery(unit_row_div).detach();
-
-    // TODO: Remove/hide actions
 
     updateTbar(tbar);
 }
