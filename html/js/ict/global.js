@@ -774,6 +774,17 @@ function init10KeyDialog( ) {
 /**
  * Actions Dialog
  **/
+function updateSelectedUnitActionsData(tbar) {
+    var selected_unit_btn = tbar.find(".unit_row_div.glowlightyellow").find(".unit_btn");
+    var actions = new Array();
+
+    $.each(tbar.find(".action_btn"), function( index, tbarActionBtn ) {
+        var actionName = $(tbarActionBtn).html();
+        actions.push(actionName);
+    });
+
+    selected_unit_btn.data({'actions':actions});
+}
 function onOpenActionsDialogFromTbar(tbar) {
     return function() {
         $(".action_dialog_btn").removeClass("glowlightgreen");
@@ -801,16 +812,7 @@ function removeActionButtonFromTbar(tbar, actionName) {
     jQuery(action_btn).detach();
 
     // Update unit button's action list data
-    var unit_btn = tbar.find(".unit_row_div.glowlightyellow").find(".unit_btn");
-    var actions = unit_btn.data('actions');
-    if(typeof actions=='undefined') {
-        actions = new Array();
-    }
-    // This removes the action from actions
-    actions = jQuery.grep(actions, function(value) {
-        return value != actionName;
-    });
-    unit_btn.data({'actions':actions});
+    updateSelectedUnitActionsData(tbar);
 }
 function addActionButtonToTbar(tbar, actionName) {
     // Update Actions Dialog
@@ -818,16 +820,10 @@ function addActionButtonToTbar(tbar, actionName) {
 
     // Add action button to TBar
     var action_container_div = tbar.find(".action_container_div");
-    action_container_div.append("<div class='action_btn button'>"+actionName+"</div>");
+    action_container_div.append("<div class='disabled action_btn button'>"+actionName+"</div>");
 
     // Update unit button's action list data
-    var unit_btn = tbar.find(".unit_row_div.glowlightyellow").find(".unit_btn");
-    var actions = unit_btn.data('actions');
-    if(typeof actions=='undefined') {
-        actions = new Array();
-    }
-    actions.push(actionName);
-    unit_btn.data({'actions':actions});
+    updateSelectedUnitActionsData(tbar);
 }
 function initActionsDialog( ) {
 	var actionsDialog = $("#dialog_prototype" ).clone().appendTo("#dialog_vertical_align_cell");
@@ -1434,6 +1430,16 @@ function setUnitName(unitBtn, unitName) {
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
 		var tbar = unitBtn.parents(".tbar");
+		var action_container_div = tbar.find(".action_container_div");
+
+        action_container_div.empty();
+        if(typeof unitBtn.data('actions') != 'undefined') {
+            jQuery.each( unitBtn.data('actions'), function(index, actionName) {
+                action_container_div.append("<div class='disabled action_btn button'>"+actionName+"</div>");
+            });
+        }
+
+		// Add color
 		tbar.find(".unit_row_div").removeClass("glowlightyellow");
 		unitBtn.parents(".unit_row_div").addClass("glowlightyellow");
 		tbar.find(".action_container_div").addClass("glowlightyellow");
@@ -1741,7 +1747,7 @@ function addTbar(tbarContainer) {
 
             // PAR button
             dest_tbar.find(".par_btn").removeClass("disabled");
-            console.log(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length);
+//            console.log(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length);
             if(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length==0) {
                 source_tbar.find(".par_btn").addClass("disabled");
             }
