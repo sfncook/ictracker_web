@@ -65,8 +65,8 @@
     float:left;
 }
 .tbar_col_scroll_div {
-    width:130px;
-    height:213px;
+    width:134px;
+    height:211px;
     overflow-y:scroll;
     margin-top: 2px;
 }
@@ -172,7 +172,7 @@
     margin-bottom:3px;
 }
 .tbar_unit_btn {
-    margin: 2px 2px 0 3px;
+    margin: 2px 4px 0 3px;
 	float: right;
 }
 .timer_bars {

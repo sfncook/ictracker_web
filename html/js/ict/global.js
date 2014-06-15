@@ -1381,6 +1381,7 @@ function showActionsForUnitBtn(unitBtn) {
 		var tbar = unitBtn.parents(".tbar");
 		tbar.find(".unit_row_div").removeClass("glowlightyellow");
 		unitBtn.parents(".unit_row_div").addClass("glowlightyellow");
+		tbar.find(".action_container_div").addClass("glowlightyellow");
     }
 }
 function updateTbar(tbar) {
