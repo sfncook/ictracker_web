@@ -6,14 +6,17 @@
                 <link href="images/icon/ict_logo_29x29.png" rel="icon" />
 		
         <!--CSS-->
+        <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/ict/reset.css" />
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_global.css" />
         <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_tbar.css" />
-        
+
         <!--JS-->
         <script src="js/jquery-1.11.0.js"></script>
         <script src="js/jquery-ui-1.10.4.js"></script>
+        <script src="js/jquery.mousewheel.js"></script>
+        <script src="js/jquery.jscrollpane.min.js"></script>
         <script src="js/jsPDF/jspdf.js"></script>
         <script src="js/ict/report.js"></script>
         <script src="js/ict/global.js"></script>
@@ -88,7 +91,23 @@
                                     <div class="unit_move_cancel_btn button">Cancel</div>
                                     <div class="unit_add_btn button">+Unit</div>
                                     <div class="clear_float"></div>
-                                    <div class="unit_container_div scroll_left tbar_col_scroll_div">
+                                    <!--<div class="unit_container_div scroll_left tbar_col_scroll_div">-->
+                                    <div class="scroll-pane jspScrollable">
+                                        <div class="jspContainer">
+                                            <div class="jspPane unit_container_div">
+
+                                            </div>
+                                            <div class="jspVerticalBar">
+                                                <div class="jspCap jspCapTop"></div>
+                                                <div class="jspTrack" style="height: 200px;">
+                                                    <div class="jspDrag" style="height: 77px; top: 123px;">
+                                                        <div class="jspDragTop"></div>
+                                                        <div class="jspDragBottom"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="jspCap jspCapBottom"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tbar_col_right_div tbar_col_div">

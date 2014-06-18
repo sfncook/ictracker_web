@@ -1558,13 +1558,18 @@ function addUnitButtonToTbar(tbar, unitName) {
     unitRowDivSerialId++;
 
     var unit_container_div = tbar.find(".unit_container_div");
+    var scroll_pane = tbar.find(".scroll-pane");
+    var pane2api = scroll_pane.data('jsp');
+    console.log(scroll_pane);
+    console.log(pane2api);
 
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
 
     // Unit row div
     var unit_row_div = $("#unit_row_div_prototype").clone();
-    unit_row_div.appendTo(unit_container_div);
+//    unit_row_div.appendTo(unit_container_div);
+    pane2api.getContentPane().append(unit_row_div);
     unit_row_div.show();
     unit_row_div.children().show();
     unit_row_div.attr("id",unitRowDivSerialId+"_unit_row_div");
@@ -1591,6 +1596,9 @@ function addUnitButtonToTbar(tbar, unitName) {
     //    btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
     var unit_timer_bg = unitBtn.find(".unit_timer_bg");
     startUnitTimerAnim(unit_timer_bg.find(".unit_timer_bar"));
+
+    // Reinitialize
+    pane2api.reinitialise();
 
     updateTbar(tbar);
 }
@@ -1970,6 +1978,8 @@ function init( ) {
 	
 	window.setTimeout(blinkUnit, 500);
 	window.setInterval(updateTimer, 1000);
+
+	$('.scroll-pane').jScrollPane();
 }
 
 //Call this to dismiss the dialogs
