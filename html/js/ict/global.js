@@ -1594,6 +1594,37 @@ function addUnitButtonToTbar(tbar, unitName) {
 
     updateTbar(tbar);
 }
+function moveUnitButton(source_tbar, dest_tbar, unitName) {
+    var unitBtn = source_tbar.find(".unit_btn:contains("+unitName+")");
+    var unit_row_div = unitBtn.parents(".unit_row_div");
+
+    dest_tbar.removeClass("glowbabyblue");
+
+    // Move actions list
+    var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
+    var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
+    var actionList = source_actionsParentContainer.children("."+unitBtn.html());
+    jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
+
+    // Move Unit to new TBar
+    var last_unit_div = dest_tbar.find(".units_container").children().last();
+    jQuery(unit_row_div).detach().insertBefore(last_unit_div);
+
+    // PAR button
+    dest_tbar.find(".par_btn").removeClass("disabled");
+//            console.log(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length);
+    if(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length==0) {
+        source_tbar.find(".par_btn").addClass("disabled");
+    }
+
+    // Select actions
+    // In source_tbar - select previous unit actions or none
+    var srcFirstUnitBtn = source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").first();
+    if(srcFirstUnitBtn!=unitBtn) {
+        showActionsForUnitBtn(srcFirstUnitBtn)();
+    }
+    showActionsForUnitBtn(unitBtn)();
+}
 
 var tbarIndex = 0;
 function addTbar(tbarContainer) {
@@ -1660,13 +1691,22 @@ function addTbar(tbarContainer) {
 //        $("#move_unit_screen_cover").fadeIn(100);
         tbar.find(".tbar_unit_info_btn").fadeOut(100, "linear", function(){tbar.find(".unit_move_checkbox").fadeIn(100)});
         $(".tbar:not(#tbar_prototype):not(#"+tbar.attr('id')+")").each(function(){
+            var tbar_destination = $(this);
             unit_move_btn.hide();
             unit_move_cancel_btn.show();
             var tbar_cover = $("<div class='tbar_move_unit_cover'></div>");
             tbar_cover.appendTo($('#tbar_container'));
-            tbar_cover.width($(this).width()+3);
-            tbar_cover.height($(this).height()+3);
-            tbar_cover.offset($(this).offset());
+            tbar_cover.width(tbar_destination.width()+3);
+            tbar_cover.height(tbar_destination.height()+3);
+            tbar_cover.offset(tbar_destination.offset());
+            tbar_cover.click(function(){
+                tbar.find(".unit_move_checkbox>*:checkbox:checked").each(function () {
+                    var unit_move_checkbox = $(this);
+                    var unit_btn = unit_move_checkbox.parents(".unit_row_div").find(".unit_btn");
+                    var unit_text = unit_btn.find(".unit_text");
+                    moveUnitButton(tbar, tbar_destination, unit_text);
+                });
+            });
         });
     });
 
