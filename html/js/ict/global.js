@@ -819,8 +819,13 @@ function addActionButtonToTbar(tbar, actionName) {
     $(".action_dialog_btn:contains('"+actionName+"')").addClass("glowlightgreen");
 
     // Add action button to TBar
-    var action_container_div = tbar.find(".action_container_div");
-    action_container_div.append("<div class='disabled action_btn button'>"+actionName+"</div>");
+    var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
+
+    // Update scroll container
+    var scroll_pane = tbar.find(".action_scroll-pane");
+    var pane2api = scroll_pane.data('jsp');
+    pane2api.getContentPane().append(actionBtn);
+    pane2api.reinitialise();
 
     // Update unit button's action list data
     updateSelectedUnitActionsData(tbar);
@@ -1558,10 +1563,8 @@ function addUnitButtonToTbar(tbar, unitName) {
     unitRowDivSerialId++;
 
     var unit_container_div = tbar.find(".unit_container_div");
-    var scroll_pane = tbar.find(".scroll-pane");
+    var scroll_pane = tbar.find(".unit_scroll-pane");
     var pane2api = scroll_pane.data('jsp');
-    console.log(scroll_pane);
-    console.log(pane2api);
 
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
