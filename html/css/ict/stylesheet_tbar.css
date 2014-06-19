@@ -16,7 +16,7 @@
 	background: #FFF;
 	border:1px solid #999;
 	margin: 5px 0 5px 10px;
-    width: 270px;
+    width: 278px;
 	height: 275px;
 	padding: 0;
 	border-radius: 3px;
@@ -60,7 +60,7 @@
 }
 
 .tbar_col_div {
-    width:133px;
+    width:137px;
     /*width:135px;
     height:244px;*/
     float:left;
@@ -211,7 +211,7 @@
     border:1px solid #EEE;
     float:left;
     border-radius: 5px;
-    margin-left: 4px;
+    margin-left: 0;
 }
 .tbar_unit_info_btn:hover {
     background:#9ad1ff;
@@ -317,7 +317,9 @@
 .jspVerticalBar {
 	left: 0;
 	width: 3px;
-	border: 1px solid black;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
 }
 .jspDrag {
     border: 1px solid black;
