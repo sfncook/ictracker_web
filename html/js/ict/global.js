@@ -1412,19 +1412,27 @@ function setUnitName(unitBtn, unitName) {
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
 		var tbar = unitBtn.parents(".tbar");
-		var action_container_div = tbar.find(".action_container_div");
+		var scroll_pane = tbar.find(".action_scroll-pane");
+		var pane2api = scroll_pane.data('jsp');
+//		var action_container_div = tbar.find(".action_container_div");
 
-        action_container_div.empty();
+        pane2api.getContentPane().empty();
+//        action_container_div.empty();
+
         if(typeof unitBtn.data('actions') != 'undefined') {
             jQuery.each( unitBtn.data('actions'), function(index, actionName) {
-                action_container_div.append("<div class='disabled action_btn button'>"+actionName+"</div>");
+                var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
+                pane2api.getContentPane().append(actionBtn);
+//                action_container_div.append("<div class='disabled action_btn button'>"+actionName+"</div>");
             });
         }
 
 		// Add color
 		tbar.find(".unit_row_div").removeClass("glowlightyellow");
 		unitBtn.parents(".unit_row_div").addClass("glowlightyellow");
-		tbar.find(".action_container_div").addClass("glowlightyellow");
+		pane2api.getContentPane().addClass("glowlightyellow");
+
+        pane2api.reinitialise();
     }
 }
 function updateTbar(tbar) {
