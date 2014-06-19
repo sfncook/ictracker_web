@@ -1414,16 +1414,12 @@ function showActionsForUnitBtn(unitBtn) {
 		var tbar = unitBtn.parents(".tbar");
 		var scroll_pane = tbar.find(".action_scroll-pane");
 		var pane2api = scroll_pane.data('jsp');
-//		var action_container_div = tbar.find(".action_container_div");
-
         pane2api.getContentPane().empty();
-//        action_container_div.empty();
 
         if(typeof unitBtn.data('actions') != 'undefined') {
             jQuery.each( unitBtn.data('actions'), function(index, actionName) {
                 var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
                 pane2api.getContentPane().append(actionBtn);
-//                action_container_div.append("<div class='disabled action_btn button'>"+actionName+"</div>");
             });
         }
 
@@ -1540,7 +1536,7 @@ function initTbars() {
 function onOpenUnitsDialogFromTbar(tbar) {
     return function() {
         $(".unit_dialog_btn").removeClass("glowlightgreen");
-        $.each(tbar.find(".unit_btn"), function( index, tbarUnitBtn ) {
+        $.each(tbar.find(".unit_text"), function( index, tbarUnitBtn ) {
             var html = $(tbarUnitBtn).html();
             $(".unit_dialog_btn:contains('"+html+"')").addClass("glowlightgreen");
         });
