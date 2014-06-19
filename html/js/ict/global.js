@@ -1566,7 +1566,6 @@ var unitRowDivSerialId = 1;
 function addUnitButtonToTbar(tbar, unitName) {
     unitRowDivSerialId++;
 
-    var unit_container_div = tbar.find(".unit_container_div");
     var scroll_pane = tbar.find(".unit_scroll-pane");
     var pane2api = scroll_pane.data('jsp');
 
@@ -1575,7 +1574,6 @@ function addUnitButtonToTbar(tbar, unitName) {
 
     // Unit row div
     var unit_row_div = $("#unit_row_div_prototype").clone();
-//    unit_row_div.appendTo(unit_container_div);
     pane2api.getContentPane().append(unit_row_div);
     unit_row_div.show();
     unit_row_div.children().show();
@@ -1609,36 +1607,39 @@ function addUnitButtonToTbar(tbar, unitName) {
 
     updateTbar(tbar);
 }
-function moveUnitButton(source_tbar, dest_tbar, unitName) {
-    var unitBtn = source_tbar.find(".unit_btn:contains("+unitName+")");
-    var unit_row_div = unitBtn.parents(".unit_row_div");
+function moveUnitButton(source_tbar, dest_tbar, unitBtn) {
+    var unitName = unitBtn.find(".unit_text").html();
 
-    dest_tbar.removeClass("glowbabyblue");
+    removeUnitButtonToTbar(source_tbar, unitName)
+    addUnitButtonToTbar(dest_tbar, unitName);
+//    source_pane2api.getContentPane().detach();
+//    source_pane2api.getContentPane().append(unit_row_div);
 
     // Move actions list
-    var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
-    var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
-    var actionList = source_actionsParentContainer.children("."+unitBtn.html());
-    jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
+//    var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
+//    var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
+//    var actionList = source_actionsParentContainer.children("."+unitBtn.html());
+//    jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
 
     // Move Unit to new TBar
-    var last_unit_div = dest_tbar.find(".units_container").children().last();
-    jQuery(unit_row_div).detach().insertBefore(last_unit_div);
+//    var last_unit_div = dest_tbar.find(".units_container").children().last();
+//    jQuery(unit_row_div).detach().insertBefore(last_unit_div);
 
     // PAR button
-    dest_tbar.find(".par_btn").removeClass("disabled");
-//            console.log(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length);
-    if(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length==0) {
-        source_tbar.find(".par_btn").addClass("disabled");
-    }
+//    dest_tbar.find(".par_btn").removeClass("disabled");
+//    if(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length==0) {
+//        source_tbar.find(".par_btn").addClass("disabled");
+//    }
 
     // Select actions
     // In source_tbar - select previous unit actions or none
-    var srcFirstUnitBtn = source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").first();
-    if(srcFirstUnitBtn!=unitBtn) {
-        showActionsForUnitBtn(srcFirstUnitBtn)();
-    }
-    showActionsForUnitBtn(unitBtn)();
+//    var srcFirstUnitBtn = source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").first();
+//    if(srcFirstUnitBtn!=unitBtn) {
+//        showActionsForUnitBtn(srcFirstUnitBtn)();
+//    }
+//    showActionsForUnitBtn(unitBtn)();
+
+    //Update Objectives and OSR?
 }
 
 var tbarIndex = 0;
@@ -1718,8 +1719,7 @@ function addTbar(tbarContainer) {
                 tbar.find(".unit_move_checkbox>*:checkbox:checked").each(function () {
                     var unit_move_checkbox = $(this);
                     var unit_btn = unit_move_checkbox.parents(".unit_row_div").find(".unit_btn");
-                    var unit_text = unit_btn.find(".unit_text");
-                    moveUnitButton(tbar, tbar_destination, unit_text);
+                    moveUnitButton(tbar, tbar_destination, unit_btn);
                 });
             });
         });
@@ -1728,56 +1728,11 @@ function addTbar(tbarContainer) {
     // Move Cancel Btn
     unit_move_cancel_btn.hide();
     unit_move_cancel_btn.click(function(){
-//        $("#move_unit_screen_cover").hide();
         jQuery($(".tbar_move_unit_cover")).detach();
         unit_move_btn.show();
         unit_move_cancel_btn.hide();
         tbar.find(".unit_move_checkbox").hide();
         tbar.find(".tbar_unit_info_btn").show();
-    });
-
-    // Droppable handler
-    tbar.droppable();
-    tbar.droppable({
-        over: function( event, ui ) {
-            $(event.target).addClass("glowbabyblue");
-        },
-        out: function( event, ui ) {
-            $(event.target).removeClass("glowbabyblue");
-        },
-        drop: function( event, ui ) {
-            var unitBtn = ui.draggable;
-            var unit_row_div = unitBtn.parents(".unit_row_div");
-            var dest_tbar = $(event.target);
-            var source_tbar = unitBtn.parents(".tbar");
-
-            dest_tbar.removeClass("glowbabyblue");
-
-            // Move actions list
-            var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
-            var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
-            var actionList = source_actionsParentContainer.children("."+unitBtn.html());
-            jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
-
-            // Move Unit to new TBar
-            var last_unit_div = dest_tbar.find(".units_container").children().last();
-            jQuery(unit_row_div).detach().insertBefore(last_unit_div);
-
-            // PAR button
-            dest_tbar.find(".par_btn").removeClass("disabled");
-//            console.log(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length);
-            if(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length==0) {
-                source_tbar.find(".par_btn").addClass("disabled");
-            }
-
-            // Select actions
-            // In source_tbar - select previous unit actions or none
-            var srcFirstUnitBtn = source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").first();
-            if(srcFirstUnitBtn!=unitBtn) {
-                showActionsForUnitBtn(srcFirstUnitBtn)();
-            }
-            showActionsForUnitBtn(unitBtn)();
-        }
     });
 
     tbar.show();
