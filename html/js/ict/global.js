@@ -1414,7 +1414,6 @@ function showActionsForUnitBtn(unitBtn) {
 		// Add color
 		tbar.find(".unit_row_div").removeClass("glowlightyellow");
 		unitBtn.parents(".unit_row_div").addClass("glowlightyellow");
-		pane2api.getContentPane().addClass("glowlightyellow");
 
         pane2api.reinitialise();
     }
@@ -1600,6 +1599,13 @@ function moveUnitButton(source_tbar, dest_tbar, unitBtn) {
     removeUnitButtonToTbar(source_tbar, unitName)
     addUnitButtonToTbar(dest_tbar, unitName);
 }
+function cancelUnitMove() {
+    jQuery($(".tbar_move_unit_cover")).detach();
+    $(".unit_move_btn").show();
+    $(".unit_move_cancel_btn").hide();
+    $(".unit_move_checkbox").hide();
+    $(".tbar_unit_info_btn").show();
+}
 
 var tbarIndex = 0;
 function addTbar(tbarContainer) {
@@ -1692,11 +1698,7 @@ function addTbar(tbarContainer) {
                 }
 
                 // Close all TBar covers
-                jQuery($(".tbar_move_unit_cover")).detach();
-                unit_move_btn.show();
-                unit_move_cancel_btn.hide();
-                tbar.find(".unit_move_checkbox").hide();
-                tbar.find(".tbar_unit_info_btn").show();
+                cancelUnitMove();
             });
         });
     });
@@ -1704,11 +1706,7 @@ function addTbar(tbarContainer) {
     // Move Cancel Btn
     unit_move_cancel_btn.hide();
     unit_move_cancel_btn.click(function(){
-        jQuery($(".tbar_move_unit_cover")).detach();
-        unit_move_btn.show();
-        unit_move_cancel_btn.hide();
-        tbar.find(".unit_move_checkbox").hide();
-        tbar.find(".tbar_unit_info_btn").show();
+        cancelUnitMove();
     });
 
     tbar.show();
@@ -1933,7 +1931,10 @@ $.fn.exists = function () {
 $( document ).ready(init);
 //Esc Key Press
 $(document).keyup(function(e) {
-  if (e.keyCode == 27) { hideAllDialogs(); }
+    if (e.keyCode == 27) {
+        hideAllDialogs();
+        cancelUnitMove();
+    }
 });
 
 document.addEventListener('click', function(event) {
