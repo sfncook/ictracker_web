@@ -1575,6 +1575,11 @@ function addUnitButtonToTbar(tbar, unitName) {
     unitBtn.click(showActionsForUnitBtn(unitBtn));
     var unit_text = unitBtn.find(".unit_text");
     unit_text.html(unitName);
+    if (unitName.length>5) {
+        unit_text.addClass("btn_largetext");
+    } else if (unitName.length>4) {
+        unit_text.addClass("btn_medtext");
+    }
 
     // Move checkbox
     tbar.find(".unit_move_btn").removeClass("disabled");
