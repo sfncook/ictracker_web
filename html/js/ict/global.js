@@ -848,18 +848,6 @@ function initActionsDialog( ) {
 
 		actionsDialogBody.append(newBtn);
 		newBtn.click(function(){onClickCallback(actionName)});
-//		newBtn.click(function() {
-//		    if(!newBtn.hasClass("hidden_sector_btn")) {
-//                var isNewButton = btn_clicked.html()=="Action";
-//                btn_clicked.html(actionName);
-//                //hideAllDialogs();
-//                if (isNewButton) {
-//                    var actionsContainer = btn_clicked.parent();
-//                    addActionButton(btn_clicked.parents(".tbar"), actionsContainer);
-//                    btn_clicked = actionsContainer.children(".blank_btn");
-//                }
-//            }
-//        });
 	});
 }
 
@@ -1598,7 +1586,6 @@ function addUnitButtonToTbar(tbar, unitName) {
 
     // Unit Timer
     // I think we'll need to show/hide the timer in the updateTbar function, but start it here.
-    //    btn_clicked.parents(".unit_row_div").find(".unit_timer_bg").show();
     var unit_timer_bg = unitBtn.find(".unit_timer_bg");
     startUnitTimerAnim(unit_timer_bg.find(".unit_timer_bar"));
 
@@ -1612,34 +1599,6 @@ function moveUnitButton(source_tbar, dest_tbar, unitBtn) {
 
     removeUnitButtonToTbar(source_tbar, unitName)
     addUnitButtonToTbar(dest_tbar, unitName);
-//    source_pane2api.getContentPane().detach();
-//    source_pane2api.getContentPane().append(unit_row_div);
-
-    // Move actions list
-//    var dest_actionsParentContainer = dest_tbar.find(".actions_parent_container");
-//    var source_actionsParentContainer = source_tbar.find(".actions_parent_container");
-//    var actionList = source_actionsParentContainer.children("."+unitBtn.html());
-//    jQuery(actionList).detach().appendTo(dest_actionsParentContainer);
-
-    // Move Unit to new TBar
-//    var last_unit_div = dest_tbar.find(".units_container").children().last();
-//    jQuery(unit_row_div).detach().insertBefore(last_unit_div);
-
-    // PAR button
-//    dest_tbar.find(".par_btn").removeClass("disabled");
-//    if(source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").length==0) {
-//        source_tbar.find(".par_btn").addClass("disabled");
-//    }
-
-    // Select actions
-    // In source_tbar - select previous unit actions or none
-//    var srcFirstUnitBtn = source_tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").first();
-//    if(srcFirstUnitBtn!=unitBtn) {
-//        showActionsForUnitBtn(srcFirstUnitBtn)();
-//    }
-//    showActionsForUnitBtn(unitBtn)();
-
-    //Update Objectives and OSR?
 }
 
 var tbarIndex = 0;
@@ -1721,6 +1680,16 @@ function addTbar(tbarContainer) {
                     var unit_btn = unit_move_checkbox.parents(".unit_row_div").find(".unit_btn");
                     moveUnitButton(tbar, tbar_destination, unit_btn);
                 });
+
+                // Show action list
+                var first_unit_btn = tbar.find(".unit_btn").first();
+                if(typeof first_unit_btn != 'undefined') {
+                    showActionsForUnitBtn(first_unit_btn);
+                }
+                var first_unit_btn_dst = tbar_destination.find(".unit_btn").first();
+                if(typeof first_unit_btn_dst != 'undefined') {
+                    showActionsForUnitBtn(first_unit_btn_dst);
+                }
 
                 // Close all TBar covers
                 jQuery($(".tbar_move_unit_cover")).detach();
