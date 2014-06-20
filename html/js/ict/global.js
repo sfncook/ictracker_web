@@ -108,49 +108,46 @@ function showParDialog( tbar, btn ){
                 var unitNames = new Array();
                 var unitBtns = new Array();
                 unit_row_divs.each(function( index ) {
-//                    var tbarUnitBtns = tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn");
-                    var tbarUnitBtn = $(this).find(".unit_btn");
-                    if(!tbarUnitBtn.hasClass("blank_btn")) {
-                        var tbarPersonnelBtn = $(this).find(".personnel_btn");
-                        var tbarPsiBtn = $(this).find(".psi_btn");
-                        var manyPeople = 0;
-                        if(tbarPersonnelBtn.html()!='P') {
-                            manyPeople = tbarPersonnelBtn.html();
-                        }
-                        var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
-                        par_dialog_unit.show();
-                        par_dialog_unit.appendTo(par_dialog_units);
-                        var unit_name = tbarUnitBtn.html();
-                        unitNames.push(unit_name);
+                    var unit_text = $(this).find(".unit_text");
+                    var tbarPersonnelBtn = $(this).find(".personnel_btn");
+                    var tbarPsiBtn = $(this).find(".psi_btn");
+                    var manyPeople = 0;
+                    if(tbarPersonnelBtn.html()!='P') {
+                        manyPeople = tbarPersonnelBtn.html();
+                    }
+                    var par_dialog_unit = $("#par_dialog_unit_prototype").clone();
+                    par_dialog_unit.show();
+                    par_dialog_unit.appendTo(par_dialog_units);
+                    var unit_name = unit_text.html();
+                    unitNames.push(unit_name);
 
-                        par_dialog_unit.attr("id", "par_dialog_unit_"+unit_name);
+                    par_dialog_unit.attr("id", "par_dialog_unit_"+unit_name);
 
-                        // Personnel Btn
-                        var personnelBtn = par_dialog_unit.find(".personnel_btn")
-                        personnelBtn.html(tbarPersonnelBtn.html());
+                    // Personnel Btn
+                    var personnelBtn = par_dialog_unit.find(".personnel_btn")
+                    personnelBtn.html(tbarPersonnelBtn.html());
 
-                        // PSI Btn
-                        var psiBtn = par_dialog_unit.find(".psi_btn")
-                        psiBtn.html(tbarPsiBtn.html());
-                        updateBgColor(tbarPsiBtn.html(), psiBtn);
-                        psiBtn.click(showDialog( 0, [psiBtn,tbarPsiBtn], "#psi_dialog" , $("#par_dialog")));
+                    // PSI Btn
+                    var psiBtn = par_dialog_unit.find(".psi_btn")
+                    psiBtn.html(tbarPsiBtn.html());
+                    updateBgColor(tbarPsiBtn.html(), psiBtn);
+                    psiBtn.click(showDialog( 0, [psiBtn,tbarPsiBtn], "#psi_dialog" , $("#par_dialog")));
 
-                        // Unit Btn
-                        var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
-                        unitBtns.push(unitBtn);
-                        unitBtn.html(unit_name);
-                        unitBtn.attr("id", "par_unit_btn_"+unit_name);
-                        unitBtn.click(togglePar(unitBtn, "#par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
+                    // Unit Btn
+                    var unitBtn = par_dialog_unit.find(".par_unit_btn").first();
+                    unitBtns.push(unitBtn);
+                    unitBtn.html(unit_name);
+                    unitBtn.attr("id", "par_unit_btn_"+unit_name);
+                    unitBtn.click(togglePar(unitBtn, "#par_unit_btn_"+unit_name+",.par_person_btn_"+unit_name));
 
-                        // People Btns
-                        var par_dialog_people = par_dialog_unit.find(".par_dialog_people");
-                        var personBtnPrototype = $("<div class='par_person_btn par_dialog_btn dialog_btn button'>Firefighter</div>");
-                        for (var i = 0; i < manyPeople; i++) {
-                            var person_btn = personBtnPrototype.clone().appendTo(par_dialog_people);
-                            person_btn.addClass("par_person_btn_"+unit_name);
-                            person_btn.attr("id", "firefighter_btn_"+i+"_"+unit_name);
-                            person_btn.click(togglePar(person_btn, "#firefighter_btn_"+i+"_"+unit_name));
-                        }
+                    // People Btns
+                    var par_dialog_people = par_dialog_unit.find(".par_dialog_people");
+                    var personBtnPrototype = $("<div class='par_person_btn par_dialog_btn dialog_btn button'>Firefighter</div>");
+                    for (var i = 0; i < manyPeople; i++) {
+                        var person_btn = personBtnPrototype.clone().appendTo(par_dialog_people);
+                        person_btn.addClass("par_person_btn_"+unit_name);
+                        person_btn.attr("id", "firefighter_btn_"+i+"_"+unit_name);
+                        person_btn.click(togglePar(person_btn, "#firefighter_btn_"+i+"_"+unit_name));
                     }
                 });
                 $(".mayday_par_btn").click(showMaydayDialog);
