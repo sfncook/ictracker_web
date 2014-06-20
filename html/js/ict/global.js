@@ -1721,6 +1721,13 @@ function addTbar(tbarContainer) {
                     var unit_btn = unit_move_checkbox.parents(".unit_row_div").find(".unit_btn");
                     moveUnitButton(tbar, tbar_destination, unit_btn);
                 });
+
+                // Close all TBar covers
+                jQuery($(".tbar_move_unit_cover")).detach();
+                unit_move_btn.show();
+                unit_move_cancel_btn.hide();
+                tbar.find(".unit_move_checkbox").hide();
+                tbar.find(".tbar_unit_info_btn").show();
             });
         });
     });
