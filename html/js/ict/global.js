@@ -1061,11 +1061,20 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         }
 
         // Par buttons
-        if(tbar.find(".par_btn").hasClass("has_par")) {
+        var par_btn = tbar.find(".par_btn");
+        if(par_btn.hasClass("disabled")) {
+            $("#benchmarks_dialog").find(".par_benchmark_btn").addClass("disabled");
+        } else {
+            $("#benchmarks_dialog").find(".par_benchmark_btn").removeClass("disabled");
+        }
+
+        if(par_btn.hasClass("has_par")) {
             $("#benchmarks_dialog").find(".par_benchmark_btn").addClass("glowlightgreen");
         } else {
             $("#benchmarks_dialog").find(".par_benchmark_btn").removeClass("glowlightgreen");
         }
+        $("#benchmarks_dialog").find(".par_benchmark_btn").unbind("click");
+        $("#benchmarks_dialog").find(".par_benchmark_btn").click(showParDialog(tbar, par_btn));
     };
 }
 
