@@ -2,6 +2,7 @@
 
 var btn_clicked;
 var tbar_clicked;
+var tbar_moving;
 var parentDialog = 0;
 
 var btnsToBlink = new Array();
@@ -1552,6 +1553,11 @@ function removeUnitButtonToTbar(tbar, unitName) {
     var unit_row_div = tbar.find(".unit_btn:contains('"+unitName+"')").parents(".unit_row_div");
     jQuery(unit_row_div).detach();
 
+    // Move unit button
+    if(tbar.find(".unit_btn").length==0) {
+        tbar.find(".unit_move_btn").hide();
+    }
+
     updateTbar(tbar);
 }
 var unitRowDivSerialId = 1;
@@ -1590,7 +1596,7 @@ function addUnitButtonToTbar(tbar, unitName) {
     }
 
     // Move checkbox
-    tbar.find(".unit_move_btn").removeClass("disabled");
+    tbar.find(".unit_move_btn").show();
     unit_row_div.find(".unit_move_checkbox").hide();
 
     // Unit Timer
@@ -1610,8 +1616,8 @@ function moveUnitButton(source_tbar, dest_tbar, unitBtn) {
     addUnitButtonToTbar(dest_tbar, unitName);
 }
 function cancelUnitMove() {
+    tbar_moving.find(".unit_move_btn").show();
     jQuery($(".tbar_move_unit_cover")).detach();
-    $(".unit_move_btn").show();
     $(".unit_move_cancel_btn").hide();
     $(".unit_move_checkbox").hide();
     $(".tbar_unit_info_btn").show();
@@ -1689,9 +1695,10 @@ function addTbar(col_x, row_y) {
 
     // Move Btn
     var unit_move_btn = tbar.find(".unit_move_btn");
+    unit_move_btn.hide();
     var unit_move_cancel_btn = tbar.find(".unit_move_cancel_btn");
     unit_move_btn.click(function(){
-//        $("#move_unit_screen_cover").fadeIn(100);
+        tbar_moving = tbar;
         tbar.find(".tbar_unit_info_btn").fadeOut(100, "linear", function(){tbar.find(".unit_move_checkbox").fadeIn(100)});
         $(".tbar:not(#tbar_prototype):not(#"+tbar.attr('id')+")").each(function(){
             var tbar_destination = $(this);
