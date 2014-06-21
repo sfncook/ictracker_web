@@ -1897,8 +1897,9 @@ function init( ) {
 
     gridster = $(".gridster ul").gridster({
       widget_base_dimensions: [278, 275],
-      widget_margins: [1, 5],
-      autogrow_cols: false,
+      widget_margins: [5, 5],
+      autogrow_cols: false
+//        ,
 //      resize: {
 //        enabled: true
 //      }
