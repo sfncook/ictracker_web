@@ -1501,18 +1501,9 @@ function updateTbar(tbar) {
     updateObjectivePercentComplete();
 }
 function initTbars() {
-    var tbar_container = $("#tbar_container");
-    addTbar(tbar_container);
-    addTbar(tbar_container);
-    addTbar(tbar_container);
-    addTbar(tbar_container);
-    addTbar(tbar_container);
-    addTbar(tbar_container);
-
-    var rehab_tbar_container = $("#rehab_tbar_container");
-    var rescue_tbar = addTbar(rehab_tbar_container);
-    var safety_tbar = addTbar(rehab_tbar_container);
-    var rehab_tbar = addTbar(rehab_tbar_container);
+    var rescue_tbar = addTbar(4, 1);
+    var safety_tbar = addTbar(4, 2);
+    var rehab_tbar = addTbar(4, 3);
 
     rescue_tbar.find(".title_text").html("RESCUE");
     safety_tbar.find(".title_text").html("Safety");
@@ -1521,6 +1512,14 @@ function initTbars() {
     updateTbar(rescue_tbar);
     updateTbar(safety_tbar);
     updateTbar(rehab_tbar);
+
+    addTbar();
+    addTbar();
+    addTbar();
+    addTbar();
+    addTbar();
+
+    addTbar();
 
     rehab_tbar.find(".benchmark_btn").hide();
 }
@@ -1619,9 +1618,21 @@ function cancelUnitMove() {
 }
 
 var tbarIndex = 0;
-function addTbar(tbarContainer) {
+function addTbar(col_x, row_y) {
     tbarIndex++;
-    var tbar = $("#tbar_prototype" ).clone().appendTo(tbarContainer);
+
+    if(typeof col_x=='undefined') {
+        col_x = 0;
+    }
+    if(typeof row_y=='undefined') {
+        row_y = 0;
+    }
+
+    var tbar = $("#tbar_prototype" ).clone();
+    tbar.max_size_x = 1;
+//    tbar.attr("data-col", col_x);
+//    tbar.attr("data-row", row_y);
+    gridster.add_widget.apply(gridster, [tbar, 1, 1, col_x, row_y]);
     tbar.prefix_dir = 'X';
     tbar.prefix_num = 'X';
     var newId = "tbar_"+tbarIndex;
@@ -1879,8 +1890,19 @@ function updateTimer() {
 	}
 }
 
-
+var gridster;
 function init( ) {
+
+    var log = document.getElementById('log');
+
+    gridster = $(".gridster ul").gridster({
+      widget_base_dimensions: [278, 275],
+      widget_margins: [1, 5],
+      autogrow_cols: false,
+//      resize: {
+//        enabled: true
+//      }
+    }).data('gridster');
 
     initTbars();
 
