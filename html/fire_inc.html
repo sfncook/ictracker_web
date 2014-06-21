@@ -76,12 +76,10 @@
                                 <!--<li data-row="3" data-col="4" data-sizex="1" data-sizey="1">2</li>-->
                             </ul>
                           </div>
-                        <div id="tbar_container" class="container-fluid">
-                            <div id="rehab_tbar_container"></div>
 
-							<!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
-							<li id="tbar_prototype" class="col-xs-4 tbar">
-								<div class="tbar_title_container">
+                            <!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
+                            <li id="tbar_prototype" class="tbar">
+                                <div class="tbar_title_container">
                                     <button type="button" class="disabled par_btn button">PAR</button>
                                     <div class="title_btn button">
                                         <table>
@@ -94,7 +92,7 @@
                                     </div>
                                     <button type="button" class="benchmark_btn button"><img class='benchmarks_icon' src='images/benchmarks_0.png'/>BNCH</button>
                                     <div class="clear_float"></div>
-								</div>
+                                </div>
                                 <div class="tbar_col_left_div tbar_col_div">
                                     <div class="disabled unit_move_btn button"><img class="move_btn_img" src="images/move_cross.png"/></div>
                                     <div class="unit_move_cancel_btn button">Cancel</div>
@@ -117,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="clear_float"></div>
-							</li><!--tbar-->
+                            </li><!--tbar-->
 
                             <div id="unit_row_div_prototype" class="unit_row_div">
                                 <div class="tbar_unit_info_btn">
@@ -133,7 +131,6 @@
                                 <div class="clear_float"></div>
                             </div>
 
-						</div><!--tbar_container-->
 					</td>
 				</tr>
                 <tr>
@@ -183,13 +180,6 @@
                     <div class="dialog_body col-xs-12">
                         <div id="unit_people_dialog_row1" class="unit_people_dialog_row1"></div>
                         <div id="unit_people_dialog_row2" class="unit_people_dialog_row2"></div>
-                        <div id="unit_people_dialog_row3" class="unit_people_dialog_row3">
-                            <div id="unit_people_dialog_row3_center_div">
-                                <!--<div id='move_unit_btn' class='button'>Move Unit <img class='move_icon' src='images/move.png'/></div>-->
-                                <div id='delete_unit_btn' class='glowpink button'>Delete Unit <img class='delete_icon' src='images/delete.png'/></div>
-                                <div class="clear_float"></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -571,14 +561,14 @@
 			
 		</div><!--dialogContainer-->
         
-        <div class="footer">
-			<table>
-				<tr>
-					<td>INC:<div id="inc_num"></div></td>
-					<td>ADD:<div id="address"></div></td>
-				</tr>
-			</table>
-		</div>
+        <!--<div class="footer">-->
+			<!--<table>-->
+				<!--<tr>-->
+					<!--<td>INC:<div id="inc_num"></div></td>-->
+					<!--<td>ADD:<div id="address"></div></td>-->
+				<!--</tr>-->
+			<!--</table>-->
+		<!--</div>-->
         
     </body>
 </html>

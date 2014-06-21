@@ -1,16 +1,6 @@
 /*
  **** T-BAR BOXES ****
  */
-#tbar_container {
-	padding: 0 0 0 5px;
-}
-#rehab_tbar_container {
-    width:280px;
-    height: 855px;
-    float:right;
-    margin: 0 15px 0 0;
-    padding: 0;
-}
 
 .tbar {
 	background: #FFF;

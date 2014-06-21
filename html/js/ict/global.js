@@ -652,7 +652,7 @@ function setTbarTitle(tbar, title) {
     }
     updateTbar(tbar);
     if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
-        addTbar($("#tbar_container"));
+        addTbar();
     }
 }
 function initSectorDialog( ) {
