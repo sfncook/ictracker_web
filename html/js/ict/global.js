@@ -279,25 +279,6 @@ function showUnitPeopleDialog( tbar, btn ){
             tbar_clicked = tbar;
             $("#dialogContainer").show();
             unit_people_dialog.show();
-
-            // Delete Unit button
-            $("#delete_unit_btn").click(showDialog( 0, btn, "#delete_unit_confirm_dialog" , $("#unit_people_dialog")));
-            $("#delete_unit_confirm_dialog").find(".ok_confirm_btn").click(function(){
-                // Delete Actions
-                var actionsParentContainer = btn.parents(".tbar").find(".actions_parent_container");
-                var unit_btn = btn.parents(".unit_row_div").find(".unit_btn");
-                var actionList = actionsParentContainer.find("."+unit_btn.html());
-                jQuery(actionList).detach();
-
-                // Delete unit side container
-                var unit_row_div = btn.parents(".unit_row_div");
-                jQuery(unit_row_div).detach();
-
-                hideAllDialogs();
-            });
-            $("#delete_unit_confirm_dialog").find(".cancel_confirm_btn").click(function(){
-                hideAllDialogs();
-            });
         }
     }
 }
@@ -1539,36 +1520,40 @@ function onOpenUnitsDialogFromTbar(tbar) {
         });
     }
 }
-function toggleUnitButtonForTbar(tbar) {
+function toggleUnitButtonForTbar(unit_col_container) {
     return function(unitName) {
         if($(".unit_dialog_btn:contains('"+unitName+"')").hasClass("glowlightgreen")) {
-            removeUnitButtonToTbar(tbar, unitName);
+            removeUnitButton(unit_col_container, unitName);
         } else {
-            addUnitButtonToTbar(tbar, unitName);
+            addUnitButton(unit_col_container, unitName);
         }
     }
 }
-function removeUnitButtonToTbar(tbar, unitName) {
+function removeUnitButton(unit_col_container, unitName) {
+    var tbar = unit_col_container.parents(".tbar");
 
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").removeClass("glowlightgreen");
 
     // Remove unit row from TBar
-    var unit_row_div = tbar.find(".unit_btn:contains('"+unitName+"')").parents(".unit_row_div");
+    var unit_row_div = unit_col_container.find(".unit_btn:contains('"+unitName+"')").parents(".unit_row_div");
+    //TODO: I think detach() leaves the object around.  Probably need to use remove.  Also need to do this using the jscrollbar framework and
+    //  reinitialize the container.
     jQuery(unit_row_div).detach();
 
     // Move unit button
-    if(tbar.find(".unit_btn").length==0) {
+    if(unit_col_container.find(".unit_btn").length==0) {
         tbar.find(".unit_move_btn").hide();
     }
 
     updateTbar(tbar);
 }
 var unitRowDivSerialId = 1;
-function addUnitButtonToTbar(tbar, unitName) {
+function addUnitButton(unit_col_container, unitName) {
     unitRowDivSerialId++;
+    var tbar = unit_col_container.parents(".tbar");
 
-    var scroll_pane = tbar.find(".left_scroll_pane");
+    var scroll_pane = unit_col_container.find(".scroll-pane");
     var pane2api = scroll_pane.data('jsp');
 
     // Update Units Dialog
@@ -1613,11 +1598,12 @@ function addUnitButtonToTbar(tbar, unitName) {
 
     updateTbar(tbar);
 }
-function moveUnitButton(source_tbar, dest_tbar, unitBtn) {
+function moveUnitButton(unit_col, dest_tbar, unitBtn) {
     var unitName = unitBtn.find(".unit_text").html();
 
-    removeUnitButtonToTbar(source_tbar, unitName)
-    addUnitButtonToTbar(dest_tbar, unitName);
+    removeUnitButton(unit_col, unitName)
+    var unit_col_left_dest = dest_tbar.find(".unit_col_left");
+    addUnitButton(unit_col_left_dest, unitName);
 }
 function cancelUnitMove() {
     if(typeof tbar_moving!='undefined') {
@@ -1697,9 +1683,14 @@ function addTbar(col_x, row_y) {
     tbar.find(".unit_col_right").hide();
 
     // Add Unit Btn
-    var unitAddBtn = tbar.find(".unit_add_btn");
-    unitAddBtn.attr("id", "unit_add_btn_"+tbarIndex);
-    unitAddBtn.click(showDialog_withCallbacks("#units_dialog", onOpenUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(tbar)));
+    var unit_col_left = tbar.find(".unit_col_left");
+    var unit_col_right = tbar.find(".unit_col_right");
+    var unit_add_btn_left = unit_col_left.find(".unit_add_btn");
+    var unit_add_btn_right = unit_col_right.find(".unit_add_btn");
+    unit_add_btn_left.attr("id", "unit_add_btn_left_"+tbarIndex);
+    unit_add_btn_right.attr("id", "unit_add_btn_right_"+tbarIndex);
+    unit_add_btn_left.click(showDialog_withCallbacks("#units_dialog", onOpenUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(unit_col_left)));
+    unit_add_btn_right.click(showDialog_withCallbacks("#units_dialog", onOpenUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(unit_col_right)));
 
     // Add Action Btn
     var action_add_btn = tbar.find(".action_add_btn");
@@ -1727,7 +1718,8 @@ function addTbar(col_x, row_y) {
                 tbar.find(".unit_move_checkbox>*:checkbox:checked").each(function () {
                     var unit_move_checkbox = $(this);
                     var unit_btn = unit_move_checkbox.parents(".unit_row_div").find(".unit_btn");
-                    moveUnitButton(tbar, tbar_destination, unit_btn);
+                    var unit_col = unit_move_checkbox.parents(".unit_col");
+                    moveUnitButton(unit_col, tbar_destination, unit_btn);
                 });
 
                 // Show action list
