@@ -820,7 +820,7 @@ function addActionButtonToTbar(tbar, actionName) {
     var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
 
     // Update scroll container
-    var scroll_pane = tbar.find(".action_scroll-pane");
+    var scroll_pane = tbar.find(".right_scroll_pane");
     var pane2api = scroll_pane.data('jsp');
     pane2api.getContentPane().append(actionBtn);
     pane2api.reinitialise();
@@ -1407,7 +1407,7 @@ function setUnitName(unitBtn, unitName) {
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
 		var tbar = unitBtn.parents(".tbar");
-		var scroll_pane = tbar.find(".action_scroll-pane");
+		var scroll_pane = tbar.find(".right_scroll_pane");
 		var pane2api = scroll_pane.data('jsp');
         pane2api.getContentPane().empty();
 
@@ -1435,7 +1435,6 @@ function updateTbar(tbar) {
 	var unitBtns = tbar.find(".unit_btn");
 	var manyUnits = unitBtns.length;
 
-    // TODO: Show timer if TBar is 'hasClock'
     var timer_bar = tbar.find(".unit_timer_bg");
     if (hasClock) {
         timer_bar.show();
@@ -1474,11 +1473,6 @@ function updateTbar(tbar) {
         if(tbar.find(".unit_row_div.glowlightyellow").length==0) {
             showActionsForUnitBtn(tbar.find(".unit_row_div").first().find(".unit_btn"))();
         }
-	} else {
-	    tbar.find(".action_add_btn").hide();
-	    var action_container_div = tbar.find(".action_container_div");
-        action_container_div.empty();
-        action_container_div.removeClass("glowlightyellow");
 	}
 
     if(manyUnits>0) {
@@ -1564,7 +1558,7 @@ var unitRowDivSerialId = 1;
 function addUnitButtonToTbar(tbar, unitName) {
     unitRowDivSerialId++;
 
-    var scroll_pane = tbar.find(".unit_scroll-pane");
+    var scroll_pane = tbar.find(".left_scroll_pane");
     var pane2api = scroll_pane.data('jsp');
 
     // Update Units Dialog
@@ -1688,6 +1682,9 @@ function addTbar(col_x, row_y) {
     var benchmarkBtnId = "tbar_benchmark_"+tbarIndex;
     benchmarkBtn.attr("id", benchmarkBtnId);
     benchmarkBtn.click(showBenchmarkDialog(tbar, benchmarkBtn));
+
+    // Right-side unit column
+    tbar.find(".unit_col_right").hide();
 
     // Add Unit Btn
     var unitAddBtn = tbar.find(".unit_add_btn");

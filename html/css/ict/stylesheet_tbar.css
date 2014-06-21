@@ -305,21 +305,21 @@
 	height: 213px;
 	overflow: auto;
 }
-.unit_scroll-pane>.jspContainer>.jspVerticalBar {
+.left_scroll_pane>.jspContainer>.jspVerticalBar {
 	left: 0;
 	width: 3px;
 	border-top: 1px solid black;
 	border-right: 1px solid black;
 	border-bottom: 1px solid black;
 }
-.action_scroll-pane>.jspContainer>.jspVerticalBar {
+.right_scroll_pane>.jspContainer>.jspVerticalBar {
     right: 0;
 	width: 3px;
 	border-top: 1px solid black;
 	border-left: 1px solid black;
 	border-bottom: 1px solid black;
 }
-.action_scroll-pane{
+.right_scroll_pane{
     background: #FFFF88;
 }
 .jspDrag {
