@@ -319,7 +319,7 @@
 	border-left: 1px solid black;
 	border-bottom: 1px solid black;
 }
-.right_scroll_pane{
+.action_col_right>.right_scroll_pane{
     background: #FFFF88;
 }
 .jspDrag {

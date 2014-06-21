@@ -1442,6 +1442,16 @@ function updateTbar(tbar) {
 	    timer_bar.hide();
 	}
 
+    // Actions vs. Right Col Units
+    if(hasActions) {
+        tbar.find(".action_col_right").show();
+        tbar.find(".unit_col_right").hide();
+    } else {
+
+        tbar.find(".action_col_right").hide();
+        tbar.find(".unit_col_right").show();
+    }
+
     // Acct Btn
 	var acctBtn = tbar.find(".acct_unit_btn");
 	if (hasAcctBtn) {
