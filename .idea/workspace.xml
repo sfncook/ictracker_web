@@ -33,21 +33,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="global.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="global.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/js/ict/global.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.453958" vertical-offset="28204" max-vertical-offset="40230">
+            <state vertical-scroll-proportion="-10.807693" vertical-offset="28204" max-vertical-offset="40230">
               <caret line="1899" column="24" selection-start-line="1899" selection-start-column="24" selection-end-line="1899" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stylesheet_global.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="stylesheet_global.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/html/css/ict/stylesheet_global.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="154.53847" vertical-offset="16483" max-vertical-offset="17115">
-              <caret line="831" column="1" selection-start-line="831" selection-start-column="1" selection-end-line="831" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.3591772" vertical-offset="16483" max-vertical-offset="17115">
+              <caret line="1114" column="37" selection-start-line="1114" selection-start-column="37" selection-end-line="1114" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -75,9 +75,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html/css/ict/stylesheet_global.css" />
         <option value="$PROJECT_DIR$/html/fire_inc.html" />
         <option value="$PROJECT_DIR$/html/js/ict/global.js" />
+        <option value="$PROJECT_DIR$/html/css/ict/stylesheet_global.css" />
       </list>
     </option>
   </component>
@@ -138,6 +138,10 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/html/css/ict/stylesheet_global.css" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -293,12 +297,12 @@
       <created>1403380105679</created>
       <updated>1403380105679</updated>
       <workItem from="1403380107162" duration="30000" />
-      <workItem from="1403380238441" duration="1336000" />
+      <workItem from="1403380238441" duration="1729000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1366000" />
+    <option name="totallyTimeSpent" value="1759000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="22" width="1276" height="778" extended-state="6" />
@@ -364,18 +368,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/css/ict/stylesheet_global.css">
+    <entry file="file://$PROJECT_DIR$/html/js/ict/global.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="154.53847" vertical-offset="16483" max-vertical-offset="17115">
-          <caret line="831" column="1" selection-start-line="831" selection-start-column="1" selection-end-line="831" selection-end-column="1" />
+        <state vertical-scroll-proportion="-10.807693" vertical-offset="28204" max-vertical-offset="40230">
+          <caret line="1899" column="24" selection-start-line="1899" selection-start-column="24" selection-end-line="1899" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/js/ict/global.js">
+    <entry file="file://$PROJECT_DIR$/html/css/ict/stylesheet_global.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.453958" vertical-offset="28204" max-vertical-offset="40230">
-          <caret line="1899" column="24" selection-start-line="1899" selection-start-column="24" selection-end-line="1899" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.3591772" vertical-offset="16483" max-vertical-offset="17115">
+          <caret line="1114" column="37" selection-start-line="1114" selection-start-column="37" selection-end-line="1114" selection-end-column="37" />
           <folding />
         </state>
       </provider>
