@@ -1616,7 +1616,14 @@ function moveUnitButton(source_tbar, dest_tbar, unitBtn) {
     addUnitButtonToTbar(dest_tbar, unitName);
 }
 function cancelUnitMove() {
-    tbar_moving.find(".unit_move_btn").show();
+    if(typeof tbar_moving!='undefined') {
+        // Move unit button
+        if(tbar_moving.find(".unit_btn").length==0) {
+            tbar_moving.find(".unit_move_btn").hide();
+        } else {
+            tbar_moving.find(".unit_move_btn").show();
+        }
+    }
     jQuery($(".tbar_move_unit_cover")).detach();
     $(".unit_move_cancel_btn").hide();
     $(".unit_move_checkbox").hide();
@@ -1705,7 +1712,7 @@ function addTbar(col_x, row_y) {
             unit_move_btn.hide();
             unit_move_cancel_btn.show();
             var tbar_cover = $("<div class='tbar_move_unit_cover'></div>");
-            tbar_cover.appendTo($('#tbar_container'));
+            tbar_cover.appendTo($('#mayday_and_tbar_container'));
             tbar_cover.width(tbar_destination.width()+3);
             tbar_cover.height(tbar_destination.height()+3);
             tbar_cover.offset(tbar_destination.offset());
