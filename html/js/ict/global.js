@@ -816,17 +816,22 @@ function initActionsDialog( ) {
 	var actionsDialogBody = actionsDialog.children(".dialog_body");
 	var actionsTitleDiv = actionsDialog.find(".dialog_title_text");
 	actionsTitleDiv.html("Actions");
+    var prototypeHeader = $("<div class=\"action_type_dialog_header col-xs-12\">PROTOTYPE</div>");
 	var prototypeBtn = $("<div class=\"action_dialog_btn col-xs-2 action_btn dialog_btn button\">PROTOTYPE</div>");
-	actions.forEach(function (actionName, index, array) {
-		var newBtn = prototypeBtn.clone();
-		newBtn.html(actionName);
+	actions.forEach(function (actionObj, index, array) {
+        var actionTypeHeader = prototypeHeader.clone();
+        actionTypeHeader.html(actionObj.action_type);
+        actionsDialogBody.append(actionTypeHeader);
 
-		if(actionName=="") {
-		    newBtn.addClass("hidden_sector_btn");
-		}
+        actionObj.actions.forEach(function (actionName, index, array) {
+            var newBtn = prototypeBtn.clone();
+            newBtn.html(actionName);
 
-		actionsDialogBody.append(newBtn);
-		newBtn.click(function(){onClickCallback(actionName)});
+            actionsDialogBody.append(newBtn);
+            newBtn.click(function () {
+                onClickCallback(actionName)
+            });
+        });
 	});
 }
 
@@ -1917,10 +1922,6 @@ function init( ) {
       widget_base_dimensions: [278, 275],
       widget_margins: [5, 5],
       autogrow_cols: false
-//        ,
-//      resize: {
-//        enabled: true
-//      }
     }).data('gridster');
 
     initTbars();
@@ -1996,50 +1997,64 @@ document.addEventListener('click', function(event) {
 }, true);
 
 var actions = [
-    "Supply",
-    "Secure Util",
-    "360",
-    "Protect Exposure",
-    "1-1/2\"",
-
-    "Take a Line",
-    "Vert Vent",
-    "Open Build",
-    "Grab RIC Bag",
-    "1-3/4",
-
-
-    "Search/Rescue",
-    "Roof Prof",
-    "Soften build",
-    "",
-    "2\"",
-
-    "Fire Attack",
-    "Fan to Door",
-    "Sprinkler",
-    "",
-    "2-1/2\"",
-
-    "IRIC",
-    "Throw Ladders",
-    "Overhaul",
-    "",
-    "3\"",
-
-    "Check Ext",
-    "Salvage",
-    "Standpipe",
-    "",
-    "Piercing Nozzle",
-
-    "Deck Gun",
-    "Elev Master",
-    "Horz Standpipe",
-    "",
-    "",
-    ];
-
+    {action_type:"Engine",
+        actions:[
+            "Supply",
+            "Take a Line",
+            "Search/Rescue",
+            "Fire Attack",
+            "IRIC",
+            "Check Extension",
+            "Protect Exposures",
+            "Overhaul",
+            "Deck Gun",
+            "Portable Monitor"
+        ]},
+    {action_type:"Ladder",
+        actions:[
+            "Secure Utilities",
+            "Vert Ventilation",
+            "Trench Cut",
+            "Roof Profile",
+            "Fan to the Door",
+            "Soften Building",
+            "Open Building",
+            "Salvage",
+            "Elevated Master"
+        ]},
+    {action_type:"Safety",
+        actions:[
+            "Agrees With Strategy",
+            "360 recon"
+        ],
+        actions_warning:[
+            "Pool",
+            "Empty Pool",
+            "Powerlines",
+            "Powerlines Down",
+            "Bars on Windows",
+            "Dogs in Yard",
+            "Hoarders House",
+            "Basement"
+    ]},
+    {action_type:"Rescue",
+        actions:[
+            "Grab RIC Bag",
+            "Accountability Update",
+            "Throw Ladders"
+        ]},
+    {action_type:"Lines",
+        actions:[
+            "1-3/4",
+            "2\"",
+            "2-1/2",
+            "3\"",
+            "Piercing Nozzle",
+            "Horizontal Standpipe",
+            "Support Sprinklers",
+            "Standpipe"
+        ]}
+];
 
 
 

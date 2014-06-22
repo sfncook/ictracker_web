@@ -545,6 +545,14 @@ td {
 .action_dialog_btn {
     margin: 5px !important;
 }
+.action_type_dialog_header {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #666;
+    margin-top: 8px;
+    border-top: 1px solid #DDD;
+}
 
 
 #mayday_btn {
