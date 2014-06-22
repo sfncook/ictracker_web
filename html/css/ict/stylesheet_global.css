@@ -933,7 +933,7 @@ td {
 }
 #osr_right_col {
     float:left;
-    padding-top: 15px;
+    /*padding-top: 15px;*/
 }
 #osr_left_col {
     float:left;
@@ -958,6 +958,10 @@ td {
 #osr_occupancy_floors_div {
     margin: 10px 0 15px 0;
     height: 25px;
+}
+#osr_address_btn {
+    width: 220px;
+    margin:5px 0 15px 0;
 }
 
 #emergency_traffic_dialog {

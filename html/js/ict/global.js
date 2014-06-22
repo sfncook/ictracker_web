@@ -1130,6 +1130,9 @@ function initOsrDialog( ) {
         $(this).click(toggleOsrBtn($(this)));
     });
 
+    $("#osr_address_btn").click(showDialog(0, $("#address_btn"), "#address_dialog", $("#osr_dialog")));
+    $("#osr_address_btn").click(toggleOsrBtn($("#osr_address_btn")));
+
     $("#osr_occupancy_basement_btn").click(function(){
         $("#osr_occupancy_basement_btn").addClass("glowlightgreen");
         $("#osr_occupancy_nobasement_btn").removeClass("glowlightgreen");
@@ -1993,6 +1996,11 @@ $(document).keyup(function(e) {
     if (e.keyCode == 27) {
         hideAllDialogs();
         cancelUnitMove();
+        if(typeof parentDialog!='undefined' && parentDialog!=0) {
+            $("#dialogContainer").show();
+            parentDialog.show();
+            parentDialog = 0;
+        }
     }
 });
 
