@@ -1123,4 +1123,12 @@ ul {
     background: red!important;
 }
 
-
+#address_dialog {
+    width: 450px;
+}
+#address_dialog>*>input {
+    margin: 5px;
+}
+#address_custom_input {
+    width: 400px;
+}

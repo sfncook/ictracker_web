@@ -57,6 +57,7 @@
                     <img class="report_icon" src="images/report.png"/>
 					<div>Report</div>
 				</div>
+                <div id="address_btn" class="address_btn dialog_btn button">Address</div>
 			</div>
         </div><!-- ict_header-->
 		
@@ -160,6 +161,19 @@
                         <div class="dialog_close_btn button">X</div>
                     </div>
                     <div class="dialog_body col-xs-12 container-fluid"></div>
+                </div>
+
+
+                <!-- Address Dialog -->
+                <div id="address_dialog" class="dialog dialog_window container-fluid">
+                    <div class="dialog_title col-xs-12 container-fluid">
+                        <div class="dialog_title_text col-xs-11">Address</div>
+                        <div class="dialog_close_btn button">X</div>
+                    </div>
+                    <div class="dialog_body col-xs-12 container-fluid">
+                        <input type="radio" name="address_type" id="address_dispatch" value="address_dispatch"><label for="address_dispatch">Dispatch Address</label><br>
+                        <input type="radio" name="address_type" id="address_custom" value="address_custom"><input type="text" id="address_custom_input">
+                    </div>
                 </div>
 
 
