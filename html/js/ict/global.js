@@ -1546,9 +1546,10 @@ function removeUnitButton(unit_col_container, unitName) {
 
     // Remove unit row from TBar
     var unit_row_div = unit_col_container.find(".unit_btn:contains('"+unitName+"')").parents(".unit_row_div");
-    //TODO: I think detach() leaves the object around.  Probably need to use remove.  Also need to do this using the jscrollbar framework and
-    //  reinitialize the container.
-    jQuery(unit_row_div).detach();
+    var scroll_pane = unit_col_container.find(".scroll-pane");
+    var pane2api = scroll_pane.data('jsp');
+    unit_row_div.remove();
+    pane2api.reinitialise();
 
     // Move unit button
     if(unit_col_container.find(".unit_btn").length==0) {
