@@ -1102,7 +1102,7 @@ ul {
 }
 
 .gridster .gs-w {
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .gridster .player {
