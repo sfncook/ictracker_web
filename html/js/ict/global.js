@@ -1388,22 +1388,26 @@ function setUnitName(unitBtn, unitName) {
 function showActionsForUnitBtn(unitBtn) {
 	return function(){
 		var tbar = unitBtn.parents(".tbar");
-		var scroll_pane = tbar.find(".right_scroll_pane");
-		var pane2api = scroll_pane.data('jsp');
-        pane2api.getContentPane().empty();
+        var sectorName = tbar.find(".title_text").html();
+        var hasActions = !(sectorsWithOutActions.indexOf(sectorName)>-1);
+        if(hasActions) {
+            var scroll_pane = tbar.find(".right_scroll_pane");
+            var pane2api = scroll_pane.data('jsp');
+            pane2api.getContentPane().empty();
 
-        if(typeof unitBtn.data('actions') != 'undefined') {
-            jQuery.each( unitBtn.data('actions'), function(index, actionName) {
-                var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
-                pane2api.getContentPane().append(actionBtn);
-            });
+            if (typeof unitBtn.data('actions') != 'undefined') {
+                jQuery.each(unitBtn.data('actions'), function (index, actionName) {
+                    var actionBtn = $("<div class='disabled action_btn button'>" + actionName + "</div>");
+                    pane2api.getContentPane().append(actionBtn);
+                });
+            }
+
+            // Add color
+            tbar.find(".unit_row_div").removeClass("glowlightyellow");
+            unitBtn.parents(".unit_row_div").addClass("glowlightyellow");
+
+            pane2api.reinitialise();
         }
-
-		// Add color
-		tbar.find(".unit_row_div").removeClass("glowlightyellow");
-		unitBtn.parents(".unit_row_div").addClass("glowlightyellow");
-
-        pane2api.reinitialise();
     }
 }
 function updateTbar(tbar) {
