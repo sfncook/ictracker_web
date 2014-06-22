@@ -34,10 +34,12 @@ function startTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
     tbar.find('.par_btn').addClass('has_par');
     tbar['par_timer'] = setTimeout(function(){cancelTbarParTimer(tbar);},(5*60*1000));
+    $(".par_benchmark_btn").addClass("glowlightgreen");
 }
 function cancelTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
     tbar.find('.par_btn').removeClass('has_par');
+    $(".par_benchmark_btn").removeClass("glowlightgreen");
     if(typeof tbar['par_timer'] != 'undefined') {
         window.clearTimeout(tbar['par_timer']);
     }
@@ -84,11 +86,12 @@ function togglePar(btn, btnSelector) {
         tbar_clicked['btn_ids_with_par'] = btn_ids_with_par;
     };
 }
-function showParDialog( tbar, btn ){
+function showParDialog( tbar, btn, parentDialog_ ){
     return function(){
         if(!btn.hasClass("disabled")) {
             btn_clicked = btn;
             tbar_clicked = tbar;
+            parentDialog = parentDialog_;
             var parDialog = $("#par_dialog");
 
             // Sector PAR
@@ -1061,7 +1064,7 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             $("#benchmarks_dialog").find(".par_benchmark_btn").removeClass("glowlightgreen");
         }
         $("#benchmarks_dialog").find(".par_benchmark_btn").unbind("click");
-        $("#benchmarks_dialog").find(".par_benchmark_btn").click(showParDialog(tbar, par_btn));
+        $("#benchmarks_dialog").find(".par_benchmark_btn").click(showParDialog(tbar, par_btn, $("#benchmarks_dialog")));
     };
 }
 
