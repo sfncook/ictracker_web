@@ -803,6 +803,10 @@ function addActionButtonToTbar(tbar, actionName) {
     // Add action button to TBar
     var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
 
+    if(actionName.length>15) {
+        actionBtn.addClass("btn_largetext");
+    }
+
     // Update scroll container
     var scroll_pane = tbar.find(".right_scroll_pane");
     var pane2api = scroll_pane.data('jsp');
@@ -829,6 +833,10 @@ function initActionsDialog( ) {
         actionObj.actions.forEach(function (actionName, index, array) {
             var newBtn = prototypeBtn.clone();
             newBtn.html(actionName);
+
+            if(actionName.length>15) {
+                newBtn.addClass("btn_largetext");
+            }
 
             actionsDialogBody.append(newBtn);
             newBtn.click(function () {
@@ -1409,6 +1417,9 @@ function showActionsForUnitBtn(unitBtn) {
             if (typeof unitBtn.data('actions') != 'undefined') {
                 jQuery.each(unitBtn.data('actions'), function (index, actionName) {
                     var actionBtn = $("<div class='disabled action_btn button'>" + actionName + "</div>");
+                    if(actionName.length>15) {
+                        actionBtn.addClass("btn_largetext");
+                    }
                     pane2api.getContentPane().append(actionBtn);
                 });
             }
