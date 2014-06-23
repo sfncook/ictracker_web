@@ -17,6 +17,10 @@ LicenseKey::LicenseKey(QWidget *parent) :
 {
 }
 
+bool LicenseKey::isLicenseKeyValid() {
+    return getOrSetLicenseKey();
+}
+
 bool LicenseKey::getOrSetLicenseKey() {
     bool isLicenseKeyValid = false;
 

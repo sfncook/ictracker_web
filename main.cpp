@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
     // Check for valid license key
     LicenseKey licenseKey;
-    bool isLicenseKeyValid = licenseKey.getOrSetLicenseKey();
+    bool isLicenseKeyValid = licenseKey.isLicenseKeyValid();
 
 
     if(isLicenseKeyValid) {
