@@ -35,6 +35,9 @@ function startTbarParTimer(tbar) {
     tbar.find('.par_btn').addClass('has_par');
     tbar['par_timer'] = setTimeout(function(){cancelTbarParTimer(tbar);},(5*60*1000));
     $(".par_benchmark_btn").addClass("glowlightgreen");
+    tbar.find(".unit_timer_bar").each(function( index ) {
+        startUnitTimerAnim($(this));
+    });
 }
 function cancelTbarParTimer(tbar) {
     var parDialog = $("#par_dialog");
