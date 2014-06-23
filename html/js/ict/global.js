@@ -1930,6 +1930,7 @@ function init( ) {
       widget_margins: [5, 5],
       autogrow_cols: false
     }).data('gridster');
+    gridster.disable();
 
     initTbars();
 
