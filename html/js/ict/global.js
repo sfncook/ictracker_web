@@ -798,7 +798,9 @@ function removeActionButtonFromTbar(tbar, actionName) {
 }
 function addActionButtonToTbar(tbar, actionName) {
     // Update Actions Dialog
-    $(".action_dialog_btn:contains('"+actionName+"')").addClass("glowlightgreen");
+    $(".action_dialog_btn").filter(function () {
+        return $(this).text() == actionName;
+    }).addClass("glowlightgreen");
 
     // Add action button to TBar
     var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
@@ -833,6 +835,21 @@ function initActionsDialog( ) {
         actionObj.actions.forEach(function (actionName, index, array) {
             var newBtn = prototypeBtn.clone();
             newBtn.html(actionName);
+
+            if(actionName.length>15) {
+                newBtn.addClass("btn_largetext");
+            }
+
+            actionsDialogBody.append(newBtn);
+            newBtn.click(function () {
+                onClickCallback(actionName)
+            });
+        });
+
+        actionObj.actions_warning.forEach(function (actionName, index, array) {
+            var newBtn = prototypeBtn.clone();
+            newBtn.html(actionName);
+            newBtn.addClass("glowpink");
 
             if(actionName.length>15) {
                 newBtn.addClass("btn_largetext");
@@ -2035,7 +2052,9 @@ var actions = [
             "Overhaul",
             "Deck Gun",
             "Portable Monitor"
-        ]},
+        ],
+        actions_warning:[]
+    },
     {action_type:"Ladder",
         actions:[
             "Secure Utilities",
@@ -2047,7 +2066,9 @@ var actions = [
             "Open Building",
             "Salvage",
             "Elevated Master"
-        ]},
+        ],
+        actions_warning:[]
+    },
     {action_type:"Safety",
         actions:[
             "Agrees With Strategy",
@@ -2068,7 +2089,9 @@ var actions = [
             "Grab RIC Bag",
             "Accountability Update",
             "Throw Ladders"
-        ]},
+        ],
+        actions_warning:[]
+    },
     {action_type:"Lines",
         actions:[
             "1-3/4",
@@ -2079,7 +2102,9 @@ var actions = [
             "Horizontal Standpipe",
             "Support Sprinklers",
             "Standpipe"
-        ]}
+        ],
+        actions_warning:[]
+    }
 ];
 
 
