@@ -1605,7 +1605,7 @@ function removeUnitButton(unit_col_container, unitName) {
     updateTbar(tbar);
 }
 var unitRowDivSerialId = 1;
-function addUnitButton(unit_col_container, unitName) {
+function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
     unitRowDivSerialId++;
     var tbar = unit_col_container.parents(".tbar");
 
@@ -1628,6 +1628,8 @@ function addUnitButton(unit_col_container, unitName) {
     tbar_unit_info_btn.click(showUnitPeopleDialog(tbar, tbar_unit_info_btn));
     tbar_unit_info_btn.show();
     tbar_unit_info_btn.children().show();
+
+    tbar_unit_info_btn.find(".personnel_btn").text(personnel_btn_text);
 
     // Unit button
     var unitBtn = unit_row_div.find(".unit_btn");
@@ -1656,9 +1658,10 @@ function addUnitButton(unit_col_container, unitName) {
 }
 function moveUnitButton(unit_col, unit_col_destination, unitBtn) {
     var unitName = unitBtn.find(".unit_text").html();
+    var personnel_btn_text = unitBtn.parents(".unit_row_div").find(".personnel_btn").html();
 
     removeUnitButton(unit_col, unitName)
-    addUnitButton(unit_col_destination, unitName);
+    addUnitButton(unit_col_destination, unitName, personnel_btn_text);
 }
 function cancelUnitMove() {
     if(typeof tbar_moving!='undefined') {
