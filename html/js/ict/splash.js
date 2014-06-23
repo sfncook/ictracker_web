@@ -26,61 +26,61 @@ $( document ).ready(init_splash);
 
 var incidentStartBtns = [
 	{
-	    icon:"images/icon_incident_fire.png",
+	    icon:"images/icons/fire.png",
 	    text:"Fire Incident",
 	    url:"fire_inc.html",
 	    row:2
 	},
 	{
-	    icon:"images/icon_incident_medic.png",
+	    icon:"images/icons/medical.png",
 	    text:"Medical Incident",
 	    disabled:"true",
 	    row:2
 	},
 	{
-	    icon:"images/icon_incident_plane.png",
+	    icon:"images/icons/plane.png",
 	    text:"ARFF Incident",
 	    disabled:"true",
 	    row:3
 	},
 	{
-	    icon:"images/icon_incident_hazmat.png",
+	    icon:"images/icons/hazmat.png",
 	    text:"HazMat Incident",
 	    disabled:"true",
 	    row:3
 	},
 	{
-	    icon:"images/icon_incident_water.png",
+	    icon:"images/icons/water.png",
 	    text:"Water Rescue",
 	    disabled:"true",
 	    row:3
 	},
 	{
-	    icon:"images/icon_incident_trench.png",
+	    icon:"images/icons/trench.png",
 	    text:"Trench Rescue",
 	    disabled:"true",
 	    row:3
 	},
 	{
-	    icon:"images/icon_incident_mountain.png",
+	    icon:"images/icons/mountain.png",
 	    text:"Mountain Rescue",
 	    disabled:"true",
 	    row:4
 	},
 	{
-	    icon:"images/icon_incident_palm.png",
+	    icon:"images/icons/palm.png",
 	    text:"Palm Rescue",
 	    disabled:"true",
 	    row:4
 	},
 	{
-	    icon:"images/icon_incident_structural.png",
+	    icon:"images/icons/structure.png",
 	    text:"Structural Rescue",
 	    disabled:"true",
 	    row:4
 	},
 	{
-	    icon:"images/icon_incident_confined.png",
+	    icon:"images/icons/confined.png",
 	    text:"Confined Space Rescue",
 	    disabled:"true",
 	    row:4
