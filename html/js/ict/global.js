@@ -772,13 +772,17 @@ function onOpenActionsDialogFromTbar(tbar) {
         $(".action_dialog_btn").removeClass("glowlightgreen");
         $.each(tbar.find(".action_btn"), function( index, tbarActionBtn ) {
             var html = $(tbarActionBtn).html();
-            $(".action_dialog_btn:contains('"+html+"')").addClass("glowlightgreen");
+            $(".action_dialog_btn").filter(function () {
+                return $(this).text() == html;
+            }).addClass("glowlightgreen");
         });
     }
 }
 function toggleActionButtonForTbar(tbar) {
     return function(actionName) {
-        if($(".action_dialog_btn:contains('"+actionName+"')").hasClass("glowlightgreen")) {
+        if($(".action_dialog_btn").filter(function () {
+            return $(this).text() == actionName;
+        }).hasClass("glowlightgreen")) {
             removeActionButtonFromTbar(tbar, actionName);
         } else {
             addActionButtonToTbar(tbar, actionName);
@@ -787,10 +791,14 @@ function toggleActionButtonForTbar(tbar) {
 }
 function removeActionButtonFromTbar(tbar, actionName) {
     // Update Actions Dialog
-    $(".action_dialog_btn:contains('"+actionName+"')").removeClass("glowlightgreen");
+    $(".action_dialog_btn").filter(function () {
+        return $(this).text() == actionName;
+    }).removeClass("glowlightgreen");
 
     // Remove action from TBar
-    var action_btn = tbar.find(".action_btn:contains('"+actionName+"')");
+    var action_btn = tbar.find(".action_btn").filter(function () {
+        return $(this).text() == actionName;
+    });
     jQuery(action_btn).detach();
 
     // Update unit button's action list data
