@@ -1502,9 +1502,9 @@ function updateTbar(tbar) {
     updateObjectivePercentComplete();
 }
 function initTbars() {
-    var rescue_tbar = addTbar(4, 1);
-    var safety_tbar = addTbar(4, 2);
-    var rehab_tbar = addTbar(4, 3);
+    var rescue_tbar = addTbar(gridster.cols, 1);
+    var safety_tbar = addTbar(gridster.cols, 2);
+    var rehab_tbar = addTbar(gridster.cols, 3);
 
     rescue_tbar.find(".title_text").html("RESCUE");
     safety_tbar.find(".title_text").html("Safety");
