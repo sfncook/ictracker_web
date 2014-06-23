@@ -799,7 +799,11 @@ function removeActionButtonFromTbar(tbar, actionName) {
     var action_btn = tbar.find(".action_btn").filter(function () {
         return $(this).text() == actionName;
     });
-    jQuery(action_btn).detach();
+//    jQuery(action_btn).detach();
+    var scroll_pane = tbar.find(".right_scroll_pane");
+    var pane2api = scroll_pane.data('jsp');
+    action_btn.remove();
+    pane2api.reinitialise();
 
     // Update unit button's action list data
     updateSelectedUnitActionsData(tbar);
