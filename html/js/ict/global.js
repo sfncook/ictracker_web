@@ -158,6 +158,7 @@ function showParDialog( tbar, btn, parentDialog_ ){
                     }
                 });
                 $(".mayday_par_btn").click(showMaydayDialog);
+//                $(".mayday_par_btn").click(showDialog_withCallbacks( "#mayday_dialog", function(){updateMaydayEvents()}, 0 , onCloseCallback));
             }
 
             parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
@@ -374,6 +375,12 @@ function showMaydayDialog(){
 	$("#dialogContainer").show();
 	mayday_dialog.show();
 }
+function onCloseMaydayDialog() {
+    $("#mayday_dialog").find(".unit_btn").each(function( i ) {
+
+    });
+}
+var maydayObjs = new Array();
 function updateMaydayEvents() {
     // Get all TBar sector and unit data
     var tbarDataObjs = [];
@@ -401,7 +408,10 @@ function updateMaydayEvents() {
 
         var selectedUnitsTexts = [];
         // Get all the selected units for this Mayday
-        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowlightgreen").each(function(){
+        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowred").each(function(){
+            selectedUnitsTexts.push($(this).html());
+        });
+        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowpink").each(function(){
             selectedUnitsTexts.push($(this).html());
         });
 
@@ -420,18 +430,24 @@ function updateMaydayEvents() {
                     var unitText = unitBtn.html();
                     var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
                     mayday_units_div.append(maydayUnitBtn);
+                    if(typeof unitBtn.data('hasMayday')!='undefined' && unitBtn.data('hasMayday')=='true') {
+                        btnsToBlink.push(maydayUnitBtn);
+                    }
                     maydayUnitBtn.click(function(){
-                        if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')==false) {
-                            unitBtn.data('hasMayday', true);
+                        if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')=='false') {
+                            unitBtn.data({'hasMayday':'true'});
                         } else {
-                            unitBtn.data('hasMayday', false);
+                            unitBtn.data({'hasMayday':'false'});
                         }
-                        if(unitBtn.data('hasMayday')) {
+                        if(unitBtn.data('hasMayday')=='true') {
                             btnsToBlink.push(unitBtn);
                             btnsToBlink.push(maydayUnitBtn);
                         } else {
                             var index = btnsToBlink.indexOf(unitBtn);
-                            btnsToBlink.splice(index,1);
+                            console.log(index);
+                            console.log(btnsToBlink);
+                            console.log(unitBtn);
+                            console.log(btnsToBlink.splice(index,1));
                             unitBtn.removeClass("glowred");
                             unitBtn.removeClass("glowpink");
                             var index_2 = btnsToBlink.indexOf(maydayUnitBtn);
@@ -441,9 +457,9 @@ function updateMaydayEvents() {
                         }
                     });
 
-                    selectedUnitsTexts.forEach(function(selectedUnitText, index, array){
-                        mayday_units_div.find(":contains("+selectedUnitText+")").addClass("glowlightgreen");
-                    });
+//                    selectedUnitsTexts.forEach(function(selectedUnitText, index, array){
+//                        mayday_units_div.find(":contains("+selectedUnitText+")").addClass("glowlightgreen");
+//                    });
                 });
             }
         });
@@ -584,7 +600,7 @@ function showSectorDialog( tbar, btn, dialogId ){
 
 // onClickCallback(btnClicked_html)
 var onClickCallback;
-function showDialog_withCallbacks( dialogId, onOpenCallback_, onClickCallback_ ){
+function showDialog_withCallbacks( dialogId, onOpenCallback_, onClickCallback_){
   return function(){
     onOpenCallback_();
 
