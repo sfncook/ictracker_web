@@ -102,9 +102,9 @@ function showParDialog( tbar, btn, parentDialog_ ){
             var tbarTitle = tbar.find(".title_text").html();
             par_dialog_sector_btn.html(tbarTitle);
             if(tbarTitle!="Sector Title") {
-                $("#par_dialog_title_text").html(tbarTitle+" PAR");
+                parDialog.find(".dialog_title_text_span").html(tbarTitle+" PAR");
             } else {
-                $("#par_dialog_title_text").html("Sector PAR");
+                parDialog.find(".dialog_title_text_span").html("Sector PAR");
             }
 
             // Units PAR
@@ -180,9 +180,7 @@ function initParDialog( ) {
 	parDialog.attr("id",newId);
 	var parDialogBody = parDialog.children(".dialog_body");
 	parDialog.addClass("par_dialog_body");
-	var parTitleDiv = parDialog.find(".dialog_title_text");
-	parTitleDiv.html("Sector PAR");
-	parTitleDiv.attr("id", "par_dialog_title_text");
+    parDialog.find(".dialog_title_text_span").html("Sector PAR");
 
 	var parbody_containers = $('<div id="par_dialog_sector"><div id="par_dialog_sector_btn" class="title_text par_title_btn par_dialog_btn dialog_btn button"></div></div><div id="par_dialog_units"></div>');
 	parbody_containers.appendTo(parDialogBody);
@@ -231,7 +229,7 @@ function initPsiDialog( ) {
 	psiDialog.attr("id",newId);
 	var psiDialogBody = psiDialog.children(".dialog_body");
 	var psiTitleDiv = psiDialog.find(".dialog_title_text");
-	psiTitleDiv.html("PSI Values");
+	psiTitleDiv.append("PSI Values");
 	var prototypeBtn = $("<div class=\"psi_dialog_btn button\">PROTOTYPE</div>");
 	for(var psiValue=4500; psiValue>=0; psiValue-=100) {
 		var newBtn = prototypeBtn.clone();
@@ -648,7 +646,7 @@ function initSectorDialog( ) {
 	var newId = "sector_dialog";
 	sectorDialog.attr("id",newId);
 	var dialog_title_text = sectorDialog.find(".dialog_title_text");
-	dialog_title_text.html("Sectors");
+	dialog_title_text.append("Sectors");
 	var dialog_body = sectorDialog.find(".dialog_body");
 	
 	var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
@@ -839,7 +837,7 @@ function initActionsDialog( ) {
 	actionsDialog.attr("id",newId);
 	var actionsDialogBody = actionsDialog.children(".dialog_body");
 	var actionsTitleDiv = actionsDialog.find(".dialog_title_text");
-	actionsTitleDiv.html("Actions");
+	actionsTitleDiv.append("Actions");
     var prototypeHeader = $("<div class=\"action_type_dialog_header col-xs-12\">PROTOTYPE</div>");
 	var prototypeBtn = $("<div class=\"action_dialog_btn col-xs-2 action_btn dialog_btn button\">PROTOTYPE</div>");
 	actions.forEach(function (actionObj, index, array) {
@@ -925,8 +923,7 @@ function initBenchmarkDialog( ) {
 	var dialogBody = dialog.children(".dialog_body");
 	newId = "benchmarks_dialog_body";
 	dialogBody.attr("id",newId);
-	var titleDiv = dialog.find(".dialog_title_text");
-	titleDiv.html("Benchmarks");
+    dialog.find(".dialog_title_text_span").html("Benchmarks");
 
 	var left_col = $('<div class="benchmark_col_container benchmark_1st_col_container"/>');
 	left_col.appendTo(dialogBody);
@@ -1066,9 +1063,9 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         // Change benchmark dialog title
         var title = tbar.find(".title_text").html();
         if(title!="Sector Title") {
-            $("#benchmarks_dialog").find(".dialog_title_text").html(title+" Benchmarks");
+            $("#benchmarks_dialog").find(".dialog_title_text_span").html(title+" Benchmarks");
         } else {
-            $("#benchmarks_dialog").find(".dialog_title_text").html("Benchmarks");
+            $("#benchmarks_dialog").find(".dialog_title_text_span").html("Benchmarks");
         }
 
         // Update all benchmarks for this tbar
@@ -1350,7 +1347,7 @@ function initUnitsDialog( ) {
 	var newId = "units_dialog";
 	unitsDialog.attr("id",newId);
 	var dialog_title_text = unitsDialog.find(".dialog_title_text");
-	dialog_title_text.html("Units");
+	dialog_title_text.append("Units");
 	var dialog_body = unitsDialog.find(".dialog_body");
 	
 	var citiesDiv = $('<div id="units_dialog_cities_div"></div>').appendTo(dialog_body);
