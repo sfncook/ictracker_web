@@ -1101,17 +1101,18 @@ td {
     margin: 5px auto;
 }
 #key_ok_btn {
-    background: lightblue;
+    background: lightgreen;
 }
-#key_ok_btn:hover {
-    background: blue;
-}
-#key_ok_btn:active {
-    background: darkblue;
-}
+/*#key_ok_btn:hover {*/
+    /*background: forestgreen;*/
+/*}*/
+/*#key_ok_btn:active {*/
+    /*background: darkgreen;*/
+/*}*/
 #key_del_btn {
     font-size:0.9rem;
     padding-top: 10px;
+    background: lightpink;
 }
 
 ul {
