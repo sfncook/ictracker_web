@@ -818,8 +818,10 @@ function addActionButtonToTbar(tbar, actionName) {
     // Add action button to TBar
     var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
 
-    if(actionName.length>15) {
+    if(actionName.length>19) {
         actionBtn.addClass("btn_largetext");
+    } else if(actionName.length>15) {
+        actionBtn.addClass("btn_medtext");
     }
 
     // Update scroll container
@@ -849,8 +851,10 @@ function initActionsDialog( ) {
             var newBtn = prototypeBtn.clone();
             newBtn.html(actionName);
 
-            if(actionName.length>15) {
+            if(actionName.length>19) {
                 newBtn.addClass("btn_largetext");
+            } else if(actionName.length>15) {
+                newBtn.addClass("btn_medtext");
             }
 
             actionsDialogBody.append(newBtn);
