@@ -2016,8 +2016,6 @@ function init( ) {
 
     $("#move_unit_screen_cover").hide();
 	$("#mode_btn").click(clickModeButton);
-
-    $("#address_btn").click(showDialog(0, $("#address_btn"), "#address_dialog"));
 	
 	hideAllDialogs();
 	
