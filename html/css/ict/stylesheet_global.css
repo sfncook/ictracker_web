@@ -350,6 +350,8 @@ td {
 }
 #mode_btn {
     z-index: 100;
+    float:right;
+    margin: 10px 10px 0 0;
 }
 #mode_side_dialog {
     top: 197px;
