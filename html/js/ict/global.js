@@ -383,9 +383,9 @@ function updateMaydayEvents() {
 	    var titleText = tbar.find(".title_text").html();
 	    if(titleText!="ReHab" && titleText!="Sector Title") {
             tbarDataObj.sectorTitle = tbar.find(".title_text").html();
-            tbarDataObj.unitTexts = [];
-            tbar.find(".unit_btn:not(.blank_btn):not(.acct_unit_btn)").each(function(){
-                tbarDataObj.unitTexts.push($(this).html());
+            tbarDataObj.unitBtns = [];
+            tbar.find(".unit_btn").each(function(){
+                tbarDataObj.unitBtns.push($(this));
             });
             tbarDataObjs.push(tbarDataObj);
         }
@@ -416,10 +416,30 @@ function updateMaydayEvents() {
             if(tbarDataObj.sectorTitle==selectedSectorText) {
                 newOption.attr("selected", "selected");
                 mayday_sector_select.addClass("glowlightgreen");
-                tbarDataObj.unitTexts.forEach(function(unitText, index, array){
-                    var unitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
-                    mayday_units_div.append(unitBtn);
-                    unitBtn.click(function(){$(this).toggleClass("glowlightgreen")});
+                tbarDataObj.unitBtns.forEach(function(unitBtn, i){
+                    var unitText = unitBtn.html();
+                    var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
+                    mayday_units_div.append(maydayUnitBtn);
+                    maydayUnitBtn.click(function(){
+                        if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')==false) {
+                            unitBtn.data('hasMayday', true);
+                        } else {
+                            unitBtn.data('hasMayday', false);
+                        }
+                        if(unitBtn.data('hasMayday')) {
+                            btnsToBlink.push(unitBtn);
+                            btnsToBlink.push(maydayUnitBtn);
+                        } else {
+                            var index = btnsToBlink.indexOf(unitBtn);
+                            btnsToBlink.splice(index,1);
+                            unitBtn.removeClass("glowred");
+                            unitBtn.removeClass("glowpink");
+                            var index_2 = btnsToBlink.indexOf(maydayUnitBtn);
+                            btnsToBlink.splice(index_2,1);
+                            maydayUnitBtn.removeClass("glowred");
+                            maydayUnitBtn.removeClass("glowpink");
+                        }
+                    });
 
                     selectedUnitsTexts.forEach(function(selectedUnitText, index, array){
                         mayday_units_div.find(":contains("+selectedUnitText+")").addClass("glowlightgreen");
