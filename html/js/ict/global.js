@@ -1331,16 +1331,6 @@ function toggleType(type) {
 		}
 	}
 }
-function initUnitsAssignedDialog( ) {
-    var prototypeUnitBtn = $("<div class=\"unit_dialog_btn unit_btn dialog_btn button\">PROTOTYPE</div>");
-
-    var unitsDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
-	var newId = "units_assigned_dialog";
-	unitsDialog.attr("id",newId);
-	var dialog_title_text = unitsDialog.find(".dialog_title_text");
-	dialog_title_text.html("Units");
-	var dialog_body = unitsDialog.find(".dialog_body");
-}
 function startUnitTimerAnim(el) {
     el.stop(true);
     el.css("width","48px").css("background","lightgreen");
@@ -1987,7 +1977,6 @@ function init( ) {
 	initActionsDialog();
 	initUnitsDialog();
 	initUnitPeopleDialog();
-	initUnitsAssignedDialog();
 	initBenchmarkDialog();
 	$("#report_btn").click(function(){alert("TESTING");});
 	initCmdTerminateDialog();
