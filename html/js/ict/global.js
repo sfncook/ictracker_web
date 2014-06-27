@@ -382,88 +382,122 @@ function onCloseMaydayDialog() {
 }
 var maydayObjs = new Array();
 function updateMaydayEvents() {
-    // Get all TBar sector and unit data
-    var tbarDataObjs = [];
-    $(".tbar").not("#tbar_prototype").each(function( i ) {
-        var tbarDataObj = {};
-	    var tbar = $(this);
-	    var titleText = tbar.find(".title_text").html();
-	    if(titleText!="ReHab" && titleText!="Sector Title") {
-            tbarDataObj.sectorTitle = tbar.find(".title_text").html();
-            tbarDataObj.unitBtns = [];
-            tbar.find(".unit_btn").each(function(){
-                tbarDataObj.unitBtns.push($(this));
-            });
-            tbarDataObjs.push(tbarDataObj);
+    var tbarTitles = [];
+    $(".tbar").not("#tbar_prototype").find(".title_text").each(function(i){
+        var title_text = $(this).html();
+        if(title_text!="Sector Title") {
+            tbarTitles.push(title_text);
         }
-	});
+    });
 
-    // For each Mayday
-    $(".mayday_info_div:not(#mayday_info_div_prototype)").each(function(){
-        var maydayDivEl = $(this);
+    var maydayOptions = [];
+    var addToMaydayOptions = tbarTitles.slice(0);
+    $("#mayday_info_div_prototype").find(".mayday_sector_select").find("option").not(".default_option").each(function(i){
+        console.log(addToMaydayOptions);
+        var maydayOptionStr = $(this).html();
+        addToMaydayOptions.remByVal(maydayOptionStr);
+        console.log(maydayOptionStr);
+        console.log(addToMaydayOptions);
+        maydayOptions.push(maydayOptionStr);
+    });
+    var removeFromMaydayOptions = [];
+    maydayOptions.forEach(function(maydayOptionStr, i, a){
+        if(maydayOptions.indexOf(maydayOptionStr)==-1) {
+            removeFromMaydayOptions.push(maydayOptionStr);
+        }
+    });
 
-        // Get all mayday data
-        var mayday_sector_select = maydayDivEl.find(".mayday_sector_select");
-        var selectedSectorText = mayday_sector_select.find("option:selected").text();
-
-        var selectedUnitsTexts = [];
-        // Get all the selected units for this Mayday
-        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowred").each(function(){
-            selectedUnitsTexts.push($(this).html());
-        });
-        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowpink").each(function(){
-            selectedUnitsTexts.push($(this).html());
-        });
-
-        var mayday_units_div = maydayDivEl.find(".mayday_units_div");
-        mayday_units_div.empty();
-        mayday_sector_select.empty();
-        mayday_sector_select.append("<option disabled='disabled' selected='selected' class='default_option'>Sector</option>");
-        mayday_sector_select.removeClass("glowlightgreen");
-        tbarDataObjs.forEach(function(tbarDataObj, index, array){
-            var newOption = $("<option>"+tbarDataObj.sectorTitle+"</option>");
-            mayday_sector_select.append(newOption);
-            if(tbarDataObj.sectorTitle==selectedSectorText) {
-                newOption.attr("selected", "selected");
-                mayday_sector_select.addClass("glowlightgreen");
-                tbarDataObj.unitBtns.forEach(function(unitBtn, i){
-                    var unitText = unitBtn.html();
-                    var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
-                    mayday_units_div.append(maydayUnitBtn);
-                    if(typeof unitBtn.data('hasMayday')!='undefined' && unitBtn.data('hasMayday')=='true') {
-                        btnsToBlink.push(maydayUnitBtn);
-                    }
-                    maydayUnitBtn.click(function(){
-                        if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')=='false') {
-                            unitBtn.data({'hasMayday':'true'});
-                        } else {
-                            unitBtn.data({'hasMayday':'false'});
-                        }
-                        if(unitBtn.data('hasMayday')=='true') {
-                            btnsToBlink.push(unitBtn);
-                            btnsToBlink.push(maydayUnitBtn);
-                        } else {
-                            var index = btnsToBlink.indexOf(unitBtn);
-                            console.log(index);
-                            console.log(btnsToBlink);
-                            console.log(unitBtn);
-                            console.log(btnsToBlink.splice(index,1));
-                            unitBtn.removeClass("glowred");
-                            unitBtn.removeClass("glowpink");
-                            var index_2 = btnsToBlink.indexOf(maydayUnitBtn);
-                            btnsToBlink.splice(index_2,1);
-                            maydayUnitBtn.removeClass("glowred");
-                            maydayUnitBtn.removeClass("glowpink");
-                        }
-                    });
-
-//                    selectedUnitsTexts.forEach(function(selectedUnitText, index, array){
-//                        mayday_units_div.find(":contains("+selectedUnitText+")").addClass("glowlightgreen");
-//                    });
-                });
-            }
+    addToMaydayOptions.forEach(function(tbar_title, i, a){
+        $(".mayday_info_div").find(".mayday_sector_select").each(function(i){
+            var mayday_sector_select = $(this);
+            mayday_sector_select.append($("<option>"+tbar_title+"</option>"));
         });
     });
+
+    //TODO: Store TBar previous title and change selection
+
+    // Get all TBar sector and unit data
+//    var tbarDataObjs = [];
+//    $(".tbar").not("#tbar_prototype").each(function( i ) {
+//        var tbarDataObj = {};
+//	    var tbar = $(this);
+//	    var titleText = tbar.find(".title_text").html();
+//	    if(titleText!="ReHab" && titleText!="Sector Title") {
+//            tbarDataObj.sectorTitle = tbar.find(".title_text").html();
+//            tbarDataObj.unitBtns = [];
+//            tbar.find(".unit_btn").each(function(){
+//                tbarDataObj.unitBtns.push($(this));
+//            });
+//            tbarDataObjs.push(tbarDataObj);
+//        }
+//	});
+//
+//    // For each Mayday
+//    $(".mayday_info_div:not(#mayday_info_div_prototype)").each(function(){
+//        var maydayDivEl = $(this);
+//
+//        // Get all mayday data
+//        var mayday_sector_select = maydayDivEl.find(".mayday_sector_select");
+//        var selectedSectorText = mayday_sector_select.find("option:selected").text();
+//
+//        var selectedUnitsTexts = [];
+//        // Get all the selected units for this Mayday
+//        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowred").each(function(){
+//            selectedUnitsTexts.push($(this).html());
+//        });
+//        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowpink").each(function(){
+//            selectedUnitsTexts.push($(this).html());
+//        });
+//
+//        var mayday_units_div = maydayDivEl.find(".mayday_units_div");
+//        mayday_units_div.empty();
+//        mayday_sector_select.empty();
+//        mayday_sector_select.append("<option disabled='disabled' selected='selected' class='default_option'>Sector</option>");
+//        mayday_sector_select.removeClass("glowlightgreen");
+//        tbarDataObjs.forEach(function(tbarDataObj, index, array){
+//            var newOption = $("<option>"+tbarDataObj.sectorTitle+"</option>");
+//            mayday_sector_select.append(newOption);
+//            if(tbarDataObj.sectorTitle==selectedSectorText) {
+//                newOption.attr("selected", "selected");
+//                mayday_sector_select.addClass("glowlightgreen");
+//                tbarDataObj.unitBtns.forEach(function(unitBtn, i){
+//                    var unitText = unitBtn.html();
+//                    var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
+//                    mayday_units_div.append(maydayUnitBtn);
+//                    if(typeof unitBtn.data('hasMayday')!='undefined' && unitBtn.data('hasMayday')=='true') {
+//                        btnsToBlink.push(maydayUnitBtn);
+//                    }
+//                    maydayUnitBtn.click(function(){
+//                        if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')=='false') {
+//                            unitBtn.data({'hasMayday':'true'});
+//                        } else {
+//                            unitBtn.data({'hasMayday':'false'});
+//                        }
+//                        if(unitBtn.data('hasMayday')=='true') {
+//                            btnsToBlink.push(unitBtn);
+//                            btnsToBlink.push(maydayUnitBtn);
+//                        } else {
+//                            var index = btnsToBlink.indexOf(unitBtn);
+//                            console.log(index);
+//                            console.log(btnsToBlink);
+//                            console.log(unitBtn);
+//                            console.log(btnsToBlink.splice(index,1));
+//                            unitBtn.removeClass("glowred");
+//                            unitBtn.removeClass("glowpink");
+//                            var index_2 = btnsToBlink.indexOf(maydayUnitBtn);
+//                            btnsToBlink.splice(index_2,1);
+//                            maydayUnitBtn.removeClass("glowred");
+//                            maydayUnitBtn.removeClass("glowpink");
+//                        }
+//                    });
+//
+////                    selectedUnitsTexts.forEach(function(selectedUnitText, index, array){
+////                        mayday_units_div.find(":contains("+selectedUnitText+")").addClass("glowlightgreen");
+////                    });
+//                });
+//            }
+//        });
+//    });
 }
 function clearMayday(maydayTd) {
     return function() {
@@ -2049,6 +2083,16 @@ function init( ) {
 	window.setInterval(updateTimer, 1000);
 
 	$('.scroll-pane').jScrollPane();
+
+    Array.prototype.remByVal = function(val) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] === val) {
+                this.splice(i, 1);
+                i--;
+            }
+        }
+        return this;
+    }
 }
 
 //Call this to dismiss the dialogs
