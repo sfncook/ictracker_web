@@ -609,27 +609,32 @@ function initMaydayDialog( ) {
  * Sector Dialog
  **/
 function showSectorDialog( tbar, btn, dialogId ){
-  return function(){
-	var sectorDlg = $(dialogId);
-	$(".dialog").hide();
-	btn_clicked = btn;
-	tbar_clicked = tbar;
-	$("#dialogContainer").show();
-	sectorDlg.show();
-	
-	//Toggle selected Sector button
-	$("div.title_btn.dialog_btn").removeClass("sector_dialog_btn_on");
-	$( "div:contains('"+btn.html()+"').title_btn.dialog_btn" ).addClass("sector_dialog_btn_on");
-	
-	//Toggle prefix_dir buttons
-	tbar_clicked.prefix_dir
-	$(".dir_supl_info_dir_btn").removeClass("glow_orange");
-	$("."+tbar.prefix_dir+"_supl_btn").addClass("glow_orange");
-	
-	//Toggle prefix_num buttons
-	$(".dir_supl_info_num_btn").removeClass("glow_orange");
-	$("."+tbar.prefix_num+"_supl_btn").addClass("glow_orange");
-  }
+    return function(){
+        var sectorDlg = $(dialogId);
+        $(".dialog").hide();
+        btn_clicked = btn;
+        tbar_clicked = tbar;
+        $("#dialogContainer").show();
+        sectorDlg.show();
+
+        // Toggle prefix_dir buttons
+        tbar_clicked.prefix_dir
+        $(".dir_supl_info_dir_btn").removeClass("glow_orange");
+        $("."+tbar.prefix_dir+"_supl_btn").addClass("glow_orange");
+
+        // Toggle prefix_num buttons
+        $(".dir_supl_info_num_btn").removeClass("glow_orange");
+        $("."+tbar.prefix_num+"_supl_btn").addClass("glow_orange");
+
+        // Highlight previously selected sectors
+        $(".title_dialog_btn").removeClass("glowlightgreen");
+        $(".title_text").each(function (index) {
+            var title_text = $(this).html();
+            if(title_text!="") {
+                $(".title_dialog_btn:contains('" + title_text + "')").addClass("glowlightgreen");
+            }
+        });
+    }
 }
 
 // onClickCallback(btnClicked_html)
@@ -751,7 +756,7 @@ function initSectorDialog( ) {
 	dialog_body.append(title_btns_container);
 	
 	//Sector title buttons
-	var prototypeBtn = $("<div class=\"title_btn button col-xs-3\">PROTOTYPE</div>");
+	var prototypeBtn = $("<div class=\"title_dialog_btn title_btn button col-xs-3\">PROTOTYPE</div>");
 	var prototypeFixedTitleSpacer = $("<div class=\"fixed_title_spacer\"></div>");
 	var prototypeClockIcon = $("<img class=\"clock_icon\" src=\"images/clock.png\"/>");
 	sectors.forEach(function (sectorName, index, array) {
@@ -773,7 +778,7 @@ function initSectorDialog( ) {
 		}
 		
 		newBtn.click(function() {
-		    if(!newBtn.hasClass("hidden_sector_btn")) {
+		    if(!newBtn.hasClass("hidden_sector_btn") && !newBtn.hasClass("glowlightgreen")) {
 		        if(sectorName=="Sector ####") {
 		            key_replace_char_at_index = 7;
 		            $("#key_output_value").html("Sector ####");
