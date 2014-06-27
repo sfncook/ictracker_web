@@ -382,39 +382,42 @@ function onCloseMaydayDialog() {
 }
 var maydayObjs = new Array();
 function updateMaydayEvents() {
-    var tbarTitles = [];
-    $(".tbar").not("#tbar_prototype").find(".title_text").each(function(i){
-        var title_text = $(this).html();
-        if(title_text!="Sector Title") {
-            tbarTitles.push(title_text);
-        }
-    });
 
-    var maydayOptions = [];
-    var addToMaydayOptions = tbarTitles.slice(0);
-    $("#mayday_info_div_prototype").find(".mayday_sector_select").find("option").not(".default_option").each(function(i){
-        console.log(addToMaydayOptions);
-        var maydayOptionStr = $(this).html();
-        addToMaydayOptions.remByVal(maydayOptionStr);
-        console.log(maydayOptionStr);
-        console.log(addToMaydayOptions);
-        maydayOptions.push(maydayOptionStr);
-    });
-    var removeFromMaydayOptions = [];
-    maydayOptions.forEach(function(maydayOptionStr, i, a){
-        if(maydayOptions.indexOf(maydayOptionStr)==-1) {
-            removeFromMaydayOptions.push(maydayOptionStr);
-        }
-    });
+//    // Update titles in select options
+//    var tbarTitles = [];
+//    $(".tbar").not("#tbar_prototype").find(".title_text").each(function(i){
+//        var title_text = $(this).html();
+//        if(title_text!="Sector Title") {
+//            tbarTitles.push(title_text);
+//        }
+//    });
+//
+//    var maydayOptions = [];
+//    var addToMaydayOptions = tbarTitles.slice(0);
+//    $("#mayday_info_div_prototype").find(".mayday_sector_select").find("option").not(".default_option").each(function(i){
+//        console.log(addToMaydayOptions);
+//        var maydayOptionStr = $(this).html();
+//        addToMaydayOptions.remByVal(maydayOptionStr);
+//        console.log(maydayOptionStr);
+//        console.log(addToMaydayOptions);
+//        maydayOptions.push(maydayOptionStr);
+//    });
+//    var removeFromMaydayOptions = [];
+//    maydayOptions.forEach(function(maydayOptionStr, i, a){
+//        if(maydayOptions.indexOf(maydayOptionStr)==-1) {
+//            removeFromMaydayOptions.push(maydayOptionStr);
+//        }
+//    });
+//
+//    addToMaydayOptions.forEach(function(tbar_title, i, a){
+//        $(".mayday_info_div").find(".mayday_sector_select").each(function(i){
+//            var mayday_sector_select = $(this);
+//            mayday_sector_select.append($("<option>"+tbar_title+"</option>"));
+//        });
+//    });
 
-    addToMaydayOptions.forEach(function(tbar_title, i, a){
-        $(".mayday_info_div").find(".mayday_sector_select").each(function(i){
-            var mayday_sector_select = $(this);
-            mayday_sector_select.append($("<option>"+tbar_title+"</option>"));
-        });
-    });
 
-    //TODO: Store TBar previous title and change selection
+    // Update units
 
     // Get all TBar sector and unit data
 //    var tbarDataObjs = [];
@@ -718,7 +721,14 @@ function setTbarTitle(tbar, title) {
     }
 
     // Update any Maydays for this sector
-    $(".mayday_sector_select").find("option:contains("+title_text_prev+")").html(title);
+    var maydaysSelected = $(".mayday_sector_select").find("option:selected:contains("+title_text_prev+")").parents(".mayday_sector_select");;
+    $(".mayday_sector_select").find("option:contains("+title_text_prev+")").remove();
+    $(".mayday_sector_select").each(function(){
+        $(this).append($("<option value='"+title+"'>"+title+"</option>"));
+    });
+    maydaysSelected.each(function(){
+        $(this).find("option:contains("+title+")").attr('selected','selected');
+    });
 }
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
