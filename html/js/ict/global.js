@@ -691,6 +691,7 @@ function clickNumBtn(btn) {
 	}
 }
 function setTbarTitle(tbar, title) {
+    var title_text_prev = tbar.find(".title_text").html();
     tbar.find(".title_text").html(title);
     if(title!="Sector") {
         hideAllDialogs();
@@ -710,6 +711,9 @@ function setTbarTitle(tbar, title) {
     if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
         addTbar();
     }
+
+    // Update any Maydays for this sector
+    $(".mayday_sector_select").find("option:contains("+title_text_prev+")").html(title);
 }
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
