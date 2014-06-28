@@ -157,7 +157,8 @@ function showParDialog( tbar, btn, parentDialog_ ){
                         person_btn.click(togglePar(person_btn, "#firefighter_btn_"+i+"_"+unit_name));
                     }
                 });
-                $(".mayday_par_btn").click(showMaydayDialog);
+//                $(".mayday_par_btn").click(showMaydayDialog);
+                showDialog_withCallbacks( "#mayday_dialog", 0, 0, onCloseMaydayDialog);
             }
 
             parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
@@ -364,21 +365,19 @@ function selectMaydaySectorBtn(sectorBtn){
 		sectorBtn.addClass("glow");
 	}
 }
-function showMaydayDialog(){
-    parentDialog = 0;
-	var mayday_dialog = $("#mayday_dialog");
-
-    // Update all Maydays
-//	updateMaydayEvents();
-	
-	$(".dialog").hide();
-	$("#dialogContainer").show();
-	mayday_dialog.show();
-}
+//function showMaydayDialog(){
+//    parentDialog = 0;
+//	var mayday_dialog = $("#mayday_dialog");
+//
+//	$(".dialog").hide();
+//	$("#dialogContainer").show();
+//	mayday_dialog.show();
+//}
 function onCloseMaydayDialog() {
-    $("#mayday_dialog").find(".unit_btn").each(function( i ) {
-
-    });
+    console.log("onCloseMaydayDialog");
+//    $("#mayday_dialog").find(".unit_btn").each(function( i ) {
+//
+//    });
 }
 function selectMaydaySector(maydayEl, tbar) {
     // Get all mayday data
@@ -496,7 +495,8 @@ function selectMaydayTab(tab, color) {
 }
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
-	maydayBtn.click(showMaydayDialog);
+//	maydayBtn.click(showMaydayDialog);
+    maydayBtn.click(showDialog_withCallbacks( "#mayday_dialog", 0, 0, onCloseMaydayDialog));
 
     $("#mayday_info_div_prototype").hide();
     $("#new_mayday_btn").click(addMaydayEvent);
@@ -548,16 +548,20 @@ function showSectorDialog( tbar, btn, dialogId ){
 
 // onClickCallback(btnClicked_html)
 var onClickCallback;
-function showDialog_withCallbacks( dialogId, onOpenCallback_, onClickCallback_){
-  return function(){
-    onOpenCallback_();
+var onCloseCallback;
+function showDialog_withCallbacks( dialogId, onOpenCallback_, onClickCallback_, onCloseCallback_){
+    return function(){
+        if(typeof onOpenCallback_!='undefined' && onOpenCallback_!=0) {
+            onOpenCallback_();
+        }
 
-	onClickCallback = onClickCallback_;
+        onClickCallback = onClickCallback_;
+        onCloseCallback = onCloseCallback_;
 
-	$(".dialog").hide();
-	$("#dialogContainer").show();
-	$(dialogId).show();
-  }
+        $(".dialog").hide();
+        $("#dialogContainer").show();
+        $(dialogId).show();
+    }
 }
 function showDialog( tbar, btn, dialogId, parentDialog_ ){
   return function(){
@@ -1990,6 +1994,9 @@ function init( ) {
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(function(){
+        if(typeof onCloseCallback!='undefined' && onCloseCallback!=0) {
+            onCloseCallback();
+        }
 	    hideAllDialogs();
 	    $(".dialog").hide();
 	    if(typeof parentDialog!='undefined' && parentDialog!=0) {
