@@ -358,6 +358,7 @@ function onCloseMaydayDialog() {
         var mayday_sector_title = maydayEl.find(".mayday_sector_title");
         var mayday_sector_title_text = mayday_select.find("option:selected").text();
         var unit_btns = $(".tbar").find(".title_text:contains("+mayday_sector_title_text+")").parents(".tbar").find(".unit_btn");
+        var found_unit_btn_mayday = false;
         unit_btns.each(function (i){
             var unit_btn = $(this);
             var unit_text = unit_btn.find(".unit_text").text();
@@ -366,12 +367,17 @@ function onCloseMaydayDialog() {
                 maydayUnitBtn.remove();
             } else {
                 maydayUnitBtn.addClass("disabled");
+                found_unit_btn_mayday = true;
             }
         });
 
-        mayday_select.hide();
-        mayday_sector_title.show();
-        mayday_sector_title.html("Sector: "+mayday_sector_title_text);
+        if(found_unit_btn_mayday) {
+            mayday_select.hide();
+            mayday_sector_title.show();
+            mayday_sector_title.html("Sector: "+mayday_sector_title_text);
+        } else {
+            maydayEl.remove();
+        }
     });
 }
 function selectMaydaySector(maydayEl, tbar) {
