@@ -17,6 +17,17 @@ function blinkUnit() {
 		}
 	});
 
+    $(".unit_btn.has_mayday").each(function() {
+        var btn = $(this);
+        if (btn.hasClass("glowred")) {
+            btn.removeClass("glowred");
+            btn.addClass("glowpink");
+        } else {
+            btn.addClass("glowred");
+            btn.removeClass("glowpink");
+        }
+    });
+
 	window.setTimeout(blinkUnit, 500);
 }
 
@@ -392,14 +403,11 @@ function selectMaydaySector(maydayEl, tbar) {
         maydayUnitBtn.click(function(){
             unitBtn.toggleClass("has_mayday");
             if(unitBtn.hasClass('has_mayday')) {
-                btnsToBlink.push(unitBtn);
-                btnsToBlink.push(maydayUnitBtn);
+                maydayUnitBtn.addClass("has_mayday");
             } else {
-                btnsToBlink.remByVal(unitBtn);
+                maydayUnitBtn.removeClass("has_mayday");
                 unitBtn.removeClass("glowred");
                 unitBtn.removeClass("glowpink");
-
-                btnsToBlink.remByVal(maydayUnitBtn);
                 maydayUnitBtn.removeClass("glowred");
                 maydayUnitBtn.removeClass("glowpink");
             }
@@ -414,19 +422,9 @@ function clearMayday(maydayEl) {
 
         unit_btns.each(function(){
             var unit_btn = $(this);
-            if(typeof unit_btn.data('hasMayday')!='undefined' && unit_btn.data('hasMayday')=='true') {
-                //TODO: Ask Tim.
-                btnsToBlink.remByVal(unit_btn);
-                unit_btn.removeClass("glowred");
-                unit_btn.removeClass("glowpink");
-            }
-        });
-
-        maydayEl.find(".unit_btn").each(function(){
-            var maydayUnitBtn = $(this);
-            btnsToBlink.remByVal(maydayUnitBtn);
-            maydayUnitBtn.removeClass("glowred");
-            maydayUnitBtn.removeClass("glowpink");
+            unit_btn.removeClass("has_mayday");
+            unit_btn.removeClass("glowred");
+            unit_btn.removeClass("glowpink");
         });
 
         maydayEl.remove();
