@@ -1643,37 +1643,6 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
     // Reinitialize
     pane2api.reinitialise();
 
-    // Update Mayday buttons
-    var title_text = tbar.find(".title_text").html();
-    var maydaysSelected = $(".mayday_sector_select").find("option:selected:contains("+title_text+")").parents(".mayday_info_div");
-    maydaysSelected.each(function(){
-        var mayday_info_div = $(this);
-        if(mayday_info_div.find(".unit_text :contains("+unitName+")").length==0){
-            var mayday_units_div = mayday_info_div.find(".mayday_units_div");
-            var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitName+"</div>");
-            mayday_units_div.append(maydayUnitBtn);
-            maydayUnitBtn.click(function(){
-                if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')=='false') {
-                    unitBtn.data({'hasMayday':'true'});
-                } else {
-                    unitBtn.data({'hasMayday':'false'});
-                }
-                if(unitBtn.data('hasMayday')=='true') {
-                    btnsToBlink.push(unitBtn);
-                    btnsToBlink.push(maydayUnitBtn);
-                } else {
-                    btnsToBlink.remByVal(unitBtn);
-                    unitBtn.removeClass("glowred");
-                    unitBtn.removeClass("glowpink");
-
-                    btnsToBlink.remByVal(maydayUnitBtn);
-                    maydayUnitBtn.removeClass("glowred");
-                    maydayUnitBtn.removeClass("glowpink");
-                }
-            });
-        }
-    });
-
     updateTbar(tbar);
 }
 function moveUnitButton(unit_col, unit_col_destination, unitBtn) {
