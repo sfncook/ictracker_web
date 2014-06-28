@@ -169,7 +169,7 @@ function showParDialog( tbar, btn, parentDialog_ ){
                     }
                 });
 //                $(".mayday_par_btn").click(showMaydayDialog);
-                showDialog_withCallbacks( "#mayday_dialog", 0, 0, onCloseMaydayDialog);
+                $(".mayday_par_btn").click(showDialog_withCallbacks( "#mayday_dialog", parDialog, 0, 0, onCloseMaydayDialog));
             }
 
             parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
@@ -516,7 +516,7 @@ function selectMaydayTab(tab, color) {
 function initMaydayDialog( ) {
 	var maydayBtn = $("#mayday_btn");
 //	maydayBtn.click(showMaydayDialog);
-    maydayBtn.click(showDialog_withCallbacks( "#mayday_dialog", 0, 0, onCloseMaydayDialog));
+    maydayBtn.click(showDialog_withCallbacks( "#mayday_dialog", 0/*parentDialog*/, 0, 0, onCloseMaydayDialog));
 
     $("#mayday_info_div_prototype").hide();
     $("#new_mayday_btn").click(addMaydayEvent);
@@ -569,8 +569,10 @@ function showSectorDialog( tbar, btn, dialogId ){
 // onClickCallback(btnClicked_html)
 var onClickCallback;
 var onCloseCallback;
-function showDialog_withCallbacks( dialogId, onOpenCallback_, onClickCallback_, onCloseCallback_){
+function showDialog_withCallbacks( dialogId, parentDialog_, onOpenCallback_, onClickCallback_, onCloseCallback_){
     return function(){
+        parentDialog = parentDialog_;
+
         if(typeof onOpenCallback_!='undefined' && onOpenCallback_!=0) {
             onOpenCallback_();
         }
@@ -1171,6 +1173,7 @@ function initObjectivesDialog( ) {
 //            showUnitsDialog(0, $("#unit_osr_btn"), $("#osr_dialog"))();
             showDialog_withCallbacks(
                 "#units_dialog",
+                0,//parent dialog
                 function(){
                     $(".unit_dialog_btn").removeClass("glowlightgreen");
                     $(".unit_dialog_btn:contains('"+btn.html()+"')").addClass("glowlightgreen");
@@ -1733,6 +1736,7 @@ function addTbar(col_x, row_y) {
     acctBtn.click(
         showDialog_withCallbacks(
             "#units_dialog",
+            0, //parentDialog
             function(){
                 $(".unit_dialog_btn").removeClass("glowlightgreen");
                 $(".unit_dialog_btn:contains('"+acctBtn.html()+"')").addClass("glowlightgreen");
@@ -1758,14 +1762,14 @@ function addTbar(col_x, row_y) {
     var unit_add_btn_right = unit_col_right.find(".unit_add_btn");
     unit_add_btn_left.attr("id", "unit_add_btn_left_"+tbarIndex);
     unit_add_btn_right.attr("id", "unit_add_btn_right_"+tbarIndex);
-    unit_add_btn_left.click(showDialog_withCallbacks("#units_dialog", onOpenUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(unit_col_left)));
-    unit_add_btn_right.click(showDialog_withCallbacks("#units_dialog", onOpenUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(unit_col_right)));
+    unit_add_btn_left.click(showDialog_withCallbacks("#units_dialog", 0/*parentDialog*/,onOpenUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(unit_col_left)));
+    unit_add_btn_right.click(showDialog_withCallbacks("#units_dialog", 0/*parentDialog*/, onOpenUnitsDialogFromTbar(tbar), toggleUnitButtonForTbar(unit_col_right)));
 
     // Add Action Btn
     var action_add_btn = tbar.find(".action_add_btn");
     action_add_btn.attr("id", "action_add_btn_"+tbarIndex);
     action_add_btn.hide();//Button is shown once units have been added
-    action_add_btn.click(showDialog_withCallbacks("#actions_dialog", onOpenActionsDialogFromTbar(tbar), toggleActionButtonForTbar(tbar)));
+    action_add_btn.click(showDialog_withCallbacks("#actions_dialog", 0/*parentDialog*/, onOpenActionsDialogFromTbar(tbar), toggleActionButtonForTbar(tbar)));
 
     // Move Btn
     var unit_move_btn = tbar.find(".unit_move_btn");
