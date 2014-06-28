@@ -363,11 +363,11 @@ function onCloseMaydayDialog() {
             var unit_btn = $(this);
             var unit_text = unit_btn.find(".unit_text").text();
             var maydayUnitBtn = maydayEl.find(".unit_text:contains("+unit_text+")").parents(".unit_btn");
-            if(typeof unit_btn.data('hasMayday')=='undefined' || unit_btn.data('hasMayday')=='false') {
-                maydayUnitBtn.remove();
-            } else {
+            if(maydayUnitBtn.hasClass("has_mayday")) {
                 maydayUnitBtn.addClass("disabled");
                 found_unit_btn_mayday = true;
+            } else {
+                maydayUnitBtn.remove();
             }
         });
 
@@ -390,12 +390,8 @@ function selectMaydaySector(maydayEl, tbar) {
         var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
         mayday_units_div.append(maydayUnitBtn);
         maydayUnitBtn.click(function(){
-            if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')=='false') {
-                unitBtn.data({'hasMayday':'true'});
-            } else {
-                unitBtn.data({'hasMayday':'false'});
-            }
-            if(unitBtn.data('hasMayday')=='true') {
+            unitBtn.toggleClass("has_mayday");
+            if(unitBtn.hasClass('has_mayday')) {
                 btnsToBlink.push(unitBtn);
                 btnsToBlink.push(maydayUnitBtn);
             } else {
