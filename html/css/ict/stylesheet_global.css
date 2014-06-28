@@ -225,27 +225,27 @@ td {
 }*/
 
 .glowred {
-	background: red;
+	background: red !important;
 	color: white;
 }
 .glowred:hover {
-	background: darkred;
+	background: darkred !important;
 	color: white;
 }
 .glowred:active {
-	background: #666;
+	background: #666 !important;
 	color: white;
 }
 .glowpink {
-	background: pink;
+	background: pink !important;
 	color: #666;
 }
 .glowpink:hover {
-	background: red;
+	background: red !important;
 	color: white;
 }
 .glowpink:hover {
-	background: red;
+	background: red !important;
 	color: white;
 }
 .glowpink:active {
@@ -584,6 +584,9 @@ td {
 .mayday_clear_item_btn {
     margin: 5px 0 5px 10px;
     width: 325px;
+}
+.mayday_sector_title {
+    font-size: 1.1rem;
 }
 
 #osr_dialog {
