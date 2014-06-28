@@ -158,7 +158,6 @@ function showParDialog( tbar, btn, parentDialog_ ){
                     }
                 });
                 $(".mayday_par_btn").click(showMaydayDialog);
-//                $(".mayday_par_btn").click(showDialog_withCallbacks( "#mayday_dialog", function(){updateMaydayEvents()}, 0 , onCloseCallback));
             }
 
             parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
@@ -369,7 +368,8 @@ function showMaydayDialog(){
     parentDialog = 0;
 	var mayday_dialog = $("#mayday_dialog");
 
-	updateMaydayEvents();
+    // Update all Maydays
+//	updateMaydayEvents();
 	
 	$(".dialog").hide();
 	$("#dialogContainer").show();
@@ -380,94 +380,35 @@ function onCloseMaydayDialog() {
 
     });
 }
-var maydayObjs = new Array();
-function updateMaydayEvents() {
+function selectMaydaySector(maydayEl, tbar) {
+    // Get all mayday data
+    var mayday_units_div = maydayEl.find(".mayday_units_div");
 
+    tbar.find(".unit_btn").each(function( i ) {
+        var unitBtn = $(this);
+        var unitText = unitBtn.html();
+        var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
+        mayday_units_div.append(maydayUnitBtn);
+        maydayUnitBtn.click(function(){
+            if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')=='false') {
+                unitBtn.data({'hasMayday':'true'});
+            } else {
+                unitBtn.data({'hasMayday':'false'});
+            }
+            if(unitBtn.data('hasMayday')=='true') {
+                btnsToBlink.push(unitBtn);
+                btnsToBlink.push(maydayUnitBtn);
+            } else {
+                btnsToBlink.remByVal(unitBtn);
+                unitBtn.removeClass("glowred");
+                unitBtn.removeClass("glowpink");
 
-//    // Update units
-//
-//    // Get all TBar sector and unit data
-//    var tbarDataObjs = [];
-//    $(".tbar").not("#tbar_prototype").each(function( i ) {
-//        var tbarDataObj = {};
-//	    var tbar = $(this);
-//	    var titleText = tbar.find(".title_text").html();
-//	    if(titleText!="ReHab" && titleText!="Sector Title") {
-//            tbarDataObj.sectorTitle = tbar.find(".title_text").html();
-//            tbarDataObj.unitBtns = [];
-//            tbar.find(".unit_btn").each(function(){
-//                tbarDataObj.unitBtns.push($(this));
-//            });
-//            tbarDataObjs.push(tbarDataObj);
-//        }
-//	});
-//
-//    // For each Mayday
-//    $(".mayday_info_div:not(#mayday_info_div_prototype)").each(function(){
-//        var maydayDivEl = $(this);
-//
-//        // Get all mayday data
-//        var mayday_sector_select = maydayDivEl.find(".mayday_sector_select");
-//        var selectedSectorText = mayday_sector_select.find("option:selected").text();
-//
-//        var selectedUnitsTexts = [];
-//        // Get all the selected units for this Mayday
-//        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowred").each(function(){
-//            selectedUnitsTexts.push($(this).html());
-//        });
-//        maydayDivEl.find(".mayday_unit_btn.unit_btn.button.glowpink").each(function(){
-//            selectedUnitsTexts.push($(this).html());
-//        });
-//
-//        var mayday_units_div = maydayDivEl.find(".mayday_units_div");
-//        mayday_units_div.empty();
-//        mayday_sector_select.empty();
-//        mayday_sector_select.append("<option disabled='disabled' selected='selected' class='default_option'>Sector</option>");
-//        mayday_sector_select.removeClass("glowlightgreen");
-//        tbarDataObjs.forEach(function(tbarDataObj, index, array){
-//            var newOption = $("<option>"+tbarDataObj.sectorTitle+"</option>");
-//            mayday_sector_select.append(newOption);
-//            if(tbarDataObj.sectorTitle==selectedSectorText) {
-//                newOption.attr("selected", "selected");
-//                mayday_sector_select.addClass("glowlightgreen");
-//                tbarDataObj.unitBtns.forEach(function(unitBtn, i){
-//                    var unitText = unitBtn.html();
-//                    var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
-//                    mayday_units_div.append(maydayUnitBtn);
-//                    if(typeof unitBtn.data('hasMayday')!='undefined' && unitBtn.data('hasMayday')=='true') {
-//                        btnsToBlink.push(maydayUnitBtn);
-//                    }
-//                    maydayUnitBtn.click(function(){
-//                        if(typeof unitBtn.data('hasMayday')=='undefined' || unitBtn.data('hasMayday')=='false') {
-//                            unitBtn.data({'hasMayday':'true'});
-//                        } else {
-//                            unitBtn.data({'hasMayday':'false'});
-//                        }
-//                        if(unitBtn.data('hasMayday')=='true') {
-//                            btnsToBlink.push(unitBtn);
-//                            btnsToBlink.push(maydayUnitBtn);
-//                        } else {
-//                            var index = btnsToBlink.indexOf(unitBtn);
-//                            console.log(index);
-//                            console.log(btnsToBlink);
-//                            console.log(unitBtn);
-//                            console.log(btnsToBlink.splice(index,1));
-//                            unitBtn.removeClass("glowred");
-//                            unitBtn.removeClass("glowpink");
-//                            var index_2 = btnsToBlink.indexOf(maydayUnitBtn);
-//                            btnsToBlink.splice(index_2,1);
-//                            maydayUnitBtn.removeClass("glowred");
-//                            maydayUnitBtn.removeClass("glowpink");
-//                        }
-//                    });
-//
-////                    selectedUnitsTexts.forEach(function(selectedUnitText, index, array){
-////                        mayday_units_div.find(":contains("+selectedUnitText+")").addClass("glowlightgreen");
-////                    });
-//                });
-//            }
-//        });
-//    });
+                btnsToBlink.remByVal(maydayUnitBtn);
+                maydayUnitBtn.removeClass("glowred");
+                maydayUnitBtn.removeClass("glowpink");
+            }
+        });
+    });
 }
 function clearMayday(maydayTd) {
     return function() {
@@ -478,24 +419,24 @@ function clearMayday(maydayTd) {
 var manyMaydays = 0;
 function addMaydayEvent() {
     manyMaydays++;
-    var newMaydayTd = $("#mayday_info_div_prototype").clone();
-    newMaydayTd.appendTo("#mayday_scroll_div");
-    newMaydayTd.show();
-    newMaydayTd.attr("id", "mayday_info_div_"+manyMaydays);
+    var maydayEl = $("#mayday_info_div_prototype").clone();
+    maydayEl.appendTo("#mayday_scroll_div");
+    maydayEl.show();
+    maydayEl.attr("id", "mayday_info_div_"+manyMaydays);
 
-    newMaydayTd.find(".mayday_box_title").html("Mayday #"+manyMaydays);
+    maydayEl.find(".mayday_box_title").html("Mayday #"+manyMaydays);
 
     // PSI button
-    var mayday_psi_btn = newMaydayTd.find(".mayday_psi_btn");
+    var mayday_psi_btn = maydayEl.find(".mayday_psi_btn");
     mayday_psi_btn.click(showDialog( 0, [mayday_psi_btn], "#psi_dialog" , $("#mayday_dialog")));
 
-    var mayday_clear_btn = newMaydayTd.find(".mayday_clear_btn");
-    mayday_clear_btn.click(clearMayday(newMaydayTd));
+    var mayday_clear_btn = maydayEl.find(".mayday_clear_btn");
+    mayday_clear_btn.click(clearMayday(maydayEl));
 
-    var hoseline_mayday_btn = newMaydayTd.find(".hoseline_mayday_btn");
-    var offhoseline_mayday_btn = newMaydayTd.find(".offhoseline_mayday_btn");
-    var uninjured_mayday_btn = newMaydayTd.find(".uninjured_mayday_btn");
-    var injured_mayday_btn = newMaydayTd.find(".injured_mayday_btn");
+    var hoseline_mayday_btn = maydayEl.find(".hoseline_mayday_btn");
+    var offhoseline_mayday_btn = maydayEl.find(".offhoseline_mayday_btn");
+    var uninjured_mayday_btn = maydayEl.find(".uninjured_mayday_btn");
+    var injured_mayday_btn = maydayEl.find(".injured_mayday_btn");
 
     hoseline_mayday_btn.click(
         function() {
@@ -530,17 +471,15 @@ function addMaydayEvent() {
             $("#mayday_units_div").find(".unit_btn").hide();
             var selectedSectorTitle = $(this).find("option:selected").text();
             tbar = $(".tbar").find(".title_text:contains("+selectedSectorTitle+")").parents(".tbar");
-            tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").each(function( i ) {
-                var unitText = $(this).html();
-                $("#mayday_units_div").find(".unit_btn:contains("+unitText+")").first().show();
-            });
-            updateMaydayEvents();
+//            tbar.find(".unit_btn").not(".blank_btn").not(".acct_unit_btn").each(function( i ) {
+//                var unitText = $(this).html();
+//                $("#mayday_units_div").find(".unit_btn:contains("+unitText+")").first().show();
+//            });
+            // Update Mayday unit list
+//            updateMaydayEvents();
+            selectMaydaySector(maydayEl, tbar);
         }
     );
-
-
-
-    updateMaydayEvents();
 }
 function selectMaydayTab(tab, color) {
     var tabEl = $("#mayday_right_tab_"+tab);
@@ -1726,7 +1665,7 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
                     btnsToBlink.remByVal(unitBtn);
                     unitBtn.removeClass("glowred");
                     unitBtn.removeClass("glowpink");
-                    
+
                     btnsToBlink.remByVal(maydayUnitBtn);
                     maydayUnitBtn.removeClass("glowred");
                     maydayUnitBtn.removeClass("glowpink");
