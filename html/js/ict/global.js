@@ -1237,7 +1237,7 @@ function initOsrDialog( ) {
             var mode_btn = $("#mode_btn");
             mode_btn.addClass("offensive_btn");
             mode_btn.removeClass("defensive_btn");
-            mode_btn.html("OFFNS");
+            mode_btn.html("OFFENSE");
             updateOsrPercentComplete();
         }
     );
@@ -1247,7 +1247,7 @@ function initOsrDialog( ) {
             var mode_btn = $("#mode_btn");
             mode_btn.addClass("defensive_btn");
             mode_btn.removeClass("offensive_btn");
-            mode_btn.html("DEFNS");
+            mode_btn.html("DEFENSE");
             updateOsrPercentComplete();
             showDialog(0, mode_btn, "#emergency_traffic_dialog")();
         }
@@ -1852,14 +1852,14 @@ function clickModeButton() {
     if(mode_btn.hasClass("offensive_btn")) {
         mode_btn.addClass("defensive_btn");
         mode_btn.removeClass("offensive_btn");
-        mode_btn.html("DEFNS");
+        mode_btn.html("DEFENSE");
         $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_def_btn").addClass("glowlightgreen");
         showDialog(0, mode_btn, "#emergency_traffic_dialog")();
     } else {
         mode_btn.addClass("offensive_btn");
         mode_btn.removeClass("defensive_btn");
-        mode_btn.html("OFFNS");
+        mode_btn.html("OFFENSE");
         $("#osr_occupancy_off_btn").addClass("glowlightgreen");
         $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
     }

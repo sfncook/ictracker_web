@@ -351,7 +351,12 @@ td {
 #mode_btn {
     z-index: 100;
     float:right;
-    margin: 10px 10px 0 0;
+    margin-right: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size:1.1rem;
 }
 #mode_side_dialog {
     top: 197px;
