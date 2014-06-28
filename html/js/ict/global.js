@@ -410,10 +410,32 @@ function selectMaydaySector(maydayEl, tbar) {
         });
     });
 }
-function clearMayday(maydayTd) {
+function clearMayday(maydayEl) {
     return function() {
-        maydayTd.hide();
-        showDialog(0, maydayTd.find(".mayday_clear_btn"), "#mayday_clear_dialog")();
+        var mayday_sector_title = maydayEl.find(".mayday_sector_title");
+        var mayday_sector_title_text = mayday_sector_title.text().replace("Sector: ", "");
+        var unit_btns = $(".tbar").find(".title_text:contains("+mayday_sector_title_text+")").parents(".tbar").find(".unit_btn");
+
+        unit_btns.each(function(){
+            var unit_btn = $(this);
+            if(typeof unit_btn.data('hasMayday')!='undefined' && unit_btn.data('hasMayday')=='true') {
+                //TODO: Ask Tim.
+                btnsToBlink.remByVal(unit_btn);
+                unit_btn.removeClass("glowred");
+                unit_btn.removeClass("glowpink");
+            }
+        });
+
+        maydayEl.find(".unit_btn").each(function(){
+            var maydayUnitBtn = $(this);
+            btnsToBlink.remByVal(maydayUnitBtn);
+            maydayUnitBtn.removeClass("glowred");
+            maydayUnitBtn.removeClass("glowpink");
+        });
+
+        maydayEl.remove();
+
+        showDialog(0, 0, "#mayday_clear_dialog")();
     }
 }
 var manyMaydays = 0;
