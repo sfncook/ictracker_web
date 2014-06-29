@@ -394,7 +394,7 @@ function onCloseMaydayDialog() {
 function selectMaydaySector(maydayEl, tbar) {
 
     removeAllMaydays(maydayEl);
-    
+    //TODO ISSUE: Add two maydays with same sector, different units.  Clear one mayday - removes has_mayday from all buttons on tbar.
     var mayday_units_div = maydayEl.find(".mayday_units_div");
     tbar.find(".unit_btn").each(function( i ) {
         var unitBtn = $(this);
@@ -418,16 +418,16 @@ function selectMaydaySector(maydayEl, tbar) {
 function removeAllMaydays(maydayEl) {
     var mayday_sector_title = maydayEl.find(".mayday_sector_title");
     var mayday_sector_title_text = mayday_sector_title.text().replace("Sector: ", "");
-    var unit_btns = $(".tbar").find(".title_text:contains("+mayday_sector_title_text+")").parents(".tbar").find(".unit_btn");
+    var tbar = $(".tbar").find(".title_text:contains("+mayday_sector_title_text+")").parents(".tbar");
+
+    // We are assuming there is just one mayday unit per mayday, but could be several mayday units per tbar
+    var mayday_unit_btn_text = maydayEl.find(".mayday_units_div").find(".unit_text").text();
+    var unit_btn = tbar.find(".unit_text:contains("+mayday_unit_btn_text+")").parents(".unit_btn");
+    unit_btn.removeClass("has_mayday");
+    unit_btn.removeClass("glowred");
+    unit_btn.removeClass("glowpink");
+
     var mayday_units_div = maydayEl.find(".mayday_units_div");
-
-    unit_btns.each(function(){
-        var unit_btn = $(this);
-        unit_btn.removeClass("has_mayday");
-        unit_btn.removeClass("glowred");
-        unit_btn.removeClass("glowpink");
-    });
-
     mayday_units_div.empty();
 }
 function clearMayday(maydayEl) {
