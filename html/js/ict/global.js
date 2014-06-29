@@ -963,8 +963,13 @@ function initBenchmarkDialog( ) {
 	dialogBody.attr("id",newId);
     dialog.find(".dialog_title_text_span").html("Benchmarks");
 
-	var left_col = $('<div class="benchmark_col_container benchmark_1st_col_container"/>');
-	left_col.appendTo(dialogBody);
+    var unable_to_obtain_benchmarks_col = $('<div class="benchmark_col_container benchmark_0th_col_container"/>');
+    unable_to_obtain_benchmarks_col.appendTo(dialogBody);
+    unable_to_obtain_benchmarks_col.append($("<div class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain Primary</div>"));
+    unable_to_obtain_benchmarks_col.append($("<div class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain Secondary</div>"));
+
+	var primary_benchmarks_col = $('<div class="benchmark_col_container benchmark_1st_col_container"/>');
+	primary_benchmarks_col.appendTo(dialogBody);
 
     var benchmark_item_prototype = $('<div class="benchmark_btn_parent_div"><div class="benchmark_item_btn button"></div></div>')
 
@@ -972,7 +977,7 @@ function initBenchmarkDialog( ) {
 //        var chkBox_primary = createCheckBox(benchmark.label, benchmark.id);
         var benchmark_item = benchmark_item_prototype.clone();
         benchmark_item.attr("id", benchmark.id);
-        left_col.append(benchmark_item);
+        primary_benchmarks_col.append(benchmark_item);
 
         var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
         benchmark_item_btn.html(benchmark.label);
@@ -981,10 +986,10 @@ function initBenchmarkDialog( ) {
         benchmark_item_btn.addClass("benchmark_item_btn_primary");
 
 
-        var right_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
-        right_col.appendTo(dialogBody);
-        right_col.hide();
-        right_cols[benchmark.id] = right_col;
+        var secondary_benchmarks_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
+        secondary_benchmarks_col.appendTo(dialogBody);
+        secondary_benchmarks_col.hide();
+        right_cols[benchmark.id] = secondary_benchmarks_col;
         benchmark.secondaries.forEach(function (benchmark_2, index, array) {
             var benchmark_item_2 = benchmark_item_prototype.clone();
             benchmark_item_2.attr("id", benchmark_2.id);
@@ -996,7 +1001,7 @@ function initBenchmarkDialog( ) {
                 benchmark_item_btn_2.addClass("par_benchmark_btn");
             }
 
-            right_col.append(benchmark_item_2);
+            secondary_benchmarks_col.append(benchmark_item_2);
         });
 
 	});

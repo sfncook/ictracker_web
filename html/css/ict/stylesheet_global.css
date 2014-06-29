@@ -665,18 +665,21 @@ td {
 }
 
 #benchmarks_dialog {
-    width: 350px;
+    width: 515px;
 }
 .benchmark_col_container {
     float: left;
-    width:50%;
 }
 .benchmark_1st_col_container {
     border-right: 1px solid #666;
 }
+.benchmark_double_btn {
+    margin-bottom: 10px !important;
+    height: 71px;
+}
 .benchmark_item_btn {
     width: 150px;
-    margin:0 0 0 10px;
+    margin: 0 10px;
 }
 .benchmark_btn_parent_div {
     padding: 5px 0 5px 0;
