@@ -225,7 +225,7 @@ td {
 }*/
 
 .font_red {
-    color: red;
+    color: red !important;
 }
 .glowred {
 	background: red !important;

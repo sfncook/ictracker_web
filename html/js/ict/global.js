@@ -895,6 +895,7 @@ function initActionsDialog( ) {
             var newBtn = prototypeBtn.clone();
             newBtn.html("*"+actionName);
             newBtn.addClass("glowpink");
+            newBtn.addClass("font_red");
 
             if(actionName.length>15) {
                 newBtn.addClass("btn_largetext");
