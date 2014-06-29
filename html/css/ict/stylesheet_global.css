@@ -224,6 +224,9 @@ td {
     margin-right:2px;
 }*/
 
+.font_red {
+    color: red;
+}
 .glowred {
 	background: red !important;
 	color: white;

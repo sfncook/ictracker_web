@@ -893,7 +893,7 @@ function initActionsDialog( ) {
 
         actionObj.actions_warning.forEach(function (actionName, index, array) {
             var newBtn = prototypeBtn.clone();
-            newBtn.html(actionName);
+            newBtn.html("*"+actionName);
             newBtn.addClass("glowpink");
 
             if(actionName.length>15) {
