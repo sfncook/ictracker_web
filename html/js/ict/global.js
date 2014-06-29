@@ -852,6 +852,11 @@ function addActionButtonToTbar(tbar, actionName) {
         actionBtn.addClass("btn_medtext");
     }
 
+    if(actionName=="IRIC") {
+        $("#iric_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+    }
+
     // Update scroll container
     var scroll_pane = tbar.find(".right_scroll_pane");
     var pane2api = scroll_pane.data('jsp');
