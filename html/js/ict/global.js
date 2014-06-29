@@ -1751,6 +1751,8 @@ function addTbar(col_x, row_y) {
             },
             function(unitName){
                 acctBtn.html(unitName);
+                $("#acct_osr_btn").addClass("glowlightgreen");
+                updateOsrPercentComplete();
                 hideAllDialogs();
             }
         )
