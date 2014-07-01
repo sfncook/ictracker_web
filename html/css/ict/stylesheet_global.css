@@ -355,11 +355,7 @@ td {
     z-index: 100;
     float:right;
     margin-right: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    font-size:1.1rem;
+    font-size:1.2rem;
 }
 #mode_side_dialog {
     top: 197px;
@@ -1155,4 +1151,8 @@ ul {
 }
 #address_custom_input {
     width: 400px;
+}
+
+.mayday_top_row_edge {
+    width: 200px;
 }
