@@ -965,8 +965,12 @@ function initBenchmarkDialog( ) {
 
     var unable_to_obtain_benchmarks_col = $('<div class="benchmark_col_container benchmark_0th_col_container"/>');
     unable_to_obtain_benchmarks_col.appendTo(dialogBody);
-    unable_to_obtain_benchmarks_col.append($("<div class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain Primary</div>"));
-    unable_to_obtain_benchmarks_col.append($("<div class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain Secondary</div>"));
+    var benchmark_unable_primary = $("<div id='benchmark_unable_primary' class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain Primary</div>");
+    var benchmark_unable_secondary = $("<div id='benchmark_unable_secondary' class='disabled benchmark_double_btn benchmark_item_btn button'>Unable to Obtain Secondary</div>");
+    benchmark_unable_primary.click(function(){clickUnableBenchmark(benchmark_unable_primary)});
+    benchmark_unable_secondary.click(function(){clickUnableBenchmark(benchmark_unable_secondary)});
+    unable_to_obtain_benchmarks_col.append(benchmark_unable_primary);
+    unable_to_obtain_benchmarks_col.append(benchmark_unable_secondary);
 
 	var primary_benchmarks_col = $('<div class="benchmark_col_container benchmark_1st_col_container"/>');
 	primary_benchmarks_col.appendTo(dialogBody);
@@ -984,6 +988,7 @@ function initBenchmarkDialog( ) {
         benchmark_item_btn.data("img_name",benchmark.img_name);
         benchmark_item_btn.click(clickPrimaryBenchmark(benchmark_item));
         benchmark_item_btn.addClass("benchmark_item_btn_primary");
+        benchmark_item_btn.attr("id", benchmark.id+"_btn");
 
 
         var secondary_benchmarks_col = $('<div class="benchmark_col_container benchmark_2nd_col_container"/>');
@@ -1008,30 +1013,56 @@ function initBenchmarkDialog( ) {
 
 	btnsToBlink.push($("#bnch_primary_challenge"));
 }
+function clickUnableBenchmark(unable_benchmark_btn) {
+    if(unable_benchmark_btn.hasClass("glowpink")) {
+        $("#benchmark_unable_primary").removeClass("glowpink");
+        $("#benchmark_unable_secondary").removeClass("glowpink");
+    } else {
+        if(unable_benchmark_btn.attr("id")=="benchmark_unable_primary") {
+            unable_benchmark_btn.addClass("glowpink");
+            resetBenchmarks();
+        }
+        if(unable_benchmark_btn.attr("id")=="benchmark_unable_secondary") {
+            resetBenchmarks();
+            clickPrimaryBenchmark($("#bnch_primary"))();
+            clickPrimaryBenchmark($("#bnch_underctl"))();
+            unable_benchmark_btn.addClass("glowpink");
+        }
+    }
+}
 function clickPrimaryBenchmark(benchmark_item) {
     return function() {
         var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
-        if(!benchmark_item_btn.hasClass("disabled")) {
-            benchmark_item_btn.toggleClass("glowlightgreen");
-            if(benchmark_item_btn.hasClass("glowlightgreen")) {
-                // If user Checked the box
-                tbar_clicked['primary_benchmark'] = benchmark_item.attr('id');
-                setBenchmark(benchmark_item.attr('id'));
-                var img_name = benchmark_item_btn.data("img_name");
-                tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
+        benchmark_item_btn.toggleClass("glowlightgreen");
+        if(benchmark_item_btn.hasClass("glowlightgreen")) {
+            // If user Checked the box
+            tbar_clicked['primary_benchmark'] = benchmark_item.attr('id');
+            setBenchmark(benchmark_item.attr('id'));
+            var img_name = benchmark_item_btn.data("img_name");
+            tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
+            if(benchmark_item.attr('id')=='bnch_underctl') {
+                $("#benchmark_unable_secondary").removeClass("disabled");
+            }
+            if(benchmark_item.attr('id')=='bnch_primary'){
+                $("#benchmark_unable_primary").removeClass("glowpink");
+                $("#benchmark_unable_secondary").removeClass("glowpink");
+                $("#benchmark_unable_secondary").addClass("disabled");
+            }
+            if(benchmark_item.attr('id')=='bnch_secondary'){
+                $("#benchmark_unable_secondary").removeClass("glowpink");
+            }
+        } else {
+            // If user UN-checked the box
+            resetSecondaryBenchmarks(tbar_clicked, benchmark_item.attr('id'));
+            if(benchmark_item.attr('id')=='bnch_primary'){
+                tbar_clicked['primary_benchmark'] = '';
+                resetBenchmarks();
+                tbar_clicked.find(".benchmarks_icon").attr("src", "images/benchmarks_0.png");
             } else {
-                // If user UN-checked the box
-                resetSecondaryBenchmarks(tbar_clicked, benchmark_item.attr('id'));
-                if(benchmark_item.attr('id')=='bnch_primary'){
-                    tbar_clicked['primary_benchmark'] = '';
-                    resetBenchmarks();
-                    tbar_clicked.find(".benchmarks_icon").attr("src", "images/benchmarks_0.png");
-                } else {
-                    tbar_clicked['primary_benchmark'] = benchmark_item.prev().attr('id');
-                    setBenchmark(benchmark_item.prev().attr('id'));
-                    var img_name = benchmark_item.prev().find(".benchmark_item_btn").data("img_name");
-                    tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
-                }
+                tbar_clicked['primary_benchmark'] = benchmark_item.prev().attr('id');
+                setBenchmark(benchmark_item.prev().attr('id'));
+                var img_name = benchmark_item.prev().find(".benchmark_item_btn").data("img_name");
+                tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
             }
         }
     };

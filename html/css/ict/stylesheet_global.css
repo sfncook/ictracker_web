@@ -672,6 +672,8 @@ td {
 .benchmark_double_btn {
     margin-bottom: 10px !important;
     height: 71px;
+    font-size: 1.1rem;
+    padding-top:10px;
 }
 .benchmark_item_btn {
     width: 150px;
