@@ -280,6 +280,10 @@
     width: 14px;
     height: 15px;
     margin-right: 4px;
+    float:left;
+}
+.benchmark_bar_img {
+    margin-bottom: 1px;
 }
 .benchmark_btn {
     width: 60px;
