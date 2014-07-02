@@ -989,7 +989,7 @@ function clickPrimaryBenchmark(benchmark_item) {
     benchmark_item_btn.toggleClass("glowlightgreen");
     if(benchmark_item_btn.hasClass("glowlightgreen")) {
         // If user Checked the box
-        tbar_clicked['primary_benchmark'] = benchmark_item.attr('id');
+        tbar_clicked.data('primary_benchmark',benchmark_item.attr('id'));
         setBenchmark(benchmark_item.attr('id'));
 //            var img_name = benchmark_item_btn.data("img_name");
 //            tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
@@ -1008,11 +1008,11 @@ function clickPrimaryBenchmark(benchmark_item) {
         // If user UN-checked the box
         resetSecondaryBenchmarks(tbar_clicked, benchmark_item.attr('id'));
         if(benchmark_item.attr('id')=='bnch_primary'){
-            tbar_clicked['primary_benchmark'] = '';
+            tbar_clicked.data('primary_benchmark','');
             resetBenchmarks();
             tbar_clicked.find(".benchmarks_icon").attr("src", "images/benchmarks_0.png");
         } else {
-            tbar_clicked['primary_benchmark'] = benchmark_item.prev().attr('id');
+            tbar_clicked.data('primary_benchmark',benchmark_item.prev().attr('id'));
             setBenchmark(benchmark_item.prev().attr('id'));
             var img_name = benchmark_item.prev().find(".benchmark_item_btn").data("img_name");
             tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
@@ -1067,7 +1067,9 @@ function setBenchmark(benchmark_item_id) {
 function clickSecondaryBenchmark(benchmark_item_2) {
     var benchmark_item_btn_2 = benchmark_item_2.find(".benchmark_item_btn");
     benchmark_item_btn_2.toggleClass("glowlightgreen");
-    tbar_clicked[benchmark_item_2.attr('id')] = benchmark_item_btn_2.hasClass("glowlightgreen");
+    var isOn = (benchmark_item_btn_2.hasClass("glowlightgreen"))?'true':'false';
+    var bchmk_id = benchmark_item_2.attr('id');
+    tbar_clicked.data(bchmk_id,isOn);
 }
 function resetSecondaryBenchmarks(tbar, chkbox_container_id) {
     return function() {
@@ -1094,8 +1096,8 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
 
         $(".benchmark_item_btn_secondary").each(function(){
             var bchmk_btn = $(this);
-            var bchmk_id = bchmk_btn.parents("benchmark_btn_parent_div").attr("id");
-            if(typeof tbar[bchmk_id] != 'undefined' && tbar[bchmk_id]) {
+            var bchmk_id = bchmk_btn.parents(".benchmark_btn_parent_div").attr("id");
+            if(typeof tbar.data(bchmk_id) != 'undefined' && tbar.data(bchmk_id)=='true') {
                 bchmk_btn.addClass("glowlightgreen");
             } else {
                 bchmk_btn.removeClass("glowlightgreen");
@@ -1104,8 +1106,8 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
 
         // Show the dialog box
         showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
-        if(typeof tbar['primary_benchmark'] != 'undefined' && tbar['primary_benchmark']!='') {
-            setBenchmark(tbar['primary_benchmark']);
+        if(typeof tbar.data('primary_benchmark') != 'undefined' && tbar.data('primary_benchmark')!='') {
+            setBenchmark(tbar.data('primary_benchmark'));
         } else {
             resetBenchmarks();
         }
