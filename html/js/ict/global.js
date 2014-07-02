@@ -978,8 +978,8 @@ function clickUnableToObtain(unable_benchmark_btn) {
         }
         if(unable_benchmark_btn.attr("id")=="benchmark_unable_secondary") {
             resetBenchmarks();
-            clickPrimaryBenchmark($("#bnch_primary"))();
-            clickPrimaryBenchmark($("#bnch_underctl"))();
+            clickPrimaryBenchmark($("#bnch_primary"));
+            clickPrimaryBenchmark($("#bnch_underctl"));
             unable_benchmark_btn.addClass("glowpink");
         }
     }
@@ -1018,6 +1018,8 @@ function clickPrimaryBenchmark(benchmark_item) {
             tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
         }
     }
+}
+function updateTbarBenchmarkIcon(tbar) {
 }
 function resetBenchmarks() {
     // Disable ALL
