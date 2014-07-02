@@ -1065,11 +1065,9 @@ function setBenchmark(benchmark_item_id) {
     }
 }
 function clickSecondaryBenchmark(benchmark_item_2) {
-    return function() {
-        var benchmark_item_btn_2 = benchmark_item_2.find(".benchmark_item_btn");
-        benchmark_item_btn_2.toggleClass("glowlightgreen");
-        tbar_clicked[benchmark_item_2.attr('id')] = benchmark_item_btn_2.hasClass("glowlightgreen");
-    };
+    var benchmark_item_btn_2 = benchmark_item_2.find(".benchmark_item_btn");
+    benchmark_item_btn_2.toggleClass("glowlightgreen");
+    tbar_clicked[benchmark_item_2.attr('id')] = benchmark_item_btn_2.hasClass("glowlightgreen");
 }
 function resetSecondaryBenchmarks(tbar, chkbox_container_id) {
     return function() {
@@ -1094,16 +1092,15 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html("Benchmarks");
         }
 
-        // Update all benchmarks for this tbar
-//        benchmarks.forEach(function (benchmark, index, array) {
-//            benchmark.secondaries.forEach(function (benchmark_2, index, array) {
-//                if(typeof tbar[benchmark_2.id] != 'undefined' && tbar[benchmark_2.id]) {
-//                    $('#'+benchmark_2.id).find(".benchmark_item_btn").addClass("glowlightgreen");
-//                } else {
-//                    $('#'+benchmark_2.id).find(".benchmark_item_btn").removeClass("glowlightgreen");
-//                }
-//            });
-//        });
+        $(".benchmark_item_btn_secondary").each(function(){
+            var bchmk_btn = $(this);
+            var bchmk_id = bchmk_btn.parents("benchmark_btn_parent_div").attr("id");
+            if(typeof tbar[bchmk_id] != 'undefined' && tbar[bchmk_id]) {
+                bchmk_btn.addClass("glowlightgreen");
+            } else {
+                bchmk_btn.removeClass("glowlightgreen");
+            }
+        });
 
         // Show the dialog box
         showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
