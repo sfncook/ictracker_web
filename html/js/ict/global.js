@@ -983,6 +983,7 @@ function clickUnableToObtain(unable_benchmark_btn) {
             unable_benchmark_btn.addClass("glowpink");
         }
     }
+    updateTbarBenchmarkIcon(tbar_clicked);
 }
 function clickPrimaryBenchmark(benchmark_item) {
     var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
@@ -991,8 +992,6 @@ function clickPrimaryBenchmark(benchmark_item) {
         // If user Checked the box
         tbar_clicked.data('primary_benchmark',benchmark_item.attr('id'));
         setBenchmark(benchmark_item.attr('id'));
-//            var img_name = benchmark_item_btn.data("img_name");
-//            tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
         if(benchmark_item.attr('id')=='bnch_underctl') {
             $("#benchmark_unable_secondary").removeClass("disabled");
         }
@@ -1014,12 +1013,39 @@ function clickPrimaryBenchmark(benchmark_item) {
         } else {
             tbar_clicked.data('primary_benchmark',benchmark_item.prev().attr('id'));
             setBenchmark(benchmark_item.prev().attr('id'));
-            var img_name = benchmark_item.prev().find(".benchmark_item_btn").data("img_name");
-            tbar_clicked.find(".benchmarks_icon").attr("src", img_name);
         }
     }
+    updateTbarBenchmarkIcon(tbar_clicked);
 }
 function updateTbarBenchmarkIcon(tbar) {
+    tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_black.png");
+    tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_black.png");
+    tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_black.png");
+    tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_black.png");
+
+    if($("#benchmark_unable_primary").hasClass("glowpink")) {
+        tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
+    } else {
+        if($("#bnch_primary").find(".benchmark_item_btn").hasClass("glowlightgreen")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+    }
+
+    if($("#bnch_underctl").find(".benchmark_item_btn").hasClass("glowlightgreen")) {
+        tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+    }
+
+    if($("#benchmark_unable_secondary").hasClass("glowpink")) {
+        tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_red.png");
+    } else {
+        if($("#bnch_secondary").find(".benchmark_item_btn").hasClass("glowlightgreen")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+    }
+
+    if($("#bnch_lossstop").find(".benchmark_item_btn").hasClass("glowlightgreen")) {
+        tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
+    }
 }
 function resetBenchmarks() {
     // Disable ALL
