@@ -983,6 +983,12 @@ function clickUnableToObtain(unable_benchmark_btn) {
             unable_benchmark_btn.addClass("glowpink");
         }
     }
+    var isOn_1 = ($("#benchmark_unable_primary").hasClass("glowpink"))?'true':'false';
+    tbar_clicked.data('benchmark_unable_primary',isOn_1);
+
+    var isOn_2 = ($("#benchmark_unable_secondary").hasClass("glowpink"))?'true':'false';
+    tbar_clicked.data('benchmark_unable_secondary',isOn_2);
+
     updateTbarBenchmarkIcon(tbar_clicked);
 }
 function clickPrimaryBenchmark(benchmark_item) {
@@ -1121,7 +1127,6 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         } else {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html("Benchmarks");
         }
-
         $(".benchmark_item_btn_secondary").each(function(){
             var bchmk_btn = $(this);
             var bchmk_id = bchmk_btn.parents(".benchmark_btn_parent_div").attr("id");
@@ -1131,6 +1136,7 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
                 bchmk_btn.removeClass("glowlightgreen");
             }
         });
+
 
         // Show the dialog box
         showDialog(tbar, benchmarkBtn, "#benchmarks_dialog")();
