@@ -2199,7 +2199,10 @@ var sectorsWithClock = [
 	"Sector 3",
 	"Sector 4",
 	"RESCUE",
-	"Sector"
+	"Sector",
+    "Safety",
+    "IRIC",
+    "RIC"
 	];
 var sectorsWithOutAcctBtn = [
 	"ReHab",
