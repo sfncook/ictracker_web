@@ -839,12 +839,18 @@ function removeActionButtonFromTbar(tbar, actionName) {
 }
 function addActionButtonToTbar(tbar, actionName) {
     // Update Actions Dialog
-    $(".action_dialog_btn").filter(function () {
+    var action_dialog_btn = $(".action_dialog_btn").filter(function () {
         return $(this).text() == actionName;
-    }).addClass("glowlightgreen");
+    });
+    action_dialog_btn.addClass("glowlightgreen");
 
+    var is_font_red = action_dialog_btn.hasClass("font_red");
     // Add action button to TBar
     var actionBtn = $("<div class='disabled action_btn button'>"+actionName+"</div>");
+
+    if(is_font_red) {
+        actionBtn.addClass("font_red");
+    }
 
     if(actionName.length>19) {
         actionBtn.addClass("btn_largetext");
@@ -898,8 +904,7 @@ function initActionsDialog( ) {
 
         actionObj.actions_warning.forEach(function (actionName, index, array) {
             var newBtn = prototypeBtn.clone();
-            newBtn.html("*"+actionName);
-            newBtn.addClass("glowpink");
+            newBtn.html(actionName);
             newBtn.addClass("font_red");
 
             if(actionName.length>15) {
@@ -2156,14 +2161,14 @@ var actions = [
             "360 recon"
         ],
         actions_warning:[
-            "Pool",
-            "Empty Pool",
-            "Powerlines",
-            "Powerlines Down",
-            "Bars on Windows",
-            "Dogs in Yard",
-            "Hoarders House",
-            "Basement"
+            "*Pool",
+            "*Empty Pool",
+            "*Powerlines",
+            "*Powerlines Down",
+            "*Bars on Windows",
+            "*Dogs in Yard",
+            "*Hoarders House",
+            "*Basement"
     ]},
     {action_type:"Rescue",
         actions:[
