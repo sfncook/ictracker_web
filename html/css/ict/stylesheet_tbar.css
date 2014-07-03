@@ -31,6 +31,8 @@
 }
 .title_dir {
     width:15px;
+    font-size:0.7rem;
+    padding-top:4px;
 }
 .title_num {
     width:15px;

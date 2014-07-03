@@ -554,7 +554,6 @@ function showSectorDialog( tbar, btn, dialogId ){
         sectorDlg.show();
 
         // Toggle prefix_dir buttons
-        tbar_clicked.prefix_dir
         $(".dir_supl_info_dir_btn").removeClass("glow_orange");
         $("."+tbar.prefix_dir+"_supl_btn").addClass("glow_orange");
 
@@ -620,7 +619,16 @@ function toggleDirBtn(btn) {
 		btn.addClass("glow_orange");
 		tbar_clicked.prefix_dir = btn.html();
 		tbarDirBtn.show();
-		tbarDirBtn.html(btn.html());
+        if(btn.html()=="N") {
+            tbarDirBtn.html("North");
+        } else if(btn.html()=="E") {
+            tbarDirBtn.html("East");
+        } else if(btn.html()=="S") {
+            tbarDirBtn.html("South");
+        } else {
+            tbarDirBtn.html("West");
+        }
+//		tbarDirBtn.html(btn.html());
 	}
 }
 function clickNumBtn(btn) {
