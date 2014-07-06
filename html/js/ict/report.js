@@ -17,8 +17,8 @@ function generateReport() {
 	var done = false;
 
 	while (!done) {
-		drawTitle(doc, $("#inc_num").html());
-		drawFooter(doc, page_number, $("#address").html());
+//		drawTitle(doc, $("#inc_num").html());
+//		drawFooter(doc, page_number, $("#address").html());
 		drawOnePageOfEvents(doc, eventIndex);
 		if (eventIndex<events.length) {
 			page_number++;

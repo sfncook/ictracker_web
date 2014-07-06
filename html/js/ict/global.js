@@ -1713,12 +1713,14 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
     unit_row_div.find(".unit_move_checkbox").hide();
 
     // Unit Timer
-    // I think we'll need to show/hide the timer in the updateTbar function, but start it here.
     var unit_timer_bg = unitBtn.find(".unit_timer_bg");
     startUnitTimerAnim(unit_timer_bg.find(".unit_timer_bar"));
 
     // Reinitialize
     pane2api.reinitialise();
+
+    // Add event for report
+    addEvent_unit_to_sector(unitName, tbar.find(".title_text").text());
 
     updateTbar(tbar);
 }
@@ -2054,7 +2056,7 @@ function init( ) {
 	initUnitsDialog();
 	initUnitPeopleDialog();
 	initBenchmarkDialog();
-	$("#report_btn").click(function(){alert("TESTING");});
+	$("#report_btn").click(function(){generateReport();});
 	initCmdTerminateDialog();
 	initMaydayDialog();
 	initObjectivesDialog();
