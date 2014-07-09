@@ -306,7 +306,7 @@ td {
 	height: 25px;
 }
 #iap_btn {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 #time {
     text-align: center;
@@ -378,6 +378,11 @@ td {
 .report_icon {
     width: 20px;
     height: 20px;
+}
+#dispatched_units_btn {
+    z-index: 100;
+    height: 46px;
+    margin-top: 10px;
 }
 #cmd_term_btn {
     z-index: 100;
@@ -491,6 +496,20 @@ td {
 #units_dialog {
     width: 855px;
 }
+#dispatched_units_div {
+    width: 846px;
+    min-height: 60px;
+    margin: 2px;
+    border: 3px double #666;
+}
+#title_dispatched_units_div {
+    color: #999;
+    margin: 1px;
+}
+.dispatched_unit_btn {
+    margin: 3px;
+    float: left;
+}
 #units_dialog_cities_div {
 	display:block;
 	padding-left:80px;
@@ -500,13 +519,13 @@ td {
 	display:block;
 	float:left;
 	width:80px;
-	height: 555px;
+	height: 450px;
 	border-right:1px solid #999;
 }
 .units_dialog_citybtns_div {
 	display:block;
 	width: 755px;
-	height: 555px;
+	height: 450px;
 	float: right;
 	overflow: scroll;
 }
@@ -924,7 +943,7 @@ td {
     margin: 5px 10px 5px 10px;
 }
 #objectives_header_btn {
-    margin-top: 20px;
+    margin-top: 10px;
     height: 45px;
 }
 #objective_right_col {

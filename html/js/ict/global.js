@@ -1425,7 +1425,10 @@ function initUnitsDialog( ) {
 	var dialog_title_text = unitsDialog.find(".dialog_title_text");
 	dialog_title_text.append("Units");
 	var dialog_body = unitsDialog.find(".dialog_body");
-	
+
+    var dispactedUnitsDiv = $('<div id="dispatched_units_div"></div>').appendTo(dialog_body);
+    dispactedUnitsDiv.append($('<div id="title_dispatched_units_div">Dispatched Units</div>'));
+    dispactedUnitsDiv.append($('<div id="units_dispatched_units_div"><div class="clear_float"></div></div>'));
 	var citiesDiv = $('<div id="units_dialog_cities_div"></div>').appendTo(dialog_body);
 	var typesDiv = $('<div id="units_dialog_types_div"></div>').appendTo(dialog_body);;
 	var btnsDivProto = $('<div class="units_dialog_citybtns_div"></div>');
@@ -1999,8 +2002,24 @@ function getHttpRequestByName(name) {
 
 
 
-function init_splash_buttons() {
-    
+function initDispatchedUnits() {
+    var dispatched_units_btn = $("#dispatched_units_btn");
+    dispatched_units_btn.click(showDialog_withCallbacks(
+        "#units_dialog",
+        0,//parent dialog
+        function(){
+            $(".unit_dialog_btn").removeClass("glowlightgreen");
+            $(".dispatched_unit_btn").each(function(){
+                var unit_text = $(this).text();
+                $(".unit_dialog_btn:contains('"+unit_text+"')").addClass("glowlightgreen");
+            });
+        },
+        function(unitName){
+            var dispatched_unit_btn = $('<div class="dispatched_unit_btn unit_btn button">'+unitName+'</div>');
+            var units_dispatched_units_div = $("#units_dispatched_units_div");
+            units_dispatched_units_div.prepend(dispatched_unit_btn);
+        }
+    ));
 }
 
 
@@ -2065,6 +2084,7 @@ function init( ) {
 	initIncidentInfo();
 	initEmergTrafficDialog();
 	init10KeyDialog();
+    initDispatchedUnits();
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
