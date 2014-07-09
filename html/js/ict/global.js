@@ -1428,7 +1428,7 @@ function initUnitsDialog( ) {
 
     var dispactedUnitsDiv = $('<div id="dispatched_units_div"></div>').appendTo(dialog_body);
     dispactedUnitsDiv.append($('<div id="title_dispatched_units_div">Dispatched Units</div>'));
-    dispactedUnitsDiv.append($('<div id="units_dispatched_units_div"><div class="clear_float"></div></div>'));
+    dispactedUnitsDiv.append($('<div id="units_dispatched_units_div"><div id="units_dispatched_units_div_clear_float" class="clear_float"></div></div>'));
 	var citiesDiv = $('<div id="units_dialog_cities_div"></div>').appendTo(dialog_body);
 	var typesDiv = $('<div id="units_dialog_types_div"></div>').appendTo(dialog_body);;
 	var btnsDivProto = $('<div class="units_dialog_citybtns_div"></div>');
@@ -1719,6 +1719,9 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
     var unit_timer_bg = unitBtn.find(".unit_timer_bg");
     startUnitTimerAnim(unit_timer_bg.find(".unit_timer_bar"));
 
+    // Dispatched Units
+    addDispatchedUnit(unitName);
+
     // Reinitialize
     pane2api.reinitialise();
 
@@ -2000,24 +2003,45 @@ function getHttpRequestByName(name) {
 	return(return_value);        
 }//getHttpRequestByName
 
-
-
+function addDispatchedUnit(unit_text) {
+    if($(".dispatched_unit_btn:contains('"+unit_text+"')").length==0) {
+        var dispatched_unit_btn = $('<div class="dispatched_unit_btn unit_btn button">' + unit_text + '</div>');
+        var units_dispatched_units_div = $("#units_dispatched_units_div");
+        $("#units_dispatched_units_div_clear_float").before(dispatched_unit_btn);
+        if (unit_text.length > 5) {
+            dispatched_unit_btn.addClass("btn_largetext");
+        } else if (unit_text.length > 4) {
+            dispatched_unit_btn.addClass("btn_medtext");
+        }
+        dispatched_unit_btn.click(function() {
+            if(typeof tbar_clicked!='undefined' && tbar_clicked!=0) {
+                onClickCallback(unit_text);
+            }
+        });
+    }
+}
 function initDispatchedUnits() {
     var dispatched_units_btn = $("#dispatched_units_btn");
     dispatched_units_btn.click(showDialog_withCallbacks(
         "#units_dialog",
         0,//parent dialog
         function(){
+            tbar_clicked = 0;
             $(".unit_dialog_btn").removeClass("glowlightgreen");
             $(".dispatched_unit_btn").each(function(){
                 var unit_text = $(this).text();
                 $(".unit_dialog_btn:contains('"+unit_text+"')").addClass("glowlightgreen");
             });
         },
-        function(unitName){
-            var dispatched_unit_btn = $('<div class="dispatched_unit_btn unit_btn button">'+unitName+'</div>');
-            var units_dispatched_units_div = $("#units_dispatched_units_div");
-            units_dispatched_units_div.prepend(dispatched_unit_btn);
+        function(unit_text){
+            var unit_dialog_btn = $(".unit_dialog_btn:contains('"+unit_text+"')");
+            if($(".dispatched_unit_btn:contains('"+unit_text+"')").length==0) {
+                addDispatchedUnit(unit_text);
+                unit_dialog_btn.addClass("glowlightgreen");
+            } else {
+                $(".dispatched_unit_btn:contains('"+unit_text+"')").remove();
+                unit_dialog_btn.removeClass("glowlightgreen");
+            }
         }
     ));
 }

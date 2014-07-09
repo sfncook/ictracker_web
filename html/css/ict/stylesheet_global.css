@@ -507,7 +507,7 @@ td {
     margin: 1px;
 }
 .dispatched_unit_btn {
-    margin: 3px;
+    margin: 4px 4px 6px 4px;
     float: left;
 }
 #units_dialog_cities_div {
