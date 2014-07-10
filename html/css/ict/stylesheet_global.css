@@ -26,6 +26,11 @@ body {
     overflow-y: hidden;
 }
 
+:focus {
+    /*Get rid of annoying blue outline when you click on anything*/
+    outline: none !important;
+}
+
 td {
     vertical-align: middle;
 }
