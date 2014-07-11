@@ -2049,43 +2049,13 @@ function initDispatchedUnits() {
 
 
 function initTabs() {
-    var tabTitle = $( "#tab_title" ),
-        tabContent = $( "#tab_content" ),
-        tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
-        tabCounter = 1;
-
     var tabs = $( "#tabs" ).tabs();
+    var dialog = $("#newform_dialog");
     $( "#add_tab" )
         .button()
         .click(function() {
             dialog.dialog( "open" );
         });
-
-    var dialog = $( "#newform_dialog" ).dialog({
-        autoOpen: false,
-        modal: true
-    });
-    $("#newform_dialog").dialog( "option", "width", 800 );
-
-    // addTab form: calls addTab function on submit and closes the dialog
-    var form = dialog.find( "form" ).submit(function( event ) {
-        addTab();
-        dialog.dialog( "close" );
-        event.preventDefault();
-    });
-
-    // actual addTab function: adds new tab using the input from the form above
-    function addTab() {
-        var label = tabTitle.val() || "Tab " + tabCounter,
-            id = "tabs-" + tabCounter,
-            li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
-            tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
-
-        tabs.find( ".ui-tabs-nav" ).append( li );
-        tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
-        tabs.tabs( "refresh" ).tabs( "option", "active", tabCounter-1 );
-        tabCounter++;
-    }
 }
 
 /**
@@ -2949,70 +2919,132 @@ var safteyNames = [
 	"Smith",];
 
 
+function addFireTab() {
+    var tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
+        tabCounter = 1;
+
+    var label = "Fire",
+        id = "tabs-" + tabCounter,
+        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) );
+
+    var tabs = $( "#tabs" );
+    tabs.find( ".ui-tabs-nav" ).append( li );
+    tabs.append( "<div id='" + id + "' class='gridster'><ul></ul></div>" );
+    tabs.tabs( "refresh" ).tabs( "option", "active", tabCounter-1 );
+    tabCounter++;
+
+    initFireIncident();
+}
+
 function init_newFormDialog() {
+    var tabTitle = $( "#tab_title" ),
+        tabContent = $( "#tab_content" ),
+        tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
+        tabCounter = 1;
+
+    var dialog = $( "#newform_dialog" ).dialog({
+        autoOpen: false,
+        modal: true
+    });
+    $("#newform_dialog").dialog( "option", "width", 800 );
+
+    // addTab form: calls addTab function on submit and closes the dialog
+    var form = dialog.find( "form" ).submit(function( event ) {
+        addTab();
+        dialog.dialog( "close" );
+        event.preventDefault();
+    });
+
+    // actual addTab function: adds new tab using the input from the form above
+    function addTab() {
+        var label = tabTitle.val() || "Tab " + tabCounter,
+            id = "tabs-" + tabCounter,
+            li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+            tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+
+        tabs.find( ".ui-tabs-nav" ).append( li );
+        tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
+        tabs.tabs( "refresh" ).tabs( "option", "active", tabCounter-1 );
+        tabCounter++;
+    }
+
     var btnPrototypeStr = '<div class="splash_start_btn button">'+
         '<img class="splash_start_btn_icon" src="[icon]"/>'+
         '<div class="splash_start_btn_text">[text]</div>'+
-        '</div>'
+        '</div>';
     incidentStartBtns.forEach(function(btnObj, index, array){
         var btnText = btnPrototypeStr.replace("[icon]", btnObj.icon).replace("[text]", btnObj.text);
         var btn = $(btnText);
+        btn.attr("id", btnObj.id);
         $("#splash_row"+btnObj.row).append(btn);
     });
     $("#splash_row2").append($("<div class='clear_float'></div>"));
     $("#splash_row3").append($("<div class='clear_float'></div>"));
     $("#splash_row4").append($("<div class='clear_float'></div>"));
+
+    $("#fire_btn").click(function(){addFireTab();dialog.dialog( "close" );$("#fire_btn").addClass("disabled");});
+    $(".splash_start_btn:not(#fire_btn)").addClass("disabled");
 }
 
 var incidentStartBtns = [
     {
         icon:"images/icons/fire.png",
         text:"Fire Incident",
+        id:"fire_btn",
         row:2
     },
     {
         icon:"images/icons/medical.png",
         text:"Medical Incident",
+        id:"medical_btn",
         row:2
     },
     {
         icon:"images/icons/plane.png",
         text:"ARFF Incident",
+        id:"plane_btn",
         row:3
     },
     {
         icon:"images/icons/hazmat.png",
         text:"HazMat Incident",
+        id:"hazmat_btn",
         row:3
     },
     {
         icon:"images/icons/water.png",
         text:"Water Rescue",
+        id:"water_btn",
         row:3
     },
     {
         icon:"images/icons/trench.png",
         text:"Trench Rescue",
+        id:"trench_btn",
         row:3
     },
     {
         icon:"images/icons/mountain.png",
         text:"Mountain Rescue",
+        id:"mountain_btn",
         row:4
     },
     {
         icon:"images/icons/palm.png",
         text:"Palm Rescue",
+        id:"palm_btn",
         row:4
     },
     {
         icon:"images/icons/structure.png",
         text:"Structural Rescue",
+        id:"structure_btn",
         row:4
     },
     {
         icon:"images/icons/confined.png",
         text:"Confined Space Rescue",
+        id:"confined_btn",
         row:4
     }
 ];
