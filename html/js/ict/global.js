@@ -2052,7 +2052,7 @@ function initTabs() {
     var tabTitle = $( "#tab_title" ),
         tabContent = $( "#tab_content" ),
         tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
-        tabCounter = 2;
+        tabCounter = 1;
 
     var tabs = $( "#tabs" ).tabs();
     $( "#add_tab" )
@@ -2094,7 +2094,7 @@ function initTabs() {
 
         tabs.find( ".ui-tabs-nav" ).append( li );
         tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
-        tabs.tabs( "refresh" );
+        tabs.tabs( "refresh" ).tabs( "option", "active", tabCounter-1 );
         tabCounter++;
     }
 }
@@ -2129,40 +2129,43 @@ function updateTimer() {
 	}
 }
 
-var gridster;
-function init( ) {
 
-    var log = document.getElementById('log');
+var gridster;
+function initFireIncident() {
 
     gridster = $(".gridster ul").gridster({
-      widget_base_dimensions: [278, 275],
-      widget_margins: [5, 5],
-      autogrow_cols: false
+        widget_base_dimensions: [278, 275],
+        widget_margins: [5, 5],
+        autogrow_cols: false
     }).data('gridster');
     gridster.disable();
 
     initTbars();
 
-	//Init Dialogs
-	initSectorDialog();
-	initParDialog();
-	initPsiDialog();
-	initActionsDialog();
-	initUnitsDialog();
-	initUnitPeopleDialog();
-	initBenchmarkDialog();
-	$("#report_btn").click(function(){generateReport();});
-	initCmdTerminateDialog();
-	initMaydayDialog();
-	initObjectivesDialog();
-	initOsrDialog();
-	initIapDialog();
-	initIncidentInfo();
-	initEmergTrafficDialog();
-	init10KeyDialog();
+    //Init Dialogs
+    initSectorDialog();
+    initParDialog();
+    initPsiDialog();
+    initActionsDialog();
+    initUnitsDialog();
+    initUnitPeopleDialog();
+    initBenchmarkDialog();
+    $("#report_btn").click(function(){generateReport();});
+    initCmdTerminateDialog();
+    initMaydayDialog();
+    initObjectivesDialog();
+    initOsrDialog();
+    initIapDialog();
+    initIncidentInfo();
+    initEmergTrafficDialog();
+    init10KeyDialog();
     initDispatchedUnits();
+}
 
+function init( ) {
     initTabs();
+
+
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
