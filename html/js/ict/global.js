@@ -1631,7 +1631,7 @@ function initTbars() {
 
     addTbar();
 
-    rehab_tbar.find(".benchmark_btn").hide();
+//    rehab_tbar.find(".benchmark_btn").hide();
 }
 
 
@@ -1846,7 +1846,7 @@ function addTbar(col_x, row_y) {
                 unit_move_btn.hide();
                 unit_move_cancel_btn.show();
                 var tbar_cover = $("<div class='tbar_move_unit_cover'></div>");
-                tbar_cover.appendTo($('#mayday_and_tbar_container'));
+                tbar_cover.appendTo($('body'));
                 tbar_cover.width(unit_col_destination.width() + 1);
                 tbar_cover.height(unit_col_destination.height() + 1);
                 tbar_cover.offset(unit_col_destination.offset());
@@ -2047,6 +2047,58 @@ function initDispatchedUnits() {
 }
 
 
+
+function initTabs() {
+    var tabTitle = $( "#tab_title" ),
+        tabContent = $( "#tab_content" ),
+        tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
+        tabCounter = 2;
+
+    var tabs = $( "#tabs" ).tabs();
+    $( "#add_tab" )
+        .button()
+        .click(function() {
+            dialog.dialog( "open" );
+        });
+
+    var dialog = $( "#dialog" ).dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            Add: function() {
+                addTab();
+                $( this ).dialog( "close" );
+            },
+            Cancel: function() {
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            form[ 0 ].reset();
+        }
+    });
+
+    // addTab form: calls addTab function on submit and closes the dialog
+    var form = dialog.find( "form" ).submit(function( event ) {
+        addTab();
+        dialog.dialog( "close" );
+        event.preventDefault();
+    });
+
+    // actual addTab function: adds new tab using the input from the form above
+    function addTab() {
+        var label = tabTitle.val() || "Tab " + tabCounter,
+            id = "tabs-" + tabCounter,
+            li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+            tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+
+        tabs.find( ".ui-tabs-nav" ).append( li );
+        tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
+        tabs.tabs( "refresh" );
+        tabCounter++;
+    }
+}
+
 /**
  * Init Timer
  **/
@@ -2110,6 +2162,8 @@ function init( ) {
 	init10KeyDialog();
     initDispatchedUnits();
 
+    initTabs();
+
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
 	$("#tbar_prototype").hide();
@@ -2128,7 +2182,6 @@ function init( ) {
         }
 	});
 
-    $("#move_unit_screen_cover").hide();
 	$("#mode_btn").click(clickModeButton);
 	
 	hideAllDialogs();
