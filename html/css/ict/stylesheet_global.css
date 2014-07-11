@@ -76,20 +76,19 @@ td {
     font-size: 2.0rem;
 }
 .splash_start_btn {
-    height: 70px;
-    width: 180px;
+    height: 78px;
+    width: 170px;
     margin: 10px;
-    font-size: 2.0rem;
     padding-top: 5px !important;
     float: left;
 }
 .splash_start_btn_icon {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 .splash_start_btn_text {
     margin-left:10px;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
 }
 
 #header_spacer_td {

@@ -84,5 +84,5 @@ var incidentStartBtns = [
 	    text:"Confined Space Rescue",
 	    disabled:"true",
 	    row:4
-	},
+	}
 ];

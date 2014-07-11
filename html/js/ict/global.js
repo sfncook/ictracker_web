@@ -2061,22 +2061,11 @@ function initTabs() {
             dialog.dialog( "open" );
         });
 
-    var dialog = $( "#dialog" ).dialog({
+    var dialog = $( "#newform_dialog" ).dialog({
         autoOpen: false,
-        modal: true,
-        buttons: {
-            Add: function() {
-                addTab();
-                $( this ).dialog( "close" );
-            },
-            Cancel: function() {
-                $( this ).dialog( "close" );
-            }
-        },
-        close: function() {
-            form[ 0 ].reset();
-        }
+        modal: true
     });
+    $("#newform_dialog").dialog( "option", "width", 800 );
 
     // addTab form: calls addTab function on submit and closes the dialog
     var form = dialog.find( "form" ).submit(function( event ) {
@@ -2163,8 +2152,8 @@ function initFireIncident() {
 }
 
 function init( ) {
+    init_newFormDialog();
     initTabs();
-
 
 
     $("#unit_row_div_prototype").hide();
@@ -2960,3 +2949,70 @@ var safteyNames = [
 	"Smith",];
 
 
+function init_newFormDialog() {
+    var btnPrototypeStr = '<div class="splash_start_btn button">'+
+        '<img class="splash_start_btn_icon" src="[icon]"/>'+
+        '<div class="splash_start_btn_text">[text]</div>'+
+        '</div>'
+    incidentStartBtns.forEach(function(btnObj, index, array){
+        var btnText = btnPrototypeStr.replace("[icon]", btnObj.icon).replace("[text]", btnObj.text);
+        var btn = $(btnText);
+        $("#splash_row"+btnObj.row).append(btn);
+    });
+    $("#splash_row2").append($("<div class='clear_float'></div>"));
+    $("#splash_row3").append($("<div class='clear_float'></div>"));
+    $("#splash_row4").append($("<div class='clear_float'></div>"));
+}
+
+var incidentStartBtns = [
+    {
+        icon:"images/icons/fire.png",
+        text:"Fire Incident",
+        row:2
+    },
+    {
+        icon:"images/icons/medical.png",
+        text:"Medical Incident",
+        row:2
+    },
+    {
+        icon:"images/icons/plane.png",
+        text:"ARFF Incident",
+        row:3
+    },
+    {
+        icon:"images/icons/hazmat.png",
+        text:"HazMat Incident",
+        row:3
+    },
+    {
+        icon:"images/icons/water.png",
+        text:"Water Rescue",
+        row:3
+    },
+    {
+        icon:"images/icons/trench.png",
+        text:"Trench Rescue",
+        row:3
+    },
+    {
+        icon:"images/icons/mountain.png",
+        text:"Mountain Rescue",
+        row:4
+    },
+    {
+        icon:"images/icons/palm.png",
+        text:"Palm Rescue",
+        row:4
+    },
+    {
+        icon:"images/icons/structure.png",
+        text:"Structural Rescue",
+        row:4
+    },
+    {
+        icon:"images/icons/confined.png",
+        text:"Confined Space Rescue",
+        row:4
+    }
+];
