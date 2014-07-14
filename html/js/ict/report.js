@@ -17,7 +17,9 @@ function generateReport() {
 	var done = false;
 
 	while (!done) {
+        drawTitle(doc, "");
 //		drawTitle(doc, $("#inc_num").html());
+        drawFooter(doc, page_number, "");
 //		drawFooter(doc, page_number, $("#address").html());
 		drawOnePageOfEvents(doc, eventIndex);
 		if (eventIndex<events.length) {
@@ -86,16 +88,17 @@ function drawOnePageOfEvents(doc) {
 	for (; eventIndex<events.length && (y<BOTTOM_SIDE-MARGIN-15); eventIndex++)
 	{
 		var event = events[eventIndex];
-		if (event.type=="unit_to_sector") {
-			render_unit_to_sector(y, event, doc);
-		}
+        event.render_func(y, event, doc);
+//		if (event.type=="unit_to_sector") {
+//			render_unit_to_sector(y, event, doc);
+//		}
 		y+=8;
 	}
 }
 
 function renderPdf(doc) {
-	//doc.output('dataurlnewwindow', {});
-	doc.output('datauri', {});
+	doc.output('dataurlnewwindow', {});
+//	doc.output('datauri', {});
 }
 
 
@@ -115,13 +118,63 @@ function getDateStr(date) {
 	}
 	return hour+":"+min+":"+sec;
 }
-function addEvent_unit_to_sector(unit_name, sector_name) {
-	events.push({"type":"unit_to_sector",
+
+
+function addEvent_title_to_sector(sector) {
+    events.push({"render_func":render_title_to_sector,
+        "datetime":new Date(),
+        "sector":sector});
+}
+function render_title_to_sector(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Sector initialized:"+event.sector, MARGIN, y);
+}
+
+function addEvent_unit_to_sector(unit, sector) {
+	events.push({"render_func":render_unit_to_sector,
 				"datetime":new Date(),
-				"unit":unit_name,
-				"sector":sector_name});
+				"unit":unit,
+				"sector":sector});
 }
 function render_unit_to_sector(y, event, doc) {
 	doc.text(getDateStr(event.datetime)+"  Unit:"+event.unit+" added to Sector:"+event.sector, MARGIN, y);
 }
 
+function addEvent_action_to_unit(action, unit, sector) {
+    events.push({"render_func":render_action_to_unit,
+        "datetime":new Date(),
+        "action":action,
+        "unit":unit,
+        "sector":sector});
+}
+function render_action_to_unit(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Action:"+event.action+" added to Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
+}
+
+function addEvent_person_has_par(unit, sector) {
+    events.push({"render_func":render_person_has_par,
+        "datetime":new Date(),
+        "unit":unit,
+        "sector":sector});
+}
+function render_person_has_par(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Fire Fighter has PAR in Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
+}
+
+function addEvent_unit_has_par(unit, sector) {
+    events.push({"render_func":render_unit_has_par,
+        "datetime":new Date(),
+        "unit":unit,
+        "sector":sector});
+}
+function render_unit_has_par(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Unit:"+event.unit+" has PAR in Sector:"+event.sector, MARGIN, y);
+}
+
+function addEvent_sector_has_par(sector) {
+    events.push({"render_func":render_sector_has_par,
+        "datetime":new Date(),
+        "sector":sector});
+}
+function render_sector_has_par(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Sector:"+event.sector+" has PAR", MARGIN, y);
+}

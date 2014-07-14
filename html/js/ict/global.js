@@ -62,23 +62,40 @@ function cancelTbarParTimer(tbar) {
 }
 function togglePar(btn, btnSelector) {
     return function() {
+
+        var person_has_par = false;
+        var unit_has_par = false;
+        var tbar_has_par = false;
+
         if(btn.hasClass("has_par")) {
             // Turn OFF PAR
             $(btnSelector).removeClass("has_par");
         } else {
             // Turn ON PAR
             $(btnSelector).addClass("has_par");
+
+            if(btn.hasClass("par_person_btn")) {
+                person_has_par = true;
+            }
         }
 
         // If this is a person button, then check if all sibling person buttons are green or if any are missing
+        unit_name = "";
         if(btn.hasClass("par_person_btn")) {
             var par_dialog_people = btn.parents(".par_dialog_people");
             var peopleWithOutPar = par_dialog_people.find(".par_person_btn:not(.has_par)");
             if(peopleWithOutPar.length==0) {
+                unit_has_par = true;
+                unit_name = btn.parents(".par_dialog_unit").find(".par_unit_btn").text();
                 btn.parents(".par_dialog_unit").find(".par_unit_btn").addClass("has_par");
             } else {
                 btn.parents(".par_dialog_unit").find(".par_unit_btn").removeClass("has_par");
             }
+        }
+
+        if(btn.hasClass("par_unit_btn") && btn.hasClass("has_par")) {
+            unit_has_par = true;
+            unit_name = btn.text();
         }
 
         // If all items have PAR (i.e. *NONE are NOT has_par*) then start the TBar PAR timer
@@ -86,6 +103,7 @@ function togglePar(btn, btnSelector) {
         if(btnsNoPar.length<=1) {
             $("#par_dialog_sector_btn").addClass("has_par");
             startTbarParTimer(tbar_clicked);
+            tbar_has_par = true;
         } else {
             $('#par_dialog_sector_btn').removeClass('has_par');
             cancelTbarParTimer(tbar_clicked);
@@ -98,6 +116,15 @@ function togglePar(btn, btnSelector) {
             btn_ids_with_par.push($(this).attr('id'));
         });
         tbar_clicked['btn_ids_with_par'] = btn_ids_with_par;
+
+        // Report
+        if(tbar_has_par) {
+            addEvent_sector_has_par(tbar_clicked.find(".title_text").text());
+        } else if(unit_has_par) {
+            addEvent_unit_has_par(unit_name, tbar_clicked.find(".title_text").text());
+        } else if(person_has_par) {
+            addEvent_person_has_par(unit_name, tbar_clicked.find(".title_text").text());
+        }
     };
 }
 function showParDialog( tbar, btn, parentDialog_ ){
@@ -679,6 +706,9 @@ function setTbarTitle(tbar, title) {
     maydaysSelected.each(function(){
         $(this).find("option:contains("+title+")").attr('selected','selected');
     });
+
+    // Report
+    addEvent_title_to_sector(title);
 }
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
@@ -882,6 +912,10 @@ function addActionButtonToTbar(tbar, actionName) {
 
     // Update unit button's action list data
     updateSelectedUnitActionsData(tbar);
+
+    // Report
+    var sector_title = tbar.find(".title_text").text();
+    addEvent_action_to_unit(actionName, "E###", sector_title)
 }
 function initActionsDialog( ) {
 	var actionsDialog = $("#dialog_prototype" ).clone().appendTo("#dialog_vertical_align_cell");
