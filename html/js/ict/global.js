@@ -1982,6 +1982,7 @@ function clickModeButton() {
         mode_btn.addClass("defensive_btn");
         mode_btn.removeClass("offensive_btn");
         mode_btn.html("DEFENSE");
+        addEvent_mode("DEFENSE");
         $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_def_btn").addClass("glowlightgreen");
         showDialog(0, mode_btn, "#emergency_traffic_dialog")();
@@ -1989,6 +1990,7 @@ function clickModeButton() {
         mode_btn.addClass("offensive_btn");
         mode_btn.removeClass("defensive_btn");
         mode_btn.html("OFFENSE");
+        addEvent_mode("OFFENSE")
         $("#osr_occupancy_off_btn").addClass("glowlightgreen");
         $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
     }

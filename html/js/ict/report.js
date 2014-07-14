@@ -196,3 +196,13 @@ function addEvent_benchmark(benchmark) {
 function render_benchmark(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Benchmark:"+event.benchmark, MARGIN, y);
 }
+
+
+function addEvent_mode(mode) {
+    events.push({"render_func":render_mode,
+        "datetime":new Date(),
+        "mode":mode});
+}
+function render_mode(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Mode changed:"+event.mode, MARGIN, y);
+}
