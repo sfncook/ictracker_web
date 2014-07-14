@@ -150,6 +150,7 @@ function render_action_to_unit(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Action:"+event.action+" added to Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
 }
 
+
 function addEvent_person_has_par(unit, sector) {
     events.push({"render_func":render_person_has_par,
         "datetime":new Date(),
@@ -159,7 +160,6 @@ function addEvent_person_has_par(unit, sector) {
 function render_person_has_par(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Fire Fighter has PAR in Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
 }
-
 function addEvent_unit_has_par(unit, sector) {
     events.push({"render_func":render_unit_has_par,
         "datetime":new Date(),
@@ -169,7 +169,6 @@ function addEvent_unit_has_par(unit, sector) {
 function render_unit_has_par(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Unit:"+event.unit+" has PAR in Sector:"+event.sector, MARGIN, y);
 }
-
 function addEvent_sector_has_par(sector) {
     events.push({"render_func":render_sector_has_par,
         "datetime":new Date(),
@@ -177,4 +176,14 @@ function addEvent_sector_has_par(sector) {
 }
 function render_sector_has_par(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Sector:"+event.sector+" has PAR", MARGIN, y);
+}
+
+
+function addEvent_benchmark(benchmark) {
+    events.push({"render_func":render_benchmark,
+        "datetime":new Date(),
+        "benchmark":benchmark});
+}
+function render_benchmark(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Benchmark:"+event.benchmark, MARGIN, y);
 }

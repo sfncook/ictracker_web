@@ -1022,6 +1022,7 @@ function clickUnableToObtain(unable_benchmark_btn) {
         $("#benchmark_unable_primary").removeClass("glowpink");
         $("#benchmark_unable_secondary").removeClass("glowpink");
     } else {
+        addEvent_benchmark(unable_benchmark_btn.text());
         if(unable_benchmark_btn.attr("id")=="benchmark_unable_primary") {
             unable_benchmark_btn.addClass("glowpink");
             resetBenchmarks();
@@ -1045,6 +1046,7 @@ function clickPrimaryBenchmark(benchmark_item) {
     var benchmark_item_btn = benchmark_item.find(".benchmark_item_btn");
     benchmark_item_btn.toggleClass("glowlightgreen");
     if(benchmark_item_btn.hasClass("glowlightgreen")) {
+        addEvent_benchmark(benchmark_item_btn.text());
         // If user Checked the box
         tbar_clicked.data('primary_benchmark',benchmark_item.attr('id'));
         setBenchmark(benchmark_item.attr('id'));
@@ -1154,6 +1156,10 @@ function clickSecondaryBenchmark(benchmark_item_2) {
     var isOn = (benchmark_item_btn_2.hasClass("glowlightgreen"))?'true':'false';
     var bchmk_id = benchmark_item_2.attr('id');
     tbar_clicked.data(bchmk_id,isOn);
+
+    if(benchmark_item_btn_2.hasClass("glowlightgreen")) {
+        addEvent_benchmark(benchmark_item_btn_2.text());
+    }
 }
 function resetSecondaryBenchmarks(tbar, chkbox_container_id) {
     return function() {
