@@ -1840,6 +1840,7 @@ function addTbar(col_x, row_y) {
                 $(".unit_dialog_btn:contains('"+acctBtn.html()+"')").addClass("glowlightgreen");
             },
             function(unitName){
+                addEvent_unit_to_acct(unitName, tbar.find(".title_text").text());
                 acctBtn.html(unitName);
                 $("#acct_osr_btn").addClass("glowlightgreen");
                 updateOsrPercentComplete();

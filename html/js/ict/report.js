@@ -138,6 +138,15 @@ function addEvent_unit_to_sector(unit, sector) {
 function render_unit_to_sector(y, event, doc) {
 	doc.text(getDateStr(event.datetime)+"  Unit:"+event.unit+" added to Sector:"+event.sector, MARGIN, y);
 }
+function addEvent_unit_to_acct(unit, sector) {
+    events.push({"render_func":render_unit_to_acct,
+        "datetime":new Date(),
+        "unit":unit,
+        "sector":sector});
+}
+function render_unit_to_acct(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Accountability Unit:"+event.unit+" added to Sector:"+event.sector, MARGIN, y);
+}
 
 function addEvent_action_to_unit(action, unit, sector) {
     events.push({"render_func":render_action_to_unit,
