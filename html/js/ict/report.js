@@ -226,3 +226,11 @@ function render_objective(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Objectives:"+event.objective, MARGIN, y);
 }
 
+function addEvent_iap(iap) {
+    events.push({"render_func":render_iap,
+        "datetime":new Date(),
+        "iap":iap});
+}
+function render_iap(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  IAP:"+event.iap, MARGIN, y);
+}

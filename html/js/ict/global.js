@@ -1408,6 +1408,7 @@ function clickIapToggleBtn(btn) {
             btn.removeClass("glow_orange");
         } else {
             btn.addClass("glow_orange");
+            addEvent_iap(btn.text());
         }
     };
 }
@@ -2166,7 +2167,8 @@ function init( ) {
 	initUnitPeopleDialog();
 	initBenchmarkDialog();
 	$("#report_btn").click(function(){generateReport();});
-	initCmdTerminateDialog();
+//	initCmdTerminateDialog();
+    $("#cmd_term_btn").hide();
 	initMaydayDialog();
 	initObjectivesDialog();
 	initOsrDialog();
