@@ -1182,3 +1182,10 @@ ul {
 .mayday_top_row_edge {
     width: 200px;
 }
+
+#nda_reminder_dialog {
+    width:300px;
+}
+#nda_reminder_dialog>.dialog_body {
+    padding:10px;
+}

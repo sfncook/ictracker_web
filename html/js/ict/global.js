@@ -2215,6 +2215,8 @@ function init( ) {
         }
         return this;
     }
+
+    showDialog( 0, 0, "#nda_reminder_dialog", 0)();
 }
 
 //Call this to dismiss the dialogs
