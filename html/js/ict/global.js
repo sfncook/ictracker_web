@@ -1235,6 +1235,9 @@ function toggleObjBtn(btn) {
     return function() {
         btn.toggleClass("glowlightgreen");
         updateObjectivePercentComplete();
+        if(btn.hasClass("glowlightgreen")){
+            addEvent_objective(btn.text());
+        }
     }
 }
 function initObjectivesDialog( ) {

@@ -217,3 +217,12 @@ function render_osr(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  OSR:"+event.osr, MARGIN, y);
 }
 
+function addEvent_objective(objective) {
+    events.push({"render_func":render_objective,
+        "datetime":new Date(),
+        "objective":objective});
+}
+function render_objective(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  Objectives:"+event.objective, MARGIN, y);
+}
+
