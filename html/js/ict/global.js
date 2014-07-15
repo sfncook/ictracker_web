@@ -1290,33 +1290,39 @@ function initOsrDialog( ) {
         $("#osr_occupancy_basement_btn").addClass("glowlightgreen");
         $("#osr_occupancy_nobasement_btn").removeClass("glowlightgreen");
         updateOsrPercentComplete();
+        addEvent_osr("Occupancy: Basement");
     });
     $("#osr_occupancy_nobasement_btn").click(function(){
         $("#osr_occupancy_basement_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_nobasement_btn").addClass("glowlightgreen");
         updateOsrPercentComplete();
+        addEvent_osr("Occupancy: No Basement");
     });
 
     $("#osr_occupancy_off_btn").click(function(){
         $("#osr_occupancy_off_btn").addClass("glowlightgreen");
         $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
         updateOsrPercentComplete();
+        addEvent_mode("OFFENSE");
     });
     $("#osr_occupancy_def_btn").click(function(){
         $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_def_btn").addClass("glowlightgreen");
         updateOsrPercentComplete();
+        addEvent_mode("DEFENSE");
     });
 
     $("#osr_occupancy_mob_btn").click(function(){
         $("#osr_occupancy_mob_btn").addClass("glowlightgreen");
         $("#osr_occupancy_stat_btn").removeClass("glowlightgreen");
         updateOsrPercentComplete();
+        addEvent_osr("Structure is Mobile");
     });
     $("#osr_occupancy_stat_btn").click(function(){
         $("#osr_occupancy_mob_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_stat_btn").addClass("glowlightgreen");
         updateOsrPercentComplete();
+        addEvent_osr("Structure is Stationary");
     });
 
 
@@ -1329,15 +1335,29 @@ function initOsrDialog( ) {
     $("#osr_select_type_of_building").change(function() {
         $("#occupancy_osr_btn").addClass("glowlightgreen");
         updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Type of building: "+selected_text);
         });
     $("#osr_select_type_of_construction").change(function() {
         $("#construction_osr_btn").addClass("glowlightgreen");
         updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Type of construction: "+selected_text);
         });
     $("#osr_select_conditions").change(function() {
         $("#conditions_osr_btn").addClass("glowlightgreen");
         updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("OSR Condition: "+selected_text);
         });
+    $("#osr_number_of_floors").change(function() {
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("OSR Number of floors: "+selected_text);
+    });
+    $("#osr_size_of_building").change(function() {
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("OSR Size of building: "+selected_text);
+    });
     $("#osr_occupancy_mob_btn").click(function() {
         $("#location_osr_btn").addClass("glowlightgreen");
         $("#assumecmd_osr_btn").addClass("glowlightgreen");

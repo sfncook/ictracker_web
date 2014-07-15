@@ -206,3 +206,14 @@ function addEvent_mode(mode) {
 function render_mode(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Mode changed:"+event.mode, MARGIN, y);
 }
+
+
+function addEvent_osr(osr) {
+    events.push({"render_func":render_osr,
+        "datetime":new Date(),
+        "osr":osr});
+}
+function render_osr(y, event, doc) {
+    doc.text(getDateStr(event.datetime)+"  OSR:"+event.osr, MARGIN, y);
+}
+
