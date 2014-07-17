@@ -2187,6 +2187,8 @@ function init( ) {
         if(typeof onCloseCallback!='undefined' && onCloseCallback!=0) {
             onCloseCallback();
         }
+        onCloseCallback=0;
+        onClickCallback=0;
 	    hideAllDialogs();
 	    $(".dialog").hide();
 	    if(typeof parentDialog!='undefined' && parentDialog!=0) {
