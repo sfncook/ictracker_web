@@ -2081,9 +2081,7 @@ function addDispatchedUnit(unit_text) {
             dispatched_unit_btn.addClass("btn_medtext");
         }
         dispatched_unit_btn.click(function() {
-            if(typeof tbar_clicked!='undefined' && tbar_clicked!=0) {
-                onClickCallback(unit_text);
-            }
+            onClickCallback(unit_text);
         });
     }
 }
@@ -2176,7 +2174,7 @@ function init( ) {
 	initIncidentInfo();
 	initEmergTrafficDialog();
 	init10KeyDialog();
-    initDispatchedUnits();
+//    initDispatchedUnits();
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
