@@ -2139,6 +2139,11 @@ function initFireIncident() {
     gridster.disable();
 
     initTbars();
+}
+
+function init( ) {
+    init_newFormDialog();
+    initTabs();
 
     //Init Dialogs
     initSectorDialog();
@@ -2158,16 +2163,11 @@ function initFireIncident() {
     initIncidentInfo();
     initEmergTrafficDialog();
     init10KeyDialog();
-}
-
-function init( ) {
-    init_newFormDialog();
-    initTabs();
 
 
-    $("#mayday_info_div_prototype").hide();
-    $("#par_dialog_unit_prototype").hide();
-    $("#benchmarks_dialog_body").hide();
+//    $("#mayday_info_div_prototype").hide();
+//    $("#par_dialog_unit_prototype").hide();
+//    $("#benchmarks_dialog_body").hide();
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
 	$("#tbar_prototype").hide();
