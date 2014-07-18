@@ -3,11 +3,12 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<title>ICT</title>
 		<meta name="description" content="Incident #" />
-                <link href="images/logo/ict_logo_29x29.png" rel="icon" />
-		
+        <link href="images/logo/ict_logo_29x29.png" rel="icon" />
+
         <!--CSS-->
-        <link rel="stylesheet" type="text/css" href="css/jquery.gridster.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.11.0.custom/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="css/jquery.gridster.css"/>
+        <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css"/>
         <link rel="stylesheet" type="text/css" href="css/ict/reset.css" />
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_global.css" />
@@ -28,10 +29,25 @@
     </head>
     
     <body>
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <div id="tabs">
+                        <ul>
+                            <!--<li><a href="#tabs-1">Fire</a></li>-->
+                            <button id="add_tab" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span style="float:left" class="ui-icon ui-icon-circle-plus"></span>Add Form</button>
+                        </ul>
+                        <!--<div id="tabs-1" class="gridster"><ul></ul></div>-->
+                    </div>
+                </td>
+                <td style="width:100px;"></td>
+            </tr>
+        </table>
+
 		<div id="ict_header">
             <div id="time" class="time_lg header_item">00:00</div>
             <img id="title_icon" class="header_item" src="images/logo/ict_logo_100x100.png"/>
-			
+
 			<div id="header_row2" class="header_row">
 				<div class="dialog_vertical_align_cell">
 					<div id="osr_header_btn" class="header_item button">
@@ -62,111 +78,85 @@
 				</div>
 			</div>
         </div><!-- ict_header-->
-		
-		<div id="mayday_and_tbar_container">
-			<table style="width:100%;">
-				<tr>
-                    <td class="mayday_top_row_edge"></td>
-					<td style="text-align: center;">
-                        <button type="button" id="mayday_btn" class="btn btn-danger">MAYDAY</button>
-                    </td>
-                    <td class="mayday_top_row_edge">
-                        <button id="mode_btn" class="offensive_btn mode_btn dialog_btn button">OFFENSE</button>
-                    </td>
-					<td rowspan="3" id="header_spacer_td"></td>
-				</tr>
-				<tr>
-					<td colspan="3">
-                          <div id="tbar_grid_layout_container" class="gridster">
-                            <ul>
-                                <!--<li data-row="1" data-col="4" data-sizex="1" data-sizey="1">0</li>-->
-                                <!--<li data-row="2" data-col="4" data-sizex="1" data-sizey="1">1</li>-->
-                                <!--<li data-row="3" data-col="4" data-sizex="1" data-sizey="1">2</li>-->
-                            </ul>
-                          </div>
 
-                            <!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
-                            <li id="tbar_prototype" class="tbar">
-                                <div class="tbar_title_container">
-                                    <button type="button" class="disabled par_btn button">PAR</button>
-                                    <div class="title_btn button">
-                                        <table>
-                                            <tr>
-                                                <td class="tbar_title_dir_td"><div class="title_dir  title_btn_comp">N</div></td>
-                                                <td class="tbar_title_td">    <div class="title_text title_btn_comp">Sector Title</div></td>
-                                                <td class="tbar_title_num_td"><div class="title_num  title_btn_comp">8</div></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <button type="button" class="benchmark_btn button">
-                                        <!--<img class='benchmarks_icon' src='images/benchmarks_0.png'/>-->
-                                        <span class="benchmarks_icon">
-                                            <img class="benchmark_bar_img_1 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
-                                            <img class="benchmark_bar_img_2 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
-                                            <img class="benchmark_bar_img_3 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
-                                            <img class="benchmark_bar_img_4 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
-                                        </span>
-                                        BNCH
-                                    </button>
-                                    <div class="clear_float"></div>
-                                </div>
-                                <div class="unit_col_left unit_col tbar_col_left_div tbar_col_div">
-                                    <div class="unit_move_btn button"><img class="move_btn_img" src="images/move_cross.png"/></div>
-                                    <div class="unit_move_cancel_btn button">Cancel</div>
-                                    <div class="unit_add_btn button">+Unit</div>
-                                    <div class="clear_float"></div>
-                                    <div class="left_scroll_pane scroll-pane jspScrollable">
-                                        <div class="jspContainer">
-                                            <div class="jspPane"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="action_col_right tbar_col_right_div tbar_col_div">
-                                    <div class="acct_unit_btn button">@acct</div>
-                                    <div class="action_add_btn button">+Action</div>
-                                    <div class="clear_float"></div>
-                                    <div class="right_scroll_pane scroll-pane jspScrollable">
-                                        <div class="jspContainer">
-                                            <div class="jspPane"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="unit_col_right unit_col tbar_col_right_div tbar_col_div">
-                                    <div class="unit_add_btn button">+Unit</div>
-                                    <div class="clear_float"></div>
-                                    <div class="right_scroll_pane scroll-pane jspScrollable">
-                                        <div class="jspContainer">
-                                            <div class="jspPane"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clear_float"></div>
-                            </li><!--tbar-->
+        <div id="newform_dialog" title="Incident Forms">
+            <div id="splash_row2"></div>
+            <div id="splash_row3"></div>
+            <div id="splash_row4"></div>
+        </div>
 
-                            <!-- Unit Row Prototype -->
-                            <div id="unit_row_div_prototype" class="unit_row_div">
-                                <div class="tbar_unit_info_btn">
-                                    <div class="tbar_personnel_btn personnel_btn button_no_hover">P</div>
-                                    <div class="psi_green tbar_psi_btn psi_btn button_no_hover">4000</div>
-                                    <div class="clear_float"></div>
-                                </div>
-                                <label class="unit_move_checkbox"><input type="checkbox"/>Move?</label>
-                                <div class="tbar_unit_btn unit_btn button">
-                                    <div class="unit_timer_bg"><div class="unit_timer_bar"></div></div>
-                                    <div class="unit_text">Unit</div>
-                                </div>
-                                <div class="clear_float"></div>
-                            </div>
+        <!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
+        <li id="tbar_prototype" class="tbar">
+            <div class="tbar_title_container">
+                <div type="button" class="disabled par_btn button">PAR</div>
+                <div class="title_btn button">
+                    <table>
+                        <tr>
+                            <td class="tbar_title_dir_td"><div class="title_dir  title_btn_comp">N</div></td>
+                            <td class="tbar_title_td">    <div class="title_text title_btn_comp">Sector Title</div></td>
+                            <td class="tbar_title_num_td"><div class="title_num  title_btn_comp">8</div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div type="button" class="benchmark_btn button">
+                    <!--<img class='benchmarks_icon' src='images/benchmarks_0.png'/>-->
+                    <span class="benchmarks_icon">
+                        <img class="benchmark_bar_img_1 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
+                        <img class="benchmark_bar_img_2 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
+                        <img class="benchmark_bar_img_3 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
+                        <img class="benchmark_bar_img_4 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
+                    </span>
+                    BNCH
+                </div>
+                <div class="clear_float"></div>
+            </div>
+            <div class="unit_col_left unit_col tbar_col_left_div tbar_col_div">
+                <div class="unit_move_btn button"><img class="move_btn_img" src="images/move_cross.png"/></div>
+                <div class="unit_move_cancel_btn button">Cancel</div>
+                <div class="unit_add_btn button">+Unit</div>
+                <div class="clear_float"></div>
+                <div class="left_scroll_pane scroll-pane jspScrollable">
+                    <div class="jspContainer">
+                        <div class="jspPane"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="action_col_right tbar_col_right_div tbar_col_div">
+                <div class="acct_unit_btn button">@acct</div>
+                <div class="action_add_btn button">+Action</div>
+                <div class="clear_float"></div>
+                <div class="right_scroll_pane scroll-pane jspScrollable">
+                    <div class="jspContainer">
+                        <div class="jspPane"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="unit_col_right unit_col tbar_col_right_div tbar_col_div">
+                <div class="unit_add_btn button">+Unit</div>
+                <div class="clear_float"></div>
+                <div class="right_scroll_pane scroll-pane jspScrollable">
+                    <div class="jspContainer">
+                        <div class="jspPane"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear_float"></div>
+        </li><!--tbar-->
 
-					</td>
-				</tr>
-                <tr>
-					<td id="footer_spacer_td"></td>
-				</tr>
-			</table>
-		</div><!-- mayday_and_tbar_container -->
-
-        <div id="move_unit_screen_cover"></div>
+        <!-- Unit Row Prototype -->
+        <div id="unit_row_div_prototype" class="unit_row_div">
+            <div class="tbar_unit_info_btn">
+                <div class="tbar_personnel_btn personnel_btn button_no_hover">P</div>
+                <div class="psi_green tbar_psi_btn psi_btn button_no_hover">4000</div>
+                <div class="clear_float"></div>
+            </div>
+            <label class="unit_move_checkbox"><input type="checkbox"/>Move?</label>
+            <div class="tbar_unit_btn unit_btn button">
+                <div class="unit_timer_bg"><div class="unit_timer_bar"></div></div>
+                <div class="unit_text">Unit</div>
+            </div>
+            <div class="clear_float"></div>
+        </div>
 
 
 		<!-- DIALOGS -->
@@ -425,33 +415,6 @@
                         </table>
                     </div>
                 </div>
-
-                <div id="mayday_info_div_prototype" class="yellow_bg mayday_info_div">
-                    <div class="mayday_box_title">Mayday #</div>
-                    <div class="glowbabyblue mayday_clear_btn button">Clear</div>
-                    <div class="clear_float"></div>
-                    <div>
-                        <span class="mayday_name_label">Name:</span>
-                        <input class="mayday_name_input" type="text"/>
-                        <div class="mayday_psi_btn psi_btn button">PSI</div>
-                        <div class="clear_float"></div>
-                    </div>
-
-                    <select class="mayday_sector_select mayday_select">
-                        <option disabled='disabled' selected='selected' class='default_option'>Sector</option>
-                    </select>
-                    <div class="mayday_sector_title"></div>
-                    <div class="mayday_units_div"></div>
-                    <div class="clear_float"></div>
-
-                    <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
-                    <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
-                    <div class="clear_float"></div>
-
-                    <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
-                    <div class="injured_mayday_btn mayday_toggle button">Injured</div>
-                    <div class="clear_float"></div>
-                </div>
                 <!-- Mayday Dialog -->
 
                 <!-- Objectives Dialog Unit Component Prototype -->
@@ -602,12 +565,12 @@
                         Just a reminder that you have signed an NDA agreement in order to use this software.  Sharing this software, discussing its details or providing visual, logical or technical details of it with unauthorized people and organizations is prohibited.  Thank you for helping us improve!
                     </div>
                 </div>
-
-            </div> <!-- dialogContainer -->
+            </div>
+        </div> <!-- dialogContainer -->
 			
 			
-			<!-- PAR Dialog Unit Component Prototype -->
-            <div id="par_dialog_unit_prototype" class="par_dialog_unit">
+        <!-- PAR Dialog Unit Component Prototype -->
+        <div id="par_dialog_unit_prototype" class="par_dialog_unit">
                 <div class="par_dialog_unit_leftcol">
                     <div class="personnel_par_btn personnel_btn button">P</div>
                     <div class="psi_par_btn psi_btn button">PSI</div>
@@ -618,17 +581,34 @@
                 <div class="par_dialog_people"></div>
                 <div class="clear_float"></div>
 			</div>
-			
-		</div><!--dialogContainer-->
-        
-        <!--<div class="footer">-->
-			<!--<table>-->
-				<!--<tr>-->
-					<!--<td>INC:<div id="inc_num"></div></td>-->
-					<!--<td>ADD:<div id="address"></div></td>-->
-				<!--</tr>-->
-			<!--</table>-->
-		<!--</div>-->
+
+        <!-- Mayday Info Div Prototype -->
+        <div id="mayday_info_div_prototype" class="yellow_bg mayday_info_div">
+            <div class="mayday_box_title">Mayday #</div>
+            <div class="glowbabyblue mayday_clear_btn button">Clear</div>
+            <div class="clear_float"></div>
+            <div>
+                <span class="mayday_name_label">Name:</span>
+                <input class="mayday_name_input" type="text"/>
+                <div class="mayday_psi_btn psi_btn button">PSI</div>
+                <div class="clear_float"></div>
+            </div>
+
+            <select class="mayday_sector_select mayday_select">
+                <option disabled='disabled' selected='selected' class='default_option'>Sector</option>
+            </select>
+            <div class="mayday_sector_title"></div>
+            <div class="mayday_units_div"></div>
+            <div class="clear_float"></div>
+
+            <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
+            <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
+            <div class="clear_float"></div>
+
+            <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
+            <div class="injured_mayday_btn mayday_toggle button">Injured</div>
+            <div class="clear_float"></div>
+        </div>
         
     </body>
 </html>

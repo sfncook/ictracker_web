@@ -1911,7 +1911,7 @@ function addTbar(col_x, row_y) {
                 unit_move_btn.hide();
                 unit_move_cancel_btn.show();
                 var tbar_cover = $("<div class='tbar_move_unit_cover'></div>");
-                tbar_cover.appendTo($('#mayday_and_tbar_container'));
+                tbar_cover.appendTo($('body'));
                 tbar_cover.width(unit_col_destination.width() + 1);
                 tbar_cover.height(unit_col_destination.height() + 1);
                 tbar_cover.offset(unit_col_destination.offset());
@@ -2112,6 +2112,17 @@ function initDispatchedUnits() {
 }
 
 
+
+function initTabs() {
+    var tabs = $( "#tabs" ).tabs();
+    var dialog = $("#newform_dialog");
+    $( "#add_tab" )
+        .button()
+        .click(function() {
+            dialog.dialog( "open" );
+        });
+}
+
 /**
  * Init Timer
  **/
@@ -2143,39 +2154,46 @@ function updateTimer() {
 }
 
 var gridster;
-function init( ) {
-
-    var log = document.getElementById('log');
+function initFireIncident() {
 
     gridster = $(".gridster ul").gridster({
-      widget_base_dimensions: [278, 275],
-      widget_margins: [5, 5],
-      autogrow_cols: false
+        widget_base_dimensions: [278, 275],
+        widget_margins: [5, 5],
+        autogrow_cols: false
     }).data('gridster');
     gridster.disable();
 
     initTbars();
 
-	//Init Dialogs
-	initSectorDialog();
-	initParDialog();
-	initPsiDialog();
-	initActionsDialog();
-	initUnitsDialog();
-	initUnitPeopleDialog();
-	initBenchmarkDialog();
-	$("#report_btn").click(function(){generateReport();});
+    //Init Dialogs
+    initSectorDialog();
+    initParDialog();
+    initPsiDialog();
+    initActionsDialog();
+    initUnitsDialog();
+    initUnitPeopleDialog();
+    initBenchmarkDialog();
+    $("#report_btn").click(function(){generateReport();});
 //	initCmdTerminateDialog();
     $("#cmd_term_btn").hide();
-	initMaydayDialog();
-	initObjectivesDialog();
-	initOsrDialog();
-	initIapDialog();
-	initIncidentInfo();
-	initEmergTrafficDialog();
-	init10KeyDialog();
+    initMaydayDialog();
+    initObjectivesDialog();
+    initOsrDialog();
+    initIapDialog();
+    initIncidentInfo();
+    initEmergTrafficDialog();
+    init10KeyDialog();
 //    initDispatchedUnits();
+}
 
+function init( ) {
+    init_newFormDialog();
+    initTabs();
+
+
+    $("#mayday_info_div_prototype").hide();
+    $("#par_dialog_unit_prototype").hide();
+    $("#benchmarks_dialog_body").hide();
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
 	$("#tbar_prototype").hide();
@@ -2196,7 +2214,6 @@ function init( ) {
         }
 	});
 
-    $("#move_unit_screen_cover").hide();
 	$("#mode_btn").click(clickModeButton);
 	
 	hideAllDialogs();
@@ -2337,13 +2354,13 @@ var sectorsWithClock = [
     "RIC"
 	];
 var sectorsWithOutAcctBtn = [
-	"ReHab",
+	"ReHab"
 	];
 var sectorsWithOutAPsiBtn = [
-	"ReHab",
+	"ReHab"
 	];
 var sectorsWithOutActions = [
-	"ReHab",
+	"ReHab"
 	];
 
 var sectors = [
@@ -2387,7 +2404,7 @@ var sectors = [
 	"Triage",
 	"Treatment",
 	"Transportation",
-	"Sector",
+	"Sector"
 	];
 
 var Engine="Engine";
@@ -2468,15 +2485,15 @@ var unitsByTypeByCity = {
 			"BSO281",
 			"BSO282"],
 		Squad:[
-			"SQ283",],
+			"SQ283"],
 		HazMat:[
-			"HM283",],
+			"HM283"],
 		Util:[
-			"U288",],
+			"U288"],
 		Brush:[
-			"Br284",],
+			"Br284"],
 		Ambo:[
-			"Ambo",],
+			"Ambo"],
 		AirVac:[
 		    "Native Air",
 		    "Life Net",
@@ -2500,28 +2517,28 @@ var unitsByTypeByCity = {
 			"L255",
 			"Lt251",
 			"Lt253",
-			"Lt255",],
+			"Lt255"],
 		BC:[
 			"BC251",
 			"BC252",
 			"BSO251",
-			"BSO252",],
+			"BSO252"],
 		Util:[
-			"U251",],
+			"U251"],
 		CV:[
-			"CV251",],
+			"CV251"],
 		WtrTend:[
 			"WT256",
-			"WT2511",],
+			"WT2511"],
 		HazMat:[
-			"HM258",],
+			"HM258"],
 		Brush:[
-			"Br2511",],
+			"Br2511"],
 		Ambo:[
 			"SWA251",
 			"SWA252",
 			"SWA253",
-			"SWA255",],
+			"SWA255"],
 		AirVac:[
 		    "Native Air",
 		    "Life Net",
@@ -2584,21 +2601,21 @@ var unitsByTypeByCity = {
 			"SQ204",
 			"SQ206"],
         ScnSup:[
-            "SS208",
+            "SS208"
         ],
 		WtrTend:[
-			"WT213",
+			"WT213"
 		],
 		Brush:[
 			"Br212",
 			"Br214",
 			"Br216",
-			"Br219",
+			"Br219"
         ],
         Foam:[
             "FO21",
             "FO22",
-            "FO23",
+            "FO23"
         ],
 		Con:[
 		    "Con201",
@@ -2606,12 +2623,12 @@ var unitsByTypeByCity = {
 		    "Con203"
 		],
 		Util:[
-			"U202",],
+			"U202"],
 		CV:[
 		    "CV201"
 		],
 		HazMat:[
-			"HM206",],
+			"HM206"],
 		Ambo:[
 			"SWA201",
 			"SWA202",
@@ -2634,7 +2651,7 @@ var unitsByTypeByCity = {
 			"SWA226",
 			"SWA227",
 			"SWA228",
-			"SWA229",
+			"SWA229"
 		],
 		AirVac:[
 		    "Native Air",
@@ -2648,7 +2665,7 @@ var unitsByTypeByCity = {
 		    "E412"],
 		BC:["BC411", "BSO411"],
 		Ambo:[
-			"SWA411",],
+			"SWA411"],
 		AirVac:[
 		    "Native Air",
 		    "Life Net",
@@ -2721,7 +2738,7 @@ var unitsByTypeByCity = {
             "E929",
             "E930",
             "E935",
-            "E960",
+            "E960"
         ],
         Ladder:[
             "L1",
@@ -2751,7 +2768,7 @@ var unitsByTypeByCity = {
             "Lt37",
             "Lt41",
             "Lt43",
-            "Lt50",
+            "Lt50"
         ],
         BC:[
             "BC1",
@@ -2771,7 +2788,7 @@ var unitsByTypeByCity = {
             "BSO5",
             "BSO6",
             "BSO8",
-            "BSO19",
+            "BSO19"
         ],
         Ambo:[
             "RES3",
@@ -2808,7 +2825,7 @@ var unitsByTypeByCity = {
             "RES50",
             "RES60",
             "RES918",
-            "RES942",
+            "RES942"
         ],
         Brush:[
             "BT23",
@@ -2823,7 +2840,7 @@ var unitsByTypeByCity = {
             "BT52",
             "BT56",
             "BT57",
-            "BT58",
+            "BT58"
         ],
         HazMat:[
             "HM4",
@@ -2833,24 +2850,24 @@ var unitsByTypeByCity = {
         Util:[
             "U10",
             "U29",
-            "U50",
+            "U50"
         ],
         Squad:[
             "SQ8",
             "SQ44",
-            "SQ72",
+            "SQ72"
         ],
         SupVeh:[
             "SV8",
             "SV12",
-            "SV45",
+            "SV45"
         ],
         Foam:[
             "Foam1",
             "Foam2",
             "Foam3",
             "Foam34",
-            "Foam44",
+            "Foam44"
         ],
         WtrTend :[
             "WT23",
@@ -2858,7 +2875,7 @@ var unitsByTypeByCity = {
             "WT52",
             "WT54",
             "WT56",
-            "WT58",
+            "WT58"
         ],
         CV:[
             "CV1",
@@ -2909,7 +2926,7 @@ var unitsByTypeByCity = {
 		Ambo:[
 			"SWA261",
 			"SWA262",
-			"SWA265",],
+			"SWA265"],
 		AirVac:[
 		    "Native Air",
 		    "Life Net",
@@ -2961,7 +2978,7 @@ var unitsByTypeByCity = {
 		    "Life Net",
 		    "Ranger 41"
 		]
-	},
+	}
 
 
 
@@ -2971,6 +2988,135 @@ var safteyNames = [
 	"Cross",
 	"Fox",
 	"Jones",
-	"Smith",];
+	"Smith"];
 
 
+function addFireTab() {
+    var tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
+        tabCounter = 1;
+
+    var label = "Fire",
+        id = "tabs-" + tabCounter,
+        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) );
+
+    var tabs = $( "#tabs" );
+    tabs.find( ".ui-tabs-nav" ).append( li );
+    tabs.append( "<div id='" + id + "' class='gridster'><ul></ul></div>" );
+    tabs.tabs( "refresh" ).tabs( "option", "active", tabCounter-1 );
+    tabCounter++;
+
+    initFireIncident();
+}
+
+function init_newFormDialog() {
+    var tabTitle = $( "#tab_title" ),
+        tabContent = $( "#tab_content" ),
+        tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
+        tabCounter = 1;
+
+    var dialog = $( "#newform_dialog" ).dialog({
+        autoOpen: false,
+        modal: true
+    });
+    $("#newform_dialog").dialog( "option", "width", 800 );
+
+    // addTab form: calls addTab function on submit and closes the dialog
+    var form = dialog.find( "form" ).submit(function( event ) {
+        addTab();
+        dialog.dialog( "close" );
+        event.preventDefault();
+    });
+
+    // actual addTab function: adds new tab using the input from the form above
+    function addTab() {
+        var label = tabTitle.val() || "Tab " + tabCounter,
+            id = "tabs-" + tabCounter,
+            li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+            tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+
+        tabs.find( ".ui-tabs-nav" ).append( li );
+        tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
+        tabs.tabs( "refresh" ).tabs( "option", "active", tabCounter-1 );
+        tabCounter++;
+    }
+
+    var btnPrototypeStr = '<div class="splash_start_btn button">'+
+        '<img class="splash_start_btn_icon" src="[icon]"/>'+
+        '<div class="splash_start_btn_text">[text]</div>'+
+        '</div>';
+    incidentStartBtns.forEach(function(btnObj, index, array){
+        var btnText = btnPrototypeStr.replace("[icon]", btnObj.icon).replace("[text]", btnObj.text);
+        var btn = $(btnText);
+        btn.attr("id", btnObj.id);
+        $("#splash_row"+btnObj.row).append(btn);
+    });
+    $("#splash_row2").append($("<div class='clear_float'></div>"));
+    $("#splash_row3").append($("<div class='clear_float'></div>"));
+    $("#splash_row4").append($("<div class='clear_float'></div>"));
+
+    $("#fire_btn").click(function(){addFireTab();dialog.dialog( "close" );$("#fire_btn").addClass("disabled");});
+    $(".splash_start_btn:not(#fire_btn)").addClass("disabled");
+}
+
+var incidentStartBtns = [
+    {
+        icon:"images/icons/fire.png",
+        text:"Fire Incident",
+        id:"fire_btn",
+        row:2
+    },
+    {
+        icon:"images/icons/medical.png",
+        text:"Medical Incident",
+        id:"medical_btn",
+        row:2
+    },
+    {
+        icon:"images/icons/plane.png",
+        text:"ARFF Incident",
+        id:"plane_btn",
+        row:3
+    },
+    {
+        icon:"images/icons/hazmat.png",
+        text:"HazMat Incident",
+        id:"hazmat_btn",
+        row:3
+    },
+    {
+        icon:"images/icons/water.png",
+        text:"Water Rescue",
+        id:"water_btn",
+        row:3
+    },
+    {
+        icon:"images/icons/trench.png",
+        text:"Trench Rescue",
+        id:"trench_btn",
+        row:3
+    },
+    {
+        icon:"images/icons/mountain.png",
+        text:"Mountain Rescue",
+        id:"mountain_btn",
+        row:4
+    },
+    {
+        icon:"images/icons/palm.png",
+        text:"Palm Rescue",
+        id:"palm_btn",
+        row:4
+    },
+    {
+        icon:"images/icons/structure.png",
+        text:"Structural Rescue",
+        id:"structure_btn",
+        row:4
+    },
+    {
+        icon:"images/icons/confined.png",
+        text:"Confined Space Rescue",
+        id:"confined_btn",
+        row:4
+    }
+];
