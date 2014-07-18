@@ -2085,31 +2085,6 @@ function addDispatchedUnit(unit_text) {
         });
     }
 }
-function initDispatchedUnits() {
-    var dispatched_units_btn = $("#dispatched_units_btn");
-    dispatched_units_btn.click(showDialog_withCallbacks(
-        "#units_dialog",
-        0,//parent dialog
-        function(){
-            tbar_clicked = 0;
-            $(".unit_dialog_btn").removeClass("glowlightgreen");
-            $(".dispatched_unit_btn").each(function(){
-                var unit_text = $(this).text();
-                $(".unit_dialog_btn:contains('"+unit_text+"')").addClass("glowlightgreen");
-            });
-        },
-        function(unit_text){
-            var unit_dialog_btn = $(".unit_dialog_btn:contains('"+unit_text+"')");
-            if($(".dispatched_unit_btn:contains('"+unit_text+"')").length==0) {
-                addDispatchedUnit(unit_text);
-                unit_dialog_btn.addClass("glowlightgreen");
-            } else {
-                $(".dispatched_unit_btn:contains('"+unit_text+"')").remove();
-                unit_dialog_btn.removeClass("glowlightgreen");
-            }
-        }
-    ));
-}
 
 
 
@@ -2183,7 +2158,6 @@ function initFireIncident() {
     initIncidentInfo();
     initEmergTrafficDialog();
     init10KeyDialog();
-//    initDispatchedUnits();
 }
 
 function init( ) {
