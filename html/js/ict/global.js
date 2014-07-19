@@ -1696,6 +1696,8 @@ function initTbars() {
     addTbar();
 
     rehab_tbar.find(".benchmark_btn").hide();
+
+    $('.scroll-pane').jScrollPane();
 }
 
 
@@ -1743,7 +1745,9 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
     var tbar = unit_col_container.parents(".tbar");
 
     var scroll_pane = unit_col_container.find(".scroll-pane");
-    var pane2api = scroll_pane.data('jsp');
+    var pane2api = scroll_pane.find('jsp');
+    pane2api.jScrollPane();
+    console.log(pane2api);
 
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
@@ -2136,7 +2140,7 @@ function initFireIncident() {
         widget_margins: [5, 5],
         autogrow_cols: false
     }).data('gridster');
-    gridster.disable();
+    gridster.disable();//Disables dragging
 
     initTbars();
 }
@@ -2165,9 +2169,6 @@ function init( ) {
     init10KeyDialog();
 
 
-//    $("#mayday_info_div_prototype").hide();
-//    $("#par_dialog_unit_prototype").hide();
-//    $("#benchmarks_dialog_body").hide();
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
 	$("#tbar_prototype").hide();
@@ -2194,8 +2195,6 @@ function init( ) {
 	
 	window.setTimeout(blinkUnit, 500);
 	window.setInterval(updateTimer, 1000);
-
-	$('.scroll-pane').jScrollPane();
 
     Array.prototype.remByVal = function(val) {
         for (var i = 0; i < this.length; i++) {
