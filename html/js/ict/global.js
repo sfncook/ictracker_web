@@ -1744,7 +1744,6 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
     var scroll_pane = unit_col_container.find(".scroll-pane");
     var pane2api = scroll_pane.data('jsp');
-    console.log(pane2api.getContentPane());
 
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
