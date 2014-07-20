@@ -1696,8 +1696,6 @@ function initTbars() {
     addTbar();
 
     rehab_tbar.find(".benchmark_btn").hide();
-
-    $('.scroll-pane').jScrollPane();
 }
 
 
@@ -1745,9 +1743,8 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
     var tbar = unit_col_container.parents(".tbar");
 
     var scroll_pane = unit_col_container.find(".scroll-pane");
-    var pane2api = scroll_pane.find('jsp');
-    pane2api.jScrollPane();
-    console.log(pane2api);
+    var pane2api = scroll_pane.data('jsp');
+    console.log(pane2api.getContentPane());
 
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
@@ -1850,6 +1847,13 @@ function addTbar(col_x, row_y) {
     var tbarNumBtn = tbar.find(".title_num");
     tbarDirBtn.hide();
     tbarNumBtn.hide();
+
+    // Scroll Bars
+    var scroll_pane = tbar.find(".scroll-pane");
+    scroll_pane.jScrollPane();
+//    var pane2api = scroll_pane.data('jsp');
+//    pane2api.reinitialise();
+//    pane2api.getContentPane();
 
     //PAR (Sector) button
     var parBtn = tbar.find(".par_btn");
@@ -2205,6 +2209,8 @@ function init( ) {
         }
         return this;
     }
+
+    $('.scroll-pane').jScrollPane();
 
     showDialog( 0, 0, "#nda_reminder_dialog", 0)();
 }
