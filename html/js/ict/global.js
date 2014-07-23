@@ -768,7 +768,7 @@ function initSectorDialog( ) {
 		}
 		
 		newBtn.click(function() {
-		    if(!newBtn.hasClass("hidden_sector_btn") && !newBtn.hasClass("glowlightgreen")) {
+		    if(!newBtn.hasClass("hidden_sector_btn") /*&& !newBtn.hasClass("glowlightgreen")*/) {
 		        if(sectorName=="Sector ####") {
 		            key_replace_char_at_index = 7;
 		            $("#key_output_value").html("Sector ####");
