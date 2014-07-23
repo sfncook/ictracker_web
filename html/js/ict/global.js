@@ -1497,6 +1497,10 @@ function initUnitsDialog( ) {
 	var typesDiv = $('<div id="units_dialog_types_div"></div>').appendTo(dialog_body);;
 	var btnsDivProto = $('<div class="units_dialog_citybtns_div"></div>');
 
+
+    // Hiding this now for beta testing
+    $("#dispatched_units_div").hide();
+
 	//Create Unit Type Buttons
 	unitTypes.forEach(function (type, index, array) {
 		var unitTypeBtn = prototypeUnitTypeBtn.clone().appendTo(typesDiv);
