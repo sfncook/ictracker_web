@@ -1,6 +1,26 @@
-cd /Users/shawn/Projects/FireIncidentReport/ICT4/html
-rm -rf my.tgz
-tar czf my.tgz *
-scp my.tgz whitehel@whitehelmettech.com:~/public_html
-ssh whitehel@whitehelmettech.com 'tar xzf ~/public_html/my.tgz -C ~/public_html/app'
+#!/bin/sh
 
+suffix=$1
+version=$2
+
+# Update version
+echo "\$( document ).ready(function(){\$('#version_text').html('Version:${version}');});" > ./html/version.js
+git tag -d "ict_deploy_${suffix}_${version}" 2> /dev/null
+git tag "ict_deploy_${suffix}_${version}"
+
+tarfileName="deploy_pkg_${suffix}_${version}.tgz"
+
+rm -rf *.tgz
+cd html
+mkdir -p "../../deploy_pkgs"
+tar czf "../../deploy_pkgs/$tarfileName" *
+cd ../
+
+ssh whitehel@whitehelmettech.com 'mkdir -p ~/deploy_pkgs'
+scp "../deploy_pkgs/$tarfileName" "whitehel@whitehelmettech.com:~/deploy_pkgs/"
+
+dirDestName="~/public_html/app_${suffix}_${version}"
+ssh whitehel@whitehelmettech.com "mkdir -p $dirDestName; rm -rf $dirDestName/*; tar xzf ~/deploy_pkgs/$tarfileName -C $dirDestName"
+
+linkName="~/public_html/app_${suffix}"
+ssh whitehel@whitehelmettech.com "rm -rf $linkName; ln -s $dirDestName $linkName"

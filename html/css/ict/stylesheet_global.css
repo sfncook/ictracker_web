@@ -1189,3 +1189,9 @@ ul {
 #nda_reminder_dialog>.dialog_body {
     padding:10px;
 }
+
+#version_text {
+    position:fixed;
+    bottom: 10px;
+    left: 10px;
+}

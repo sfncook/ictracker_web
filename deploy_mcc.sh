@@ -1,3 +1,4 @@
+#!/bin/sh
 cd ./html
 rm -rf my.tgz
 tar czf my.tgz *
