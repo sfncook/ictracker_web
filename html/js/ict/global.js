@@ -1497,10 +1497,6 @@ function initUnitsDialog( ) {
 	var typesDiv = $('<div id="units_dialog_types_div"></div>').appendTo(dialog_body);;
 	var btnsDivProto = $('<div class="units_dialog_citybtns_div"></div>');
 
-
-    // Hiding this now for beta testing
-    $("#dispatched_units_div").hide();
-
 	//Create Unit Type Buttons
 	unitTypes.forEach(function (type, index, array) {
 		var unitTypeBtn = prototypeUnitTypeBtn.clone().appendTo(typesDiv);
@@ -1722,81 +1718,85 @@ function toggleUnitButtonForTbar(unit_col_container) {
     }
 }
 function removeUnitButton(unit_col_container, unitName) {
-    var tbar = unit_col_container.parents(".tbar");
-
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").removeClass("glowlightgreen");
 
-    // Remove unit row from TBar
-    var unit_row_div = unit_col_container.find(".unit_btn:contains('"+unitName+"')").parents(".unit_row_div");
-    var scroll_pane = unit_col_container.find(".scroll-pane");
-    var pane2api = scroll_pane.data('jsp');
-    unit_row_div.remove();
-    pane2api.reinitialise();
 
-    // Move unit button
-    if(unit_col_container.find(".unit_btn").length==0) {
-        tbar.find(".unit_move_btn").hide();
+    if(typeof unit_col_container!='undefined' && unit_col_container!=0) {
+        var tbar = unit_col_container.parents(".tbar");
+        // Remove unit row from TBar
+        var unit_row_div = unit_col_container.find(".unit_btn:contains('"+unitName+"')").parents(".unit_row_div");
+        var scroll_pane = unit_col_container.find(".scroll-pane");
+        var pane2api = scroll_pane.data('jsp');
+        unit_row_div.remove();
+        pane2api.reinitialise();
+
+        // Move unit button
+        if(unit_col_container.find(".unit_btn").length==0) {
+            tbar.find(".unit_move_btn").hide();
+        }
     }
 
     updateTbar(tbar);
 }
 var unitRowDivSerialId = 1;
 function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
-    unitRowDivSerialId++;
-    var tbar = unit_col_container.parents(".tbar");
-
-    var scroll_pane = unit_col_container.find(".scroll-pane");
-    var pane2api = scroll_pane.data('jsp');
+    // Dispatched Units
+    addDispatchedUnit(unitName);
 
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
 
-    // Unit row div
-    var unit_row_div = $("#unit_row_div_prototype").clone();
-    pane2api.getContentPane().append(unit_row_div);
-    unit_row_div.show();
-    unit_row_div.children().show();
-    unit_row_div.attr("id",unitRowDivSerialId+"_unit_row_div");
+    if(typeof unit_col_container!='undefined' && unit_col_container!=0) {
+        unitRowDivSerialId++;
+        var tbar = unit_col_container.parents(".tbar");
 
-    // Unit Info Btn ('P' and PSI buttons)
-    var tbar_unit_info_btn = unit_row_div.find(".tbar_unit_info_btn");
-    tbar_unit_info_btn.attr("id", unitRowDivSerialId+"_unit_row_div");
-    tbar_unit_info_btn.click(showUnitPeopleDialog(tbar, tbar_unit_info_btn));
-    tbar_unit_info_btn.show();
-    tbar_unit_info_btn.children().show();
+        var scroll_pane = unit_col_container.find(".scroll-pane");
+        var pane2api = scroll_pane.data('jsp');
 
-    tbar_unit_info_btn.find(".personnel_btn").text(personnel_btn_text);
+        // Unit row div
+        var unit_row_div = $("#unit_row_div_prototype").clone();
+        pane2api.getContentPane().append(unit_row_div);
+        unit_row_div.show();
+        unit_row_div.children().show();
+        unit_row_div.attr("id",unitRowDivSerialId+"_unit_row_div");
 
-    // Unit button
-    var unitBtn = unit_row_div.find(".unit_btn");
-    unitBtn.click(showActionsForUnitBtn(unitBtn));
-    var unit_text = unitBtn.find(".unit_text");
-    unit_text.html(unitName);
-    if (unitName.length>5) {
-        unit_text.addClass("btn_largetext");
-    } else if (unitName.length>4) {
-        unit_text.addClass("btn_medtext");
+        // Unit Info Btn ('P' and PSI buttons)
+        var tbar_unit_info_btn = unit_row_div.find(".tbar_unit_info_btn");
+        tbar_unit_info_btn.attr("id", unitRowDivSerialId+"_unit_row_div");
+        tbar_unit_info_btn.click(showUnitPeopleDialog(tbar, tbar_unit_info_btn));
+        tbar_unit_info_btn.show();
+        tbar_unit_info_btn.children().show();
+
+        tbar_unit_info_btn.find(".personnel_btn").text(personnel_btn_text);
+
+        // Unit button
+        var unitBtn = unit_row_div.find(".unit_btn");
+        unitBtn.click(showActionsForUnitBtn(unitBtn));
+        var unit_text = unitBtn.find(".unit_text");
+        unit_text.html(unitName);
+        if (unitName.length>5) {
+            unit_text.addClass("btn_largetext");
+        } else if (unitName.length>4) {
+            unit_text.addClass("btn_medtext");
+        }
+
+        // Move checkbox
+        tbar.find(".unit_move_btn").show();
+        unit_row_div.find(".unit_move_checkbox").hide();
+
+        // Unit Timer
+        var unit_timer_bg = unitBtn.find(".unit_timer_bg");
+        startUnitTimerAnim(unit_timer_bg.find(".unit_timer_bar"));
+
+        // Reinitialize
+        pane2api.reinitialise();
+
+        // Add event for report
+        addEvent_unit_to_sector(unitName, tbar.find(".title_text").text());
+
+        updateTbar(tbar);
     }
-
-    // Move checkbox
-    tbar.find(".unit_move_btn").show();
-    unit_row_div.find(".unit_move_checkbox").hide();
-
-    // Unit Timer
-    var unit_timer_bg = unitBtn.find(".unit_timer_bg");
-    startUnitTimerAnim(unit_timer_bg.find(".unit_timer_bar"));
-
-    // Dispatched Units
-    addDispatchedUnit(unitName);
-
-    // Reinitialize
-    pane2api.reinitialise();
-
-    // Add event for report
-    addEvent_unit_to_sector(unitName, tbar.find(".title_text").text());
-
-    updateTbar(tbar);
 }
 function moveUnitButton(unit_col, unit_col_destination, unitBtn) {
     var unitName = unitBtn.find(".unit_text").html();
@@ -2091,28 +2091,31 @@ function addDispatchedUnit(unit_text) {
 }
 function initDispatchedUnits() {
     var dispatched_units_btn = $("#dispatched_units_btn");
-    dispatched_units_btn.click(showDialog_withCallbacks(
-        "#units_dialog",
-        0,//parent dialog
-        function(){
-            tbar_clicked = 0;
-            $(".unit_dialog_btn").removeClass("glowlightgreen");
-            $(".dispatched_unit_btn").each(function(){
-                var unit_text = $(this).text();
-                $(".unit_dialog_btn:contains('"+unit_text+"')").addClass("glowlightgreen");
-            });
-        },
-        function(unit_text){
-            var unit_dialog_btn = $(".unit_dialog_btn:contains('"+unit_text+"')");
-            if($(".dispatched_unit_btn:contains('"+unit_text+"')").length==0) {
-                addDispatchedUnit(unit_text);
-                unit_dialog_btn.addClass("glowlightgreen");
-            } else {
-                $(".dispatched_unit_btn:contains('"+unit_text+"')").remove();
-                unit_dialog_btn.removeClass("glowlightgreen");
-            }
-        }
-    ));
+    dispatched_units_btn.click(
+        showDialog_withCallbacks("#units_dialog", 0/*parentDialog*/, 0/*onOpenCallback*/, toggleUnitButtonForTbar(0))
+    );
+//    dispatched_units_btn.click(showDialog_withCallbacks(
+//        "#units_dialog",
+//        0,//parent dialog
+//        function(){
+//            tbar_clicked = 0;
+//            $(".unit_dialog_btn").removeClass("glowlightgreen");
+//            $(".dispatched_unit_btn").each(function(){
+//                var unit_text = $(this).text();
+//                $(".unit_dialog_btn:contains('"+unit_text+"')").addClass("glowlightgreen");
+//            });
+//        },
+//        function(unit_text){
+//            var unit_dialog_btn = $(".unit_dialog_btn:contains('"+unit_text+"')");
+//            if($(".dispatched_unit_btn:contains('"+unit_text+"')").length==0) {
+//                addDispatchedUnit(unit_text);
+//                unit_dialog_btn.addClass("glowlightgreen");
+//            } else {
+//                $(".dispatched_unit_btn:contains('"+unit_text+"')").remove();
+//                unit_dialog_btn.removeClass("glowlightgreen");
+//            }
+//        }
+//    ));
 }
 
 
@@ -2178,7 +2181,7 @@ function init( ) {
 	initIncidentInfo();
 	initEmergTrafficDialog();
 	init10KeyDialog();
-//    initDispatchedUnits();
+    initDispatchedUnits();
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
