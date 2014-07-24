@@ -5,8 +5,10 @@ version=$2
 
 # Update version
 echo "\$( document ).ready(function(){\$('#version_text').html('Version:${version}');});" > ./html/version.js
-git tag -d "ict_deploy_${suffix}_${version}" 2> /dev/null
-git tag "ict_deploy_${suffix}_${version}"
+
+# Commit git
+git add -A
+git commit -m "ict_deploy_${suffix}_${version}"
 
 tarfileName="deploy_pkg_${suffix}_${version}.tgz"
 
