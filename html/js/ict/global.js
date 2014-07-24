@@ -920,7 +920,8 @@ function addActionButtonToTbar(tbar, actionName) {
 
     // Report
     var sector_title = tbar.find(".title_text").text();
-    addEvent_action_to_unit(actionName, "E###", sector_title)
+    var unit_name = tbar.find(".left_scroll_pane").find(".unit_row_div.glowlightyellow").find(".unit_text").text();
+    addEvent_action_to_unit(actionName, unit_name, sector_title)
 }
 function initActionsDialog( ) {
 	var actionsDialog = $("#dialog_prototype" ).clone().appendTo("#dialog_vertical_align_cell");

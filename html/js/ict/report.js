@@ -156,7 +156,7 @@ function addEvent_action_to_unit(action, unit, sector) {
         "sector":sector});
 }
 function render_action_to_unit(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Action:"+event.action+" added to Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
+    doc.text(/*getDateStr(event.datetime)+*/"  Action:"+event.action+" added to Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
 }
 
 
