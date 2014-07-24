@@ -157,6 +157,14 @@ td {
 	background-color: #BBB;
 }
 
+.button_top {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: none;
+}
+
 
 .button_no_hover {
 	text-align: center;
@@ -361,6 +369,7 @@ td {
     float:right;
     margin-right: 10px;
     font-size:1.2rem;
+    padding: 0 20px;
 }
 #mode_side_dialog {
     top: 197px;
@@ -587,19 +596,39 @@ td {
     border-top: 1px solid #DDD;
 }
 
-
+#mayday_btn_container {
+    position: fixed;
+    width:100%;
+    top:0;
+    left:0;
+    z-index: 100;
+    pointer-events: none;
+}
 #mayday_btn {
+    margin-left:auto;
+    margin-right:auto;
     background: red;
     color: white;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    /*border-top-left-radius: 0;*/
+    /*border-top-right-radius: 0;*/
+    /*border-bottom-left-radius: 20px;*/
+    /*border-bottom-right-radius: 20px;*/
+    border-radius: 20px;
     border-top: none;
     border-right: 2px solid orange;
     border-bottom: 2px solid orange;
     border-left: 2px solid orange;
     font-size: 1.25rem;
+    padding: 0 20px;
+    width:130px;
+    text-align: center;
+    pointer-events: auto;
+}
+#mayday_btn:hover {
+    background: #FF9696;
+}
+#mayday_btn:active {
+    background: #C20000;
 }
 #mayday_clear_dialog {
     width: 350px;
