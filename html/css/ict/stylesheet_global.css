@@ -597,13 +597,11 @@ td {
     border-top: 1px solid #DDD;
 }
 
-#mayday_btn_container {
-    position: fixed;
+#top_header_container {
     width:100%;
-    top:0;
-    left:0;
     z-index: 100;
     pointer-events: none;
+    padding-right:100px;
 }
 #mayday_btn {
     margin-left:auto;
@@ -624,6 +622,7 @@ td {
     width:130px;
     text-align: center;
     pointer-events: auto;
+    float: left;
 }
 #mayday_btn:hover {
     background: #FF9696;
@@ -1248,4 +1247,8 @@ ul {
 }
 #upgrade_left_col {
     float:left;
+}
+
+.gridster > * {
+    margin-right: 120px !important;
 }
