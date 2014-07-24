@@ -1957,6 +1957,26 @@ function addTbar(col_x, row_y) {
 
 
 /**
+ * Init Upgrade Dialog
+ **/
+function initUpgradeDialog() {
+    $("#upgrade_btn").click(showDialog(0, 0, "#upgrade_dialog"));
+    $(".right_upgrade_btn").addClass("disabled");
+    $(".left_upgrade_btn").click(function() {
+        $(".left_upgrade_btn").removeClass("glowlightgreen");
+        $(this).addClass("glowlightgreen");
+        $(".right_upgrade_btn").removeClass("disabled");
+    });
+
+    $(".right_upgrade_btn").click(function(){
+        $(".right_upgrade_btn").removeClass("glowlightgreen");
+        $(this).addClass("glowlightgreen");
+    });
+}
+
+
+
+/**
  * Init Command Terminate Dialog
  **/
 function terminateCommand() {
@@ -2182,6 +2202,7 @@ function init( ) {
 	initEmergTrafficDialog();
 	init10KeyDialog();
     initDispatchedUnits();
+    initUpgradeDialog();
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();

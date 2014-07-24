@@ -1233,3 +1233,17 @@ ul {
     width: 25px;
     height: 25px;
 }
+
+#upgrade_dialog {
+    width: 350px;
+}
+.upgrade_btn {
+    width: 150px;
+    margin: 5px;
+}
+#upgrade_right_col {
+    float:right;
+}
+#upgrade_left_col {
+    float:left;
+}
