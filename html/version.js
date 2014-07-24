@@ -1,1 +1,1 @@
-$( document ).ready(function(){$('#version_text').html('Version:0.0.6');});
+$( document ).ready(function(){$('#version_text').html('Version:0.0.7');});
