@@ -2369,10 +2369,10 @@ var sectors = [
 	"West Sector",
 	"RESCUE",
 
-	"A Side",
-	"B Side",
-	"C Side",
-	"D Side",
+	"Alpha Side",
+	"Bravo Side",
+	"Charlie Side",
+	"Delta Side",
 	"Safety",
 
 	"On Deck",
