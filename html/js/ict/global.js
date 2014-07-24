@@ -904,6 +904,11 @@ function addActionButtonToTbar(tbar, actionName) {
         updateOsrPercentComplete();
     }
 
+    if(actionName=="Take a Line") {
+        $("#establish_supply_objective_btn").addClass("glowlightgreen");
+        updateObjectivePercentComplete();
+    }
+
     // Update scroll container
     var scroll_pane = tbar.find(".right_scroll_pane");
     var pane2api = scroll_pane.data('jsp');
