@@ -1247,9 +1247,10 @@ ul {
 }
 
 .gridster > * {
-    margin-right: 120px !important;
+    /*margin-right: 120px !important;*/
 }
 
 #mayday_and_tbar_container {
     margin-bottom: 50px;
+    padding-right: 90px;
 }
