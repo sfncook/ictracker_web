@@ -1693,15 +1693,12 @@ function initTbars() {
     updateTbar(safety_tbar);
     updateTbar(rehab_tbar);
 
-    addTbar();
-    addTbar();
-    addTbar();
-    addTbar();
-    addTbar();
-
-    addTbar();
-
     rehab_tbar.find(".benchmark_btn").hide();
+
+    // Make three rows of TBars
+    for(var i=1; i<=(gridster.cols-1)*3; i++) {
+        addTbar();
+    }
 }
 
 
