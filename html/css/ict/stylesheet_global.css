@@ -273,7 +273,7 @@ td {
     background: DeepSkyBlue;
 }
 .glowlightgreen {
-    background: LightGreen;
+    background: LightGreen !important;
 }
 .glowlightgreen:hover {
     background: DarkGreen;
