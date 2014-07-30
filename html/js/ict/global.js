@@ -2441,7 +2441,7 @@ var sectors = [
 
     "Lobby",
     "Customer Service",
-    "Rescue",
+    "RESCUE",
     "Treatment",
 
     "Accountability",
