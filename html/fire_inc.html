@@ -215,11 +215,17 @@
                 <!-- Address Dialog -->
                 <div id="address_dialog" class="dialog dialog_window container-fluid">
                     <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Address<span class="dialog_close_btn button">Close</span></div>
+                        <div class="dialog_title_text">Dispatch Address<span class="dialog_close_btn button">Close</span></div>
                     </div>
                     <div class="dialog_body col-xs-12 container-fluid">
-                        <input type="radio" name="address_type" id="address_dispatch" value="address_dispatch"><label for="address_dispatch">Dispatch Address</label><br>
-                        <input type="radio" name="address_type" id="address_custom" value="address_custom"><input type="text" id="address_custom_input">
+                        <input type="text" id="address_custom_input">
+                        <div id="address_dlg_clear" class="button">Clear</div>
+                        <div class="clear_float"></div>
+                        <div>
+                            <div id="address_dlg_ok" class="confirm_btn button">OK</div>
+                            <div id="address_dlg_cancel" class="confirm_btn button">Cancel</div>
+                            <div class="clear_float"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -485,7 +491,7 @@
                     <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
                         <div id="osr_left_col">
                             <div id="unit_osr_btn" class="osr_btn button">Unit ID</div>
-                            <div class="osr_btn button">Address</div>
+                            <div id="address_left_osr_btn" class="osr_btn button">Address</div>
                             <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
                             <div id="construction_osr_btn" class="osr_btn button">Construction</div>
                             <div id="conditions_osr_btn" class="osr_btn button">Conditions</div>

@@ -1293,7 +1293,27 @@ function initOsrDialog( ) {
     });
 
     $("#osr_address_btn").click(showDialog(0, $("#address_btn"), "#address_dialog", $("#osr_dialog")));
-    $("#osr_address_btn").click(toggleOsrBtn($("#osr_address_btn")));
+//    $("#osr_address_btn").click(toggleOsrBtn($("#osr_address_btn")));
+    $("#address_dlg_ok").click(function(){
+        var address = $("#address_custom_input").val()
+        if(address) {
+            $("#osr_address_btn").html(address);
+            $("#osr_address_btn").addClass("glowlightgreen");
+            $("#address_left_osr_btn").addClass("glowlightgreen");
+            $("#address_dialog").hide();
+            $("#osr_dialog").show();
+        } else {
+            $("#osr_address_btn").html("Dispatch Address");
+            $("#osr_address_btn").removeClass("glowlightgreen");
+            $("#address_left_osr_btn").removeClass("glowlightgreen");
+            $("#address_dialog").hide();
+            $("#osr_dialog").show();
+        }
+    });
+    $("#address_dlg_cancel").click(hideAllDialogs);
+    $("#address_dlg_clear").click(function(){
+        $("#address_custom_input").val("");
+    });
 
     $("#osr_occupancy_basement_btn").click(function(){
         $("#osr_occupancy_basement_btn").addClass("glowlightgreen");

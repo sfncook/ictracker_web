@@ -1202,7 +1202,8 @@ ul {
     margin: 5px;
 }
 #address_custom_input {
-    width: 400px;
+    margin-top:5px;
+    width: 380px;
 }
 
 .mayday_top_row_edge {
@@ -1253,4 +1254,9 @@ ul {
 #mayday_and_tbar_container {
     margin-bottom: 50px;
     padding-right: 90px;
+}
+
+#address_dlg_clear {
+    float:right;
+    margin:5px;
 }
