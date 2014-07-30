@@ -2401,22 +2401,22 @@ var sectors = [
 	"Interior",
 	"Sector 1",
     "North Sector",
-	"A-Side Sector",
+	"Alpha Sector",
 
     "",
     "Sector 2",
     "Eat Sector",
-    "B-Side Sector",
+    "Bravo Sector",
 
     "Ventilation",
     "Sector 3",
     "South Sector",
-    "C-Side Sector",
+    "Charlie Sector",
 
     "Roof",
     "Sector 4",
     "West Sector",
-    "D-Side Sector",
+    "Delta Sector",
 
     "",
     "Sector ####",
