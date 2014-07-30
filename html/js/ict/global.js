@@ -2399,47 +2399,64 @@ var sectorsWithOutActions = [
 
 var sectors = [
 	"Interior",
-	"Roof",
-	"Ventilation",
-	"Evac",
-	"IRIC",
-
 	"Sector 1",
-	"Sector 2",
-	"Sector 3",
-	"Sector 4",
-	"RIC",
+    "North Sector",
+	"A-Side Sector",
 
-	"North Sector",
-	"East Sector",
-	"South Sector",
-	"West Sector",
-	"RESCUE",
+    "",
+    "Sector 2",
+    "Eat Sector",
+    "B-Side Sector",
 
-	"Alpha Side",
-	"Bravo Side",
-	"Charlie Side",
-	"Delta Side",
-	"Safety",
+    "Ventilation",
+    "Sector 3",
+    "South Sector",
+    "C-Side Sector",
 
-	"On Deck",
-	"Staging",
-	"Lobby",
-	"Accountability",
-	"ReHab",
+    "Roof",
+    "Sector 4",
+    "West Sector",
+    "D-Side Sector",
 
-	"Overhaul",
-	"Salvage",
-	"Cust Service",
-	"Resource",
-	"Sector ####",
+    "",
+    "Sector ####",
+    "",
+    "",
 
-	"Medical",
-	"Triage",
-	"Treatment",
-	"Transportation",
-	"Extrication",
-	];
+    "",
+    "",
+    "",
+    "",
+
+
+    "On Deck",
+    "Overhaul",
+    "IRIC",
+    "Medical",
+
+
+    "Staging",
+    "Salvage",
+    "RIC",
+    "Triage",
+
+    "Lobby",
+    "Customer Service",
+    "Rescue",
+    "Treatment",
+
+    "Accountability",
+    "Evacuation",
+    "Safety",
+    "Transportation",
+
+
+    "",
+    "Resource",
+    "ReHab",
+    "",
+
+];
 
 var Engine="Engine";
 var Ladder="Ladder";
