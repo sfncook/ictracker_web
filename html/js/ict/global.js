@@ -2428,7 +2428,6 @@ var sectors = [
     "",
     "",
 
-
     "On Deck",
     "Overhaul",
     "IRIC",
