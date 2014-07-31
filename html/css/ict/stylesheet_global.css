@@ -390,6 +390,10 @@ td {
     z-index: 100;
 	height: 45px;
 }
+#sectorreport_btn {
+    z-index: 100;
+    height: 45px;
+}
 .report_icon {
     width: 20px;
     height: 20px;

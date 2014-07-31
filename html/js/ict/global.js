@@ -2214,7 +2214,8 @@ function init( ) {
 	initUnitsDialog();
 	initUnitPeopleDialog();
 	initBenchmarkDialog();
-	$("#report_btn").click(function(){generateReport();});
+	$("#report_btn").click(function(){generateReportSortByTime();});
+    $("#sectorreport_btn").click(function(){generateReportSortBySector();});
 //	initCmdTerminateDialog();
     $("#cmd_term_btn").hide();
 	initMaydayDialog();
