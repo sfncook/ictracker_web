@@ -1,5 +1,7 @@
 #!/bin/sh
 
+[ $# -eq 0 ] && { echo "Usage: $0 [suffix] [version]"; exit 1; }
+
 suffix=$1
 version=$2
 
