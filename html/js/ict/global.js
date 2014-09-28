@@ -1722,6 +1722,15 @@ function initTbars() {
 }
 
 
+function updateDispatchUnitsHighlight() {
+    $(".dispatched_unit_btn").removeClass("glowlightgreen");
+    $( ".tbar" ).each(function( index, tbar ) {
+        $(tbar).find(".unit_text").each(function( index, tbarUnitBtn ) {
+            var html = $(tbarUnitBtn).html();
+            $(".dispatched_unit_btn:contains('"+html+"')").addClass("glowlightgreen");
+        });
+    });
+}
 function onOpenUnitsDialogFromTbar(tbar) {
     return function() {
         $(".unit_dialog_btn").removeClass("glowlightgreen");
@@ -1729,6 +1738,7 @@ function onOpenUnitsDialogFromTbar(tbar) {
             var html = $(tbarUnitBtn).html();
             $(".unit_dialog_btn:contains('"+html+"')").addClass("glowlightgreen");
         });
+        updateDispatchUnitsHighlight();
     }
 }
 function toggleUnitButtonForTbar(unit_col_container) {
@@ -1761,11 +1771,10 @@ function removeUnitButton(unit_col_container, unitName) {
     }
 
     updateTbar(tbar);
+    updateDispatchUnitsHighlight();
 }
 var unitRowDivSerialId = 1;
 function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
-    // Dispatched Units
-    addDispatchedUnit(unitName);
 
     // Update Units Dialog
     $(".unit_dialog_btn:contains('"+unitName+"')").addClass("glowlightgreen");
@@ -1820,6 +1829,9 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
         updateTbar(tbar);
     }
+
+    // Dispatched Units
+    addDispatchedUnit(unitName);
 }
 function moveUnitButton(unit_col, unit_col_destination, unitBtn) {
     var unitName = unitBtn.find(".unit_text").html();
@@ -2131,6 +2143,7 @@ function addDispatchedUnit(unit_text) {
             onClickCallback(unit_text);
         });
     }
+    updateDispatchUnitsHighlight();
 }
 function initDispatchedUnits() {
     var dispatched_units_btn = $("#dispatched_units_btn");
@@ -2406,7 +2419,7 @@ var sectors = [
 
     "",
     "Sector 2",
-    "Eat Sector",
+    "East Sector",
     "Bravo Sector",
 
     "Ventilation",
