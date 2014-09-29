@@ -377,6 +377,7 @@ td {
 #mode_btn {
     float:right;
     margin-right: 10px;
+    pointer-events:auto;
 }
 #mode_side_dialog {
     top: 197px;
@@ -614,6 +615,7 @@ td {
     width:100%;
     z-index: 50;
     padding-right:100px;
+    pointer-events: none;
 }
 #top_header_mayday_container {
     position: fixed;
