@@ -1,6 +1,7 @@
 
-function MaydayEvent(tbar, unit) // Constructor
+function MaydayEvent(tbar, unitBtn, maydayUnitBtn) // Constructor
 {
     this.tbar = tbar;
-    this.unit = unit;
+    this.unitBtn = unitBtn;
+    this.maydayUnitBtn = maydayUnitBtn;
 }

@@ -386,9 +386,6 @@ function initUnitPeopleDialog() {
 }
 
 
-/**
- * Mayday Dialog
- **/
 function onCloseMaydayDialog() {
     $(".mayday_info_div").not("#mayday_info_div_prototype").each(function( i ) {
         var maydayEl = $(this);
@@ -432,6 +429,26 @@ function resetMayday(maydayEl) {
         prev_mayday_unit_btn.removeClass("glowpink");
     }
 }
+/**
+ * Mayday Dialog
+ **/
+var allMaydayEvents = new Array();
+function addMaydayEvent(tbar, unitBtn, maydayUnitBtn) {
+    var maydayEvent = new MaydayEvent(tbar, unitBtn, maydayUnitBtn);
+    allMaydayEvents.push(maydayEvent);
+    unitBtn.addClass("has_mayday");
+    maydayUnitBtn.addClass("has_mayday");
+    return maydayEvent;
+}
+function removeMaydayEvent(maydayEvent) {
+    allMaydayEvents.remByVal(maydayEvent);
+    maydayEvent.unitBtn.removeClass("has_mayday");
+    maydayEvent.unitBtn.removeClass("glowred");
+    maydayEvent.unitBtn.removeClass("glowpink");
+    maydayEvent.maydayUnitBtn.removeClass("has_mayday");
+    maydayEvent.maydayUnitBtn.removeClass("glowred");
+    maydayEvent.maydayUnitBtn.removeClass("glowpink");
+}
 function updateMaydaySector(maydayEl) {
     var selectedSectorTitle = maydayEl.find(".mayday_select").find("option:selected").text();
     var tbar = $(".tbar").find(".title_text:contains("+selectedSectorTitle+")").parents(".tbar");
@@ -448,32 +465,31 @@ function updateMaydaySector(maydayEl) {
 
         // Set Mayday for clicked unit button
         maydayUnitBtn.click(function(){
-            resetMayday(maydayEl);
-            maydayEl.data('unit_btn',unitBtn);
-            maydayEl.data('mayday_unit_btn',maydayUnitBtn);
-            unitBtn.toggleClass("has_mayday");
-            if(unitBtn.hasClass('has_mayday')) {
-                maydayUnitBtn.addClass("has_mayday");
-            } else {
-                maydayUnitBtn.removeClass("has_mayday");
-                unitBtn.removeClass("glowred");
-                unitBtn.removeClass("glowpink");
-                maydayUnitBtn.removeClass("glowred");
-                maydayUnitBtn.removeClass("glowpink");
+            var prevMaydayEventObj = maydayEl.data("maydayEventObj");
+
+            // Remove previous mayday
+            if(typeof prevMaydayEventObj != 'undefined' && prevMaydayEventObj!=null) {
+                removeMaydayEvent(prevMaydayEventObj);
+                maydayEl.data("maydayEventObj", null);
             }
+
+            // Add new mayday
+            var newMaydayEventObj = addMaydayEvent(tbar, unitBtn, maydayUnitBtn);
+            maydayEl.data("maydayEventObj", newMaydayEventObj);
         });
 
     });
 }
 function clearMayday(maydayEl) {
     return function() {
-        resetMayday(maydayEl)
+        var maydayEventObj = maydayEl.data("maydayEventObj");
+        removeMaydayEvent(maydayEventObj);
         maydayEl.remove();
         showDialog(0, 0, "#mayday_clear_dialog")();
     }
 }
 var manyMaydays = 0;
-function addMaydayEvent() {
+function addMaydayEventElement() {
     manyMaydays++;
     var maydayEl = $("#mayday_info_div_prototype").clone();
     maydayEl.appendTo("#mayday_scroll_div");
@@ -556,7 +572,7 @@ function initMaydayDialog( ) {
     maydayBtn.click(showDialog_withCallbacks( "#mayday_dialog", 0/*parentDialog*/, 0, 0, onCloseMaydayDialog));
 
     $("#mayday_info_div_prototype").hide();
-    $("#new_mayday_btn").click(addMaydayEvent);
+    $("#new_mayday_btn").click(addMaydayEventElement);
 
     $(".mayday_tab_div").hide();
     selectMaydayTab("radio", "tan_bg");
