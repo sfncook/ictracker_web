@@ -442,12 +442,23 @@ function addMaydayEvent(tbar, unitBtn, maydayUnitBtn) {
 }
 function removeMaydayEvent(maydayEvent) {
     allMaydayEvents.remByVal(maydayEvent);
-    maydayEvent.unitBtn.removeClass("has_mayday");
-    maydayEvent.unitBtn.removeClass("glowred");
-    maydayEvent.unitBtn.removeClass("glowpink");
     maydayEvent.maydayUnitBtn.removeClass("has_mayday");
     maydayEvent.maydayUnitBtn.removeClass("glowred");
     maydayEvent.maydayUnitBtn.removeClass("glowpink");
+
+    var unitHasOtherMayday = false;
+    for (i = 0; i < allMaydayEvents.length; i++) {
+        var maydayEventObj = allMaydayEvents[i];
+        if(maydayEventObj.unitBtn.find(".unit_text").html()===maydayEvent.unitBtn.find(".unit_text").html()) {
+            unitHasOtherMayday = true;
+        }
+    }
+
+    if(!unitHasOtherMayday){
+        maydayEvent.unitBtn.removeClass("has_mayday");
+        maydayEvent.unitBtn.removeClass("glowred");
+        maydayEvent.unitBtn.removeClass("glowpink");
+    }
 }
 function updateMaydaySector(maydayEl) {
     var selectedSectorTitle = maydayEl.find(".mayday_select").find("option:selected").text();
@@ -457,7 +468,7 @@ function updateMaydaySector(maydayEl) {
     resetMayday(maydayEl);
     maydayEl.data("tbar", tbar);
 
-    tbar.find(".unit_btn:not(.has_mayday)").each(function( i ) {
+    tbar.find(".unit_btn").each(function( i ) {
         var unitBtn = $(this);
         var unitText = unitBtn.html();
         var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>"+unitText+"</div>");
