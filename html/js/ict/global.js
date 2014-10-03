@@ -1284,6 +1284,29 @@ function initObjectivesDialog( ) {
 
 
 /**
+ * Street Name Dialog
+ **/
+function initStreetNameDialog() {
+    $("#streetname_btn").click(showDialog(0, $("#streetname_btn"), "#streetname_dialog"));
+    $("#streetname_dlg_ok").click(function(){
+        var input = $("#streetname_custom_input").val()
+        if(input) {
+            $("#streetname_btn").html(input);
+            hideAllDialogs();
+        } else {
+            $("#streetname_btn").html("Street Address");
+            hideAllDialogs();
+        }
+    });
+    $("#streetname_dlg_cancel").click(hideAllDialogs);
+    $("#streetname_dlg_clear").click(function(){
+        $("#streetname_custom_input").val("");
+    });
+}
+
+
+
+/**
  * OSR Dialog
  **/
  function updateOsrPercentComplete() {
@@ -2270,6 +2293,7 @@ function init( ) {
 	init10KeyDialog();
     initDispatchedUnits();
     initUpgradeDialog();
+    initStreetNameDialog()
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
