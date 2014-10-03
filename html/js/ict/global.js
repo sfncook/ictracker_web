@@ -1294,7 +1294,7 @@ function initStreetNameDialog() {
             $("#streetname_btn").html(input);
             hideAllDialogs();
         } else {
-            $("#streetname_btn").html("Street Address");
+            $("#streetname_btn").html("Street Name");
             hideAllDialogs();
         }
     });

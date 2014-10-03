@@ -1238,6 +1238,11 @@ ul {
     margin-top:5px;
     width: 380px;
 }
+#streetname_dlg_clear {
+    float:right;
+    margin:5px;
+}
+
 
 
 #address_dialog {
