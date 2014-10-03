@@ -1854,6 +1854,9 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         // Add event for report
         addEvent_unit_to_sector(unitName, tbar.find(".title_text").text());
 
+        // Always select the most recently added unit
+        showActionsForUnitBtn(unitBtn)();
+
         updateTbar(tbar);
     }
 
