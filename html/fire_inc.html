@@ -38,9 +38,14 @@
                 <div>Units</div>
             </div>
             <div id="upgrade_btn" class="header_item button">Upgrade</div>
+            <div id="cmdxfer_units_btn" class="header_item button">
+                <div>Command</div>
+                <div>Transferred</div>
+            </div>
 			
 			<div id="header_row2" class="header_row">
 				<div class="dialog_vertical_align_cell">
+                    <div id="branch_btn" class="header_item button">Branch</div>
 					<div id="osr_header_btn" class="header_item button">
                         <div>OSR</div>
                         <div id="osr_btn_perccomplete">(0% Complete)</div>
@@ -524,7 +529,6 @@
                     </div>
                     <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
                         <div id="osr_left_col">
-                            <div id="unit_osr_btn" class="osr_btn button">Unit ID</div>
                             <div id="address_left_osr_btn" class="osr_btn button">Address</div>
                             <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
                             <div id="construction_osr_btn" class="osr_btn button">Construction</div>
@@ -538,6 +542,7 @@
                             <div id="acct_osr_btn" class="osr_btn button">Accountability</div>
                         </div>
                         <div id="osr_right_col">
+                            <div id="unit_osr_btn" class="button">Unit ID</div>
                             <div id="osr_address_btn" class="button">Dispatch Address</div>
                             <select id="osr_select_type_of_building" class="osr_select">
                                 <option disabled="disabled" selected="selected">Type of building</option>
@@ -547,9 +552,16 @@
                                 <option>Apartment</option>
                                 <option>Hotel</option>
                                 <option>Strip Mall</option>
+                                <option>Strip Mall with Big Box</option>
                                 <option>Office Complex</option>
-                                <option>Big box Retail</option>
+                                <option>Big Box Retail</option>
                                 <option>Specialized/Other</option>
+                            </select>
+                            <select id="osr_size_of_building" class="osr_select">
+                                <option disabled="disabled" selected="selected">Size of building</option>
+                                <option>Small building</option>
+                                <option>Medium building</option>
+                                <option>Large building</option>
                             </select>
 
                             <select id="osr_number_of_floors" class="osr_select">
@@ -580,12 +592,9 @@
                                 <option>24 floors</option>
                                 <option>25 floors</option>
                             </select>
-                            <select id="osr_size_of_building" class="osr_select">
-                                <option disabled="disabled" selected="selected">Size of building</option>
-                                <option>Small building</option>
-                                <option>Medium building</option>
-                                <option>Large building</option>
-                            </select>
+
+                            <div id="osr_subfloor_btn" class="osr_toggle_btn button">Sub Floor (1-2)</div>
+                            <div class="clear_float"></div>
 
                             <div class="osr_toggle_container_div">
                                 <div id="osr_occupancy_basement_btn" class="osr_toggle_btn button">Basement</div>

@@ -327,6 +327,9 @@ td {
     margin-bottom: 4px;
 	height: 25px;
 }
+#branch_btn {
+    margin-bottom: 10px;
+}
 #iap_btn {
     margin-top: 10px;
 }
@@ -420,6 +423,11 @@ td {
     height: 20px;
 }
 #dispatched_units_btn {
+    z-index: 100;
+    height: 46px;
+    margin: 5px 0;
+}
+#cmdxfer_units_btn {
     z-index: 100;
     height: 46px;
     margin: 5px 0;
@@ -1055,11 +1063,18 @@ td {
     float:left;
     margin:0 5px;
 }
+#osr_subfloor_btn {
+    width: 215px;
+}
 #osr_occupancy_floors_div {
     margin: 10px 0 15px 0;
     height: 25px;
 }
 #osr_address_btn {
+    width: 220px;
+    margin:5px 0 15px 0;
+}
+#unit_osr_btn {
     width: 220px;
     margin:5px 0 15px 0;
 }

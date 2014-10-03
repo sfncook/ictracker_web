@@ -926,10 +926,10 @@ function addActionButtonToTbar(tbar, actionName) {
         actionBtn.addClass("btn_medtext");
     }
 
-    if(actionName=="IRIC") {
-        $("#iric_osr_btn").addClass("glowlightgreen");
-        updateOsrPercentComplete();
-    }
+//    if(actionName=="IRIC") {
+//        $("#iric_osr_btn").addClass("glowlightgreen");
+//        updateOsrPercentComplete();
+//    }
 
     if(actionName=="Take a Line") {
         $("#establish_supply_objective_btn").addClass("glowlightgreen");
@@ -1365,6 +1365,11 @@ function initOsrDialog( ) {
         $("#address_custom_input").val("");
     });
 
+    $("#osr_subfloor_btn").click(function(){
+        $("#osr_subfloor_btn").toggleClass("glowlightgreen");
+        addEvent_osr("Occupancy: Sub Floor (1-2)");
+    });
+
     $("#osr_occupancy_basement_btn").click(function(){
         $("#osr_occupancy_basement_btn").addClass("glowlightgreen");
         $("#osr_occupancy_nobasement_btn").removeClass("glowlightgreen");
@@ -1549,9 +1554,9 @@ function startUnitTimerAnim(el) {
     el.css("width","48px").css("background","lightgreen");
 
     el
-      .animate({width:"32px"}, 3.33*60*1000, "linear", function(){el.css("background","yellow")})
-      .animate({width:"16px"}, 3.33*60*1000, "linear", function(){el.css("background","red")})
-      .animate({width:"0"},    3.33*60*1000, "linear");
+      .animate({width:"32px"}, 5*60*1000, "linear", function(){el.css("background","yellow")})
+      .animate({width:"16px"}, 5*60*1000, "linear", function(){el.css("background","red")})
+      .animate({width:3},    4*60*1000, "linear");
 }
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -1958,8 +1963,8 @@ function addTbar(col_x, row_y) {
             function(unitName){
                 addEvent_unit_to_acct(unitName, tbar.find(".title_text").text());
                 acctBtn.html(unitName);
-                $("#acct_osr_btn").addClass("glowlightgreen");
-                updateOsrPercentComplete();
+//                $("#acct_osr_btn").addClass("glowlightgreen");
+//                updateOsrPercentComplete();
                 hideAllDialogs();
             }
         )
@@ -2453,7 +2458,9 @@ var sectorsWithClock = [
 	"Extrication",
     "Safety",
     "IRIC",
-    "RIC"
+    "RIC",
+    "Overhaul",
+    "Salvage"
 	];
 var sectorsWithOutAcctBtn = [
 	"ReHab",
