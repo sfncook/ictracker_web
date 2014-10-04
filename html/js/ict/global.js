@@ -2254,14 +2254,38 @@ function initDispatchedUnits() {
 /**
  * Coookies
  **/
+function unitToObjForJson(unitBtn) {
+    var unitObj = {};
+
+    var unit_text = unitBtn.find(".unit_text").html();
+    unitObj['unit_text'] = unit_text;
+    // unit timer
+    // actions
+    // par
+    // psi
+
+    return unitObj;
+}
 function tbarToJson(tbarEl) {
     var tbarObj = {};
+
+    // TBar
     var title_text = tbarEl.find(".title_text").html();
     var col = tbarEl.data("col");
     var row = tbarEl.data("row");
     tbarObj['title_text'] = title_text;
     tbarObj['col'] = col;
     tbarObj['row'] = row;
+
+    // Units
+    var units = new Array();
+    tbarEl.find(".unit_btn").each(function( index, unitBtn ) {
+        var unitBtnJson = unitToObjForJson($(unitBtn));
+        units.push(unitBtnJson);
+    });
+
+    tbarObj['units'] = units;
+
     return JSON.stringify(tbarObj);
 }
 function deleteAllCookies() {
@@ -2276,8 +2300,10 @@ function saveCookieState() {
         if($(tbar).attr('id')!='tbar_prototype') {
             var tbarJson = tbarToJson($(tbar));
             var tbar_key = "tbar_"+$(tbar).data("col")+"_"+$(tbar).data("row");
+            $.cookie('tbar_' + tbar_key, tbarJson);
         }
     });
+    console.log($.cookie());
 }
 function findTbarElementByColRow(col, row) {
     var retTbar;
@@ -2296,11 +2322,22 @@ function findTbarElementByColRow(col, row) {
         return retTbar;
     }
 }
+function addAllUnitsToTbar(tbarEl, units) {
+    var unit_col_left = tbarEl.find(".unit_col_left");
+    var unit_col_right = tbarEl.find(".unit_col_right");
+    for(var i=0; i<units.length; i++) {
+        var unit = units[i];
+        var unit_text = unit['unit_text'];
+        addUnitButton(unit_col_left, unit_text);
+    }
+}
 function loadCookieState() {
+    console.log($.cookie());
     for(var key in $.cookie()){
         var tbarObj = JSON.parse($.cookie(key));
         var col = tbarObj['col'];
         var row = tbarObj['row'];
+        var units = tbarObj['units'];
         var tbarEl = findTbarElementByColRow(col, row);
         if(typeof tbarEl!='undefined') {
             tbarEl.find(".title_text").html(tbarObj['title_text']);
@@ -2309,6 +2346,7 @@ function loadCookieState() {
             var title_text = tbarObj['title_text'];
             tbarEl.find(".title_text").html(title_text);
         }
+        addAllUnitsToTbar(tbarEl, units);
     }
 }
 
