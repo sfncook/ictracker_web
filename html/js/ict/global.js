@@ -1318,22 +1318,6 @@ function initStreetNameDialog() {
  function toggleOsrBtn(btn) {
     return function() {
         btn.toggleClass("glowlightgreen");
-        if(btn.attr("id")=="unit_osr_btn" && btn.hasClass("glowlightgreen")){
-//            showUnitsDialog(0, $("#unit_osr_btn"), $("#osr_dialog"))();
-            showDialog_withCallbacks(
-                "#units_dialog",
-                0,//parent dialog
-                function(){
-                    $(".unit_dialog_btn").removeClass("glowlightgreen");
-                    $(".unit_dialog_btn:contains('"+btn.html()+"')").addClass("glowlightgreen");
-                },
-                function(unitName){
-                    btn.html(unitName);
-                    $("#units_dialog").hide();
-                    $("#osr_dialog").show();
-                }
-            )();
-        }
         updateOsrPercentComplete();
     }
 }
@@ -1341,6 +1325,26 @@ function initOsrDialog( ) {
     $(".osr_btn").each(function() {
         $(this).click(toggleOsrBtn($(this)));
     });
+
+    $("#unit_osr_btn").click(
+        showDialog_withCallbacks(
+            "#units_dialog",
+            0,//parent dialog
+            function(){
+                $(".unit_dialog_btn").removeClass("glowlightgreen");
+                var unit_btn_text = $("#unit_osr_btn").html();
+                if(unit_btn_text!="Unit ID") {
+                    $(".unit_dialog_btn:contains('"+unit_btn_text+"')").addClass("glowlightgreen");
+                }
+            },
+            function(unitName){
+                $("#unit_osr_btn").html(unitName);
+                $("#unit_osr_btn").addClass("glowlightgreen");
+                $("#units_dialog").hide();
+                $("#osr_dialog").show();
+            }
+        )
+    );
 
     $("#osr_address_btn").click(showDialog(0, $("#address_btn"), "#address_dialog", $("#osr_dialog")));
 //    $("#osr_address_btn").click(toggleOsrBtn($("#osr_address_btn")));
