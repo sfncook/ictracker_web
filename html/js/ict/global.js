@@ -1438,6 +1438,10 @@ function initOsrDialog( ) {
         var selected_text = $(this).find("option:selected").text();
         addEvent_osr("OSR Condition: "+selected_text);
         });
+    $("#osr_number_of_subfloors").change(function() {
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("OSR Number of sub-floors: "+selected_text);
+    });
     $("#osr_number_of_floors").change(function() {
         var selected_text = $(this).find("option:selected").text();
         addEvent_osr("OSR Number of floors: "+selected_text);
