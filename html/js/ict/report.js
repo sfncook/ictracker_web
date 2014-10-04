@@ -149,8 +149,11 @@ function pushEvent_toQueues(event) {
 }
 
 function addEvent_title_to_sector(sector) {
+    addEvent_title_to_sector(sector, new Date());
+}
+function addEvent_title_to_sector(sector, date) {
     var event = {"render_func":render_title_to_sector,
-        "datetime":new Date(),
+        "datetime":date,
         "sector":sector};
 
     pushEvent_toQueues(event);
@@ -160,8 +163,11 @@ function render_title_to_sector(y, event, doc) {
 }
 
 function addEvent_unit_to_sector(unit, sector) {
+    addEvent_unit_to_sector(unit, sector, new Date());
+}
+function addEvent_unit_to_sector(unit, sector, date) {
     var event = {"render_func":render_unit_to_sector,
-        "datetime":new Date(),
+        "datetime":date,
         "unit":unit,
         "sector":sector};
 
@@ -171,8 +177,11 @@ function render_unit_to_sector(y, event, doc) {
 	doc.text(getDateStr(event.datetime)+"  Unit:"+event.unit+" added to Sector:"+event.sector, MARGIN, y);
 }
 function addEvent_unit_to_acct(unit, sector) {
+    addEvent_unit_to_acct(unit, sector, new Date());
+}
+function addEvent_unit_to_acct(unit, sector, date) {
     var event = {"render_func":render_unit_to_acct,
-        "datetime":new Date(),
+        "datetime":date,
         "unit":unit,
         "sector":sector};
 
@@ -183,8 +192,11 @@ function render_unit_to_acct(y, event, doc) {
 }
 
 function addEvent_action_to_unit(action, unit, sector) {
+    addEvent_action_to_unit(action, unit, sector, new Date());
+}
+function addEvent_action_to_unit(action, unit, sector, date) {
     var event = {"render_func":render_action_to_unit,
-        "datetime":new Date(),
+        "datetime":date,
         "action":action,
         "unit":unit,
         "sector":sector};
@@ -197,8 +209,11 @@ function render_action_to_unit(y, event, doc) {
 
 
 function addEvent_person_has_par(unit, sector) {
+    addEvent_person_has_par(unit, sector, new Date());
+}
+function addEvent_person_has_par(unit, sector, date) {
     var event = {"render_func":render_person_has_par,
-        "datetime":new Date(),
+        "datetime":date,
         "unit":unit,
         "sector":sector};
 
@@ -208,8 +223,11 @@ function render_person_has_par(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Fire Fighter has PAR in Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
 }
 function addEvent_unit_has_par(unit, sector) {
+    addEvent_unit_has_par(unit, sector, new Date());
+}
+function addEvent_unit_has_par(unit, sector, date) {
     var event = {"render_func":render_unit_has_par,
-        "datetime":new Date(),
+        "datetime":date,
         "unit":unit,
         "sector":sector};
 
@@ -219,8 +237,11 @@ function render_unit_has_par(y, event, doc) {
     doc.text(getDateStr(event.datetime)+"  Unit:"+event.unit+" has PAR in Sector:"+event.sector, MARGIN, y);
 }
 function addEvent_sector_has_par(sector) {
+    addEvent_sector_has_par(sector, new Date());
+}
+function addEvent_sector_has_par(sector, date) {
     var event = {"render_func":render_sector_has_par,
-        "datetime":new Date(),
+        "datetime":date,
         "sector":sector};
 
     pushEvent_toQueues(event);
@@ -231,8 +252,11 @@ function render_sector_has_par(y, event, doc) {
 
 
 function addEvent_benchmark(benchmark) {
+    addEvent_benchmark(benchmark, new Date());
+}
+function addEvent_benchmark(benchmark, date) {
     var event = {"render_func":render_benchmark,
-        "datetime":new Date(),
+        "datetime":date,
         "benchmark":benchmark};
 
     pushEvent_toQueues(event);
@@ -243,8 +267,11 @@ function render_benchmark(y, event, doc) {
 
 
 function addEvent_mode(mode) {
+    addEvent_mode(mode, new Date());
+}
+function addEvent_mode(mode, date) {
     var event = {"render_func":render_mode,
-        "datetime":new Date(),
+        "datetime":date,
         "mode":mode};
 
     pushEvent_toQueues(event);
@@ -255,8 +282,11 @@ function render_mode(y, event, doc) {
 
 
 function addEvent_osr(osr) {
+    addEvent_osr(osr, new Date());
+}
+function addEvent_osr(osr, date) {
     var event = {"render_func":render_osr,
-        "datetime":new Date(),
+        "datetime":date,
         "osr":osr};
 
     pushEvent_toQueues(event);
@@ -266,8 +296,11 @@ function render_osr(y, event, doc) {
 }
 
 function addEvent_objective(objective) {
+    addEvent_objective(objective, new Date());
+}
+function addEvent_objective(objective, date) {
     var event = {"render_func":render_objective,
-        "datetime":new Date(),
+        "datetime":date,
         "objective":objective};
 
     pushEvent_toQueues(event);
@@ -277,8 +310,11 @@ function render_objective(y, event, doc) {
 }
 
 function addEvent_iap(iap) {
+    addEvent_iap(iap, new Date());
+}
+function addEvent_iap(iap, date) {
     var event = {"render_func":render_iap,
-        "datetime":new Date(),
+        "datetime":date,
         "iap":iap};
 
     pushEvent_toQueues(event);

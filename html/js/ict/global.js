@@ -736,6 +736,9 @@ function setTbarTitle(tbar, title) {
 
     // Report
     addEvent_title_to_sector(title);
+
+    // Update Cookies
+    saveCookieState();
 }
 function initSectorDialog( ) {
 	var sectorDialog = $("#dialog_prototype" ).clone().appendTo( "#dialog_vertical_align_cell" );
@@ -1779,8 +1782,10 @@ function initTbars() {
     rehab_tbar.find(".benchmark_btn").hide();
 
     // Make three rows of TBars
-    for(var i=1; i<=(gridster.cols-1)*3; i++) {
-        addTbar();
+    for(var row=1; row<=3; row++) {
+        for(var col=1; col<=(gridster.cols-1); col++) {
+            addTbar(col, row);
+        }
     }
 }
 
@@ -1936,11 +1941,13 @@ function addTbar(col_x, row_y) {
     tbar.max_size_x = 1;
 //    tbar.attr("data-col", col_x);
 //    tbar.attr("data-row", row_y);
-    gridster.add_widget.apply(gridster, [tbar, 1, 1, col_x, row_y]);
+    var retObj = gridster.add_widget.apply(gridster, [tbar, 1, 1, col_x, row_y]);
     tbar.prefix_dir = 'X';
     tbar.prefix_num = 'X';
     var newTbarId = "tbar_"+tbarIndex;
     tbar.attr("id",newTbarId);
+    tbar.data("col", col_x);
+    tbar.data("row", row_y);
 
     //Title Btn
     var titleBtn = tbar.find(".title_btn");
@@ -2241,6 +2248,47 @@ function initDispatchedUnits() {
 }
 
 
+
+/**
+ * Coookies
+ **/
+function tbarToJson(tbarEl) {
+    var tbarObj = {};
+    var title_text = tbarEl.find(".title_text").html();
+    var col = tbarEl.data("col");
+    var row = tbarEl.data("row");
+    tbarObj['title_text'] = title_text;
+    tbarObj['col'] = col;
+    tbarObj['row'] = row;
+    return JSON.stringify(tbarObj);
+}
+function deleteAllCookies() {
+    for(var key in $.cookie()){
+        $.removeCookie(key);
+    }
+}
+function saveCookieState() {
+    deleteAllCookies();
+
+    $( ".tbar" ).each(function( index, tbar ) {
+        if($(tbar).attr('id')!='tbar_prototype') {
+            var tbarJson = tbarToJson($(tbar));
+            var tbar_key = "tbar_"+$(tbar).data("col")+"_"+$(tbar).data("row");
+            $.cookie('tbar_' + tbar_key, tbarJson);
+        }
+    });
+}
+function loadCookieState() {
+//    $.cookie().each(function( index, tbarCookie ) {
+//        console.log(tbarCookie);
+//    });
+    for(var key in $.cookie()){
+        console.log(key);
+    }
+}
+
+
+
 /**
  * Init Timer
  **/
@@ -2321,7 +2369,7 @@ function init( ) {
 	init10KeyDialog();
     initDispatchedUnits();
     initUpgradeDialog();
-    initStreetNameDialog()
+    initStreetNameDialog();
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
@@ -2362,6 +2410,8 @@ function init( ) {
         }
         return this;
     }
+
+    loadCookieState();
 
     showDialog( 0, 0, "#nda_reminder_dialog", 0)();
 }
