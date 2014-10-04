@@ -2413,7 +2413,9 @@ var actions = [
             "Deck Gun",
             "Portable Monitor"
         ],
-        actions_warning:[]
+        actions_warning:[
+            "*Victim Found"
+        ]
     },
     {action_type:"Ladder",
         actions:[
@@ -2424,8 +2426,10 @@ var actions = [
             "Fan to the Door",
             "Soften Building",
             "Open Building",
+            "Open Rollup",
             "Salvage",
-            "Elevated Master"
+            "Elevated Master",
+            "Pressurize Exposures"
         ],
         actions_warning:[]
     },
@@ -2442,13 +2446,18 @@ var actions = [
             "*Bars on Windows",
             "*Dogs in Yard",
             "*Hoarders House",
-            "*Basement"
+            "*Basement",
+            "*Flashover",
+            "*Backdraft",
+            "*Eminent Collapse",
+            "*Collapse"
     ]},
     {action_type:"Rescue",
         actions:[
             "Grab RIC Bag",
             "Accountability Update",
-            "Throw Ladders"
+            "Throw Ladders",
+            "Monitor Ch. 16"
         ],
         actions_warning:[]
     },
