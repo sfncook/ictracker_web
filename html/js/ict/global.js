@@ -2251,6 +2251,21 @@ function updateTimer() {
 	var secStr = (elapsedSec<10)?("0"+elapsedSec):elapsedSec;
 	var minStr = (elapsedMin<10)?("0"+elapsedMin):elapsedMin;
 	var hrStr = (elapsedHr<10)?("0"+elapsedHr):elapsedHr;
+
+    $("#time").removeClass("font_red");
+    $("#time").removeClass("font_blue");
+    $("#time").removeClass("blink_me");
+
+    if(elapsedSec>=1200 && elapsedSec<=1259) {
+        $("#time").addClass("font_blue");
+    }
+    if(elapsedSec>=1800 && elapsedSec<=1859) {
+        $("#time").addClass("font_red");
+        $("#time").addClass("blink_me");
+    }
+    if(elapsedSec>=2100 && elapsedSec<=2159) {
+        $("#time").addClass("font_blue");
+    }
 	
 	if (elapsedHr>0) {
 		if (!hourRollOverDone) {
