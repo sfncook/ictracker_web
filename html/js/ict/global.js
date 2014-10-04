@@ -2088,8 +2088,9 @@ function initUpgradeDialog() {
  * Init Command Terminate Dialog
  **/
 function terminateCommand() {
-	generateReport();
+//	generateReport();
 	hideAllDialogs();
+    deleteAllCookies();
 }
 function dontTerminateCommand() {
 	hideAllDialogs();
@@ -2110,6 +2111,7 @@ function initCmdTerminateDialog( ) {
 	dialogBody.append(question_div);
 	dialogBody.append(yesBtn);
 	dialogBody.append(noBtn);
+    dialogBody.append($("<div class='clear_float'></div>"));
 	yesBtn.click(terminateCommand);
 	noBtn.click(dontTerminateCommand);
 	
@@ -2274,13 +2276,11 @@ function saveCookieState() {
         if($(tbar).attr('id')!='tbar_prototype') {
             var tbarJson = tbarToJson($(tbar));
             var tbar_key = "tbar_"+$(tbar).data("col")+"_"+$(tbar).data("row");
-            $.cookie('tbar_' + tbar_key, tbarJson);
         }
     });
 }
 function findTbarElementByColRow(col, row) {
     var retTbar;
-    console.log(retTbar);
     $( ".tbar" ).each(function( index, tbar ) {
         if($(tbar).attr('id')!='tbar_prototype') {
             var colTbar = $(tbar).data("col");
@@ -2383,8 +2383,8 @@ function init( ) {
 	initBenchmarkDialog();
 	$("#report_btn").click(function(){generateReportSortByTime();});
     $("#sectorreport_btn").click(function(){generateReportSortBySector();});
-//	initCmdTerminateDialog();
-    $("#cmd_term_btn").hide();
+	initCmdTerminateDialog();
+//    $("#cmd_term_btn").hide();
 	initMaydayDialog();
 	initObjectivesDialog();
 	initOsrDialog();

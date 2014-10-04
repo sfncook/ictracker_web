@@ -1376,3 +1376,12 @@ ul {
     50% { opacity: 0.0; }
     100% { opacity: 1.0; }
 }
+
+#cmd_trm_dialog {
+    width:450px;
+}
+.yes_no_btn {
+    width:100px;
+    margin: 4px;
+    float: left;
+}
