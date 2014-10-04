@@ -2278,12 +2278,37 @@ function saveCookieState() {
         }
     });
 }
+function findTbarElementByColRow(col, row) {
+    var retTbar;
+    console.log(retTbar);
+    $( ".tbar" ).each(function( index, tbar ) {
+        if($(tbar).attr('id')!='tbar_prototype') {
+            var colTbar = $(tbar).data("col");
+            var rowTbar = $(tbar).data("row");
+            if(col==colTbar && row==rowTbar) {
+                retTbar = tbar;
+            }
+        }
+    });
+    if(typeof retTbar!='undefined') {
+        return $(retTbar);
+    } else {
+        return retTbar;
+    }
+}
 function loadCookieState() {
-//    $.cookie().each(function( index, tbarCookie ) {
-//        console.log(tbarCookie);
-//    });
     for(var key in $.cookie()){
-        console.log(key);
+        var tbarObj = JSON.parse($.cookie(key));
+        var col = tbarObj['col'];
+        var row = tbarObj['row'];
+        var tbarEl = findTbarElementByColRow(col, row);
+        if(typeof tbarEl!='undefined') {
+            tbarEl.find(".title_text").html(tbarObj['title_text']);
+        } else {
+            tbarEl = addTbar(col, row);
+            var title_text = tbarObj['title_text'];
+            tbarEl.find(".title_text").html(title_text);
+        }
     }
 }
 
