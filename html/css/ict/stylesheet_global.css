@@ -513,7 +513,7 @@ td {
     font-size: 0.8rem;
 }
 .dialog_body {
-	padding: 4px 0;
+	padding: 0;
 	border-right: 1px solid #666;
 	border-bottom: 1px solid #666;
 	border-left: 1px solid #666;
@@ -757,8 +757,10 @@ td {
 .benchmark_col_container {
     float: left;
 }
-.benchmark_1st_col_container {
-    border-right: 1px solid #666;
+.benchmark_2nd_col_container {
+    background: #FFFF88;
+    height:162px;
+    border-top:1px solid #999;
 }
 .benchmark_double_btn {
     margin-bottom: 10px !important;
@@ -772,6 +774,9 @@ td {
 }
 .benchmark_btn_parent_div {
     padding: 5px 0 5px 0;
+}
+.benchmark_item_btn_hidden {
+    opacity: 0;
 }
 
 #par_dialog {
@@ -1325,4 +1330,11 @@ ul {
 #address_dlg_clear {
     float:right;
     margin:5px;
+}
+
+.selected_benchmark {
+    background: #FFFF88;
+    border-top:1px solid #999;
+    border-left:1px solid #999;
+    border-bottom:1px solid #999;
 }

@@ -1084,12 +1084,12 @@ function clickPrimaryBenchmark(benchmark_item) {
         tbar_clicked.data('primary_benchmark',benchmark_item.attr('id'));
         setBenchmark(benchmark_item.attr('id'));
         if(benchmark_item.attr('id')=='bnch_underctl') {
-            $("#benchmark_unable_secondary").removeClass("disabled");
+//            $("#benchmark_unable_secondary").removeClass("disabled");
         }
         if(benchmark_item.attr('id')=='bnch_primary'){
             $("#benchmark_unable_primary").removeClass("glowpink");
             $("#benchmark_unable_secondary").removeClass("glowpink");
-            $("#benchmark_unable_secondary").addClass("disabled");
+//            $("#benchmark_unable_secondary").addClass("disabled");
         }
         if(benchmark_item.attr('id')=='bnch_secondary'){
             $("#benchmark_unable_secondary").removeClass("glowpink");
@@ -1141,23 +1141,23 @@ function updateTbarBenchmarkIcon(tbar) {
 function resetBenchmarks() {
     // Disable ALL
     $('.benchmark_btn_parent_div').each(function (index) {
-        $(this).find(".benchmark_item_btn_primary").addClass("disabled");
+//        $(this).find(".benchmark_item_btn_primary").addClass("disabled");
         $(this).find(".benchmark_item_btn_primary").removeClass("glowlightgreen");
-        $(this).removeClass("glowlightyellow");
+        $(this).removeClass("selected_benchmark");
     });
     $('.benchmark_2nd_col_container').hide();
 
     // Enable but do not check, nor select first chkbox
-    $("#bnch_primary").find(".benchmark_item_btn_primary").removeClass("disabled");
+//    $("#bnch_primary").find(".benchmark_item_btn_primary").removeClass("disabled");
 }
 function setBenchmark(benchmark_item_id) {
     var benchmark_item = $("#"+benchmark_item_id);
     var benchmark_item_btn_primary = benchmark_item.find(".benchmark_item_btn_primary");
     var chk_btn = $(benchmark_item.find(".chk_btn")[0]);
 
-    benchmark_item_btn_primary.removeClass("disabled");
+//    benchmark_item_btn_primary.removeClass("disabled");
     benchmark_item_btn_primary.addClass("glowlightgreen");
-    benchmark_item.addClass("glowlightyellow");
+    benchmark_item.addClass("selected_benchmark");
 
     // Show right-side
     $('.benchmark_2nd_col_container').hide();
@@ -1166,21 +1166,21 @@ function setBenchmark(benchmark_item_id) {
 
     // Remove glowlightyellow from previous
     benchmark_item.prevAll().each(function (index) {
-        $(this).find(".benchmark_item_btn_primary").removeClass("disabled");
+//        $(this).find(".benchmark_item_btn_primary").removeClass("disabled");
         $(this).find(".benchmark_item_btn_primary").addClass("glowlightgreen");
-        $(this).removeClass("glowlightyellow");
+        $(this).removeClass("selected_benchmark");
     });
 
     // Disable ALL next
     benchmark_item.nextAll().each(function (index) {
-        $(this).find(".benchmark_item_btn_primary").addClass("disabled");
+//        $(this).find(".benchmark_item_btn_primary").addClass("disabled");
         $(this).find(".benchmark_item_btn_primary").removeClass("glowlightgreen");
-        $(this).removeClass("glowlightyellow");
+        $(this).removeClass("selected_benchmark");
     });
 
     if(benchmark_item.next().hasClass("benchmark_btn_parent_div")) {
-        benchmark_item.next().find(".benchmark_item_btn_primary").removeClass("disabled");
-        benchmark_item.next().removeClass("glowlightyellow");
+//        benchmark_item.next().find(".benchmark_item_btn_primary").removeClass("disabled");
+        benchmark_item.next().removeClass("selected_benchmark");
     }
 }
 function clickSecondaryBenchmark(benchmark_item_2) {
