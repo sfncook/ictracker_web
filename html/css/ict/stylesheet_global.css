@@ -763,7 +763,6 @@ td {
 .benchmark_2nd_col_container {
     background: #FFFF88;
     height:162px;
-    border-top:1px solid #999;
 }
 .benchmark_double_btn {
     margin-bottom: 10px !important;
@@ -780,6 +779,9 @@ td {
 }
 .benchmark_item_btn_hidden {
     opacity: 0;
+}
+.benchmark_item_btn_secondary {
+    margin: 5px 10px;
 }
 
 #par_dialog {
