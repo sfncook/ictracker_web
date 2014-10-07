@@ -1567,9 +1567,10 @@ function startUnitTimerAnim(el) {
     el.css("width","48px").css("background","lightgreen");
 
     el
-      .animate({width:"32px"}, 5*60*1000, "linear", function(){el.css("background","yellow")})
-      .animate({width:"16px"}, 5*60*1000, "linear", function(){el.css("background","red")})
-      .animate({width:3},    4*60*1000, "linear");
+        .animate({width:"32px"}, 5*60*1000, "linear", function(){el.css("background","yellow")})
+        .animate({width:"16px"}, 5*60*1000, "linear", function(){el.css("background","red")})
+        .animate({width:"5px"},  4*60*1000, "linear", function(){el.parent().addClass("blink_unit_timer")})
+        .animate({width:"0px"},  1*60*1000, "linear");
 }
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
@@ -2680,6 +2681,7 @@ var sectors = [
 var Engine="Engine";
 var Ladder="Ladder";
 var BC="BC";
+var BSO="BSO";
 var Squad="Squad";
 var Medic="Medic";
 var Util="Util";
@@ -2706,30 +2708,31 @@ var AirVac = "AirVac";
 var Con = "Con";
 
 var unitTypes = [
-	Engine,
-	Ladder,
-	BC,
-	Squad,
-	Util,
-	CV,
-	Con,
-	WtrTend,
-	HazMat,
-	Brush,
-	Foam,
-	Hose,
-	Rehab,
-	SpecInc,
-	SupVeh,
-	FireBt,
-	Vent,
-	Crisis,
-	PIO,
-	Attack,
-	Ambo,
-	Medic,
-	Heilo,
-	AirVac];
+    Engine,
+    Ladder,
+    BC,
+    BSO,
+    Squad,
+    Util,
+    CV,
+    Con,
+    WtrTend,
+    HazMat,
+    Brush,
+    Foam,
+    Hose,
+    Rehab,
+    SpecInc,
+    SupVeh,
+    FireBt,
+    Vent,
+    Crisis,
+    PIO,
+    Attack,
+    Ambo,
+    Medic,
+    Heilo,
+    AirVac];
 
 var unitsByTypeByCity = {
     "Chandler":{
@@ -2751,7 +2754,8 @@ var unitsByTypeByCity = {
 			"Lt283"],
 		BC:[
 			"BC281",
-			"BC282",
+			"BC282"],
+        BSO:[
 			"BSO281",
 			"BSO282"],
 		Squad:[
@@ -2790,7 +2794,8 @@ var unitsByTypeByCity = {
 			"Lt255",],
 		BC:[
 			"BC251",
-			"BC252",
+			"BC252"],
+        BSO:[
 			"BSO251",
 			"BSO252",],
 		Util:[
@@ -2862,7 +2867,8 @@ var unitsByTypeByCity = {
 		    "ED200",
 			"BC201",
 			"BC202",
-			"BC203",
+			"BC203"],
+        BSO:[
 			"BSO200",
 			"BSO201",
 			"BSO202",
@@ -2933,7 +2939,8 @@ var unitsByTypeByCity = {
 		Engine:[
 		    "E411",
 		    "E412"],
-		BC:["BC411", "BSO411"],
+		BC:["BC411"],
+        BSO:["BSO411"],
 		Ambo:[
 			"SWA411",],
 		AirVac:[
@@ -3050,7 +3057,8 @@ var unitsByTypeByCity = {
             "BC8",
             "BC19",
             "No Dep",
-            "So Dep",
+            "So Dep"],
+        BSO:[
             "BSO1",
             "BSO2",
             "BSO3",
@@ -3188,7 +3196,8 @@ var unitsByTypeByCity = {
 			"Lt263",
 			"Lt264"],
 		BC:[
-		    "BC261",
+		    "BC261"],
+        BSO:[
 		    "BSO261"],
 		WtrTend:["WT261"],
 		Brush:["BR261"],
@@ -3219,7 +3228,8 @@ var unitsByTypeByCity = {
 			"Lt273",
 			"Lt276"],
 		BC:[
-			"BC271",
+			"BC271"],
+        BSO:[
 			"BSO271"],
 		SpecInc:[
 			"SI272"
