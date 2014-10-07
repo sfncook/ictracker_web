@@ -1901,6 +1901,9 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         showActionsForUnitBtn(unitBtn)();
 
         updateTbar(tbar);
+
+        // Only hide the units dialog if user did not the dispatch button first
+        hideAllDialogs();
     }
 
     // Dispatched Units
@@ -2227,28 +2230,6 @@ function initDispatchedUnits() {
     dispatched_units_btn.click(
         showDialog_withCallbacks("#units_dialog", 0/*parentDialog*/, 0/*onOpenCallback*/, toggleUnitButtonForTbar(0))
     );
-//    dispatched_units_btn.click(showDialog_withCallbacks(
-//        "#units_dialog",
-//        0,//parent dialog
-//        function(){
-//            tbar_clicked = 0;
-//            $(".unit_dialog_btn").removeClass("glowlightgreen");
-//            $(".dispatched_unit_btn").each(function(){
-//                var unit_text = $(this).text();
-//                $(".unit_dialog_btn:contains('"+unit_text+"')").addClass("glowlightgreen");
-//            });
-//        },
-//        function(unit_text){
-//            var unit_dialog_btn = $(".unit_dialog_btn:contains('"+unit_text+"')");
-//            if($(".dispatched_unit_btn:contains('"+unit_text+"')").length==0) {
-//                addDispatchedUnit(unit_text);
-//                unit_dialog_btn.addClass("glowlightgreen");
-//            } else {
-//                $(".dispatched_unit_btn:contains('"+unit_text+"')").remove();
-//                unit_dialog_btn.removeClass("glowlightgreen");
-//            }
-//        }
-//    ));
 }
 
 
