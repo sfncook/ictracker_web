@@ -2254,15 +2254,27 @@ function initDispatchedUnits() {
 /**
  * Coookies
  **/
+function actionObjForJson(unitBtn) {
+    var unitObj = {};
+
+    var unit_text = unitBtn.find(".unit_text").html();
+    unitObj['unit_text'] = unit_text;
+    // actions
+    // par
+    // psi
+    // unit timer
+
+    return unitObj;
+}
 function unitToObjForJson(unitBtn) {
     var unitObj = {};
 
     var unit_text = unitBtn.find(".unit_text").html();
     unitObj['unit_text'] = unit_text;
-    // unit timer
     // actions
     // par
     // psi
+    // unit timer
 
     return unitObj;
 }
@@ -2324,7 +2336,8 @@ function findTbarElementByColRow(col, row) {
 }
 function addAllUnitsToTbar(tbarEl, units) {
     var unit_col_left = tbarEl.find(".unit_col_left");
-    var unit_col_right = tbarEl.find(".unit_col_right");
+    //TODO: Need to distinguish between left and right containers
+//    var unit_col_right = tbarEl.find(".unit_col_right");
     for(var i=0; i<units.length; i++) {
         var unit = units[i];
         var unit_text = unit['unit_text'];
