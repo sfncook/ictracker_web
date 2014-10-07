@@ -1,4 +1,6 @@
 
+// Disabling cookies for now.
+var COOKIES_ENABLED = false;
 
 var btn_clicked;
 var tbar_clicked;
@@ -2306,16 +2308,18 @@ function deleteAllCookies() {
     }
 }
 function saveCookieState() {
-    deleteAllCookies();
+    if(COOKIES_ENABLED) {
+        deleteAllCookies();
 
-    $( ".tbar" ).each(function( index, tbar ) {
-        if($(tbar).attr('id')!='tbar_prototype') {
-            var tbarJson = tbarToJson($(tbar));
-            var tbar_key = "tbar_"+$(tbar).data("col")+"_"+$(tbar).data("row");
-            $.cookie('tbar_' + tbar_key, tbarJson);
-        }
-    });
-    console.log($.cookie());
+        $( ".tbar" ).each(function( index, tbar ) {
+            if($(tbar).attr('id')!='tbar_prototype') {
+                var tbarJson = tbarToJson($(tbar));
+                var tbar_key = "tbar_"+$(tbar).data("col")+"_"+$(tbar).data("row");
+                $.cookie('tbar_' + tbar_key, tbarJson);
+            }
+        });
+        console.log($.cookie());
+    }
 }
 function findTbarElementByColRow(col, row) {
     var retTbar;
@@ -2345,21 +2349,23 @@ function addAllUnitsToTbar(tbarEl, units) {
     }
 }
 function loadCookieState() {
-    console.log($.cookie());
-    for(var key in $.cookie()){
-        var tbarObj = JSON.parse($.cookie(key));
-        var col = tbarObj['col'];
-        var row = tbarObj['row'];
-        var units = tbarObj['units'];
-        var tbarEl = findTbarElementByColRow(col, row);
-        if(typeof tbarEl!='undefined') {
-            tbarEl.find(".title_text").html(tbarObj['title_text']);
-        } else {
-            tbarEl = addTbar(col, row);
-            var title_text = tbarObj['title_text'];
-            tbarEl.find(".title_text").html(title_text);
+    if(COOKIES_ENABLED) {
+        console.log($.cookie());
+        for(var key in $.cookie()){
+            var tbarObj = JSON.parse($.cookie(key));
+            var col = tbarObj['col'];
+            var row = tbarObj['row'];
+            var units = tbarObj['units'];
+            var tbarEl = findTbarElementByColRow(col, row);
+            if(typeof tbarEl!='undefined') {
+                tbarEl.find(".title_text").html(tbarObj['title_text']);
+            } else {
+                tbarEl = addTbar(col, row);
+                var title_text = tbarObj['title_text'];
+                tbarEl.find(".title_text").html(title_text);
+            }
+            addAllUnitsToTbar(tbarEl, units);
         }
-        addAllUnitsToTbar(tbarEl, units);
     }
 }
 
