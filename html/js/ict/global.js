@@ -2333,14 +2333,14 @@ function updateTimer() {
     $("#time").removeClass("font_blue");
     $("#time").removeClass("blink_me");
 
-    if(elapsedSec>=1200 && elapsedSec<=1259) {
+    if(elapsedMin==20) {
         $("#time").addClass("font_blue");
     }
-    if(elapsedSec>=1800 && elapsedSec<=1859) {
+    if(elapsedMin==30) {
         $("#time").addClass("font_red");
         $("#time").addClass("blink_me");
     }
-    if(elapsedSec>=2100 && elapsedSec<=2159) {
+    if(elapsedMin==35) {
         $("#time").addClass("font_blue");
     }
 	
