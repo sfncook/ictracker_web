@@ -2581,63 +2581,16 @@ var sectorsWithOutActions = [
 	];
 
 var sectors = [
-	"Interior",
-	"Sector 1",
-    "North Sector",
-	"Alpha Sector",
-
-    "",
-    "Sector 2",
-    "East Sector",
-    "Bravo Sector",
-
-    "Ventilation",
-    "Sector 3",
-    "South Sector",
-    "Charlie Sector",
-
-    "Roof",
-    "Sector 4",
-    "West Sector",
-    "Delta Sector",
-
-    "",
-    "Sector ####",
-    "",
-    "",
-
-    "",
-    "",
-    "",
-    "",
-
-    "On Deck",
-    "Overhaul",
-    "IRIC",
-    "Medical",
-
-
-    "Staging",
-    "Salvage",
-    "RIC",
-    "Triage",
-
-    "Lobby",
-    "Customer Service",
-    "RESCUE",
-    "Treatment",
-
-    "Accountability",
-    "Evacuation",
-    "Safety",
-    "Transportation",
-
-
-    "",
-    "Resource",
-    "ReHab",
-    "",
-
+    "Interior",     "Sector 1",     "Alpha Sector",     "Salvage",              "",
+    "Ventilation",  "Sector 2",     "Bravo Sector",     "Overhaul",             "",
+    "Roof",         "Sector 3",     "Charlie Sector",   "Evacuation",           "",
+    "On Deck",      "Sector 4",     "Delta Sector",     "Customer Service",     "ReHab",
+    "Staging",      "Sector 5",     "",                 "",                     "",
+    "",             "Sector 6",     "North Sector",     "",                     "Medical",
+    "IRIC",         "Sector 7",     "East Sector",      "Lobby",                "Triage",
+    "RIC",          "Sector 8",     "South Sector",     "Resource",             "Treatment",
+    "RESCUE",       "Sector 9",     "West Sector",      "Accountability",       "Transportation",
+    "Safety",       "Sector ####",  "",                 "",                     "LZ"
 ];
 
 var Engine="Engine";
