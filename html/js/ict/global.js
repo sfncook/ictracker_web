@@ -1535,7 +1535,7 @@ function initUnitsDialog( ) {
         $("#dispatched_delete_start_btn").toggleClass("glowlightblue");
         if($("#dispatched_delete_start_btn").hasClass("glowlightblue")) {
             $(".delete_dispatched_unit_btn").show();
-            $("#dispatched_delete_start_btn").html("Cancel");
+            $("#dispatched_delete_start_btn").html("DONE");
         } else {
             $(".delete_dispatched_unit_btn").hide();
             $("#dispatched_delete_start_btn").html("DELETE");
@@ -2163,6 +2163,13 @@ function addDispatchedUnit(unit_text) {
         } else {
             delBtn.hide();
         }
+
+        // Click event for delete dispatch buttons
+        delBtn.click(function(){
+            $(this).parent().remove();
+            event.stopImmediatePropagation();
+        });
+
         $("#units_dispatched_units_div_clear_float").before(dispatched_unit_btn);
         if (unit_text.length > 5) {
             dispatched_unit_btn.addClass("btn_largetext");
