@@ -1516,7 +1516,7 @@ function initUnitsDialog( ) {
 
     var dispactedUnitsDiv = $('<div id="dispatched_units_div"></div>').appendTo(dialog_body);
     dispactedUnitsDiv.append($('<div id="title_dispatched_units_div">Dispatched Units</div>'));
-    dispactedUnitsDiv.append($('<div id="units_dispatched_units_div"><div id="units_dispatched_units_div_clear_float" class="clear_float"></div></div>'));
+    dispactedUnitsDiv.append($('<div id="units_dispatched_units_div"><div id="dispatched_delete_start_btn" class="button">DELETE</div> <div id="units_dispatched_units_div_clear_float" class="clear_float"> </div></div>'));
 	var citiesDiv = $('<div id="units_dialog_cities_div"></div>').appendTo(dialog_body);
 	var typesDiv = $('<div id="units_dialog_types_div"></div>').appendTo(dialog_body);;
 	var btnsDivProto = $('<div class="units_dialog_citybtns_div"></div>');
@@ -1529,6 +1529,18 @@ function initUnitsDialog( ) {
 		unitTypeBtn.attr("id",newId);
 		unitTypeBtn.click(toggleType(type));
 	});
+
+    // dispatched_delete_start_btn
+    $("#dispatched_delete_start_btn").click(function() {
+        $("#dispatched_delete_start_btn").toggleClass("glowlightblue");
+        if($("#dispatched_delete_start_btn").hasClass("glowlightblue")) {
+            $(".delete_dispatched_unit_btn").show();
+            $("#dispatched_delete_start_btn").html("Cancel");
+        } else {
+            $(".delete_dispatched_unit_btn").hide();
+            $("#dispatched_delete_start_btn").html("DELETE");
+        }
+    });
 	
 	//**** CITY *****
 	$.each(unitsByTypeByCity, function( city, unitsByType ) {
@@ -2141,8 +2153,16 @@ function getHttpRequestByName(name) {
 
 function addDispatchedUnit(unit_text) {
     if($(".dispatched_unit_btn:contains('"+unit_text+"')").length==0) {
-        var dispatched_unit_btn = $('<div class="dispatched_unit_btn unit_btn button">' + unit_text + '</div>');
+        var dispatched_unit_btn = $('<div class="dispatched_unit_btn unit_btn button">' + unit_text + '<div class="delete_dispatched_unit_btn">X</div></div>');
         var units_dispatched_units_div = $("#units_dispatched_units_div");
+
+        // Show or hide delBtn
+        var delBtn = dispatched_unit_btn.find(".delete_dispatched_unit_btn");
+        if($("#dispatched_delete_start_btn").hasClass("glowlightblue")) {
+            delBtn.show();
+        } else {
+            delBtn.hide();
+        }
         $("#units_dispatched_units_div_clear_float").before(dispatched_unit_btn);
         if (unit_text.length > 5) {
             dispatched_unit_btn.addClass("btn_largetext");
@@ -2413,6 +2433,11 @@ function init( ) {
 function hideAllDialogs( ) {
 	$("#dialogContainer").hide();
 	$(".dialog").hide();
+
+    // Reset units_dialog dispatch units delete buttons
+    $(".delete_dispatched_unit_btn").hide();
+    $("#dispatched_delete_start_btn").removeClass("glowlightblue");
+    $("#dispatched_delete_start_btn").html("DELETE");
 }
 
 $.fn.exists = function () {
