@@ -1494,12 +1494,13 @@ function toggleType(type) {
 function startUnitTimerAnim(el) {
     el.stop(true);
     el.css("width","48px").css("background","lightgreen");
+    el.parent().removeClass("blink_unit_timer");
 
     el
-        .animate({width:"32px"}, 5*60*1000, "linear", function(){el.css("background","yellow")})
-        .animate({width:"16px"}, 5*60*1000, "linear", function(){el.css("background","red")})
-        .animate({width:"5px"},  4*60*1000, "linear", function(){el.parent().addClass("blink_unit_timer")})
-        .animate({width:"0px"},  1*60*1000, "linear");
+        .animate({width:"32px"}, 5*1000, "linear", function(){el.css("background","yellow")})
+        .animate({width:"16px"}, 5*1000, "linear", function(){el.css("background","red")})
+        .animate({width:"5px"},  4*1000, "linear", function(){el.parent().addClass("blink_unit_timer")})
+        .animate({width:"0px"},  1*1000, "linear");
 }
 function initUnitsDialog( ) {
 	var prototypeCityBtn 		= $("<div class=\"unitCity_dialog_btn dialog_btn button\">PROTOTYPE</div>");
