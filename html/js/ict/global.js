@@ -2530,7 +2530,8 @@ var actions = [
             "Protect Exposures",
             "Overhaul",
             "Deck Gun",
-            "Portable Monitor"
+            "Portable Monitor",
+            "Secondary Search"
         ],
         actions_warning:[
             "*Victim Found"
