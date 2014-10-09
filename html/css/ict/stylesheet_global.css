@@ -1382,7 +1382,7 @@ ul {
 #time_report_dialog {
     width: 800px;
 }
-.time_report_dialog_body {
+.report_dialog_body {
     height:500px;
     overflow: scroll;
     background: white;
@@ -1391,4 +1391,8 @@ ul {
 .report_toggle_btn  {
     float: left;
     margin: 10px;
+}
+#pdf_report_btn {
+    float: right;
+    margin:10px;
 }

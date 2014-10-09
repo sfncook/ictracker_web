@@ -2195,6 +2195,47 @@ function initDispatchedUnits() {
 /**
  * Coookies
  **/
+function initReportDialog() {
+    $("#time_report_btn").addClass("glowlightgreen");
+    $("#sector_report_dialog_body").hide();
+
+    $("#sector_report_btn").click(function(){
+        $("#sector_report_btn").toggleClass("glowlightgreen");
+        $("#time_report_btn").toggleClass("glowlightgreen");
+        if ($("#sector_report_btn").hasClass("glowlightgreen")) {
+            $("#time_report_dialog_body").hide();
+            $("#sector_report_dialog_body").show();
+        } else {
+            $("#time_report_dialog_body").show();
+            $("#sector_report_dialog_body").hide();
+        }
+    });
+
+    $("#time_report_btn").click(function(){
+        $("#sector_report_btn").toggleClass("glowlightgreen");
+        $("#time_report_btn").toggleClass("glowlightgreen");
+        if ($("#sector_report_btn").hasClass("glowlightgreen")) {
+            $("#time_report_dialog_body").hide();
+            $("#sector_report_dialog_body").show();
+        } else {
+            $("#time_report_dialog_body").show();
+            $("#sector_report_dialog_body").hide();
+        }
+    });
+
+//	$("#report_btn").click(function(){generateReportSortByTime();});
+    $("#report_btn").click(function() {
+        $("#time_report_dialog_body").html(getReportStrSortByTime());
+        $("#sector_report_dialog_body").html(getReportStrSortBySector());
+        showDialog( 0, 0, "#time_report_dialog")();
+    });
+}
+
+
+
+/**
+ * Coookies
+ **/
 function actionObjForJson(unitBtn) {
     var unitObj = {};
 
@@ -2379,8 +2420,7 @@ function init( ) {
 	initUnitsDialog();
 	initUnitPeopleDialog();
 	initBenchmarkDialog();
-//	$("#report_btn").click(function(){generateReportSortByTime();});
-    $("#report_btn").click(showDialog( 0, 0, "#time_report_dialog"));
+    initReportDialog();
     $("#sectorreport_btn").click(function(){generateReportSortBySector();});
 	initCmdTerminateDialog();
 //    $("#cmd_term_btn").hide();

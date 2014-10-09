@@ -11,6 +11,31 @@ var MARGIN = 20;
 var RIGHT_SIDE = 209;
 var BOTTOM_SIDE = 300;
 var eventIndex=0;
+
+function getReportStr(eventArray) {
+    var renderedStr = "";
+    for (var i=0; i<eventArray.length; i++) {
+        var event = eventArray[i];
+        var eventStr = event.get_str_func(event);
+        renderedStr = renderedStr + eventStr + "<br>\n";
+    }
+    return renderedStr;
+}
+function getReportStrSortByTime() {
+    return getReportStr(events);
+}
+function getReportStrSortBySector() {
+    var eventsBySectorArray = [];
+
+    for (var sectorEvents in eventsBySector) {
+        eventsBySectorArray = eventsBySectorArray.concat(eventsBySector[sectorEvents]);
+    }
+
+    return getReportStr(eventsBySectorArray);
+}
+
+
+
 function generateReportSortByTime() {
     generateReport(events);
 }
@@ -103,9 +128,6 @@ function drawOnePageOfEvents(doc, eventArray) {
     {
         var event = eventArray[eventIndex];
         event.render_func(y, event, doc);
-//		if (event.type=="unit_to_sector") {
-//			render_unit_to_sector(y, event, doc);
-//		}
         y+=8;
     }
 }
@@ -150,14 +172,17 @@ function addEvent_title_to_sector(sector) {
     addEvent_title_to_sector_with_date(sector, new Date());
 }
 function addEvent_title_to_sector_with_date(sector, date) {
-    var event = {"render_func":render_title_to_sector,
+    var event = {
+        "render_func":render_title_to_sector,
+        "get_str_func":get_str_title_to_sector,
         "datetime":date,
-        "sector":sector};
+        "sector":sector
+    };
 
     pushEvent_toQueues(event);
 }
 function render_title_to_sector(y, event, doc) {
-    doc.text(get_str_title_to_sector(event);, MARGIN, y);
+    doc.text(get_str_title_to_sector(event), MARGIN, y);
 }
 function get_str_title_to_sector(event) {
     return getDateStr(event.datetime)+"  Sector initialized:"+event.sector;
@@ -167,10 +192,13 @@ function addEvent_unit_to_sector(unit, sector) {
     addEvent_unit_to_sector_with_date(unit, sector, new Date());
 }
 function addEvent_unit_to_sector_with_date(unit, sector, date) {
-    var event = {"render_func":render_unit_to_sector,
+    var event = {
+        "render_func":render_unit_to_sector,
+        "get_str_func":get_str_unit_to_sector,
         "datetime":date,
         "unit":unit,
-        "sector":sector};
+        "sector":sector
+    };
 
     pushEvent_toQueues(event);
 }
@@ -185,10 +213,13 @@ function addEvent_unit_to_acct(unit, sector) {
     addEvent_unit_to_acct_with_date(unit, sector, new Date());
 }
 function addEvent_unit_to_acct_with_date(unit, sector, date) {
-    var event = {"render_func":render_unit_to_acct,
+    var event = {
+        "render_func":render_unit_to_acct,
+        "get_str_func":get_str_unit_to_acct,
         "datetime":date,
         "unit":unit,
-        "sector":sector};
+        "sector":sector
+    };
 
     pushEvent_toQueues(event);
 }
@@ -196,18 +227,21 @@ function render_unit_to_acct(y, event, doc) {
     doc.text(get_str_unit_to_acct(event), MARGIN, y);
 }
 function get_str_unit_to_acct(event) {
-    return getDateStr(event.datetime)+"  Accountability Unit:"+event.unit+" added to Sector:"+event.sector
+    return getDateStr(event.datetime)+"  Accountability Unit:"+event.unit+" added to Sector:"+event.sector;
 }
 
 function addEvent_action_to_unit(action, unit, sector) {
     addEvent_action_to_unit_with_date(action, unit, sector, new Date());
 }
 function addEvent_action_to_unit_with_date(action, unit, sector, date) {
-    var event = {"render_func":render_action_to_unit,
+    var event = {
+        "render_func":render_action_to_unit,
+        "get_str_func":get_str_action_to_unit,
         "datetime":date,
         "action":action,
         "unit":unit,
-        "sector":sector};
+        "sector":sector
+    };
 
     pushEvent_toQueues(event);
 }
@@ -223,10 +257,13 @@ function addEvent_person_has_par(unit, sector) {
     addEvent_person_has_par_with_date(unit, sector, new Date());
 }
 function addEvent_person_has_par_with_date(unit, sector, date) {
-    var event = {"render_func":render_person_has_par,
+    var event = {
+        "render_func":render_person_has_par,
+        "get_str_func":get_str_person_has_par,
         "datetime":date,
         "unit":unit,
-        "sector":sector};
+        "sector":sector
+    };
 
     pushEvent_toQueues(event);
 }
@@ -241,10 +278,13 @@ function addEvent_unit_has_par(unit, sector) {
     addEvent_unit_has_par_with_date(unit, sector, new Date());
 }
 function addEvent_unit_has_par_with_date(unit, sector, date) {
-    var event = {"render_func":render_unit_has_par,
+    var event = {
+        "render_func":render_unit_has_par,
+        "get_str_func":get_str_unit_has_par,
         "datetime":date,
         "unit":unit,
-        "sector":sector};
+        "sector":sector
+    };
 
     pushEvent_toQueues(event);
 }
@@ -259,9 +299,12 @@ function addEvent_sector_has_par(sector) {
     addEvent_sector_has_par_with_date(sector, new Date());
 }
 function addEvent_sector_has_par_with_date(sector, date) {
-    var event = {"render_func":render_sector_has_par,
+    var event = {
+        "render_func":render_sector_has_par,
+        "get_str_func":get_str_sector_has_par,
         "datetime":date,
-        "sector":sector};
+        "sector":sector
+    };
 
     pushEvent_toQueues(event);
 }
@@ -277,9 +320,12 @@ function addEvent_benchmark(benchmark) {
     addEvent_benchmark_with_date(benchmark, new Date());
 }
 function addEvent_benchmark_with_date(benchmark, date) {
-    var event = {"render_func":render_benchmark,
+    var event = {
+        "render_func":render_benchmark,
+        "get_str_func":get_str_benchmark,
         "datetime":date,
-        "benchmark":benchmark};
+        "benchmark":benchmark
+    };
 
     pushEvent_toQueues(event);
 }
@@ -295,9 +341,12 @@ function addEvent_mode(mode) {
     addEvent_mode_with_date(mode, new Date());
 }
 function addEvent_mode_with_date(mode, date) {
-    var event = {"render_func":render_mode,
+    var event = {
+        "render_func":render_mode,
+        "get_str_func":get_str_mode,
         "datetime":date,
-        "mode":mode};
+        "mode":mode
+    };
 
     pushEvent_toQueues(event);
 }
@@ -313,9 +362,12 @@ function addEvent_osr(osr) {
     addEvent_osr_with_date(osr, new Date());
 }
 function addEvent_osr_with_date(osr, date) {
-    var event = {"render_func":render_osr,
+    var event = {
+        "render_func":render_osr,
+        "get_str_func":get_str_osr,
         "datetime":date,
-        "osr":osr};
+        "osr":osr
+    };
 
     pushEvent_toQueues(event);
 }
@@ -330,9 +382,12 @@ function addEvent_objective(objective) {
     addEvent_objective_with_date(objective, new Date());
 }
 function addEvent_objective_with_date(objective, date) {
-    var event = {"render_func":render_objective,
+    var event = {
+        "render_func":render_objective,
+        "get_str_func":get_str_objective,
         "datetime":date,
-        "objective":objective};
+        "objective":objective
+    };
 
     pushEvent_toQueues(event);
 }
@@ -347,9 +402,12 @@ function addEvent_iap(iap) {
     addEvent_iap_with_date(iap, new Date());
 }
 function addEvent_iap_with_date(iap, date) {
-    var event = {"render_func":render_iap,
+    var event = {
+        "render_func":render_iap,
+        "get_str_func":get_str_iap,
         "datetime":date,
-        "iap":iap};
+        "iap":iap
+    };
 
     pushEvent_toQueues(event);
 }
