@@ -2335,6 +2335,7 @@ function updateTimer() {
 
     if(elapsedMin==20) {
         $("#time").addClass("font_blue");
+        $("#time").addClass("blink_me");
     }
     if(elapsedMin==30) {
         $("#time").addClass("font_red");
@@ -2342,6 +2343,7 @@ function updateTimer() {
     }
     if(elapsedMin==35) {
         $("#time").addClass("font_blue");
+        $("#time").addClass("blink_me");
     }
 	
 	if (elapsedHr>0) {
