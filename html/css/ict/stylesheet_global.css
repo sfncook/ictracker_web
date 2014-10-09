@@ -703,6 +703,10 @@ td {
 .mayday_sector_title {
     font-size: 1.1rem;
 }
+#mayday_scroll_div {
+    overflow: scroll;
+    height: 400px;
+}
 
 #osr_dialog {
 	width: 420px;
