@@ -1378,3 +1378,17 @@ ul {
     margin: 4px;
     float: left;
 }
+
+#time_report_dialog {
+    width: 800px;
+}
+.time_report_dialog_body {
+    height:500px;
+    overflow: scroll;
+    background: white;
+}
+
+.report_toggle_btn  {
+    float: left;
+    margin: 10px;
+}

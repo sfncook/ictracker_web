@@ -157,7 +157,10 @@ function addEvent_title_to_sector_with_date(sector, date) {
     pushEvent_toQueues(event);
 }
 function render_title_to_sector(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Sector initialized:"+event.sector, MARGIN, y);
+    doc.text(get_str_title_to_sector(event);, MARGIN, y);
+}
+function get_str_title_to_sector(event) {
+    return getDateStr(event.datetime)+"  Sector initialized:"+event.sector;
 }
 
 function addEvent_unit_to_sector(unit, sector) {
@@ -172,8 +175,12 @@ function addEvent_unit_to_sector_with_date(unit, sector, date) {
     pushEvent_toQueues(event);
 }
 function render_unit_to_sector(y, event, doc) {
-	doc.text(getDateStr(event.datetime)+"  Unit:"+event.unit+" added to Sector:"+event.sector, MARGIN, y);
+	doc.text(get_str_unit_to_sector(event), MARGIN, y);
 }
+function get_str_unit_to_sector(event) {
+    return getDateStr(event.datetime)+"  Unit:"+event.unit+" added to Sector:"+event.sector;
+}
+
 function addEvent_unit_to_acct(unit, sector) {
     addEvent_unit_to_acct_with_date(unit, sector, new Date());
 }
@@ -186,7 +193,10 @@ function addEvent_unit_to_acct_with_date(unit, sector, date) {
     pushEvent_toQueues(event);
 }
 function render_unit_to_acct(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Accountability Unit:"+event.unit+" added to Sector:"+event.sector, MARGIN, y);
+    doc.text(get_str_unit_to_acct(event), MARGIN, y);
+}
+function get_str_unit_to_acct(event) {
+    return getDateStr(event.datetime)+"  Accountability Unit:"+event.unit+" added to Sector:"+event.sector
 }
 
 function addEvent_action_to_unit(action, unit, sector) {
@@ -202,7 +212,10 @@ function addEvent_action_to_unit_with_date(action, unit, sector, date) {
     pushEvent_toQueues(event);
 }
 function render_action_to_unit(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Action:"+event.action+" added to Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
+    doc.text(get_str_action_to_unit(event), MARGIN, y);
+}
+function get_str_action_to_unit(event) {
+    return getDateStr(event.datetime)+"  Action:"+event.action+" added to Unit:"+event.unit+" Sector:"+event.sector;
 }
 
 
@@ -218,8 +231,12 @@ function addEvent_person_has_par_with_date(unit, sector, date) {
     pushEvent_toQueues(event);
 }
 function render_person_has_par(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Fire Fighter has PAR in Unit:"+event.unit+" Sector:"+event.sector, MARGIN, y);
+    doc.text(get_str_person_has_par(event), MARGIN, y);
 }
+function get_str_person_has_par(event) {
+    return getDateStr(event.datetime)+"  Fire Fighter has PAR in Unit:"+event.unit+" Sector:"+event.sector;
+}
+
 function addEvent_unit_has_par(unit, sector) {
     addEvent_unit_has_par_with_date(unit, sector, new Date());
 }
@@ -232,8 +249,12 @@ function addEvent_unit_has_par_with_date(unit, sector, date) {
     pushEvent_toQueues(event);
 }
 function render_unit_has_par(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Unit:"+event.unit+" has PAR in Sector:"+event.sector, MARGIN, y);
+    doc.text(get_str_unit_has_par(event), MARGIN, y);
 }
+function get_str_unit_has_par(event) {
+    return getDateStr(event.datetime)+"  Unit:"+event.unit+" has PAR in Sector:"+event.sector;
+}
+
 function addEvent_sector_has_par(sector) {
     addEvent_sector_has_par_with_date(sector, new Date());
 }
@@ -245,7 +266,10 @@ function addEvent_sector_has_par_with_date(sector, date) {
     pushEvent_toQueues(event);
 }
 function render_sector_has_par(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Sector:"+event.sector+" has PAR", MARGIN, y);
+    doc.text(get_str_sector_has_par(event), MARGIN, y);
+}
+function get_str_sector_has_par(event) {
+    return getDateStr(event.datetime)+"  Sector:"+event.sector+" has PAR";
 }
 
 
@@ -260,7 +284,10 @@ function addEvent_benchmark_with_date(benchmark, date) {
     pushEvent_toQueues(event);
 }
 function render_benchmark(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Benchmark:"+event.benchmark, MARGIN, y);
+    doc.text(get_str_benchmark(event), MARGIN, y);
+}
+function get_str_benchmark(event) {
+    return getDateStr(event.datetime)+"  Benchmark:"+event.benchmark;
 }
 
 
@@ -275,7 +302,10 @@ function addEvent_mode_with_date(mode, date) {
     pushEvent_toQueues(event);
 }
 function render_mode(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Mode changed:"+event.mode, MARGIN, y);
+    doc.text(get_str_mode(event), MARGIN, y);
+}
+function get_str_mode(event) {
+    return getDateStr(event.datetime)+"  Mode changed:"+event.mode;
 }
 
 
@@ -290,7 +320,10 @@ function addEvent_osr_with_date(osr, date) {
     pushEvent_toQueues(event);
 }
 function render_osr(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  OSR:"+event.osr, MARGIN, y);
+    doc.text(get_str_osr(event), MARGIN, y);
+}
+function get_str_osr(event) {
+    return getDateStr(event.datetime)+"  OSR:"+event.osr;
 }
 
 function addEvent_objective(objective) {
@@ -304,7 +337,10 @@ function addEvent_objective_with_date(objective, date) {
     pushEvent_toQueues(event);
 }
 function render_objective(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  Objectives:"+event.objective, MARGIN, y);
+    doc.text(get_str_objective(event), MARGIN, y);
+}
+function get_str_objective(event) {
+    return getDateStr(event.datetime)+"  Objectives:"+event.objective;
 }
 
 function addEvent_iap(iap) {
@@ -318,5 +354,8 @@ function addEvent_iap_with_date(iap, date) {
     pushEvent_toQueues(event);
 }
 function render_iap(y, event, doc) {
-    doc.text(getDateStr(event.datetime)+"  IAP:"+event.iap, MARGIN, y);
+    doc.text(get_str_iap(event), MARGIN, y);
+}
+function get_str_iap(event) {
+    return getDateStr(event.datetime)+"  IAP:"+event.iap;
 }

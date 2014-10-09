@@ -2379,7 +2379,8 @@ function init( ) {
 	initUnitsDialog();
 	initUnitPeopleDialog();
 	initBenchmarkDialog();
-	$("#report_btn").click(function(){generateReportSortByTime();});
+//	$("#report_btn").click(function(){generateReportSortByTime();});
+    $("#report_btn").click(showDialog( 0, 0, "#time_report_dialog"));
     $("#sectorreport_btn").click(function(){generateReportSortBySector();});
 	initCmdTerminateDialog();
 //    $("#cmd_term_btn").hide();
