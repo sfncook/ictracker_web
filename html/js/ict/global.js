@@ -1,7 +1,4 @@
 
-// Disabling cookies for now.
-var COOKIES_ENABLED = false;
-
 var btn_clicked;
 var tbar_clicked;
 var tbar_moving;
