@@ -57,7 +57,7 @@ function cancelTbarParTimer(tbar) {
         window.clearTimeout(tbar['par_timer']);
     }
     tbar.find(".has_par").removeClass("has_par");
-    tbar['btn_ids_with_par'] = new Array();
+    tbar.data({'btn_ids_with_par':new Array()});
 
     // Cookies
     saveCookieState();
@@ -117,7 +117,6 @@ function togglePar(btn, btnSelector) {
         btnsWithPar.each(function( index ) {
             btn_ids_with_par.push($(this).attr('id'));
         });
-        tbar_clicked['btn_ids_with_par'] = btn_ids_with_par;
         tbar_clicked.data({'btn_ids_with_par':btn_ids_with_par});
 
         // Report
@@ -206,8 +205,8 @@ function showParDialog( tbar, btn, parentDialog_ ){
             }
 
             parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
-            if(typeof tbar['btn_ids_with_par'] != 'undefined') {
-                $.each( tbar['btn_ids_with_par'], function(index, btnId) {
+            if(typeof tbar.data('btn_ids_with_par') != 'undefined') {
+                $.each( tbar.data('btn_ids_with_par'), function(index, btnId) {
                     $('#'+btnId).addClass('has_par');
                 });
             }
