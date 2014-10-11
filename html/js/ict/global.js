@@ -2281,6 +2281,9 @@ function unitToObjForJson(unitBtn) {
     unitObj['unit_par'] = unit_par;
 
     // psi
+    var psi_btn = unitBtn.parent().find('.psi_btn').html();
+    unitObj['psi_btn'] = psi_btn;
+
     // unit timer
 
     return unitObj;
@@ -2379,8 +2382,13 @@ function addAllUnitsToTbar(tbarEl, units) {
         unitBtn.data({'actions':actions});
 
         // Par
-        if(typeof unit['unit_par'] != 'undefine') {
+        if(typeof unit['unit_par'] != 'undefined') {
             unitBtn.parent().find('.personnel_btn').html(unit['unit_par']);
+        }
+
+        // PSI
+        if(typeof unit['psi_btn'] != 'undefined') {
+            setPsiText_WithBtn(unit['psi_btn'], unitBtn.parent().find('.psi_btn'));
         }
 
     }
