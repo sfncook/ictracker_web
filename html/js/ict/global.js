@@ -679,10 +679,12 @@ function setBtnText( text ){
 function toggleDirBtn(btn) {
 	var tbarDirBtn = tbar_clicked.find(".title_dir");
 	if (btn.hasClass("glow_orange")) {
+        $("#sub_sector_btn").removeClass("glow_orange");
 		$(".dir_supl_info_dir_btn").removeClass("glow_orange");
 		tbar_clicked.prefix_dir = 'X';
 		tbarDirBtn.hide();
 	} else {
+        $("#sub_sector_btn").removeClass("glow_orange");
 		$(".dir_supl_info_dir_btn").removeClass("glow_orange");
 		btn.addClass("glow_orange");
 		tbar_clicked.prefix_dir = btn.html();
@@ -762,7 +764,27 @@ function initSectorDialog( ) {
 	var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
 	dialog_body.append(dir_btns_container);
 	var suplInfoPrototypeBtn = $("<div class=\"button col-xs-3 sm_round_btn\">PROTOTYPE</div>");
-	
+
+    //Sub button
+    var newBtn = $('<div id="sub_sector_btn" class="button">Sub</div>').clone();
+    dir_btns_container.append(newBtn);
+    newBtn.click(function() {
+        var tbarDirBtn = tbar_clicked.find(".title_dir");
+        if (newBtn.hasClass("glow_orange")) {
+            $("#sub_sector_btn").removeClass("glow_orange");
+            $(".dir_supl_info_dir_btn").removeClass("glow_orange");
+            tbar_clicked.prefix_dir = 'X';
+            tbarDirBtn.hide();
+        } else {
+            $("#sub_sector_btn").removeClass("glow_orange");
+            $(".dir_supl_info_dir_btn").removeClass("glow_orange");
+            newBtn.addClass("glow_orange");
+            tbar_clicked.prefix_dir = newBtn.html();
+            tbarDirBtn.show();
+            tbarDirBtn.html("Sub");
+        }
+    });
+
 	//Suplimental buttons
 	["N","E","S","W"].forEach(function (btnText, index, array) {
 		var newBtn = suplInfoPrototypeBtn.clone();

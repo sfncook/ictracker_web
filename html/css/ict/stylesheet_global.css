@@ -1412,3 +1412,11 @@ ul {
     font-size: 1.05rem;
     margin-top: 10px;
 }
+
+#sub_sector_btn {
+    width: 33px;
+    height: 21px;
+    float: left;
+    padding-top:2px;
+    border-radius: 10px;
+}
