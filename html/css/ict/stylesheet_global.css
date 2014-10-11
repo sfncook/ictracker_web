@@ -1433,3 +1433,33 @@ ul {
     width: 165px;
     margin-left: 10px;
 }
+
+#resume_dialog{
+    width: 400px;
+}
+#resume_dialog > .dialog_body{
+    text-align: center;
+}
+#resume_cmd_btn {
+    width: 100px;
+    height: 45px;
+    margin: 10px 20px 10px 75px;
+    float:left;
+}
+#cmd_term_label {
+    font-size:1.5rem;
+    margin:10px;
+}
+#report_btn_2 {
+    z-index: 100;
+    height: 45px;
+    width: 100px;
+    float: left;
+    margin: 10px 20px 10px 25px;
+}
+#yes_cmd_term_btn {
+    margin-left:95px;
+}
+#no_cmd_term_btn {
+    margin-left:50px;
+}

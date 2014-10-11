@@ -3,6 +3,7 @@ var btn_clicked;
 var tbar_clicked;
 var tbar_moving;
 var parentDialog = 0;
+var isIncidentRunning = true;
 
 var btnsToBlink = new Array();
 function blinkUnit() {
@@ -2134,9 +2135,29 @@ function initUpgradeDialog() {
  * Init Command Terminate Dialog
  **/
 function terminateCommand() {
-//	generateReport();
+
 	hideAllDialogs();
-    deleteAllCookies();
+    isIncidentRunning = false;
+
+    var t1 = (new Date()).getTime();
+    var elapsed = parseInt(t1-t0);
+    var elapsedSec = parseInt((elapsed/1000)%60);
+    var elapsedMin = parseInt((elapsed/(1000*60))%60);
+    var elapsedHr = parseInt((elapsed/(1000*60*60))%60);
+
+    var secStr = (elapsedSec<10)?("0"+elapsedSec):elapsedSec;
+    var minStr = (elapsedMin<10)?("0"+elapsedMin):elapsedMin;
+    var hrStr = (elapsedHr<10)?("0"+elapsedHr):elapsedHr;
+
+    if (elapsedHr>0) {
+        $("#cmd_term_label").html("Command terminated at: "+hrStr+":"+minStr+":"+secStr);
+    } else {
+        $("#cmd_term_label").html("Command terminated at: "+minStr+":"+secStr);
+    }
+
+    showDialog(0, 0, "#resume_dialog")();
+
+    saveCookieState();
 }
 function dontTerminateCommand() {
 	hideAllDialogs();
@@ -2153,7 +2174,9 @@ function initCmdTerminateDialog( ) {
 	var yesBtn = prototypeBtn.clone();
 	var noBtn = prototypeBtn.clone();
 	yesBtn.html("YES");
+    yesBtn.attr("id","yes_cmd_term_btn");
 	noBtn.html("NO");
+    noBtn.attr("id","no_cmd_term_btn");
 	dialogBody.append(question_div);
 	dialogBody.append(yesBtn);
 	dialogBody.append(noBtn);
@@ -2163,6 +2186,11 @@ function initCmdTerminateDialog( ) {
 	
 	var cmdTrmBtn = $("#cmd_term_btn");
 	cmdTrmBtn.click(showDialog(0, cmdTrmBtn, "#cmd_trm_dialog"));
+
+    $("#resume_cmd_btn").click(function(){
+        isIncidentRunning = true;
+        hideAllDialogs();
+    });
 }
 
 
@@ -2398,6 +2426,12 @@ function initReportDialog() {
         $("#sector_report_dialog_body").html(getReportStrSortBySector());
         showDialog( 0, 0, "#time_report_dialog")();
     });
+
+    $("#report_btn_2").click(function() {
+        $("#time_report_dialog_body").html(getReportStrSortByTime());
+        $("#sector_report_dialog_body").html(getReportStrSortBySector());
+        showDialog( 0, 0, "#time_report_dialog", $("#resume_dialog"))();
+    });
 }
 
 
@@ -2527,6 +2561,8 @@ function saveCookieState() {
 
         // App version
         $.cookie('previous_app_version', $('#version_text').html());
+
+        $.cookie('is_incident_running', isIncidentRunning);
 
         // Tbars
         $( ".tbar" ).each(function( index, tbar ) {
@@ -2699,6 +2735,10 @@ function loadCookieState() {
 
             }
 
+            else if (key == 'is_incident_running') {
+                isIncidentRunning = JSON.parse($.cookie(key));
+            }
+
             // Timer
             else if(key=='t0') {
                 t0 = $.cookie(key);
@@ -2863,42 +2903,44 @@ function startIncidentTimer() {
 	t0 = (new Date()).getTime();
 }
 function updateTimer() {
-	var t1 = (new Date()).getTime();
-	var elapsed = parseInt(t1-t0);
-	var elapsedSec = parseInt((elapsed/1000)%60);
-	var elapsedMin = parseInt((elapsed/(1000*60))%60);
-	var elapsedHr = parseInt((elapsed/(1000*60*60))%60);
+    if(isIncidentRunning) {
+        var t1 = (new Date()).getTime();
+        var elapsed = parseInt(t1-t0);
+        var elapsedSec = parseInt((elapsed/1000)%60);
+        var elapsedMin = parseInt((elapsed/(1000*60))%60);
+        var elapsedHr = parseInt((elapsed/(1000*60*60))%60);
 
-	var secStr = (elapsedSec<10)?("0"+elapsedSec):elapsedSec;
-	var minStr = (elapsedMin<10)?("0"+elapsedMin):elapsedMin;
-	var hrStr = (elapsedHr<10)?("0"+elapsedHr):elapsedHr;
+        var secStr = (elapsedSec<10)?("0"+elapsedSec):elapsedSec;
+        var minStr = (elapsedMin<10)?("0"+elapsedMin):elapsedMin;
+        var hrStr = (elapsedHr<10)?("0"+elapsedHr):elapsedHr;
 
-    $("#time").removeClass("font_red");
-    $("#time").removeClass("font_blue");
-    $("#time").removeClass("blink_me");
+        $("#time").removeClass("font_red");
+        $("#time").removeClass("font_blue");
+        $("#time").removeClass("blink_me");
 
-    if(elapsedMin==20) {
-        $("#time").addClass("font_blue");
-        $("#time").addClass("blink_me");
+        if(elapsedMin==20) {
+            $("#time").addClass("font_blue");
+            $("#time").addClass("blink_me");
+        }
+        if(elapsedMin==30) {
+            $("#time").addClass("font_red");
+            $("#time").addClass("blink_me");
+        }
+        if(elapsedMin==35) {
+            $("#time").addClass("font_blue");
+            $("#time").addClass("blink_me");
+        }
+
+        if (elapsedHr>0) {
+            if (!hourRollOverDone) {
+                $("#time").removeClass("time_lg");
+                hourRollOverDone = true;
+            }
+            $("#time").html(hrStr+":"+minStr+":"+secStr);
+        } else {
+            $("#time").html(minStr+":"+secStr);
+        }
     }
-    if(elapsedMin==30) {
-        $("#time").addClass("font_red");
-        $("#time").addClass("blink_me");
-    }
-    if(elapsedMin==35) {
-        $("#time").addClass("font_blue");
-        $("#time").addClass("blink_me");
-    }
-
-	if (elapsedHr>0) {
-		if (!hourRollOverDone) {
-			$("#time").removeClass("time_lg");
-			hourRollOverDone = true;
-		}
-		$("#time").html(hrStr+":"+minStr+":"+secStr);
-	} else {
-		$("#time").html(minStr+":"+secStr);
-	}
 }
 
 var gridster;
@@ -2945,17 +2987,22 @@ function init( ) {
 	$("#dialogContainer").hide();
 	$("#dialog_prototype").hide();
 	$(".dialog_close_btn").click(function(){
-        if(typeof onCloseCallback!='undefined' && onCloseCallback!=0) {
-            onCloseCallback();
-        }
-        onCloseCallback=0;
-        onClickCallback=0;
-	    hideAllDialogs();
-	    $(".dialog").hide();
-	    if(typeof parentDialog!='undefined' && parentDialog!=0) {
-	        $("#dialogContainer").show();
-            parentDialog.show();
-            parentDialog = 0;
+        if($(this).parents(".dialog").attr("id")=="nda_reminder_dialog" && !isIncidentRunning) {
+            hideAllDialogs();
+            terminateCommand();
+        } else {
+            if(typeof onCloseCallback!='undefined' && onCloseCallback!=0) {
+                onCloseCallback();
+            }
+            onCloseCallback=0;
+            onClickCallback=0;
+            hideAllDialogs();
+            $(".dialog").hide();
+            if(typeof parentDialog!='undefined' && parentDialog!=0) {
+                $("#dialogContainer").show();
+                parentDialog.show();
+                parentDialog = 0;
+            }
         }
 	});
 
@@ -3006,7 +3053,7 @@ $.fn.exists = function () {
 $( document ).ready(init);
 //Esc Key Press
 $(document).keyup(function(e) {
-    if (e.keyCode == 27) {
+    if (e.keyCode == 27 && isIncidentRunning) {
         if(typeof onCloseCallback!='undefined' && onCloseCallback!=0) {
             onCloseCallback();
         }
