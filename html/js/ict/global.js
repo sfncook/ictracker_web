@@ -2352,6 +2352,7 @@ function saveCookieState() {
 
         // TODO:
         // Timer
+        $.cookie('t0',t0);
 
         // Mode
         var mode_btn = $("#mode_btn");
@@ -2443,9 +2444,12 @@ function loadCookieState() {
         for(var key in $.cookie()){
             // TODO:
             // Timer
+            if(key=='t0') {
+                t0 = $.cookie(key);
+            }
 
             // Mode
-            if(key=='mode') {
+            else if(key=='mode') {
                 var mode = $.cookie(key);
                 setMode(mode)
             }
