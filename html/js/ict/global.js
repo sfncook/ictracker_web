@@ -2234,6 +2234,16 @@ function initDispatchedUnits() {
 /**
  * Init Command Transferred
  **/
+function isTransferComplete() {
+    if($("#from_unit_cmdxfer_btn").hasClass("glowlightgreen") && $("#to_unit_cmdxfer_btn").hasClass("glowlightgreen")) {
+        addEvent_cmdxfer($("#from_unit_cmdxfer_btn").html(), $("#to_unit_cmdxfer_btn").html());
+        $("#from_unit_cmdxfer_btn").removeClass("glowlightgreen");
+        $("#from_unit_cmdxfer_btn").html("UNIT");
+        $("#to_unit_cmdxfer_btn").removeClass("glowlightgreen");
+        $("#to_unit_cmdxfer_btn").html("UNIT");
+        hideAllDialogs();
+    }
+}
 function initCmdXfer() {
     $("#cmdxfer_units_btn").click(showDialog(0, 0, "#cmdxfer_dialog"));
 
@@ -2253,6 +2263,7 @@ function initCmdXfer() {
                 $("#from_unit_cmdxfer_btn").addClass("glowlightgreen");
                 $("#units_dialog").hide();
                 $("#cmdxfer_dialog").show();
+                isTransferComplete();
                 saveCookieState();
             }
         )
@@ -2274,6 +2285,7 @@ function initCmdXfer() {
                 $("#to_unit_cmdxfer_btn").addClass("glowlightgreen");
                 $("#units_dialog").hide();
                 $("#cmdxfer_dialog").show();
+                isTransferComplete();
                 saveCookieState();
             }
         )

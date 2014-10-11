@@ -435,3 +435,24 @@ function render_iap(y, event, doc) {
 function get_str_iap(event) {
     return getDateStr(event.datetime)+"  IAP:"+event.iap;
 }
+
+function addEvent_cmdxfer(from_unit, to_unit) {
+    addEvent_cmdxfer_with_date(from_unit, to_unit, new Date());
+}
+function addEvent_cmdxfer_with_date(from_unit, to_unit, date) {
+    var event = {
+        "render_func":render_cmdxfer,
+        "get_str_func":get_str_cmdxfer,
+        "datetime":date,
+        "from_unit":from_unit,
+        "to_unit":to_unit
+    };
+
+    pushEvent_toQueues(event);
+}
+function render_cmdxfer(y, event, doc) {
+    doc.text(get_str_unit_to_sector(event), MARGIN, y);
+}
+function get_str_cmdxfer(event) {
+    return getDateStr(event.datetime)+"  Command Transferred From:"+event.from_unit+" To:"+event.to_unit;
+}
