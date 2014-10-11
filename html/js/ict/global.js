@@ -1454,6 +1454,7 @@ function clickIapToggleBtn(btn) {
             btn.addClass("glow_orange");
             addEvent_iap(btn.text());
         }
+        saveCookieState();
     };
 }
 function initIapDialog( ) {
@@ -2405,7 +2406,6 @@ function saveCookieState() {
             }
         });
 
-        // TODO:
         // Timer
         $.cookie('t0',t0);
 
@@ -2456,6 +2456,26 @@ function saveCookieState() {
         $.cookie('objective_btns', JSON.stringify(objective_btns));
 
         // IAP
+        var iap_toggle_btns = new Array();
+        $( ".iap_toggle_btn" ).each(function( index, iap_toggle_btn ) {
+            var objToAdd = {
+                'id':$(iap_toggle_btn).attr("id"),
+                'orange':$(iap_toggle_btn).hasClass("glow_orange")
+            };
+            iap_toggle_btns.push(objToAdd);
+        });
+        $.cookie('iap_toggle_btns', JSON.stringify(iap_toggle_btns));
+
+        var iap_inputs = new Array();
+        $( ".iap_input" ).each(function( index, iap_input ) {
+            var objToAdd = {
+                'id':$(iap_input).attr("id"),
+                'text':$(iap_input).val()
+            };
+            iap_inputs.push(objToAdd);
+        });
+        $.cookie('iap_inputs', JSON.stringify(iap_inputs));
+
         // Report
 
         console.log($.cookie());
@@ -2633,6 +2653,25 @@ function loadCookieState() {
             }
 
             // IAP
+            else if (key == 'iap_toggle_btns') {
+                var iapBtnStr = $.cookie(key);
+                var iap_toggle_btns = JSON.parse(iapBtnStr);
+                for(var i=0; i<iap_toggle_btns.length; i++) {
+                    var objFromJson = iap_toggle_btns[i];
+                    if(objFromJson['orange']) {
+                        $("#"+objFromJson['id']).addClass("glow_orange");
+                    }
+                }
+            }
+            else if (key == 'iap_inputs') {
+                var iapBtnStr = $.cookie(key);
+                var iap_toggle_btns = JSON.parse(iapBtnStr);
+                for(var i=0; i<iap_toggle_btns.length; i++) {
+                    var objFromJson = iap_toggle_btns[i];
+                    $("#"+objFromJson['id']).val(objFromJson['text']);
+                }
+            }
+
             // Report
 
             else {

@@ -283,42 +283,42 @@
                             <tr>
                                 <td class="iap_label_td">Critical Fireground Factors:</td>
                                 <td>
-                                    <div class="iap_toggle_btn button">Building</div>
-                                    <div class="iap_toggle_btn button">Fire</div>
-                                    <div class="iap_toggle_btn button">Occupancy</div>
-                                    <div class="iap_toggle_btn button">Life Hazard</div>
-                                    <div class="iap_toggle_btn button">Arrangement</div>
-                                    <div class="iap_toggle_btn button">Resources</div>
-                                    <div class="iap_toggle_btn button">Action Effect</div>
-                                    <div class="iap_toggle_btn button">Special</div>
+                                    <div id="bldg_iap_btn" class="iap_toggle_btn button">Building</div>
+                                    <div id="fire_iap_btn" class="iap_toggle_btn button">Fire</div>
+                                    <div id="occu_iap_btn" class="iap_toggle_btn button">Occupancy</div>
+                                    <div id="life_iap_btn" class="iap_toggle_btn button">Life Hazard</div>
+                                    <div id="arra_iap_btn" class="iap_toggle_btn button">Arrangement</div>
+                                    <div id="reso_iap_btn" class="iap_toggle_btn button">Resources</div>
+                                    <div id="acti_iap_btn" class="iap_toggle_btn button">Action Effect</div>
+                                    <div id="spec_iap_btn" class="iap_toggle_btn button">Special</div>
                                     <div class="clear_float"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="iap_red_label iap_label_td">Rescue:</td>
-                                <td><textarea class="iap_input">Primary search</textarea></td>
+                                <td><textarea id="iap_resc_input" class="iap_input">Primary search</textarea></td>
                             </tr>
                             <tr>
                                 <td class="iap_blue_label iap_label_td">Fire Control:</td>
                                 <td>
-                                    <textarea class="iap_input">Supply line, attack +2</textarea>
+                                    <textarea id="iap_fire_input" class="iap_input">Supply line, attack +2</textarea>
                                     <div id="iap_sprinkler_toggle_btn" class="iap_toggle_btn button">Vent Sprinkler?</div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="iap_blue_label iap_label_td">Property/People:</td>
                                 <td>
-                                    <textarea class="iap_input">Salvage</textarea>
+                                    <textarea id="iap_prop_input" class="iap_input">Salvage</textarea>
                                     <div id="iap_btn_evacloc" class="button">Show Evacuation Location</div>
                                     <div class="clear_both"></div>
                                     <div id="iap_evacloc_input_container">
-                                        <textarea id="iap_evacloc_input">Evacuation Location</textarea>
+                                        <textarea id="iap_evacloc_input" class="iap_input">Evacuation Location</textarea>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="iap_red_label iap_label_td">Firefighter Safety:</td>
-                                <td><textarea class="iap_input">IRIC to Recue, Acct. locations, Safety, Rehab +1 unit</textarea></td>
+                                <td><textarea id="iap_safe_input" class="iap_input">IRIC to Recue, Acct. locations, Safety, Rehab +1 unit</textarea></td>
                             </tr>
                         </table>
                     </div>
