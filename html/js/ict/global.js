@@ -1267,6 +1267,7 @@ function initStreetNameDialog() {
     return function() {
         btn.toggleClass("glowlightgreen");
         updateOsrPercentComplete();
+        saveCookieState();
     }
 }
 function initOsrDialog( ) {
@@ -2337,6 +2338,40 @@ function deleteAllCookies() {
         $.removeCookie(key);
     }
 }
+function osrToJson() {
+    var osr = {};
+
+    var osr_btns = new Array();
+    $( ".osr_btn" ).each(function( index, osr_btn ) {
+        var objToAdd = {
+            'id':$(osr_btn).attr("id"),
+            'green':$(osr_btn).hasClass("glowlightgreen")
+        };
+        osr_btns.push(objToAdd);
+    });
+    osr['osr_btns'] = osr_btns;
+
+    osr['unit_osr_btn'] = {
+        'html':$("#unit_osr_btn").html(),
+        'green':$("#unit_osr_btn").hasClass("glowlightgreen")
+    };
+    osr['osr_address_btn'] = {
+        'html':$("#osr_address_btn").html(),
+        'green':$("#osr_address_btn").hasClass("glowlightgreen")
+    };
+
+    var osr_toggle_btns = new Array();
+    $( ".osr_toggle_btn" ).each(function( index, osr_btn ) {
+        var objToAdd = {
+            'id':$(osr_btn).attr("id"),
+            'green':$(osr_btn).hasClass("glowlightgreen")
+        };
+        osr_toggle_btns.push(objToAdd);
+    });
+    osr['osr_toggle_btns'] = osr_toggle_btns;
+
+    return JSON.stringify(osr);
+}
 function saveCookieState() {
     if(COOKIES_ENABLED) {
         // Reset cookies
@@ -2350,7 +2385,6 @@ function saveCookieState() {
                 $.cookie('tbar_' + tbar_key, tbarJson);
             }
         });
-        console.log($.cookie());
 
         // TODO:
         // Timer
@@ -2389,9 +2423,13 @@ function saveCookieState() {
         $.cookie('upgrade_btns', JSON.stringify(upgrade_btns));
 
         // OSR
+        $.cookie('osr', osrToJson());
+
         // Objectives
         // IAP
         // Report
+
+        console.log($.cookie());
     }
 }
 function findTbarElementByColRow(col, row) {
@@ -2491,7 +2529,6 @@ function loadCookieState() {
             else if (key == 'upgrade_btns') {
                 var upgradeBtnsStr = $.cookie(key);
                 upgrade_btns = JSON.parse(upgradeBtnsStr);
-                console.log(upgrade_btns);
                 for(var i=0; i<upgrade_btns.length; i++) {
                     var objFromJson = upgrade_btns[i];
                     if(objFromJson['green']) {
@@ -2506,6 +2543,37 @@ function loadCookieState() {
             }
 
             // OSR
+            else if (key == 'osr') {
+                var osrStr = $.cookie(key);
+                var osrObj = JSON.parse(osrStr);
+                if (typeof osrObj['osr_btns'] != 'undefined') {
+                    var osr_btns = osrObj['osr_btns'];
+                    for(var i=0; i<osr_btns.length; i++) {
+                        var objFromJson = osr_btns[i];
+                        if(objFromJson['green']) {
+                            $("#"+objFromJson['id']).addClass("glowlightgreen");
+                        }
+                    }
+                }
+                $("#unit_osr_btn").html(osrObj['unit_osr_btn']['html']);
+                if(osrObj['unit_osr_btn']['green']) {
+                    $("#unit_osr_btn").addClass('glowlightgreen');
+                }
+                $("#osr_address_btn").html(osrObj['osr_address_btn']['html']);
+                if(osrObj['osr_address_btn']['green']) {
+                    $("#osr_address_btn").addClass('glowlightgreen');
+                }
+                if (typeof osrObj['osr_toggle_btns'] != 'undefined') {
+                    var osr_btns = osrObj['osr_toggle_btns'];
+                    for(var i=0; i<osr_btns.length; i++) {
+                        var objFromJson = osr_btns[i];
+                        if(objFromJson['green']) {
+                            $("#"+objFromJson['id']).addClass("glowlightgreen");
+                        }
+                    }
+                }
+            }
+
             // Objectives
             // IAP
             // Report
@@ -2535,7 +2603,7 @@ function updateTimer() {
 	var elapsedSec = parseInt((elapsed/1000)%60);
 	var elapsedMin = parseInt((elapsed/(1000*60))%60);
 	var elapsedHr = parseInt((elapsed/(1000*60*60))%60);
-	
+
 	var secStr = (elapsedSec<10)?("0"+elapsedSec):elapsedSec;
 	var minStr = (elapsedMin<10)?("0"+elapsedMin):elapsedMin;
 	var hrStr = (elapsedHr<10)?("0"+elapsedHr):elapsedHr;
@@ -2556,7 +2624,7 @@ function updateTimer() {
         $("#time").addClass("font_blue");
         $("#time").addClass("blink_me");
     }
-	
+
 	if (elapsedHr>0) {
 		if (!hourRollOverDone) {
 			$("#time").removeClass("time_lg");
@@ -2627,9 +2695,9 @@ function init( ) {
 
     $("#move_unit_screen_cover").hide();
 	$("#mode_btn").click(clickModeButton);
-	
+
 	hideAllDialogs();
-	
+
 	window.setTimeout(blinkUnit, 500);
 	window.setInterval(updateTimer, 1000);
 
