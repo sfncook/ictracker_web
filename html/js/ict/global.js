@@ -1294,12 +1294,42 @@ function initStreetNameDialog() {
 }
  function toggleOsrBtn(btn) {
     return function() {
-        btn.toggleClass("glowlightgreen");
-        updateOsrPercentComplete();
-        saveCookieState();
+        if(btn.attr("id")!='acct_osr_btn') {
+            btn.toggleClass("glowlightgreen");
+            updateOsrPercentComplete();
+            saveCookieState();
+        }
     }
 }
 function initOsrDialog( ) {
+
+    $("#acct_osr_btn").click(function() {
+        if ($("#acct_osr_btn").hasClass("glowlightgreen")) {
+            $("#acct_osr_btn").removeClass("glowlightgreen");
+            $("#acct_osr_btn").html("Accountability");
+            saveCookieState();
+        } else {
+            showDialog_withCallbacks(
+                "#units_dialog",
+                0,//parent dialog
+                function(){
+                    $(".unit_dialog_btn").removeClass("glowlightgreen");
+                    var unit_btn_text = $("#acct_osr_btn").html();
+                    if(unit_btn_text!="Unit ID") {
+                        $(".unit_dialog_btn:contains('"+unit_btn_text+"')").addClass("glowlightgreen");
+                    }
+                },
+                function(unitName){
+                    $("#acct_osr_btn").html(unitName);
+                    $("#acct_osr_btn").addClass("glowlightgreen");
+                    $("#units_dialog").hide();
+                    $("#osr_dialog").show();
+                    saveCookieState();
+                }
+            )();
+        }
+    });
+
     $(".osr_btn").each(function() {
         $(this).click(toggleOsrBtn($(this)));
     });
@@ -2452,7 +2482,8 @@ function osrToJson() {
     $( ".osr_btn" ).each(function( index, osr_btn ) {
         var objToAdd = {
             'id':$(osr_btn).attr("id"),
-            'green':$(osr_btn).hasClass("glowlightgreen")
+            'green':$(osr_btn).hasClass("glowlightgreen"),
+            'html':$(osr_btn).html()
         };
         osr_btns.push(objToAdd);
     });
@@ -2725,6 +2756,7 @@ function loadCookieState() {
                         if(objFromJson['green']) {
                             $("#"+objFromJson['id']).addClass("glowlightgreen");
                         }
+                        $("#"+objFromJson['id']).html(objFromJson['html']);
                     }
                 }
                 $("#unit_osr_btn").html(osrObj['unit_osr_btn']['html']);
