@@ -1217,6 +1217,7 @@ function toggleObjBtn(btn) {
         if(btn.hasClass("glowlightgreen")){
             addEvent_objective(btn.text());
         }
+        saveCookieState();
     }
 }
 function initObjectivesDialog( ) {
@@ -2441,6 +2442,16 @@ function saveCookieState() {
         $.cookie('osr', osrToJson());
 
         // Objectives
+        var objective_btns = new Array();
+        $( ".objective_btn" ).each(function( index, objective_btn ) {
+            var objToAdd = {
+                'id':$(objective_btn).attr("id"),
+                'green':$(objective_btn).hasClass("glowlightgreen")
+            };
+            objective_btns.push(objToAdd);
+        });
+        $.cookie('objective_btns', JSON.stringify(objective_btns));
+
         // IAP
         // Report
 
@@ -2543,7 +2554,7 @@ function loadCookieState() {
             // Upgrade
             else if (key == 'upgrade_btns') {
                 var upgradeBtnsStr = $.cookie(key);
-                upgrade_btns = JSON.parse(upgradeBtnsStr);
+                var upgrade_btns = JSON.parse(upgradeBtnsStr);
                 for(var i=0; i<upgrade_btns.length; i++) {
                     var objFromJson = upgrade_btns[i];
                     if(objFromJson['green']) {
@@ -2598,9 +2609,22 @@ function loadCookieState() {
                         $("#"+objFromJson['id']).find("option:contains("+objFromJson['selected']+")").attr('selected','selected');
                     }
                 }
-            }
+                updateOsrPercentComplete();
+            }// OSR
 
             // Objectives
+            else if (key == 'objective_btns') {
+                var objectiveBtnStr = $.cookie(key);
+                var objective_btns = JSON.parse(objectiveBtnStr);
+                for(var i=0; i<objective_btns.length; i++) {
+                    var objFromJson = objective_btns[i];
+                    if(objFromJson['green']) {
+                        $("#"+objFromJson['id']).addClass("glowlightgreen");
+                    }
+                }
+                updateObjectivePercentComplete();
+            }
+
             // IAP
             // Report
 
