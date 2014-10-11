@@ -1563,6 +1563,7 @@ function initUnitsDialog( ) {
             $(".delete_dispatched_unit_btn").hide();
             $("#dispatched_delete_start_btn").html("DELETE");
         }
+        saveCookieState();
     });
 	
 	//**** CITY *****
@@ -2421,13 +2422,11 @@ function saveCookieState() {
         // Dispatched Units
         var dispatched_units = new Array();
         $( ".dispatched_unit_btn" ).each(function( index, dispatched_unit_btn ) {
-//            console.log($(dispatched_unit_btn.childNodes[0]));
-//            if($(tbar).attr('id')!='tbar_prototype') {
-//                var tbarJson = tbarToJson($(tbar));
-//                var tbar_key = "tbar_"+$(tbar).data("col")+"_"+$(tbar).data("row");
-//                $.cookie('tbar_' + tbar_key, tbarJson);
-//            }
+            var dispatched_unit_text = $(dispatched_unit_btn).text();
+            dispatched_unit_text = dispatched_unit_text.substring(0, dispatched_unit_text.length - 1);
+            dispatched_units.push(dispatched_unit_text);
         });
+        $.cookie('dispatched_units', JSON.stringify(dispatched_units));
 
         // Upgrade
         var upgrade_btns = new Array();
@@ -2577,6 +2576,14 @@ function loadCookieState() {
 
 
             // Dispatched Units
+            else if (key == 'dispatched_units') {
+                var dispatched_units_str = $.cookie(key);
+                var dispatched_units = JSON.parse(dispatched_units_str);
+                for(var i=0; i<dispatched_units.length; i++) {
+                    var dispatched_unit = dispatched_units[i];
+                    addDispatchedUnit(dispatched_unit);
+                }
+            }
 
             // Upgrade
             else if (key == 'upgrade_btns') {
