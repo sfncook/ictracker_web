@@ -2393,6 +2393,9 @@ function saveCookieState() {
         // Reset cookies
         deleteAllCookies();
 
+        // App version
+        $.cookie('previous_app_version', $('#version_text').html());
+
         // Tbars
         $( ".tbar" ).each(function( index, tbar ) {
             if($(tbar).attr('id')!='tbar_prototype') {
@@ -2530,8 +2533,12 @@ function loadCookieState() {
     if(COOKIES_ENABLED) {
         for(var key in $.cookie()){
             // TODO:
+            if (key == 'previous_app_version') {
+
+            }
+
             // Timer
-            if(key=='t0') {
+            else if(key=='t0') {
                 t0 = $.cookie(key);
             }
 
