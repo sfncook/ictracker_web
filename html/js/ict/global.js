@@ -886,6 +886,9 @@ function toggleActionButtonForTbar(tbar) {
         } else {
             addActionButtonToTbar(tbar, actionName);
         }
+
+        // Update Cookies
+        saveCookieState();
     }
 }
 function removeActionButtonFromTbar(tbar, actionName) {
@@ -1758,6 +1761,9 @@ function toggleUnitButtonForTbar(unit_col_container) {
         } else {
             addUnitButton(unit_col_container, unitName);
         }
+
+        // Update Cookies
+        saveCookieState();
     }
 }
 function removeUnitButton(unit_col_container, unitName) {
@@ -2250,7 +2256,15 @@ function unitToObjForJson(unitBtn) {
 
     var unit_text = unitBtn.find(".unit_text").html();
     unitObj['unit_text'] = unit_text;
-    // actions
+
+    // Actions
+    unitObj['actions'] = [];
+    if(typeof unitBtn.data('actions')!='undefined') {
+        jQuery.each(unitBtn.data('actions'), function (index, actionName) {
+            unitObj['actions'].push(actionName);
+        });
+    }
+
     // par
     // psi
     // unit timer
@@ -2323,11 +2337,14 @@ function addAllUnitsToTbar(tbarEl, units) {
         var unit = units[i];
         var unit_text = unit['unit_text'];
         addUnitButton(unit_col_left, unit_text);
+        var unitBtn = unit_col_left.find(".unit_btn:contains('"+unit_text+"')");
+        var actions = unit['actions'];
+        unitBtn.data({'actions':actions});
     }
 }
 function loadCookieState() {
     if(COOKIES_ENABLED) {
-        console.log($.cookie());
+//        console.log($.cookie());
         for(var key in $.cookie()){
             var tbarObj = JSON.parse($.cookie(key));
             var col = tbarObj['col'];
@@ -2342,6 +2359,10 @@ function loadCookieState() {
                 tbarEl.find(".title_text").html(title_text);
             }
             addAllUnitsToTbar(tbarEl, units);
+
+            if(units.length>0) {
+                showActionsForUnitBtn(tbarEl.find(".unit_row_div").first().find(".unit_btn"))();
+            }
         }
     }
 }
