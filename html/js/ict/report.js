@@ -155,6 +155,24 @@ function getDateStr(date) {
 	return hour+":"+min+":"+sec;
 }
 
+//function eventsToJsonObj() {
+//    var eventObjs = new Array();
+//    for(var i=0; i<events.length; i++) {
+//        var event = events[i];
+//        var newEvent = event;
+//        newEvent['render_func'] = event.render_func.name;
+//        newEvent['get_str_func'] = event.get_str_func.name;
+//        eventObjs.push(newEvent);
+////        console.log(eventName);
+////        console.log(window[eventName]);
+//    }
+////    console.log(eventObjs);
+//    return JSON.stringify(eventObjs);
+//}
+//function setEvents(newEvents) {
+////    events = newEvents.clone();
+//}
+
 function pushEvent_toQueues(event) {
     events.push(event);
 

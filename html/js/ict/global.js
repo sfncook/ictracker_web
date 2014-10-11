@@ -2476,6 +2476,7 @@ function saveCookieState() {
         $.cookie('iap_inputs', JSON.stringify(iap_inputs));
 
         // Report
+//        $.cookie('events', eventsToJsonObj());
 
         console.log($.cookie());
     }
@@ -2680,6 +2681,11 @@ function loadCookieState() {
             }
 
             // Report
+//            else if (key == 'events') {
+//                var newEventsStr = $.cookie(key);
+//                var newEvents = JSON.parse(newEventsStr);
+//                setEvents(newEvents);
+//            }
 
             else {
                 var tbarObj = JSON.parse($.cookie(key));
@@ -2815,6 +2821,10 @@ function init( ) {
         }
         return this;
     }
+
+    Array.prototype.clone = function() {
+        return this.slice(0);
+    };
 
     loadCookieState();
 
