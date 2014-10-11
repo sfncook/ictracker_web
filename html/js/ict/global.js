@@ -831,14 +831,20 @@ function initSectorDialog( ) {
 		}
 		
 		newBtn.click(function() {
-		    if(!newBtn.hasClass("hidden_sector_btn") /*&& !newBtn.hasClass("glowlightgreen")*/) {
-		        if(sectorName=="Sector ####") {
-		            key_replace_char_at_index = 7;
-		            $("#key_output_value").html("Sector ####");
-		            showDialog(tbar_clicked, btn_clicked, "#key_dialog")();
-		        } else {
-                    setTbarTitle(tbar_clicked, sectorName);
-		        }
+		    if (!newBtn.hasClass("hidden_sector_btn")) {
+                if(!newBtn.hasClass("glowlightgreen")) {
+                    if(sectorName=="Sector ####") {
+                        key_replace_char_at_index = 7;
+                        $("#key_output_value").html("Sector ####");
+                        showDialog(tbar_clicked, btn_clicked, "#key_dialog")();
+                    } else {
+                        setTbarTitle(tbar_clicked, sectorName);
+                    }
+                } else {
+                    tbar_clicked.find(".title_text").html("Sector Title");
+                    hideAllDialogs();
+                    saveCookieState();
+                }
             }
 		});
 	});
