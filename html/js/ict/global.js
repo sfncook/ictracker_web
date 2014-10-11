@@ -38,6 +38,9 @@ function setParText(text) {
 		btn_clicked.html(text);
 		btn_clicked.removeClass("par_btn_without_number");
 		hideAllDialogs();
+
+        // Cookies
+        saveCookieState();
 	  }
 }
 function startTbarParTimer(tbar) {
@@ -303,6 +306,9 @@ function clickPersonnelBtn(btn) {
 		btn.addClass("glow_orange");
 		personnel_btn.html(btn.html());
 	}
+
+    // Cookies
+    saveCookieState();
 }
 function clickResetClockBtn() {
     startUnitTimerAnim(btn_clicked.parents(".unit_row_div").find(".unit_timer_bar"));
@@ -2271,6 +2277,9 @@ function unitToObjForJson(unitBtn) {
     }
 
     // par
+    var unit_par = unitBtn.parent().find('.personnel_btn').html();
+    unitObj['unit_par'] = unit_par;
+
     // psi
     // unit timer
 
@@ -2324,11 +2333,18 @@ function saveCookieState() {
                 $.cookie('tbar_' + tbar_key, tbarJson);
             }
         });
-
-        // Dispatched Units
-
-        //
         console.log($.cookie());
+
+        // Timer
+        // Mode
+        // Mayday
+        // Street Name
+        // Dispatched Units
+        // Upgrade
+        // OSR
+        // Objectives
+        // IAP
+        // Report
     }
 }
 function findTbarElementByColRow(col, row) {
@@ -2357,8 +2373,16 @@ function addAllUnitsToTbar(tbarEl, units) {
         var unit_text = unit['unit_text'];
         addUnitButton(unit_col_left, unit_text);
         var unitBtn = unit_col_left.find(".unit_btn:contains('"+unit_text+"')");
+
+        // Actions
         var actions = unit['actions'];
         unitBtn.data({'actions':actions});
+
+        // Par
+        if(typeof unit['unit_par'] != 'undefine') {
+            unitBtn.parent().find('.personnel_btn').html(unit['unit_par']);
+        }
+
     }
 }
 function loadTbarFromCookie(tbarObj) {
