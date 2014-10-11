@@ -1327,7 +1327,8 @@ function initOsrDialog( ) {
     $("#osr_address_btn").click(showDialog(0, $("#address_btn"), "#address_dialog", $("#osr_dialog")));
 //    $("#osr_address_btn").click(toggleOsrBtn($("#osr_address_btn")));
     $("#address_dlg_ok").click(function(){
-        var address = $("#address_custom_input").val()
+        var address = $("#address_custom_input").val();
+        $("#dispatch_address_btn_btn").removeClass("glowlightgreen");
         if(address) {
             $("#osr_address_btn").html(address);
             $("#osr_address_btn").addClass("glowlightgreen");
@@ -1345,6 +1346,14 @@ function initOsrDialog( ) {
     $("#address_dlg_cancel").click(hideAllDialogs);
     $("#address_dlg_clear").click(function(){
         $("#address_custom_input").val("");
+    });
+    $("#dispatch_address_btn_btn").click(function(){
+        $("#dispatch_address_btn_btn").addClass("glowlightgreen");
+        $("#address_custom_input").val("");
+        $("#osr_address_btn").html("Dispatch Address");
+        $("#osr_address_btn").addClass("glowlightgreen");
+        $("#address_dialog").hide();
+        $("#osr_dialog").show();
     });
 
     $("#osr_subfloor_btn").click(function(){

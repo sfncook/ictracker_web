@@ -1420,3 +1420,8 @@ ul {
     padding-top:2px;
     border-radius: 10px;
 }
+
+#dispatch_address_btn_btn {
+    float:left;
+    margin-left: 5px;
+}
