@@ -2980,15 +2980,18 @@ var actions = [
         actions:[
             "Secure Utilities",
             "Vert Ventilation",
+            "2nd Hole",
             "Trench Cut",
             "Roof Profile",
             "Fan to the Door",
+            "Pressurize Exposures",
             "Soften Building",
             "Open Building",
             "Open Rollup",
             "Salvage",
-            "Elevated Master",
-            "Pressurize Exposures"
+            "Position for Def. Ops",
+            "Put Stick Up",
+            "Elevated Master"
         ],
         actions_warning:[]
     },
@@ -3056,8 +3059,12 @@ var sectorsWithClock = [
     "IRIC",
     "RIC",
     "Overhaul",
-    "Salvage"
-	];
+    "Salvage",
+    "North Sector",
+    "East Sector",
+    "South Sector",
+    "West Sector"
+];
 var sectorsWithOutAcctBtn = [
 	"ReHab",
 	];
