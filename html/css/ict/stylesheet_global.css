@@ -716,7 +716,7 @@ td {
 }
 
 #iap_dialog {
-    width: 600px;
+    width: 612px;
 }
 #iap_table_main td {
     padding: 5px;
@@ -746,15 +746,18 @@ td {
     font-size: 0.8rem;
     margin: 2px;
 }
-#iap_sprinkler_toggle_btn {
+#iap_vent_toggle_btn {
     width: 120px;
-    float: left;
     font-size: 0.8rem;
     margin: 2px;
 }
+#iap_sprinkler_toggle_btn {
+     width: 120px;
+     font-size: 0.8rem;
+     margin: 2px;
+ }
 #iap_btn_evacloc {
     width: 120px;
-    float: left;
     font-size: 0.8rem;
     margin: 2px;
 }
