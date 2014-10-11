@@ -1243,6 +1243,8 @@ function initStreetNameDialog() {
             $("#streetname_btn").html("Street Name");
             hideAllDialogs();
         }
+        // Cookies
+        saveCookieState();
     });
     $("#streetname_dlg_cancel").click(hideAllDialogs);
     $("#streetname_dlg_clear").click(function(){
@@ -2354,10 +2356,12 @@ function saveCookieState() {
         // Mode
         var mode_btn = $("#mode_btn");
         $.cookie('mode', mode_btn.html());
-//        setMode(mode_text) {
 
         // Mayday
         // Street Name
+        var streetname_btn = $("#streetname_btn");
+        $.cookie('streetname_btn', streetname_btn.html());
+
         // Dispatched Units
         // Upgrade
         // OSR
@@ -2448,6 +2452,12 @@ function loadCookieState() {
 
             // Mayday
             // Street Name
+            else if(key=='streetname_btn') {
+                var streetname_btn = $.cookie(key);
+                $("#streetname_btn").html(streetname_btn);
+            }
+
+
             // Dispatched Units
             // Upgrade
             // OSR
