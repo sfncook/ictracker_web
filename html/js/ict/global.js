@@ -1366,6 +1366,7 @@ function initOsrDialog( ) {
     $(".osr_select").change(
         function() {
             $(this).addClass("glowlightgreen");
+            saveCookieState();
         }
     );
 
@@ -1433,6 +1434,10 @@ function initOsrDialog( ) {
 
 	var osr_btn = $("#osr_header_btn");
 	osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
+
+    $(".osr_toggle_btn").each(function(){
+        $(this).click(saveCookieState);
+    });
 }
 
 
@@ -2370,6 +2375,16 @@ function osrToJson() {
     });
     osr['osr_toggle_btns'] = osr_toggle_btns;
 
+    var osr_selects = new Array();
+    $( ".osr_select" ).each(function( index, osr_select ) {
+        osr_selects.push({
+            'id':$(osr_select).attr('id'),
+            'selected':$(osr_select).find("option:selected").html(),
+            'green':$(osr_select).hasClass("glowlightgreen")
+        });
+    });
+    osr['osr_selects'] = osr_selects;
+
     return JSON.stringify(osr);
 }
 function saveCookieState() {
@@ -2570,6 +2585,17 @@ function loadCookieState() {
                         if(objFromJson['green']) {
                             $("#"+objFromJson['id']).addClass("glowlightgreen");
                         }
+                    }
+                }
+
+                if (typeof osrObj['osr_selects'] != 'undefined') {
+                    var osr_selects = osrObj['osr_selects'];
+                    for(var i=0; i<osr_selects.length; i++) {
+                        var objFromJson = osr_selects[i];
+                        if(objFromJson['green']) {
+                            $("#"+objFromJson['id']).addClass("glowlightgreen");
+                        }
+                        $("#"+objFromJson['id']).find("option:contains("+objFromJson['selected']+")").attr('selected','selected');
                     }
                 }
             }
