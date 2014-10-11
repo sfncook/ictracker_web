@@ -1867,6 +1867,9 @@ function moveUnitButton(unit_col, unit_col_destination, unitBtn) {
 
     removeUnitButton(unit_col, unitName)
     addUnitButton(unit_col_destination, unitName, personnel_btn_text);
+
+    // Cookies
+    saveCookieState();
 }
 function cancelUnitMove() {
     if(typeof tbar_moving!='undefined') {
@@ -2293,13 +2296,13 @@ function tbarToJson(tbarEl) {
     tbarObj['units'] = units;
 
     // Par Tbar
-    var par_names = new Array();
+    var btn_ids_with_par = new Array();
     if(typeof tbarEl.data('btn_ids_with_par')!='undefined') {
         jQuery.each(tbarEl.data('btn_ids_with_par'), function (index, parName) {
-            par_names.push(parName);
+            btn_ids_with_par.push(parName);
         });
     }
-    tbarObj['par_names'] = par_names;
+    tbarObj['btn_ids_with_par'] = btn_ids_with_par;
 
     return JSON.stringify(tbarObj);
 }
@@ -2310,8 +2313,10 @@ function deleteAllCookies() {
 }
 function saveCookieState() {
     if(COOKIES_ENABLED) {
+        // Reset cookies
         deleteAllCookies();
 
+        // Tbars
         $( ".tbar" ).each(function( index, tbar ) {
             if($(tbar).attr('id')!='tbar_prototype') {
                 var tbarJson = tbarToJson($(tbar));
@@ -2319,6 +2324,10 @@ function saveCookieState() {
                 $.cookie('tbar_' + tbar_key, tbarJson);
             }
         });
+
+        // Dispatched Units
+
+        //
         console.log($.cookie());
     }
 }
@@ -2366,17 +2375,24 @@ function loadTbarFromCookie(tbarObj) {
     }
     addAllUnitsToTbar(tbarEl, units);
 
+    // Par Tbar
+    if(typeof tbarObj['btn_ids_with_par'] != 'undefined') {
+        tbarEl.data({'btn_ids_with_par':tbarObj['btn_ids_with_par']});
+    }
+    // TODO: Turn tbar par btn green if needed
+    // TODO: Update tbar par timer (?)
+
     if(units.length>0) {
         showActionsForUnitBtn(tbarEl.find(".unit_row_div").first().find(".unit_btn"))();
     }
 }
 function loadCookieState() {
     if(COOKIES_ENABLED) {
-//        console.log($.cookie());
         for(var key in $.cookie()){
             var tbarObj = JSON.parse($.cookie(key));
             loadTbarFromCookie(tbarObj);
         }
+        console.log($.cookie());
     }
 }
 
