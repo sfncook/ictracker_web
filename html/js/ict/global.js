@@ -2098,26 +2098,35 @@ function initEmergTrafficDialog() {
             hideAllDialogs();
         })});
 }
-function clickModeButton() {
-    // TODO: Update OSR button percentage when toggle mode button to OFF
+function setMode(mode_text) {
     var mode_btn = $("#mode_btn");
-
-    if(mode_btn.hasClass("offensive_btn")) {
+    if (mode_text == 'DEFENSE') {
         mode_btn.addClass("defensive_btn");
         mode_btn.removeClass("offensive_btn");
         mode_btn.html("DEFENSE");
-        addEvent_mode("DEFENSE");
         $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_def_btn").addClass("glowlightgreen");
-        showDialog(0, mode_btn, "#emergency_traffic_dialog")();
     } else {
         mode_btn.addClass("offensive_btn");
         mode_btn.removeClass("defensive_btn");
         mode_btn.html("OFFENSE");
-        addEvent_mode("OFFENSE")
         $("#osr_occupancy_off_btn").addClass("glowlightgreen");
         $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
     }
+}
+function clickModeButton() {
+    var mode_btn = $("#mode_btn");
+    if(mode_btn.hasClass("offensive_btn")) {
+        setMode('DEFENSE');
+        addEvent_mode("DEFENSE");
+        showDialog(0, mode_btn, "#emergency_traffic_dialog")();
+    } else {
+        setMode('OFFENSE');
+        addEvent_mode("OFFENSE");
+    }
+
+    // Cookie
+    saveCookieState();
 }
 
 
@@ -2284,6 +2293,7 @@ function unitToObjForJson(unitBtn) {
     var psi_btn = unitBtn.parent().find('.psi_btn').html();
     unitObj['psi_btn'] = psi_btn;
 
+    // TODO:
     // unit timer
 
     return unitObj;
@@ -2338,8 +2348,14 @@ function saveCookieState() {
         });
         console.log($.cookie());
 
+        // TODO:
         // Timer
+
         // Mode
+        var mode_btn = $("#mode_btn");
+        $.cookie('mode', mode_btn.html());
+//        setMode(mode_text) {
+
         // Mayday
         // Street Name
         // Dispatched Units
@@ -2421,8 +2437,28 @@ function loadTbarFromCookie(tbarObj) {
 function loadCookieState() {
     if(COOKIES_ENABLED) {
         for(var key in $.cookie()){
-            var tbarObj = JSON.parse($.cookie(key));
-            loadTbarFromCookie(tbarObj);
+            // TODO:
+            // Timer
+
+            // Mode
+            if(key=='mode') {
+                var mode = $.cookie(key);
+                setMode(mode)
+            }
+
+            // Mayday
+            // Street Name
+            // Dispatched Units
+            // Upgrade
+            // OSR
+            // Objectives
+            // IAP
+            // Report
+
+            else {
+                var tbarObj = JSON.parse($.cookie(key));
+                loadTbarFromCookie(tbarObj);
+            }
         }
         console.log($.cookie());
     }
