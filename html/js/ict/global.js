@@ -2042,11 +2042,13 @@ function initUpgradeDialog() {
         $(".left_upgrade_btn").removeClass("glowlightgreen");
         $(this).addClass("glowlightgreen");
         $(".right_upgrade_btn").removeClass("disabled");
+        saveCookieState();
     });
 
     $(".right_upgrade_btn").click(function(){
         $(".right_upgrade_btn").removeClass("glowlightgreen");
         $(this).addClass("glowlightgreen");
+        saveCookieState();
     });
 }
 
@@ -2364,7 +2366,28 @@ function saveCookieState() {
         $.cookie('streetname_btn', streetname_btn.html());
 
         // Dispatched Units
+        var dispatched_units = new Array();
+        $( ".dispatched_unit_btn" ).each(function( index, dispatched_unit_btn ) {
+//            console.log($(dispatched_unit_btn.childNodes[0]));
+//            if($(tbar).attr('id')!='tbar_prototype') {
+//                var tbarJson = tbarToJson($(tbar));
+//                var tbar_key = "tbar_"+$(tbar).data("col")+"_"+$(tbar).data("row");
+//                $.cookie('tbar_' + tbar_key, tbarJson);
+//            }
+        });
+
         // Upgrade
+        var upgrade_btns = new Array();
+        $( ".upgrade_btn" ).each(function( index, upgrade_btn ) {
+            var objToAdd = {
+                'id':$(upgrade_btn).attr("id"),
+                'disabled':$(upgrade_btn).hasClass("disabled"),
+                'green':$(upgrade_btn).hasClass("glowlightgreen")
+            };
+            upgrade_btns.push(objToAdd);
+        });
+        $.cookie('upgrade_btns', JSON.stringify(upgrade_btns));
+
         // OSR
         // Objectives
         // IAP
@@ -2449,21 +2472,39 @@ function loadCookieState() {
             }
 
             // Mode
-            else if(key=='mode') {
+            else if (key=='mode') {
                 var mode = $.cookie(key);
                 setMode(mode)
             }
 
             // Mayday
             // Street Name
-            else if(key=='streetname_btn') {
+            else if (key=='streetname_btn') {
                 var streetname_btn = $.cookie(key);
                 $("#streetname_btn").html(streetname_btn);
             }
 
 
             // Dispatched Units
+
             // Upgrade
+            else if (key == 'upgrade_btns') {
+                var upgradeBtnsStr = $.cookie(key);
+                upgrade_btns = JSON.parse(upgradeBtnsStr);
+                console.log(upgrade_btns);
+                for(var i=0; i<upgrade_btns.length; i++) {
+                    var objFromJson = upgrade_btns[i];
+                    if(objFromJson['green']) {
+                        $("#"+objFromJson['id']).addClass("glowlightgreen");
+                    }
+                    if(objFromJson['disabled']) {
+                        $("#"+objFromJson['id']).addClass("disabled");
+                    } else {
+                        $("#"+objFromJson['id']).removeClass("disabled");
+                    }
+                }
+            }
+
             // OSR
             // Objectives
             // IAP
