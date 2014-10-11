@@ -1425,3 +1425,8 @@ ul {
     float:left;
     margin-left: 5px;
 }
+
+#osr_direction {
+    width: 165px;
+    margin-left: 10px;
+}
