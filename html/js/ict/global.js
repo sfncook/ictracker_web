@@ -58,6 +58,9 @@ function cancelTbarParTimer(tbar) {
     }
     tbar.find(".has_par").removeClass("has_par");
     tbar['btn_ids_with_par'] = new Array();
+
+    // Cookies
+    saveCookieState();
 }
 function togglePar(btn, btnSelector) {
     return function() {
@@ -115,6 +118,7 @@ function togglePar(btn, btnSelector) {
             btn_ids_with_par.push($(this).attr('id'));
         });
         tbar_clicked['btn_ids_with_par'] = btn_ids_with_par;
+        tbar_clicked.data({'btn_ids_with_par':btn_ids_with_par});
 
         // Report
         if(tbar_has_par) {
@@ -124,6 +128,9 @@ function togglePar(btn, btnSelector) {
         } else if(person_has_par) {
             addEvent_person_has_par(unit_name, tbar_clicked.find(".title_text").text());
         }
+
+        // Cookies
+        saveCookieState();
     };
 }
 function showParDialog( tbar, btn, parentDialog_ ){
@@ -2244,10 +2251,6 @@ function actionObjForJson(unitBtn) {
 
     var unit_text = unitBtn.find(".unit_text").html();
     unitObj['unit_text'] = unit_text;
-    // actions
-    // par
-    // psi
-    // unit timer
 
     return unitObj;
 }
@@ -2288,8 +2291,16 @@ function tbarToJson(tbarEl) {
         var unitBtnJson = unitToObjForJson($(unitBtn));
         units.push(unitBtnJson);
     });
-
     tbarObj['units'] = units;
+
+    // Par Tbar
+    var par_names = new Array();
+    if(typeof tbarEl.data('btn_ids_with_par')!='undefined') {
+        jQuery.each(tbarEl.data('btn_ids_with_par'), function (index, parName) {
+            par_names.push(parName);
+        });
+    }
+    tbarObj['par_names'] = par_names;
 
     return JSON.stringify(tbarObj);
 }
@@ -2342,27 +2353,30 @@ function addAllUnitsToTbar(tbarEl, units) {
         unitBtn.data({'actions':actions});
     }
 }
+function loadTbarFromCookie(tbarObj) {
+    var col = tbarObj['col'];
+    var row = tbarObj['row'];
+    var units = tbarObj['units'];
+    var tbarEl = findTbarElementByColRow(col, row);
+    if(typeof tbarEl!='undefined') {
+        tbarEl.find(".title_text").html(tbarObj['title_text']);
+    } else {
+        tbarEl = addTbar(col, row);
+        var title_text = tbarObj['title_text'];
+        tbarEl.find(".title_text").html(title_text);
+    }
+    addAllUnitsToTbar(tbarEl, units);
+
+    if(units.length>0) {
+        showActionsForUnitBtn(tbarEl.find(".unit_row_div").first().find(".unit_btn"))();
+    }
+}
 function loadCookieState() {
     if(COOKIES_ENABLED) {
 //        console.log($.cookie());
         for(var key in $.cookie()){
             var tbarObj = JSON.parse($.cookie(key));
-            var col = tbarObj['col'];
-            var row = tbarObj['row'];
-            var units = tbarObj['units'];
-            var tbarEl = findTbarElementByColRow(col, row);
-            if(typeof tbarEl!='undefined') {
-                tbarEl.find(".title_text").html(tbarObj['title_text']);
-            } else {
-                tbarEl = addTbar(col, row);
-                var title_text = tbarObj['title_text'];
-                tbarEl.find(".title_text").html(title_text);
-            }
-            addAllUnitsToTbar(tbarEl, units);
-
-            if(units.length>0) {
-                showActionsForUnitBtn(tbarEl.find(".unit_row_div").first().find(".unit_btn"))();
-            }
+            loadTbarFromCookie(tbarObj);
         }
     }
 }
