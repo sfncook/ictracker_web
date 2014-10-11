@@ -2231,6 +2231,56 @@ function initDispatchedUnits() {
 }
 
 
+/**
+ * Init Command Transferred
+ **/
+function initCmdXfer() {
+    $("#cmdxfer_units_btn").click(showDialog(0, 0, "#cmdxfer_dialog"));
+
+    $("#from_unit_cmdxfer_btn").click(
+        showDialog_withCallbacks(
+            "#units_dialog",
+            0,//parent dialog
+            function(){
+                $(".unit_dialog_btn").removeClass("glowlightgreen");
+                var unit_btn_text = $("#from_unit_cmdxfer_btn").html();
+                if(unit_btn_text!="UNIT") {
+                    $(".unit_dialog_btn:contains('"+unit_btn_text+"')").addClass("glowlightgreen");
+                }
+            },
+            function(unitName){
+                $("#from_unit_cmdxfer_btn").html(unitName);
+                $("#from_unit_cmdxfer_btn").addClass("glowlightgreen");
+                $("#units_dialog").hide();
+                $("#cmdxfer_dialog").show();
+                saveCookieState();
+            }
+        )
+    );
+
+    $("#to_unit_cmdxfer_btn").click(
+        showDialog_withCallbacks(
+            "#units_dialog",
+            0,//parent dialog
+            function(){
+                $(".unit_dialog_btn").removeClass("glowlightgreen");
+                var unit_btn_text = $("#to_unit_cmdxfer_btn").html();
+                if(unit_btn_text!="UNIT") {
+                    $(".unit_dialog_btn:contains('"+unit_btn_text+"')").addClass("glowlightgreen");
+                }
+            },
+            function(unitName){
+                $("#to_unit_cmdxfer_btn").html(unitName);
+                $("#to_unit_cmdxfer_btn").addClass("glowlightgreen");
+                $("#units_dialog").hide();
+                $("#cmdxfer_dialog").show();
+                saveCookieState();
+            }
+        )
+    );
+}
+
+
 
 /**
  * Coookies
@@ -2478,6 +2528,18 @@ function saveCookieState() {
         // Report
 //        $.cookie('events', eventsToJsonObj());
 
+        // Command Transferred
+        var unit_cmdxfer_btns = new Array();
+        $( ".unit_cmdxfer_btn" ).each(function( index, unit_cmdxfer_btn ) {
+            var objToAdd = {
+                'id':$(unit_cmdxfer_btn).attr("id"),
+                'html':$(unit_cmdxfer_btn).html(),
+                'green':$(unit_cmdxfer_btn).hasClass("glowlightgreen")
+            };
+            unit_cmdxfer_btns.push(objToAdd);
+        });
+        $.cookie('unit_cmdxfer_btns', JSON.stringify(unit_cmdxfer_btns));
+
         console.log($.cookie());
     }
 }
@@ -2687,6 +2749,19 @@ function loadCookieState() {
 //                setEvents(newEvents);
 //            }
 
+            // Command Transferred
+            else if (key == 'unit_cmdxfer_btns') {
+                var unit_cmdxfer_btnstr = $.cookie(key);
+                var unit_cmdxfer_btns = JSON.parse(unit_cmdxfer_btnstr);
+                for(var i=0; i<unit_cmdxfer_btns.length; i++) {
+                    var objFromJson = unit_cmdxfer_btns[i];
+                    $("#"+objFromJson['id']).html(objFromJson['html']);
+                    if(objFromJson['green']) {
+                        $("#"+objFromJson['id']).addClass("glowlightgreen");
+                    }
+                }
+            }
+
             else {
                 var tbarObj = JSON.parse($.cookie(key));
                 loadTbarFromCookie(tbarObj);
@@ -2781,6 +2856,7 @@ function init( ) {
     initDispatchedUnits();
     initUpgradeDialog();
     initStreetNameDialog();
+    initCmdXfer();
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();

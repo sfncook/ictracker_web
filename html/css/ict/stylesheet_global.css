@@ -1396,3 +1396,19 @@ ul {
     float: right;
     margin:10px;
 }
+
+#cmdxfer_dialog {
+    width: 350px;
+}
+#cmdxfer_dialog > .dialog_body {
+    padding-left: 5px;
+}
+.unit_cmdxfer_btn {
+    float:left;
+    margin:10px;
+}
+#cmdxfer_text {
+    float: left;
+    font-size: 1.05rem;
+    margin-top: 10px;
+}
