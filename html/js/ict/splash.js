@@ -1,5 +1,12 @@
 
 function init_splash( ) {
+
+    // Reset any past incidents
+    //  Delete all cookies
+    for(var key in $.cookie()){
+        $.removeCookie(key);
+    }
+
     var btnPrototypeStr = '<div class="splash_start_btn button">'+
                             '<img class="splash_start_btn_icon" src="[icon]"/>'+
                             '<div class="splash_start_btn_text">[text]</div>'+

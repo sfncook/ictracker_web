@@ -1443,7 +1443,13 @@ ul {
 #resume_cmd_btn {
     width: 100px;
     height: 45px;
-    margin: 10px 20px 10px 75px;
+    margin: 10px 0px 10px 30px;
+    float:left;
+}
+#new_incident_cmd_btn {
+    width: 100px;
+    height: 45px;
+    margin: 10px 0px 10px 20px;
     float:left;
 }
 #cmd_term_label {
@@ -1455,7 +1461,7 @@ ul {
     height: 45px;
     width: 100px;
     float: left;
-    margin: 10px 20px 10px 25px;
+    margin: 10px 0px 10px 20px;
 }
 #yes_cmd_term_btn {
     margin-left:95px;

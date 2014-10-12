@@ -2191,6 +2191,13 @@ function initCmdTerminateDialog( ) {
         isIncidentRunning = true;
         hideAllDialogs();
     });
+
+    $("#new_incident_cmd_btn").click(function(){
+        deleteAllCookies();
+        var newlocation = document.location.href.replace("fire_inc.html", "index.html");
+        document.location.href = newlocation;
+//        document.location.href = '../';
+    });
 }
 
 
