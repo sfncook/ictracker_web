@@ -2440,6 +2440,14 @@ function initReportDialog() {
         }
     });
 
+    $("#print_report_btn").click(function(){
+        if ($("#time_report_btn").hasClass("glowlightgreen")) {
+            generateReportSortByTime();
+        } else {
+            generateReportSortBySector();
+        }
+    });
+
 //	$("#report_btn").click(function(){generateReportSortByTime();});
     $("#report_btn").click(function() {
         $("#time_report_dialog_body").html(getReportStrSortByTime());

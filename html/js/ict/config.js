@@ -1,2 +1,2 @@
 
-var COOKIES_ENABLED = true;
+var COOKIES_ENABLED = false;

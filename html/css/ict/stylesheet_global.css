@@ -1398,9 +1398,16 @@ ul {
     float: left;
     margin: 10px;
 }
-#pdf_report_btn {
+#print_report_btn {
     float: right;
     margin:10px;
+    width: 78px
+}
+#print_report_icon {
+    float:left;
+    width:20px;
+    height:20px;
+    margin: 0 5px;
 }
 
 #cmdxfer_dialog {
