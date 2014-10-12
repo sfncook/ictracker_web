@@ -2114,9 +2114,17 @@ function addTbar(col_x, row_y) {
  **/
 function initUpgradeDialog() {
     $("#upgrade_btn").click(showDialog(0, 0, "#upgrade_dialog"));
+    $(".middle_upgrade_btn").addClass("disabled");
     $(".right_upgrade_btn").addClass("disabled");
     $(".left_upgrade_btn").click(function() {
         $(".left_upgrade_btn").removeClass("glowlightgreen");
+        $(this).addClass("glowlightgreen");
+        $(".middle_upgrade_btn").removeClass("disabled");
+        saveCookieState();
+    });
+
+    $(".middle_upgrade_btn").click(function(){
+        $(".middle_upgrade_btn").removeClass("glowlightgreen");
         $(this).addClass("glowlightgreen");
         $(".right_upgrade_btn").removeClass("disabled");
         saveCookieState();

@@ -1338,7 +1338,7 @@ ul {
 }
 
 #upgrade_dialog {
-    width: 350px;
+    width: 485px;
 }
 .upgrade_btn {
     width: 150px;
@@ -1348,6 +1348,9 @@ ul {
     float:right;
 }
 #upgrade_left_col {
+    float:left;
+}
+#upgrade_middle_col {
     float:left;
 }
 
