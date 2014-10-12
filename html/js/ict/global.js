@@ -2890,9 +2890,14 @@ function loadCookieState() {
                 }
             }
 
-            else {
+            else if (key.indexOf("tbar_")==0) {
                 var tbarObj = JSON.parse($.cookie(key));
                 loadTbarFromCookie(tbarObj);
+            }
+
+            else {
+                console.log("Unhandled cookie:");
+                console.log($.cookie(key));
             }
         }
         console.log($.cookie());
