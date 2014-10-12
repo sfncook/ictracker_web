@@ -709,7 +709,7 @@ td {
 }
 
 #osr_dialog {
-	width: 420px;
+	width: 455px;
 }
 #objectives_dialog {
 	width: 190px;
@@ -1075,7 +1075,7 @@ td {
     font-size:0.6rem;
 }
 .osr_btn {
-    width: 165px;
+    width: 205px;
     margin: 5px 10px 5px 10px;
 }
 #osr_right_col {
@@ -1433,7 +1433,7 @@ ul {
 }
 
 #osr_direction {
-    width: 165px;
+    width: 205px;
     margin-left: 10px;
 }
 
