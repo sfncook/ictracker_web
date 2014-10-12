@@ -1377,9 +1377,11 @@ function initOsrDialog( ) {
     $("#address_dlg_cancel").click(hideAllDialogs);
     $("#address_dlg_clear").click(function(){
         $("#address_custom_input").val("");
+        $("#dispatch_address_btn_btn").removeClass("glowlightgreen");
     });
     $("#dispatch_address_btn_btn").click(function(){
         $("#dispatch_address_btn_btn").addClass("glowlightgreen");
+        $("#address_left_osr_btn").addClass("glowlightgreen");
         $("#address_custom_input").val("");
         $("#osr_address_btn").html("Dispatch Address");
         $("#osr_address_btn").addClass("glowlightgreen");
