@@ -1516,10 +1516,13 @@ function initOsrDialog( ) {
  **/
 function clickIapToggleBtn(btn) {
     return function() {
-        if(btn.hasClass("glow_orange")) {
-            btn.removeClass("glow_orange");
+        if (btn.html() == "Vent" || btn.html() == "Sprinkler") {
+            var color = "glowlightgreen";
         } else {
-            btn.addClass("glow_orange");
+            var color = "glow_orange";
+        }
+        btn.toggleClass(color);
+        if (btn.hasClass(color)) {
             addEvent_iap(btn.text());
         }
         saveCookieState();
@@ -2640,7 +2643,8 @@ function saveCookieState() {
         $( ".iap_toggle_btn" ).each(function( index, iap_toggle_btn ) {
             var objToAdd = {
                 'id':$(iap_toggle_btn).attr("id"),
-                'orange':$(iap_toggle_btn).hasClass("glow_orange")
+                'orange':$(iap_toggle_btn).hasClass("glow_orange"),
+                'green':$(iap_toggle_btn).hasClass("glowlightgreen")
             };
             iap_toggle_btns.push(objToAdd);
         });
@@ -2866,6 +2870,9 @@ function loadCookieState() {
                     var objFromJson = iap_toggle_btns[i];
                     if(objFromJson['orange']) {
                         $("#"+objFromJson['id']).addClass("glow_orange");
+                    }
+                    if(objFromJson['green']) {
+                        $("#"+objFromJson['id']).addClass("glowlightgreen");
                     }
                 }
             }
