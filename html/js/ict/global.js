@@ -4,6 +4,7 @@ var tbar_clicked;
 var tbar_moving;
 var parentDialog = 0;
 var isIncidentRunning = true;
+var inc_num_input = "";
 
 var btnsToBlink = new Array();
 function blinkUnit() {
@@ -2262,16 +2263,16 @@ function clickModeButton() {
  * Init Incident Info
  **/
 function initIncidentInfo() {
-	var inc_num_input = getHttpRequestByName("inc_num_input");
+	inc_num_input = getHttpRequestByName("inc_num_input");
 	inc_num_input = decodeURIComponent(inc_num_input);
-	$("#inc_num").html(inc_num_input);
+	$("#inc_num").html("Incident #: " + inc_num_input);
 	
-	var address_input = getHttpRequestByName("address_input");
-	address_input = decodeURIComponent(address_input);
-	$("#address").html(address_input);
+//	var address_input = getHttpRequestByName("address_input");
+//	address_input = decodeURIComponent(address_input);
+//	$("#address").html(address_input);
 }
 function getHttpRequestByName(name) {
-	get_string = document.location.search;         
+	get_string = document.location.search;
 	return_value = '';
 	
 	do { //This loop is made to catch all instances of any get variable.
@@ -2450,14 +2451,14 @@ function initReportDialog() {
 
 //	$("#report_btn").click(function(){generateReportSortByTime();});
     $("#report_btn").click(function() {
-        $("#time_report_dialog_body").html(getReportStrSortByTime());
-        $("#sector_report_dialog_body").html(getReportStrSortBySector());
+        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num_input, DEPARTMENT_NAME, t0));
+        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num_input, DEPARTMENT_NAME, t0));
         showDialog( 0, 0, "#time_report_dialog")();
     });
 
     $("#report_btn_2").click(function() {
-        $("#time_report_dialog_body").html(getReportStrSortByTime());
-        $("#sector_report_dialog_body").html(getReportStrSortBySector());
+        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num_input, DEPARTMENT_NAME, t0));
+        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num_input, DEPARTMENT_NAME, t0));
         showDialog( 0, 0, "#time_report_dialog", $("#resume_dialog"))();
     });
 }

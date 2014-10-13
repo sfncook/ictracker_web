@@ -12,6 +12,9 @@ var RIGHT_SIDE = 209;
 var BOTTOM_SIDE = 300;
 var eventIndex=0;
 
+
+// Get Report Str - return HTML-formatted string with entire report
+//  This is for the report DIV, not the PDF
 function getReportStr(eventArray) {
     var renderedStr = "";
     for (var i=0; i<eventArray.length; i++) {
@@ -21,21 +24,46 @@ function getReportStr(eventArray) {
     }
     return renderedStr;
 }
-function getReportStrSortByTime() {
-    return getReportStr(events);
+function getReportStrSortByTime(inc_num, dept_name, inc_start_time) {
+    var reportStr = getTitleStr(inc_num, dept_name, inc_start_time);
+    reportStr += getReportStr(events);
+    return reportStr;
 }
-function getReportStrSortBySector() {
+function getReportStrSortBySector(inc_num, dept_name, inc_start_time) {
     var eventsBySectorArray = [];
 
     for (var sectorEvents in eventsBySector) {
         eventsBySectorArray = eventsBySectorArray.concat(eventsBySector[sectorEvents]);
     }
 
-    return getReportStr(eventsBySectorArray);
+    var reportStr = getTitleStr(inc_num, dept_name, inc_start_time);
+    reportStr += getReportStr(eventsBySectorArray);
+    return reportStr;
+}
+function getTitleStr(inc_num, dept_name, inc_start_time) {
+    var titleStr = "<span class='report_div_header_span'>Incident #: </span>";
+    titleStr += "<span class='report_div_header_value_span'>" + inc_num + "</span>";
+    titleStr += "<span style='float:right' class='report_div_header_span'>" + dept_name + "</span>\n";
+    titleStr += "<div class='clear_float'></div>\n";
+
+    var t0Int = parseInt(inc_start_time);
+    var t0Sec = parseInt((t0Int/1000)%60);
+    var t0Min = parseInt((t0Int/(1000*60))%60);
+    var t0Hr = parseInt((t0Int/(1000*60*60))%60);
+
+    var secStr = (t0Sec<10)?("0"+t0Sec):t0Sec;
+    var minStr = (t0Min<10)?("0"+t0Min):t0Min;
+    var hrStr = (t0Hr<10)?("0"+t0Hr):t0Hr;
+
+    titleStr += "<span class='report_div_header_span'>Incident start time: </span>";
+    titleStr += "<span class='report_div_header_value_span'>" + hrStr + ":" + minStr +":" + secStr + "</span><br>\n";
+
+    return titleStr;
 }
 
 
 
+// Generate the Report PDF
 function generateReportSortByTime() {
     generateReport(events);
 }
@@ -48,7 +76,6 @@ function generateReportSortBySector() {
 
     generateReport(eventsBySectorArray);
 }
-
 function generateReport(eventArray) {
 	eventIndex=0;
 	var page_number = 1;
@@ -57,7 +84,7 @@ function generateReport(eventArray) {
 
 	while (!done) {
         drawTitle(doc, "");
-//		drawTitle(doc, $("#inc_num").html());
+		drawTitle(doc, $("#inc_num").html());
         drawFooter(doc, page_number, "");
 //		drawFooter(doc, page_number, $("#address").html());
         drawOnePageOfEvents(doc, eventArray);
@@ -71,6 +98,7 @@ function generateReport(eventArray) {
 	
 	renderPdf(doc);
 }
+
 
 function drawTitle(doc, inc_num) {
 	doc.text("Incident #"+inc_num, MARGIN, MARGIN);
