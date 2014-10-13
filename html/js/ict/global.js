@@ -149,7 +149,7 @@ function showParDialog( tbar, btn, parentDialog_ ){
             var par_dialog_sector_btn = $("#par_dialog_sector_btn");
             var tbarTitle = tbar.find(".title_text").html();
             par_dialog_sector_btn.html(tbarTitle);
-            if(tbarTitle!="Sector Title") {
+            if(tbarTitle!="_") {
                 parDialog.find(".dialog_title_text_span").html(tbarTitle+" PAR");
             } else {
                 parDialog.find(".dialog_title_text_span").html("Sector PAR");
@@ -735,7 +735,7 @@ function setTbarTitle(tbar, title) {
         updateObjectivePercentComplete();
     }
     updateTbar(tbar);
-    if($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length<=1) {
+    if($(".title_text:contains('_'):not(#tbar_prototype)").length<=1) {
         addTbar();
     }
 
@@ -843,7 +843,7 @@ function initSectorDialog( ) {
                         setTbarTitle(tbar_clicked, sectorName);
                     }
                 } else {
-                    tbar_clicked.find(".title_text").html("Sector Title");
+                    tbar_clicked.find(".title_text").html("_");
                     hideAllDialogs();
                     saveCookieState();
                 }
@@ -1153,7 +1153,7 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
     return function() {
         // Change benchmark dialog title
         var title = tbar.find(".title_text").html();
-        if(title!="Sector Title") {
+        if(title!="_") {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html(title+" Benchmarks");
         } else {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html("Benchmarks");
