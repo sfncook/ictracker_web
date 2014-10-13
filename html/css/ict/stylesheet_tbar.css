@@ -231,7 +231,7 @@
 	height: 27px;
 	border-radius: 10px;
 	font-size: 1.0rem;
-	padding: 4px 0 0 0;
+	padding: 2px 0 0 0;
 }
 .blank_btn {
 	background: #AAC7D1;
@@ -299,7 +299,7 @@
     height: 4px;
     background: black;
     border:1px black solid;
-    margin-left:4px;
+    margin-left:2px;
 }
 .unit_timer_bar {
     width: 48px;
