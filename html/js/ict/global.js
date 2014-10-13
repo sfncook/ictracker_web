@@ -2290,6 +2290,9 @@ function initIncidentInfo() {
 	inc_num_input = getHttpRequestByName("inc_num_input");
 	inc_num_input = decodeURIComponent(inc_num_input);
 	$("#inc_num").html("Incident #: " + inc_num_input);
+    if (inc_num_input == "") {
+        $("#inc_num").hide();
+    }
 	
 //	var address_input = getHttpRequestByName("address_input");
 //	address_input = decodeURIComponent(address_input);
