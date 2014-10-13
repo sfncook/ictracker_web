@@ -41,10 +41,16 @@ function getReportStrSortBySector(inc_num, dept_name, inc_start_time) {
     return reportStr;
 }
 function getTitleStr(inc_num, dept_name, inc_start_time) {
-    var titleStr = "<span class='report_div_header_span'>Incident #: </span>";
-    titleStr += "<span class='report_div_header_value_span'>" + inc_num + "</span>";
-    titleStr += "<span style='float:right' class='report_div_header_span'>" + dept_name + "</span>\n";
-    titleStr += "<div class='clear_float'></div>\n";
+    var titleStr = "";
+    if (inc_num != "") {
+        titleStr += "<span class='report_div_header_span'>Incident #: </span>";
+        titleStr += "<span class='report_div_header_value_span'>" + inc_num + "</span>";
+    }
+
+    if (dept_name != "") {
+        titleStr += "<span style='float:right' class='report_div_header_span'>" + dept_name + "</span>\n";
+        titleStr += "<div class='clear_float'></div>\n";
+    }
 
     var t0Int = parseInt(inc_start_time);
     var t0Sec = parseInt((t0Int/1000)%60);
