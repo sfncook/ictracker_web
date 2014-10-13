@@ -21,7 +21,12 @@ function init_splash( ) {
         }
 
         if(typeof btnObj.url != 'undefined') {
-            btn.click(function(){window.location.href = btnObj.url;});
+            btn.click(function(){
+                var urlLink = btnObj.url + "?";
+                urlLink += "inc_num_input=" + $("#inc_num_input").val();
+                console.log(urlLink);
+                window.location.href = urlLink;
+            });
         }
     });
     $("#splash_row2").append($("<div class='clear_float'></div>"));
