@@ -99,7 +99,7 @@ td {
     height: 20px;
 }
 #ict_header {
-    background: #BBB;
+    background: #e5e5e5;
     position: fixed;
     right: 0;
     top:0;
@@ -139,7 +139,7 @@ td {
 	text-align: center;
 	background: #CCC;
 	color: black;
-	border: none;
+	border: 1px solid #9a9a9a;
 	border-radius: 3px;
 	padding: 4px 4px 4px 4px;
     cursor: pointer;
@@ -308,6 +308,15 @@ td {
 .glowbabyblue:active {
     background: #66aaff;
 }
+.lightgray {
+    background: #e5e5e5 !important;
+}
+.lightgray_border {
+    border: 1px #e5e5e5 solid !important;
+}
+.lightgray_border_right {
+    border-right: 1px #e5e5e5 solid !important;
+}
 
 .has_par {
     background: lightgreen !important;
@@ -337,7 +346,7 @@ td {
     text-align: center;
     font-family: 'Carrois Gothic SC';
     font-size: 1.45rem;
-    color: white;
+    color: black;
 }
 .time_lg {
     font-size: 2.3rem !important;

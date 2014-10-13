@@ -752,6 +752,10 @@ function setTbarTitle(tbar, title) {
     // Report
     addEvent_title_to_sector(title);
 
+    // Show Tbar Buttons
+    tbar.find(".par_btn").removeClass("hidden_div");
+    tbar.find(".benchmark_btn").removeClass("hidden_div");
+
     // Update Cookies
     saveCookieState();
 }
@@ -1731,6 +1735,8 @@ function showActionsForUnitBtn(unitBtn) {
 function updateTbar(tbar) {
     // Get current state of TBar
     var sectorName = tbar.find(".title_text").html();
+    var sectorNameIsSet = sectorName != '_';
+    var isTbarInit = manyUnits>0 || sectorNameIsSet;
 	var hasClock = sectorsWithClock.indexOf(sectorName)>-1;
 	var hasAcctBtn = !(sectorsWithOutAcctBtn.indexOf(sectorName)>-1);
 	var hasPsiBtn = !(sectorsWithOutAPsiBtn.indexOf(sectorName)>-1);
@@ -1771,11 +1777,19 @@ function updateTbar(tbar) {
 	    psiBtns.hide();
 	}
 
-	// PAR btn
-	if(manyUnits>0) {
-	    tbar.find(".par_btn").removeClass("disabled");
+	// Is TBar initialized?
+	if(isTbarInit) {
+	    tbar.find(".par_btn").removeClass("hidden_div");
+        tbar.find(".benchmark_btn").removeClass("hidden_div");
+        tbar.find(".tbar_title_container").removeClass("lightgray");
+        tbar.removeClass("lightgray_border");
+        tbar.find(".unit_col_left").removeClass("lightgray_border_right");
 	} else {
-	    tbar.find(".par_btn").addClass("disabled");
+	    tbar.find(".par_btn").addClass("hidden_div");
+        tbar.find(".benchmark_btn").addClass("hidden_div");
+        tbar.find(".tbar_title_container").addClass("lightgray");
+        tbar.addClass("lightgray_border");
+        tbar.find(".unit_col_left").addClass("lightgray_border_right");
 	}
 
     // Actions
@@ -1880,6 +1894,8 @@ function removeUnitButton(unit_col_container, unitName) {
         // Move unit button
         if(unit_col_container.find(".unit_btn").length==0) {
             tbar.find(".unit_move_btn").hide();
+            tbar.find(".right_scroll_pane").hide();
+            tbar.find(".action_add_btn").hide();
         }
     }
 
@@ -1942,6 +1958,10 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
         // Always select the most recently added unit
         showActionsForUnitBtn(unitBtn)();
+
+        // Show rightscrollpane
+        var right_scroll_pane = tbar.find(".right_scroll_pane");
+        right_scroll_pane.show();
 
         updateTbar(tbar);
 
@@ -2108,6 +2128,10 @@ function addTbar(col_x, row_y) {
     unit_move_cancel_btn.click(function(){
         cancelUnitMove();
     });
+
+    // Right Scroll Pane (actions)
+    var right_scroll_pane = tbar.find(".right_scroll_pane");
+    right_scroll_pane.hide();
 
     tbar.show();
 
