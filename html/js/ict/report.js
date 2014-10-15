@@ -23,23 +23,23 @@ function getReportStr(eventArray) {
     }
     return renderedStr;
 }
-function getReportStrSortByTime(inc_num, dept_name, inc_start_time) {
-    var reportStr = getTitleStr(inc_num, dept_name, inc_start_time);
+function getReportStrSortByTime(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
+    var reportStr = getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address);
     reportStr += getReportStr(events);
     return reportStr;
 }
-function getReportStrSortBySector(inc_num, dept_name, inc_start_time) {
+function getReportStrSortBySector(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
     var eventsBySectorArray = [];
 
     for (var sectorEvents in eventsBySector) {
         eventsBySectorArray = eventsBySectorArray.concat(eventsBySector[sectorEvents]);
     }
 
-    var reportStr = getTitleStr(inc_num, dept_name, inc_start_time);
+    var reportStr = getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address);
     reportStr += getReportStr(eventsBySectorArray);
     return reportStr;
 }
-function getTitleStr(inc_num, dept_name, inc_start_time) {
+function getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
     var titleStr = "";
     if (inc_num != "") {
         titleStr += "<span class='report_div_header_span'>Incident #: </span>";
@@ -48,6 +48,16 @@ function getTitleStr(inc_num, dept_name, inc_start_time) {
 
     if (dept_name != "") {
         titleStr += "<span style='float:right' class='report_div_header_span'>" + dept_name + "</span>\n";
+        titleStr += "<div class='clear_float'></div>\n";
+    }
+
+    if (osr_unit != "") {
+        titleStr += "<span class='report_div_header_span'>OSR Unit: </span>";
+        titleStr += "<span class='report_div_header_value_span'>" + osr_unit + "</span>";
+    }
+
+    if (inc_address != "") {
+        titleStr += "<span style='float:right' class='report_div_header_span'>" + inc_address + "</span>\n";
         titleStr += "<div class='clear_float'></div>\n";
     }
 
@@ -60,8 +70,10 @@ function getTitleStr(inc_num, dept_name, inc_start_time) {
     var minStr = (t0Min < 10) ? ("0" + t0Min) : t0Min;
     var hrStr = (t0Hr < 10) ? ("0" + t0Hr) : t0Hr;
 
+    titleStr += "<div>";
     titleStr += "<span class='report_div_header_span'>Incident start time: </span>";
     titleStr += "<span class='report_div_header_value_span'>" + hrStr + ":" + minStr + ":" + secStr + "</span><br>\n";
+    titleStr += "</div>";
 
     return titleStr;
 }
