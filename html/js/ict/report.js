@@ -1,4 +1,3 @@
-
 var testMe;
 var events = [];
 var eventsBySector = {};
@@ -6,18 +5,18 @@ var eventsBySector = {};
 
 /****
  Render PDF
-****/
+ ****/
 var MARGIN = 20;
 var RIGHT_SIDE = 209;
 var BOTTOM_SIDE = 300;
-var eventIndex=0;
+var eventIndex = 0;
 
 
 // Get Report Str - return HTML-formatted string with entire report
 //  This is for the report DIV, not the PDF
 function getReportStr(eventArray) {
     var renderedStr = "";
-    for (var i=0; i<eventArray.length; i++) {
+    for (var i = 0; i < eventArray.length; i++) {
         var event = eventArray[i];
         var eventStr = event.get_str_func(event);
         renderedStr = renderedStr + eventStr + "<br>\n";
@@ -53,20 +52,19 @@ function getTitleStr(inc_num, dept_name, inc_start_time) {
     }
 
     var t0Int = parseInt(inc_start_time);
-    var t0Sec = parseInt((t0Int/1000)%60);
-    var t0Min = parseInt((t0Int/(1000*60))%60);
-    var t0Hr = parseInt((t0Int/(1000*60*60))%60);
+    var t0Sec = parseInt((t0Int / 1000) % 60);
+    var t0Min = parseInt((t0Int / (1000 * 60)) % 60);
+    var t0Hr = parseInt((t0Int / (1000 * 60 * 60)) % 60);
 
-    var secStr = (t0Sec<10)?("0"+t0Sec):t0Sec;
-    var minStr = (t0Min<10)?("0"+t0Min):t0Min;
-    var hrStr = (t0Hr<10)?("0"+t0Hr):t0Hr;
+    var secStr = (t0Sec < 10) ? ("0" + t0Sec) : t0Sec;
+    var minStr = (t0Min < 10) ? ("0" + t0Min) : t0Min;
+    var hrStr = (t0Hr < 10) ? ("0" + t0Hr) : t0Hr;
 
     titleStr += "<span class='report_div_header_span'>Incident start time: </span>";
-    titleStr += "<span class='report_div_header_value_span'>" + hrStr + ":" + minStr +":" + secStr + "</span><br>\n";
+    titleStr += "<span class='report_div_header_value_span'>" + hrStr + ":" + minStr + ":" + secStr + "</span><br>\n";
 
     return titleStr;
 }
-
 
 
 // Generate the Report PDF
@@ -83,72 +81,70 @@ function generateReportSortBySector() {
     generateReport(eventsBySectorArray);
 }
 function generateReport(eventArray) {
-	eventIndex=0;
-	var page_number = 1;
-	var doc = new jsPDF();
-	var done = false;
+    eventIndex = 0;
+    var page_number = 1;
+    var doc = new jsPDF();
+    var done = false;
 
-	while (!done) {
+    while (!done) {
         drawTitle(doc, "");
-		drawTitle(doc, $("#inc_num").html());
+        drawTitle(doc, $("#inc_num").html());
         drawFooter(doc, page_number, "");
 //		drawFooter(doc, page_number, $("#address").html());
         drawOnePageOfEvents(doc, eventArray);
-        if (eventIndex<eventArray.length) {
+        if (eventIndex < eventArray.length) {
             page_number++;
             doc.addPage();
         } else {
             done = true;
         }
-	}
-	
-	renderPdf(doc);
+    }
+
+    renderPdf(doc);
 }
 
 
 function drawTitle(doc, inc_num) {
-	doc.text("Incident #"+inc_num, MARGIN, MARGIN);
-	doc.text("Mesa Fire Department", RIGHT_SIDE-77, MARGIN);
-	doc.setLineWidth(0.5);
-	doc.line(MARGIN, MARGIN+2, RIGHT_SIDE-MARGIN, MARGIN+2);
+    doc.text("Incident #" + inc_num, MARGIN, MARGIN);
+    doc.text("Mesa Fire Department", RIGHT_SIDE - 77, MARGIN);
+    doc.setLineWidth(0.5);
+    doc.line(MARGIN, MARGIN + 2, RIGHT_SIDE - MARGIN, MARGIN + 2);
 }
 
-var weekday=new Array(7);
-weekday[0]="Sunday";
-weekday[1]="Monday";
-weekday[2]="Tuesday";
-weekday[3]="Wednesday";
-weekday[4]="Thursday";
-weekday[5]="Friday";
-weekday[6]="Saturday";
-var month=new Array();
-month[0]="January";
-month[1]="February";
-month[2]="March";
-month[3]="April";
-month[4]="May";
-month[5]="June";
-month[6]="July";
-month[7]="August";
-month[8]="September";
-month[9]="October";
-month[10]="November";
-month[11]="December";
+var weekday = new Array(7);
+weekday[0] = "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+var month = new Array();
+month[0] = "January";
+month[1] = "February";
+month[2] = "March";
+month[3] = "April";
+month[4] = "May";
+month[5] = "June";
+month[6] = "July";
+month[7] = "August";
+month[8] = "September";
+month[9] = "October";
+month[10] = "November";
+month[11] = "December";
 function drawFooter(doc, page_number, address) {
-	var date = new Date();
-	var dayStr = weekday[date.getDay()];
-	var monthStr = month[date.getMonth()];
-	var dateStr = date.getDate();
-	var yearStr = date.getFullYear();
-	var fullDateStr = dayStr+" "+monthStr+" "+dateStr+", "+yearStr;
-	doc.text(fullDateStr, RIGHT_SIDE-MARGIN-60, BOTTOM_SIDE-MARGIN);
-	
-	doc.text("Page:"+page_number, MARGIN, BOTTOM_SIDE-MARGIN);
-	doc.line(MARGIN, BOTTOM_SIDE-MARGIN-6, RIGHT_SIDE-MARGIN, BOTTOM_SIDE-MARGIN-6);
-	doc.text(address, MARGIN, BOTTOM_SIDE-MARGIN-7);
+    var date = new Date();
+    var dayStr = weekday[date.getDay()];
+    var monthStr = month[date.getMonth()];
+    var dateStr = date.getDate();
+    var yearStr = date.getFullYear();
+    var fullDateStr = dayStr + " " + monthStr + " " + dateStr + ", " + yearStr;
+    doc.text(fullDateStr, RIGHT_SIDE - MARGIN - 60, BOTTOM_SIDE - MARGIN);
+
+    doc.text("Page:" + page_number, MARGIN, BOTTOM_SIDE - MARGIN);
+    doc.line(MARGIN, BOTTOM_SIDE - MARGIN - 6, RIGHT_SIDE - MARGIN, BOTTOM_SIDE - MARGIN - 6);
+    doc.text(address, MARGIN, BOTTOM_SIDE - MARGIN - 7);
 }
-
-
 
 
 /*
@@ -156,37 +152,36 @@ function drawFooter(doc, page_number, address) {
  * 
  */
 function drawOnePageOfEvents(doc, eventArray) {
-    var y = MARGIN+10;
+    var y = MARGIN + 10;
 
-    for (; eventIndex<eventArray.length && (y<BOTTOM_SIDE-MARGIN-15); eventIndex++)
-    {
+    for (; eventIndex < eventArray.length && (y < BOTTOM_SIDE - MARGIN - 15); eventIndex++) {
         var event = eventArray[eventIndex];
         event.render_func(y, event, doc);
-        y+=8;
+        y += 8;
     }
 }
 
 function renderPdf(doc) {
-	doc.output('dataurlnewwindow', {});
+    doc.output('dataurlnewwindow', {});
 //	doc.output('datauri', {});
 }
 
 
 //unit to sector
 function getDateStr(date) {
-	var hour = date.getHours();
-	var min = date.getMinutes();
-	var sec = date.getSeconds();
-	if (hour<10) {
-		hour = "0"+hour;
-	}
-	if (min<10) {
-		min = "0"+min;
-	}
-	if (sec<10) {
-		sec = "0"+sec;
-	}
-	return hour+":"+min+":"+sec;
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var sec = date.getSeconds();
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
+    if (min < 10) {
+        min = "0" + min;
+    }
+    if (sec < 10) {
+        sec = "0" + sec;
+    }
+    return hour + ":" + min + ":" + sec;
 }
 
 //function eventsToJsonObj() {
@@ -210,9 +205,9 @@ function getDateStr(date) {
 function pushEvent_toQueues(event) {
     events.push(event);
 
-    if(typeof event.sector!='undefined') {
+    if (typeof event.sector != 'undefined') {
         var sectorEvents = eventsBySector[event.sector];
-        if(typeof sectorEvents=='undefined') {
+        if (typeof sectorEvents == 'undefined') {
             sectorEvents = [];
             eventsBySector[event.sector] = sectorEvents;
         }
@@ -225,10 +220,10 @@ function addEvent_title_to_sector(sector) {
 }
 function addEvent_title_to_sector_with_date(sector, date) {
     var event = {
-        "render_func":render_title_to_sector,
-        "get_str_func":get_str_title_to_sector,
-        "datetime":date,
-        "sector":sector
+        "render_func": render_title_to_sector,
+        "get_str_func": get_str_title_to_sector,
+        "datetime": date,
+        "sector": sector
     };
 
     pushEvent_toQueues(event);
@@ -237,7 +232,7 @@ function render_title_to_sector(y, event, doc) {
     doc.text(get_str_title_to_sector(event), MARGIN, y);
 }
 function get_str_title_to_sector(event) {
-    return getDateStr(event.datetime)+"  Sector initialized:"+event.sector;
+    return getDateStr(event.datetime) + "  Sector initialized:" + event.sector;
 }
 
 function addEvent_unit_to_sector(unit, sector) {
@@ -245,20 +240,20 @@ function addEvent_unit_to_sector(unit, sector) {
 }
 function addEvent_unit_to_sector_with_date(unit, sector, date) {
     var event = {
-        "render_func":render_unit_to_sector,
-        "get_str_func":get_str_unit_to_sector,
-        "datetime":date,
-        "unit":unit,
-        "sector":sector
+        "render_func": render_unit_to_sector,
+        "get_str_func": get_str_unit_to_sector,
+        "datetime": date,
+        "unit": unit,
+        "sector": sector
     };
 
     pushEvent_toQueues(event);
 }
 function render_unit_to_sector(y, event, doc) {
-	doc.text(get_str_unit_to_sector(event), MARGIN, y);
+    doc.text(get_str_unit_to_sector(event), MARGIN, y);
 }
 function get_str_unit_to_sector(event) {
-    return getDateStr(event.datetime)+"  Unit:"+event.unit+" added to Sector:"+event.sector;
+    return getDateStr(event.datetime) + "  Unit:" + event.unit + " added to Sector:" + event.sector;
 }
 
 function addEvent_unit_to_acct(unit, sector) {
@@ -266,11 +261,11 @@ function addEvent_unit_to_acct(unit, sector) {
 }
 function addEvent_unit_to_acct_with_date(unit, sector, date) {
     var event = {
-        "render_func":render_unit_to_acct,
-        "get_str_func":get_str_unit_to_acct,
-        "datetime":date,
-        "unit":unit,
-        "sector":sector
+        "render_func": render_unit_to_acct,
+        "get_str_func": get_str_unit_to_acct,
+        "datetime": date,
+        "unit": unit,
+        "sector": sector
     };
 
     pushEvent_toQueues(event);
@@ -279,7 +274,7 @@ function render_unit_to_acct(y, event, doc) {
     doc.text(get_str_unit_to_acct(event), MARGIN, y);
 }
 function get_str_unit_to_acct(event) {
-    return getDateStr(event.datetime)+"  Accountability Unit:"+event.unit+" added to Sector:"+event.sector;
+    return getDateStr(event.datetime) + "  Accountability Unit:" + event.unit + " added to Sector:" + event.sector;
 }
 
 function addEvent_action_to_unit(action, unit, sector) {
@@ -287,12 +282,12 @@ function addEvent_action_to_unit(action, unit, sector) {
 }
 function addEvent_action_to_unit_with_date(action, unit, sector, date) {
     var event = {
-        "render_func":render_action_to_unit,
-        "get_str_func":get_str_action_to_unit,
-        "datetime":date,
-        "action":action,
-        "unit":unit,
-        "sector":sector
+        "render_func": render_action_to_unit,
+        "get_str_func": get_str_action_to_unit,
+        "datetime": date,
+        "action": action,
+        "unit": unit,
+        "sector": sector
     };
 
     pushEvent_toQueues(event);
@@ -301,7 +296,7 @@ function render_action_to_unit(y, event, doc) {
     doc.text(get_str_action_to_unit(event), MARGIN, y);
 }
 function get_str_action_to_unit(event) {
-    return getDateStr(event.datetime)+"  Action:"+event.action+" added to Unit:"+event.unit+" Sector:"+event.sector;
+    return getDateStr(event.datetime) + "  Action:" + event.action + " added to Unit:" + event.unit + " Sector:" + event.sector;
 }
 
 
@@ -310,11 +305,11 @@ function addEvent_person_has_par(unit, sector) {
 }
 function addEvent_person_has_par_with_date(unit, sector, date) {
     var event = {
-        "render_func":render_person_has_par,
-        "get_str_func":get_str_person_has_par,
-        "datetime":date,
-        "unit":unit,
-        "sector":sector
+        "render_func": render_person_has_par,
+        "get_str_func": get_str_person_has_par,
+        "datetime": date,
+        "unit": unit,
+        "sector": sector
     };
 
     pushEvent_toQueues(event);
@@ -323,7 +318,7 @@ function render_person_has_par(y, event, doc) {
     doc.text(get_str_person_has_par(event), MARGIN, y);
 }
 function get_str_person_has_par(event) {
-    return getDateStr(event.datetime)+"  Fire Fighter has PAR in Unit:"+event.unit+" Sector:"+event.sector;
+    return getDateStr(event.datetime) + "  Fire Fighter has PAR in Unit:" + event.unit + " Sector:" + event.sector;
 }
 
 function addEvent_unit_has_par(unit, sector) {
@@ -331,11 +326,11 @@ function addEvent_unit_has_par(unit, sector) {
 }
 function addEvent_unit_has_par_with_date(unit, sector, date) {
     var event = {
-        "render_func":render_unit_has_par,
-        "get_str_func":get_str_unit_has_par,
-        "datetime":date,
-        "unit":unit,
-        "sector":sector
+        "render_func": render_unit_has_par,
+        "get_str_func": get_str_unit_has_par,
+        "datetime": date,
+        "unit": unit,
+        "sector": sector
     };
 
     pushEvent_toQueues(event);
@@ -344,7 +339,7 @@ function render_unit_has_par(y, event, doc) {
     doc.text(get_str_unit_has_par(event), MARGIN, y);
 }
 function get_str_unit_has_par(event) {
-    return getDateStr(event.datetime)+"  Unit:"+event.unit+" has PAR in Sector:"+event.sector;
+    return getDateStr(event.datetime) + "  Unit:" + event.unit + " has PAR in Sector:" + event.sector;
 }
 
 function addEvent_sector_has_par(sector) {
@@ -352,10 +347,10 @@ function addEvent_sector_has_par(sector) {
 }
 function addEvent_sector_has_par_with_date(sector, date) {
     var event = {
-        "render_func":render_sector_has_par,
-        "get_str_func":get_str_sector_has_par,
-        "datetime":date,
-        "sector":sector
+        "render_func": render_sector_has_par,
+        "get_str_func": get_str_sector_has_par,
+        "datetime": date,
+        "sector": sector
     };
 
     pushEvent_toQueues(event);
@@ -364,7 +359,7 @@ function render_sector_has_par(y, event, doc) {
     doc.text(get_str_sector_has_par(event), MARGIN, y);
 }
 function get_str_sector_has_par(event) {
-    return getDateStr(event.datetime)+"  Sector:"+event.sector+" has PAR";
+    return getDateStr(event.datetime) + "  Sector:" + event.sector + " has PAR";
 }
 
 
@@ -373,10 +368,10 @@ function addEvent_benchmark(benchmark) {
 }
 function addEvent_benchmark_with_date(benchmark, date) {
     var event = {
-        "render_func":render_benchmark,
-        "get_str_func":get_str_benchmark,
-        "datetime":date,
-        "benchmark":benchmark
+        "render_func": render_benchmark,
+        "get_str_func": get_str_benchmark,
+        "datetime": date,
+        "benchmark": benchmark
     };
 
     pushEvent_toQueues(event);
@@ -385,7 +380,7 @@ function render_benchmark(y, event, doc) {
     doc.text(get_str_benchmark(event), MARGIN, y);
 }
 function get_str_benchmark(event) {
-    return getDateStr(event.datetime)+"  Benchmark:"+event.benchmark;
+    return getDateStr(event.datetime) + "  Benchmark:" + event.benchmark;
 }
 
 
@@ -394,10 +389,10 @@ function addEvent_mode(mode) {
 }
 function addEvent_mode_with_date(mode, date) {
     var event = {
-        "render_func":render_mode,
-        "get_str_func":get_str_mode,
-        "datetime":date,
-        "mode":mode
+        "render_func": render_mode,
+        "get_str_func": get_str_mode,
+        "datetime": date,
+        "mode": mode
     };
 
     pushEvent_toQueues(event);
@@ -406,7 +401,7 @@ function render_mode(y, event, doc) {
     doc.text(get_str_mode(event), MARGIN, y);
 }
 function get_str_mode(event) {
-    return getDateStr(event.datetime)+"  Mode changed:"+event.mode;
+    return getDateStr(event.datetime) + "  Mode changed:" + event.mode;
 }
 
 
@@ -415,10 +410,10 @@ function addEvent_osr(osr) {
 }
 function addEvent_osr_with_date(osr, date) {
     var event = {
-        "render_func":render_osr,
-        "get_str_func":get_str_osr,
-        "datetime":date,
-        "osr":osr
+        "render_func": render_osr,
+        "get_str_func": get_str_osr,
+        "datetime": date,
+        "osr": osr
     };
 
     pushEvent_toQueues(event);
@@ -427,7 +422,7 @@ function render_osr(y, event, doc) {
     doc.text(get_str_osr(event), MARGIN, y);
 }
 function get_str_osr(event) {
-    return getDateStr(event.datetime)+"  OSR:"+event.osr;
+    return getDateStr(event.datetime) + "  OSR:" + event.osr;
 }
 
 function addEvent_objective(objective) {
@@ -435,10 +430,10 @@ function addEvent_objective(objective) {
 }
 function addEvent_objective_with_date(objective, date) {
     var event = {
-        "render_func":render_objective,
-        "get_str_func":get_str_objective,
-        "datetime":date,
-        "objective":objective
+        "render_func": render_objective,
+        "get_str_func": get_str_objective,
+        "datetime": date,
+        "objective": objective
     };
 
     pushEvent_toQueues(event);
@@ -447,7 +442,7 @@ function render_objective(y, event, doc) {
     doc.text(get_str_objective(event), MARGIN, y);
 }
 function get_str_objective(event) {
-    return getDateStr(event.datetime)+"  Objectives:"+event.objective;
+    return getDateStr(event.datetime) + "  Objectives:" + event.objective;
 }
 
 function addEvent_iap(iap) {
@@ -455,10 +450,10 @@ function addEvent_iap(iap) {
 }
 function addEvent_iap_with_date(iap, date) {
     var event = {
-        "render_func":render_iap,
-        "get_str_func":get_str_iap,
-        "datetime":date,
-        "iap":iap
+        "render_func": render_iap,
+        "get_str_func": get_str_iap,
+        "datetime": date,
+        "iap": iap
     };
 
     pushEvent_toQueues(event);
@@ -467,7 +462,7 @@ function render_iap(y, event, doc) {
     doc.text(get_str_iap(event), MARGIN, y);
 }
 function get_str_iap(event) {
-    return getDateStr(event.datetime)+"  IAP:"+event.iap;
+    return getDateStr(event.datetime) + "  IAP:" + event.iap;
 }
 
 function addEvent_cmdxfer(from_unit, to_unit) {
@@ -475,11 +470,11 @@ function addEvent_cmdxfer(from_unit, to_unit) {
 }
 function addEvent_cmdxfer_with_date(from_unit, to_unit, date) {
     var event = {
-        "render_func":render_cmdxfer,
-        "get_str_func":get_str_cmdxfer,
-        "datetime":date,
-        "from_unit":from_unit,
-        "to_unit":to_unit
+        "render_func": render_cmdxfer,
+        "get_str_func": get_str_cmdxfer,
+        "datetime": date,
+        "from_unit": from_unit,
+        "to_unit": to_unit
     };
 
     pushEvent_toQueues(event);
@@ -488,5 +483,5 @@ function render_cmdxfer(y, event, doc) {
     doc.text(get_str_unit_to_sector(event), MARGIN, y);
 }
 function get_str_cmdxfer(event) {
-    return getDateStr(event.datetime)+"  Command Transferred From:"+event.from_unit+" To:"+event.to_unit;
+    return getDateStr(event.datetime) + "  Command Transferred From:" + event.from_unit + " To:" + event.to_unit;
 }
