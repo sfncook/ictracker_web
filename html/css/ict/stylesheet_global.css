@@ -36,45 +36,54 @@ td {
 }
 
 #splash_outer_outer_div {
-    position:fixed;
-    top:0px;
-    left:0px;
-    width:100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
     height: 100%;
-	display: table;
+    display: table;
 }
+
 #splash_outer_inner_div {
-	display: table-cell;
-	vertical-align: middle
+    display: table-cell;
+    vertical-align: middle
 }
+
 #splash_row1 {
     width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
+
 #splash_row2 {
-    width:410px;
+    width: 410px;
     margin: 0 auto;
 }
+
 #splash_row3 {
-    width:800px;
+    width: 800px;
     margin: 0 auto;
 }
+
 #splash_row4 {
-    width:800px;
+    width: 800px;
     margin: 0 auto;
 }
+
 #splash_title_logo_img {
     float: left;
 }
+
 #splash_inc_info_container {
     padding-top: 50px;
     float: left;
 }
+
 #splash_title {
     font-family: sans-serif;
     font-size: 2.0rem;
 }
+
 .splash_start_btn {
     height: 70px;
     width: 180px;
@@ -83,26 +92,30 @@ td {
     padding-top: 5px !important;
     float: left;
 }
+
 .splash_start_btn_icon {
     width: 40px;
     height: 40px;
 }
+
 .splash_start_btn_text {
-    margin-left:10px;
+    margin-left: 10px;
     font-size: 1.4rem;
 }
 
 #header_spacer_td {
-	width: 100px;
+    width: 100px;
 }
+
 #footer_spacer_td {
     height: 20px;
 }
+
 #ict_header {
     background: #BBB;
     position: fixed;
     right: 0;
-    top:0;
+    top: 0;
     height: 100%;
     z-index: 50;
     padding: 4px;
@@ -128,6 +141,7 @@ td {
     width: 100%;
     height: 20px;
 }
+
 #address {
     padding: 3px 10px 3px 10px;
 }
@@ -136,21 +150,23 @@ td {
  **** BUTTONS ****
  */
 .button {
-	text-align: center;
-	background: #CCC;
-	color: black;
-	border: none;
-	border-radius: 3px;
-	padding: 4px 4px 4px 4px;
+    text-align: center;
+    background: #CCC;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 4px 4px 4px;
     cursor: pointer;
     box-shadow: 1px 1px 2px #888;
 }
+
 .button:hover {
-	background-color: #EEE;
+    background-color: #EEE;
     color: #999;
 }
+
 .button:active {
-	background-color: #BBB;
+    background-color: #BBB;
 }
 
 .button_top {
@@ -161,25 +177,24 @@ td {
     border-top: none;
     margin: 0 10px;
 
-    width:130px;
-    height:50px;
+    width: 130px;
+    height: 50px;
     margin-right: 10px;
     display: inline-block;
     font-size: 1.45rem;
     padding: 10 10px;
     text-align: center;
-    pointer-events:auto;
+    pointer-events: auto;
 }
 
-
 .button_no_hover {
-	text-align: center;
-	background: #CCC;
-	color: #666;
-	border: none;
-	border-radius: 3px;
-	padding: 4px 4px 4px 4px;
-	text-shadow: 1px 1px #AAA;
+    text-align: center;
+    background: #CCC;
+    color: #666;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 4px 4px 4px;
+    text-shadow: 1px 1px #AAA;
     cursor: pointer !important;
     box-shadow: 1px 1px 2px #888;
 }
@@ -191,54 +206,61 @@ td {
 }
 
 .hidden_div {
-	/*
-	 *Use opacity rather than show/hide
-	 *so the button maintains its space
-	*/
-	opacity: 0.0;
+    /*
+     *Use opacity rather than show/hide
+     *so the button maintains its space
+    */
+    opacity: 0.0;
 }
+
 .hidden_div:hover {
-	cursor: default !important;
-	opacity: 0.0;
+    cursor: default !important;
+    opacity: 0.0;
 }
 
 .btn-ict {
-	background: #DDD;
-	color: #666;
-	text-shadow: 1px 1px #AAA;
-	box-shadow: 1px 1px 2px #888;
-	height: 22px;
+    background: #DDD;
+    color: #666;
+    text-shadow: 1px 1px #AAA;
+    box-shadow: 1px 1px 2px #888;
+    height: 22px;
 }
 
 .sm_round_btn {
-	height: 20px;
-	width: 20px;
-	border-radius: 10px;
-	padding: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    padding: 0;
 }
 
 .glow_orange {
     background: #FFAD2C;
 }
+
 .glow_orange:hover {
     background: #FFAD2C;
 }
+
 .glow_blue {
     background: #2A5071;
     color: #DDD;
     box-shadow: 2px 2px 2px #172C3E;
 }
+
 .glow_blue:hover {
     background: #2A5071;
 }
+
 .glowlightyellow {
-	/*background: #FFFF99;*/
-	background: #FFFF88;
+    /*background: #FFFF99;*/
+    background: #FFFF88;
 }
+
 .glowlightyellow.unit_row_div {
-    border-top:1px solid #999;
-    border-bottom:1px solid #999;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
+
 /*.unit_row_div.glowlightyellow>.unit_btn{
     margin-right:2px;
 }*/
@@ -246,65 +268,82 @@ td {
 .font_red {
     color: red !important;
 }
+
 .font_blue {
     color: blue !important;
 }
+
 .glowred {
-	background: red !important;
-	color: white;
+    background: red !important;
+    color: white;
 }
+
 .glowred:hover {
-	background: darkred !important;
-	color: white;
+    background: darkred !important;
+    color: white;
 }
+
 .glowred:active {
-	background: #666 !important;
-	color: white;
+    background: #666 !important;
+    color: white;
 }
+
 .glowpink {
-	background: pink !important;
-	color: #666;
+    background: pink !important;
+    color: #666;
 }
+
 .glowpink:hover {
-	background: red !important;
-	color: white;
+    background: red !important;
+    color: white;
 }
+
 .glowpink:hover {
-	background: red !important;
-	color: white;
+    background: red !important;
+    color: white;
 }
+
 .glowpink:active {
-	background: #666;
-	color: white;
+    background: #666;
+    color: white;
 }
+
 .glowlightblue {
     background: DeepSkyBlue;
 }
+
 .glowlightgreen {
     background: LightGreen !important;
 }
+
 .glowlightgreen:hover {
     background: DarkGreen;
     color: white;
 }
+
 .glowgreen {
     background: green;
     color: white;
 }
+
 .glowgreen:hover {
     background: DarkGreen;
     color: white;
 }
+
 .glowgreen:active {
     background: #666;
     color: white;
 }
+
 .glowbabyblue {
     background: #99e5ff;
 }
+
 .glowbabyblue:hover {
     background: #77ddff;
 }
+
 .glowbabyblue:active {
     background: #66aaff;
 }
@@ -312,6 +351,7 @@ td {
 .has_par {
     background: lightgreen !important;
 }
+
 .has_par:hover {
     background: green !important;
 }
@@ -325,164 +365,198 @@ td {
  */
 .header_item {
     margin-bottom: 4px;
-	height: 25px;
+    height: 25px;
 }
+
 #branch_btn {
     margin-bottom: 10px;
 }
+
 #iap_btn {
     margin-top: 10px;
 }
+
 #time {
     text-align: center;
     font-family: 'Carrois Gothic SC';
     font-size: 1.45rem;
     color: white;
 }
+
 .time_lg {
     font-size: 2.3rem !important;
-	height: 43px;
+    height: 43px;
 }
+
 #safety_btn_label {
-	color: #FFF;
-	width: 100%;
-	border-top: 1px solid #888;
+    color: #FFF;
+    width: 100%;
+    border-top: 1px solid #888;
 }
+
 .safety_btn {
-	width: 90px;
-	height: 25px;
+    width: 90px;
+    height: 25px;
     z-index: 100;
 }
+
 .side_dialog_table tr {
-	vertical-align: top;
+    vertical-align: top;
 }
+
 .side_dialog {
-    background: #666 ;
+    background: #666;
     z-index: 50;
-	padding: 4px;
+    padding: 4px;
 }
+
 .side_dialog > div {
-    margin:0 0 4px 0;
+    margin: 0 0 4px 0;
 }
+
 .side_dialog_arm {
     background: #666;
     height: 2rem;
     width: 100px;
     z-index: 45;
 }
+
 #safety_side_dialog {
     top: 157px;
 }
+
 #safety_side_dialog_arm {
     top: 157px;
 }
 
 #streetname_btn {
-    float:left;
+    float: left;
     margin-left: 10px;
-    pointer-events:auto;
+    pointer-events: auto;
     background: #a56c15 !important;
     color: white;
     font-size: 1.2rem;
 }
+
 #streetname_btn:hover {
     background: #E89A1B !important;
 }
+
 #streetname_btn:active {
     background: #69430f !important;
 }
+
 #inc_num {
-    float:left;
+    float: left;
     margin-left: 10px;
     font-size: 1.05rem;
 }
+
 #mode_btn {
-    float:right;
+    float: right;
     margin-right: 10px;
-    pointer-events:auto;
+    pointer-events: auto;
 }
+
 #mode_side_dialog {
     top: 197px;
 }
+
 #mode_side_dialog_arm {
     top: 197px;
 }
+
 .offensive_btn {
     background: green !important;
     color: white;
 }
+
 .defensive_btn {
     background: #FF2B21 !important;
     color: white;
 }
+
 #report_btn {
     z-index: 100;
-	height: 45px;
+    height: 45px;
 }
+
 #sectorreport_btn {
     z-index: 100;
     height: 45px;
 }
+
 .report_icon {
     width: 20px;
     height: 20px;
 }
+
 #dispatched_units_btn {
     z-index: 100;
     height: 46px;
     margin: 5px 0;
 }
+
+#upgrade_btn {
+    height: 46px;
+}
+
 #cmdxfer_units_btn {
     z-index: 100;
     height: 46px;
     margin: 5px 0;
 }
+
 #cmd_term_btn {
     z-index: 100;
     font-size: 0.75rem;
-	height: 53px;
+    height: 53px;
 }
+
 #cmd_term_btn > div {
-	height:12px;
+    height: 12px;
 }
+
 .terminate_icon {
     width: 20px;
     height: 20px;
 }
 
 #header_row2 {
-	display: table;
-	height: -moz-calc(100% - 350px);
-	height: -webkit-calc(100% - 350px);
-	height: calc(100% - 350px);
-	width: 92px;
-}
-#header_row3 {
-	position: absolute;
-	bottom: 10px;
-	right: 2px;
-	width: 94px;
-	padding: 2px;
+    display: table;
+    height: -moz-calc(100% -350px);
+    height: -webkit-calc(100% -350px);
+    height: calc(100% -350px);
+    width: 92px;
 }
 
+#header_row3 {
+    position: absolute;
+    bottom: 10px;
+    right: 2px;
+    width: 94px;
+    padding: 2px;
+}
 
 /*
  **** DIALOG ITEMS ****
  */
 #dialogContainer {
-    background: rgba(0,0,0,0.4);
-    position:fixed;
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
     z-index: 200;
-    top:0px;
-    left:0px;
-    width:100%;
+    top: 0px;
+    left: 0px;
+    width: 100%;
     height: 100%;
-	display: table;
+    display: table;
 }
+
 .dialog_vertical_align_cell {
-	display: table-cell;
-	vertical-align: middle
+    display: table-cell;
+    vertical-align: middle
 }
+
 .dialog_window {
     z-index: 999;
     background: #EEE;
@@ -491,18 +565,21 @@ td {
     border: 1px solid #666;
     box-shadow: 0px 0px 15px #555;
 }
+
 .dialog_title {
     background: #AAA;
-	padding: 2px 0;
-	border: 1px solid #666;
+    padding: 2px 0;
+    border: 1px solid #666;
 }
+
 .dialog_title_text {
-	text-align: center;
-	font-size: 1.1rem;
+    text-align: center;
+    font-size: 1.1rem;
     color: white;
     float: left;
-    width:100%
+    width: 100%
 }
+
 .dialog_close_btn {
     background: #F67574;
     height: 20px;
@@ -513,56 +590,65 @@ td {
     border-radius: 15px;
     border: 1px solid #CCC;
     text-shadow: none;
-	width: 40px;
-	float: right;
+    width: 40px;
+    float: right;
     font-size: 0.8rem;
 }
+
 .dialog_body {
-	padding: 0;
-	border-right: 1px solid #666;
-	border-bottom: 1px solid #666;
-	border-left: 1px solid #666;
+    padding: 0;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #666;
+    border-left: 1px solid #666;
 }
 
 #sector_dialog {
     width: 890px;
 }
+
 #dir_btns_container {
-	padding: 4px 0;
-	border-top: 1px solid #DDD;
+    padding: 4px 0;
+    border-top: 1px solid #DDD;
 }
+
 #dir_btns_container > .button {
-	margin: 0 8px;
+    margin: 0 8px;
 }
+
 #title_btns_container {
-	padding: 4px 0;
+    padding: 4px 0;
 }
+
 #title_btns_container > .button {
-	margin: 4px;
+    margin: 4px;
 }
 
 .clear_float {
-	clear: both;
-        width:0px;
+    clear: both;
+    width: 0px;
 }
 
 #units_dialog {
     width: 855px;
 }
+
 #dispatched_units_div {
     width: 846px;
     min-height: 60px;
     margin: 2px;
     border: 3px double #666;
 }
+
 #title_dispatched_units_div {
     color: #999;
     margin: 1px;
 }
+
 .dispatched_unit_btn {
     margin: 4px 4px 6px 4px;
     float: left;
 }
+
 .delete_dispatched_unit_btn {
     position: relative;
     left: -5px;
@@ -574,80 +660,93 @@ td {
     border: 1px #999 solid;
     color: white;
 }
+
 #dispatched_delete_start_btn {
     float: right;
     margin-right: 8px;
 }
+
 .delete_dispatched_unit_btn:hover {
     background: #ffc4be;
 }
+
 .delete_dispatched_unit_btn:active {
     background: #87282a;
 }
 
 #units_dialog_cities_div {
-	display:block;
-	padding-left:80px;
-	border-bottom:1px solid #999;
+    display: block;
+    padding-left: 80px;
+    border-bottom: 1px solid #999;
 }
+
 #units_dialog_types_div {
-	display:block;
-	float:left;
-	width:80px;
-	height: 450px;
-	border-right:1px solid #999;
+    display: block;
+    float: left;
+    width: 80px;
+    height: 450px;
+    border-right: 1px solid #999;
 }
+
 .units_dialog_citybtns_div {
-	display:block;
-	width: 755px;
-	height: 450px;
-	float: right;
-	overflow: scroll;
+    display: block;
+    width: 755px;
+    height: 450px;
+    float: right;
+    overflow: scroll;
 }
+
 .unitTypeColumn {
     padding-bottom: 15px;
 }
 
 .unitCity_dialog_btn {
-    width:70px;
+    width: 70px;
     height: 20px;
     padding: 2;
-	float: left;
-	margin: 5px;
+    float: left;
+    margin: 5px;
 }
+
 .unit_dialog_btn {
-	float: left;
-	margin: 5px;
+    float: left;
+    margin: 5px;
 }
+
 .btn_largetext {
-    font-size:0.7rem !important;
+    font-size: 0.7rem !important;
 }
+
 .btn_medtext {
-    font-size:0.8rem !important;
+    font-size: 0.8rem !important;
 }
+
 .unitType_dialog_btn {
-    width:70px;
+    width: 70px;
     height: 20px;
     padding: 2px;
-	margin: 5px;
+    margin: 5px;
 }
 
 #psi_dialog {
     width: 445px;
 }
+
 .psi_dialog_btn {
     width: 40px;
     height: 30px;
-    float:left;
+    float: left;
     margin: 4px;
 }
 
 #actions_dialog {
     width: 708px;
 }
+
 .action_dialog_btn {
     margin: 5px !important;
 }
+
 .action_type_dialog_header {
     text-align: center;
     font-size: 1.1rem;
@@ -661,23 +760,25 @@ td {
     position: fixed;
     top: 0;
     left: 0;
-    width:100%;
+    width: 100%;
     z-index: 50;
-    padding-right:100px;
+    padding-right: 100px;
     pointer-events: none;
 }
+
 #top_header_mayday_container {
     position: fixed;
     top: 0;
     left: 0;
-    width:100%;
+    width: 100%;
     text-align: center;
     z-index: 50;
-    padding-right:100px;
+    padding-right: 100px;
     pointer-events: none;
 }
+
 #mayday_btn {
-    margin-left:auto;
+    margin-left: auto;
     background: red;
     color: white;
     border-top-left-radius: 0;
@@ -689,98 +790,118 @@ td {
     border-bottom: 2px solid orange;
     border-left: 2px solid orange;
 }
+
 #mayday_btn:hover {
     background: #FF9696;
 }
+
 #mayday_btn:active {
     background: #C20000;
 }
+
 #mayday_clear_dialog {
     width: 350px;
 }
+
 .mayday_clear_item_btn {
     margin: 5px 0 5px 10px;
     width: 325px;
 }
+
 .mayday_sector_title {
     font-size: 1.1rem;
 }
+
 #mayday_scroll_div {
     overflow: scroll;
     height: 400px;
 }
 
 #osr_dialog {
-	width: 455px;
+    width: 455px;
 }
+
 #objectives_dialog {
-	width: 190px;
+    width: 190px;
 }
 
 #iap_dialog {
     width: 612px;
 }
+
 #iap_table_main td {
     padding: 5px;
 }
+
 .iap_label_td {
     text-align: right;
 }
+
 .iap_red_label {
     font-size: 1.25rem;
     color: red;
 }
+
 .iap_blue_label {
     font-size: 1.25rem;
     color: blue;
 }
+
 .iap_input {
     border: #999 2px solid;
     color: black;
     width: 300px;
     height: 60px;
-    font-size:0.9rem;
+    font-size: 0.9rem;
     float: left;
 }
+
 .iap_toggle_btn {
     width: 100px;
     float: left;
     font-size: 0.8rem;
     margin: 2px;
 }
+
 #iap_vent_toggle_btn {
     width: 120px;
     font-size: 0.8rem;
     margin: 2px;
 }
+
 #iap_sprinkler_toggle_btn {
-     width: 120px;
-     font-size: 0.8rem;
-     margin: 2px;
- }
+    width: 120px;
+    font-size: 0.8rem;
+    margin: 2px;
+}
+
 #iap_btn_evacloc {
     width: 120px;
     font-size: 0.8rem;
     margin: 2px;
 }
+
 #iap_evacloc_dialog {
     width: 300px;
 }
+
 #iap_evacloc_input_container {
     float: left;
 }
+
 #iap_evacloc_input {
     border: #999 2px solid;
     color: black;
     width: 300px;
     height: 60px;
-    font-size:0.9rem;
+    font-size: 0.9rem;
 }
 
 .chk_btn {
-	float: left;
-	margin: 5px !important;
+    float: left;
+    margin: 5px !important;
 }
+
 .chk_label {
     font-size: 1.1rem;
 }
@@ -788,29 +909,36 @@ td {
 #benchmarks_dialog {
     width: 515px;
 }
+
 .benchmark_col_container {
     float: left;
 }
+
 .benchmark_2nd_col_container {
     background: #FFFF88;
-    height:162px;
+    height: 162px;
 }
+
 .benchmark_double_btn {
     margin-bottom: 10px !important;
     height: 71px;
     font-size: 1.1rem;
-    padding-top:10px;
+    padding-top: 10px;
 }
+
 .benchmark_item_btn {
     width: 150px;
     margin: 0 10px;
 }
+
 .benchmark_btn_parent_div {
     padding: 5px 0 5px 0;
 }
+
 .benchmark_item_btn_hidden {
     opacity: 0;
 }
+
 .benchmark_item_btn_secondary {
     margin: 5px 10px;
 }
@@ -818,77 +946,93 @@ td {
 #par_dialog {
     width: 355px;
 }
+
 #par_dialog_sector_btn {
-	width:168px;
-	height: 24px;
+    width: 168px;
+    height: 24px;
     text-align: center;
     margin: 5px auto;
 }
-.par_person_btn  {
+
+.par_person_btn {
     width: 100px;
     margin: 5px;
     float: left;
 }
+
 .par_unit_btn {
     background: #CCC;
     margin: 5px;
-    float:left;
+    float: left;
 }
+
 .par_dialog_people {
     width: 220px;
-    float:left;
+    float: left;
 }
+
 .mayday_par_btn {
     background: red;
     color: white;
-    text-shadow:none;
+    text-shadow: none;
     float: left;
     padding: 4px 0 0 0;
     margin: 5px 0 5px 20px;
     height: 27px;
     width: 60px;
 }
+
 .personnel_par_btn {
     float: left;
     margin: 10px 5px !important;
 }
+
 .psi_par_btn {
     float: left;
     margin-top: 7px !important;
 }
+
 .par_dialog_unit {
     margin-top: 4px;
-    border-top:1px solid #666;
+    border-top: 1px solid #666;
 }
+
 .par_dialog_unit_leftcol {
     float: left;
 }
+
 .par_dialog_unit_rightcol {
-    float:left;
+    float: left;
 }
 
 #mayday_dialog {
     width: 900px;
     background: white;
 }
+
 #mayday_dialog_body {
     padding: 0;
 }
+
 #mayday_scroll_div {
-    min-height:370px;
-    overflow:scroll;
+    min-height: 370px;
+    overflow: scroll;
 }
+
 .mayday_list li {
     margin: 0;
     cursor: default;
     padding-top: 2px;
 }
+
 #new_mayday_btn_icon {
-    float:left;
+    float: left;
 }
+
 #new_mayday_btn_text {
-    float:left;
+    float: left;
 }
+
 .mayday_toggle {
     display: inline-block;
     float: left;
@@ -898,115 +1042,139 @@ td {
     font-size: 0.9rem;
     margin: 4px;
 }
+
 .mayday_select {
-	text-align: center;
-	background: #CCC;
-	color: #666;
-	border: none;
-	border-radius: 3px;
-	padding: 4px 4px 4px 4px;
-	text-shadow: 1px 1px #AAA;
+    text-align: center;
+    background: #CCC;
+    color: #666;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 4px 4px 4px;
+    text-shadow: 1px 1px #AAA;
     cursor: pointer;
     box-shadow: 1px 1px 2px #888;
     width: 250px;
-    display:block;
-    margin:10px 4px 5px 4px;
+    display: block;
+    margin: 10px 4px 5px 4px;
 }
+
 #mayday_table_main td {
     vertical-align: top;
 }
+
 #mayday_left_td {
-    padding:0;
-    width:285px;
+    padding: 0;
+    width: 285px;
     background: #EEE;
 }
+
 #mayday_units_div {
-    width:100%;
+    width: 100%;
     margin: 4px 4px 10px 4px;
-    min-height:1px;
+    min-height: 1px;
 }
+
 .mayday_name_label {
-    padding-top:3px;
-    float:left;
+    padding-top: 3px;
+    float: left;
 }
+
 .mayday_psi_btn {
-    margin-top:1px;
-    float:left;
+    margin-top: 1px;
+    float: left;
 }
+
 .mayday_box_title {
-    font-size:1.1rem;
+    font-size: 1.1rem;
     color: #666;
-    margin-bottom:5px;
-    text-align:center;
-    float:left;
+    margin-bottom: 5px;
+    text-align: center;
+    float: left;
 }
+
 .mayday_clear_btn {
     height: 24px;
     padding: 2px;
     margin-right: 6px;
-    float:right;
+    float: right;
 }
+
 #new_mayday_btn {
-    width:116px;
-    margin:4px;
+    width: 116px;
+    margin: 4px;
 }
+
 #new_mayday_btn_icon {
     height: 12px;
     width: 12px;
-    margin:4px;
+    margin: 4px;
 }
+
 .mayday_info_div {
     padding: 5px;
     border: 1px solid #666;
     margin: 4px 4;
-    width:272px;
+    width: 272px;
 }
+
 #mayday_right_td {
     width: 613px;
     height: 100%;
 }
+
 .mayday_tab_div {
-    height:100%;
+    height: 100%;
     width: 100%;
     padding: 10px;
 }
+
 #mayday_right_tab_div {
-    width:100%;
+    width: 100%;
     background: #EEE;
 }
+
 .mayday_right_tab_text {
-    float:left;
+    float: left;
     margin: 3px 8px 0 0;
     box-shadow: none;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
+
 .select_on {
-    border:3px #4863A0 solid;
+    border: 3px #4863A0 solid;
 }
+
 .select_off {
-    border:3px transparent solid;
+    border: 3px transparent solid;
 }
+
 .list_level_2 {
     margin-left: 15px !important;
 }
+
 .red_font {
     color: red;
 }
+
 .list_med_font_size {
     font-size: 0.85rem;
     font-weight: 500;
 }
+
 .sm_font {
     font-size: 0.8rem;
     font-weight: 300;
 }
+
 .underlined {
     border-bottom: 1px #666 dashed;
 }
+
 #mayday_td_left {
-    width:270px;
+    width: 270px;
 }
+
 .mayday_name_input {
     width: 175px;
     margin: 0 4px;
@@ -1014,141 +1182,170 @@ td {
     border-top: #EEE 2px solid;
     border-right: #EEE 2px solid;
     color: black;
-    float:left;
+    float: left;
 }
+
 .mayday_unit_btn {
-    float:left;
-    margin:4px;
+    float: left;
+    margin: 4px;
 }
+
 #mayday_list_grablives li {
     padding: 0px;
 }
+
 #mayday_list_grablives {
     background: #CCFFCC;
 }
+
 .first_char_red::first-letter {
     color: red;
 }
+
 .yellow_bg {
     background: #E7E5B0;
 }
+
 .tan_bg {
     background: #E7C9B0;
 }
+
 .green_bg {
     background: #B0E7B0;
 }
+
 .gray_bg {
     background: #D6D6D6;
 }
+
 .blue_bg {
     background: #BDDFFC;
 }
+
 .red_bg {
     background: #F27272;
 }
+
 .mayday_list_title {
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .objective_btn {
     width: 165px;
     margin: 5px 10px 5px 10px;
 }
+
 #objectives_header_btn {
     margin-top: 10px;
     height: 45px;
 }
+
 #objective_right_col {
-    float:right;
+    float: right;
     width: 150px;
 }
+
 #objective_left_col {
-    float:left;
+    float: left;
 }
+
 #objectives_btn_perccomplete {
-    font-size:0.6rem;
+    font-size: 0.6rem;
 }
 
 #osr_header_btn {
     height: 45px;
 }
+
 #osr_btn_perccomplete {
-    font-size:0.6rem;
+    font-size: 0.6rem;
 }
+
 .osr_btn {
     width: 205px;
     margin: 5px 10px 5px 10px;
 }
+
 #osr_right_col {
-    float:left;
+    float: left;
     /*padding-top: 15px;*/
 }
+
 #osr_left_col {
-    float:left;
+    float: left;
 }
+
 #osr_occupancy_right_col_label {
     margin-top: 10px;
     margin-right: 5px;
-    float:left;
+    float: left;
 }
+
 #osr_floors {
-    float:left;
+    float: left;
 }
+
 .osr_toggle_container_div {
     margin: 10px 0 15px 0;
     height: 25px;
 }
-.osr_toggle_btn  {
+
+.osr_toggle_btn {
     width: 100px;
-    float:left;
-    margin:0 5px;
+    float: left;
+    margin: 0 5px;
 }
+
 #osr_subfloor_btn {
     width: 215px;
 }
+
 #osr_occupancy_floors_div {
     margin: 10px 0 15px 0;
     height: 25px;
 }
+
 #osr_address_btn {
     width: 220px;
-    margin:5px 0 15px 0;
+    margin: 5px 0 15px 0;
 }
+
 #unit_osr_btn {
     width: 220px;
-    margin:5px 0 15px 0;
+    margin: 5px 0 15px 0;
 }
 
 #emergency_traffic_dialog {
     width: 475px;
 }
+
 .emergency_traffic_item_btn {
     margin: 5px 0 5px 10px;
     width: 450px;
 }
 
 .osr_select {
-	text-align: center;
-	background: #CCC;
-	color: #666;
-	border: none;
-	border-radius: 3px;
-	padding: 4px 4px 4px 4px;
-	text-shadow: 1px 1px #AAA;
+    text-align: center;
+    background: #CCC;
+    color: #666;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 4px 4px 4px;
+    text-shadow: 1px 1px #AAA;
     cursor: pointer;
     box-shadow: 1px 1px 2px #888;
     width: 220px;
-    display:block;
-    margin-bottom:15px;
+    display: block;
+    margin-bottom: 15px;
 }
 
 #unit_people_dialog {
-    width:400px;
+    width: 400px;
 }
+
 .unit_people_dialog_btn {
-    float:left;
-    margin:4px !important;
+    float: left;
+    margin: 4px !important;
 }
 
 .delete_icon {
@@ -1156,27 +1353,33 @@ td {
     height: 12px;
     margin-left: 7px;
 }
+
 .delete_icon:hover {
     cursor: pointer !important;
 }
+
 #delete_unit_btn {
     width: 108px;
-    float:left;
+    float: left;
     margin: 10px;
 }
+
 .move_icon {
     width: 14px;
     height: 14px;
     margin-left: 7px;
 }
+
 .move_icon:hover {
     cursor: pointer !important;
 }
+
 #move_unit_btn {
     width: 108px;
-    float:left;
+    float: left;
     margin: 10px;
 }
+
 #unit_people_dialog_row3_center_div {
     width: 130px;
     display: block;
@@ -1184,32 +1387,35 @@ td {
 }
 
 .reset_clock_btn {
-    float:right;
-    width:120px;
-    height:20px;
-    height:22px;
-    margin:4px 10px;
+    float: right;
+    width: 120px;
+    height: 20px;
+    height: 22px;
+    margin: 4px 10px;
     padding: 0 4px;
 }
 
 #units_assigned_dialog {
-    width:350px;
+    width: 350px;
 }
 
 #delete_unit_confirm_dialog {
     width: 360px;
 }
+
 #delete_unit_confirm_dialog_text {
-    padding:8px;
-    font-size:1.1rem;
+    padding: 8px;
+    font-size: 1.1rem;
     color: #666;
 }
+
 #delete_unit_confirm_dialog_btns {
     width: 200px;
     margin: 0 auto;
 }
+
 .confirm_btn {
-    float:left;
+    float: left;
     margin: 10px 20px;
 }
 
@@ -1219,55 +1425,62 @@ td {
     border: 2px solid black;
     background: black;
 }
+
 #test_bar {
-    width:196px;
-    height:100%;
-    background:LightGreen;
+    width: 196px;
+    height: 100%;
+    background: LightGreen;
 }
 
 #key_dialog {
     width: 175px;
 }
+
 #key_dialog > .dialog_body {
     padding: 10px;
 }
+
 .key_btn {
     width: 40px;
     height: 40px;
     float: left;
     margin: 5px;
     font-size: 1.3rem;
-    padding:5px;
+    padding: 5px;
 }
+
 #key_output_value {
-    font-size:1.5rem;
-    color:#666;
+    font-size: 1.5rem;
+    color: #666;
     height: 40px;
     background: #DDD;
     padding: 0 10px;
-    text-align:right;
+    text-align: right;
 }
+
 #key_input {
     width: 75px;
     margin: 5px auto;
 }
+
 #key_ok_btn {
     background: lightgreen;
 }
+
 /*#key_ok_btn:hover {*/
-    /*background: forestgreen;*/
+/*background: forestgreen;*/
 /*}*/
 /*#key_ok_btn:active {*/
-    /*background: darkgreen;*/
+/*background: darkgreen;*/
 /*}*/
 #key_del_btn {
-    font-size:0.9rem;
+    font-size: 0.9rem;
     padding-top: 10px;
     background: lightpink;
 }
 
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .gridster .gs-w {
@@ -1278,37 +1491,39 @@ ul {
     background: #BBB;
 }
 
-
 .gridster .preview-holder {
-    border: none!important;
-    background: red!important;
+    border: none !important;
+    background: red !important;
 }
 
 #streetname_dialog {
     width: 450px;
 }
+
 #streetname_dialog>*>input {
     margin: 5px;
 }
+
 #streetname_custom_input {
-    margin-top:5px;
+    margin-top: 5px;
     width: 380px;
 }
+
 #streetname_dlg_clear {
-    float:right;
-    margin:5px;
+    float: right;
+    margin: 5px;
 }
-
-
 
 #address_dialog {
     width: 450px;
 }
+
 #address_dialog>*>input {
     margin: 5px;
 }
+
 #address_custom_input {
-    margin-top:5px;
+    margin-top: 5px;
     width: 380px;
 }
 
@@ -1317,14 +1532,15 @@ ul {
 }
 
 #nda_reminder_dialog {
-    width:300px;
+    width: 300px;
 }
+
 #nda_reminder_dialog>.dialog_body {
-    padding:10px;
+    padding: 10px;
 }
 
 #version_text {
-    position:fixed;
+    position: fixed;
     bottom: 10px;
     left: 10px;
     background: white;
@@ -1332,8 +1548,9 @@ ul {
 }
 
 .top_header_btn {
-    float:left;
+    float: left;
 }
+
 .top_header_btn_icon {
     width: 25px;
     height: 25px;
@@ -1342,18 +1559,22 @@ ul {
 #upgrade_dialog {
     width: 485px;
 }
+
 .upgrade_btn {
     width: 150px;
     margin: 5px;
 }
+
 #upgrade_right_col {
-    float:right;
+    float: right;
 }
+
 #upgrade_left_col {
-    float:left;
+    float: left;
 }
+
 #upgrade_middle_col {
-    float:left;
+    float: left;
 }
 
 .gridster > * {
@@ -1367,22 +1588,23 @@ ul {
 }
 
 #address_dlg_clear {
-    float:right;
-    margin:5px;
+    float: right;
+    margin: 5px;
 }
 
 .selected_benchmark {
     background: #FFFF88;
-    border-top:1px solid #999;
-    border-left:1px solid #999;
-    border-bottom:1px solid #999;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
 
 #cmd_trm_dialog {
-    width:450px;
+    width: 450px;
 }
+
 .yes_no_btn {
-    width:100px;
+    width: 100px;
     margin: 4px;
     float: left;
 }
@@ -1390,38 +1612,44 @@ ul {
 #time_report_dialog {
     width: 800px;
 }
+
 .report_dialog_body {
-    height:500px;
+    height: 500px;
     overflow: scroll;
     background: white;
 }
 
-.report_toggle_btn  {
+.report_toggle_btn {
     float: left;
     margin: 10px;
 }
+
 #print_report_btn {
     float: right;
-    margin:10px;
+    margin: 10px;
     width: 78px
 }
+
 #print_report_icon {
-    float:left;
-    width:20px;
-    height:20px;
+    float: left;
+    width: 20px;
+    height: 20px;
     margin: 0 5px;
 }
 
 #cmdxfer_dialog {
     width: 350px;
 }
+
 #cmdxfer_dialog > .dialog_body {
     padding-left: 5px;
 }
+
 .unit_cmdxfer_btn {
-    float:left;
-    margin:10px;
+    float: left;
+    margin: 10px;
 }
+
 #cmdxfer_text {
     float: left;
     font-size: 1.05rem;
@@ -1432,12 +1660,12 @@ ul {
     width: 33px;
     height: 21px;
     float: left;
-    padding-top:2px;
+    padding-top: 2px;
     border-radius: 10px;
 }
 
 #dispatch_address_btn_btn {
-    float:left;
+    float: left;
     margin-left: 5px;
 }
 
@@ -1446,28 +1674,33 @@ ul {
     margin-left: 10px;
 }
 
-#resume_dialog{
+#resume_dialog {
     width: 400px;
 }
-#resume_dialog > .dialog_body{
+
+#resume_dialog > .dialog_body {
     text-align: center;
 }
+
 #resume_cmd_btn {
     width: 100px;
     height: 45px;
     margin: 10px 0px 10px 30px;
-    float:left;
+    float: left;
 }
+
 #new_incident_cmd_btn {
     width: 100px;
     height: 45px;
     margin: 10px 0px 10px 20px;
-    float:left;
+    float: left;
 }
+
 #cmd_term_label {
-    font-size:1.5rem;
-    margin:10px;
+    font-size: 1.5rem;
+    margin: 10px;
 }
+
 #report_btn_2 {
     z-index: 100;
     height: 45px;
@@ -1475,17 +1708,20 @@ ul {
     float: left;
     margin: 10px 0px 10px 20px;
 }
+
 #yes_cmd_term_btn {
-    margin-left:95px;
+    margin-left: 95px;
 }
+
 #no_cmd_term_btn {
-    margin-left:50px;
+    margin-left: 50px;
 }
 
 .report_div_header_span {
     font-size: 1.05rem;
     font-weight: bold;
 }
+
 .report_div_header_value_span {
     font-size: 1.05rem;
 }

@@ -2200,6 +2200,8 @@ function initUpgradeDialog() {
     $(".right_upgrade_btn").click(function () {
         $(".right_upgrade_btn").removeClass("glowlightgreen");
         $(this).addClass("glowlightgreen");
+        $("#upgrade_btn_sub_label").removeClass("hidden_div");
+        $("#upgrade_btn_sub_label").html($(this).html());
         saveCookieState();
     });
 }
