@@ -1,758 +1,844 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<title>ICT</title>
-		<meta name="description" content="Incident #" />
-                <link href="images/logo/ict_logo_29x29.png" rel="icon" />
-		
-        <!--CSS-->
-        <link rel="stylesheet" type="text/css" href="css/jquery.gridster.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="css/ict/reset.css" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_global.css" />
-        <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_tbar.css" />
-        <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_animation.css" />
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <title>ICT</title>
+    <meta name="description" content="Incident #"/>
+    <link href="images/logo/ict_logo_29x29.png" rel="icon"/>
 
-        <!--JS-->
-        <script src="js/jquery-1.11.0.js"></script>
-        <script src="js/jquery-ui-1.10.4.js"></script>
-        <script src="js/jquery.mousewheel.js"></script>
-        <script src="js/jquery.jscrollpane.min.js"></script>
-        <script src="js/jsPDF/jspdf.js"></script>
-        <script src="js/jquery.gridster.js"></script>
-        <script src="js/jquery.cookie.js"></script>
-        <script src="js/ict/MaydayEvent.js"></script>
-        <script src="js/ict/config.js"></script>
-        <script src="js/ict/report.js"></script>
-        <script src="js/ict/global.js"></script>
-        <script src="version.js"></script>
-		<script>
-			startIncidentTimer();
-		</script>
-    </head>
-    
-    <body>
-		<div id="ict_header">
-            <div id="time" class="time_lg header_item">00:00</div>
-            <img id="title_icon" class="header_item" src="images/logo/ict_logo_100x100.png"/>
-            <div id="dispatched_units_btn" class="header_item button">
-                <div>Dispatched</div>
-                <div>Units</div>
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="css/jquery.gridster.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/ict/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_global.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_tbar.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_animation.css"/>
+
+    <!--JS-->
+    <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/jquery-ui-1.10.4.js"></script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/jquery.jscrollpane.min.js"></script>
+    <script src="js/jsPDF/jspdf.js"></script>
+    <script src="js/jquery.gridster.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/ict/MaydayEvent.js"></script>
+    <script src="js/ict/config.js"></script>
+    <script src="js/ict/report.js"></script>
+    <script src="js/ict/global.js"></script>
+    <script src="version.js"></script>
+    <script>
+        startIncidentTimer();
+    </script>
+</head>
+
+<body>
+<div id="ict_header">
+    <div id="time" class="time_lg header_item">00:00</div>
+    <img id="title_icon" class="header_item" src="images/logo/ict_logo_100x100.png"/>
+
+    <div id="dispatched_units_btn" class="header_item button">
+        <div>Dispatched</div>
+        <div>Units</div>
+    </div>
+    <div id="upgrade_btn" class="header_item button">Upgrade</div>
+    <div id="cmdxfer_units_btn" class="header_item button">
+        <div>Command</div>
+        <div>Transferred</div>
+    </div>
+
+    <div id="header_row2" class="header_row">
+        <div class="dialog_vertical_align_cell">
+            <div id="branch_btn" class="header_item button">Branch</div>
+            <div id="osr_header_btn" class="header_item button">
+                <div>OSR</div>
+                <div id="osr_btn_perccomplete">(0% Complete)</div>
             </div>
-            <div id="upgrade_btn" class="header_item button">Upgrade</div>
-            <div id="cmdxfer_units_btn" class="header_item button">
-                <div>Command</div>
-                <div>Transferred</div>
+            <div id="objectives_header_btn" class="header_item button">
+                <div>Objectives</div>
+                <div id="objectives_btn_perccomplete">(0% Complete)</div>
             </div>
-			
-			<div id="header_row2" class="header_row">
-				<div class="dialog_vertical_align_cell">
-                    <div id="branch_btn" class="header_item button">Branch</div>
-					<div id="osr_header_btn" class="header_item button">
-                        <div>OSR</div>
-                        <div id="osr_btn_perccomplete">(0% Complete)</div>
-                    </div>
-					<div id="objectives_header_btn" class="header_item button">
-                        <div>Objectives</div>
-                        <div id="objectives_btn_perccomplete">(0% Complete)</div>
-                    </div>
-                    <div id="iap_btn" class="header_item button">IAP</div>
-				</div>
-			</div>
-			
-			<div id="header_row3" class="header_row">
-				<div id="cmd_term_btn" class="header_item button">
-                    <img class="terminate_icon" src="images/terminate.png"/>
-					<div>Command</div>
-					<div>Terminated</div>
-				</div>
-				<div id="report_btn" class="header_item button">
-                    <img class="report_icon" src="images/report.png"/>
-                    <div>Reports</div>
-				</div>
-			</div>
-        </div><!-- ict_header-->
+            <div id="iap_btn" class="header_item button">IAP</div>
+        </div>
+    </div>
+
+    <div id="header_row3" class="header_row">
+        <div id="cmd_term_btn" class="header_item button">
+            <img class="terminate_icon" src="images/terminate.png"/>
+
+            <div>Command</div>
+            <div>Terminated</div>
+        </div>
+        <div id="report_btn" class="header_item button">
+            <img class="report_icon" src="images/report.png"/>
+
+            <div>Reports</div>
+        </div>
+    </div>
+</div>
+<!-- ict_header-->
 
 
-        <div id="top_header_container">
-            <div id="streetname_btn" class="button_top button">Street Name</div>
-            <div id="inc_num">Incident #:</div>
-            <div id="mode_btn" class="offensive_btn button_top button">OFFENSE</div>
+<div id="top_header_container">
+    <div id="streetname_btn" class="button_top button">Street Name</div>
+    <div id="inc_num">Incident #:</div>
+    <div id="mode_btn" class="offensive_btn button_top button">OFFENSE</div>
+    <div class="clear_float"></div>
+</div>
+<div id="top_header_mayday_container">
+    <div id="mayday_btn" class="button_top button">MAYDAY</div>
+</div>
+
+<div id="mayday_and_tbar_container">
+    <div id="tbar_grid_layout_container" class="gridster">
+        <ul>
+            <!--<li data-row="1" data-col="4" data-sizex="1" data-sizey="1">0</li>-->
+            <!--<li data-row="2" data-col="4" data-sizex="1" data-sizey="1">1</li>-->
+            <!--<li data-row="3" data-col="4" data-sizex="1" data-sizey="1">2</li>-->
+        </ul>
+    </div>
+
+    <!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
+    <li id="tbar_prototype" class="tbar">
+        <div class="tbar_title_container">
+            <button type="button" class="disabled par_btn button">PAR</button>
+            <div class="title_btn button">
+                <table>
+                    <tr>
+                        <td class="tbar_title_dir_td">
+                            <div class="title_dir  title_btn_comp">N</div>
+                        </td>
+                        <td class="tbar_title_td">
+                            <div class="title_text title_btn_comp">Sector Title</div>
+                        </td>
+                        <td class="tbar_title_num_td">
+                            <div class="title_num  title_btn_comp">8</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <button type="button" class="benchmark_btn button">
+                <!--<img class='benchmarks_icon' src='images/benchmarks_0.png'/>-->
+                            <span class="benchmarks_icon">
+                                <img class="benchmark_bar_img_1 benchmark_bar_img"
+                                     src="images/benchmark_bar_black.png"/><br/>
+                                <img class="benchmark_bar_img_2 benchmark_bar_img"
+                                     src="images/benchmark_bar_black.png"/><br/>
+                                <img class="benchmark_bar_img_3 benchmark_bar_img"
+                                     src="images/benchmark_bar_black.png"/><br/>
+                                <img class="benchmark_bar_img_4 benchmark_bar_img"
+                                     src="images/benchmark_bar_black.png"/><br/>
+                            </span>
+                BNCH
+            </button>
             <div class="clear_float"></div>
         </div>
-        <div id="top_header_mayday_container">
-            <div id="mayday_btn" class="button_top button">MAYDAY</div>
+        <div class="unit_col_left unit_col tbar_col_left_div tbar_col_div">
+            <div class="unit_move_btn button"><img class="move_btn_img" src="images/move_cross.png"/></div>
+            <div class="unit_move_cancel_btn button">Cancel</div>
+            <div class="unit_add_btn button">+Unit</div>
+            <div class="clear_float"></div>
+            <div class="left_scroll_pane scroll-pane jspScrollable">
+                <div class="jspContainer">
+                    <div class="jspPane"></div>
+                </div>
+            </div>
         </div>
+        <div class="action_col_right tbar_col_right_div tbar_col_div">
+            <div class="acct_unit_btn button">@acct</div>
+            <div class="action_add_btn button">+Action</div>
+            <div class="clear_float"></div>
+            <div class="right_scroll_pane scroll-pane jspScrollable">
+                <div class="jspContainer">
+                    <div class="jspPane"></div>
+                </div>
+            </div>
+        </div>
+        <div class="unit_col_right unit_col tbar_col_right_div tbar_col_div">
+            <div class="unit_add_btn button">+Unit</div>
+            <div class="clear_float"></div>
+            <div class="right_scroll_pane scroll-pane jspScrollable">
+                <div class="jspContainer">
+                    <div class="jspPane"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear_float"></div>
+    </li>
+    <!--tbar-->
 
-        <div id="mayday_and_tbar_container">
-              <div id="tbar_grid_layout_container" class="gridster">
-                <ul>
-                    <!--<li data-row="1" data-col="4" data-sizex="1" data-sizey="1">0</li>-->
-                    <!--<li data-row="2" data-col="4" data-sizex="1" data-sizey="1">1</li>-->
-                    <!--<li data-row="3" data-col="4" data-sizex="1" data-sizey="1">2</li>-->
-                </ul>
-              </div>
+    <!-- Unit Row Prototype -->
+    <div id="unit_row_div_prototype" class="unit_row_div">
+        <div class="tbar_unit_info_btn">
+            <div class="tbar_personnel_btn personnel_btn button_no_hover">P</div>
+            <div class="psi_green tbar_psi_btn psi_btn button_no_hover">4000</div>
+            <div class="clear_float"></div>
+        </div>
+        <label class="unit_move_checkbox"><input type="checkbox"/>Move?</label>
 
-                <!-- This is a T-Bar PROTOTYPE.  It will be hidden and cloned for all T-Bar's.-->
-                <li id="tbar_prototype" class="tbar">
-                    <div class="tbar_title_container">
-                        <button type="button" class="disabled par_btn button">PAR</button>
-                        <div class="title_btn button">
-                            <table>
-                                <tr>
-                                    <td class="tbar_title_dir_td"><div class="title_dir  title_btn_comp">N</div></td>
-                                    <td class="tbar_title_td">    <div class="title_text title_btn_comp">Sector Title</div></td>
-                                    <td class="tbar_title_num_td"><div class="title_num  title_btn_comp">8</div></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <button type="button" class="benchmark_btn button">
-                            <!--<img class='benchmarks_icon' src='images/benchmarks_0.png'/>-->
-                            <span class="benchmarks_icon">
-                                <img class="benchmark_bar_img_1 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
-                                <img class="benchmark_bar_img_2 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
-                                <img class="benchmark_bar_img_3 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
-                                <img class="benchmark_bar_img_4 benchmark_bar_img" src="images/benchmark_bar_black.png"/><br/>
-                            </span>
-                            BNCH
-                        </button>
-                        <div class="clear_float"></div>
-                    </div>
-                    <div class="unit_col_left unit_col tbar_col_left_div tbar_col_div">
-                        <div class="unit_move_btn button"><img class="move_btn_img" src="images/move_cross.png"/></div>
-                        <div class="unit_move_cancel_btn button">Cancel</div>
-                        <div class="unit_add_btn button">+Unit</div>
-                        <div class="clear_float"></div>
-                        <div class="left_scroll_pane scroll-pane jspScrollable">
-                            <div class="jspContainer">
-                                <div class="jspPane"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="action_col_right tbar_col_right_div tbar_col_div">
-                        <div class="acct_unit_btn button">@acct</div>
-                        <div class="action_add_btn button">+Action</div>
-                        <div class="clear_float"></div>
-                        <div class="right_scroll_pane scroll-pane jspScrollable">
-                            <div class="jspContainer">
-                                <div class="jspPane"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit_col_right unit_col tbar_col_right_div tbar_col_div">
-                        <div class="unit_add_btn button">+Unit</div>
-                        <div class="clear_float"></div>
-                        <div class="right_scroll_pane scroll-pane jspScrollable">
-                            <div class="jspContainer">
-                                <div class="jspPane"></div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="tbar_unit_btn unit_btn button">
+            <div class="unit_timer_bg">
+                <div class="unit_timer_bar"></div>
+            </div>
+            <div class="unit_text">Unit</div>
+        </div>
+        <div class="clear_float"></div>
+    </div>
+</div>
+<!-- mayday_and_tbar_container -->
+
+<div id="move_unit_screen_cover"></div>
+
+
+<!-- DIALOGS -->
+<div id="dialogContainer">
+<div id="dialog_vertical_align_cell" class="dialog_vertical_align_cell">
+<!-- This is a Dialog PROTOTYPE.  It will be hidden and cloned for some T-Bar's.-->
+<div id="dialog_prototype" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text"><span class="dialog_title_text_span"></span><span
+                class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid"></div>
+</div>
+
+
+<!-- Benchmarks Dialog Body -->
+<div id="benchmarks_dialog_body" class="dialog_body col-xs-12 container-fluid">
+    <div class="benchmark_col_container benchmark_0th_col_container">
+        <div id='benchmark_unable_primary' class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain
+            Primary
+        </div>
+        <div id='benchmark_unable_secondary' class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain
+            Secondary
+        </div>
+    </div>
+    <div class="benchmark_col_container benchmark_1st_col_container">
+        <div class="benchmark_btn_parent_div">
+            <div id="bnch_primary" class="benchmark_item_btn_primary benchmark_item_btn button">Primary All Clear</div>
+        </div>
+        <div class="benchmark_btn_parent_div">
+            <div id="bnch_underctl" class="benchmark_item_btn_primary benchmark_item_btn button">Under Control</div>
+        </div>
+        <div class="benchmark_btn_parent_div">
+            <div id="bnch_secondary" class="benchmark_item_btn_primary benchmark_item_btn button">Secondary All Clear
+            </div>
+        </div>
+        <div class="benchmark_btn_parent_div">
+            <div id="bnch_lossstop" class="benchmark_item_btn_primary benchmark_item_btn button">Loss Stop</div>
+        </div>
+    </div>
+    <div id="bnch_2nd_col_primary" class="benchmark_col_container benchmark_2nd_col_container">
+        <div id="bnch_primary_par" class="par_benchmark_btn benchmark_item_btn_secondary benchmark_item_btn button">
+            PAR
+        </div>
+        <div id="bnch_primary_notify" class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm</div>
+        <div id="bnch_primary_challenge" class="benchmark_item_btn_secondary benchmark_item_btn button">Challenge
+            Strategy
+        </div>
+    </div>
+    <div id="bnch_2nd_col_underctl" class="benchmark_col_container benchmark_2nd_col_container">
+        <div id="bnch_underctl_par" class="par_benchmark_btn benchmark_item_btn_secondary benchmark_item_btn button">
+            PAR
+        </div>
+        <div id="bnch_underctl_notify" class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm</div>
+        <div id="bnch_underctl_obtain" class="benchmark_item_btn_secondary benchmark_item_btn button">Obtain Secondary
+        </div>
+    </div>
+    <div id="bnch_2nd_col_secondary" class="benchmark_col_container benchmark_2nd_col_container">
+        <div id="bnch_secondary_par" class="par_benchmark_btn benchmark_item_btn_secondary benchmark_item_btn button">
+            PAR
+        </div>
+        <div id="bnch_secondary_notify" class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm
+        </div>
+    </div>
+    <div id="bnch_2nd_col_lossstop" class="benchmark_col_container benchmark_2nd_col_container">
+        <div id="bnch_lossstop_par" class="par_benchmark_btn benchmark_item_btn_secondary benchmark_item_btn button">
+            PAR
+        </div>
+        <div id="bnch_lossstop_notify" class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm</div>
+    </div>
+</div>
+
+<!-- Resume Command Dialog -->
+<div id="resume_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_body col-xs-12 container-fluid">
+        <div id="cmd_term_label">Command terminated at:</div>
+        <div id="resume_cmd_btn" class="button">Resume Command</div>
+        <div id="report_btn_2" class="header_item button">
+            <img class="report_icon" src="images/report.png"/>
+
+            <div>Reports</div>
+        </div>
+        <div id="new_incident_cmd_btn" class="button">Start New Incident</div>
+        <div class="clear_float"></div>
+    </div>
+</div>
+
+<!-- Command Transfer Dialog -->
+<div id="cmdxfer_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Command Transferred<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid">
+        <div id="from_unit_cmdxfer_btn" class="unit_cmdxfer_btn unit_btn dialog_btn button">UNIT</div>
+        <span id="cmdxfer_text">transferred command to</span>
+
+        <div id="to_unit_cmdxfer_btn" class="unit_cmdxfer_btn unit_btn dialog_btn button">UNIT</div>
+        <div class="clear_float"></div>
+    </div>
+</div>
+
+<!-- Street Name Dialog -->
+<div id="streetname_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Street Name<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid">
+        <input type="text" id="streetname_custom_input">
+
+        <div id="streetname_dlg_clear" class="button">Clear</div>
+        <div class="clear_float"></div>
+        <div>
+            <div id="streetname_dlg_ok" class="confirm_btn button">OK</div>
+            <div id="streetname_dlg_cancel" class="confirm_btn button">Cancel</div>
+            <div class="clear_float"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Address Dialog -->
+<div id="address_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Dispatch Address<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid">
+        <input type="text" id="address_custom_input">
+
+        <div id="address_dlg_clear" class="button">Clear</div>
+        <div class="clear_float"></div>
+        <div id="dispatch_address_btn_btn" class="button">Dispatch Address</div>
+        <div class="clear_float"></div>
+        <div>
+            <div id="address_dlg_ok" class="confirm_btn button">OK</div>
+            <div id="address_dlg_cancel" class="confirm_btn button">Cancel</div>
+            <div class="clear_float"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Unit People Dialog -->
+<div id="unit_people_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Unit<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12">
+        <div id="unit_people_dialog_row1" class="unit_people_dialog_row1"></div>
+        <div id="unit_people_dialog_row2" class="unit_people_dialog_row2"></div>
+    </div>
+</div>
+
+
+<!-- Emergency Traffic Dialog -->
+<div id="emergency_traffic_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Emergency Traffic<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid">
+        <div class="emergency_traffic_item_btn button">"Command to all units, switching to defensive operations."</div>
+        <div class="emergency_traffic_item_btn button">"I repeat switching to defensive operations."</div>
+        <div class="emergency_traffic_item_btn button">"ALL UNITS exit the structure & prepare for roll call."</div>
+    </div>
+</div>
+
+<!-- IAP Dialog -->
+<div id="iap_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Action Plan = Offensive or Defensive?<span
+                class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12">
+        <table id="iap_table_main">
+            <tr>
+                <td class="iap_label_td">Critical Fireground Factors:</td>
+                <td colspan="2">
+                    <div id="bldg_iap_btn" class="iap_toggle_btn button">Building</div>
+                    <div id="fire_iap_btn" class="iap_toggle_btn button">Fire</div>
+                    <div id="occu_iap_btn" class="iap_toggle_btn button">Occupancy</div>
+                    <div id="life_iap_btn" class="iap_toggle_btn button">Life Hazard</div>
+                    <div id="arra_iap_btn" class="iap_toggle_btn button">Arrangement</div>
+                    <div id="reso_iap_btn" class="iap_toggle_btn button">Resources</div>
+                    <div id="acti_iap_btn" class="iap_toggle_btn button">Action Effect</div>
+                    <div id="spec_iap_btn" class="iap_toggle_btn button">Special</div>
                     <div class="clear_float"></div>
-                </li><!--tbar-->
+                </td>
+            </tr>
+            <tr>
+                <td class="iap_red_label iap_label_td">Rescue:</td>
+                <td><textarea id="iap_resc_input" class="iap_input">Primary search</textarea></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="iap_blue_label iap_label_td">Fire Control:</td>
+                <td>
+                    <textarea id="iap_fire_input" class="iap_input">Supply line, attack +2</textarea>
+                </td>
+                <td>
+                    <div id="iap_vent_toggle_btn" class="iap_toggle_btn button">Vent</div>
+                    <div id="iap_sprinkler_toggle_btn" class="iap_toggle_btn button">Sprinkler</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="iap_blue_label iap_label_td">Property/People:</td>
+                <td>
+                    <textarea id="iap_prop_input" class="iap_input">Salvage</textarea>
 
-                <!-- Unit Row Prototype -->
-                <div id="unit_row_div_prototype" class="unit_row_div">
-                    <div class="tbar_unit_info_btn">
-                        <div class="tbar_personnel_btn personnel_btn button_no_hover">P</div>
-                        <div class="psi_green tbar_psi_btn psi_btn button_no_hover">4000</div>
-                        <div class="clear_float"></div>
+                    <div class="clear_both"></div>
+                    <div id="iap_evacloc_input_container">
+                        <textarea id="iap_evacloc_input" class="iap_input">Evacuation Location</textarea>
                     </div>
-                    <label class="unit_move_checkbox"><input type="checkbox"/>Move?</label>
-                    <div class="tbar_unit_btn unit_btn button">
-                        <div class="unit_timer_bg"><div class="unit_timer_bar"></div></div>
-                        <div class="unit_text">Unit</div>
-                    </div>
-                    <div class="clear_float"></div>
-                </div>
-		</div><!-- mayday_and_tbar_container -->
-
-        <div id="move_unit_screen_cover"></div>
-
-
-		<!-- DIALOGS -->
-		<div id="dialogContainer">
-            <div id="dialog_vertical_align_cell" class="dialog_vertical_align_cell">
-                <!-- This is a Dialog PROTOTYPE.  It will be hidden and cloned for some T-Bar's.-->
-                <div id="dialog_prototype" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text"><span class="dialog_title_text_span"></span><span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12 container-fluid"></div>
-                </div>
+                </td>
+                <td>
+                    <div id="iap_btn_evacloc" class="button">Show Evacuation Location</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="iap_red_label iap_label_td">Firefighter Safety:</td>
+                <td><textarea id="iap_safe_input" class="iap_input">IRIC to Recue, Acct. locations, Safety, Rehab +1
+                    unit</textarea></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- IAP Dialog -->
 
 
-                <!-- Benchmarks Dialog Body -->
-                <div id="benchmarks_dialog_body" class="dialog_body col-xs-12 container-fluid">
-                    <div class="benchmark_col_container benchmark_0th_col_container">
-                        <div id='benchmark_unable_primary'      class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain Primary</div>
-                        <div id='benchmark_unable_secondary'    class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain Secondary</div>
-                    </div>
-                    <div class="benchmark_col_container benchmark_1st_col_container">
-                        <div class="benchmark_btn_parent_div"><div id="bnch_primary"    class="benchmark_item_btn_primary benchmark_item_btn button">Primary All Clear</div>      </div>
-                        <div class="benchmark_btn_parent_div"><div id="bnch_underctl"   class="benchmark_item_btn_primary benchmark_item_btn button">Under Control</div>          </div>
-                        <div class="benchmark_btn_parent_div"><div id="bnch_secondary"  class="benchmark_item_btn_primary benchmark_item_btn button">Secondary All Clear</div>    </div>
-                        <div class="benchmark_btn_parent_div"><div id="bnch_lossstop"   class="benchmark_item_btn_primary benchmark_item_btn button">Loss Stop</div>              </div>
-                    </div>
-                    <div id="bnch_2nd_col_primary"      class="benchmark_col_container benchmark_2nd_col_container">
-                        <div id="bnch_primary_par"      class="par_benchmark_btn benchmark_item_btn_secondary benchmark_item_btn button">PAR</div>
-                        <div id="bnch_primary_notify"   class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm</div>
-                        <div id="bnch_primary_challenge"class="benchmark_item_btn_secondary benchmark_item_btn button">Challenge Strategy</div>
-                    </div>
-                    <div id="bnch_2nd_col_underctl"     class="benchmark_col_container benchmark_2nd_col_container">
-                        <div id="bnch_underctl_par"     class="par_benchmark_btn benchmark_item_btn_secondary benchmark_item_btn button">PAR</div>
-                        <div id="bnch_underctl_notify"  class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm</div>
-                        <div id="bnch_underctl_obtain"  class="benchmark_item_btn_secondary benchmark_item_btn button">Obtain Secondary</div>
-                    </div>
-                    <div id="bnch_2nd_col_secondary"    class="benchmark_col_container benchmark_2nd_col_container">
-                        <div id="bnch_secondary_par"    class="par_benchmark_btn benchmark_item_btn_secondary benchmark_item_btn button">PAR</div>
-                        <div id="bnch_secondary_notify" class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm</div>
-                    </div>
-                    <div id="bnch_2nd_col_lossstop"     class="benchmark_col_container benchmark_2nd_col_container">
-                        <div id="bnch_lossstop_par"     class="par_benchmark_btn benchmark_item_btn_secondary benchmark_item_btn button">PAR</div>
-                        <div id="bnch_lossstop_notify"  class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm</div>
-                    </div>
-                </div>
+<!-- Time Report Dialog -->
+<div id="time_report_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Reports<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid">
+        <div class="col-xs-12 container-fluid">
+            <div id="time_report_btn" class="report_toggle_btn button">Time Report</div>
+            <div id="sector_report_btn" class="report_toggle_btn button">Sector Report</div>
+            <div id="print_report_btn" class="button">
+                <img id="print_report_icon" src="images/printer.png"/>
+                Print
+            </div>
+            <div class="clear_float"></div>
+        </div>
+        <div id="time_report_dialog_body" class="report_dialog_body col-xs-12 container-fluid">
+            TESTING
+        </div>
+        <div id="sector_report_dialog_body" class="report_dialog_body col-xs-12 container-fluid">
 
-                <!-- Resume Command Dialog -->
-                <div id="resume_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_body col-xs-12 container-fluid">
-                        <div id="cmd_term_label">Command terminated at:</div>
-                        <div id="resume_cmd_btn" class="button">Resume Command</div>
-                        <div id="report_btn_2" class="header_item button">
-                            <img class="report_icon" src="images/report.png"/>
-                            <div>Reports</div>
-                        </div>
-                        <div id="new_incident_cmd_btn" class="button">Start New Incident</div>
-                        <div class="clear_float"></div>
-                    </div>
-                </div>
+        </div>
+    </div>
+</div>
 
-                <!-- Command Transfer Dialog -->
-                <div id="cmdxfer_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Command Transferred<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12 container-fluid">
-                        <div id="from_unit_cmdxfer_btn" class="unit_cmdxfer_btn unit_btn dialog_btn button">UNIT</div>
-                        <span id="cmdxfer_text">transferred command to</span>
-                        <div id="to_unit_cmdxfer_btn"   class="unit_cmdxfer_btn unit_btn dialog_btn button">UNIT</div>
-                        <div class="clear_float"></div>
-                    </div>
-                </div>
 
-                <!-- Street Name Dialog -->
-                <div id="streetname_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Street Name<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12 container-fluid">
-                        <input type="text" id="streetname_custom_input">
-                        <div id="streetname_dlg_clear" class="button">Clear</div>
-                        <div class="clear_float"></div>
-                        <div>
-                            <div id="streetname_dlg_ok" class="confirm_btn button">OK</div>
-                            <div id="streetname_dlg_cancel" class="confirm_btn button">Cancel</div>
+<!-- 10key keyboard Dialog -->
+<div id="key_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12 container-fluid">
+        <div class="dialog_title_text"><span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12">
+        <div id="key_output_value">Sector ####</div>
+        <div class="key_number_btn key_btn button">7</div>
+        <div class="key_number_btn key_btn button">8</div>
+        <div class="key_number_btn key_btn button">9</div>
+        <div class="clear_float"></div>
+        <div class="key_number_btn key_btn button">4</div>
+        <div class="key_number_btn key_btn button">5</div>
+        <div class="key_number_btn key_btn button">6</div>
+        <div class="clear_float"></div>
+        <div class="key_number_btn key_btn button">1</div>
+        <div class="key_number_btn key_btn button">2</div>
+        <div class="key_number_btn key_btn button">3</div>
+        <div class="clear_float"></div>
+        <div id="key_del_btn" class="key_btn button">DEL</div>
+        <div class="key_number_btn key_btn button">0</div>
+        <div id="key_ok_btn" class="key_btn button">OK</div>
+        <div class="clear_float"></div>
+
+    </div>
+</div>
+
+
+<!-- Mayday Clear Dialog -->
+<div id="mayday_clear_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Clear Mayday<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid">
+        <div class="mayday_clear_item_btn button">"Firefighter self rescued"</div>
+        <div class="mayday_clear_item_btn button">"Firefighter rescued"</div>
+        <div class="mayday_clear_item_btn button">"Firefighter MIA"</div>
+    </div>
+</div>
+
+<!-- Mayday Dialog -->
+<div id="mayday_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">MAYDAY<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="mayday_dialog_body" class="dialog_body col-xs-12">
+        <table id="mayday_table_main">
+            <tr>
+                <td id="mayday_left_td">
+                    <div id="mayday_scroll_div">
+                        <div id="new_mayday_btn" class="glowpink button">
+                            <img id="new_mayday_btn_icon" class='plus_icon' src='images/plus.png'/>
+
+                            <div id="new_mayday_btn_text">New Mayday</div>
                             <div class="clear_float"></div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Address Dialog -->
-                <div id="address_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Dispatch Address<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12 container-fluid">
-                        <input type="text" id="address_custom_input">
-                        <div id="address_dlg_clear" class="button">Clear</div>
-                        <div class="clear_float"></div>
-                        <div id="dispatch_address_btn_btn" class="button">Dispatch Address</div>
-                        <div class="clear_float"></div>
-                        <div>
-                            <div id="address_dlg_ok" class="confirm_btn button">OK</div>
-                            <div id="address_dlg_cancel" class="confirm_btn button">Cancel</div>
-                            <div class="clear_float"></div>
+                </td>
+                <td id="mayday_right_td">
+                    <div id="mayday_right_tab_div">
+                        <div id="mayday_right_tab_radio" class="mayday_right_tab_text tan_bg   button">Radio
+                            Transition
                         </div>
-                    </div>
-                </div>
-
-
-                <!-- Unit People Dialog -->
-                <div id="unit_people_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Unit<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12">
-                        <div id="unit_people_dialog_row1" class="unit_people_dialog_row1"></div>
-                        <div id="unit_people_dialog_row2" class="unit_people_dialog_row2"></div>
-                    </div>
-                </div>
-
-
-                <!-- Emergency Traffic Dialog -->
-                <div id="emergency_traffic_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Emergency Traffic<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12 container-fluid">
-                        <div class="emergency_traffic_item_btn button">"Command to all units, switching to defensive operations."</div>
-                        <div class="emergency_traffic_item_btn button">"I repeat switching to defensive operations."</div>
-                        <div class="emergency_traffic_item_btn button">"ALL UNITS exit the structure & prepare for roll call."</div>
-                    </div>
-                </div>
-
-                <!-- IAP Dialog -->
-                <div id="iap_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Action Plan = Offensive or Defensive?<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12">
-                        <table id="iap_table_main">
-                            <tr>
-                                <td class="iap_label_td">Critical Fireground Factors:</td>
-                                <td colspan="2">
-                                    <div id="bldg_iap_btn" class="iap_toggle_btn button">Building</div>
-                                    <div id="fire_iap_btn" class="iap_toggle_btn button">Fire</div>
-                                    <div id="occu_iap_btn" class="iap_toggle_btn button">Occupancy</div>
-                                    <div id="life_iap_btn" class="iap_toggle_btn button">Life Hazard</div>
-                                    <div id="arra_iap_btn" class="iap_toggle_btn button">Arrangement</div>
-                                    <div id="reso_iap_btn" class="iap_toggle_btn button">Resources</div>
-                                    <div id="acti_iap_btn" class="iap_toggle_btn button">Action Effect</div>
-                                    <div id="spec_iap_btn" class="iap_toggle_btn button">Special</div>
-                                    <div class="clear_float"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="iap_red_label iap_label_td">Rescue:</td>
-                                <td><textarea id="iap_resc_input" class="iap_input">Primary search</textarea></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="iap_blue_label iap_label_td">Fire Control:</td>
-                                <td>
-                                    <textarea id="iap_fire_input" class="iap_input">Supply line, attack +2</textarea>
-                                </td>
-                                <td>
-                                    <div id="iap_vent_toggle_btn" class="iap_toggle_btn button">Vent</div>
-                                    <div id="iap_sprinkler_toggle_btn" class="iap_toggle_btn button">Sprinkler</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="iap_blue_label iap_label_td">Property/People:</td>
-                                <td>
-                                    <textarea id="iap_prop_input" class="iap_input">Salvage</textarea>
-                                    <div class="clear_both"></div>
-                                    <div id="iap_evacloc_input_container">
-                                        <textarea id="iap_evacloc_input" class="iap_input">Evacuation Location</textarea>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div id="iap_btn_evacloc" class="button">Show Evacuation Location</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="iap_red_label iap_label_td">Firefighter Safety:</td>
-                                <td><textarea id="iap_safe_input" class="iap_input">IRIC to Recue, Acct. locations, Safety, Rehab +1 unit</textarea></td>
-                                <td></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <!-- IAP Dialog -->
-
-
-                <!-- Time Report Dialog -->
-                <div id="time_report_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Reports<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12 container-fluid">
-                        <div class="col-xs-12 container-fluid">
-                            <div id="time_report_btn" class="report_toggle_btn button">Time Report</div>
-                            <div id="sector_report_btn" class="report_toggle_btn button">Sector Report</div>
-                            <div id="print_report_btn" class="button">
-                                <img id="print_report_icon" src="images/printer.png"/>
-                                Print
-                            </div>
-                            <div class="clear_float"></div>
-                        </div>
-                        <div id="time_report_dialog_body" class="report_dialog_body col-xs-12 container-fluid">
-                            TESTING
-                        </div>
-                        <div id="sector_report_dialog_body" class="report_dialog_body col-xs-12 container-fluid">
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- 10key keyboard Dialog -->
-                <div id="key_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12 container-fluid">
-                        <div class="dialog_title_text"><span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12">
-                        <div id="key_output_value">Sector ####</div>
-                        <div class="key_number_btn key_btn button">7</div>
-                        <div class="key_number_btn key_btn button">8</div>
-                        <div class="key_number_btn key_btn button">9</div>
-                        <div class="clear_float"></div>
-                        <div class="key_number_btn key_btn button">4</div>
-                        <div class="key_number_btn key_btn button">5</div>
-                        <div class="key_number_btn key_btn button">6</div>
-                        <div class="clear_float"></div>
-                        <div class="key_number_btn key_btn button">1</div>
-                        <div class="key_number_btn key_btn button">2</div>
-                        <div class="key_number_btn key_btn button">3</div>
-                        <div class="clear_float"></div>
-                        <div id="key_del_btn" class="key_btn button">DEL</div>
-                        <div class="key_number_btn key_btn button">0</div>
-                        <div id="key_ok_btn" class="key_btn button">OK</div>
-                        <div class="clear_float"></div>
-
-                    </div>
-                </div>
-
-
-                <!-- Mayday Clear Dialog -->
-                <div id="mayday_clear_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Clear Mayday<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12 container-fluid">
-                        <div class="mayday_clear_item_btn button">"Firefighter self rescued"</div>
-                        <div class="mayday_clear_item_btn button">"Firefighter rescued"</div>
-                        <div class="mayday_clear_item_btn button">"Firefighter MIA"</div>
-                    </div>
-                </div>
-
-                <!-- Mayday Dialog -->
-                <div id="mayday_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">MAYDAY<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div id="mayday_dialog_body" class="dialog_body col-xs-12">
-                        <table id="mayday_table_main">
-                            <tr>
-                                <td id="mayday_left_td">
-                                    <div id="mayday_scroll_div">
-                                        <div id="new_mayday_btn" class="glowpink button">
-                                            <img id="new_mayday_btn_icon" class='plus_icon' src='images/plus.png'/>
-                                            <div id="new_mayday_btn_text">New Mayday</div>
-                                            <div class="clear_float"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td id="mayday_right_td">
-                                    <div id="mayday_right_tab_div">
-                                        <div id="mayday_right_tab_radio"  class="mayday_right_tab_text tan_bg   button">Radio Transition</div>
-                                        <div id="mayday_right_tab_grab"   class="mayday_right_tab_text green_bg button">GRAB-LIVES</div>
-                                        <div id="mayday_right_tab_deploy" class="mayday_right_tab_text gray_bg  button">Deployment</div>
-                                        <div id="mayday_right_tab_build"  class="mayday_right_tab_text blue_bg  button">Build Out</div>
-                                        <div class="clear_float"></div>
-                                    </div>
-                                    <div id="mayday_tab_div_radio" class="mayday_tab_div tan_bg">
-                                        <span class="mayday_list_title">Radio Transition and Alert</span>
-                                        <ul class="mayday_list">
-                                            <li class="">Emergency Traffic Declaration: Alert fireground that a MAYDAY has been declared</li>
-                                            <li class="">If needed move non-affected units to secondary radio channel</li>
-                                            <li class="list_level_2">Support officer/runs ongiong operations</li>
-                                            <li class="list_level_2">Fireground channel/command directs rescue</li>
-                                            <li class="">PAR conducted by Operations on secondary channel</li>
-                                            <li class="">Immediately request additional alarm(s)</li>
-                                        </ul>
-                                    </div>
-                                    <div id="mayday_tab_div_grab" class="mayday_tab_div green_bg">
-                                        <span class="mayday_list_title">GRAB-LIVES</span>
-                                        <ul id="mayday_list_grablives" class="mayday_list">
-                                            <li class="first_char_red list_med_font_size">Gauge <span class="sm_font">(CHECK AIR)</span></li>
-                                            <li class="first_char_red list_med_font_size">Radio <span class="sm_font">(CALL for Help)</span></li>
-                                            <li class="first_char_red list_med_font_size">Activate <span class="sm_font">(Pass)</span></li>
-                                            <li class="list_space_below first_char_red list_med_font_size">Breathing <span class="sm_font">(Control)</span></li>
-                                            <li class="first_char_red list_med_font_size">Low <span class="sm_font">(Stay Low)</span></li>
-                                            <li class="first_char_red list_med_font_size">Illuminate <span class="sm_font">(Flashlight)</span></li>
-                                            <li class="first_char_red list_med_font_size">Volume <span class="sm_font">(Make Noise)</span></li>
-                                            <li class="first_char_red list_med_font_size">Exit <span class="sm_font">(Find Exit)</span></li>
-                                            <li class="list_space_below first_char_red list_med_font_size">Shield Airway</li>
-                                            <li class="first_char_red list_med_font_size">Air Level:_______</li>
-                                        </ul>
-                                    </div>
-                                    <div id="mayday_tab_div_deploy" class="mayday_tab_div gray_bg">
-                                        <span class="mayday_list_title">Deployment Considerations</span>
-                                        <ul class="mayday_list">
-                                            <li class="list_space_below list_med_font_size">Deploy Rescue</li>
-                                            <li class="list_space_below list_med_font_size">Commit additional resources to the Rapid Intervention Team</li>
-                                            <li class="list_space_below list_med_font_size">Change Plan to a high priority rescue effort</li>
-                                            <li class="list_space_below list_med_font_size">Consider withdrawing companies from affected areas</li>
-                                            <li class="list_space_below list_med_font_size">Re-enforce firefighting positions</li>
-                                            <li class="list_space_below list_med_font_size">Open / Unlock all doors</li>
-                                            <li class="list_space_below list_med_font_size">Ventilate - maintain tenability</li>
-                                            <li class="list_space_below list_med_font_size">Provide additional lighting</li>
-                                            <li class="list_space_below list_med_font_size">Closely coordinate and control search efforts</li>
-                                            <li class="list_space_below list_med_font_size">Special call for TRT teams if needed</li>
-                                            <li class="list_space_below list_med_font_size">Monitor structural stability</li>
-                                            <li class="list_space_below list_med_font_size">Maintain strong supervision and control of crews</li>
-                                            <li class="list_space_below list_med_font_size">Assign additional chief officers to area of rescue</li>
-                                        </ul>
-                                    </div>
-                                    <div id="mayday_tab_div_build" class="mayday_tab_div blue_bg">
-                                        <span class="mayday_list_title">Build out command and Control</span>
-                                        <ul class="mayday_list">
-                                            <li class="list_space_below list_med_font_size">Use chief officers is critical location, fill out command team</li>
-                                            <li class="list_space_below list_med_font_size">Build/effective rehab</li>
-                                            <li class="list_space_below list_med_font_size">Control the media</li>
-                                            <li class="list_space_below list_med_font_size">Put medical sector in place</li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div id="mayday_info_div_prototype" class="yellow_bg mayday_info_div">
-                    <div class="mayday_box_title">Mayday #</div>
-                    <div class="glowbabyblue mayday_clear_btn button">Clear</div>
-                    <div class="clear_float"></div>
-                    <div>
-                        <span class="mayday_name_label">Name:</span>
-                        <input class="mayday_name_input" type="text"/>
-                        <div class="mayday_psi_btn psi_btn button">PSI</div>
+                        <div id="mayday_right_tab_grab" class="mayday_right_tab_text green_bg button">GRAB-LIVES</div>
+                        <div id="mayday_right_tab_deploy" class="mayday_right_tab_text gray_bg  button">Deployment</div>
+                        <div id="mayday_right_tab_build" class="mayday_right_tab_text blue_bg  button">Build Out</div>
                         <div class="clear_float"></div>
                     </div>
-
-                    <select class="mayday_sector_select mayday_select">
-                        <option disabled='disabled' selected='selected' class='default_option'>Sector</option>
-                    </select>
-                    <div class="mayday_sector_title"></div>
-                    <div class="mayday_units_div"></div>
-                    <div class="clear_float"></div>
-
-                    <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
-                    <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
-                    <div class="clear_float"></div>
-
-                    <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
-                    <div class="injured_mayday_btn mayday_toggle button">Injured</div>
-                    <div class="clear_float"></div>
-                </div>
-                <!-- Mayday Dialog -->
-
-                <!-- Objectives Dialog Unit Component Prototype -->
-                <div id="objectives_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Objectives<span class="dialog_close_btn button">Close</span></div>
+                    <div id="mayday_tab_div_radio" class="mayday_tab_div tan_bg">
+                        <span class="mayday_list_title">Radio Transition and Alert</span>
+                        <ul class="mayday_list">
+                            <li class="">Emergency Traffic Declaration: Alert fireground that a MAYDAY has been
+                                declared
+                            </li>
+                            <li class="">If needed move non-affected units to secondary radio channel</li>
+                            <li class="list_level_2">Support officer/runs ongiong operations</li>
+                            <li class="list_level_2">Fireground channel/command directs rescue</li>
+                            <li class="">PAR conducted by Operations on secondary channel</li>
+                            <li class="">Immediately request additional alarm(s)</li>
+                        </ul>
                     </div>
-                    <div id="objectives_dialog_body" class="dialog_body col-xs-12 container-fluid">
-                        <div id="objective_left_col">
-                            <div id="rescue_objective_btn" class="objective_btn button">Upgrade to full recue</div>
-                            <div id="safety_objective_btn" class="objective_btn button">Assing safety</div>
-                            <div id="establish_supply_objective_btn" class="objective_btn button">Establish supply line</div>
-                            <div id="secure_objective_btn" class="objective_btn button">Secure utilities</div>
-                            <div id="vent_objective_btn" class="objective_btn button">Ventilation</div>
-                            <div id="ondeck_objective_btn" class="objective_btn button">Create "On deck"</div>
-                            <div id="pressure_objective_btn" class="objective_btn button">Pressurize exposures</div>
-                            <div id="monitor_objective_btn" class="objective_btn button">Monitor channel 16</div>
-                            <div id="salvage_objective_btn" class="objective_btn button">Salvage</div>
-                            <div id="rehab_objective_btn" class="objective_btn button">Establish rehab</div>
-                            <div id="custsvc_objective_btn" class="objective_btn button">Customer service</div>
-                        </div>
-                        <div id="objective_right_col">
-                        </div>
+                    <div id="mayday_tab_div_grab" class="mayday_tab_div green_bg">
+                        <span class="mayday_list_title">GRAB-LIVES</span>
+                        <ul id="mayday_list_grablives" class="mayday_list">
+                            <li class="first_char_red list_med_font_size">Gauge <span class="sm_font">(CHECK AIR)</span>
+                            </li>
+                            <li class="first_char_red list_med_font_size">Radio <span
+                                    class="sm_font">(CALL for Help)</span></li>
+                            <li class="first_char_red list_med_font_size">Activate <span class="sm_font">(Pass)</span>
+                            </li>
+                            <li class="list_space_below first_char_red list_med_font_size">Breathing <span
+                                    class="sm_font">(Control)</span></li>
+                            <li class="first_char_red list_med_font_size">Low <span class="sm_font">(Stay Low)</span>
+                            </li>
+                            <li class="first_char_red list_med_font_size">Illuminate <span
+                                    class="sm_font">(Flashlight)</span></li>
+                            <li class="first_char_red list_med_font_size">Volume <span
+                                    class="sm_font">(Make Noise)</span></li>
+                            <li class="first_char_red list_med_font_size">Exit <span class="sm_font">(Find Exit)</span>
+                            </li>
+                            <li class="list_space_below first_char_red list_med_font_size">Shield Airway</li>
+                            <li class="first_char_red list_med_font_size">Air Level:_______</li>
+                        </ul>
                     </div>
-                </div>
-
-                <!-- OSR Dialog Unit Component Prototype -->
-                <div id="osr_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">On Scene Report (OSR)<span class="dialog_close_btn button">Close</span></div>
+                    <div id="mayday_tab_div_deploy" class="mayday_tab_div gray_bg">
+                        <span class="mayday_list_title">Deployment Considerations</span>
+                        <ul class="mayday_list">
+                            <li class="list_space_below list_med_font_size">Deploy Rescue</li>
+                            <li class="list_space_below list_med_font_size">Commit additional resources to the Rapid
+                                Intervention Team
+                            </li>
+                            <li class="list_space_below list_med_font_size">Change Plan to a high priority rescue
+                                effort
+                            </li>
+                            <li class="list_space_below list_med_font_size">Consider withdrawing companies from affected
+                                areas
+                            </li>
+                            <li class="list_space_below list_med_font_size">Re-enforce firefighting positions</li>
+                            <li class="list_space_below list_med_font_size">Open / Unlock all doors</li>
+                            <li class="list_space_below list_med_font_size">Ventilate - maintain tenability</li>
+                            <li class="list_space_below list_med_font_size">Provide additional lighting</li>
+                            <li class="list_space_below list_med_font_size">Closely coordinate and control search
+                                efforts
+                            </li>
+                            <li class="list_space_below list_med_font_size">Special call for TRT teams if needed</li>
+                            <li class="list_space_below list_med_font_size">Monitor structural stability</li>
+                            <li class="list_space_below list_med_font_size">Maintain strong supervision and control of
+                                crews
+                            </li>
+                            <li class="list_space_below list_med_font_size">Assign additional chief officers to area of
+                                rescue
+                            </li>
+                        </ul>
                     </div>
-                    <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
-                        <div id="osr_left_col">
-                            <div id="address_left_osr_btn" class="osr_btn button">Address</div>
-                            <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
-                            <div id="construction_osr_btn" class="osr_btn button">Construction</div>
-                            <div id="conditions_osr_btn" class="osr_btn button">Conditions</div>
-                            <div id="assumecmd_osr_btn" class="osr_btn button">Assume Command</div>
-                            <div id="location_osr_btn" class="osr_btn button">Location(mobile/cab)</div>
-                            <div id="mode_osr_btn" class="osr_btn button">Strategy (off./def.)</div>
-                            <div id="attack_osr_btn" class="osr_btn button">Attack line</div>
-                            <div id="water_osr_btn" class="osr_btn button">Water supply</div>
-                            <div id="iric_osr_btn" class="osr_btn button">IRIC</div>
-                            <div id="acct_osr_btn" class="osr_btn button">Accountability</div>
-                            <select id="osr_direction" class="osr_select">
-                                <option disabled="disabled" selected="selected">Accountability Direction</option>
-                                <option>North Side Accountability</option>
-                                <option>East Side Accountability</option>
-                                <option>South Side Accountability</option>
-                                <option>West Side Accountability</option>
-                                <option>Alpha Side Accountability</option>
-                                <option>Bravo Side Accountability</option>
-                                <option>Charlie Side Accountability</option>
-                                <option>Delta Side Accountability</option>
-                            </select>
-                        </div>
-                        <div id="osr_right_col">
-                            <div id="unit_osr_btn" class="button">Unit ID</div>
-                            <div id="osr_address_btn" class="button">Dispatch Address</div>
-
-                            <select id="osr_size_of_building" class="osr_select">
-                                <option disabled="disabled" selected="selected">Size of building</option>
-                                <option>Small building</option>
-                                <option>Medium building</option>
-                                <option>Large building</option>
-                            </select>
-
-                            <select id="osr_number_of_floors" class="osr_select">
-                                <option disabled="disabled" selected="selected">Number of floors</option>
-                                <option>1 floor</option>
-                                <option>2 floors</option>
-                                <option>3 floors</option>
-                                <option>4 floors</option>
-                                <option>5 floors</option>
-                                <option>6 floors</option>
-                                <option>7 floors</option>
-                                <option>8 floors</option>
-                                <option>9 floors</option>
-                                <option>10 floors</option>
-                                <option>11 floors</option>
-                                <option>12 floors</option>
-                                <option>13 floors</option>
-                                <option>14 floors</option>
-                                <option>15 floors</option>
-                                <option>16 floors</option>
-                                <option>17 floors</option>
-                                <option>18 floors</option>
-                                <option>19 floors</option>
-                                <option>20 floors</option>
-                                <option>21 floors</option>
-                                <option>22 floors</option>
-                                <option>23 floors</option>
-                                <option>24 floors</option>
-                                <option>25 floors</option>
-                            </select>
-
-                            <select id="osr_select_type_of_building" class="osr_select">
-                                <option disabled="disabled" selected="selected">Type of building</option>
-                                <option>Residential Home</option>
-                                <option>Duplex</option>
-                                <option>Mobile Home</option>
-                                <option>Apartment</option>
-                                <option>Hotel</option>
-                                <option>Strip Mall</option>
-                                <option>Strip Mall with Big Box</option>
-                                <option>Office Complex</option>
-                                <option>Big Box Retail</option>
-                                <option>Specialized/Other</option>
-                            </select>
-
-                            <select id="osr_number_of_subfloors" class="osr_select">
-                                <option disabled="disabled" selected="selected">Sub Floors</option>
-                                <option>None</option>
-                                <option>-1 floor</option>
-                                <option>-2 floors</option>
-                            </select>
-
-                            <div class="osr_toggle_container_div">
-                                <div id="osr_occupancy_basement_btn" class="osr_toggle_btn button">Basement</div>
-                                <div id="osr_occupancy_nobasement_btn" class="osr_toggle_btn button">No Basement</div>
-                            </div>
-
-                            <select id="osr_select_type_of_construction" class="osr_select">
-                                <option disabled="disabled" selected="selected">Construction type</option>
-                                <option>Light weight construction</option>
-                                <option>Wood frame construction</option>
-                                <option>Block construction</option>
-                                <option>Brick construction</option>
-                                <option>Tilt slab construction</option>
-                                <option>Specialized/Other construction</option>
-                            </select>
-
-                            <select id="osr_select_roof" class="osr_select">
-                                <option disabled="disabled" selected="selected">Roof</option>
-                                <option>Pitched - tile roof</option>
-                                <option>Pitched - asphalt roof</option>
-                                <option>Pitched - wood shingle roof</option>
-                                <option>Flat roof</option>
-                                <option>Arched roof</option>
-                            </select>
-
-                            <select id="osr_select_conditions" class="osr_select">
-                                <option disabled="disabled" selected="selected">Conditions</option>
-                                <option>Nothing showing</option>
-                                <option>Smoke showing</option>
-                                <option>Smoke & Fire showing</option>
-                                <option>Fully Involved</option>
-                                <option>Attic Fire</option>
-                            </select>
-
-                            <div class="osr_toggle_container_div">
-                                <div id="osr_occupancy_mob_btn" class="osr_toggle_btn button">Mobile</div>
-                                <div id="osr_occupancy_stat_btn" class="osr_toggle_btn button">Stationary</div>
-                            </div>
-
-                            <div class="osr_toggle_container_div">
-                                <div id="osr_occupancy_off_btn" class="osr_toggle_btn button">Offensive</div>
-                                <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
-                            </div>
-                        </div>
-                        <div style="width:100%" class="clear_float"></div>
+                    <div id="mayday_tab_div_build" class="mayday_tab_div blue_bg">
+                        <span class="mayday_list_title">Build out command and Control</span>
+                        <ul class="mayday_list">
+                            <li class="list_space_below list_med_font_size">Use chief officers is critical location,
+                                fill out command team
+                            </li>
+                            <li class="list_space_below list_med_font_size">Build/effective rehab</li>
+                            <li class="list_space_below list_med_font_size">Control the media</li>
+                            <li class="list_space_below list_med_font_size">Put medical sector in place</li>
+                        </ul>
                     </div>
-                </div> <!-- OSR Dialog Unit Component Prototype -->
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 
-                <!-- NDA Reminder Dialog -->
-                <div id="nda_reminder_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Reminder<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div class="dialog_body col-xs-12 container-fluid">
-                        Just a reminder that you have signed an NDA agreement in order to use this software.  Sharing this software, discussing its details or providing visual, logical or technical details of it with unauthorized people and organizations is prohibited.  Thank you for helping us improve!
-                    </div>
-                </div>
+<div id="mayday_info_div_prototype" class="yellow_bg mayday_info_div">
+    <div class="mayday_box_title">Mayday #</div>
+    <div class="glowbabyblue mayday_clear_btn button">Clear</div>
+    <div class="clear_float"></div>
+    <div>
+        <span class="mayday_name_label">Name:</span>
+        <input class="mayday_name_input" type="text"/>
 
-                <!-- Upgrade Dialog -->
-                <div id="upgrade_dialog" class="dialog dialog_window container-fluid">
-                    <div class="dialog_title col-xs-12">
-                        <div class="dialog_title_text">Upgrade<span class="dialog_close_btn button">Close</span></div>
-                    </div>
-                    <div id="upgrade_dialog_body" class="dialog_body col-xs-12 container-fluid">
-                        <div id="upgrade_left_col">
-                            <div id="enroute_upgrade_btn" class="left_upgrade_btn upgrade_btn button">En Route</div>
-                            <div id="onscene_upgrade_btn" class="left_upgrade_btn upgrade_btn button">On Scene</div>
-                        </div>
-                        <div id="upgrade_middle_col">
-                            <div id="balance_upgrade_btn" class="middle_upgrade_btn upgrade_btn button">Balance To</div>
-                        </div>
-                        <div id="upgrade_right_col">
-                            <div id="working_upgrade_btn"   class="right_upgrade_btn upgrade_btn button">Working Fire</div>
-                            <div id="first_upgrade_btn"     class="right_upgrade_btn upgrade_btn button">1st Alarm</div>
-                            <div id="second_upgrade_btn"    class="right_upgrade_btn upgrade_btn button">2nd Alarm</div>
-                            <div id="third_upgrade_btn"     class="right_upgrade_btn upgrade_btn button">3rd Alarm</div>
-                            <div id="fourth_upgrade_btn"    class="right_upgrade_btn upgrade_btn button">4th Alarm</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="mayday_psi_btn psi_btn button">PSI</div>
+        <div class="clear_float"></div>
+    </div>
 
-            </div> <!-- dialogContainer -->
-			
-			
-			<!-- PAR Dialog Unit Component Prototype -->
-            <div id="par_dialog_unit_prototype" class="par_dialog_unit">
-                <div class="par_dialog_unit_leftcol">
-                    <div class="personnel_par_btn personnel_btn button">P</div>
-                    <div class="psi_par_btn psi_btn button">PSI</div>
-                    <div class="par_unit_btn par_dialog_btn unit_btn button">XXX</div>
-                    <div class="clear_float"></div>
-                    <div class="mayday_par_btn button">Mayday</div>
-                </div>
-                <div class="par_dialog_people"></div>
-                <div class="clear_float"></div>
-			</div>
-			
-		</div><!--dialogContainer-->
+    <select class="mayday_sector_select mayday_select">
+        <option disabled='disabled' selected='selected' class='default_option'>Sector</option>
+    </select>
 
-        <div id="version_text">Version: 0.0</div>
-    </body>
+    <div class="mayday_sector_title"></div>
+    <div class="mayday_units_div"></div>
+    <div class="clear_float"></div>
+
+    <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
+    <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
+    <div class="clear_float"></div>
+
+    <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
+    <div class="injured_mayday_btn mayday_toggle button">Injured</div>
+    <div class="clear_float"></div>
+</div>
+<!-- Mayday Dialog -->
+
+<!-- Objectives Dialog Unit Component Prototype -->
+<div id="objectives_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Objectives<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="objectives_dialog_body" class="dialog_body col-xs-12 container-fluid">
+        <div id="objective_left_col">
+            <div id="rescue_objective_btn" class="objective_btn button">Upgrade to full recue</div>
+            <div id="safety_objective_btn" class="objective_btn button">Assing safety</div>
+            <div id="establish_supply_objective_btn" class="objective_btn button">Establish supply line</div>
+            <div id="secure_objective_btn" class="objective_btn button">Secure utilities</div>
+            <div id="vent_objective_btn" class="objective_btn button">Ventilation</div>
+            <div id="ondeck_objective_btn" class="objective_btn button">Create "On deck"</div>
+            <div id="pressure_objective_btn" class="objective_btn button">Pressurize exposures</div>
+            <div id="monitor_objective_btn" class="objective_btn button">Monitor channel 16</div>
+            <div id="salvage_objective_btn" class="objective_btn button">Salvage</div>
+            <div id="rehab_objective_btn" class="objective_btn button">Establish rehab</div>
+            <div id="custsvc_objective_btn" class="objective_btn button">Customer service</div>
+        </div>
+        <div id="objective_right_col">
+        </div>
+    </div>
+</div>
+
+<!-- OSR Dialog Unit Component Prototype -->
+<div id="osr_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">On Scene Report (OSR)<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
+        <div id="osr_left_col">
+            <div id="address_left_osr_btn" class="osr_btn button">Address</div>
+            <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
+            <div id="construction_osr_btn" class="osr_btn button">Construction</div>
+            <div id="conditions_osr_btn" class="osr_btn button">Conditions</div>
+            <div id="assumecmd_osr_btn" class="osr_btn button">Assume Command</div>
+            <div id="location_osr_btn" class="osr_btn button">Location(mobile/cab)</div>
+            <div id="mode_osr_btn" class="osr_btn button">Strategy (off./def.)</div>
+            <div id="attack_osr_btn" class="osr_btn button">Attack line</div>
+            <div id="water_osr_btn" class="osr_btn button">Water supply</div>
+            <div id="iric_osr_btn" class="osr_btn button">IRIC</div>
+            <div id="acct_osr_btn" class="osr_btn button">Accountability</div>
+            <select id="osr_direction" class="osr_select">
+                <option disabled="disabled" selected="selected">Accountability Direction</option>
+                <option>North Side Accountability</option>
+                <option>East Side Accountability</option>
+                <option>South Side Accountability</option>
+                <option>West Side Accountability</option>
+                <option>Alpha Side Accountability</option>
+                <option>Bravo Side Accountability</option>
+                <option>Charlie Side Accountability</option>
+                <option>Delta Side Accountability</option>
+            </select>
+        </div>
+        <div id="osr_right_col">
+            <div id="unit_osr_btn" class="button">Unit ID</div>
+            <div id="osr_address_btn" class="button">Dispatch Address</div>
+
+            <select id="osr_size_of_building" class="osr_select">
+                <option disabled="disabled" selected="selected">Size of building</option>
+                <option>Small building</option>
+                <option>Medium building</option>
+                <option>Large building</option>
+            </select>
+
+            <select id="osr_number_of_floors" class="osr_select">
+                <option disabled="disabled" selected="selected">Number of floors</option>
+                <option>1 floor</option>
+                <option>2 floors</option>
+                <option>3 floors</option>
+                <option>4 floors</option>
+                <option>5 floors</option>
+                <option>6 floors</option>
+                <option>7 floors</option>
+                <option>8 floors</option>
+                <option>9 floors</option>
+                <option>10 floors</option>
+                <option>11 floors</option>
+                <option>12 floors</option>
+                <option>13 floors</option>
+                <option>14 floors</option>
+                <option>15 floors</option>
+                <option>16 floors</option>
+                <option>17 floors</option>
+                <option>18 floors</option>
+                <option>19 floors</option>
+                <option>20 floors</option>
+                <option>21 floors</option>
+                <option>22 floors</option>
+                <option>23 floors</option>
+                <option>24 floors</option>
+                <option>25 floors</option>
+            </select>
+
+            <select id="osr_select_type_of_building" class="osr_select">
+                <option disabled="disabled" selected="selected">Type of building</option>
+                <option>Residential Home</option>
+                <option>Duplex</option>
+                <option>Mobile Home</option>
+                <option>Apartment</option>
+                <option>Hotel</option>
+                <option>Strip Mall</option>
+                <option>Strip Mall with Big Box</option>
+                <option>Office Complex</option>
+                <option>Big Box Retail</option>
+                <option>Specialized/Other</option>
+            </select>
+
+            <select id="osr_number_of_subfloors" class="osr_select">
+                <option disabled="disabled" selected="selected">Sub Floors</option>
+                <option>None</option>
+                <option>-1 floor</option>
+                <option>-2 floors</option>
+            </select>
+
+            <div class="osr_toggle_container_div">
+                <div id="osr_occupancy_basement_btn" class="osr_toggle_btn button">Basement</div>
+                <div id="osr_occupancy_nobasement_btn" class="osr_toggle_btn button">No Basement</div>
+            </div>
+
+            <select id="osr_select_type_of_construction" class="osr_select">
+                <option disabled="disabled" selected="selected">Construction type</option>
+                <option>Light weight construction</option>
+                <option>Wood frame construction</option>
+                <option>Block construction</option>
+                <option>Brick construction</option>
+                <option>Tilt slab construction</option>
+                <option>Specialized/Other construction</option>
+            </select>
+
+            <select id="osr_select_roof" class="osr_select">
+                <option disabled="disabled" selected="selected">Roof</option>
+                <option>Pitched - tile roof</option>
+                <option>Pitched - asphalt roof</option>
+                <option>Pitched - wood shingle roof</option>
+                <option>Flat roof</option>
+                <option>Arched roof</option>
+            </select>
+
+            <select id="osr_select_conditions" class="osr_select">
+                <option disabled="disabled" selected="selected">Conditions</option>
+                <option>Nothing showing</option>
+                <option>Smoke showing</option>
+                <option>Smoke & Fire showing</option>
+                <option>Fully Involved</option>
+                <option>Attic Fire</option>
+            </select>
+
+            <div class="osr_toggle_container_div">
+                <div id="osr_occupancy_mob_btn" class="osr_toggle_btn button">Mobile</div>
+                <div id="osr_occupancy_stat_btn" class="osr_toggle_btn button">Stationary</div>
+            </div>
+
+            <div class="osr_toggle_container_div">
+                <div id="osr_occupancy_off_btn" class="osr_toggle_btn button">Offensive</div>
+                <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
+            </div>
+        </div>
+        <div style="width:100%" class="clear_float"></div>
+    </div>
+</div>
+<!-- OSR Dialog Unit Component Prototype -->
+
+<!-- NDA Reminder Dialog -->
+<div id="nda_reminder_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Reminder<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid">
+        Just a reminder that you have signed an NDA agreement in order to use this software. Sharing this software,
+        discussing its details or providing visual, logical or technical details of it with unauthorized people and
+        organizations is prohibited. Thank you for helping us improve!
+    </div>
+</div>
+
+<!-- Upgrade Dialog -->
+<div id="upgrade_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Upgrade<span class="dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="upgrade_dialog_body" class="dialog_body col-xs-12 container-fluid">
+        <div id="upgrade_left_col">
+            <div id="enroute_upgrade_btn" class="left_upgrade_btn upgrade_btn button">En Route</div>
+            <div id="onscene_upgrade_btn" class="left_upgrade_btn upgrade_btn button">On Scene</div>
+        </div>
+        <div id="upgrade_middle_col">
+            <div id="balance_upgrade_btn" class="middle_upgrade_btn upgrade_btn button">Balance To</div>
+        </div>
+        <div id="upgrade_right_col">
+            <div id="working_upgrade_btn" class="right_upgrade_btn upgrade_btn button">Working Fire</div>
+            <div id="first_upgrade_btn" class="right_upgrade_btn upgrade_btn button">1st Alarm</div>
+            <div id="second_upgrade_btn" class="right_upgrade_btn upgrade_btn button">2nd Alarm</div>
+            <div id="third_upgrade_btn" class="right_upgrade_btn upgrade_btn button">3rd Alarm</div>
+            <div id="fourth_upgrade_btn" class="right_upgrade_btn upgrade_btn button">4th Alarm</div>
+        </div>
+    </div>
+</div>
+
+</div>
+<!-- dialogContainer -->
+
+
+<!-- PAR Dialog Unit Component Prototype -->
+<div id="par_dialog_unit_prototype" class="par_dialog_unit">
+    <div class="par_dialog_unit_leftcol">
+        <div class="personnel_par_btn personnel_btn button">P</div>
+        <div class="psi_par_btn psi_btn button">PSI</div>
+        <div class="par_unit_btn par_dialog_btn unit_btn button">XXX</div>
+        <div class="clear_float"></div>
+        <div class="mayday_par_btn button">Mayday</div>
+    </div>
+    <div class="par_dialog_people"></div>
+    <div class="clear_float"></div>
+</div>
+
+</div>
+<!--dialogContainer-->
+
+<div id="version_text">Version: 0.0</div>
+</body>
 </html>

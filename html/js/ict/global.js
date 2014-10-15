@@ -2176,7 +2176,8 @@ function initUpgradeDialog() {
         0,                  // onOpenCallback_
         0,
         function () {        // onCloseCallback_
-            console.log("close upgrade dialog");
+            $(".left_upgrade_btn").removeClass("glowlightgreen");
+            $(".middle_upgrade_btn").removeClass("glowlightgreen");
         }
     ));
 //    $("#upgrade_btn").click(showDialog(0, 0, "#upgrade_dialog"));
