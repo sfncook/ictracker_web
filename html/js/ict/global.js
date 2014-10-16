@@ -1924,8 +1924,9 @@ function toggleUnitButtonForTbar(unit_col_container) {
 }
 function removeUnitButton(unit_col_container, unitName) {
     // Update Units Dialog
-    $(".unit_dialog_btn:contains('" + unitName + "')").removeClass("glowlightgreen");
-
+    $(".unit_dialog_btn").filter(function () {
+        return $(this).text() === unitName;
+    }).removeClass("glowlightgreen");
 
     if (typeof unit_col_container != 'undefined' && unit_col_container != 0) {
         var tbar = unit_col_container.parents(".tbar");
@@ -1951,7 +1952,7 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
     // Update Units Dialog
     $(".unit_dialog_btn").filter(function () {
         return $(this).text() === unitName;
-    }).addClass("glowlightgreen")
+    }).addClass("glowlightgreen");
 
     if (typeof unit_col_container != 'undefined' && unit_col_container != 0) {
         unitRowDivSerialId++;
@@ -2086,6 +2087,7 @@ function addTbar(col_x, row_y) {
             function () {
                 $(".unit_dialog_btn").removeClass("glowlightgreen");
                 $(".unit_dialog_btn:contains('" + acctBtn.html() + "')").addClass("glowlightgreen");
+
             },
             function (unitName) {
                 addEvent_unit_to_acct(unitName, tbar.find(".title_text").text());
