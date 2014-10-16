@@ -634,6 +634,8 @@ td {
 #title_dispatched_units_div {
     color: #999;
     margin: 1px;
+    width: 200px;
+    float: left;
 }
 
 .dispatched_unit_btn {
@@ -655,7 +657,9 @@ td {
 
 #dispatched_delete_start_btn {
     float: right;
-    margin-right: 8px;
+    margin-right: 3px;
+    margin-top: 1px;
+    padding: 0;
 }
 
 .delete_dispatched_unit_btn:hover {

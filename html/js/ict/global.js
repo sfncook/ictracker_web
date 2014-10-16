@@ -1662,7 +1662,9 @@ function initUnitsDialog() {
 
     var dispactedUnitsDiv = $('<div id="dispatched_units_div"></div>').appendTo(dialog_body);
     dispactedUnitsDiv.append($('<div id="title_dispatched_units_div">Dispatched Units</div>'));
-    dispactedUnitsDiv.append($('<div id="units_dispatched_units_div"><div id="dispatched_delete_start_btn" class="button">DELETE</div> <div id="units_dispatched_units_div_clear_float" class="clear_float"> </div></div>'));
+    dispactedUnitsDiv.append($('<div id="dispatched_delete_start_btn" class="button">DELETE</div>'));
+    dispactedUnitsDiv.append($('<div class="clear_float"></div>'));
+    dispactedUnitsDiv.append($('<div id="units_dispatched_units_div"><div id="units_dispatched_units_div_clear_float" class="clear_float"> </div></div>'));
     var citiesDiv = $('<div id="units_dialog_cities_div"></div>').appendTo(dialog_body);
     var typesDiv = $('<div id="units_dialog_types_div"></div>').appendTo(dialog_body);
     ;
