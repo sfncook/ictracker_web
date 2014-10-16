@@ -368,14 +368,6 @@ td {
     height: 25px;
 }
 
-#branch_btn {
-    margin-bottom: 10px;
-}
-
-#iap_btn {
-    margin-top: 10px;
-}
-
 #time {
     text-align: center;
     font-family: 'Carrois Gothic SC';
@@ -522,21 +514,21 @@ td {
     height: 20px;
 }
 
-#header_row2 {
-    display: table;
-    height: -moz-calc(100% -350px);
-    height: -webkit-calc(100% -350px);
-    height: calc(100% -350px);
-    width: 92px;
-}
+/*#header_row2 {*/
+/*display: table;*/
+/*height: -moz-calc(100% -350px);*/
+/*height: -webkit-calc(100% -350px);*/
+/*height: calc(100% -350px);*/
+/*width: 92px;*/
+/*}*/
 
-#header_row3 {
-    position: absolute;
-    bottom: 10px;
-    right: 2px;
-    width: 94px;
-    padding: 2px;
-}
+/*#header_row3 {*/
+/*position: absolute;*/
+/*bottom: 10px;*/
+/*right: 2px;*/
+/*width: 94px;*/
+/*padding: 2px;*/
+/*}*/
 
 /*
  **** DIALOG ITEMS ****
@@ -1236,7 +1228,6 @@ td {
 }
 
 #objectives_header_btn {
-    margin-top: 10px;
     height: 45px;
 }
 
