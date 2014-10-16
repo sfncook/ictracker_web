@@ -153,7 +153,7 @@ td {
     text-align: center;
     background: #CCC;
     color: black;
-    border: none;
+    border: 1px solid #9a9a9a;
     border-radius: 3px;
     padding: 4px 4px 4px 4px;
     cursor: pointer;
@@ -621,11 +621,11 @@ td {
 }
 
 #units_dialog {
-    width: 855px;
+    width: 927px;
 }
 
 #dispatched_units_div {
-    width: 846px;
+    width: 916px;
     min-height: 60px;
     margin: 2px;
     border: 3px double #666;
@@ -668,14 +668,14 @@ td {
 
 #units_dialog_cities_div {
     display: block;
-    padding-left: 80px;
+    padding-left: 170px;
     border-bottom: 1px solid #999;
 }
 
 #units_dialog_types_div {
     display: block;
     float: left;
-    width: 80px;
+    width: 165px;
     height: 450px;
     border-right: 1px solid #999;
 }
@@ -695,7 +695,7 @@ td {
 .unitCity_dialog_btn {
     width: 70px;
     height: 20px;
-    padding: 2;
+    padding: 0;
     float: left;
     margin: 5px;
 }
@@ -715,9 +715,10 @@ td {
 
 .unitType_dialog_btn {
     width: 70px;
-    height: 20px;
-    padding: 2px;
-    margin: 5px;
+    height: 25px;
+    padding: 2;
+    margin: 8px 8px 0 4px;
+    float: left;
 }
 
 #psi_dialog {

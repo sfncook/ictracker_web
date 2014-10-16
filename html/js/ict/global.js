@@ -650,7 +650,9 @@ function showSectorDialog(tbar, btn, dialogId) {
         $(".title_text").each(function (index) {
             var title_text = $(this).html();
             if (title_text != "") {
-                $(".title_dialog_btn:contains('" + title_text + "')").addClass("glowlightgreen");
+                $(".title_dialog_btn").filter(function () {
+                    return $(this).text() === title_text;
+                }).addClass("glowlightgreen");
             }
         });
     }
@@ -1885,7 +1887,9 @@ function updateDispatchUnitsHighlight() {
     $(".tbar").each(function (index, tbar) {
         $(tbar).find(".unit_text").each(function (index, tbarUnitBtn) {
             var html = $(tbarUnitBtn).html();
-            $(".dispatched_unit_btn:contains('" + html + "')").addClass("glowlightgreen");
+            $(".dispatched_unit_btn").filter(function () {
+                return $(this).text() === html;
+            }).addClass("glowlightgreen");
         });
     });
 }
@@ -1894,14 +1898,21 @@ function onOpenUnitsDialogFromTbar(tbar) {
         $(".unit_dialog_btn").removeClass("glowlightgreen");
         $.each(tbar.find(".unit_text"), function (index, tbarUnitBtn) {
             var html = $(tbarUnitBtn).html();
-            $(".unit_dialog_btn:contains('" + html + "')").addClass("glowlightgreen");
+            $(".unit_dialog_btn").filter(function () {
+                return $(this).text() === html;
+            }).addClass("glowlightgreen");
         });
         updateDispatchUnitsHighlight();
     }
 }
 function toggleUnitButtonForTbar(unit_col_container) {
     return function (unitName) {
-        if ($(".unit_dialog_btn:contains('" + unitName + "')").hasClass("glowlightgreen")) {
+
+        var unit_dialog_btn = $(".unit_dialog_btn").filter(function () {
+            return $(this).text() === unitName;
+        });
+
+        if (unit_dialog_btn.hasClass("glowlightgreen")) {
             removeUnitButton(unit_col_container, unitName);
         } else {
             addUnitButton(unit_col_container, unitName);
@@ -1938,7 +1949,9 @@ var unitRowDivSerialId = 1;
 function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
     // Update Units Dialog
-    $(".unit_dialog_btn:contains('" + unitName + "')").addClass("glowlightgreen");
+    $(".unit_dialog_btn").filter(function () {
+        return $(this).text() === unitName;
+    }).addClass("glowlightgreen")
 
     if (typeof unit_col_container != 'undefined' && unit_col_container != 0) {
         unitRowDivSerialId++;
