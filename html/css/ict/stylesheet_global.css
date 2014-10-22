@@ -122,14 +122,14 @@ td {
 }
 
 #title_icon {
-    width: 90px;
-    height: 90px;
+    width: 29px;
+    height: 29px;
     border: 1px solid #AAA;
     border-radius: 3px;
-}
-
-#title_icon:hover {
-    /*cursor: pointer;*/
+    position: fixed;
+    bottom: 30px;
+    left: 10px;
+    z-index: 150;
 }
 
 .footer {
