@@ -1377,6 +1377,7 @@ function initOsrDialog() {
                     $("#units_dialog").hide();
                     $("#osr_dialog").show();
                     saveCookieState();
+                    updateOsrPercentComplete();
                 }
             )();
         }
