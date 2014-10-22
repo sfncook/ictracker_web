@@ -2630,9 +2630,7 @@ function tbarToJson(tbarEl) {
     return JSON.stringify(tbarObj);
 }
 function deleteAllCookies() {
-    for (var key in $.cookie()) {
-        $.removeCookie(key);
-    }
+    localStorage.clear();
 }
 function osrToJson() {
     var osr = {};
@@ -2685,30 +2683,30 @@ function saveCookieState() {
         deleteAllCookies();
 
         // App version
-        $.cookie('previous_app_version', $('#version_text').html());
+        localStorage.setItem('previous_app_version', $('#version_text').html());
 
-        $.cookie('is_incident_running', isIncidentRunning);
+        localStorage.setItem('is_incident_running', isIncidentRunning);
 
         // Tbars
         $(".tbar").each(function (index, tbar) {
             if ($(tbar).attr('id') != 'tbar_prototype') {
                 var tbarJson = tbarToJson($(tbar));
                 var tbar_key = "tbar_" + $(tbar).data("col") + "_" + $(tbar).data("row");
-                $.cookie('tbar_' + tbar_key, tbarJson);
+                localStorage.setItem('tbar_' + tbar_key, tbarJson);
             }
         });
 
         // Timer
-        $.cookie('t0', t0);
+        localStorage.setItem('t0', t0);
 
         // Mode
         var mode_btn = $("#mode_btn");
-        $.cookie('mode', mode_btn.html());
+        localStorage.setItem('mode', mode_btn.html());
 
         // Mayday
         // Street Name
         var streetname_btn = $("#streetname_btn");
-        $.cookie('streetname_btn', streetname_btn.html());
+        localStorage.setItem('streetname_btn', streetname_btn.html());
 
         // Dispatched Units
         var dispatched_units = new Array();
@@ -2717,7 +2715,7 @@ function saveCookieState() {
             dispatched_unit_text = dispatched_unit_text.substring(0, dispatched_unit_text.length - 1);
             dispatched_units.push(dispatched_unit_text);
         });
-        $.cookie('dispatched_units', JSON.stringify(dispatched_units));
+        localStorage.setItem('dispatched_units', JSON.stringify(dispatched_units));
 
         // Upgrade
         var upgrade_btns = new Array();
@@ -2729,10 +2727,10 @@ function saveCookieState() {
             };
             upgrade_btns.push(objToAdd);
         });
-        $.cookie('upgrade_btns', JSON.stringify(upgrade_btns));
+        localStorage.setItem('upgrade_btns', JSON.stringify(upgrade_btns));
 
         // OSR
-        $.cookie('osr', osrToJson());
+        localStorage.setItem('osr', osrToJson());
 
         // Objectives
         var objective_btns = new Array();
@@ -2743,7 +2741,7 @@ function saveCookieState() {
             };
             objective_btns.push(objToAdd);
         });
-        $.cookie('objective_btns', JSON.stringify(objective_btns));
+        localStorage.setItem('objective_btns', JSON.stringify(objective_btns));
 
         // IAP
         var iap_toggle_btns = new Array();
@@ -2755,7 +2753,7 @@ function saveCookieState() {
             };
             iap_toggle_btns.push(objToAdd);
         });
-        $.cookie('iap_toggle_btns', JSON.stringify(iap_toggle_btns));
+        localStorage.setItem('iap_toggle_btns', JSON.stringify(iap_toggle_btns));
 
         var iap_inputs = new Array();
         $(".iap_input").each(function (index, iap_input) {
@@ -2765,10 +2763,10 @@ function saveCookieState() {
             };
             iap_inputs.push(objToAdd);
         });
-        $.cookie('iap_inputs', JSON.stringify(iap_inputs));
+        localStorage.setItem('iap_inputs', JSON.stringify(iap_inputs));
 
         // Report
-//        $.cookie('events', eventsToJsonObj());
+//        localStorage.setItem('events', eventsToJsonObj());
 
         // Command Transferred
         var unit_cmdxfer_btns = new Array();
@@ -2780,9 +2778,13 @@ function saveCookieState() {
             };
             unit_cmdxfer_btns.push(objToAdd);
         });
-        $.cookie('unit_cmdxfer_btns', JSON.stringify(unit_cmdxfer_btns));
+        localStorage.setItem('unit_cmdxfer_btns', JSON.stringify(unit_cmdxfer_btns));
 
-        console.log($.cookie());
+//        for(var i=0, len=localStorage.length; i<len; i++) {
+//            var key = localStorage.key(i);
+//            var value = localStorage[key];
+//            console.log(key + " => " + value);
+//        }
     }
 }
 function findTbarElementByColRow(col, row) {
@@ -2855,38 +2857,40 @@ function loadTbarFromCookie(tbarObj) {
 }
 function loadCookieState() {
     if (COOKIES_ENABLED) {
-        for (var key in $.cookie()) {
+        for(var keyIndex=0, len=localStorage.length; keyIndex<len; keyIndex++) {
+            var key = localStorage.key(keyIndex);
+            var value = localStorage[key];
             // TODO:
             if (key == 'previous_app_version') {
 
             }
 
             else if (key == 'is_incident_running') {
-                isIncidentRunning = JSON.parse($.cookie(key));
+                isIncidentRunning = JSON.parse(value);
             }
 
             // Timer
             else if (key == 't0') {
-                t0 = $.cookie(key);
+                t0 = value;
             }
 
             // Mode
             else if (key == 'mode') {
-                var mode = $.cookie(key);
+                var mode = value;
                 setMode(mode)
             }
 
             // Mayday
             // Street Name
             else if (key == 'streetname_btn') {
-                var streetname_btn = $.cookie(key);
+                var streetname_btn = value;
                 $("#streetname_btn").html(streetname_btn);
             }
 
 
             // Dispatched Units
             else if (key == 'dispatched_units') {
-                var dispatched_units_str = $.cookie(key);
+                var dispatched_units_str = value;
                 var dispatched_units = JSON.parse(dispatched_units_str);
                 for (var i = 0; i < dispatched_units.length; i++) {
                     var dispatched_unit = dispatched_units[i];
@@ -2896,7 +2900,7 @@ function loadCookieState() {
 
             // Upgrade
             else if (key == 'upgrade_btns') {
-                var upgradeBtnsStr = $.cookie(key);
+                var upgradeBtnsStr = value;
                 var upgrade_btns = JSON.parse(upgradeBtnsStr);
                 for (var i = 0; i < upgrade_btns.length; i++) {
                     var objFromJson = upgrade_btns[i];
@@ -2913,7 +2917,7 @@ function loadCookieState() {
 
             // OSR
             else if (key == 'osr') {
-                var osrStr = $.cookie(key);
+                var osrStr = value;
                 var osrObj = JSON.parse(osrStr);
                 if (typeof osrObj['osr_btns'] != 'undefined') {
                     var osr_btns = osrObj['osr_btns'];
@@ -2958,7 +2962,7 @@ function loadCookieState() {
 
             // Objectives
             else if (key == 'objective_btns') {
-                var objectiveBtnStr = $.cookie(key);
+                var objectiveBtnStr = value;
                 var objective_btns = JSON.parse(objectiveBtnStr);
                 for (var i = 0; i < objective_btns.length; i++) {
                     var objFromJson = objective_btns[i];
@@ -2971,7 +2975,7 @@ function loadCookieState() {
 
             // IAP
             else if (key == 'iap_toggle_btns') {
-                var iapBtnStr = $.cookie(key);
+                var iapBtnStr = value;
                 var iap_toggle_btns = JSON.parse(iapBtnStr);
                 for (var i = 0; i < iap_toggle_btns.length; i++) {
                     var objFromJson = iap_toggle_btns[i];
@@ -2984,7 +2988,7 @@ function loadCookieState() {
                 }
             }
             else if (key == 'iap_inputs') {
-                var iapBtnStr = $.cookie(key);
+                var iapBtnStr = value;
                 var iap_toggle_btns = JSON.parse(iapBtnStr);
                 for (var i = 0; i < iap_toggle_btns.length; i++) {
                     var objFromJson = iap_toggle_btns[i];
@@ -2994,14 +2998,14 @@ function loadCookieState() {
 
             // Report
 //            else if (key == 'events') {
-//                var newEventsStr = $.cookie(key);
+//                var newEventsStr = value;
 //                var newEvents = JSON.parse(newEventsStr);
 //                setEvents(newEvents);
 //            }
 
             // Command Transferred
             else if (key == 'unit_cmdxfer_btns') {
-                var unit_cmdxfer_btnstr = $.cookie(key);
+                var unit_cmdxfer_btnstr = value;
                 var unit_cmdxfer_btns = JSON.parse(unit_cmdxfer_btnstr);
                 for (var i = 0; i < unit_cmdxfer_btns.length; i++) {
                     var objFromJson = unit_cmdxfer_btns[i];
@@ -3013,16 +3017,15 @@ function loadCookieState() {
             }
 
             else if (key.indexOf("tbar_") == 0) {
-                var tbarObj = JSON.parse($.cookie(key));
+                var tbarObj = JSON.parse(value);
                 loadTbarFromCookie(tbarObj);
             }
 
             else {
                 console.log("Unhandled cookie:");
-                console.log($.cookie(key));
+                console.log(value);
             }
-        }
-        console.log($.cookie());
+        } // for
     }
 }
 
@@ -3076,9 +3079,16 @@ function updateTimer() {
     }
 }
 
+function supports_html5_storage() {
+    try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+        return false;
+    }
+}
+
 var gridster;
 function init() {
-
     var log = document.getElementById('log');
 
     gridster = $(".gridster ul").gridster({
