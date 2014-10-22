@@ -1286,7 +1286,9 @@ function updateObjectivePercentComplete() {
     var many_objective_btn = $(".objective_btn").length;
     var many_objective_btn_green = $(".objective_btn.glowlightgreen").length;
     var percent_complete = Math.floor((many_objective_btn_green / many_objective_btn) * 100);
-    $("#objectives_btn_perccomplete").html("(" + percent_complete + "% Complete)");
+    var percent_complete_normalized = Math.ceil(percent_complete/10)*10;
+    var perc_img_file = "images/perc_bar/perc_bar_" + percent_complete_normalized + ".png";
+    $("#objectives_perc_bar").attr("src", perc_img_file);
 }
 function toggleObjBtn(btn) {
     return function () {
@@ -1338,7 +1340,9 @@ function updateOsrPercentComplete() {
     var many_osr_btn = $(".osr_btn").length;
     var many_osr_btn_green = $(".osr_btn.glowlightgreen").length;
     var percent_complete = Math.floor((many_osr_btn_green / many_osr_btn) * 100);
-    $("#osr_btn_perccomplete").html("(" + percent_complete + "% Complete)");
+    var percent_complete_normalized = Math.ceil(percent_complete/10)*10;
+    var perc_img_file = "images/perc_bar/perc_bar_" + percent_complete_normalized + ".png";
+    $("#osr_perc_bar").attr("src", perc_img_file);
 }
 function toggleOsrBtn(btn) {
     return function () {

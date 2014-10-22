@@ -366,6 +366,7 @@ td {
 .header_item {
     margin-bottom: 4px;
     height: 25px;
+    width: 90px;
 }
 
 #time {
@@ -1232,10 +1233,6 @@ td {
     margin: 5px 10px 5px 10px;
 }
 
-#objectives_header_btn {
-    height: 45px;
-}
-
 #objective_right_col {
     float: right;
     width: 150px;
@@ -1247,10 +1244,6 @@ td {
 
 #objectives_btn_perccomplete {
     font-size: 0.6rem;
-}
-
-#osr_header_btn {
-    height: 45px;
 }
 
 #osr_btn_perccomplete {
@@ -1720,4 +1713,28 @@ ul {
 
 .report_div_header_value_span {
     font-size: 1.05rem;
+}
+
+.perc_bar_bg {
+    border: 1px solid black;
+    background: black;
+    width: 3px;
+    height: 15px;
+    float: left;
+}
+.perc_bar_fg {
+    background: lightgreen;
+    width: 1px;
+    height: 13px;
+}
+
+#osr_perc_bar {
+    float:left;
+    width: 3px;
+    height: 16px;
+}
+#objectives_perc_bar {
+    float:left;
+    width: 3px;
+    height: 16px;
 }
