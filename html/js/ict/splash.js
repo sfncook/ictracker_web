@@ -24,7 +24,6 @@ function init_splash( ) {
             btn.click(function(){
                 var urlLink = btnObj.url + "?";
                 urlLink += "inc_num_input=" + $("#inc_num_input").val();
-                console.log(urlLink);
                 window.location.href = urlLink;
             });
         }
