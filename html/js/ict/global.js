@@ -3175,7 +3175,15 @@ function init() {
         return this.slice(0);
     };
 
-    loadCookieState();
+    if (COOKIES_ENABLED) {
+        if(supports_html5_storage()) {
+            console.log("Loading incident info from HTML 5 local storage.");
+            loadCookieState();
+        } else {
+            COOKIES_ENABLED = false;
+            console.log("Your browser does not support HTML 5 local storage.  State will not be persisted.");
+        }
+    }
 
     showDialog(0, 0, "#nda_reminder_dialog", 0)();
 }
