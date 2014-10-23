@@ -4,6 +4,7 @@ function init_splash( ) {
     if (localStorage.getItem('inc_info') != null ) {
         var inc_info = JSON.parse(localStorage.getItem('inc_info'));
         $("#prev_inc_btn").show();
+        $("#prev_inc_btn").data({'url': inc_info['url']});
         $("#prev_inc_icon").attr("src", inc_info['inc_icon']);
 
         var inc_num = inc_info['inc_num'];
@@ -44,22 +45,29 @@ function init_splash( ) {
 
         if(typeof btnObj.url != 'undefined') {
             btn.click(function(){
-                var urlLink = btnObj.url;
-                window.location.href = urlLink;
+                deleteAllCookies();
+
                 var inc_info = {
                     'inc_num':$("#inc_num_input").val(),
                     'address':$("#address_input").val(),
                     'inc_type':btnObj.type,
+                    'url':btnObj.url,
                     'inc_icon':btnObj.icon
                 };
-                deleteAllCookies();
                 localStorage.setItem('inc_info', JSON.stringify(inc_info));
+
+                var urlLink = btnObj.url;
+                window.location.href = urlLink;
             });
         }
     });
     $("#splash_row2").append($("<div class='clear_float'></div>"));
     $("#splash_row3").append($("<div class='clear_float'></div>"));
     $("#splash_row4").append($("<div class='clear_float'></div>"));
+
+    $("#prev_inc_btn").click(function() {
+        window.location.href = $("#prev_inc_btn").data('url');
+    });
 }
 
 $( document ).ready(init_splash);

@@ -116,13 +116,18 @@ function osrToJson() {
 }
 function saveCookieState() {
     if (COOKIES_ENABLED) {
+        var inc_info_json = localStorage.getItem('inc_info');
+
         // Reset cookies
         deleteAllCookies();
 
         // App version
         localStorage.setItem('previous_app_version', $('#version_text').html());
 
+        // Incident Info
         localStorage.setItem('is_incident_running', isIncidentRunning);
+        localStorage.setItem('inc_info', inc_info_json);
+
 
         // Tbars
         $(".tbar").each(function (index, tbar) {
