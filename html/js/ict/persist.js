@@ -307,6 +307,12 @@ function loadCookieState() {
 
             }
 
+            if (key == 'inc_info') {
+                inc_info = JSON.parse(value);
+                inc_num = inc_info['inc_num'];
+                inc_address = inc_info['address'];
+            }
+
             else if (key == 'is_incident_running') {
                 isIncidentRunning = JSON.parse(value);
             }

@@ -3,7 +3,8 @@ var tbar_clicked;
 var tbar_moving;
 var parentDialog = 0;
 var isIncidentRunning = true;
-var inc_num_input = "";
+var inc_num = "";
+var inc_address = "";
 
 var btnsToBlink = new Array();
 function blinkUnit() {
@@ -2348,16 +2349,15 @@ function clickModeButton() {
  * Init Incident Info
  **/
 function initIncidentInfo() {
-    inc_num_input = getHttpRequestByName("inc_num_input");
-    inc_num_input = decodeURIComponent(inc_num_input);
-    $("#inc_num").html("Incident #: " + inc_num_input);
-    if (inc_num_input == "") {
+    $("#inc_num").html("Incident #: " + inc_num);
+    if (inc_num == "") {
         $("#inc_num").hide();
     }
 
-//	var address_input = getHttpRequestByName("address_input");
-//	address_input = decodeURIComponent(address_input);
-//	$("#address").html(address_input);
+    $("#inc_address").html("Address: " + inc_address);
+    if (inc_address == "") {
+        $("#inc_address").hide();
+    }
 }
 function getHttpRequestByName(name) {
     get_string = document.location.search;
@@ -2542,8 +2542,8 @@ function initReportDialog() {
         var inc_address = $("#streetname_btn").html();
         inc_address = (inc_address != "Street Name") ? inc_address : "";
 
-        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num_input, DEPARTMENT_NAME, t0, osr_unit, inc_address));
-        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num_input, DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
         showDialog(0, 0, "#time_report_dialog")();
     });
 
@@ -2554,8 +2554,8 @@ function initReportDialog() {
         var inc_address = $("#streetname_btn").html();
         inc_address = (inc_address != "Street Name") ? inc_address : "";
 
-        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num_input, DEPARTMENT_NAME, t0, osr_unit, inc_address));
-        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num_input, DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
         showDialog(0, 0, "#time_report_dialog", $("#resume_dialog"))();
     });
 }
@@ -2629,6 +2629,16 @@ function init() {
         autogrow_cols: false
     }).data('gridster');
     gridster.disable();
+
+    if (COOKIES_ENABLED) {
+        if(supports_html5_storage()) {
+            console.log("Loading incident info from HTML 5 local storage.");
+            loadCookieState();
+        } else {
+            COOKIES_ENABLED = false;
+            console.log("Your browser does not support HTML 5 local storage.  State will not be persisted.");
+        }
+    }
 
     initTbars();
 
@@ -2706,16 +2716,6 @@ function init() {
     Array.prototype.clone = function () {
         return this.slice(0);
     };
-
-    if (COOKIES_ENABLED) {
-        if(supports_html5_storage()) {
-            console.log("Loading incident info from HTML 5 local storage.");
-            loadCookieState();
-        } else {
-            COOKIES_ENABLED = false;
-            console.log("Your browser does not support HTML 5 local storage.  State will not be persisted.");
-        }
-    }
 
     showDialog(0, 0, "#nda_reminder_dialog", 0)();
 }

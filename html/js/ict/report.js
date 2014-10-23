@@ -100,7 +100,8 @@ function generateReport(eventArray) {
 
     while (!done) {
         drawTitle(doc, "");
-        drawTitle(doc, $("#inc_num").html());
+        var inc_num = $("#inc_num").html().replace("Incident #: ", "")
+        drawTitle(doc, inc_num);
         drawFooter(doc, page_number, "");
 //		drawFooter(doc, page_number, $("#address").html());
         drawOnePageOfEvents(doc, eventArray);
@@ -117,7 +118,7 @@ function generateReport(eventArray) {
 
 
 function drawTitle(doc, inc_num) {
-    doc.text("Incident #" + inc_num, MARGIN, MARGIN);
+    doc.text("Incident #:" + inc_num, MARGIN, MARGIN);
     doc.text("Mesa Fire Department", RIGHT_SIDE - 77, MARGIN);
     doc.setLineWidth(0.5);
     doc.line(MARGIN, MARGIN + 2, RIGHT_SIDE - MARGIN, MARGIN + 2);

@@ -448,9 +448,15 @@ td {
     background: #69430f !important;
 }
 
-#inc_num {
+#inc_info_box {
     float: left;
     margin-left: 10px;
+    background: white;
+}
+#inc_num {
+    font-size: 1.05rem;
+}
+#inc_address {
     font-size: 1.05rem;
 }
 
