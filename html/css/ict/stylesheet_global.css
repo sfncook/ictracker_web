@@ -102,6 +102,15 @@ td {
     margin-left: 10px;
     font-size: 1.4rem;
 }
+#prev_inc_btn {
+
+}
+#prev_inc_icon {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
 
 #header_spacer_td {
     width: 100px;
@@ -1736,4 +1745,11 @@ ul {
     float:left;
     width: 3px;
     height: 16px;
+}
+
+#prev_inc_btn {
+    margin-top:20px;
+}
+#prev_inc_no_inc_info {
+    margin-top:10px;
 }
