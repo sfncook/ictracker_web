@@ -1286,10 +1286,9 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
 function updateObjectivePercentComplete() {
     var many_objective_btn = $(".objective_btn").length;
     var many_objective_btn_green = $(".objective_btn.glowlightgreen").length;
-    var percent_complete = Math.floor((many_objective_btn_green / many_objective_btn) * 100);
-    var percent_complete_normalized = Math.ceil(percent_complete/10)*10;
-    var perc_img_file = "images/perc_bar/perc_bar_" + percent_complete_normalized + ".png";
-    $("#objectives_perc_bar").attr("src", perc_img_file);
+    var percent_complete = many_objective_btn_green / many_objective_btn;
+    var width = percent_complete * 78.0;
+    $("#objectives_perc_bar").width(width);
 }
 function toggleObjBtn(btn) {
     return function () {
@@ -1340,10 +1339,9 @@ function initStreetNameDialog() {
 function updateOsrPercentComplete() {
     var many_osr_btn = $(".osr_btn").length;
     var many_osr_btn_green = $(".osr_btn.glowlightgreen").length;
-    var percent_complete = Math.floor((many_osr_btn_green / many_osr_btn) * 100);
-    var percent_complete_normalized = Math.ceil(percent_complete/10)*10;
-    var perc_img_file = "images/perc_bar/perc_bar_" + percent_complete_normalized + ".png";
-    $("#osr_perc_bar").attr("src", perc_img_file);
+    var percent_complete = many_osr_btn_green / many_osr_btn;
+    var width = percent_complete * 78.0;
+    $("#osr_perc_bar").width(width);
 }
 function toggleOsrBtn(btn) {
     return function () {

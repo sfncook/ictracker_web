@@ -1746,16 +1746,34 @@ ul {
     height: 13px;
 }
 
-#osr_perc_bar {
-    float:left;
-    width: 3px;
-    height: 16px;
+.perc_horz_bar_bg {
+    background: black;
+    border: 1px solid black;
+    height: 3px;
+    width: 80px;
 }
-#objectives_perc_bar {
-    float:left;
-    width: 3px;
-    height: 16px;
+.perc_horz_bar {
+    background: lightgreen;
+    height: 1px;
+    width: 78px;
 }
+#osr_header_btn {
+    height: 30px;
+}
+#objectives_header_btn {
+    height: 30px;
+}
+
+/*#osr_perc_bar {*/
+    /*float:left;*/
+    /*width: 3px;*/
+    /*height: 16px;*/
+/*}*/
+/*#objectives_perc_bar {*/
+    /*float:left;*/
+    /*width: 3px;*/
+    /*height: 16px;*/
+/*}*/
 
 #prev_inc_btn {
     margin-top:20px;
