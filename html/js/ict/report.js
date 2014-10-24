@@ -61,10 +61,14 @@ function getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address) 
         titleStr += "<div class='clear_float'></div>\n";
     }
 
-    var t0Int = parseInt(inc_start_time);
-    var t0Sec = parseInt((t0Int / 1000) % 60);
-    var t0Min = parseInt((t0Int / (1000 * 60)) % 60);
-    var t0Hr = parseInt((t0Int / (1000 * 60 * 60)) % 60);
+//    var t0Int = parseInt(inc_start_time);
+//    console.log(t0Int);
+//    var t0Sec = parseInt((t0Int / 1000) % 60);
+//    var t0Min = parseInt((t0Int / (1000 * 60)) % 60);
+//    var t0Hr = parseInt((t0Int / (1000 * 60 * 60)) % 60);
+    var t0Sec = inc_start_time.getSeconds();
+    var t0Min = inc_start_time.getMinutes();
+    var t0Hr =  inc_start_time.getHours();
 
     var secStr = (t0Sec < 10) ? ("0" + t0Sec) : t0Sec;
     var minStr = (t0Min < 10) ? ("0" + t0Min) : t0Min;

@@ -2239,7 +2239,7 @@ function terminateCommand() {
     isIncidentRunning = false;
 
     var t1 = (new Date()).getTime();
-    var elapsed = parseInt(t1 - t0);
+    var elapsed = parseInt(t1 - t0.getTime());
     var elapsedSec = parseInt((elapsed / 1000) % 60);
     var elapsedMin = parseInt((elapsed / (1000 * 60)) % 60);
     var elapsedHr = parseInt((elapsed / (1000 * 60 * 60)) % 60);
@@ -2568,12 +2568,13 @@ function initReportDialog() {
 var t0;
 var hourRollOverDone = false;
 function startIncidentTimer() {
-    t0 = (new Date()).getTime();
+    t0 = new Date();
+    console.log(t0);
 }
 function updateTimer() {
     if (isIncidentRunning) {
         var t1 = (new Date()).getTime();
-        var elapsed = parseInt(t1 - t0);
+        var elapsed = parseInt(t1 - t0.getTime());
         var elapsedSec = parseInt((elapsed / 1000) % 60);
         var elapsedMin = parseInt((elapsed / (1000 * 60)) % 60);
         var elapsedHr = parseInt((elapsed / (1000 * 60 * 60)) % 60);
