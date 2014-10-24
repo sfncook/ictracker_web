@@ -13,8 +13,9 @@
 	z-index:0;
 }
 .tbar_title_container {
-	background: #BBB;
+	background: black;
 	height: 29px;
+    border-bottom: 1px solid black;
 }
 .title_btn {
 	width:168px;

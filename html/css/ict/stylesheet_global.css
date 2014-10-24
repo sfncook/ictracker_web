@@ -163,7 +163,7 @@ td {
  */
 .button {
     text-align: center;
-    background: #CCC;
+    background: white;
     color: black;
     border: 1px solid #9a9a9a;
     border-radius: 3px;
@@ -212,7 +212,7 @@ td {
 }
 
 .disabled, .disabled:hover, .disabled:active {
-    background: #DDD !important;
+    background: #EEE !important;
     color: #AAA;
     cursor: default;
 }
