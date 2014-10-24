@@ -315,6 +315,7 @@ function loadCookieState() {
                 inc_num = inc_info['inc_num'];
                 inc_address = inc_info['address'];
                 inc_type_icon = inc_info['inc_icon'];
+                inc_type = inc_info['inc_type'];
             }
 
             else if (key == 'is_incident_running') {
