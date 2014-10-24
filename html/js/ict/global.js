@@ -1157,6 +1157,9 @@ function initBenchmarkDialog() {
     $('.benchmark_item_btn_2').click(function(){
         $(this).toggleClass("glowlightgreen");
         updateTbarBenchmarkIcon(tbar_clicked);
+        var isOn = $(this).hasClass("glowlightgreen");
+        var btnId = $(this).attr("id");
+        tbar_clicked.data(btnId, isOn);
     });
 }
 function toggleBenchmarkBtn(bnchBtn, toggleClass) {
@@ -1305,7 +1308,22 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             "bnch_secondary_par",
             "bnch_secondary_notify",
             "bnch_lossstop_par",
-            "bnch_lossstop_notify"
+            "bnch_lossstop_notify",
+            'benchmark_vent_1',
+            'benchmark_vent_2',
+            'benchmark_vent_3',
+            'benchmark_iric_1',
+            'benchmark_iric_2',
+            'benchmark_iric_3',
+            'benchmark_iric_4',
+            'benchmark_safety_1',
+            'benchmark_safety_2',
+            'benchmark_treatment_1',
+            'benchmark_treatment_2',
+            'benchmark_treatment_3',
+            'benchmark_lz_1',
+            'benchmark_lz_2',
+            'benchmark_lz_3'
         ];
         for (i = 0; i < bnchBtnIds.length; i++) {
             var bnchBtnId = bnchBtnIds[i];
