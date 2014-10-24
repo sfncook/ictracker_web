@@ -1219,18 +1219,25 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         $(".benchmarks_dialog_body").hide();
         if(sectorsWithClassicBnch.indexOf(title)>=0) {
             $("#benchmarks_dialog_body").show();
+            $("#benchmarks_dialog").width(515);
         } else if(sectorsWithIricBnch.indexOf(title)>=0) {
             $("#benchmarks_iric_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
         } else if(sectorsWithLzBnch.indexOf(title)>=0) {
             $("#benchmarks_lz_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
         } else if(sectorsWithSafetyBnch.indexOf(title)>=0) {
             $("#benchmarks_safety_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
         } else if(sectorsWithTreatmentBnch.indexOf(title)>=0) {
             $("#benchmarks_treatment_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
         } else if(sectorsWithTriageBnch.indexOf(title)>=0) {
             $("#benchmarks_triage_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
         } else if(sectorsWithVentBnch.indexOf(title)>=0) {
             $("#benchmarks_vent_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
         }
 
         // Set all button states
