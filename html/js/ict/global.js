@@ -1193,7 +1193,7 @@ function updateTbarBenchmarkIcon(tbar) {
     tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_black.png");
 
     var sectorName = tbar.find(".title_text").html();
-    if(sectorsWithClassicBnch.indexOf(sectorName)>=0) {
+    if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="Sector Title") {
         if ($("#benchmark_unable_primary").hasClass("glowpink")) {
             tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
         } else {
@@ -1252,7 +1252,7 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         }
 
         $(".benchmarks_dialog_body").hide();
-        if(sectorsWithClassicBnch.indexOf(title)>=0) {
+        if(sectorsWithClassicBnch.indexOf(title)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="Sector Title") {
             $("#benchmarks_dialog_body").show();
             $("#benchmarks_dialog").width(515);
         } else if(sectorsWithIricBnch.indexOf(title)>=0) {
@@ -1928,6 +1928,7 @@ function updateTbar(tbar) {
     // Benchmarks
     if(
         sectorsWithClassicBnch.indexOf(sectorName)>=0 ||
+        (sectorName.indexOf("Sector ")==0  && sectorName!="Sector Title") ||
         sectorsWithIricBnch.indexOf(sectorName)>=0 ||
         sectorsWithLzBnch.indexOf(sectorName)>=0 ||
         sectorsWithSafetyBnch.indexOf(sectorName)>=0 ||
@@ -1944,7 +1945,7 @@ function updateTbar(tbar) {
     tbar.find(".benchmark_bar_img_2").hide();
     tbar.find(".benchmark_bar_img_3").hide();
     tbar.find(".benchmark_bar_img_4").hide();
-    if(sectorsWithClassicBnch.indexOf(sectorName)>=0) {
+    if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="Sector Title") {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
