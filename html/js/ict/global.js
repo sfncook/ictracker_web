@@ -771,6 +771,7 @@ function setTbarTitle(tbar, title) {
 
     // Update Cookies
     saveCookieState();
+
 }
 function initSectorDialog() {
     var sectorDialog = $("#dialog_prototype").clone().appendTo("#dialog_vertical_align_cell");
@@ -1141,6 +1142,12 @@ function initBenchmarkDialog() {
     var dialogBody = dialog.children(".dialog_body");
     dialogBody.remove();
     dialog.append($("#benchmarks_dialog_body"));
+    dialog.append($("#benchmarks_vent_dialog_body"));
+    dialog.append($("#benchmarks_iric_dialog_body"));
+    dialog.append($("#benchmarks_safety_dialog_body"));
+    dialog.append($("#benchmarks_treatment_dialog_body"));
+    dialog.append($("#benchmarks_lz_dialog_body"));
+    dialog.append($("#benchmarks_triage_dialog_body"));
 
     $(".benchmark_2nd_col_container").hide();
     btnsToBlink.push($("#bnch_primary_challenge"));
@@ -1207,6 +1214,23 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html(title + " Benchmarks");
         } else {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html("Benchmarks");
+        }
+
+        $(".benchmarks_dialog_body").hide();
+        if(sectorsWithClassicBnch.indexOf(title)>=0) {
+            $("#benchmarks_dialog_body").show();
+        } else if(sectorsWithIricBnch.indexOf(title)>=0) {
+            $("#benchmarks_iric_dialog_body").show();
+        } else if(sectorsWithLzBnch.indexOf(title)>=0) {
+            $("#benchmarks_lz_dialog_body").show();
+        } else if(sectorsWithSafetyBnch.indexOf(title)>=0) {
+            $("#benchmarks_safety_dialog_body").show();
+        } else if(sectorsWithTreatmentBnch.indexOf(title)>=0) {
+            $("#benchmarks_treatment_dialog_body").show();
+        } else if(sectorsWithTriageBnch.indexOf(title)>=0) {
+            $("#benchmarks_triage_dialog_body").show();
+        } else if(sectorsWithVentBnch.indexOf(title)>=0) {
+            $("#benchmarks_vent_dialog_body").show();
         }
 
         // Set all button states
@@ -1844,6 +1868,21 @@ function updateTbar(tbar) {
         }
     }
 
+    // Benchmarks
+    if(
+        sectorsWithClassicBnch.indexOf(sectorName)>=0 ||
+        sectorsWithIricBnch.indexOf(sectorName)>=0 ||
+        sectorsWithLzBnch.indexOf(sectorName)>=0 ||
+        sectorsWithSafetyBnch.indexOf(sectorName)>=0 ||
+        sectorsWithTreatmentBnch.indexOf(sectorName)>=0 ||
+        sectorsWithTriageBnch.indexOf(sectorName)>=0 ||
+        sectorsWithVentBnch.indexOf(sectorName)>=0
+        ) {
+        tbar.find(".benchmark_btn").show();
+    } else {
+        tbar.find(".benchmark_btn").hide();
+    }
+
     if (manyUnits > 0) {
         if (sectorName == "RESCUE") {
             $("#rescue_objective_btn").addClass("glowlightgreen");
@@ -2110,6 +2149,7 @@ function addTbar(col_x, row_y) {
     var benchmarkBtnId = "tbar_benchmark_" + tbarIndex;
     benchmarkBtn.attr("id", benchmarkBtnId);
     benchmarkBtn.click(showBenchmarkDialog(tbar, benchmarkBtn));
+    benchmarkBtn.hide();
 
     // Add Unit Btn
     var unit_col_left = tbar.find(".unit_col_left");
@@ -2839,6 +2879,43 @@ var actions = [
 ];
 
 
+var sectorsWithClassicBnch = [
+    "Interior",
+    "Sector 1",
+    "Sector 2",
+    "Sector 3",
+    "Sector 4",
+    "Sector 5",
+    "Sector 6",
+    "Sector 7",
+    "Sector 8",
+    "Sector 9",
+    "North Sector",
+    "East Sector",
+    "South Sector",
+    "West Sector"
+];
+var sectorsWithVentBnch = [
+    "Ventilation",
+    "Roof"
+];
+var sectorsWithIricBnch = [
+    "IRIC",
+    "RIC",
+    "RESCUE"
+];
+var sectorsWithSafetyBnch = [
+    "Safety"
+];
+var sectorsWithTreatmentBnch = [
+    "Treatment"
+];
+var sectorsWithLzBnch = [
+    "LZ"
+];
+var sectorsWithTriageBnch = [
+    "Triage"
+];
 var sectorsWithClock = [
     "Interior",
     "Roof",

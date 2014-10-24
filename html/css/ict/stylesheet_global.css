@@ -954,6 +954,12 @@ td {
     margin: 0 10px;
 }
 
+.benchmark_item_btn_2 {
+    width: 150px;
+    margin: 10 10px;
+}
+
+
 .benchmark_btn_parent_div {
     padding: 5px 0 5px 0;
 }

@@ -296,6 +296,8 @@ function loadTbarFromCookie(tbarObj) {
     if (units.length > 0) {
         showActionsForUnitBtn(tbarEl.find(".unit_row_div").first().find(".unit_btn"))();
     }
+
+    updateTbar(tbarEl);
 }
 function loadCookieState() {
     if (COOKIES_ENABLED) {
