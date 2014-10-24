@@ -5,6 +5,7 @@ var parentDialog = 0;
 var isIncidentRunning = true;
 var inc_num = "";
 var inc_address = "";
+var inc_type_icon = "";
 
 var btnsToBlink = new Array();
 function blinkUnit() {
@@ -2492,6 +2493,8 @@ function initIncidentInfo() {
     if (inc_address == "") {
         $("#inc_address").hide();
     }
+
+    $("#inc_type_icon").attr("src", inc_type_icon);
 }
 function getHttpRequestByName(name) {
     get_string = document.location.search;
@@ -2784,7 +2787,6 @@ function init() {
     initObjectivesDialog();
     initOsrDialog();
     initIapDialog();
-    initIncidentInfo();
     initEmergTrafficDialog();
     init10KeyDialog();
     initDispatchedUnits();
@@ -2836,6 +2838,8 @@ function init() {
             console.log("Your browser does not support HTML 5 local storage.  State will not be persisted.");
         }
     }
+
+    initIncidentInfo();
 
     Array.prototype.remByVal = function (val) {
         for (var i = 0; i < this.length; i++) {

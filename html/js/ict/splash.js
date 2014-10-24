@@ -91,7 +91,7 @@ var incidentStartBtns = [
         type:'arff',
 	    icon:"images/icons/plane.png",
 	    text:"ARFF Incident",
-	    disabled:"true",
+        url:"fire_inc.html",
 	    row:3
 	},
 	{

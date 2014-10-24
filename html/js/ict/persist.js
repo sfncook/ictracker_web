@@ -314,6 +314,7 @@ function loadCookieState() {
                 inc_info = JSON.parse(value);
                 inc_num = inc_info['inc_num'];
                 inc_address = inc_info['address'];
+                inc_type_icon = inc_info['inc_icon'];
             }
 
             else if (key == 'is_incident_running') {
