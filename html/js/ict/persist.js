@@ -139,7 +139,7 @@ function saveCookieState() {
         });
 
         // Timer
-        localStorage.setItem('t0', t0.getTime());
+        localStorage.setItem('t0', t0);
 
         // Mode
         var mode_btn = $("#mode_btn");
@@ -319,7 +319,7 @@ function loadCookieState() {
 
             // Timer
             else if (key == 't0') {
-                t0 = new Date(value);
+                t0 = value;
             }
 
             // Mode
