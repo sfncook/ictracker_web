@@ -1151,6 +1151,11 @@ function initBenchmarkDialog() {
 
     $(".benchmark_2nd_col_container").hide();
     btnsToBlink.push($("#bnch_primary_challenge"));
+
+    $('.benchmark_item_btn_2').click(function(){
+        $(this).toggleClass("glowlightgreen");
+        updateTbarBenchmarkIcon(tbar_clicked);
+    });
 }
 function toggleBenchmarkBtn(bnchBtn, toggleClass) {
     bnchBtn.toggleClass(toggleClass);
@@ -1182,28 +1187,53 @@ function updateTbarBenchmarkIcon(tbar) {
     tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_black.png");
     tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_black.png");
 
-    if ($("#benchmark_unable_primary").hasClass("glowpink")) {
-        tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
-    } else {
-        if ($("#bnch_primary").hasClass("glowlightgreen")) {
-            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+    var sectorName = tbar.find(".title_text").html();
+    if(sectorsWithClassicBnch.indexOf(sectorName)>=0) {
+        if ($("#benchmark_unable_primary").hasClass("glowpink")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
+        } else {
+            if ($("#bnch_primary").hasClass("glowlightgreen")) {
+                tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+            }
         }
-    }
 
-    if ($("#bnch_underctl").hasClass("glowlightgreen")) {
-        tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
-    }
-
-    if ($("#benchmark_unable_secondary").hasClass("glowpink")) {
-        tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_red.png");
-    } else {
-        if ($("#bnch_secondary").hasClass("glowlightgreen")) {
-            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        if ($("#bnch_underctl").hasClass("glowlightgreen")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
         }
-    }
 
-    if ($("#bnch_lossstop").hasClass("glowlightgreen")) {
-        tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
+        if ($("#benchmark_unable_secondary").hasClass("glowpink")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_red.png");
+        } else {
+            if ($("#bnch_secondary").hasClass("glowlightgreen")) {
+                tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+            }
+        }
+
+        if ($("#bnch_lossstop").hasClass("glowlightgreen")) {
+            tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if(sectorsWithIricBnch.indexOf(sectorName)>=0) {
+        if( $("#benchmark_iric_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_iric_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_iric_3").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_iric_4").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");}
+    } else if(sectorsWithLzBnch.indexOf(sectorName)>=0) {
+        if( $("#benchmark_lz_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_lz_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_lz_3").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+    } else if(sectorsWithSafetyBnch.indexOf(sectorName)>=0) {
+        if( $("#benchmark_safety_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_safety_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+    } else if(sectorsWithTreatmentBnch.indexOf(sectorName)>=0) {
+        if( $("#benchmark_treatment_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_treatment_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_treatment_3").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+    } else if(sectorsWithTriageBnch.indexOf(sectorName)>=0) {
+
+    } else if(sectorsWithVentBnch.indexOf(sectorName)>=0) {
+        if( $("#benchmark_vent_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_vent_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( $("#benchmark_vent_3").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
     }
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
@@ -1889,6 +1919,42 @@ function updateTbar(tbar) {
     } else {
         tbar.find(".benchmark_btn").hide();
     }
+
+    tbar.find(".benchmark_bar_img_1").hide();
+    tbar.find(".benchmark_bar_img_2").hide();
+    tbar.find(".benchmark_bar_img_3").hide();
+    tbar.find(".benchmark_bar_img_4").hide();
+    if(sectorsWithClassicBnch.indexOf(sectorName)>=0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+        tbar.find(".benchmark_bar_img_4").show();
+    } else if(sectorsWithIricBnch.indexOf(sectorName)>=0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+        tbar.find(".benchmark_bar_img_4").show();
+    } else if(sectorsWithLzBnch.indexOf(sectorName)>=0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+    } else if(sectorsWithSafetyBnch.indexOf(sectorName)>=0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+    } else if(sectorsWithTreatmentBnch.indexOf(sectorName)>=0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+    } else if(sectorsWithTriageBnch.indexOf(sectorName)>=0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+    } else if(sectorsWithVentBnch.indexOf(sectorName)>=0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+    }
+
 
     if (manyUnits > 0) {
         if (sectorName == "RESCUE") {
