@@ -2628,16 +2628,6 @@ function init() {
     }).data('gridster');
     gridster.disable();
 
-    if (COOKIES_ENABLED) {
-        if(supports_html5_storage()) {
-            console.log("Loading incident info from HTML 5 local storage.");
-            loadCookieState();
-        } else {
-            COOKIES_ENABLED = false;
-            console.log("Your browser does not support HTML 5 local storage.  State will not be persisted.");
-        }
-    }
-
     initTbars();
 
     //Init Dialogs
@@ -2700,6 +2690,16 @@ function init() {
     window.setInterval(updateTimer, 1000);
 
     $('.scroll-pane').jScrollPane();
+
+
+    if (COOKIES_ENABLED) {
+        if(supports_html5_storage()) {
+            loadCookieState();
+        } else {
+            COOKIES_ENABLED = false;
+            console.log("Your browser does not support HTML 5 local storage.  State will not be persisted.");
+        }
+    }
 
     Array.prototype.remByVal = function (val) {
         for (var i = 0; i < this.length; i++) {
