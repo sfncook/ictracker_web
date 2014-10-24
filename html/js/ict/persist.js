@@ -301,6 +301,7 @@ function loadTbarFromCookie(tbarObj) {
 }
 function loadCookieState() {
     if (COOKIES_ENABLED) {
+        COOKIES_ENABLED = false; // temporarily disable so we don't try to save cookies again.
         for(var keyIndex=0, len=localStorage.length; keyIndex<len; keyIndex++) {
             var key = localStorage.key(keyIndex);
             var value = localStorage[key];
@@ -476,5 +477,6 @@ function loadCookieState() {
                 console.log(value);
             }
         } // for
+        COOKIES_ENABLED = true;
     }
 }
