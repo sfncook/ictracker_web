@@ -488,6 +488,10 @@ td {
 #mode_dlg_def {
     margin: 10px;
 }
+.outer_glow {
+    box-shadow: 0px 0px 20px darkred;
+    border:2px solid yellow;
+}
 
 #report_btn {
     z-index: 100;

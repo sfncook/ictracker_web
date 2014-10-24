@@ -2436,7 +2436,13 @@ function initModeDialog() {
         "#mode_dialog", //  dialogId
         0, // parent_dialog
         function() {
-            // TODO: Update mode setting in dialog
+            if($("#mode_btn").hasClass("offensive_btn")) {
+                $("#mode_dlg_def").removeClass("outer_glow");
+                $("#mode_dlg_off").addClass("outer_glow");
+            } else {
+                $("#mode_dlg_def").addClass("outer_glow");
+                $("#mode_dlg_off").removeClass("outer_glow");
+            }
         }
     ));
 
