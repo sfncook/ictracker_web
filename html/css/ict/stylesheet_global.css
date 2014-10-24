@@ -121,13 +121,16 @@ td {
 }
 
 #ict_header {
-    background: #BBB;
+    background: black;
     position: fixed;
     right: 0;
     top: 0;
     height: 100%;
     z-index: 50;
     padding: 4px;
+}
+#ict_header > .button {
+    background: white;
 }
 
 #title_icon {
@@ -464,6 +467,9 @@ td {
     float: right;
     margin-right: 10px;
     pointer-events: auto;
+    background: #a56c15;
+    color: white;
+    font-size: 1.2rem;
 }
 
 #mode_side_dialog {
