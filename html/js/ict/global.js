@@ -2424,6 +2424,30 @@ function initEmergTrafficDialog() {
         })
     });
 }
+
+
+
+
+/**
+ * Init Mode Dialog
+ **/
+function initModeDialog() {
+    $("#mode_btn").click(showDialog_withCallbacks(
+        "#mode_dialog", //  dialogId
+        0, // parent_dialog
+        function() {
+            // TODO: Update mode setting in dialog
+        }
+    ));
+
+    $("#mode_dlg_def").click(function() {
+        setMode("DEFENSE");
+    });
+
+    $("#mode_dlg_off").click(function() {
+        setMode("OFFENSE");
+    });
+}
 function setMode(mode_text) {
     var mode_btn = $("#mode_btn");
     if (mode_text == 'DEFENSE') {
@@ -2432,26 +2456,19 @@ function setMode(mode_text) {
         mode_btn.html("DEFENSE");
         $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_def_btn").addClass("glowlightgreen");
+
+        addEvent_mode("DEFENSE");
+        showDialog(0, mode_btn, "#emergency_traffic_dialog")();
     } else {
         mode_btn.addClass("offensive_btn");
         mode_btn.removeClass("defensive_btn");
         mode_btn.html("OFFENSE");
         $("#osr_occupancy_off_btn").addClass("glowlightgreen");
         $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
-    }
-}
-function clickModeButton() {
-    var mode_btn = $("#mode_btn");
-    if (mode_btn.hasClass("offensive_btn")) {
-        setMode('DEFENSE');
-        addEvent_mode("DEFENSE");
-        showDialog(0, mode_btn, "#emergency_traffic_dialog")();
-    } else {
-        setMode('OFFENSE');
-        addEvent_mode("OFFENSE");
-    }
 
-    // Cookie
+        addEvent_mode("OFFENSE");
+        hideAllDialogs();
+    }
     saveCookieState();
 }
 
@@ -2768,6 +2785,7 @@ function init() {
     initUpgradeDialog();
     initStreetNameDialog();
     initCmdXfer();
+    initModeDialog();
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
@@ -2795,7 +2813,6 @@ function init() {
     });
 
     $("#move_unit_screen_cover").hide();
-    $("#mode_btn").click(clickModeButton);
 
     hideAllDialogs();
 
