@@ -1466,7 +1466,7 @@ td {
 }
 
 #key_dialog {
-    width: 175px;
+    width: 234px;
 }
 
 #key_dialog > .dialog_body {
@@ -1474,12 +1474,12 @@ td {
 }
 
 .key_btn {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     float: left;
     margin: 5px;
-    font-size: 1.3rem;
-    padding: 5px;
+    font-size: 1.7rem;
+    padding: 7px;
 }
 
 #key_output_value {
@@ -1488,7 +1488,7 @@ td {
     height: 40px;
     background: #DDD;
     padding: 0 10px;
-    text-align: right;
+    text-align: center;
 }
 
 #key_input {
