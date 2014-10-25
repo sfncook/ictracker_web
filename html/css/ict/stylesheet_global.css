@@ -1839,3 +1839,9 @@ ul {
     float:left;
     width:120px;
 }
+
+.mayday_check {
+    width: 15px;
+    height: 15px;
+    margin: 5px !important;
+}

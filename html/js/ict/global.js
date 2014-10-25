@@ -694,6 +694,14 @@ function initMaydayDialog() {
     $(".mayday_clear_item_btn").click(function () {
         hideAllDialogs()
     });
+
+    $(".mayday_check").change(function(){
+        if($(this).is(":checked")) {
+            $(this).parent().addClass("glowlightgreen")
+        } else {
+            $(this).parent().removeClass("glowlightgreen")
+        }
+    });
 }
 
 
