@@ -610,7 +610,7 @@ function addMaydayEventElement() {
     maydayTimers.push({'mayday_t0':mayday_t0, 'mayday_timer':mayday_timer});
 
     // Mayday Select DDLB
-    $(".mayday_sector_select").change(
+    maydayEl.find(".mayday_sector_select").change(
         function () {
             $(this).addClass("glowlightgreen");
             $("#mayday_units_div").find(".unit_btn").hide();
@@ -620,11 +620,17 @@ function addMaydayEventElement() {
 
 
     // Select DDLB
-    $(".mayday_select").not("#mayday_sector_select").change(
+    maydayEl.find(".mayday_select").not("#mayday_sector_select").change(
         function () {
             $(this).addClass("glowlightgreen");
         }
     );
+
+    // Mayday Single Toggle Btns
+    maydayEl.find(".mayday_single_toggle").click(function() {
+        console.log($(this));
+        $(this).toggleClass("glowlightgreen");
+    });
 
 
     // Sector Div

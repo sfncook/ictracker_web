@@ -1830,3 +1830,12 @@ ul {
     width: 50px;
     margin: 10px;
 }
+
+.vert_spacer {
+    height:15px;
+}
+
+.mayday_select_half {
+    float:left;
+    width:120px;
+}
