@@ -410,7 +410,7 @@ function initUnitPeopleDialog() {
 function onCloseMaydayDialog() {
     $(".mayday_info_div").not("#mayday_info_div_prototype").each(function (i) {
         var maydayEl = $(this);
-        var mayday_select = maydayEl.find(".mayday_select");
+        var mayday_select = maydayEl.find(".mayday_sector_select");
         var mayday_sector_title = maydayEl.find(".mayday_sector_title");
         var mayday_sector_title_text = mayday_select.find("option:selected").text();
         var unit_btns = $(".tbar").find(".title_text:contains(" + mayday_sector_title_text + ")").parents(".tbar").find(".unit_btn");
@@ -482,12 +482,14 @@ function removeMaydayEvent(maydayEvent) {
     }
 }
 function updateMaydaySector(maydayEl) {
-    var selectedSectorTitle = maydayEl.find(".mayday_select").find("option:selected").text();
+    var selectedSectorTitle = maydayEl.find(".mayday_sector_select").find("option:selected").text();
     var tbar = $(".tbar").find(".title_text:contains(" + selectedSectorTitle + ")").parents(".tbar");
     var mayday_units_div = maydayEl.find(".mayday_units_div");
 
     resetMayday(maydayEl);
     maydayEl.data("tbar", tbar);
+
+    $(".mayday_unit_btn").remove();
 
     tbar.find(".unit_btn").each(function (i) {
         var unitBtn = $(this);
@@ -607,12 +609,20 @@ function addMaydayEventElement() {
     var mayday_t0 = (new Date()).getTime();
     maydayTimers.push({'mayday_t0':mayday_t0, 'mayday_timer':mayday_timer});
 
-    // Select DDLB
-    $(".mayday_select").change(
+    // Mayday Select DDLB
+    $(".mayday_sector_select").change(
         function () {
             $(this).addClass("glowlightgreen");
             $("#mayday_units_div").find(".unit_btn").hide();
             updateMaydaySector(maydayEl);
+        }
+    );
+
+
+    // Select DDLB
+    $(".mayday_select").not("#mayday_sector_select").change(
+        function () {
+            $(this).addClass("glowlightgreen");
         }
     );
 
@@ -635,7 +645,26 @@ function selectMaydayTab(tab, color) {
 }
 function initMaydayDialog() {
     var maydayBtn = $("#mayday_btn");
-    maydayBtn.click(showDialog_withCallbacks("#mayday_dialog", 0/*parentDialog*/, 0, 0, onCloseMaydayDialog));
+    maydayBtn.click(showDialog_withCallbacks(
+        "#mayday_dialog", // dialogId
+        0, // parentDialog
+        function() { // onOpenCallback
+            var sector_titles = [];
+            $(".tbar").each(function(){
+                var sector_title = $(this).find(".title_text").html();
+                if(sector_title != "Sector Title") {
+                    sector_titles.push(sector_title);
+                }
+            });
+            $(".mayday_sector_select").each(function (i) {
+                for (i = 0; i < sector_titles.length; i++) {
+                    var title = sector_titles[i];
+                    $(this).append($("<option value='" + title + "'>" + title + "</option>"));
+                }
+            });
+        },
+        0, // onClickCallback
+        onCloseMaydayDialog));
 
     $("#mayday_info_div_prototype").hide();
     $("#new_mayday_btn").click(addMaydayEventElement);
@@ -792,15 +821,15 @@ function setTbarTitle(tbar, title) {
         addTbar();
     }
 
-    // Update any Maydays for this sector
-    var maydaysSelected = $(".mayday_sector_select").find("option:selected:contains(" + title_text_prev + ")").parents(".mayday_sector_select");
-    $(".mayday_sector_select").find("option:contains(" + title_text_prev + ")").remove();
-    $(".mayday_sector_select").each(function () {
-        $(this).append($("<option value='" + title + "'>" + title + "</option>"));
-    });
-    maydaysSelected.each(function () {
-        $(this).find("option:contains(" + title + ")").attr('selected', 'selected');
-    });
+//    // Update any Maydays for this sector
+//    var maydaysSelected = $(".mayday_sector_select").find("option:selected:contains(" + title_text_prev + ")").parents(".mayday_sector_select");
+//    $(".mayday_sector_select").find("option:contains(" + title_text_prev + ")").remove();
+//    $(".mayday_sector_select").each(function () {
+//        $(this).append($("<option value='" + title + "'>" + title + "</option>"));
+//    });
+//    maydaysSelected.each(function () {
+//        $(this).find("option:contains(" + title + ")").attr('selected', 'selected');
+//    });
 
     // Report
     addEvent_title_to_sector(title);
