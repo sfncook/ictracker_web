@@ -1565,6 +1565,12 @@ ul {
 
 #version_text {
     position: fixed;
+    bottom: 30px;
+    left: 10px;
+    z-index: 150;
+}
+#copyright_text {
+    position: fixed;
     bottom: 10px;
     left: 10px;
     z-index: 150;
