@@ -520,6 +520,36 @@ function clearMayday(maydayEl) {
         showDialog(0, 0, "#mayday_clear_dialog")();
     }
 }
+var maydayTimers = new Array();
+function updateAllMaydayTimers() {
+    if (isIncidentRunning) {
+        for (i = 0; i < maydayTimers.length; i++) {
+            var maydayTimer = maydayTimers[i];
+            var mayday_t0 = maydayTimer['mayday_t0'];
+            var mayday_timer = maydayTimer['mayday_timer'];
+
+            var t1 = (new Date()).getTime();
+            var elapsed = parseInt(t1 - mayday_t0);
+            var elapsedSec = parseInt((elapsed / 1000) % 60);
+            var elapsedMin = parseInt((elapsed / (1000 * 60)) % 60);
+            var elapsedHr = parseInt((elapsed / (1000 * 60 * 60)) % 60);
+
+            var secStr = (elapsedSec < 10) ? ("0" + elapsedSec) : elapsedSec;
+            var minStr = (elapsedMin < 10) ? ("0" + elapsedMin) : elapsedMin;
+            var hrStr = (elapsedHr < 10) ? ("0" + elapsedHr) : elapsedHr;
+
+            if (elapsedHr > 0) {
+                if (!hourRollOverDone) {
+                    mayday_timer.removeClass("time_lg");
+                    hourRollOverDone = true;
+                }
+                mayday_timer.html(hrStr + ":" + minStr + ":" + secStr);
+            } else {
+                mayday_timer.html(minStr + ":" + secStr);
+            }
+        }
+    }
+}
 var manyMaydays = 0;
 function addMaydayEventElement() {
     manyMaydays++;
@@ -572,6 +602,10 @@ function addMaydayEventElement() {
         }
     );
 
+    // Mayday Timer
+    var mayday_timer = maydayEl.find(".mayday_timer");
+    var mayday_t0 = (new Date()).getTime();
+    maydayTimers.push({'mayday_t0':mayday_t0, 'mayday_timer':mayday_timer});
 
     // Select DDLB
     $(".mayday_select").change(
@@ -2871,6 +2905,7 @@ function init() {
 
     window.setTimeout(blinkUnit, 500);
     window.setInterval(updateTimer, 1000);
+    window.setInterval(updateAllMaydayTimers, 1000);
 
     $('.scroll-pane').jScrollPane();
 
