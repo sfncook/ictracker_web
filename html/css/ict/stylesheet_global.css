@@ -1810,3 +1810,8 @@ ul {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
+.benchmark_triage_input {
+    width: 50px;
+    margin: 10px;
+}
