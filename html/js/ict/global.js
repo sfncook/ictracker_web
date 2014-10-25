@@ -2136,26 +2136,33 @@ function updateDispatchUnitsHighlight() {
 function onOpenUnitsDialogFromTbar(tbar) {
     return function () {
         $(".unit_dialog_btn").removeClass("glowlightgreen");
-        $.each(tbar.find(".unit_text"), function (index, tbarUnitBtn) {
+
+        $.each($(".unit_text"), function (index, tbarUnitBtn) {
             var html = $(tbarUnitBtn).html();
             $(".unit_dialog_btn").filter(function () {
                 return $(this).text() === html;
             }).addClass("glowlightgreen");
         });
+
+        $.each($(".dispatched_unit_btn"), function (index, tbarUnitBtn) {
+            var html = $(tbarUnitBtn).html();
+            html = html.replace("<div class=\"delete_dispatched_unit_btn\" style=\"display: none;\">X</div>", "");
+            $(".unit_dialog_btn").filter(function () {
+                return $(this).text() === html;
+            }).addClass("glowlightgreen");
+        });
+
         updateDispatchUnitsHighlight();
     }
 }
 function toggleUnitButtonForTbar(unit_col_container) {
     return function (unitName) {
+        var addUnit = unit_col_container.find(".unit_btn:contains('" + unitName + "')").length==0;
 
-        var unit_dialog_btn = $(".unit_dialog_btn").filter(function () {
-            return $(this).text() === unitName;
-        });
-
-        if (unit_dialog_btn.hasClass("glowlightgreen")) {
-            removeUnitButton(unit_col_container, unitName);
-        } else {
+        if (addUnit) {
             addUnitButton(unit_col_container, unitName);
+        } else {
+            removeUnitButton(unit_col_container, unitName);
         }
 
         // Update Cookies
