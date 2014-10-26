@@ -1,68 +1,94 @@
 var sectors_arff = [
     "Interior",     "Alpha Sector",     "Salvage",          "Medical",
     "Ventilation",  "Bravo Sector",     "Overhaul",         "Triage",
-    "",             "Charlie Sector",   "Evacuation",       "Treatment",
-    "On Deck",      "Delta Sector",     "Customer Service", "Transportation",
-    "Staging",      "",                 "",                 "LZ",
-    "",             "North Sector",     "ReHab",            "",
-    "IRIC",         "East Sector",      "Lobby",            "",
-    "RIC",          "South Sector",     "Resource",         "",
-    "RESCUE",       "West Sector",      "Accountability",   "",
-    "Safety",       "",                 "",                 "",
+    "On Deck",      "Charlie Sector",   "Evacuation",       "Treatment",
+    "Staging",      "Delta Sector",     "Customer Service", "Transportation",
+    "",             "",                 "",                 "LZ",
+    "IRIC",         "North Sector",     "ReHab",            "",
+    "RIC",          "East Sector",      "Lobby",            "",
+    "RESCUE",       "South Sector",     "Resource",         "",
+    "Safety",       "West Sector",      "Accountability",   "",
+    "",             "",                 "",                 "",
     "Tail",         "Wing",             "Engine",           "Brake"
 ];
 
 
 var actions_arff = [
-    {action_type: "Critical Fire Ground Factors",
+    {action_type: "Engine",
         actions: [
-            "Aircraft",
-            "Fire",
-            "Occupancy",
-            "Life Hazard",
-            "Arrangement",
-            "Resources",
-            "Action Effect",
-            "Special"
+            "Supply",
+            "Take a Line",
+            "Search/Rescue",
+            "Fire Attack",
+            "IRIC",
+            "Check Extension",
+            "Protect Exposures",
+            "Overhaul",
+            "Deck Gun",
+            "Portable Monitor",
+            "Secondary Search"
         ],
         actions_warning: [
-            "*Aircraft"
+            "*Victim Found"
         ]
     },
+    {action_type: "Ladder",
+        actions: [
+            "Secure Utilities",
+            "Vert Ventilation",
+            "2nd Hole",
+            "Trench Cut",
+            "Roof Profile",
+            "Fan to the Door",
+            "Pressurize Exposures",
+            "Soften Building",
+            "Open Building",
+            "Open Rollup",
+            "Salvage",
+            "Position for Def. Ops",
+            "Put Stick Up",
+            "Elevated Master"
+        ],
+        actions_warning: []
+    },
+    {action_type: "Safety",
+        actions: [
+            "Agrees With Strategy",
+            "360 recon"
+        ],
+        actions_warning: [
+            "*Pool",
+            "*Empty Pool",
+            "*Powerlines",
+            "*Powerlines Down",
+            "*Bars on Windows",
+            "*Dogs in Yard",
+            "*Hoarders House",
+            "*Basement",
+            "*Flashover",
+            "*Backdraft",
+            "*Eminent Collapse",
+            "*Collapse"
+        ]},
     {action_type: "Rescue",
         actions: [
-            "Primary Search"
+            "Grab RIC Bag",
+            "Accountability Update",
+            "Throw Ladders",
+            "Monitor Ch. 16"
         ],
-        actions_warning: [
-            "*Egress Protection"
-        ]
+        actions_warning: []
     },
-    {action_type: "Fire Control",
+    {action_type: "Lines",
         actions: [
-            "Vent"
-        ],
-        actions_warning: [
-            "Water/Foam Resources",
-            "ARRF Truck Attack",
-            "Interior",
-            "Exterior"
-        ]
-    },
-    {action_type: "Property / People",
-        actions: [
-            "Evacuation Location"
-        ],
-        actions_warning: [
-            "Tx Location?",
-            "Transportation?"
-        ]
-    },
-    {action_type: "Firefighter Safety",
-        actions: [
-            "Rescue",
-            "Acctability Locations",
-            "Safety",
-            "ReHab + Unit"
+            "1-3/4",
+            "2\"",
+            "2-1/2",
+            "3\"",
+            "Piercing Nozzle",
+            "Horizontal Standpipe",
+            "Support Sprinklers",
+            "Standpipe"
         ],
         actions_warning: []
     }
