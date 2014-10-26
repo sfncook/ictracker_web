@@ -725,19 +725,38 @@
     <div class="dialog_title col-xs-12">
         <div class="dialog_title_text">Objectives<span class="dialog_close_btn button">Close</span></div>
     </div>
-    <div id="objectives_dialog_body" class="dialog_body col-xs-12 container-fluid">
+    <div id="objectives_dialog_body_fire" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
         <div id="objective_left_col">
-            <div id="rescue_objective_btn" class="objective_btn button">Upgrade to full recue</div>
-            <div id="safety_objective_btn" class="objective_btn button">Assing safety</div>
-            <div id="establish_supply_objective_btn" class="objective_btn button">Establish supply line</div>
-            <div id="secure_objective_btn" class="objective_btn button">Secure utilities</div>
-            <div id="vent_objective_btn" class="objective_btn button">Ventilation</div>
-            <div id="ondeck_objective_btn" class="objective_btn button">Create "On deck"</div>
-            <div id="pressure_objective_btn" class="objective_btn button">Pressurize exposures</div>
-            <div id="monitor_objective_btn" class="objective_btn button">Monitor channel 16</div>
-            <div id="salvage_objective_btn" class="objective_btn button">Salvage</div>
-            <div id="rehab_objective_btn" class="objective_btn button">Establish rehab</div>
-            <div id="custsvc_objective_btn" class="objective_btn button">Customer service</div>
+            <div id="rescue_objective_btn"              class="fire objective_btn button">Upgrade to full recue</div>
+            <div id="safety_objective_btn"              class="fire objective_btn button">Assing safety</div>
+            <div id="establish_supply_objective_btn"    class="fire objective_btn button">Establish supply line</div>
+            <div id="secure_objective_btn"              class="fire objective_btn button">Secure utilities</div>
+            <div id="vent_objective_btn"                class="fire objective_btn button">Ventilation</div>
+            <div id="ondeck_objective_btn"              class="fire objective_btn button">Create "On deck"</div>
+            <div id="pressure_objective_btn"            class="fire objective_btn button">Pressurize exposures</div>
+            <div id="monitor_objective_btn"             class="fire objective_btn button">Monitor channel 16</div>
+            <div id="salvage_objective_btn"             class="fire objective_btn button">Salvage</div>
+            <div id="rehab_objective_btn"               class="fire objective_btn button">Establish rehab</div>
+            <div id="custsvc_objective_btn"             class="fire objective_btn button">Customer service</div>
+        </div>
+        <div id="objective_right_col">
+        </div>
+    </div>
+    <div id="objectives_dialog_body_arff" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
+        <div id="objective_left_col">
+            <div id="arff_allc_objective_btn" class="arff objective_btn button">All Clear</div>
+            <div id="arff_undc_objective_btn" class="arff objective_btn button">Under Control</div>
+            <div id="arff_loss_objective_btn" class="arff objective_btn button">Loss Stop</div>
+            <div id="arff_fire_objective_btn" class="arff objective_btn button">Fire Control Group</div>
+            <div id="arff_escr_objective_btn" class="arff objective_btn button">Escort Additional Units</div>
+            <div id="arff_trig_objective_btn" class="arff objective_btn button">Triage</div>
+            <div id="arff_vent_objective_btn" class="arff objective_btn button">Ventilation</div>
+            <div id="arff_pres_objective_btn" class="arff objective_btn button">Pressurize Cabin</div>
+            <div id="arff_watr_objective_btn" class="arff objective_btn button">Water-Foam Resource group</div>
+            <div id="arff_asgn_objective_btn" class="arff objective_btn button">Assign Safety</div>
+            <div id="arff_stab_objective_btn" class="arff objective_btn button">Stabilize/Safety of Aircraft</div>
+            <div id="arff_estb_objective_btn" class="arff objective_btn button">Establish ReHab</div>
+            <div id="arff_vict_objective_btn" class="arff objective_btn button">Patient/Victim Services</div>
         </div>
         <div id="objective_right_col">
         </div>
@@ -752,6 +771,7 @@
     <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
         <div id="osr_left_col">
             <div id="address_left_osr_btn" class="osr_btn button">Address</div>
+            <div id="location_left_osr_btn" class="osr_btn button">Location</div>
             <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
             <div id="construction_osr_btn" class="osr_btn button">Construction</div>
             <div id="conditions_osr_btn" class="osr_btn button">Conditions</div>
@@ -815,7 +835,7 @@
             </select>
 
             <select id="osr_select_type_of_building" class="osr_select">
-                <option disabled="disabled" selected="selected">Type of building</option>
+                <option disabled="disabled" selected="selected">Type of Building</option>
                 <option>Residential Home</option>
                 <option>Duplex</option>
                 <option>Mobile Home</option>
@@ -828,6 +848,12 @@
                 <option>Specialized/Other</option>
             </select>
 
+            <select id="osr_select_type_of_aircraft" class="osr_select">
+                <option disabled="disabled" selected="selected">Type of Aircraft</option>
+                <option>Single Engine</option>
+                <option>Personal Jet</option>
+            </select>
+
             <select id="osr_number_of_subfloors" class="osr_select">
                 <option disabled="disabled" selected="selected">Sub Floors</option>
                 <option>None</option>
@@ -835,7 +861,7 @@
                 <option>-2 floors</option>
             </select>
 
-            <div class="osr_toggle_container_div">
+            <div id="osr_basement_toggles" class="osr_toggle_container_div">
                 <div id="osr_occupancy_basement_btn" class="osr_toggle_btn button">Basement</div>
                 <div id="osr_occupancy_nobasement_btn" class="osr_toggle_btn button">No Basement</div>
             </div>
@@ -868,6 +894,15 @@
                 <option>Attic Fire</option>
             </select>
 
+            <select id="osr_select_conditions_arff" class="osr_select">
+                <option disabled="disabled" selected="selected">Aircraft Conditions</option>
+                <option>Nothing showing</option>
+                <option>Smoke showing</option>
+                <option>Smoke & Fire showing</option>
+                <option>Fully Involved</option>
+                <option>Attic Fire</option>
+            </select>
+
             <div class="osr_toggle_container_div">
                 <div id="osr_occupancy_mob_btn" class="osr_toggle_btn button">Mobile</div>
                 <div id="osr_occupancy_stat_btn" class="osr_toggle_btn button">Stationary</div>
@@ -877,6 +912,9 @@
                 <div id="osr_occupancy_off_btn" class="osr_toggle_btn button">Offensive</div>
                 <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
             </div>
+
+            <div id="osr_foam_btn" class="button">Applying Foam</div>
+            <div id="osr_egress_btn" class="button">Protecting Egress</div>
         </div>
         <div style="width:100%" class="clear_float"></div>
     </div>

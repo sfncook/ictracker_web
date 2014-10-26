@@ -5,22 +5,51 @@ var sectors_arff = [
 
 
 var actions_arff = [
-    {action_type: "Engine",
+    {action_type: "Critical Fire Ground Factors",
         actions: [
-            "Supply",
-            "Take a Line",
-            "Search/Rescue",
-            "Fire Attack",
-            "IRIC",
-            "Check Extension",
-            "Protect Exposures",
-            "Overhaul",
-            "Deck Gun",
-            "Portable Monitor",
-            "Secondary Search"
+            "Aircraft",
+            "Fire",
+            "Occupancy",
+            "Life Hazard",
+            "Arrangement",
+            "Resources",
+            "Action Effect",
+            "Special"
         ],
-        actions_warning: [
-            "*Victim Found"
-        ]
+        actions_warning: []
+    },
+    {action_type: "Rescue",
+        actions: [
+            "Egress Protection",
+            "Primary Search"
+        ],
+        actions_warning: []
+    },
+    {action_type: "Fire Control",
+        actions: [
+            "Water/Foam Resources",
+            "ARRF Truck Attack",
+            "Interior",
+            "Exterior",
+            "Vent"
+        ],
+        actions_warning: []
+    },
+    {action_type: "Property / People",
+        actions: [
+            "Tx Location?",
+            "Transportation?",
+            "Evacuation Location"
+        ],
+        actions_warning: []
+    },
+    {action_type: "Firefighter Safety",
+        actions: [
+            "Rescue",
+            "Acctability Locations",
+            "Safety",
+            "ReHab + Unit"
+        ],
+        actions_warning: []
     }
 ];

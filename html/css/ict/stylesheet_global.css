@@ -849,7 +849,7 @@ td {
 }
 
 #objectives_dialog {
-    width: 190px;
+    width: 235px;
 }
 
 #iap_dialog {
@@ -1273,7 +1273,7 @@ td {
 }
 
 .objective_btn {
-    width: 165px;
+    width: 210px;
     margin: 5px 10px 5px 10px;
 }
 
@@ -1340,12 +1340,12 @@ td {
 
 #osr_address_btn {
     width: 220px;
-    margin: 5px 0 15px 0;
+    margin: 5px 0 10px 0;
 }
 
 #unit_osr_btn {
     width: 220px;
-    margin: 5px 0 15px 0;
+    margin: 5px 0 10px 0;
 }
 
 #emergency_traffic_dialog {
@@ -1844,4 +1844,13 @@ ul {
     width: 15px;
     height: 15px;
     margin: 5px !important;
+}
+
+#osr_foam_btn {
+    width:220px;
+    margin: 5px 0 10px 0;
+}
+#osr_egress_btn {
+    width:220px;
+    margin: 5px 0 10px 0;
 }
