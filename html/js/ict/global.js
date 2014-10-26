@@ -2136,11 +2136,14 @@ function initTbars() {
 
 function updateDispatchUnitsHighlight() {
     $(".dispatched_unit_btn").removeClass("glowlightgreen");
+
     $(".tbar").each(function (index, tbar) {
         $(tbar).find(".unit_text").each(function (index, tbarUnitBtn) {
             var html = $(tbarUnitBtn).html();
             $(".dispatched_unit_btn").filter(function () {
-                return $(this).text() === html;
+                var html_noclosebtn = $(this).html();
+                html_noclosebtn = html_noclosebtn.replace("<div class=\"delete_dispatched_unit_btn\" style=\"display: none;\">X</div>", "");
+                return html_noclosebtn === html;
             }).addClass("glowlightgreen");
         });
     });
@@ -2151,14 +2154,7 @@ function onOpenUnitsDialogFromTbar(tbar) {
 
         $.each($(".unit_text"), function (index, tbarUnitBtn) {
             var html = $(tbarUnitBtn).html();
-            $(".unit_dialog_btn").filter(function () {
-                return $(this).text() === html;
-            }).addClass("glowlightgreen");
-        });
 
-        $.each($(".dispatched_unit_btn"), function (index, tbarUnitBtn) {
-            var html = $(tbarUnitBtn).html();
-            html = html.replace("<div class=\"delete_dispatched_unit_btn\" style=\"display: none;\">X</div>", "");
             $(".unit_dialog_btn").filter(function () {
                 return $(this).text() === html;
             }).addClass("glowlightgreen");
