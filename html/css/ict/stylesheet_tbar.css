@@ -13,7 +13,7 @@
 	z-index:0;
 }
 .tbar_title_container {
-	background: black;
+	background: #BBB;
 	height: 29px;
     border-bottom: 1px solid black;
 }
@@ -238,6 +238,21 @@
 	background: #AAC7D1;
 	border-bottom: 2px dotted #888 !important;
 	border-radius: 10px;
+}
+
+
+.action_btn {
+	width: 126px;
+	height: 26px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 4px;
+	box-shadow: none;
+	font-size: 100%;
+	padding-bottom: 2px;
+    color: black;
+    background: white !important;
 }
 
 .hidden_sector_btn, .hidden_sector_btn:hover, .hidden_sector_btn:active {

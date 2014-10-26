@@ -121,7 +121,7 @@ td {
 }
 
 #ict_header {
-    background: black;
+    background: #e5e5e5;
     position: fixed;
     right: 0;
     top: 0;
@@ -406,7 +406,7 @@ td {
     text-align: center;
     font-family: 'Carrois Gothic SC';
     font-size: 1.45rem;
-    color: white;
+    color: black;
 }
 
 .time_lg {
