@@ -815,6 +815,8 @@ function clickNumBtn(btn) {
 function setTbarTitle(tbar, title) {
     var title_text_prev = tbar.find(".title_text").html();
     tbar.find(".title_text").html(title);
+    clearUnpopulated(tbar);
+
     if (title != "Sector") {
         hideAllDialogs();
     }
@@ -2130,6 +2132,10 @@ function initTbars() {
             addTbar(col, row);
         }
     }
+
+    clearUnpopulated(rescue_tbar);
+    clearUnpopulated(safety_tbar);
+    clearUnpopulated(rehab_tbar);
 }
 
 
@@ -2208,6 +2214,12 @@ function removeUnitButton(unit_col_container, unitName) {
     updateTbar(tbar);
     updateDispatchUnitsHighlight();
 }
+function clearUnpopulated(tbar) {
+    tbar.find(".right_scroll_pane").show();
+    tbar.removeClass("tbar_unpopulated");
+    tbar.find(".tbar_shield").removeClass("tbar_unpopulated");
+    tbar.find(".tbar_col_left_div").removeClass("tbar_unpopulated");
+}
 var unitRowDivSerialId = 1;
 function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
@@ -2220,9 +2232,10 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         unitRowDivSerialId++;
         var tbar = unit_col_container.parents(".tbar");
 
+        clearUnpopulated(tbar);
+
         var scroll_pane = unit_col_container.find(".scroll-pane");
         var pane2api = scroll_pane.data('jsp');
-        tbar.find(".right_scroll_pane").show();
 
         // Unit row div
         var unit_row_div = $("#unit_row_div_prototype").clone();
@@ -2440,6 +2453,10 @@ function addTbar(col_x, row_y) {
 
     // right_scroll_pane
     tbar.find(".right_scroll_pane").hide();
+
+    // Tbar Shield
+    var tbar_shield = $("#tbar_shield_prototype").clone();
+    tbar_shield
 
     tbar.show();
 
@@ -2936,6 +2953,8 @@ function init() {
         autogrow_cols: false
     }).data('gridster');
     gridster.disable();
+
+    $("#tbar_shield_prototype").hide();
 
     initTbars();
 
