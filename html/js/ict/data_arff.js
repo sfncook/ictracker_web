@@ -1,6 +1,15 @@
 var sectors_arff = [
-    "Interior", "Exterior", "Wing", "Tail Section", "",
-    "Safety",   "ReHab",    "RESCUE"
+    "Interior",     "Alpha Sector",     "Salvage",          "Medical",
+    "Ventilation",  "Bravo Sector",     "Overhaul",         "Triage",
+    "",             "Charlie Sector",   "Evacuation",       "Treatment",
+    "On Deck",      "Delta Sector",     "Customer Service", "Transportation",
+    "Staging",      "",                 "",                 "LZ",
+    "",             "North Sector",     "ReHab",            "",
+    "IRIC",         "East Sector",      "Lobby",            "",
+    "RIC",          "South Sector",     "Resource",         "",
+    "RESCUE",       "West Sector",      "Accountability",   "",
+    "Safety",       "",                 "",                 "",
+    "Tail",         "Wing",             "Engine",           "Brake"
 ];
 
 
