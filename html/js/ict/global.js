@@ -628,7 +628,6 @@ function addMaydayEventElement() {
 
     // Mayday Single Toggle Btns
     maydayEl.find(".mayday_single_toggle").click(function() {
-        console.log($(this));
         $(this).toggleClass("glowlightgreen");
     });
 
