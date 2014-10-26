@@ -643,7 +643,10 @@ td {
     border-left: 1px solid #666;
 }
 
-#sector_dialog {
+#sector_dialog.fire {
+    width: 887px;
+}
+#sector_dialog.arff {
     width: 712px;
 }
 

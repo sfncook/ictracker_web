@@ -859,6 +859,8 @@ function initSectorDialog() {
     dialog_title_text.append("Sectors");
     var dialog_body = sectorDialog.find(".dialog_body");
 
+    $("#sector_dialog").addClass(inc_type);
+
     if(inc_type == "fire") {
         var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
         dialog_body.append(dir_btns_container);
@@ -2658,7 +2660,6 @@ function initIncidentInfo() {
         $("#osr_select_conditions").hide();
         $("#construction_osr_btn").hide();
         $("#occupancy_osr_btn").hide();
-
     }
 }
 function getHttpRequestByName(name) {
