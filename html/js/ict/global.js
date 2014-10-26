@@ -951,6 +951,10 @@ function initSectorDialog() {
                     hideAllDialogs();
                     saveCookieState();
                 }
+                if(inAddSectorSequence) {
+                    var unit_col_left = tbar_clicked.find(".unit_col_left");
+                    showDialog_withCallbacks("#units_dialog", 0/*parentDialog*/, onOpenUnitsDialogFromTbar(tbar_clicked), toggleUnitButtonForTbar(unit_col_left))();
+                }
             }
         });
     });
@@ -2108,6 +2112,10 @@ function updateTbar(tbar) {
             $("#custsvc_objective_btn").addClass("glowlightgreen");
         }
     }
+
+    if(manyUnits > 0 && sectorName != "-") {
+        clearUnpopulated(tbar);
+    }
     updateOsrPercentComplete();
     updateObjectivePercentComplete();
 }
@@ -2285,6 +2293,28 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
         // Only hide the units dialog if user did not the dispatch button first
         hideAllDialogs();
+
+        if(inAddSectorSequence) {
+            showDialog_withCallbacks(
+                "#units_dialog",
+                0, //parentDialog
+                function () {
+                    var acctBtn = tbar.find(".acct_unit_btn");
+                    $(".unit_dialog_btn").removeClass("glowlightgreen");
+                    $(".unit_dialog_btn:contains('" + acctBtn.html() + "')").addClass("glowlightgreen");
+
+                },
+                function (unitName) {
+                    var acctBtn = tbar.find(".acct_unit_btn");
+                    addEvent_unit_to_acct(unitName, tbar.find(".title_text").text());
+                    acctBtn.html(unitName);
+//                $("#acct_osr_btn").addClass("glowlightgreen");
+//                updateOsrPercentComplete();
+                    hideAllDialogs();
+                    inAddSectorSequence = false;
+                }
+            )();
+        }
     }
 
     // Dispatched Units
@@ -2455,13 +2485,16 @@ function addTbar(col_x, row_y) {
     tbar.find(".right_scroll_pane").hide();
 
     // Tbar Shield
-    var tbar_shield = $("#tbar_shield_prototype").clone();
-    tbar_shield
+    tbar.find(".tbar_shield").click(function() {
+        inAddSectorSequence = true;
+        showSectorDialog(tbar, titleBtn, "#sector_dialog")();
+    });
 
     tbar.show();
 
     return tbar;
 }
+var inAddSectorSequence = false;
 
 
 /**
@@ -3026,6 +3059,7 @@ function init() {
     };
 
     $(".dialog_close_btn").click(function () {
+        inAddSectorSequence = false;
         if ($(this).parents(".dialog").attr("id") == "nda_reminder_dialog" && !isIncidentRunning) {
             hideAllDialogs();
             terminateCommand();
@@ -3067,6 +3101,7 @@ $(document).ready(init);
 //Esc Key Press
 $(document).keyup(function (e) {
     if (e.keyCode == 27 && isIncidentRunning) {
+        inAddSectorSequence = false;
         if (typeof onCloseCallback != 'undefined' && onCloseCallback != 0) {
             onCloseCallback();
         }
