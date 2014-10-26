@@ -218,6 +218,26 @@ td {
     opacity: 0.5;
 }
 
+.action_btn {
+    width: 126px;
+    height: 26px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 4px;
+    box-shadow: none;
+    font-size: 100%;
+    padding-bottom: 2px;
+    color: black !important;
+    background: #ddd !important;
+    opacity: 100 !important;
+}
+.action_btn :hover {
+    color: black !important;
+    background: #ddd !important;
+    opacity: 100 !important;
+}
+
 .hidden_div {
     /*
      *Use opacity rather than show/hide

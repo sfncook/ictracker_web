@@ -240,25 +240,12 @@
 	border-radius: 10px;
 }
 
-
-.action_btn {
-	width: 126px;
-	height: 26px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	margin: 4px;
-	box-shadow: none;
-	font-size: 100%;
-	padding-bottom: 2px;
-    color: black;
-}
-
 .hidden_sector_btn, .hidden_sector_btn:hover, .hidden_sector_btn:active {
     height: 24px;
     opacity:0;
     cursor: default;
 }
+
 
 .personnel_btn {
     width: 20px;

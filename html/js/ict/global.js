@@ -2643,6 +2643,7 @@ function initIncidentInfo() {
         $("#location_left_osr_btn").hide();
         $("#osr_select_type_of_aircraft").hide();
         $("#osr_select_conditions_arff").hide();
+        $("#aircraft_osr_btn").hide();
     } else {
         $("#address_left_osr_btn").hide();
         $("#osr_size_of_building").hide();
@@ -2653,6 +2654,9 @@ function initIncidentInfo() {
         $("#osr_select_type_of_construction").hide();
         $("#osr_select_roof").hide();
         $("#osr_select_conditions").hide();
+        $("#construction_osr_btn").hide();
+        $("#occupancy_osr_btn").hide();
+
     }
 }
 function getHttpRequestByName(name) {

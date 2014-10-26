@@ -1,14 +1,14 @@
 var sectors_fire = [
-    "Interior", "Sector 1", "Alpha Sector", "Salvage", "",
-    "Ventilation", "Sector 2", "Bravo Sector", "Overhaul", "",
-    "Roof", "Sector 3", "Charlie Sector", "Evacuation", "",
-    "On Deck", "Sector 4", "Delta Sector", "Customer Service", "ReHab",
-    "Staging", "Sector 5", "", "", "",
-    "", "Sector 6", "North Sector", "", "Medical",
-    "IRIC", "Sector 7", "East Sector", "Lobby", "Triage",
-    "RIC", "Sector 8", "South Sector", "Resource", "Treatment",
-    "RESCUE", "Sector 9", "West Sector", "Accountability", "Transportation",
-    "Safety", "Sector ####", "", "", "LZ"
+    "Interior", "Sector 1", "Alpha Sector", "Salvage", "Medical",
+    "Ventilation", "Sector 2", "Bravo Sector", "Overhaul", "Triage",
+    "Roof", "Sector 3", "Charlie Sector", "Evacuation", "Treatment",
+    "On Deck", "Sector 4", "Delta Sector", "Customer Service", "Transportation",
+    "Staging", "Sector 5", "", "", "LZ",
+    "", "Sector 6", "North Sector", "ReHab", "",
+    "IRIC", "Sector 7", "East Sector", "Lobby", "",
+    "RIC", "Sector 8", "South Sector", "Resource", "",
+    "RESCUE", "Sector 9", "West Sector", "Accountability", "",
+    "Safety", "Sector ####", "", "", ""
 ];
 
 

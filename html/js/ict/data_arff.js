@@ -16,32 +16,37 @@ var actions_arff = [
             "Action Effect",
             "Special"
         ],
-        actions_warning: []
+        actions_warning: [
+            "*Aircraft"
+        ]
     },
     {action_type: "Rescue",
         actions: [
-            "Egress Protection",
             "Primary Search"
         ],
-        actions_warning: []
+        actions_warning: [
+            "*Egress Protection"
+        ]
     },
     {action_type: "Fire Control",
         actions: [
+            "Vent"
+        ],
+        actions_warning: [
             "Water/Foam Resources",
             "ARRF Truck Attack",
             "Interior",
-            "Exterior",
-            "Vent"
-        ],
-        actions_warning: []
+            "Exterior"
+        ]
     },
     {action_type: "Property / People",
         actions: [
-            "Tx Location?",
-            "Transportation?",
             "Evacuation Location"
         ],
-        actions_warning: []
+        actions_warning: [
+            "Tx Location?",
+            "Transportation?"
+        ]
     },
     {action_type: "Firefighter Safety",
         actions: [
