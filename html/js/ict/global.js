@@ -153,7 +153,7 @@ function showParDialog(tbar, btn, parentDialog_) {
             var par_dialog_sector_btn = $("#par_dialog_sector_btn");
             var tbarTitle = tbar.find(".title_text").html();
             par_dialog_sector_btn.html(tbarTitle);
-            if (tbarTitle != "Sector Title") {
+            if (tbarTitle != "-") {
                 parDialog.find(".dialog_title_text_span").html(tbarTitle + " PAR");
             } else {
                 parDialog.find(".dialog_title_text_span").html("Sector PAR");
@@ -657,7 +657,7 @@ function initMaydayDialog() {
             var sector_titles = [];
             $(".tbar").each(function(){
                 var sector_title = $(this).find(".title_text").html();
-                if(sector_title != "Sector Title") {
+                if(sector_title != "-") {
                     sector_titles.push(sector_title);
                 }
             });
@@ -830,7 +830,7 @@ function setTbarTitle(tbar, title) {
         updateObjectivePercentComplete();
     }
     updateTbar(tbar);
-    if ($(".title_text:contains('Sector Title'):not(#tbar_prototype)").length <= 1) {
+    if ($(".title_text:contains('-'):not(#tbar_prototype)").length <= 1) {
         addTbar();
     }
 
@@ -945,7 +945,7 @@ function initSectorDialog() {
                         setTbarTitle(tbar_clicked, sectorName);
                     }
                 } else {
-                    tbar_clicked.find(".title_text").html("Sector Title");
+                    tbar_clicked.find(".title_text").html("-");
                     hideAllDialogs();
                     saveCookieState();
                 }
@@ -1085,6 +1085,7 @@ function addActionButtonToTbar(tbar, actionName) {
 
     // Update scroll container
     var scroll_pane = tbar.find(".right_scroll_pane");
+    scroll_pane.show();
     var pane2api = scroll_pane.data('jsp');
     pane2api.getContentPane().append(actionBtn);
     pane2api.reinitialise();
@@ -1277,7 +1278,7 @@ function updateTbarBenchmarkIcon(tbar) {
     tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_black.png");
 
     var sectorName = tbar.find(".title_text").html();
-    if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="Sector Title") {
+    if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="-") {
         if ($("#benchmark_unable_primary").hasClass("glowpink")) {
             tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
         } else {
@@ -1331,14 +1332,14 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
     return function () {
         // Change benchmark dialog title
         var title = tbar.find(".title_text").html();
-        if (title != "Sector Title") {
+        if (title != "-") {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html(title + " Benchmarks");
         } else {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html("Benchmarks");
         }
 
         $(".benchmarks_dialog_body").hide();
-        if(sectorsWithClassicBnch.indexOf(title)>=0 || title.indexOf("Sector ")==0 && title!="Sector Title") {
+        if(sectorsWithClassicBnch.indexOf(title)>=0 || title.indexOf("Sector ")==0 && title!="-") {
             $("#benchmarks_dialog_body").show();
             $("#benchmarks_dialog").width(515);
         } else if(sectorsWithIricBnch.indexOf(title)>=0) {
@@ -2039,7 +2040,7 @@ function updateTbar(tbar) {
     // Benchmarks
     if(
         sectorsWithClassicBnch.indexOf(sectorName)>=0 ||
-        (sectorName.indexOf("Sector ")==0  && sectorName!="Sector Title") ||
+        (sectorName.indexOf("Sector ")==0  && sectorName!="-") ||
         sectorsWithIricBnch.indexOf(sectorName)>=0 ||
         sectorsWithLzBnch.indexOf(sectorName)>=0 ||
         sectorsWithSafetyBnch.indexOf(sectorName)>=0 ||
@@ -2056,7 +2057,7 @@ function updateTbar(tbar) {
     tbar.find(".benchmark_bar_img_2").hide();
     tbar.find(".benchmark_bar_img_3").hide();
     tbar.find(".benchmark_bar_img_4").hide();
-    if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="Sector Title") {
+    if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="-") {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
@@ -2221,6 +2222,7 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
         var scroll_pane = unit_col_container.find(".scroll-pane");
         var pane2api = scroll_pane.data('jsp');
+        tbar.find(".right_scroll_pane").show();
 
         // Unit row div
         var unit_row_div = $("#unit_row_div_prototype").clone();
@@ -2435,6 +2437,9 @@ function addTbar(col_x, row_y) {
     unit_move_cancel_btn.click(function () {
         cancelUnitMove();
     });
+
+    // right_scroll_pane
+    tbar.find(".right_scroll_pane").hide();
 
     tbar.show();
 
