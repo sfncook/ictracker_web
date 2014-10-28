@@ -1610,12 +1610,14 @@ function initOsrDialog() {
             $("#osr_address_btn").html(address);
             $("#osr_address_btn").addClass("glowlightgreen");
             $("#address_left_osr_btn").addClass("glowlightgreen");
+            $("#location_left_osr_btn").addClass("glowlightgreen");
             $("#address_dialog").hide();
             $("#osr_dialog").show();
         } else {
             $("#osr_address_btn").html("Dispatch Address");
             $("#osr_address_btn").removeClass("glowlightgreen");
             $("#address_left_osr_btn").removeClass("glowlightgreen");
+            $("#location_left_osr_btn").removeClass("glowlightgreen");
             $("#address_dialog").hide();
             $("#osr_dialog").show();
         }
@@ -1628,6 +1630,7 @@ function initOsrDialog() {
     $("#dispatch_address_btn_btn").click(function () {
         $("#dispatch_address_btn_btn").addClass("glowlightgreen");
         $("#address_left_osr_btn").addClass("glowlightgreen");
+        $("#location_left_osr_btn").addClass("glowlightgreen");
         $("#address_custom_input").val("");
         $("#osr_address_btn").html("Dispatch Address");
         $("#osr_address_btn").addClass("glowlightgreen");
@@ -1748,6 +1751,19 @@ function initOsrDialog() {
             showDialog(0, mode_btn, "#emergency_traffic_dialog")();
         }
     );
+    $("#osr_select_type_of_aircraft").change(function () {
+        $("#aircraft_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Type of aircraft: " + selected_text);
+    });
+    $("#osr_select_conditions_arff").change(function () {
+        $("#conditions_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Condition of aircraft: " + selected_text);
+    });
+
 
     var osr_btn = $("#osr_header_btn");
     osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
