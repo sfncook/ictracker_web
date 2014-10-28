@@ -2639,24 +2639,10 @@ function initIncidentInfo() {
     sectors = window['sectors_'+inc_type];
     actions = window['actions_'+inc_type];
 
-    if(inc_type == "fire") {
-        $("#location_left_osr_btn").hide();
-        $("#osr_select_type_of_aircraft").hide();
-        $("#osr_select_conditions_arff").hide();
-        $("#aircraft_osr_btn").hide();
-    } else {
-        $("#address_left_osr_btn").hide();
-        $("#osr_size_of_building").hide();
-        $("#osr_number_of_floors").hide();
-        $("#osr_select_type_of_building").hide();
-        $("#osr_number_of_subfloors").hide();
-        $("#osr_basement_toggles").hide();
-        $("#osr_select_type_of_construction").hide();
-        $("#osr_select_roof").hide();
-        $("#osr_select_conditions").hide();
-        $("#construction_osr_btn").hide();
-        $("#occupancy_osr_btn").hide();
-    }
+    $(".fire").hide();
+    $(".arff").hide();
+    $("."+inc_type).show();
+
 }
 function getHttpRequestByName(name) {
     get_string = document.location.search;

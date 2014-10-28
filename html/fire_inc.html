@@ -771,11 +771,11 @@
     </div>
     <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
         <div id="osr_left_col">
-            <div id="address_left_osr_btn" class="osr_btn button">Address</div>
-            <div id="location_left_osr_btn" class="osr_btn button">Location</div>
-            <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
-            <div id="aircraft_osr_btn" class="osr_btn button">Type of Aircraft</div>
-            <div id="construction_osr_btn" class="osr_btn button">Construction</div>
+            <div id="address_left_osr_btn" class="fire osr_btn button">Address</div>
+            <div id="location_left_osr_btn" class="arff osr_btn button">Location</div>
+            <div id="occupancy_osr_btn" class="fire osr_btn button">Occupancy</div>
+            <div id="aircraft_osr_btn" class="arff osr_btn button">Type of Aircraft</div>
+            <div id="construction_osr_btn" class="fire osr_btn button">Construction</div>
             <div id="conditions_osr_btn" class="osr_btn button">Conditions</div>
             <div id="assumecmd_osr_btn" class="osr_btn button">Assume Command</div>
             <div id="location_osr_btn" class="osr_btn button">Location(mobile/cab)</div>
@@ -800,14 +800,14 @@
             <div id="unit_osr_btn" class="button">Unit ID</div>
             <div id="osr_address_btn" class="button">Dispatch Address</div>
 
-            <select id="osr_size_of_building" class="osr_select">
+            <select id="osr_size_of_building" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Size of building</option>
                 <option>Small building</option>
                 <option>Medium building</option>
                 <option>Large building</option>
             </select>
 
-            <select id="osr_number_of_floors" class="osr_select">
+            <select id="osr_number_of_floors" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Number of floors</option>
                 <option>1 floor</option>
                 <option>2 floors</option>
@@ -836,7 +836,7 @@
                 <option>25 floors</option>
             </select>
 
-            <select id="osr_select_type_of_building" class="osr_select">
+            <select id="osr_select_type_of_building" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Type of Building</option>
                 <option>Residential Home</option>
                 <option>Duplex</option>
@@ -850,25 +850,25 @@
                 <option>Specialized/Other</option>
             </select>
 
-            <select id="osr_select_type_of_aircraft" class="osr_select">
+            <select id="osr_select_type_of_aircraft" class="arff osr_select">
                 <option disabled="disabled" selected="selected">Type of Aircraft</option>
                 <option>Single Engine</option>
                 <option>Personal Jet</option>
             </select>
 
-            <select id="osr_number_of_subfloors" class="osr_select">
+            <select id="osr_number_of_subfloors" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Sub Floors</option>
                 <option>None</option>
                 <option>-1 floor</option>
                 <option>-2 floors</option>
             </select>
 
-            <div id="osr_basement_toggles" class="osr_toggle_container_div">
+            <div id="osr_basement_toggles" class="fire osr_toggle_container_div">
                 <div id="osr_occupancy_basement_btn" class="osr_toggle_btn button">Basement</div>
                 <div id="osr_occupancy_nobasement_btn" class="osr_toggle_btn button">No Basement</div>
             </div>
 
-            <select id="osr_select_type_of_construction" class="osr_select">
+            <select id="osr_select_type_of_construction" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Construction type</option>
                 <option>Light weight construction</option>
                 <option>Wood frame construction</option>
@@ -878,7 +878,7 @@
                 <option>Specialized/Other construction</option>
             </select>
 
-            <select id="osr_select_roof" class="osr_select">
+            <select id="osr_select_roof" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Roof</option>
                 <option>Pitched - tile roof</option>
                 <option>Pitched - asphalt roof</option>
@@ -887,7 +887,7 @@
                 <option>Arched roof</option>
             </select>
 
-            <select id="osr_select_conditions" class="osr_select">
+            <select id="osr_select_conditions" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Conditions</option>
                 <option>Nothing showing</option>
                 <option>Smoke showing</option>
@@ -896,7 +896,7 @@
                 <option>Attic Fire</option>
             </select>
 
-            <select id="osr_select_conditions_arff" class="osr_select">
+            <select id="osr_select_conditions_arff" class="arff osr_select">
                 <option disabled="disabled" selected="selected">Aircraft Conditions</option>
                 <option>Nothing showing</option>
                 <option>Smoke showing</option>
@@ -915,8 +915,8 @@
                 <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
             </div>
 
-            <div id="osr_foam_btn" class="button">Applying Foam</div>
-            <div id="osr_egress_btn" class="button">Protecting Egress</div>
+            <div id="osr_foam_btn" class="arff button">Applying Foam</div>
+            <div id="osr_egress_btn" class="arff button">Protecting Egress</div>
         </div>
         <div style="width:100%" class="clear_float"></div>
     </div>
