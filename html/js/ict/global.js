@@ -1528,11 +1528,15 @@ function initStreetNameDialog() {
  * OSR Dialog
  **/
 function updateOsrPercentComplete() {
-    var many_osr_btn = $(".osr_btn").length;
-    var many_osr_btn_green = $(".osr_btn.glowlightgreen").length;
-    var percent_complete = many_osr_btn_green / many_osr_btn;
-    var width = percent_complete * 78.0;
-    $("#osr_perc_bar").width(width);
+    if(inc_type!='') {
+        var many_osr_btn = $("."+inc_type).filter(".osr_btn").length;
+        var many_osr_btn_green = $("."+inc_type).filter(".osr_btn.glowlightgreen").length;
+        var percent_complete = many_osr_btn_green / many_osr_btn;
+        var width = percent_complete * 78.0;
+        $("#osr_perc_bar").width(width);
+    } else {
+        $("#osr_perc_bar").width(0);
+    }
 }
 function toggleOsrBtn(btn) {
     return function () {
@@ -2641,7 +2645,7 @@ function initIncidentInfo() {
 
     $(".fire").hide();
     $(".arff").hide();
-    $("."+inc_type).show();
+    $('.'+inc_type).show();
 
 }
 function getHttpRequestByName(name) {
