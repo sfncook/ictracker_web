@@ -1,6 +1,46 @@
 /**
  * Persistence
  **/
+var bnchBtnIds_unable = [
+    "benchmark_unable_primary",
+    "benchmark_unable_secondary"
+];
+var bnchBtnIds = [
+    "bnch_primary",
+    "bnch_underctl",
+    "bnch_secondary",
+    "bnch_lossstop",
+    "bnch_primary_par",
+    "bnch_primary_notify",
+    "bnch_primary_challenge",
+    "bnch_underctl_par",
+    "bnch_underctl_notify",
+    "bnch_underctl_obtain",
+    "bnch_secondary_par",
+    "bnch_secondary_notify",
+    "bnch_lossstop_par",
+    "bnch_lossstop_notify",
+    'benchmark_vent_1',
+    'benchmark_vent_2',
+    'benchmark_vent_3',
+    'benchmark_iric_1',
+    'benchmark_iric_2',
+    'benchmark_iric_3',
+    'benchmark_iric_4',
+    'benchmark_safety_1',
+    'benchmark_safety_2',
+    'benchmark_treatment_1',
+    'benchmark_treatment_2',
+    'benchmark_treatment_3',
+    'benchmark_lz_1',
+    'benchmark_lz_2',
+    'benchmark_lz_3'
+];
+var triageBtnIds = [
+    "benchmark_triage_1",
+    "benchmark_triage_2",
+    "benchmark_triage_3"
+];
 function actionObjForJson(unitBtn) {
     var unitObj = {};
 
@@ -63,6 +103,32 @@ function tbarToJson(tbarEl) {
         });
     }
     tbarObj['btn_ids_with_par'] = btn_ids_with_par;
+
+    // Benchmarks
+    var benchmarks = {};
+    for (i = 0; i < bnchBtnIds_unable.length; i++) {
+        var bnchBtnId = bnchBtnIds_unable[i];
+        if (tbarEl.data(bnchBtnId)) {
+            benchmarks[bnchBtnId] = 'true';
+        } else {
+            benchmarks[bnchBtnId] = 'false';
+        }
+    }
+    for (i = 0; i < bnchBtnIds.length; i++) {
+        var bnchBtnId = bnchBtnIds[i];
+        if (tbarEl.data(bnchBtnId)) {
+            benchmarks[bnchBtnId] = 'true';
+        } else {
+            benchmarks[bnchBtnId] = 'false';
+        }
+    }
+    for (i = 0; i < triageBtnIds.length; i++) {
+        var bnchBtnId = triageBtnIds[i];
+        if (tbarEl.data(bnchBtnId)) {
+            benchmarks[bnchBtnId] = tbarEl.data(bnchBtnId);
+        }
+    }
+    tbarObj['benchmarks'] = benchmarks;
 
     return JSON.stringify(tbarObj);
 }
@@ -297,7 +363,18 @@ function loadTbarFromCookie(tbarObj) {
         showActionsForUnitBtn(tbarEl.find(".unit_row_div").first().find(".unit_btn"))();
     }
 
-    updateTbar(tbarEl);
+    // Benchmarks
+    var benchmarks = tbarObj['benchmarks'];
+    var benchmarksKeys = Object.keys(benchmarks);
+    for (i = 0; i < benchmarksKeys.length; i++) {
+        var benchmarksKey = benchmarksKeys[i];
+        var benchmark = benchmarks[benchmarksKey];
+        if(triageBtnIds.indexOf(benchmarksKey) == -1) {
+            tbarEl.data(benchmarksKey, benchmark=="true");
+        } else {
+            tbarEl.data(benchmarksKey, benchmark);
+        }
+    }
 }
 function loadCookieState() {
     if (COOKIES_ENABLED) {

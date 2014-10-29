@@ -1230,16 +1230,18 @@ function initBenchmarkDialog() {
 
     $('.benchmark_item_btn_2').click(function(){
         $(this).toggleClass("glowlightgreen");
-        updateTbarBenchmarkIcon(tbar_clicked);
         var isOn = $(this).hasClass("glowlightgreen");
         var btnId = $(this).attr("id");
         tbar_clicked.data(btnId, isOn);
+        updateTbarBenchmarkIcon(tbar_clicked);
+        saveCookieState();
     });
 
     $(".benchmark_triage_input").on("input", function() {
         var btnId = $(this).attr("id");
         tbar_clicked.data(btnId, $(this).val());
         updateTbarBenchmarkIcon(tbar_clicked);
+        saveCookieState();
     });
 }
 function toggleBenchmarkBtn(bnchBtn, toggleClass) {
@@ -1265,6 +1267,7 @@ function toggleBenchmarkBtn(bnchBtn, toggleClass) {
     }
 
     updateTbarBenchmarkIcon(tbar_clicked);
+    saveCookieState();
 }
 function updateTbarBenchmarkIcon(tbar) {
     tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_black.png");
@@ -1274,53 +1277,53 @@ function updateTbarBenchmarkIcon(tbar) {
 
     var sectorName = tbar.find(".title_text").html();
     if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="Sector Title") {
-        if ($("#benchmark_unable_primary").hasClass("glowpink")) {
+        if (tbar.data("benchmark_unable_primary")) {
             tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
         } else {
-            if ($("#bnch_primary").hasClass("glowlightgreen")) {
+            if (tbar.data("bnch_primary")) {
                 tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
             }
         }
 
-        if ($("#bnch_underctl").hasClass("glowlightgreen")) {
+        if (tbar.data("bnch_underctl")) {
             tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
         }
 
-        if ($("#benchmark_unable_secondary").hasClass("glowpink")) {
+        if (tbar.data("benchmark_unable_secondary")) {
             tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_red.png");
         } else {
-            if ($("#bnch_secondary").hasClass("glowlightgreen")) {
+            if (tbar.data("bnch_secondary")) {
                 tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
             }
         }
 
-        if ($("#bnch_lossstop").hasClass("glowlightgreen")) {
+        if (tbar.data("bnch_lossstop")) {
             tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
         }
     } else if(sectorsWithIricBnch.indexOf(sectorName)>=0) {
-        if( $("#benchmark_iric_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_iric_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_iric_3").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_iric_4").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_iric_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_iric_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_iric_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_iric_4") ) {tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");}
     } else if(sectorsWithLzBnch.indexOf(sectorName)>=0) {
-        if( $("#benchmark_lz_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_lz_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_lz_3").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_lz_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_lz_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_lz_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
     } else if(sectorsWithSafetyBnch.indexOf(sectorName)>=0) {
-        if( $("#benchmark_safety_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_safety_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_safety_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_safety_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
     } else if(sectorsWithTreatmentBnch.indexOf(sectorName)>=0) {
-        if( $("#benchmark_treatment_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_treatment_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_treatment_3").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_treatment_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_treatment_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_treatment_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
     } else if(sectorsWithTriageBnch.indexOf(sectorName)>=0) {
-        if( $("#benchmark_triage_1").val()!="" ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_triage_2").val()!="" ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_triage_3").val()!="" ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_triage_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_triage_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_triage_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
     } else if(sectorsWithVentBnch.indexOf(sectorName)>=0) {
-        if( $("#benchmark_vent_1").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_vent_2").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( $("#benchmark_vent_3").hasClass("glowlightgreen") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_vent_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_vent_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
+        if( tbar.data("benchmark_vent_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
     }
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
@@ -1358,10 +1361,6 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         }
 
         // Set all button states
-        var bnchBtnIds_unable = [
-            "benchmark_unable_primary",
-            "benchmark_unable_secondary"
-        ];
         for (i = 0; i < bnchBtnIds_unable.length; i++) {
             var bnchBtnId = bnchBtnIds_unable[i];
             var bnchBtn = $("#" + bnchBtnId);
@@ -1376,37 +1375,6 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             }
         }
 
-        var bnchBtnIds = [
-            "bnch_primary",
-            "bnch_underctl",
-            "bnch_secondary",
-            "bnch_lossstop",
-            "bnch_primary_par",
-            "bnch_primary_notify",
-            "bnch_primary_challenge",
-            "bnch_underctl_par",
-            "bnch_underctl_notify",
-            "bnch_underctl_obtain",
-            "bnch_secondary_par",
-            "bnch_secondary_notify",
-            "bnch_lossstop_par",
-            "bnch_lossstop_notify",
-            'benchmark_vent_1',
-            'benchmark_vent_2',
-            'benchmark_vent_3',
-            'benchmark_iric_1',
-            'benchmark_iric_2',
-            'benchmark_iric_3',
-            'benchmark_iric_4',
-            'benchmark_safety_1',
-            'benchmark_safety_2',
-            'benchmark_treatment_1',
-            'benchmark_treatment_2',
-            'benchmark_treatment_3',
-            'benchmark_lz_1',
-            'benchmark_lz_2',
-            'benchmark_lz_3'
-        ];
         for (i = 0; i < bnchBtnIds.length; i++) {
             var bnchBtnId = bnchBtnIds[i];
             var bnchBtn = $("#" + bnchBtnId);
@@ -1422,11 +1390,6 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         }
 
         // Triage Benchmarks
-        var triageBtnIds = [
-            "benchmark_triage_1",
-            "benchmark_triage_2",
-            "benchmark_triage_3"
-        ];
         for (i = 0; i < triageBtnIds.length; i++) {
             var bnchBtnId = triageBtnIds[i];
             var bnchBtn = $("#" + bnchBtnId);
@@ -2067,7 +2030,6 @@ function updateTbar(tbar) {
     } else {
         tbar.find(".benchmark_btn").hide();
     }
-
     tbar.find(".benchmark_bar_img_1").hide();
     tbar.find(".benchmark_bar_img_2").hide();
     tbar.find(".benchmark_bar_img_3").hide();
@@ -2102,6 +2064,7 @@ function updateTbar(tbar) {
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
     }
+    updateTbarBenchmarkIcon(tbar);
 
 
     if (manyUnits > 0) {
@@ -2971,6 +2934,9 @@ function init() {
     if (COOKIES_ENABLED) {
         if(supports_html5_storage()) {
             loadCookieState();
+            $(".tbar").each(function(){
+                updateTbar($(this));
+            });
         } else {
             COOKIES_ENABLED = false;
             console.log("Your browser does not support HTML 5 local storage.  State will not be persisted.");
