@@ -423,7 +423,8 @@
             <tr>
                 <td class="iap_label_td">Critical Fireground Factors:</td>
                 <td colspan="2">
-                    <div id="bldg_iap_btn" class="iap_toggle_btn button">Building</div>
+                    <div id="bldg_iap_btn" class="fire iap_toggle_btn button">Building</div>
+                    <div id="airc_iap_btn" class="arff iap_toggle_btn button">Aircraft</div>
                     <div id="fire_iap_btn" class="iap_toggle_btn button">Fire</div>
                     <div id="occu_iap_btn" class="iap_toggle_btn button">Occupancy</div>
                     <div id="life_iap_btn" class="iap_toggle_btn button">Life Hazard</div>
@@ -436,13 +437,17 @@
             </tr>
             <tr>
                 <td class="iap_red_label iap_label_td">Rescue:</td>
-                <td><textarea id="iap_resc_input" class="iap_input">Primary search</textarea></td>
+                <td>
+                    <textarea id="iap_rescfire_input" class="fire iap_input">Primary Search</textarea>
+                    <textarea id="iap_rescarff_input" class="arff iap_input">Egress Protection, Primary Search</textarea>
+                </td>
                 <td></td>
             </tr>
             <tr>
                 <td class="iap_blue_label iap_label_td">Fire Control:</td>
                 <td>
-                    <textarea id="iap_fire_input" class="iap_input">Supply line, attack +2</textarea>
+                    <textarea id="iap_fire_input" class="fire iap_input">Supply line, attack +2</textarea>
+                    <textarea id="iap_firearff_input" class="arff iap_input">Water/Foam Resources, ARRF Truck Attack +1 Interior, 1 Exterior, Vent</textarea>
                 </td>
                 <td>
                     <div id="iap_vent_toggle_btn" class="iap_toggle_btn button">Vent</div>
@@ -452,7 +457,8 @@
             <tr>
                 <td class="iap_blue_label iap_label_td">Property/People:</td>
                 <td>
-                    <textarea id="iap_prop_input" class="iap_input">Salvage</textarea>
+                    <textarea id="iap_propfire_input" class="fire iap_input">Salvage</textarea>
+                    <textarea id="iap_proparff_input" class="arff iap_input">Tx Location?, Transportation?</textarea>
 
                     <div class="clear_both"></div>
                     <div id="iap_evacloc_input_container">
