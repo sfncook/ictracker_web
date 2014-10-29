@@ -274,7 +274,7 @@ function saveCookieState() {
         localStorage.setItem('iap_inputs', JSON.stringify(iap_inputs));
 
         // Report
-//        localStorage.setItem('events', eventsToJsonObj());
+        localStorage.setItem('events', eventsToJsonObj());
 
         // Command Transferred
         var unit_cmdxfer_btns = new Array();
@@ -287,12 +287,6 @@ function saveCookieState() {
             unit_cmdxfer_btns.push(objToAdd);
         });
         localStorage.setItem('unit_cmdxfer_btns', JSON.stringify(unit_cmdxfer_btns));
-
-//        for(var i=0, len=localStorage.length; i<len; i++) {
-//            var key = localStorage.key(i);
-//            var value = localStorage[key];
-//            console.log(key + " => " + value);
-//        }
     }
 }
 function findTbarElementByColRow(col, row) {
@@ -527,11 +521,11 @@ function loadCookieState() {
             }
 
             // Report
-//            else if (key == 'events') {
-//                var newEventsStr = value;
-//                var newEvents = JSON.parse(newEventsStr);
-//                setEvents(newEvents);
-//            }
+            else if (key == 'events') {
+                var newEventsStr = value;
+                var newEvents = JSON.parse(newEventsStr);
+                setEvents(newEvents);
+            }
 
             // Command Transferred
             else if (key == 'unit_cmdxfer_btns') {

@@ -18,7 +18,8 @@ function getReportStr(eventArray) {
     var renderedStr = "";
     for (var i = 0; i < eventArray.length; i++) {
         var event = eventArray[i];
-        var eventStr = event.get_str_func(event);
+//        var eventStr = event.get_str_func(event);
+        var eventStr = window[event.get_str_func](event);
         renderedStr = renderedStr + eventStr + "<br>\n";
     }
     return renderedStr;
@@ -186,7 +187,8 @@ function renderPdf(doc) {
 
 
 //unit to sector
-function getDateStr(date) {
+function getDateStr(date_) {
+    var date = new Date(date_);
     var hour = date.getHours();
     var min = date.getMinutes();
     var sec = date.getSeconds();
@@ -202,23 +204,23 @@ function getDateStr(date) {
     return hour + ":" + min + ":" + sec;
 }
 
-//function eventsToJsonObj() {
-//    var eventObjs = new Array();
-//    for(var i=0; i<events.length; i++) {
-//        var event = events[i];
-//        var newEvent = event;
-//        newEvent['render_func'] = event.render_func.name;
-//        newEvent['get_str_func'] = event.get_str_func.name;
-//        eventObjs.push(newEvent);
-////        console.log(eventName);
-////        console.log(window[eventName]);
-//    }
-////    console.log(eventObjs);
-//    return JSON.stringify(eventObjs);
-//}
-//function setEvents(newEvents) {
-////    events = newEvents.clone();
-//}
+function eventsToJsonObj() {
+    var eventObjs = new Array();
+    for(var i=0; i<events.length; i++) {
+        var event = events[i];
+        var newEvent = event;
+        newEvent['render_func'] = event.render_func.name;
+        newEvent['get_str_func'] = event.get_str_func.name;
+        eventObjs.push(newEvent);
+    }
+//    console.log(eventObjs);
+    return JSON.stringify(eventObjs);
+}
+function setEvents(newEvents) {
+    for( var i=0; i<newEvents.length; i++) {
+        events.push(newEvents[i]);
+    }
+}
 
 function pushEvent_toQueues(event) {
     events.push(event);
