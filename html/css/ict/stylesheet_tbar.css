@@ -4,7 +4,7 @@
 
 .tbar {
 	background: #FFF;
-	border:1px solid #999;
+	border:1px solid #AAA;
 	margin: 5px 0 5px 10px;
     width: 278px;
 	height: 275px;
@@ -13,9 +13,8 @@
 	z-index:0;
 }
 .tbar_title_container {
-	background: black;
+	background: #DDD;
 	height: 29px;
-    border-bottom: 1px solid black;
 }
 .title_btn {
 	width:168px;

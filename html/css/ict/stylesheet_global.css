@@ -121,7 +121,7 @@ td {
 }
 
 #ict_header {
-    background: black;
+    background: #DDD;
     position: fixed;
     right: 0;
     top: 0;
@@ -406,7 +406,7 @@ td {
     text-align: center;
     font-family: 'Carrois Gothic SC';
     font-size: 1.45rem;
-    color: white;
+    color: black;
 }
 
 .time_lg {
@@ -1596,16 +1596,20 @@ ul {
 }
 
 #version_text {
-    position: fixed;
-    bottom: 30px;
-    left: 10px;
+    /*position: fixed;*/
+    /*bottom: 30px;*/
+    /*left: 10px;*/
     z-index: 150;
+    background: white;
+    margin: 0 10px;
 }
 #copyright_text {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
+    /*position: fixed;*/
+    /*bottom: 10px;*/
+    /*left: 10px;*/
     z-index: 150;
+    background: white;
+    margin: 0 10px;
 }
 
 .top_header_btn {
@@ -1644,7 +1648,7 @@ ul {
 
 #mayday_and_tbar_container {
     padding-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     padding-right: 90px;
 }
 
