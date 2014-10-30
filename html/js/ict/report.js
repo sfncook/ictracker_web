@@ -18,8 +18,8 @@ function getReportStr(eventArray) {
     var renderedStr = "";
     for (var i = 0; i < eventArray.length; i++) {
         var event = eventArray[i];
-//        var eventStr = event.get_str_func(event);
-        var eventStr = window[event.get_str_func](event);
+        var eventStr = event.get_str_func(event);
+//        var eventStr = window[event.get_str_func](event);
         renderedStr = renderedStr + eventStr + "<br>\n";
     }
     return renderedStr;

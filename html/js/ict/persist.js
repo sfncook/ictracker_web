@@ -274,7 +274,9 @@ function saveCookieState() {
         localStorage.setItem('iap_inputs', JSON.stringify(iap_inputs));
 
         // Report
-        localStorage.setItem('events', eventsToJsonObj());
+        if(REPORT_COOKIES_ENABLED) {
+            localStorage.setItem('events', eventsToJsonObj());
+        }
 
         // Command Transferred
         var unit_cmdxfer_btns = new Array();
@@ -522,9 +524,11 @@ function loadCookieState() {
 
             // Report
             else if (key == 'events') {
-                var newEventsStr = value;
-                var newEvents = JSON.parse(newEventsStr);
-                setEvents(newEvents);
+                if(REPORT_COOKIES_ENABLED) {
+                    var newEventsStr = value;
+                    var newEvents = JSON.parse(newEventsStr);
+                    setEvents(newEvents);
+                }
             }
 
             // Command Transferred
@@ -546,8 +550,7 @@ function loadCookieState() {
             }
 
             else {
-                console.log("Unhandled cookie:");
-                console.log(value);
+                console.log("Unhandled cookie: key:["+key+"] value:["+value+"]");
             }
         } // for
         COOKIES_ENABLED = true;
