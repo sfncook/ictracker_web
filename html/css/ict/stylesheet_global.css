@@ -1396,7 +1396,8 @@ td {
 }
 
 #unit_people_dialog {
-    width: 400px;
+    width: 532px;
+    font-size: 1.1rem;
 }
 
 .unit_people_dialog_btn {
@@ -1444,10 +1445,9 @@ td {
 
 .reset_clock_btn {
     float: right;
-    width: 120px;
-    height: 20px;
-    height: 22px;
-    margin: 4px 10px;
+    width: 150px;
+    height: 30px;
+    margin: 7px 10px 0 10px;
     padding: 0 4px;
 }
 
@@ -1890,3 +1890,16 @@ ul {
     background: transparent !important;
 }
 
+.psi_btn.unit_people_dialog_btn {
+    font-size:1.1rem;
+    width: 50px;
+    margin: 8px !important;
+}
+
+.unit_people_dialog_btn.button.sm_round_btn {
+    font-size:1.2rem;
+    width:30px;
+    height:30px;
+    border-radius: 20px;
+    margin-right: 10px !important;
+}
