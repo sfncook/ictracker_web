@@ -40,7 +40,7 @@ var actions_fire = [
             "Roof Profile",
             "Fan to the Door",
             "Pressurize Exposures",
-            "Forceable Entry",
+            "Forcible Entry",
             "Soften Building",
             "Open Building",
             "Open Rollup",
