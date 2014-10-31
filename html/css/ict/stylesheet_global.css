@@ -459,7 +459,7 @@ td {
     float: left;
     margin-left: 10px;
     pointer-events: auto;
-    background: #a56c15 !important;
+    background: #e4b32d !important;
     color: white;
     font-size: 1.2rem;
 }
@@ -488,7 +488,7 @@ td {
     float: right;
     margin-right: 10px;
     pointer-events: auto;
-    background: #a56c15;
+    background: #e4b32d;
     color: white;
     font-size: 1.2rem;
 }
@@ -1851,6 +1851,7 @@ ul {
     box-shadow: 0 0 15px lightblue;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    background: white;
 }
 
 .benchmark_triage_input {
@@ -1880,4 +1881,11 @@ ul {
 #osr_egress_btn {
     width:220px;
     margin: 5px 0 10px 0;
+}
+
+.splash_version {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: transparent !important;
 }
