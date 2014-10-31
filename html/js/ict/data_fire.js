@@ -1,14 +1,14 @@
 var sectors_fire = [
-    "Interior", "Sector 1", "Alpha Sector", "Salvage", "Medical",
-    "Ventilation", "Sector 2", "Bravo Sector", "Overhaul", "Triage",
-    "Roof", "Sector 3", "Charlie Sector", "Evacuation", "Treatment",
-    "On Deck", "Sector 4", "Delta Sector", "Customer Service", "Transportation",
-    "Staging", "Sector 5", "", "", "LZ",
-    "", "Sector 6", "North Sector", "ReHab", "",
-    "IRIC", "Sector 7", "East Sector", "Lobby", "",
-    "RIC", "Sector 8", "South Sector", "Resource", "",
-    "RESCUE", "Sector 9", "West Sector", "Accountability", "",
-    "Safety", "Sector ####", "", "", ""
+    "Interior",     "Sector 1",     "Alpha Sector",     "Salvage",          "",
+    "Ventilation",  "Sector 2",     "Bravo Sector",     "Overhaul",         "Triage",
+    "Roof",         "Sector 3",     "Charlie Sector",   "Evacuation",       "Extrication",
+    "On Deck",      "Sector 4",     "Delta Sector",     "Customer Service", "Treatment",
+    "Staging",      "Sector 5",     "",                 "",                 "Transportation",
+    "",             "Sector 6",     "North Sector",     "ReHab",            "LZ",
+    "IRIC",         "Sector 7",     "East Sector",      "Lobby",            "",
+    "RIC",          "Sector 8",     "South Sector",     "Resource",         "",
+    "RESCUE",       "Sector 9",     "West Sector",      "Accountability",   "",
+    "Safety",       "Sector ####",  "",                 "",                 ""
 ];
 
 
@@ -40,6 +40,7 @@ var actions_fire = [
             "Roof Profile",
             "Fan to the Door",
             "Pressurize Exposures",
+            "Forceable Entry",
             "Soften Building",
             "Open Building",
             "Open Rollup",
