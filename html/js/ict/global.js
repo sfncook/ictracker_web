@@ -607,7 +607,7 @@ function addMaydayEventElement() {
     // Mayday Timer
     var mayday_timer = maydayEl.find(".mayday_timer");
     var mayday_t0 = (new Date()).getTime();
-    maydayTimers.push({'mayday_t0':mayday_t0, 'mayday_timer':mayday_timer});
+    maydayTimers.push({'mayday_t0': mayday_t0, 'mayday_timer': mayday_timer});
 
     // Mayday Select DDLB
     maydayEl.find(".mayday_sector_select").change(
@@ -627,7 +627,7 @@ function addMaydayEventElement() {
     );
 
     // Mayday Single Toggle Btns
-    maydayEl.find(".mayday_single_toggle").click(function() {
+    maydayEl.find(".mayday_single_toggle").click(function () {
         $(this).toggleClass("glowlightgreen");
     });
 
@@ -653,11 +653,11 @@ function initMaydayDialog() {
     maydayBtn.click(showDialog_withCallbacks(
         "#mayday_dialog", // dialogId
         0, // parentDialog
-        function() { // onOpenCallback
+        function () { // onOpenCallback
             var sector_titles = [];
-            $(".tbar").each(function(){
+            $(".tbar").each(function () {
                 var sector_title = $(this).find(".title_text").html();
-                if(sector_title != "Sector Title") {
+                if (sector_title != "Sector Title") {
                     sector_titles.push(sector_title);
                 }
             });
@@ -694,8 +694,8 @@ function initMaydayDialog() {
         hideAllDialogs()
     });
 
-    $(".mayday_check").change(function(){
-        if($(this).is(":checked")) {
+    $(".mayday_check").change(function () {
+        if ($(this).is(":checked")) {
             $(this).parent().addClass("glowlightgreen")
         } else {
             $(this).parent().removeClass("glowlightgreen")
@@ -861,7 +861,7 @@ function initSectorDialog() {
 
     $("#sector_dialog").addClass(inc_type);
 
-    if(inc_type == "fire") {
+    if (inc_type == "fire") {
         var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
         dialog_body.append(dir_btns_container);
         var suplInfoPrototypeBtn = $("<div class=\"button col-xs-3 sm_round_btn\">PROTOTYPE</div>");
@@ -1228,7 +1228,7 @@ function initBenchmarkDialog() {
     $(".benchmark_2nd_col_container").hide();
     btnsToBlink.push($("#bnch_primary_challenge"));
 
-    $('.benchmark_item_btn_2').click(function(){
+    $('.benchmark_item_btn_2').click(function () {
         $(this).toggleClass("glowlightgreen");
         var isOn = $(this).hasClass("glowlightgreen");
         var btnId = $(this).attr("id");
@@ -1237,7 +1237,7 @@ function initBenchmarkDialog() {
         saveCookieState();
     });
 
-    $(".benchmark_triage_input").on("input", function() {
+    $(".benchmark_triage_input").on("input", function () {
         var btnId = $(this).attr("id");
         tbar_clicked.data(btnId, $(this).val());
         updateTbarBenchmarkIcon(tbar_clicked);
@@ -1276,7 +1276,7 @@ function updateTbarBenchmarkIcon(tbar) {
     tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_black.png");
 
     var sectorName = tbar.find(".title_text").html();
-    if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="Sector Title") {
+    if (sectorsWithClassicBnch.indexOf(sectorName) >= 0 || sectorName.indexOf("Sector ") == 0 && sectorName != "Sector Title") {
         if (tbar.data("benchmark_unable_primary")) {
             tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
         } else {
@@ -1300,30 +1300,66 @@ function updateTbarBenchmarkIcon(tbar) {
         if (tbar.data("bnch_lossstop")) {
             tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
         }
-    } else if(sectorsWithIricBnch.indexOf(sectorName)>=0) {
-        if( tbar.data("benchmark_iric_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_iric_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_iric_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_iric_4") ) {tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");}
-    } else if(sectorsWithLzBnch.indexOf(sectorName)>=0) {
-        if( tbar.data("benchmark_lz_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_lz_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_lz_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
-    } else if(sectorsWithSafetyBnch.indexOf(sectorName)>=0) {
-        if( tbar.data("benchmark_safety_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_safety_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-    } else if(sectorsWithTreatmentBnch.indexOf(sectorName)>=0) {
-        if( tbar.data("benchmark_treatment_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_treatment_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_treatment_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
-    } else if(sectorsWithTriageBnch.indexOf(sectorName)>=0) {
-        if( tbar.data("benchmark_triage_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_triage_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_triage_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
-    } else if(sectorsWithVentBnch.indexOf(sectorName)>=0) {
-        if( tbar.data("benchmark_vent_1") ) {tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_vent_2") ) {tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");}
-        if( tbar.data("benchmark_vent_3") ) {tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");}
+    } else if (sectorsWithIricBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_iric_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_iric_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_iric_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_iric_4")) {
+            tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithLzBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_lz_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_lz_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_lz_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithSafetyBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_safety_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_safety_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithTreatmentBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_treatment_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_treatment_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_treatment_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithTriageBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_triage_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_triage_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_triage_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithVentBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_vent_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_vent_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_vent_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
     }
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
@@ -1337,25 +1373,25 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
         }
 
         $(".benchmarks_dialog_body").hide();
-        if(sectorsWithClassicBnch.indexOf(title)>=0 || title.indexOf("Sector ")==0 && title!="Sector Title") {
+        if (sectorsWithClassicBnch.indexOf(title) >= 0 || title.indexOf("Sector ") == 0 && title != "Sector Title") {
             $("#benchmarks_dialog_body").show();
             $("#benchmarks_dialog").width(515);
-        } else if(sectorsWithIricBnch.indexOf(title)>=0) {
+        } else if (sectorsWithIricBnch.indexOf(title) >= 0) {
             $("#benchmarks_iric_dialog_body").show();
             $("#benchmarks_dialog").width(200);
-        } else if(sectorsWithLzBnch.indexOf(title)>=0) {
+        } else if (sectorsWithLzBnch.indexOf(title) >= 0) {
             $("#benchmarks_lz_dialog_body").show();
             $("#benchmarks_dialog").width(200);
-        } else if(sectorsWithSafetyBnch.indexOf(title)>=0) {
+        } else if (sectorsWithSafetyBnch.indexOf(title) >= 0) {
             $("#benchmarks_safety_dialog_body").show();
             $("#benchmarks_dialog").width(200);
-        } else if(sectorsWithTreatmentBnch.indexOf(title)>=0) {
+        } else if (sectorsWithTreatmentBnch.indexOf(title) >= 0) {
             $("#benchmarks_treatment_dialog_body").show();
             $("#benchmarks_dialog").width(200);
-        } else if(sectorsWithTriageBnch.indexOf(title)>=0) {
+        } else if (sectorsWithTriageBnch.indexOf(title) >= 0) {
             $("#benchmarks_triage_dialog_body").show();
             $("#benchmarks_dialog").width(225);
-        } else if(sectorsWithVentBnch.indexOf(title)>=0) {
+        } else if (sectorsWithVentBnch.indexOf(title) >= 0) {
             $("#benchmarks_vent_dialog_body").show();
             $("#benchmarks_dialog").width(200);
         }
@@ -1426,9 +1462,9 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
  * Objectives Dialog
  **/
 function updateObjectivePercentComplete() {
-    if(inc_type!="") {
-        var many_objective_btn = $(".objective_btn."+inc_type).length;
-        var many_objective_btn_green = $(".objective_btn.glowlightgreen."+inc_type).length;
+    if (inc_type != "") {
+        var many_objective_btn = $(".objective_btn." + inc_type).length;
+        var many_objective_btn_green = $(".objective_btn.glowlightgreen." + inc_type).length;
         var percent_complete = many_objective_btn_green / many_objective_btn;
         var width = percent_complete * 78.0;
         $("#objectives_perc_bar").width(width);
@@ -1452,7 +1488,7 @@ function initObjectivesDialog() {
     objectives_header_btn.click(showDialog(0, objectives_header_btn, "#objectives_dialog"));
 
     $(".objectives_dialog_body").hide();
-    $("#objectives_dialog_body_"+inc_type).show();
+    $("#objectives_dialog_body_" + inc_type).show();
     updateObjectivePercentComplete();
 }
 
@@ -1485,9 +1521,9 @@ function initStreetNameDialog() {
  * OSR Dialog
  **/
 function updateOsrPercentComplete() {
-    if(inc_type!='') {
-        var many_osr_btn = $("."+inc_type).filter(".osr_btn").length;
-        var many_osr_btn_green = $("."+inc_type).filter(".osr_btn.glowlightgreen").length;
+    if (inc_type != '') {
+        var many_osr_btn = $("." + inc_type).filter(".osr_btn").length;
+        var many_osr_btn_green = $("." + inc_type).filter(".osr_btn.glowlightgreen").length;
         var percent_complete = many_osr_btn_green / many_osr_btn;
         var width = percent_complete * 78.0;
         $("#osr_perc_bar").width(width);
@@ -1729,8 +1765,12 @@ function initOsrDialog() {
         $(this).click(saveCookieState);
     });
 
-    $("#osr_foam_btn").click(function(){$(this).toggleClass('glowlightgreen')});
-    $("#osr_egress_btn").click(function(){$(this).toggleClass('glowlightgreen')});
+    $("#osr_foam_btn").click(function () {
+        $(this).toggleClass('glowlightgreen')
+    });
+    $("#osr_egress_btn").click(function () {
+        $(this).toggleClass('glowlightgreen')
+    });
 }
 
 
@@ -2016,15 +2056,15 @@ function updateTbar(tbar) {
     }
 
     // Benchmarks
-    if(
-        sectorsWithClassicBnch.indexOf(sectorName)>=0 ||
-        (sectorName.indexOf("Sector ")==0  && sectorName!="Sector Title") ||
-        sectorsWithIricBnch.indexOf(sectorName)>=0 ||
-        sectorsWithLzBnch.indexOf(sectorName)>=0 ||
-        sectorsWithSafetyBnch.indexOf(sectorName)>=0 ||
-        sectorsWithTreatmentBnch.indexOf(sectorName)>=0 ||
-        sectorsWithTriageBnch.indexOf(sectorName)>=0 ||
-        sectorsWithVentBnch.indexOf(sectorName)>=0
+    if (
+        sectorsWithClassicBnch.indexOf(sectorName) >= 0 ||
+            (sectorName.indexOf("Sector ") == 0 && sectorName != "Sector Title") ||
+            sectorsWithIricBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithLzBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithSafetyBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithTreatmentBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithTriageBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithVentBnch.indexOf(sectorName) >= 0
         ) {
         tbar.find(".benchmark_btn").show();
     } else {
@@ -2034,32 +2074,32 @@ function updateTbar(tbar) {
     tbar.find(".benchmark_bar_img_2").hide();
     tbar.find(".benchmark_bar_img_3").hide();
     tbar.find(".benchmark_bar_img_4").hide();
-    if(sectorsWithClassicBnch.indexOf(sectorName)>=0 || sectorName.indexOf("Sector ")==0 && sectorName!="Sector Title") {
+    if (sectorsWithClassicBnch.indexOf(sectorName) >= 0 || sectorName.indexOf("Sector ") == 0 && sectorName != "Sector Title") {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
         tbar.find(".benchmark_bar_img_4").show();
-    } else if(sectorsWithIricBnch.indexOf(sectorName)>=0) {
+    } else if (sectorsWithIricBnch.indexOf(sectorName) >= 0) {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
         tbar.find(".benchmark_bar_img_4").show();
-    } else if(sectorsWithLzBnch.indexOf(sectorName)>=0) {
+    } else if (sectorsWithLzBnch.indexOf(sectorName) >= 0) {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
-    } else if(sectorsWithSafetyBnch.indexOf(sectorName)>=0) {
+    } else if (sectorsWithSafetyBnch.indexOf(sectorName) >= 0) {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
-    } else if(sectorsWithTreatmentBnch.indexOf(sectorName)>=0) {
-        tbar.find(".benchmark_bar_img_1").show();
-        tbar.find(".benchmark_bar_img_2").show();
-        tbar.find(".benchmark_bar_img_3").show();
-    } else if(sectorsWithTriageBnch.indexOf(sectorName)>=0) {
+    } else if (sectorsWithTreatmentBnch.indexOf(sectorName) >= 0) {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
-    } else if(sectorsWithVentBnch.indexOf(sectorName)>=0) {
+    } else if (sectorsWithTriageBnch.indexOf(sectorName) >= 0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+    } else if (sectorsWithVentBnch.indexOf(sectorName) >= 0) {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
@@ -2142,10 +2182,10 @@ function onOpenUnitsDialogFromTbar(tbar) {
 }
 function toggleUnitButtonForTbar(unit_col_container) {
     return function (unitName) {
-        if(typeof unit_col_container != 'undefined' && unit_col_container!=0 ) {
-            var addUnit = unit_col_container.find(".unit_btn:contains('" + unitName + "')").length==0;
+        if (typeof unit_col_container != 'undefined' && unit_col_container != 0) {
+            var addUnit = unit_col_container.find(".unit_btn:contains('" + unitName + "')").length == 0;
         } else {
-            var addUnit = $(".dispatched_unit_btn:contains('" + unitName + "')").length==0;
+            var addUnit = $(".dispatched_unit_btn:contains('" + unitName + "')").length == 0;
         }
 
         if (addUnit) {
@@ -2544,8 +2584,6 @@ function initEmergTrafficDialog() {
 }
 
 
-
-
 /**
  * Init Mode Dialog
  **/
@@ -2553,8 +2591,8 @@ function initModeDialog() {
     $("#mode_btn").click(showDialog_withCallbacks(
         "#mode_dialog", //  dialogId
         0, // parent_dialog
-        function() {
-            if($("#mode_btn").hasClass("offensive_btn")) {
+        function () {
+            if ($("#mode_btn").hasClass("offensive_btn")) {
                 $("#mode_dlg_def").removeClass("outer_glow");
                 $("#mode_dlg_off").addClass("outer_glow");
             } else {
@@ -2564,11 +2602,11 @@ function initModeDialog() {
         }
     ));
 
-    $("#mode_dlg_def").click(function() {
+    $("#mode_dlg_def").click(function () {
         setMode("DEFENSE");
     });
 
-    $("#mode_dlg_off").click(function() {
+    $("#mode_dlg_off").click(function () {
         setMode("OFFENSE");
     });
 }
@@ -2613,12 +2651,12 @@ function initIncidentInfo() {
 
     $("#inc_type_icon").attr("src", inc_type_icon);
 
-    sectors = window['sectors_'+inc_type];
-    actions = window['actions_'+inc_type];
+    sectors = window['sectors_' + inc_type];
+    actions = window['actions_' + inc_type];
 
     $(".fire").hide();
     $(".arff").hide();
-    $('.'+inc_type).show();
+    $('.' + inc_type).show();
 
 }
 function getHttpRequestByName(name) {
@@ -2823,7 +2861,6 @@ function initReportDialog() {
 }
 
 
-
 /**
  * Init Timer
  **/
@@ -2932,9 +2969,9 @@ function init() {
 
 
     if (COOKIES_ENABLED) {
-        if(supports_html5_storage()) {
+        if (supports_html5_storage()) {
             loadCookieState();
-            $(".tbar").each(function(){
+            $(".tbar").each(function () {
                 updateTbar($(this));
             });
         } else {
@@ -2965,7 +3002,7 @@ function init() {
     };
 
     $(".dialog_close_btn").click(function () {
-        if ($(this).parents(".dialog").attr("id") == "nda_reminder_dialog" && !isIncidentRunning) {
+        if (!isIncidentRunning) {
             hideAllDialogs();
             terminateCommand();
         } else {
@@ -2983,8 +3020,6 @@ function init() {
             }
         }
     });
-
-    showDialog(0, 0, "#nda_reminder_dialog", 0)();
 }
 
 //Call this to dismiss the dialogs

@@ -1223,7 +1223,7 @@ td {
 }
 
 .list_med_font_size {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     font-weight: 500;
 }
 
@@ -1889,3 +1889,4 @@ ul {
     left: 10px;
     background: transparent !important;
 }
+
