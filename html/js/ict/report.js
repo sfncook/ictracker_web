@@ -81,12 +81,42 @@ function getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address) 
         titleStr += "<div class='report_div_header_span'>" + inc_address + "</div>\n";
     }
 
-    var inc_start_DateObj = new Date(parseInt(inc_start_time));
-    titleStr += "<div class='report_div_header_span'>" + msEpochToTimeString(inc_start_time) + "</div>";
+    if (inc_start_time != "") {
+        titleStr += "<div class='report_div_header_span'>" + msEpochToDateString(inc_start_time) + "</div>";
+        titleStr += "<div class='report_div_header_span'>" + msEpochToTimeString(inc_start_time) + "</div>";
+    }
 
     titleStr += "</div>";
     return titleStr
 }
+function msEpochToDateString(msEpoch) {
+//    var date = new Date(parseInt(msEpoch));
+//    var hr = date.getHours();
+//    var hrStr = hr + "";
+//
+//    var date = new Date(parseInt(msEpoch));
+//    var min = date.getMinutes();
+//    var minStr = (min < 10) ? ("0" + min) : min;
+//
+//    var timeStr = hrStr + ":" + minStr;
+//
+//    if (hr < 12) {
+//        timeStr += "AM";
+//    }
+//
+//    return timeStr;
+
+//    var date = new Date();
+//    var dayStr = weekday[date.getDay()];
+//    var monthStr = month[date.getMonth()];
+//    var dateStr = date.getDate();
+//    var yearStr = date.getFullYear();
+//    var fullDateStr = dayStr + " " + monthStr + " " + dateStr + ", " + yearStr;
+//    doc.text(fullDateStr, RIGHT_SIDE - MARGIN - 60, BOTTOM_SIDE - MARGIN);
+//
+    return "Saturday November 1, 2014"
+}
+
 function msEpochToTimeString(msEpoch) {
     var date = new Date(parseInt(msEpoch));
     var hr = date.getHours();
@@ -163,7 +193,15 @@ function drawTitle(doc, inc_num, dept_name, inc_start_time, osr_unit, inc_addres
         doc.text(inc_address, MARGIN, y);
     }
 
-    y+=2;
+    if (inc_start_time != "") {
+        y += lineSpacing;
+        doc.text(msEpochToDateString(inc_start_time), MARGIN, y);
+        y += lineSpacing;
+        doc.text(msEpochToTimeString(inc_start_time), MARGIN, y);
+    }
+
+
+    y += 2;
     doc.setLineWidth(0.5);
     doc.line(MARGIN, y, RIGHT_SIDE - MARGIN, y);
 
@@ -191,14 +229,14 @@ month[8] = "September";
 month[9] = "October";
 month[10] = "November";
 month[11] = "December";
-function drawFooter(doc, page_number) {
-    var date = new Date();
-    var dayStr = weekday[date.getDay()];
-    var monthStr = month[date.getMonth()];
-    var dateStr = date.getDate();
-    var yearStr = date.getFullYear();
-    var fullDateStr = dayStr + " " + monthStr + " " + dateStr + ", " + yearStr;
-    doc.text(fullDateStr, RIGHT_SIDE - MARGIN - 60, BOTTOM_SIDE - MARGIN);
+function drawFooter(doc, page_number, inc_num) {
+//    var date = new Date();
+//    var dayStr = weekday[date.getDay()];
+//    var monthStr = month[date.getMonth()];
+//    var dateStr = date.getDate();
+//    var yearStr = date.getFullYear();
+//    var fullDateStr = dayStr + " " + monthStr + " " + dateStr + ", " + yearStr;
+//    doc.text(fullDateStr, RIGHT_SIDE - MARGIN - 60, BOTTOM_SIDE - MARGIN);
 
     doc.text("Page:" + page_number, MARGIN, BOTTOM_SIDE - MARGIN);
     doc.line(MARGIN, BOTTOM_SIDE - MARGIN - 6, RIGHT_SIDE - MARGIN, BOTTOM_SIDE - MARGIN - 6);
