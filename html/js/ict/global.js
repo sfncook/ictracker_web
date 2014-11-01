@@ -2639,7 +2639,7 @@ function setMode(mode_text) {
  * Init Incident Info
  **/
 function initIncidentInfo() {
-    $("#inc_num").html("Incident #: " + inc_num);
+    $("#inc_num").html(inc_num);
     if (inc_num == "") {
         $("#inc_num").hide();
     }
@@ -2831,9 +2831,9 @@ function initReportDialog() {
         osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
 
         if ($("#time_report_btn").hasClass("glowlightgreen")) {
-            generateReportSortByTime(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address);
+            generateReportSortByTime(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address);
         } else {
-            generateReportSortBySector(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address);
+            generateReportSortBySector(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address);
         }
     });
 
@@ -2841,8 +2841,8 @@ function initReportDialog() {
         var osr_unit = $("#unit_osr_btn").html();
         osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
 
-        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
-        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address));
         showDialog(0, 0, "#time_report_dialog")();
     });
 
@@ -2850,8 +2850,8 @@ function initReportDialog() {
         var osr_unit = $("#unit_osr_btn").html();
         osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
 
-        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
-        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address));
         showDialog(0, 0, "#time_report_dialog", $("#resume_dialog"))();
     });
 }

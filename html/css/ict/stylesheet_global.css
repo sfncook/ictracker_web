@@ -479,9 +479,13 @@ td {
 }
 #inc_num {
     font-size: 1.05rem;
+    float:left;
+    margin:5px;
 }
 #inc_address {
     font-size: 1.05rem;
+    float:right;
+    margin:5px;
 }
 
 #mode_btn {
@@ -813,6 +817,9 @@ td {
     z-index: 50;
     padding-right: 100px;
     pointer-events: none;
+}
+#top_header_container>* {
+    pointer-events: auto;
 }
 
 #top_header_mayday_container {
