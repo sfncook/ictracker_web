@@ -816,7 +816,9 @@ td {
     width: 100%;
     z-index: 50;
     padding-right: 100px;
+    padding-bottom: 5px;
     pointer-events: none;
+    /*background: #DDD;*/
 }
 #top_header_container>* {
     pointer-events: auto;
