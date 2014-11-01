@@ -154,7 +154,7 @@ function generateReport(eventArray, inc_num, dept_name, inc_start_time, osr_unit
     var y = startY + 10;
     while (!done) {
         drawOnePageOfEvents(doc, eventArray, y);
-        drawFooter(doc, page_number);
+        drawFooter(doc, page_number, inc_num);
 
         if (eventIndex < eventArray.length) {
             page_number++;
@@ -173,11 +173,6 @@ function drawTitle(doc, inc_num, dept_name, inc_start_time, osr_unit, inc_addres
     var y = MARGIN;
     var lineSpacing = 8;
 
-    if (dept_name != "") {
-        y += lineSpacing;
-        doc.text(dept_name, MARGIN, y);
-    }
-
     if (inc_num != "") {
         y += lineSpacing;
         doc.text(inc_num, MARGIN, y);
@@ -195,9 +190,14 @@ function drawTitle(doc, inc_num, dept_name, inc_start_time, osr_unit, inc_addres
 
     if (inc_start_time != "") {
         y += lineSpacing;
-        doc.text(msEpochToDateString(inc_start_time), MARGIN, y);
+        doc.text(msEpochToDateString(inc_start_time) + "  " + msEpochToTimeString(inc_start_time), MARGIN, y);
+    }
+
+    if (dept_name != "") {
         y += lineSpacing;
-        doc.text(msEpochToTimeString(inc_start_time), MARGIN, y);
+        doc.text("*The information in this report is private and is the sole property of:", MARGIN, y);
+        y += lineSpacing;
+        doc.text(dept_name, MARGIN, y);
     }
 
 
@@ -230,15 +230,8 @@ month[9] = "October";
 month[10] = "November";
 month[11] = "December";
 function drawFooter(doc, page_number, inc_num) {
-//    var date = new Date();
-//    var dayStr = weekday[date.getDay()];
-//    var monthStr = month[date.getMonth()];
-//    var dateStr = date.getDate();
-//    var yearStr = date.getFullYear();
-//    var fullDateStr = dayStr + " " + monthStr + " " + dateStr + ", " + yearStr;
-//    doc.text(fullDateStr, RIGHT_SIDE - MARGIN - 60, BOTTOM_SIDE - MARGIN);
-
-    doc.text("Page:" + page_number, MARGIN, BOTTOM_SIDE - MARGIN);
+    doc.text(inc_num, MARGIN, BOTTOM_SIDE - MARGIN);
+    doc.text("Page:" + page_number, RIGHT_SIDE - MARGIN - 20, BOTTOM_SIDE - MARGIN);
     doc.line(MARGIN, BOTTOM_SIDE - MARGIN - 6, RIGHT_SIDE - MARGIN, BOTTOM_SIDE - MARGIN - 6);
 }
 
