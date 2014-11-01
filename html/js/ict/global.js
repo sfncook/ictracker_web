@@ -1494,7 +1494,35 @@ function initObjectivesDialog() {
 
 
 /**
- * Street Name Dialog
+ * Incident Num Dialog
+ **/
+function initIncNumDialog() {
+    $("#inc_num").click(function() {
+        $("#inc_num_custom_input").val($("#inc_num").html());
+        showDialog(0, $("#inc_num"), "#inc_num_dialog")();
+    });
+
+    $("#inc_num_dlg_ok").click(function () {
+        inc_num = $("#inc_num_custom_input").val()
+        if (inc_num) {
+            $("#inc_num").html(inc_num);
+            hideAllDialogs();
+        } else {
+            $("#inc_num").html("INCIDENT #");
+            hideAllDialogs();
+        }
+        // Cookies
+        saveCookieState();
+    });
+    $("#inc_num_dlg_cancel").click(hideAllDialogs);
+    $("#inc_num_dlg_clear").click(function () {
+        $("#inc_num_custom_input").val("");
+    });
+}
+
+
+/**
+ * Incident Address Dialog
  **/
 function initIncAddressDialog() {
     $("#inc_address").click(function() {
@@ -2645,7 +2673,7 @@ function setMode(mode_text) {
 function initIncidentInfo() {
     $("#inc_num").html(inc_num);
     if (inc_num == "") {
-        $("#inc_num").hide();
+        $("#inc_num").html("INCIDENT #");
     }
 
     $("#inc_address").html(inc_address);
@@ -2950,6 +2978,7 @@ function init() {
     initDispatchedUnits();
     initUpgradeDialog();
     initIncAddressDialog();
+    initIncNumDialog();
     initCmdXfer();
     initModeDialog();
 

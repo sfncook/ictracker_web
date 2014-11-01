@@ -1559,19 +1559,31 @@ ul {
     background: red !important;
 }
 
-#inc_address_dialog {
+#inc_num_dialog {
     width: 450px;
 }
-
-#inc_address_dialog>*>input {
+#inc_num_dialog>*>input {
+    margin: 5px;
+}
+#inc_num_custom_input {
+    margin-top: 5px;
+    width: 380px;
+}
+#inc_num_dlg_clear {
+    float: right;
     margin: 5px;
 }
 
+#inc_address_dialog {
+    width: 450px;
+}
+#inc_address_dialog>*>input {
+    margin: 5px;
+}
 #inc_address_custom_input {
     margin-top: 5px;
     width: 380px;
 }
-
 #inc_address_dlg_clear {
     float: right;
     margin: 5px;
