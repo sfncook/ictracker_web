@@ -82,62 +82,92 @@ function getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address) 
     }
 
     var inc_start_DateObj = new Date(parseInt(inc_start_time));
-    titleStr += "<div class='report_div_header_span'>" + getHour(inc_start_time) + ":" + getMin(inc_start_time) + "</div>";
+    titleStr += "<div class='report_div_header_span'>" + msEpochToTimeString(inc_start_time) + "</div>";
 
     titleStr += "</div>";
     return titleStr
 }
-function getHour(msEpoch) {
+function msEpochToTimeString(msEpoch) {
     var date = new Date(parseInt(msEpoch));
     var hr = date.getHours();
-    return hr;
-}
-function getMin(msEpoch) {
-    var date = new Date(parseInt(msEpoch));
-    var hr = date.getMinutes();
-    return hr;
-}
+    var hrStr = hr + "";
 
+    var date = new Date(parseInt(msEpoch));
+    var min = date.getMinutes();
+    var minStr = (min < 10) ? ("0" + min) : min;
+
+    var timeStr = hrStr + ":" + minStr;
+
+    if (hr < 12) {
+        timeStr += "AM";
+    }
+
+    return timeStr;
+}
 
 
 // Generate the Report PDF
-function generateReportSortByTime() {
-    generateReport(events);
+function generateReportSortByTime(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
+    generateReport(events, inc_num, dept_name, inc_start_time, osr_unit, inc_address);
 }
-function generateReportSortBySector() {
+function generateReportSortBySector(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
     var eventsBySectorArray = getEventsBySector(events);
-    generateReport(eventsBySectorArray);
+    generateReport(eventsBySectorArray, inc_num, dept_name, inc_start_time, osr_unit, inc_address);
 }
-function generateReport(eventArray) {
+function generateReport(eventArray, inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
     eventIndex = 0;
     var page_number = 1;
     var doc = new jsPDF();
     var done = false;
 
+    var startY = drawTitle(doc, inc_num, dept_name, inc_start_time, osr_unit, inc_address);
+    var y = startY + 10;
     while (!done) {
-        drawTitle(doc, "");
-        var inc_num = $("#inc_num").html().replace("Incident #: ", "")
-        drawTitle(doc, inc_num);
-        drawFooter(doc, page_number, "");
-//		drawFooter(doc, page_number, $("#address").html());
-        drawOnePageOfEvents(doc, eventArray);
+        drawOnePageOfEvents(doc, eventArray, y);
+        drawFooter(doc, page_number);
+
         if (eventIndex < eventArray.length) {
             page_number++;
             doc.addPage();
         } else {
             done = true;
         }
+        y = MARGIN;
     }
 
     renderPdf(doc);
 }
 
 
-function drawTitle(doc, inc_num) {
-    doc.text("Incident #:" + inc_num, MARGIN, MARGIN);
-    doc.text("Mesa Fire Department", RIGHT_SIDE - 77, MARGIN);
+function drawTitle(doc, inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
+    var y = MARGIN;
+    var lineSpacing = 8;
+
+    if (dept_name != "") {
+        y += lineSpacing;
+        doc.text(dept_name, MARGIN, y);
+    }
+
+    if (inc_num != "") {
+        y += lineSpacing;
+        doc.text(inc_num, MARGIN, y);
+    }
+
+    if (osr_unit != "") {
+        y += lineSpacing;
+        doc.text('OSR Unit:' + osr_unit, MARGIN, y);
+    }
+
+    if (inc_address != "") {
+        y += lineSpacing;
+        doc.text(inc_address, MARGIN, y);
+    }
+
+    y+=2;
     doc.setLineWidth(0.5);
-    doc.line(MARGIN, MARGIN + 2, RIGHT_SIDE - MARGIN, MARGIN + 2);
+    doc.line(MARGIN, y, RIGHT_SIDE - MARGIN, y);
+
+    return y;
 }
 
 var weekday = new Array(7);
@@ -161,7 +191,7 @@ month[8] = "September";
 month[9] = "October";
 month[10] = "November";
 month[11] = "December";
-function drawFooter(doc, page_number, address) {
+function drawFooter(doc, page_number) {
     var date = new Date();
     var dayStr = weekday[date.getDay()];
     var monthStr = month[date.getMonth()];
@@ -172,7 +202,6 @@ function drawFooter(doc, page_number, address) {
 
     doc.text("Page:" + page_number, MARGIN, BOTTOM_SIDE - MARGIN);
     doc.line(MARGIN, BOTTOM_SIDE - MARGIN - 6, RIGHT_SIDE - MARGIN, BOTTOM_SIDE - MARGIN - 6);
-    doc.text(address, MARGIN, BOTTOM_SIDE - MARGIN - 7);
 }
 
 
@@ -180,9 +209,8 @@ function drawFooter(doc, page_number, address) {
  * return:The last event Index
  *
  */
-function drawOnePageOfEvents(doc, eventArray) {
-    var y = MARGIN + 10;
-
+function drawOnePageOfEvents(doc, eventArray, startY) {
+    var y = startY;
     for (; eventIndex < eventArray.length && (y < BOTTOM_SIDE - MARGIN - 15); eventIndex++) {
         var event = eventArray[eventIndex];
 //        event.render_func(y, event, doc);

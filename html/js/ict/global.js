@@ -2827,14 +2827,16 @@ function initReportDialog() {
     });
 
     $("#print_report_btn").click(function () {
+        var osr_unit = $("#unit_osr_btn").html();
+        osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
+
         if ($("#time_report_btn").hasClass("glowlightgreen")) {
-            generateReportSortByTime();
+            generateReportSortByTime(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address);
         } else {
-            generateReportSortBySector();
+            generateReportSortBySector(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address);
         }
     });
 
-//	$("#report_btn").click(function(){generateReportSortByTime();});
     $("#report_btn").click(function () {
         var osr_unit = $("#unit_osr_btn").html();
         osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
