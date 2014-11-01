@@ -1,3 +1,10 @@
+var inc_num = "";
+var inc_address = "";
+var inc_type_icon = "";
+var inc_type = "";
+var inc_url = "";
+var inc_icon = "";
+
 //*************
 //  SAVING
 //*************
@@ -184,7 +191,9 @@ function saveCookieState() {
     if (COOKIES_ENABLED) {
 
         // Save items that need to survive
-        var inc_info_json = localStorage.getItem('inc_info');
+        var inc_url_temp = localStorage.getItem('inc_url');
+        var inc_icon_temp = localStorage.getItem('inc_icon');
+        var inc_type_temp = localStorage.getItem('inc_type');
         var eventsJson = localStorage.getItem('events');
 
         // Reset cookies
@@ -195,7 +204,11 @@ function saveCookieState() {
 
         // Incident Info
         localStorage.setItem('is_incident_running', isIncidentRunning);
-        localStorage.setItem('inc_info', inc_info_json);
+        localStorage.setItem('inc_num', inc_num);
+        localStorage.setItem('inc_address', inc_address);
+        localStorage.setItem('inc_url', inc_url_temp);
+        localStorage.setItem('inc_icon', inc_icon_temp);
+        localStorage.setItem('inc_type', inc_type_temp);
 
 
         // Tbars
@@ -386,20 +399,27 @@ function loadCookieState() {
             var key = localStorage.key(keyIndex);
             var value = localStorage[key];
 
+            // Incident Info
             if (key == 'previous_app_version') {
                 // TODO:
             }
-
-            else if (key == 'inc_info') {
-                inc_info = JSON.parse(value);
-                inc_num = inc_info['inc_num'];
-                inc_address = inc_info['address'];
-                inc_type_icon = inc_info['inc_icon'];
-                inc_type = inc_info['inc_type'];
+            else if (key == 'inc_num') {
+                inc_num = value;
             }
-
+            else if (key == 'inc_address') {
+                inc_address = value;
+            }
+            else if (key == 'inc_url') {
+                inc_url = value;
+            }
+            else if (key == 'inc_icon') {
+                inc_icon = value;
+            }
+            else if (key == 'inc_type') {
+                inc_type = value;
+            }
             else if (key == 'is_incident_running') {
-                isIncidentRunning = JSON.parse(value);
+                isIncidentRunning = value;
             }
 
             // Timer

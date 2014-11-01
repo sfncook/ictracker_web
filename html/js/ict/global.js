@@ -3,10 +3,6 @@ var tbar_clicked;
 var tbar_moving;
 var parentDialog = 0;
 var isIncidentRunning = true;
-var inc_num = "";
-var inc_address = "";
-var inc_type_icon = "";
-var inc_type = "";
 
 var btnsToBlink = new Array();
 function blinkUnit() {
@@ -2681,7 +2677,7 @@ function initIncidentInfo() {
         $("#inc_address").html("ADDRESS");
     }
 
-    $("#inc_type_icon").attr("src", inc_type_icon);
+    $("#inc_type_icon").attr("src", inc_icon);
 
     sectors = window['sectors_' + inc_type];
     actions = window['actions_' + inc_type];
