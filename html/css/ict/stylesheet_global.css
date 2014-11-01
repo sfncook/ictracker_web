@@ -1782,15 +1782,6 @@ ul {
     margin-left: 50px;
 }
 
-.report_div_header_span {
-    font-size: 1.05rem;
-    font-weight: bold;
-}
-
-.report_div_header_value_span {
-    font-size: 1.05rem;
-}
-
 .perc_bar_bg {
     border: 1px solid black;
     background: black;

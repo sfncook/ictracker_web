@@ -2839,9 +2839,6 @@ function initReportDialog() {
         var osr_unit = $("#unit_osr_btn").html();
         osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
 
-        var inc_address = $("#streetname_btn").html();
-        inc_address = (inc_address != "Street Name") ? inc_address : "";
-
         $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
         $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
         showDialog(0, 0, "#time_report_dialog")();
@@ -2850,9 +2847,6 @@ function initReportDialog() {
     $("#report_btn_2").click(function () {
         var osr_unit = $("#unit_osr_btn").html();
         osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
-
-        var inc_address = $("#streetname_btn").html();
-        inc_address = (inc_address != "Street Name") ? inc_address : "";
 
         $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));
         $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num.replace("Incident #: ", ""), DEPARTMENT_NAME, t0, osr_unit, inc_address));

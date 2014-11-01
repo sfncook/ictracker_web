@@ -36,18 +36,19 @@ function getEventsBySector(events_) {
 // Get Report Str - return HTML-formatted string with entire report
 //  This is for the report DIV, not the PDF
 function getReportStr(eventArray) {
-    var renderedStr = "";
+    var renderedStr = '<div class="div_report_block">';
     for (var i = 0; i < eventArray.length; i++) {
         var event = eventArray[i];
-//        var eventStr = event.get_str_func(event);
         var eventStr = window[event.get_str_func](event);
-        renderedStr = renderedStr + eventStr + "<br>\n";
+        renderedStr += eventStr + "<br>\n";
     }
+    renderedStr += '</div>'
     return renderedStr;
 }
 function getReportStrSortByTime(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
     var reportStr = getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address);
     reportStr += getReportStr(events);
+    reportStr += '<div class="clear_float"></div>';
     return reportStr;
 }
 function getReportStrSortBySector(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
@@ -56,51 +57,47 @@ function getReportStrSortBySector(inc_num, dept_name, inc_start_time, osr_unit, 
     var eventsBySectorArray = getEventsBySector(events);
     reportStr += getReportStr(eventsBySectorArray);
 
+    reportStr += '<div class="clear_float"></div>';
+
     return reportStr;
 }
 function getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
-    var titleStr = "";
-    if (inc_num != "") {
-        titleStr += "<span class='report_div_header_span'>Incident #: </span>";
-        titleStr += "<span class='report_div_header_value_span'>" + inc_num + "</span>";
-    }
+    var titleStr = '<div class="div_report_title_block">';
 
     if (dept_name != "") {
-        titleStr += "<span style='float:right' class='report_div_header_span'>" + dept_name + "</span>\n";
-        titleStr += "<div class='clear_float'></div>\n";
+        titleStr += "<div class='report_div_header_span'>" + dept_name + "</div>\n";
     }
 
+    if (inc_num != "") {
+        titleStr += "<div class='report_div_header_span'>" + inc_num + "</div>";
+    }
+
+
     if (osr_unit != "") {
-        titleStr += "<span class='report_div_header_span'>OSR Unit: </span>";
-        titleStr += "<span class='report_div_header_value_span'>" + osr_unit + "</span>";
+        titleStr += "<div><span class='report_div_header_span'>OSR Unit: </span><span class='report_div_header_value_span'>" + osr_unit + "</span></div>\n";
     }
 
     if (inc_address != "") {
-        titleStr += "<span style='float:right' class='report_div_header_span'>" + inc_address + "</span>\n";
-        titleStr += "<div class='clear_float'></div>\n";
+        titleStr += "<div class='report_div_header_span'>" + inc_address + "</div>\n";
     }
 
-//    var t0Int = parseInt(inc_start_time);
-//    console.log(t0Int);
-//    var t0Sec = parseInt((t0Int / 1000) % 60);
-//    var t0Min = parseInt((t0Int / (1000 * 60)) % 60);
-//    var t0Hr = parseInt((t0Int / (1000 * 60 * 60)) % 60);
-    var inc_start_DateObj = new Date(inc_start_time);
-    var t0Sec = inc_start_DateObj.getSeconds();
-    var t0Min = inc_start_DateObj.getMinutes();
-    var t0Hr = inc_start_DateObj.getHours();
+    var inc_start_DateObj = new Date(parseInt(inc_start_time));
+    titleStr += "<div class='report_div_header_span'>" + getHour(inc_start_time) + ":" + getMin(inc_start_time) + "</div>";
 
-    var secStr = (t0Sec < 10) ? ("0" + t0Sec) : t0Sec;
-    var minStr = (t0Min < 10) ? ("0" + t0Min) : t0Min;
-    var hrStr = (t0Hr < 10) ? ("0" + t0Hr) : t0Hr;
-
-    titleStr += "<div>";
-    titleStr += "<span class='report_div_header_span'>Incident start time: </span>";
-    titleStr += "<span class='report_div_header_value_span'>" + hrStr + ":" + minStr + ":" + secStr + "</span><br>\n";
     titleStr += "</div>";
-
-    return titleStr;
+    return titleStr
 }
+function getHour(msEpoch) {
+    var date = new Date(parseInt(msEpoch));
+    var hr = date.getHours();
+    return hr;
+}
+function getMin(msEpoch) {
+    var date = new Date(parseInt(msEpoch));
+    var hr = date.getMinutes();
+    return hr;
+}
+
 
 
 // Generate the Report PDF
