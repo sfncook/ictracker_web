@@ -459,17 +459,17 @@ td {
     float: left;
     margin-left: 10px;
     pointer-events: auto;
-    background: #e4b32d !important;
+    background: #e4b32d;
     color: white;
     font-size: 1.2rem;
 }
 
 #branch_btn:hover {
-    background: #E89A1B !important;
+    background: #E89A1B;
 }
 
 #branch_btn:active {
-    background: #69430f !important;
+    background: #69430f;
 }
 
 #inc_info_box {
