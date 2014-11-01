@@ -2644,7 +2644,7 @@ function initIncidentInfo() {
         $("#inc_num").hide();
     }
 
-    $("#inc_address").html("Address: " + inc_address);
+    $("#inc_address").html(inc_address);
     if (inc_address == "") {
         $("#inc_address").hide();
     }
