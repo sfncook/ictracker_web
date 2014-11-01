@@ -1,6 +1,5 @@
 var testMe;
 var events = new Array();
-var eventsBySector = {};
 
 
 /****
@@ -11,6 +10,28 @@ var RIGHT_SIDE = 209;
 var BOTTOM_SIDE = 300;
 var eventIndex = 0;
 
+
+function getEventsBySector(events_) {
+    var eventsBySectorArray = [];
+    var eventsBySector = {};
+
+    for (var i = 0; i < events_.length; i++) {
+        var event = events_[i];
+        if (typeof event.sector != 'undefined') {
+            var sectorEvents = eventsBySector[event.sector];
+            if (typeof sectorEvents == 'undefined') {
+                sectorEvents = [];
+                eventsBySector[event.sector] = sectorEvents;
+            }
+            sectorEvents.push(event);
+        }
+    }
+
+    for (var sectorEvents in eventsBySector) {
+        eventsBySectorArray = eventsBySectorArray.concat(eventsBySector[sectorEvents]);
+    }
+    return eventsBySectorArray;
+}
 
 // Get Report Str - return HTML-formatted string with entire report
 //  This is for the report DIV, not the PDF
@@ -30,14 +51,11 @@ function getReportStrSortByTime(inc_num, dept_name, inc_start_time, osr_unit, in
     return reportStr;
 }
 function getReportStrSortBySector(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
-    var eventsBySectorArray = [];
-
-    for (var sectorEvents in eventsBySector) {
-        eventsBySectorArray = eventsBySectorArray.concat(eventsBySector[sectorEvents]);
-    }
-
     var reportStr = getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address);
+
+    var eventsBySectorArray = getEventsBySector(events);
     reportStr += getReportStr(eventsBySectorArray);
+
     return reportStr;
 }
 function getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address) {
@@ -90,12 +108,7 @@ function generateReportSortByTime() {
     generateReport(events);
 }
 function generateReportSortBySector() {
-    var eventsBySectorArray = [];
-
-    for (var sectorEvents in eventsBySector) {
-        eventsBySectorArray = eventsBySectorArray.concat(eventsBySector[sectorEvents]);
-    }
-
+    var eventsBySectorArray = getEventsBySector(events);
     generateReport(eventsBySectorArray);
 }
 function generateReport(eventArray) {
@@ -168,7 +181,7 @@ function drawFooter(doc, page_number, address) {
 
 /*
  * return:The last event Index
- * 
+ *
  */
 function drawOnePageOfEvents(doc, eventArray) {
     var y = MARGIN + 10;
@@ -207,7 +220,7 @@ function getDateStr(date_) {
 
 
 function loadEvents(newEvents) {
-    if(REPORT_COOKIES_ENABLED) {
+    if (REPORT_COOKIES_ENABLED) {
         events = new Array();
         for (var i = 0; i < newEvents.length; i++) {
             events.push(newEvents[i]);
@@ -215,7 +228,7 @@ function loadEvents(newEvents) {
     }
 }
 function saveEvents() {
-    if(REPORT_COOKIES_ENABLED && COOKIES_ENABLED) {
+    if (REPORT_COOKIES_ENABLED && COOKIES_ENABLED) {
         var eventsJson = JSON.stringify(events);
         localStorage.setItem('events', eventsJson);
     }
@@ -224,15 +237,6 @@ function saveEvents() {
 
 function pushEvent_toQueues(event) {
     events.push(event);
-
-    if (typeof event.sector != 'undefined') {
-        var sectorEvents = eventsBySector[event.sector];
-        if (typeof sectorEvents == 'undefined') {
-            sectorEvents = [];
-            eventsBySector[event.sector] = sectorEvents;
-        }
-        sectorEvents.push(event);
-    }
 }
 
 function addEvent_title_to_sector(sector) {
