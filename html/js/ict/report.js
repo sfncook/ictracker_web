@@ -18,8 +18,8 @@ function getReportStr(eventArray) {
     var renderedStr = "";
     for (var i = 0; i < eventArray.length; i++) {
         var event = eventArray[i];
-        var eventStr = event.get_str_func(event);
-//        var eventStr = window[event.get_str_func](event);
+//        var eventStr = event.get_str_func(event);
+        var eventStr = window[event.get_str_func](event);
         renderedStr = renderedStr + eventStr + "<br>\n";
     }
     return renderedStr;
@@ -175,7 +175,8 @@ function drawOnePageOfEvents(doc, eventArray) {
 
     for (; eventIndex < eventArray.length && (y < BOTTOM_SIDE - MARGIN - 15); eventIndex++) {
         var event = eventArray[eventIndex];
-        event.render_func(y, event, doc);
+//        event.render_func(y, event, doc);
+        window[event.render_func](y, event, doc);
         y += 8;
     }
 }
@@ -204,18 +205,7 @@ function getDateStr(date_) {
     return hour + ":" + min + ":" + sec;
 }
 
-function eventsToJsonObj() {
-    var eventObjs = new Array();
-    for (var i = 0; i < events.length; i++) {
-        var event = events[i];
-        var newEvent = event;
-        newEvent['render_func'] = event.render_func.name;
-        newEvent['get_str_func'] = event.get_str_func.name;
-        eventObjs.push(newEvent);
-    }
-//    console.log(eventObjs);
-    return JSON.stringify(eventObjs);
-}
+
 function loadEvents(newEvents) {
     if(REPORT_COOKIES_ENABLED) {
         for (var i = 0; i < newEvents.length; i++) {
@@ -223,14 +213,14 @@ function loadEvents(newEvents) {
         }
     }
 }
-
-
 function saveEvents() {
     if(REPORT_COOKIES_ENABLED) {
         var eventsJson = JSON.stringify(events);
         localStorage.setItem('events', eventsJson);
     }
 }
+
+
 function pushEvent_toQueues(event) {
     events.push(event);
 
@@ -249,8 +239,8 @@ function addEvent_title_to_sector(sector) {
 }
 function addEvent_title_to_sector_with_date(sector, date) {
     var event = {
-        "render_func": render_title_to_sector,
-        "get_str_func": get_str_title_to_sector,
+        "render_func": 'render_title_to_sector',
+        "get_str_func": 'get_str_title_to_sector',
         "datetime": date,
         "sector": sector
     };
@@ -270,8 +260,8 @@ function addEvent_unit_to_sector(unit, sector) {
 }
 function addEvent_unit_to_sector_with_date(unit, sector, date) {
     var event = {
-        "render_func": render_unit_to_sector,
-        "get_str_func": get_str_unit_to_sector,
+        "render_func": 'render_unit_to_sector',
+        "get_str_func": 'get_str_unit_to_sector',
         "datetime": date,
         "unit": unit,
         "sector": sector
@@ -292,8 +282,8 @@ function addEvent_unit_to_acct(unit, sector) {
 }
 function addEvent_unit_to_acct_with_date(unit, sector, date) {
     var event = {
-        "render_func": render_unit_to_acct,
-        "get_str_func": get_str_unit_to_acct,
+        "render_func": 'render_unit_to_acct',
+        "get_str_func": 'get_str_unit_to_acct',
         "datetime": date,
         "unit": unit,
         "sector": sector
@@ -314,8 +304,8 @@ function addEvent_action_to_unit(action, unit, sector) {
 }
 function addEvent_action_to_unit_with_date(action, unit, sector, date) {
     var event = {
-        "render_func": render_action_to_unit,
-        "get_str_func": get_str_action_to_unit,
+        "render_func": 'render_action_to_unit',
+        "get_str_func": 'get_str_action_to_unit',
         "datetime": date,
         "action": action,
         "unit": unit,
@@ -338,8 +328,8 @@ function addEvent_person_has_par(unit, sector) {
 }
 function addEvent_person_has_par_with_date(unit, sector, date) {
     var event = {
-        "render_func": render_person_has_par,
-        "get_str_func": get_str_person_has_par,
+        "render_func": 'render_person_has_par',
+        "get_str_func": 'get_str_person_has_par',
         "datetime": date,
         "unit": unit,
         "sector": sector
@@ -360,8 +350,8 @@ function addEvent_unit_has_par(unit, sector) {
 }
 function addEvent_unit_has_par_with_date(unit, sector, date) {
     var event = {
-        "render_func": render_unit_has_par,
-        "get_str_func": get_str_unit_has_par,
+        "render_func": 'render_unit_has_par',
+        "get_str_func": 'get_str_unit_has_par',
         "datetime": date,
         "unit": unit,
         "sector": sector
@@ -382,8 +372,8 @@ function addEvent_sector_has_par(sector) {
 }
 function addEvent_sector_has_par_with_date(sector, date) {
     var event = {
-        "render_func": render_sector_has_par,
-        "get_str_func": get_str_sector_has_par,
+        "render_func": 'render_sector_has_par',
+        "get_str_func": 'get_str_sector_has_par',
         "datetime": date,
         "sector": sector
     };
@@ -404,8 +394,8 @@ function addEvent_benchmark(benchmark) {
 }
 function addEvent_benchmark_with_date(benchmark, date) {
     var event = {
-        "render_func": render_benchmark,
-        "get_str_func": get_str_benchmark,
+        "render_func": 'render_benchmark',
+        "get_str_func": 'get_str_benchmark',
         "datetime": date,
         "benchmark": benchmark
     };
@@ -426,8 +416,8 @@ function addEvent_mode(mode) {
 }
 function addEvent_mode_with_date(mode, date) {
     var event = {
-        "render_func": render_mode,
-        "get_str_func": get_str_mode,
+        "render_func": 'render_mode',
+        "get_str_func": 'get_str_mode',
         "datetime": date,
         "mode": mode
     };
@@ -448,8 +438,8 @@ function addEvent_osr(osr) {
 }
 function addEvent_osr_with_date(osr, date) {
     var event = {
-        "render_func": render_osr,
-        "get_str_func": get_str_osr,
+        "render_func": 'render_osr',
+        "get_str_func": 'get_str_osr',
         "datetime": date,
         "osr": osr
     };
@@ -469,8 +459,8 @@ function addEvent_objective(objective) {
 }
 function addEvent_objective_with_date(objective, date) {
     var event = {
-        "render_func": render_objective,
-        "get_str_func": get_str_objective,
+        "render_func": 'render_objective',
+        "get_str_func": 'get_str_objective',
         "datetime": date,
         "objective": objective
     };
@@ -490,8 +480,8 @@ function addEvent_iap(iap) {
 }
 function addEvent_iap_with_date(iap, date) {
     var event = {
-        "render_func": render_iap,
-        "get_str_func": get_str_iap,
+        "render_func": 'render_iap',
+        "get_str_func": 'get_str_iap',
         "datetime": date,
         "iap": iap
     };
@@ -511,8 +501,8 @@ function addEvent_cmdxfer(from_unit, to_unit) {
 }
 function addEvent_cmdxfer_with_date(from_unit, to_unit, date) {
     var event = {
-        "render_func": render_cmdxfer,
-        "get_str_func": get_str_cmdxfer,
+        "render_func": 'render_cmdxfer',
+        "get_str_func": 'get_str_cmdxfer',
         "datetime": date,
         "from_unit": from_unit,
         "to_unit": to_unit
