@@ -455,7 +455,7 @@ td {
     top: 157px;
 }
 
-#streetname_btn {
+#branch_btn {
     float: left;
     margin-left: 10px;
     pointer-events: auto;
@@ -464,11 +464,11 @@ td {
     font-size: 1.2rem;
 }
 
-#streetname_btn:hover {
+#branch_btn:hover {
     background: #E89A1B !important;
 }
 
-#streetname_btn:active {
+#branch_btn:active {
     background: #69430f !important;
 }
 
@@ -1559,20 +1559,20 @@ ul {
     background: red !important;
 }
 
-#streetname_dialog {
+#inc_address_dialog {
     width: 450px;
 }
 
-#streetname_dialog>*>input {
+#inc_address_dialog>*>input {
     margin: 5px;
 }
 
-#streetname_custom_input {
+#inc_address_custom_input {
     margin-top: 5px;
     width: 380px;
 }
 
-#streetname_dlg_clear {
+#inc_address_dlg_clear {
     float: right;
     margin: 5px;
 }

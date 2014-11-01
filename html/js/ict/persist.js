@@ -214,10 +214,9 @@ function saveCookieState() {
         var mode_btn = $("#mode_btn");
         localStorage.setItem('mode', mode_btn.html());
 
-        // Mayday
         // Street Name
-        var streetname_btn = $("#streetname_btn");
-        localStorage.setItem('streetname_btn', streetname_btn.html());
+//        var streetname_btn = $("#streetname_btn");
+//        localStorage.setItem('streetname_btn', streetname_btn.html());
 
         // Dispatched Units
         var dispatched_units = new Array();
@@ -414,12 +413,11 @@ function loadCookieState() {
                 setMode(mode)
             }
 
-            // Mayday
-            // Street Name
-            else if (key == 'streetname_btn') {
-                var streetname_btn = value;
-                $("#streetname_btn").html(streetname_btn);
-            }
+//            // Street Name
+//            else if (key == 'inc_address_btn') {
+//                var streetname_btn = value;
+//                $("#inc_address_btn").html(streetname_btn);
+//            }
 
 
             // Dispatched Units

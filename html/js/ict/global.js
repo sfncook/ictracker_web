@@ -1497,22 +1497,22 @@ function initObjectivesDialog() {
  * Street Name Dialog
  **/
 function initStreetNameDialog() {
-    $("#streetname_btn").click(showDialog(0, $("#streetname_btn"), "#streetname_dialog"));
-    $("#streetname_dlg_ok").click(function () {
-        var input = $("#streetname_custom_input").val()
-        if (input) {
-            $("#streetname_btn").html(input);
+    $("#inc_address").click(showDialog(0, $("#inc_address"), "#inc_address_dialog"));
+    $("#inc_address_dlg_ok").click(function () {
+        inc_address = $("#inc_address_custom_input").val()
+        if (inc_address) {
+            $("#inc_address").html(inc_address);
             hideAllDialogs();
         } else {
-            $("#streetname_btn").html("Street Name");
+            $("#inc_address").html("ADDRESS");
             hideAllDialogs();
         }
         // Cookies
         saveCookieState();
     });
-    $("#streetname_dlg_cancel").click(hideAllDialogs);
-    $("#streetname_dlg_clear").click(function () {
-        $("#streetname_custom_input").val("");
+    $("#inc_address_dlg_cancel").click(hideAllDialogs);
+    $("#inc_address_dlg_clear").click(function () {
+        $("#inc_address_custom_input").val("");
     });
 }
 
@@ -2646,7 +2646,7 @@ function initIncidentInfo() {
 
     $("#inc_address").html(inc_address);
     if (inc_address == "") {
-        $("#inc_address").hide();
+        $("#inc_address").html("ADDRESS");
     }
 
     $("#inc_type_icon").attr("src", inc_type_icon);
