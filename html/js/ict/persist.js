@@ -1,6 +1,6 @@
-/**
- * Persistence
- **/
+//*************
+//  SAVING
+//*************
 var bnchBtnIds_unable = [
     "benchmark_unable_primary",
     "benchmark_unable_secondary"
@@ -182,7 +182,10 @@ function osrToJson() {
 }
 function saveCookieState() {
     if (COOKIES_ENABLED) {
+
+        // Save items that need to survive
         var inc_info_json = localStorage.getItem('inc_info');
+        var eventsJson = localStorage.getItem('events');
 
         // Reset cookies
         deleteAllCookies();
@@ -274,9 +277,7 @@ function saveCookieState() {
         localStorage.setItem('iap_inputs', JSON.stringify(iap_inputs));
 
         // Report
-        if(REPORT_COOKIES_ENABLED) {
-            localStorage.setItem('events', eventsToJsonObj());
-        }
+        localStorage.setItem('events', eventsJson);
 
         // Command Transferred
         var unit_cmdxfer_btns = new Array();
@@ -291,6 +292,11 @@ function saveCookieState() {
         localStorage.setItem('unit_cmdxfer_btns', JSON.stringify(unit_cmdxfer_btns));
     }
 }
+
+
+//*************
+//  LOADING
+//*************
 function findTbarElementByColRow(col, row) {
     var retTbar;
     $(".tbar").each(function (index, tbar) {
@@ -365,8 +371,8 @@ function loadTbarFromCookie(tbarObj) {
     for (i = 0; i < benchmarksKeys.length; i++) {
         var benchmarksKey = benchmarksKeys[i];
         var benchmark = benchmarks[benchmarksKey];
-        if(triageBtnIds.indexOf(benchmarksKey) == -1) {
-            tbarEl.data(benchmarksKey, benchmark=="true");
+        if (triageBtnIds.indexOf(benchmarksKey) == -1) {
+            tbarEl.data(benchmarksKey, benchmark == "true");
         } else {
             tbarEl.data(benchmarksKey, benchmark);
         }
@@ -375,7 +381,7 @@ function loadTbarFromCookie(tbarObj) {
 function loadCookieState() {
     if (COOKIES_ENABLED) {
         COOKIES_ENABLED = false; // temporarily disable so we don't try to save cookies again.
-        for(var keyIndex=0, len=localStorage.length; keyIndex<len; keyIndex++) {
+        for (var keyIndex = 0, len = localStorage.length; keyIndex < len; keyIndex++) {
             var key = localStorage.key(keyIndex);
             var value = localStorage[key];
             // TODO:
@@ -524,11 +530,9 @@ function loadCookieState() {
 
             // Report
             else if (key == 'events') {
-                if(REPORT_COOKIES_ENABLED) {
-                    var newEventsStr = value;
-                    var newEvents = JSON.parse(newEventsStr);
-                    setEvents(newEvents);
-                }
+                var newEventsStr = value;
+                var newEvents = JSON.parse(newEventsStr);
+                loadEvents(newEvents);
             }
 
             // Command Transferred
@@ -550,7 +554,7 @@ function loadCookieState() {
             }
 
             else {
-                console.log("Unhandled cookie: key:["+key+"] value:["+value+"]");
+                console.log("Unhandled cookie: key:[" + key + "] value:[" + value + "]");
             }
         } // for
         COOKIES_ENABLED = true;
