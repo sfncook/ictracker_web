@@ -1496,8 +1496,12 @@ function initObjectivesDialog() {
 /**
  * Street Name Dialog
  **/
-function initStreetNameDialog() {
-    $("#inc_address").click(showDialog(0, $("#inc_address"), "#inc_address_dialog"));
+function initIncAddressDialog() {
+    $("#inc_address").click(function() {
+        $("#inc_address_custom_input").val($("#inc_address").html());
+        showDialog(0, $("#inc_address"), "#inc_address_dialog")();
+    });
+
     $("#inc_address_dlg_ok").click(function () {
         inc_address = $("#inc_address_custom_input").val()
         if (inc_address) {
@@ -2945,7 +2949,7 @@ function init() {
     init10KeyDialog();
     initDispatchedUnits();
     initUpgradeDialog();
-    initStreetNameDialog();
+    initIncAddressDialog();
     initCmdXfer();
     initModeDialog();
 
