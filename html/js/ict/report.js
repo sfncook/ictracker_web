@@ -1,5 +1,5 @@
 var testMe;
-var events = [];
+var events = new Array();
 var eventsBySector = {};
 
 
@@ -208,13 +208,14 @@ function getDateStr(date_) {
 
 function loadEvents(newEvents) {
     if(REPORT_COOKIES_ENABLED) {
+        events = new Array();
         for (var i = 0; i < newEvents.length; i++) {
             events.push(newEvents[i]);
         }
     }
 }
 function saveEvents() {
-    if(REPORT_COOKIES_ENABLED) {
+    if(REPORT_COOKIES_ENABLED && COOKIES_ENABLED) {
         var eventsJson = JSON.stringify(events);
         localStorage.setItem('events', eventsJson);
     }

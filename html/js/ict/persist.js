@@ -378,18 +378,20 @@ function loadTbarFromCookie(tbarObj) {
         }
     }
 }
+initializingInProgress = false;
 function loadCookieState() {
     if (COOKIES_ENABLED) {
         COOKIES_ENABLED = false; // temporarily disable so we don't try to save cookies again.
+        var newEvents = new Array();
         for (var keyIndex = 0, len = localStorage.length; keyIndex < len; keyIndex++) {
             var key = localStorage.key(keyIndex);
             var value = localStorage[key];
-            // TODO:
-            if (key == 'previous_app_version') {
 
+            if (key == 'previous_app_version') {
+                // TODO:
             }
 
-            if (key == 'inc_info') {
+            else if (key == 'inc_info') {
                 inc_info = JSON.parse(value);
                 inc_num = inc_info['inc_num'];
                 inc_address = inc_info['address'];
@@ -531,8 +533,7 @@ function loadCookieState() {
             // Report
             else if (key == 'events') {
                 var newEventsStr = value;
-                var newEvents = JSON.parse(newEventsStr);
-                loadEvents(newEvents);
+                newEvents = JSON.parse(newEventsStr);
             }
 
             // Command Transferred
@@ -557,6 +558,7 @@ function loadCookieState() {
                 console.log("Unhandled cookie: key:[" + key + "] value:[" + value + "]");
             }
         } // for
+        loadEvents(newEvents);
         COOKIES_ENABLED = true;
     }
 }
