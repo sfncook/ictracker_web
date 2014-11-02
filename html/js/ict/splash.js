@@ -92,52 +92,59 @@ var incidentStartBtns = [
         row: 3
     },
     {
-        type: 'hazmat',
+//        type: 'hazmat',
+        type: 'arff',
         icon: "images/icons/hazmat.png",
         text: "HazMat Incident",
-        disabled: "true",
+        url: "fire_inc.html",
         row: 3
     },
     {
-        type: 'water',
+//        type: 'water',
+        type: 'arff',
         icon: "images/icons/water.png",
         text: "Water Rescue",
-        disabled: "true",
+        url: "fire_inc.html",
         row: 3
     },
     {
-        type: 'trench',
+//        type: 'trench',
+        type: 'arff',
         icon: "images/icons/trench.png",
         text: "Trench Rescue",
-        disabled: "true",
+        url: "fire_inc.html",
         row: 3
     },
     {
-        type: 'mountain',
+//        type: 'mountain',
+        type: 'arff',
         icon: "images/icons/mountain.png",
         text: "Mountain Rescue",
-        disabled: "true",
+        url: "fire_inc.html",
         row: 4
     },
     {
-        type: 'palm',
+//        type: 'palm',
+        type: 'arff',
         icon: "images/icons/palm.png",
         text: "Palm Rescue",
-        disabled: "true",
+        url: "fire_inc.html",
         row: 4
     },
     {
-        type: 'struct',
+//        type: 'struct',
+        type: 'arff',
         icon: "images/icons/structure.png",
         text: "Structural Rescue",
-        disabled: "true",
+        url: "fire_inc.html",
         row: 4
     },
     {
-        type: 'confined',
+//        type: 'confined',
+        type: 'arff',
         icon: "images/icons/confined.png",
         text: "Confined Space Rescue",
-        disabled: "true",
+        url: "fire_inc.html",
         row: 4
     }
 ];
