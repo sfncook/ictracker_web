@@ -1,4 +1,29 @@
-function init_splash() {
+function initPrevTable() {
+    var previnc_right_col = $("#previnc_right_col");
+    var view_previnc_btn = $("#view_previnc_btn");
+    var view_previn_clos = $("#view_previn_clos");
+    var view_previn_open = $("#view_previn_open");
+
+    previnc_right_col.hide();
+    view_previn_clos.hide();
+    view_previn_open.show();
+
+    view_previnc_btn.click(function () {
+        if (previnc_right_col.is(":visible")) {
+            // close it
+            previnc_right_col.hide();
+            view_previn_clos.hide();
+            view_previn_open.show();
+        } else {
+            // open it
+            previnc_right_col.show();
+            view_previn_clos.show();
+            view_previn_open.hide();
+        }
+    });
+}
+
+function initSplash() {
 
     var inc_num = localStorage.getItem('inc_num');
     var inc_address = localStorage.getItem('inc_address');
@@ -47,11 +72,11 @@ function init_splash() {
             btn.click(function () {
                 deleteAllCookies();
 
-                localStorage.setItem('inc_num',     $("#inc_num_input").val());
+                localStorage.setItem('inc_num', $("#inc_num_input").val());
                 localStorage.setItem('inc_address', $("#address_input").val());
-                localStorage.setItem('inc_url',     btnObj.url);
-                localStorage.setItem('inc_icon',    btnObj.icon);
-                localStorage.setItem('inc_type',    btnObj.type);
+                localStorage.setItem('inc_url', btnObj.url);
+                localStorage.setItem('inc_icon', btnObj.icon);
+                localStorage.setItem('inc_type', btnObj.type);
 
                 var urlLink = btnObj.url;
                 window.location.href = urlLink;
@@ -67,7 +92,12 @@ function init_splash() {
     });
 }
 
-$(document).ready(init_splash);
+function init() {
+    initSplash();
+    initPrevTable();
+}
+
+$(document).ready(init);
 
 var incidentStartBtns = [
     {

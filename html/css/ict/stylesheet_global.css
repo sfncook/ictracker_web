@@ -1915,3 +1915,53 @@ ul {
     border-radius: 20px;
     margin-right: 10px !important;
 }
+
+#previnc_container {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top: 1px black solid;
+    border-left: 1px black solid;
+    border-bottom: 1px black solid;
+    background: #ccd6e4;
+}
+.view_previnc_btn {
+    width:100px;
+    float:left;
+    margin: 20px;
+}
+.previnc_btn_logo {
+    width:15px;
+    height:15px;
+}
+.previnc_right_col {
+    float:left;
+    overflow: scroll;
+    max-height: 600px;
+}
+.previnc_table {
+    border:5px double black;
+    background: white;
+    margin: 20px;
+}
+.previnc_table td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.delbtn {
+    border:1px solid darkgray;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+}
+.delbtn:hover {
+    cursor: pointer;
+}
+.delbtn:active {
+    cursor: pointer;
+    border: 2px solid black;
+}
