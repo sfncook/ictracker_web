@@ -139,6 +139,16 @@ function tbarToJson(tbarEl) {
 
     return JSON.stringify(tbarObj);
 }
+function archiveCurrentInc() {
+    var cur_inc_string = JSON.stringify(localStorage);
+    var prev_incs = localStorage.getItem("prev_incs");
+    if(prev_incs==null) {
+        prev_incs = new Array();
+    }
+    prev_incs.push(cur_inc_string);
+    localStorage.clear();
+    localStorage.setItem("prev_incs", prev_incs);
+}
 function deleteAllCookies() {
     localStorage.clear();
 }

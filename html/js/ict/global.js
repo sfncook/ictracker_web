@@ -1493,7 +1493,7 @@ function initObjectivesDialog() {
  * Incident Num Dialog
  **/
 function initIncNumDialog() {
-    $("#inc_num").click(function() {
+    $("#inc_num").click(function () {
         $("#inc_num_custom_input").val($("#inc_num").html());
         showDialog(0, $("#inc_num"), "#inc_num_dialog")();
     });
@@ -1521,7 +1521,7 @@ function initIncNumDialog() {
  * Incident Address Dialog
  **/
 function initIncAddressDialog() {
-    $("#inc_address").click(function() {
+    $("#inc_address").click(function () {
         $("#inc_address_custom_input").val($("#inc_address").html());
         showDialog(0, $("#inc_address"), "#inc_address_dialog")();
     });
@@ -2589,10 +2589,10 @@ function initCmdTerminateDialog() {
     });
 
     $("#new_incident_cmd_btn").click(function () {
+//        archiveCurrentInc();
         deleteAllCookies();
         var newlocation = document.location.href.replace("fire_inc.html", "index.html");
         document.location.href = newlocation;
-//        document.location.href = '../';
     });
 }
 

@@ -1,4 +1,12 @@
+function loadPrevTable(prevIncs) {
+    for (var i = 0; i < prevIncs.length; i++) {
+        var incStr = prevIncs[i];
+        var incObj = JSON.parse(incStr);
+        console.log(incObj);
+    }
+}
 function initPrevTable() {
+    var previnc_container = $("#previnc_container");
     var previnc_right_col = $("#previnc_right_col");
     var view_previnc_btn = $("#view_previnc_btn");
     var view_previn_clos = $("#view_previn_clos");
@@ -21,6 +29,15 @@ function initPrevTable() {
             view_previn_open.hide();
         }
     });
+
+    var prevIncsStr = localStorage.getItem("prev_incs");
+    if (prevIncsStr != null && prevIncsStr.length > 0) {
+        var prevIncsObj = JSON.parse(prevIncsStr);
+        previnc_container.show();
+        loadPrevTable(prevIncsObj);
+    } else {
+        previnc_container.hide();
+    }
 }
 
 function initSplash() {
