@@ -12,17 +12,11 @@ function loadPrevTable(prevIncs) {
         var rowEl = $('<tr></tr>');
         rowEl.append('<td><div class="load_btn button">Load</div></td>');
         rowEl.append('<td>' + incObj['inc_num'] + '</td>');
-        rowEl.append('<td>' + incObj['inc_type'] + '</td>');
+        rowEl.append('<td><img class="prev_table_type_icon" src="' + incObj['inc_icon'] + '"/></td>');
         rowEl.append('<td>' + incObj['inc_address'] + '</td>');
-        rowEl.append('<td><div class="del_btn button">Delete</div></td>');
 
         var load_btn = rowEl.find(".load_btn");
         load_btn.click(callLoadInc(incObj));
-
-        var del_btn = rowEl.find(".del_btn");
-        del_btn.click(function () {
-            //TODO
-        });
 
         $('#previnc_right_col_body').append(rowEl);
     }

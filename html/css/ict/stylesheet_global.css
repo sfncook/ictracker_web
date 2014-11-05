@@ -1972,3 +1972,7 @@ ul {
 .del_btn {
     background: deeppink;
 }
+.prev_table_type_icon {
+    width:30px;
+    height:30px;
+}
