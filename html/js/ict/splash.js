@@ -1,4 +1,9 @@
-
+function callLoadInc(incObj) {
+    return function(){
+        loadInc(incObj);
+        window.location.href = incObj['inc_url'];
+    };
+}
 function loadPrevTable(prevIncs) {
     for (var i = 0; i < prevIncs.length; i++) {
         var incStr = prevIncs[i];
@@ -12,10 +17,7 @@ function loadPrevTable(prevIncs) {
         rowEl.append('<td><div class="del_btn button">Delete</div></td>');
 
         var load_btn = rowEl.find(".load_btn");
-        load_btn.click(function () {
-            loadInc(incObj);
-            window.location.href = incObj['inc_url'];
-        });
+        load_btn.click(callLoadInc(incObj));
 
         var del_btn = rowEl.find(".del_btn");
         del_btn.click(function () {
@@ -107,7 +109,7 @@ function initSplash() {
 
         if (typeof btnObj.url != 'undefined') {
             btn.click(function () {
-                deleteAllCookies();
+                clearIncData();
 
                 localStorage.setItem('inc_num', $("#inc_num_input").val());
                 localStorage.setItem('inc_address', $("#address_input").val());

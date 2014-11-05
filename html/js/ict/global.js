@@ -2554,6 +2554,8 @@ function terminateCommand() {
     showDialog(0, 0, "#resume_dialog")();
 
     saveCookieState();
+
+    archiveCurrentInc();
 }
 function dontTerminateCommand() {
     hideAllDialogs();
@@ -2589,7 +2591,7 @@ function initCmdTerminateDialog() {
     });
 
     $("#new_incident_cmd_btn").click(function () {
-        archiveCurrentInc();
+//        archiveCurrentInc();
 //        deleteAllCookies();
         var newlocation = document.location.href.replace("fire_inc.html", "index.html");
         document.location.href = newlocation;
