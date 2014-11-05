@@ -645,29 +645,39 @@ function selectMaydayTab(tab, color) {
     $("#mayday_right_td").addClass(color);
 }
 function onOpenMaydayDialog() {
+    var mayday_units_all = $("#mayday_units_all");
+    $(".tbar_unit_btn").each(function() {
+        var tbar_parent = $(this).parents("#unit_row_div_prototype");
+        var isProtoType = tbar_parent.length>0;
 
+        if(!isProtoType) {
+            var unit_text = $(this).find(".unit_text").html();
+            var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>" + unit_text + "</div>");
+            mayday_units_all.append(maydayUnitBtn);
+        }
+    });
+
+    var sector_titles = [];
+    $(".tbar").each(function () {
+        var sector_title = $(this).find(".title_text").html();
+        if (sector_title != "Sector Title") {
+            sector_titles.push(sector_title);
+        }
+    });
+    $(".mayday_sector_select").each(function (i) {
+        for (i = 0; i < sector_titles.length; i++) {
+            var title = sector_titles[i];
+            $(this).append($("<option value='" + title + "'>" + title + "</option>"));
+        }
+    });
 }
 function initMaydayDialog() {
     var maydayBtn = $("#mayday_btn");
     maydayBtn.click(showDialog_withCallbacks(
-        "#mayday_dialog", // dialogId
-        0, // parentDialog
-        function () { // onOpenCallback
-            var sector_titles = [];
-            $(".tbar").each(function () {
-                var sector_title = $(this).find(".title_text").html();
-                if (sector_title != "Sector Title") {
-                    sector_titles.push(sector_title);
-                }
-            });
-            $(".mayday_sector_select").each(function (i) {
-                for (i = 0; i < sector_titles.length; i++) {
-                    var title = sector_titles[i];
-                    $(this).append($("<option value='" + title + "'>" + title + "</option>"));
-                }
-            });
-        },
-        0, // onClickCallback
+        "#mayday_dialog",   // dialogId
+        0,                  // parentDialog
+        onOpenMaydayDialog, // onOpenCallback
+        0,                  // onClickCallback
         onCloseMaydayDialog));
 
 //    $("#mayday_info_div_prototype").hide();
