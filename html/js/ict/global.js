@@ -644,6 +644,9 @@ function selectMaydayTab(tab, color) {
     $("#mayday_right_td").removeClass("blue_bg");
     $("#mayday_right_td").addClass(color);
 }
+function onOpenMaydayDialog() {
+
+}
 function initMaydayDialog() {
     var maydayBtn = $("#mayday_btn");
     maydayBtn.click(showDialog_withCallbacks(
@@ -667,7 +670,7 @@ function initMaydayDialog() {
         0, // onClickCallback
         onCloseMaydayDialog));
 
-    $("#mayday_info_div_prototype").hide();
+//    $("#mayday_info_div_prototype").hide();
     $("#new_mayday_btn").click(addMaydayEventElement);
 
     $(".mayday_tab_div").hide();

@@ -871,11 +871,6 @@ td {
     /*height: 25px;*/
 }
 
-#mayday_scroll_div {
-    overflow: scroll;
-    height: 100%;
-}
-
 #osr_dialog {
     width: 455px;
 }
@@ -1079,11 +1074,6 @@ td {
 #mayday_dialog_body {
     padding: 0;
     background: #EEE;
-}
-
-#mayday_scroll_div {
-    min-height: 370px;
-    overflow: scroll;
 }
 
 .mayday_list li {
