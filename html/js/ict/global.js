@@ -3031,7 +3031,7 @@ function init() {
         return this.slice(0);
     };
 
-    $(".dialog_close_btn").click(function () {
+    $(".close_btn").click(function () {
         if (!isIncidentRunning) {
             hideAllDialogs();
             terminateCommand();
