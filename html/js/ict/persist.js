@@ -147,7 +147,22 @@ function archiveCurrentInc() {
     }
     prev_incs.push(cur_inc_string);
     localStorage.clear();
-    localStorage.setItem("prev_incs", prev_incs);
+    localStorage.setItem("prev_incs", JSON.stringify(prev_incs));
+}
+function loadInc(incObj) {
+    var keys = Object.keys(incObj);
+    clearIncData();
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        var value = incObj[key];
+        localStorage.setItem(key, value);
+    }
+}
+function clearIncData() {
+    var cur_inc_string = JSON.stringify(localStorage);
+    var prev_incs = localStorage.getItem("prev_incs");
+    localStorage.clear();
+    localStorage.setItem("prev_incs", JSON.stringify(prev_incs));
 }
 function deleteAllCookies() {
     localStorage.clear();

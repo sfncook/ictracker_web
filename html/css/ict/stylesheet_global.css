@@ -1940,7 +1940,7 @@ ul {
     float:left;
     overflow: scroll;
     max-height: 600px;
-    width:550px;
+    max-width:550px;
 }
 .previnc_table {
     border:5px double black;
@@ -1965,4 +1965,10 @@ ul {
 .delbtn:active {
     cursor: pointer;
     border: 2px solid black;
+}
+.load_btn {
+    background: lightgreen;
+}
+.del_btn {
+    background: deeppink;
 }
