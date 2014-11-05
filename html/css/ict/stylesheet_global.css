@@ -1872,12 +1872,7 @@ ul {
     width: 52px;
     height: 51px;
     float:left;
-    border-right: 1px solid darkgray;
-    border-bottom: 1px solid darkgray;
-    border-left: 1px solid darkgray;
-    box-shadow: 0 0 15px lightblue;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border: none;
     background: white;
 }
 
