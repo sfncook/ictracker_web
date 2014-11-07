@@ -869,16 +869,6 @@ function setTbarTitle(tbar, title) {
         addTbar();
     }
 
-//    // Update any Maydays for this sector
-//    var maydaysSelected = $(".mayday_sector_select").find("option:selected:contains(" + title_text_prev + ")").parents(".mayday_sector_select");
-//    $(".mayday_sector_select").find("option:contains(" + title_text_prev + ")").remove();
-//    $(".mayday_sector_select").each(function () {
-//        $(this).append($("<option value='" + title + "'>" + title + "</option>"));
-//    });
-//    maydaysSelected.each(function () {
-//        $(this).find("option:contains(" + title + ")").attr('selected', 'selected');
-//    });
-
     // Report
     addEvent_title_to_sector(title);
 
@@ -2395,8 +2385,6 @@ function addTbar(col_x, row_y) {
 
     var tbar = $("#tbar_prototype").clone();
     tbar.max_size_x = 1;
-//    tbar.attr("data-col", col_x);
-//    tbar.attr("data-row", row_y);
     var retObj = gridster.add_widget.apply(gridster, [tbar, 1, 1, col_x, row_y]);
     tbar.prefix_dir = 'X';
     tbar.prefix_num = 'X';
@@ -2519,6 +2507,9 @@ function addTbar(col_x, row_y) {
     });
 
     tbar.show();
+
+    // Init scroll bar
+    tbar.find('.scroll-pane').jScrollPane();
 
     return tbar;
 }
@@ -3030,8 +3021,6 @@ function init() {
     window.setTimeout(blinkUnit, 500);
     window.setInterval(updateTimer, 1000);
     window.setInterval(updateAllMaydayTimers, 1000);
-
-    $('.scroll-pane').jScrollPane();
 
 
     if (COOKIES_ENABLED) {
