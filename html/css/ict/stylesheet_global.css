@@ -1191,7 +1191,7 @@ td {
     margin: 4px;
 }
 
-.mayday_info_div {
+#mayday_info_edit_div {
     padding: 5px;
     border: 1px solid #666;
     margin: 4px 4;
@@ -1220,6 +1220,9 @@ td {
     box-shadow: none;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+}
+#mayday_add_btn {
+    margin-top: 20px;
 }
 
 .select_on {
