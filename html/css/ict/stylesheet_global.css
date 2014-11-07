@@ -870,8 +870,11 @@ td {
     height: 27px;
     padding: 4px 0 0 2px;
     font-size: 0.7rem;
-    float:right;
+    float:left;
     margin:4px 2px;
+}
+.mayday_sector_btn_list {
+    float:right;
 }
 .mayday_row_div {
     margin-top: 10px;
