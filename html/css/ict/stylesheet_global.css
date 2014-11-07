@@ -876,11 +876,11 @@ td {
 
 .mayday_sector_title {
     width:124px;
-    height: 24px;
+    height: 27px;
     padding: 4px 0 0 2px;
     font-size: 0.7rem;
-    float:left;
-    margin:2px;
+    float:right;
+    margin:4px 2px;
 }
 .mayday_row_div {
     margin-top: 10px;
@@ -1148,17 +1148,21 @@ td {
 }
 
 .mayday_name_label {
-    padding-top: 3px;
     float: left;
+    font-weight: bold;
 }
-
+.mayday_name_value {
+    float:left;
+}
 .mayday_psi_btn {
     margin-top: 1px;
-    float: left;
+    margin-right: 4px;
+    float: right;
 }
 
 .mayday_box_title {
     font-size: 1.1rem;
+    font-weight: bold;
     color: #666;
     margin-bottom: 5px;
     text-align: center;
@@ -1168,7 +1172,7 @@ td {
 .mayday_clear_btn {
     height: 24px;
     padding: 2px;
-    margin-right: 6px;
+    margin-right: 4px;
     float: right;
 }
 
@@ -1179,8 +1183,8 @@ td {
 .mayday_timer {
     font-size: 1.1rem;
     color: #666;
-    float: left;
-    margin-left: 35px;
+    float: right;
+    margin-right: 5px;
 }
 #new_mayday_btn_icon {
     height: 12px;
@@ -1227,11 +1231,14 @@ td {
     float: left;
 }
 .mayday_saved {
-    width: 200px;
+    width: 228px;
     background: yellow;
     float: left;
     margin: 10px;
+    padding: 4px;
+    border: 3px double #999;
 }
+
 .select_on {
     border: 3px #4863A0 solid;
 }
@@ -1265,7 +1272,6 @@ td {
 #mayday_td_left {
     width: 270px;
 }
-
 .mayday_name_input {
     width: 175px;
     margin: 0 4px;
@@ -1275,16 +1281,13 @@ td {
     color: black;
     float: left;
 }
-
 .mayday_unit_btn {
     float: left;
     margin: 4px;
 }
-
 #mayday_list_grablives li {
     padding: 0px;
 }
-
 #mayday_list_grablives {
     background: #CCFFCC;
 }
