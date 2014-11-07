@@ -581,7 +581,7 @@
                     </div>
                     <div id="mayday_info_edit_div" class="yellow_bg mayday_info_div">
                         <div class="mayday_box_title">Mayday #</div>
-                        <div class="mayday_timer">00:00</div>
+                        <div class="hidden_div mayday_timer">00:00</div>
                         <div class="glowbabyblue mayday_clear_btn button">Clear</div>
                         <div class="clear_float"></div>
                         <div>
@@ -592,64 +592,58 @@
                             <div class="clear_float"></div>
                         </div>
 
-                        <div id="mayday_units_all" class="mayday_units_div"></div>
+                        <div id="mayday_units_all" class="mayday_row_div mayday_units_div"></div>
 
-                        <div id="mayday_sectors_all"></div>
-                        <div class="clear_float"></div>
+                        <div id="mayday_sectors_all" class="mayday_row_div"></div>
 
-                        <!--<select class="mayday_sector_select mayday_select">-->
-                            <!--<option disabled='disabled' selected='selected' class='default_option'>Sector</option>-->
-                        <!--</select>-->
-                        <!--<div class="mayday_sector_title"></div>-->
+                        <div class="mayday_row_div">
+                            <select class="mayday_select_half mayday_channel_select mayday_select">
+                                <option disabled='disabled' selected='selected' class='default_option'>Channel</option>
+                                <option class='mayday_channel_1'>Channel 1</option>
+                                <option class='mayday_channel_2'>Channel 2</option>
+                                <option class='mayday_channel_3'>Channel 3</option>
+                                <option class='mayday_channel_4'>Channel 4</option>
+                                <option class='mayday_channel_5'>Channel 5</option>
+                                <option class='mayday_channel_6'>Channel 6</option>
+                                <option class='mayday_channel_7'>Channel 7</option>
+                                <option class='mayday_channel_8'>Channel 8</option>
+                                <option class='mayday_channel_9'>Channel 9</option>
+                                <option class='mayday_channel_10'>Channel 10</option>
+                                <option class='mayday_channel_11'>Channel 11</option>
+                                <option class='mayday_channel_12'>Channel 12</option>
+                                <option class='mayday_channel_13'>Channel 13</option>
+                                <option class='mayday_channel_14'>Channel 14</option>
+                                <option class='mayday_channel_15'>Channel 15</option>
+                                <option class='mayday_channel_16'>Channel 16</option>
+                            </select>
 
-                        <select class="mayday_select_half mayday_channel_select mayday_select">
-                            <option disabled='disabled' selected='selected' class='default_option'>Channel</option>
-                            <option class='mayday_channel_1'>Channel 1</option>
-                            <option class='mayday_channel_2'>Channel 2</option>
-                            <option class='mayday_channel_3'>Channel 3</option>
-                            <option class='mayday_channel_4'>Channel 4</option>
-                            <option class='mayday_channel_5'>Channel 5</option>
-                            <option class='mayday_channel_6'>Channel 6</option>
-                            <option class='mayday_channel_7'>Channel 7</option>
-                            <option class='mayday_channel_8'>Channel 8</option>
-                            <option class='mayday_channel_9'>Channel 9</option>
-                            <option class='mayday_channel_10'>Channel 10</option>
-                            <option class='mayday_channel_11'>Channel 11</option>
-                            <option class='mayday_channel_12'>Channel 12</option>
-                            <option class='mayday_channel_13'>Channel 13</option>
-                            <option class='mayday_channel_14'>Channel 14</option>
-                            <option class='mayday_channel_15'>Channel 15</option>
-                            <option class='mayday_channel_16'>Channel 16</option>
-                        </select>
+                            <select class="mayday_select_half mayday_rank_select mayday_select">
+                                <option disabled='disabled' selected='selected' class='default_option'>Rank</option>
+                                <option class='mayday_rank_capt'>Captain</option>
+                                <option class='mayday_rank_eng'>Engineer</option>
+                                <option class='mayday_rank_ff'>Fire Fighter</option>
+                            </select>
+                            <div class="clear_float"></div>
+                        </div>
 
-                        <select class="mayday_select_half mayday_rank_select mayday_select">
-                            <option disabled='disabled' selected='selected' class='default_option'>Rank</option>
-                            <option class='mayday_rank_capt'>Captain</option>
-                            <option class='mayday_rank_eng'>Engineer</option>
-                            <option class='mayday_rank_ff'>Fire Fighter</option>
-                        </select>
-                        <div class="clear_float"></div>
+                        <div class="mayday_row_div">
+                            <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
+                            <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
 
-                        <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
-                        <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
-                        <div class="clear_float"></div>
+                            <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
+                            <div class="injured_mayday_btn mayday_toggle button">Injured</div>
+                            <div class="clear_float"></div>
+                        </div>
 
-                        <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
-                        <div class="injured_mayday_btn mayday_toggle button">Injured</div>
-                        <div class="clear_float"></div>
-
-                        <div class="vert_spacer"></div>
-
-                        <div class="lost_mayday_btn mayday_single_toggle mayday_toggle button">Lost</div>
-                        <div class="trap_mayday_btn mayday_single_toggle mayday_toggle button">Trapped</div>
-                        <div class="oair_mayday_btn mayday_single_toggle mayday_toggle button">Out of Air</div>
-                        <div class="regi_mayday_btn mayday_single_toggle mayday_toggle button">Regulator Issue</div>
-                        <div class="lair_mayday_btn mayday_single_toggle mayday_toggle button">Low Air</div>
-                        <div class="pack_mayday_btn mayday_single_toggle mayday_toggle button">Pack Issue</div>
-
-                        <div class="clear_float"></div>
-
-                        <div id="mayday_add_btn" class="button">+Add</div>
+                        <div class="mayday_row_div">
+                            <div class="lost_mayday_btn mayday_single_toggle mayday_toggle button">Lost</div>
+                            <div class="trap_mayday_btn mayday_single_toggle mayday_toggle button">Trapped</div>
+                            <div class="oair_mayday_btn mayday_single_toggle mayday_toggle button">Out of Air</div>
+                            <div class="regi_mayday_btn mayday_single_toggle mayday_toggle button">Regulator Issue</div>
+                            <div class="lair_mayday_btn mayday_single_toggle mayday_toggle button">Low Air</div>
+                            <div class="pack_mayday_btn mayday_single_toggle mayday_toggle button">Pack Issue</div>
+                            <div class="clear_float"></div>
+                        </div>
                     </div>
                 </td>
                 <td id="mayday_right_td">
@@ -739,6 +733,26 @@
                             <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Put medical sector in place</li>
                         </ul>
                     </div>
+                    <div class="clear_float"></div>
+                    <div id="mayday_list_box">
+                        <div id="mayday_prototype" class="mayday_saved">TESTING1</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING2</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING3</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING4</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING5</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING6</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING7</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING8</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING9</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING10</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING11</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING12</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING13</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING14</div>
+                        <div id="mayday_prototype" class="mayday_saved">TESTING15</div>
+                        <div class="clear_float"></div>
+                    </div>
+                    <div class="clear_float"></div>
                 </td>
             </tr>
         </table>

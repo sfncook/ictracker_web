@@ -668,6 +668,7 @@ function onOpenMaydayDialog() {
             }
         }
     });
+    mayday_units_all.append('<div class="clear_float"></div>');
 
     // Update list of all sectors
     var mayday_sectors_all = $("#mayday_sectors_all");
@@ -679,6 +680,7 @@ function onOpenMaydayDialog() {
             mayday_sectors_all.append(maydaySectorBtn);
         }
     });
+    mayday_sectors_all.append('<div class="clear_float"></div>');
 
 //    var sector_titles = [];
 //    $(".tbar").each(function () {

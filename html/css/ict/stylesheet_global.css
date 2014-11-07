@@ -882,10 +882,7 @@ td {
     float:left;
     margin:2px;
 }
-#mayday_units_all {
-    margin-top: 10px;
-}
-#mayday_sector_title {
+.mayday_row_div {
     margin-top: 10px;
 }
 #osr_dialog {
@@ -1207,6 +1204,7 @@ td {
     height: 100%;
     width: 100%;
     padding: 10px;
+    float: left;
 }
 
 #mayday_right_tab_div {
@@ -1221,10 +1219,19 @@ td {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
-#mayday_add_btn {
-    margin-top: 20px;
+#mayday_list_box {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 285px);
+    background: red;
+    float: left;
 }
-
+.mayday_saved {
+    width: 200px;
+    background: yellow;
+    float: left;
+    margin: 10px;
+}
 .select_on {
     border: 3px #4863A0 solid;
 }
