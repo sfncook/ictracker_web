@@ -875,10 +875,19 @@ td {
 }
 
 .mayday_sector_title {
-    font-size: 1.1rem;
-    /*height: 25px;*/
+    width:124px;
+    height: 24px;
+    padding: 4px 0 0 2px;
+    font-size: 0.7rem;
+    float:left;
+    margin:2px;
 }
-
+#mayday_units_all {
+    margin-top: 10px;
+}
+#mayday_sector_title {
+    margin-top: 10px;
+}
 #osr_dialog {
     width: 455px;
 }
