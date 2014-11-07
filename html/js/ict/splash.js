@@ -29,32 +29,34 @@ function initPrevTable() {
     var view_previnc_btn = $("#view_previnc_btn");
     var view_previn_clos = $("#view_previn_clos");
     var view_previn_open = $("#view_previn_open");
+    var no_previnc_btn = $("#no_previnc_btn");
 
     previnc_right_col.hide();
     view_previn_clos.hide();
     view_previn_open.show();
 
-    view_previnc_btn.click(function () {
-        if (previnc_right_col.is(":visible")) {
-            // close it
-            previnc_right_col.hide();
-            view_previn_clos.hide();
-            view_previn_open.show();
-        } else {
-            // open it
-            previnc_right_col.show();
-            view_previn_clos.show();
-            view_previn_open.hide();
-        }
-    });
 
     var prevIncsStr = localStorage.getItem("prev_incs");
     if (prevIncsStr != null && prevIncsStr.length > 0) {
+        no_previnc_btn.hide();
+        view_previnc_btn.click(function () {
+            if (previnc_right_col.is(":visible")) {
+                // close it
+                previnc_right_col.hide();
+                view_previn_clos.hide();
+                view_previn_open.show();
+            } else {
+                // open it
+                previnc_right_col.show();
+                view_previn_clos.show();
+                view_previn_open.hide();
+            }
+        });
+
         var prevIncsObj = JSON.parse(prevIncsStr);
-        previnc_container.show();
         loadPrevTable(prevIncsObj);
     } else {
-        previnc_container.hide();
+        view_previnc_btn.hide();
     }
 }
 
