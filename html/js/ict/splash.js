@@ -22,6 +22,8 @@ function loadPrevTable(prevIncs) {
     }
 }
 function initPrevTable() {
+    archiveCurrentInc();
+
     var previnc_container = $("#previnc_container");
     var previnc_right_col = $("#previnc_right_col");
     var view_previnc_btn = $("#view_previnc_btn");
@@ -58,40 +60,11 @@ function initPrevTable() {
 
 function initSplash() {
 
-    var inc_num = localStorage.getItem('inc_num');
-    var inc_address = localStorage.getItem('inc_address');
-    if (inc_num != null || inc_num != null) {
-        if (inc_num == null) {
-            $("#prev_inc_num").parent().hide();
-        } else {
-            $("#prev_inc_num").html(inc_num);
-            $("#prev_inc_num").parent().show();
-        }
-
-        if (inc_address == null) {
-            $("#prev_inc_address").parent().hide();
-        } else {
-            $("#prev_inc_address").html(inc_address);
-            $("#prev_inc_address").parent().show();
-        }
-
-        $("#prev_inc_btn").show();
-        var inc_url = localStorage.getItem('inc_url');
-        $("#prev_inc_btn").data({'url': inc_url});
-
-        var inc_icon = localStorage.getItem('inc_icon');
-        $("#prev_inc_icon").attr("src", inc_icon);
-
-        $("#prev_inc_no_inc_info").hide();
-    } else {
-        $("#prev_inc_btn").hide();
-        $("#prev_inc_no_inc_info").show();
-    }
-
     var btnPrototypeStr = '<div class="splash_start_btn button">' +
         '<img class="splash_start_btn_icon" src="[icon]"/>' +
         '<div class="splash_start_btn_text">[text]</div>' +
-        '</div>'
+        '</div>';
+
     incidentStartBtns.forEach(function (btnObj, index, array) {
         var btnText = btnPrototypeStr.replace("[icon]", btnObj.icon).replace("[text]", btnObj.text);
         var btn = $(btnText);
@@ -119,10 +92,6 @@ function initSplash() {
     $("#splash_row2").append($("<div class='clear_float'></div>"));
     $("#splash_row3").append($("<div class='clear_float'></div>"));
     $("#splash_row4").append($("<div class='clear_float'></div>"));
-
-    $("#prev_inc_btn").click(function () {
-        window.location.href = $("#prev_inc_btn").data('url');
-    });
 }
 
 function init() {

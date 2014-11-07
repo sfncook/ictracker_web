@@ -140,22 +140,26 @@ function tbarToJson(tbarEl) {
     return JSON.stringify(tbarObj);
 }
 function archiveCurrentInc() {
-    var cur_inc_string = JSON.stringify(localStorage);
-    var prev_incs_str = localStorage.getItem("prev_incs");
-    var prevIncsObj = new Array();
-    if (prev_incs_str != null) {
-        prevIncsObj = JSON.parse(prev_incs_str);
-    }
-    for (var i = 0; i < prevIncsObj.length; i++) {
-        var incObj = JSON.parse(prevIncsObj[i]);
-        if (incObj['inc_num'] == inc_num) {
-            prevIncsObj.splice(i, 1);
-            break;
+    var inc_num = localStorage.getItem('inc_num');
+    var inc_address = localStorage.getItem('inc_address');
+    if (inc_num != null || inc_address != null) {
+        var cur_inc_string = JSON.stringify(localStorage);
+        var prev_incs_str = localStorage.getItem("prev_incs");
+        var prevIncsObj = new Array();
+        if (prev_incs_str != null) {
+            prevIncsObj = JSON.parse(prev_incs_str);
         }
+        for (var i = 0; i < prevIncsObj.length; i++) {
+            var incObj = JSON.parse(prevIncsObj[i]);
+            if (incObj['inc_num'] == inc_num) {
+                prevIncsObj.splice(i, 1);
+                break;
+            }
+        }
+        prevIncsObj.push(cur_inc_string);
+        localStorage.clear();
+        localStorage.setItem("prev_incs", JSON.stringify(prevIncsObj));
     }
-    prevIncsObj.push(cur_inc_string);
-    localStorage.clear();
-    localStorage.setItem("prev_incs", JSON.stringify(prevIncsObj));
 }
 function loadInc(incObj) {
     var keys = Object.keys(incObj);
@@ -170,7 +174,9 @@ function clearIncData() {
     var cur_inc_string = JSON.stringify(localStorage);
     var prev_incs = localStorage.getItem("prev_incs");
     localStorage.clear();
-    localStorage.setItem("prev_incs", prev_incs);
+    if (prev_incs != null) {
+        localStorage.setItem("prev_incs", prev_incs);
+    }
 }
 function deleteAllCookies() {
     localStorage.clear();
@@ -605,7 +611,7 @@ function loadCookieState() {
                 loadTbarFromCookie(tbarObj);
             }
 
-            else if(key == 'prev_incs') {
+            else if (key == 'prev_incs') {
                 // Do nothing
             }
 
