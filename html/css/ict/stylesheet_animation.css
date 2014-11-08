@@ -69,3 +69,38 @@
     20% { background: white; border: 1px solid white; box-shadow: 0px 0px 10px 5px red;}
     100% { background: black; border: 1px solid red;box-shadow: none;}
 }
+
+.has_mayday {
+    -webkit-animation-name: has_mayday;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: has_mayday;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: has_mayday;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes has_mayday {
+    0% { background: black; border: 1px solid red; box-shadow: none;}
+    20% { background: white; border: 1px solid white; box-shadow: 0px 0px 10px 5px red;}
+    100% { background: black; border: 1px solid red;box-shadow: none;}
+}
+
+@-webkit-keyframes has_mayday {
+    0% { background: black; border: 1px solid red; box-shadow: none;}
+    20% { background: white; border: 1px solid white; box-shadow: 0px 0px 10px 5px red;}
+    100% { background: black; border: 1px solid red;box-shadow: none;}
+}
+
+@keyframes has_mayday {
+    0% { background: black; border: 1px solid red; box-shadow: none;}
+    20% { background: white; border: 1px solid white; box-shadow: 0px 0px 10px 5px red;}
+    100% { background: black; border: 1px solid red;box-shadow: none;}
+}

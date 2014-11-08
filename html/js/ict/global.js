@@ -596,6 +596,8 @@ function selectMaydayEl(maydayEl) {
         filterMaydayUnitsForSector("");
     }
 
+    updateUnitMaydays();
+
     // Update channel
     var mayday_channel_select = mayday_info_edit_div.find(".mayday_channel_select");
     var mayday_channel_value = maydayEl.find(".mayday_channel_value").html();
@@ -724,6 +726,19 @@ function selectMaydayTab(tab, color) {
     $("#mayday_right_td").removeClass("blue_bg");
     $("#mayday_right_td").addClass(color);
 }
+function updateUnitMaydays() {
+    $(".tbar_unit_btn").removeClass("has_mayday");
+    $(".tbar_unit_btn").removeClass("glowred");
+    $(".tbar_unit_btn").removeClass("glowpink");
+    $(".mayday_saved").each(function () {
+        var unit_text = $(this).find(".mayday_unit_value").html();
+        var sector_title = $(this).find(".mayday_sector_value").html();
+        if (unit_text != '' && sector_title != '') {
+            var tbar = $(".title_text:contains(" + sector_title + ")").parents(".tbar");
+            tbar.find(".unit_text:contains(" + unit_text + ")").parent().addClass("has_mayday");
+        }
+    });
+}
 function filterMaydaySectorsForUnit(unit_text) {
     if (unit_text == "") {
         $(".mayday_sector_title").removeClass("disabled");
@@ -795,6 +810,7 @@ function onOpenMaydayDialog() {
                     });
                     filterMaydaySectorsForUnit(clicked_unit_text);
                 }
+                updateUnitMaydays();
             });
         }
     }
@@ -845,6 +861,7 @@ function onOpenMaydayDialog() {
                     });
                     filterMaydayUnitsForSector(clicked_sector_text);
                 }
+                updateUnitMaydays();
             });
         }
     }
