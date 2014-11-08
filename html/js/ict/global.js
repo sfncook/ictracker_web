@@ -596,13 +596,23 @@ function selectMaydayEl(maydayEl) {
     var mayday_channel_select = mayday_info_edit_div.find(".mayday_channel_select");
     var mayday_channel_value = maydayEl.find(".mayday_channel_value").html();
     if (mayday_channel_value != "") {
-//        var selected_text = $(this).find("option:selected").text();
-//        mayday_channel_select.selec
+        mayday_channel_select.val(mayday_channel_value);
+        mayday_channel_select.addClass("glowlightgreen");
     } else {
-
+        mayday_channel_select.val("Channel");
+        mayday_channel_select.removeClass("glowlightgreen");
     }
 
     // Update rank
+    var mayday_rank_select = mayday_info_edit_div.find(".mayday_rank_select");
+    var mayday_rank_value = maydayEl.find(".mayday_rank_value").html();
+    if (mayday_rank_value != "") {
+        mayday_rank_select.val(mayday_rank_value);
+        mayday_rank_select.addClass("glowlightgreen");
+    } else {
+        mayday_rank_select.val("Rank");
+        mayday_rank_select.removeClass("glowlightgreen");
+    }
 
     // Update hoseline
     var hoseline_mayday_btn = mayday_info_edit_div.find(".hoseline_mayday_btn");
@@ -894,6 +904,20 @@ function initMaydayDialog() {
     mayday_info_edit_div.find(".mayday_name_input").on('input', function () {
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
         mayday_saved_selected.find(".mayday_name_value").html($(this).val());
+    });
+
+    // Select channel
+    var mayday_channel_select = $("#mayday_channel_select");
+    mayday_channel_select.change(function () {
+        var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
+        mayday_saved_selected.find(".mayday_channel_value").html($(this).val());
+    });
+
+    // Select rank
+    var mayday_rank_select = $("#mayday_rank_select");
+    mayday_rank_select.change(function () {
+        var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
+        mayday_saved_selected.find(".mayday_rank_value").html($(this).val());
     });
 
     // Select unit
