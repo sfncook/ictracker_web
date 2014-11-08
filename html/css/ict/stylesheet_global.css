@@ -1229,6 +1229,14 @@ td {
     border: 4px solid red;
     background: lightpink;
 }
+.mayday_saved:hover {
+    background: white;
+    cursor: pointer;
+}
+.mayday_saved:active {
+    background: darkgray;
+    cursor: pointer;
+}
 
 .select_on {
     border: 3px #4863A0 solid;

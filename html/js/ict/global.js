@@ -591,6 +591,10 @@ function addMaydayEventElement() {
 
     selectMaydayEl(maydayEl);
     $("#mayday_info_edit_div").show();
+
+    maydayEl.click(function(){
+        return selectMaydayEl($(this));
+    });
 }
 function selectMaydayTab(tab, color) {
     var tabEl = $("#mayday_right_tab_" + tab);
