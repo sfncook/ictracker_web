@@ -555,7 +555,9 @@ function updateAllMaydayTimers() {
 }
 function selectMaydayEl(maydayEl) {
     $(".mayday_saved").data({'selected':false});
+    $(".mayday_saved").removeClass("mayday_saved_selected");
     maydayEl.data({'selected':true});
+    maydayEl.addClass("mayday_saved_selected");
     var mayday_info_edit_div = $("#mayday_info_edit_div");
     var mayday_box_title = mayday_info_edit_div.find(".mayday_box_title");
     var mayday_timer = mayday_info_edit_div.find(".mayday_timer");
