@@ -566,10 +566,18 @@ function selectMaydayEl(maydayEl) {
     mayday_timer.html(maydayEl.find(".mayday_timer").html());
     mayday_name_input.val(maydayEl.find(".mayday_name_value").html());
 
+    // Update unit
     var mayday_unit_value = maydayEl.find(".mayday_unit_value").html();
     mayday_info_edit_div.find(".mayday_unit_btn").removeClass("glowred");
     if (mayday_unit_value != "") {
         mayday_info_edit_div.find(".mayday_unit_btn:contains(" + mayday_unit_value + ")").addClass("glowred");
+    }
+
+    // Update sector
+    var mayday_sector_value = maydayEl.find(".mayday_sector_value").html();
+    mayday_info_edit_div.find(".mayday_sector_edit_btn").removeClass("glowred");
+    if (mayday_sector_value != "") {
+        mayday_info_edit_div.find(".mayday_sector_edit_btn:contains(" + mayday_sector_value + ")").addClass("glowred");
     }
 }
 var manyMaydays = 0;
@@ -673,10 +681,28 @@ function onOpenMaydayDialog() {
     allSectorNames = allSectorNames.sort();
     for (var i = 0; i < allSectorNames.length; i++) {
         var sector_title = allSectorNames[i];
-        var sectorBtnExists = $(".mayday_sector_btn_edit:contains('" + sector_title + "')").exists();
+        var sectorBtnExists = $(".mayday_sector_edit_btn:contains('" + sector_title + "')").exists();
         if (!sectorBtnExists && sector_title != "Sector Title") {
-            var maydaySectorBtn = $("<div class='mayday_sector_btn_edit mayday_sector_title button'>" + sector_title + "</div>");
+            var maydaySectorBtn = $("<div class='mayday_sector_edit_btn mayday_sector_title button'>" + sector_title + "</div>");
             mayday_sectors_all.append(maydaySectorBtn);
+
+            maydaySectorBtn.click(function () {
+                var clicked_sector_text = $(this).html();
+                var mayday_el = $(".mayday_saved.mayday_saved_selected");
+                var mayday_sector_value = mayday_el.find(".mayday_sector_value");
+                if ($(this).hasClass("glowred")) {
+                    $(this).removeClass("glowred");
+                    mayday_sector_value.html("");
+                } else {
+                    $(".mayday_sector_edit_btn").removeClass("glowred");
+                    $(this).addClass("glowred");
+                    mayday_sector_value.html(clicked_sector_text);
+
+                    var tbars_with_sector = $(".tbar").filter(function () {
+                        return $(this).find(".title_text:contains('" + clicked_sector_text + "')").exists();
+                    });
+                }
+            });
         }
     }
     mayday_sectors_all.append('<div class="clear_float"></div>');
