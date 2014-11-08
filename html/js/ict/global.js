@@ -569,15 +569,27 @@ function selectMaydayEl(maydayEl) {
     // Update unit
     var mayday_unit_value = maydayEl.find(".mayday_unit_value").html();
     mayday_info_edit_div.find(".mayday_unit_btn").removeClass("glowred");
+    var mayday_unit_select = $("#mayday_unit_select");
     if (mayday_unit_value != "") {
         mayday_info_edit_div.find(".mayday_unit_btn:contains(" + mayday_unit_value + ")").addClass("glowred");
+        mayday_unit_select.val(mayday_unit_value);
+        mayday_unit_select.addClass("glowred");
+    } else {
+        mayday_unit_select.removeClass("glowred");
+        mayday_unit_select.val("Unit");
     }
 
     // Update sector
     var mayday_sector_value = maydayEl.find(".mayday_sector_value").html();
     mayday_info_edit_div.find(".mayday_sector_edit_btn").removeClass("glowred");
+    var mayday_sectors_select = $("#mayday_sectors_select");
     if (mayday_sector_value != "") {
         mayday_info_edit_div.find(".mayday_sector_edit_btn:contains(" + mayday_sector_value + ")").addClass("glowred");
+        mayday_sectors_select.val(mayday_sector_value);
+        mayday_sectors_select.addClass("glowred");
+    } else {
+        mayday_sectors_select.removeClass("glowred");
+        mayday_sectors_select.val("Sector");
     }
 
     // Update channel

@@ -864,14 +864,6 @@ td {
     padding-left: 10px;
     text-align: left;
 }
-#mayday_unit_select {
-    height: 25px;
-    margin-top: 15px;
-}
-#mayday_sectors_select {
-    height: 25px;
-    margin-top: 15px;
-}
 
 #osr_dialog {
     width: 455px;
@@ -1113,8 +1105,9 @@ td {
     cursor: pointer;
     box-shadow: 1px 1px 2px #888;
     width: 250px;
+    height: 25px;
     display: block;
-    margin: 10px 4px 5px 4px;
+    margin: 15px 4px 5px 4px;
 }
 #mayday_table_main {
     height:95%;
