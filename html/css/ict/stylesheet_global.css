@@ -202,13 +202,6 @@ td {
     box-shadow: 1px 1px 2px #888;
 }
 
-.disabled, .disabled:hover, .disabled:active {
-    background: #999 !important;
-    color: #EEE;
-    cursor: default;
-    opacity: 0.5;
-}
-
 .action_btn {
     width: 126px;
     height: 26px;
@@ -1991,4 +1984,11 @@ ul {
 .glowgreen:active {
     background: #666;
     color: white;
+}
+
+.disabled, .disabled:hover, .disabled:active {
+    background: #999 !important;
+    color: #EEE;
+    cursor: default;
+    opacity: 0.5;
 }

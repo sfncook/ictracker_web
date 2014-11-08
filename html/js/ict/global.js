@@ -694,6 +694,18 @@ function addMaydayEventElement() {
     maydayEl.click(function () {
         return selectMaydayEl($(this));
     });
+
+    var bounds = maydayEl.offset();
+    var width = maydayEl.outerWidth();
+    var right = bounds.left + width;
+    var win = $(window);
+    var viewport = {
+        left : win.scrollLeft()
+    };
+    viewport.right = viewport.left + win.width();
+    if(right+width>=viewport.right) {
+        $("#new_mayday_btn").addClass("disabled");
+    }
 }
 function selectMaydayTab(tab, color) {
     var tabEl = $("#mayday_right_tab_" + tab);
