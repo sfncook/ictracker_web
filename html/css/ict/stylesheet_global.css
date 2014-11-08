@@ -1094,11 +1094,11 @@ td {
 .mayday_toggle {
     display: inline-block;
     float: left;
-    padding: 0;
-    height: 20px;
+    padding: 6px 0 0 0;
+    height: 35px;
     width: 120px;
     font-size: 0.9rem;
-    margin: 4px;
+    margin: 5px;
 }
 
 .mayday_select {
