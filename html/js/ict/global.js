@@ -551,85 +551,27 @@ function updateAllMaydayTimers() {
 var manyMaydays = 0;
 function addMaydayEventElement() {
     manyMaydays++;
-    var maydayEl = $("#mayday_info_div_prototype").clone();
-    maydayEl.appendTo("#mayday_scroll_div");
+
+    // Add new mayday info to list (bottom of mayday window)
+    var maydayEl = $("#mayday_prototype").clone();
+    maydayEl.appendTo("#mayday_list_box");
     maydayEl.show();
     maydayEl.attr("id", "mayday_info_div_" + manyMaydays);
     maydayEl.find(".mayday_box_title").html("Mayday #" + manyMaydays);
 
-
-    // PSI button
-    var mayday_psi_btn = maydayEl.find(".mayday_psi_btn");
-    mayday_psi_btn.click(showDialog(0, [mayday_psi_btn], "#psi_dialog", $("#mayday_dialog")));
-
-    var mayday_clear_btn = maydayEl.find(".mayday_clear_btn");
-    mayday_clear_btn.click(clearMayday(maydayEl));
-
-
-    // Hoseline Buttons
-    var hoseline_mayday_btn = maydayEl.find(".hoseline_mayday_btn");
-    var offhoseline_mayday_btn = maydayEl.find(".offhoseline_mayday_btn");
-    hoseline_mayday_btn.click(
-        function () {
-            hoseline_mayday_btn.addClass("glowgreen");
-            offhoseline_mayday_btn.removeClass("glowred");
-        }
-    );
-
-    offhoseline_mayday_btn.click(
-        function () {
-            hoseline_mayday_btn.removeClass("glowgreen");
-            offhoseline_mayday_btn.addClass("glowred");
-        }
-    );
-
-
-    // Injured Buttons
-    var uninjured_mayday_btn = maydayEl.find(".uninjured_mayday_btn");
-    var injured_mayday_btn = maydayEl.find(".injured_mayday_btn");
-    uninjured_mayday_btn.click(
-        function () {
-            uninjured_mayday_btn.addClass("glowgreen");
-            injured_mayday_btn.removeClass("glowred");
-        }
-    );
-    injured_mayday_btn.click(
-        function () {
-            uninjured_mayday_btn.removeClass("glowgreen");
-            injured_mayday_btn.addClass("glowred");
-        }
-    );
+//    var mayday_clear_btn = maydayEl.find(".mayday_clear_btn");
+//    mayday_clear_btn.click(clearMayday(maydayEl));
 
     // Mayday Timer
-    var mayday_timer = maydayEl.find(".mayday_timer");
-    var mayday_t0 = (new Date()).getTime();
-    maydayTimers.push({'mayday_t0': mayday_t0, 'mayday_timer': mayday_timer});
+//    var mayday_timer = maydayEl.find(".mayday_timer");
+//    var mayday_t0 = (new Date()).getTime();
+//    maydayTimers.push({'mayday_t0': mayday_t0, 'mayday_timer': mayday_timer});
 
-    // Mayday Select DDLB
-    maydayEl.find(".mayday_sector_select").change(
-        function () {
-            $(this).addClass("glowlightgreen");
-            $("#mayday_units_div").find(".unit_btn").hide();
-            updateMaydaySector(maydayEl);
-        }
-    );
+    // Select unit
 
+    // Select sector
 
-    // Select DDLB
-    maydayEl.find(".mayday_select").not("#mayday_sector_select").change(
-        function () {
-            $(this).addClass("glowlightgreen");
-        }
-    );
-
-    // Mayday Single Toggle Btns
-    maydayEl.find(".mayday_single_toggle").click(function () {
-        $(this).toggleClass("glowlightgreen");
-    });
-
-
-    // Sector Div
-    maydayEl.find(".mayday_sector_title").hide();
+    $("#mayday_info_edit_div").show();
 }
 function selectMaydayTab(tab, color) {
     var tabEl = $("#mayday_right_tab_" + tab);
@@ -703,12 +645,11 @@ function initMaydayDialog() {
         0                   // onCloseCallback
     ));
 
-//    $("#mayday_info_div_prototype").hide();
-    $("#new_mayday_btn").click(addMaydayEventElement);
 
+    // Init mayday tabs
+    $("#new_mayday_btn").click(addMaydayEventElement);
     $(".mayday_tab_div").hide();
     selectMaydayTab("radio", "tan_bg");
-
     $("#mayday_right_tab_radio").click(function () {
         selectMaydayTab("radio", "tan_bg")
     });
@@ -723,7 +664,7 @@ function initMaydayDialog() {
     });
 
     $(".mayday_clear_item_btn").click(function () {
-        hideAllDialogs()
+        hideAllDialogs();
     });
 
     $(".mayday_check").change(function () {
@@ -732,6 +673,59 @@ function initMaydayDialog() {
         } else {
             $(this).parent().removeClass("glowlightgreen")
         }
+    });
+
+    // Init edit box
+    var mayday_info_edit_div = $("#mayday_info_edit_div");
+    mayday_info_edit_div.hide();
+    $("#mayday_prototype").hide();
+
+    // PSI button
+    var mayday_psi_btn = mayday_info_edit_div.find(".mayday_psi_btn");
+    mayday_psi_btn.click(showDialog(0, [mayday_psi_btn], "#psi_dialog", $("#mayday_dialog")));
+
+    // Hoseline Buttons
+    var hoseline_mayday_btn = mayday_info_edit_div.find(".hoseline_mayday_btn");
+    var offhoseline_mayday_btn = mayday_info_edit_div.find(".offhoseline_mayday_btn");
+    hoseline_mayday_btn.click(
+        function () {
+            hoseline_mayday_btn.addClass("glowgreen");
+            offhoseline_mayday_btn.removeClass("glowred");
+        }
+    );
+    offhoseline_mayday_btn.click(
+        function () {
+            hoseline_mayday_btn.removeClass("glowgreen");
+            offhoseline_mayday_btn.addClass("glowred");
+        }
+    );
+
+    // Injured Buttons
+    var uninjured_mayday_btn = mayday_info_edit_div.find(".uninjured_mayday_btn");
+    var injured_mayday_btn = mayday_info_edit_div.find(".injured_mayday_btn");
+    uninjured_mayday_btn.click(
+        function () {
+            uninjured_mayday_btn.addClass("glowgreen");
+            injured_mayday_btn.removeClass("glowred");
+        }
+    );
+    injured_mayday_btn.click(
+        function () {
+            uninjured_mayday_btn.removeClass("glowgreen");
+            injured_mayday_btn.addClass("glowred");
+        }
+    );
+
+    // Select DDLB
+    mayday_info_edit_div.find(".mayday_select").change(
+        function () {
+            $(this).addClass("glowlightgreen");
+        }
+    );
+
+    // Mayday Single Toggle Btns
+    mayday_info_edit_div.find(".mayday_single_toggle").click(function () {
+        $(this).toggleClass("glowlightgreen");
     });
 }
 

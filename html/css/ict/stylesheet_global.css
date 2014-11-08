@@ -316,19 +316,12 @@ td {
     background: pink !important;
     color: #666;
 }
-
 .glowpink:hover {
     background: red !important;
     color: white;
 }
-
-.glowpink:hover {
-    background: red !important;
-    color: white;
-}
-
 .glowpink:active {
-    background: #666;
+    background: #666 !important;
     color: white;
 }
 
