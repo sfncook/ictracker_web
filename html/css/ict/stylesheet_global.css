@@ -1134,20 +1134,24 @@ td {
     float: right;
 }
 
+.mayday_box_title_edit {
+    margin-left:40px;
+}
 .mayday_box_title {
     font-size: 1.1rem;
     font-weight: bold;
     color: #666;
     margin-bottom: 5px;
     text-align: center;
-    float: left;
+    width: 100px;
+    float:left;
 }
 
 .mayday_clear_btn {
     height: 24px;
     padding: 2px;
     margin-right: 4px;
-    float: right;
+    float: left;
 }
 
 #new_mayday_btn {
