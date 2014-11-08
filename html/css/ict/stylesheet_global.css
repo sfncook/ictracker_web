@@ -336,20 +336,6 @@ td {
     color: white;
 }
 
-.glowgreen {
-    background: green;
-    color: white;
-}
-
-.glowgreen:hover {
-    background: DarkGreen;
-    color: white;
-}
-
-.glowgreen:active {
-    background: #666;
-    color: white;
-}
 
 .glowbabyblue {
     background: #99e5ff;
@@ -1988,4 +1974,20 @@ ul {
 .prev_table_type_icon {
     width:30px;
     height:30px;
+}
+
+
+.glowgreen {
+    background: green;
+    color: white;
+}
+
+.glowgreen:hover {
+    background: DarkGreen;
+    color: white;
+}
+
+.glowgreen:active {
+    background: #666;
+    color: white;
 }

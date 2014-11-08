@@ -579,6 +579,34 @@ function selectMaydayEl(maydayEl) {
     if (mayday_sector_value != "") {
         mayday_info_edit_div.find(".mayday_sector_edit_btn:contains(" + mayday_sector_value + ")").addClass("glowred");
     }
+
+    // Update channel
+    var mayday_channel_select = mayday_info_edit_div.find(".mayday_channel_select");
+    var mayday_channel_value = maydayEl.find(".mayday_channel_value").html();
+    if(mayday_channel_value!=""){
+//        var selected_text = $(this).find("option:selected").text();
+//        mayday_channel_select.selec
+    } else {
+
+    }
+
+    // Update rank
+
+    // Update hoseline
+    var hoseline_mayday_btn =       mayday_info_edit_div.find(".hoseline_mayday_btn");
+    var offhoseline_mayday_btn =    mayday_info_edit_div.find(".offhoseline_mayday_btn");
+    var mayday_misc_onhs =          maydayEl.find(".mayday_misc_onhs");
+    var mayday_misc_ofhs =          maydayEl.find(".mayday_misc_ofhs");
+    if(hoseline_mayday_btn.hasClass("glowgreen")) {
+        mayday_misc_onhs.addClass("glowgreen");
+    } else {
+        mayday_misc_onhs.removeClass("glowgreen");
+    }
+    if(offhoseline_mayday_btn.hasClass("glowred")) {
+        mayday_misc_ofhs.addClass("glowred");
+    } else {
+        mayday_misc_ofhs.removeClass("glowred");
+    }
 }
 var manyMaydays = 0;
 function addMaydayEventElement() {
@@ -763,12 +791,18 @@ function initMaydayDialog() {
         function () {
             hoseline_mayday_btn.addClass("glowgreen");
             offhoseline_mayday_btn.removeClass("glowred");
+            var mayday_el = $(".mayday_saved.mayday_saved_selected");
+            mayday_el.find(".mayday_misc_onhs").addClass("glowgreen");
+            mayday_el.find(".mayday_misc_ofhs").removeClass("glowred");
         }
     );
     offhoseline_mayday_btn.click(
         function () {
             hoseline_mayday_btn.removeClass("glowgreen");
             offhoseline_mayday_btn.addClass("glowred");
+            var mayday_el = $(".mayday_saved.mayday_saved_selected");
+            mayday_el.find(".mayday_misc_onhs").removeClass("glowgreen");
+            mayday_el.find(".mayday_misc_ofhs").addClass("glowred");
         }
     );
 
