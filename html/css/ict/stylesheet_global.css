@@ -299,7 +299,7 @@ td {
 
 .glowred {
     background: red !important;
-    color: white;
+    color: white !important;
 }
 .glowred:hover {
     background: darkred !important;
@@ -863,6 +863,14 @@ td {
 .mayday_info_tbl_r {
     padding-left: 10px;
     text-align: left;
+}
+#mayday_unit_select {
+    height: 25px;
+    margin-top: 15px;
+}
+#mayday_sectors_select {
+    height: 25px;
+    margin-top: 15px;
 }
 
 #osr_dialog {
