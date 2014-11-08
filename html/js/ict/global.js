@@ -615,20 +615,56 @@ function selectMaydayEl(maydayEl) {
     }
 
     // Update hoseline
-    var hoseline_mayday_btn = mayday_info_edit_div.find(".hoseline_mayday_btn");
-    var offhoseline_mayday_btn = mayday_info_edit_div.find(".offhoseline_mayday_btn");
+    var hoseline_mayday_btn = $("#hoseline_mayday_btn");
+    var offhoseline_mayday_btn = $("#offhoseline_mayday_btn");
     var mayday_misc_onhs = maydayEl.find(".mayday_misc_onhs");
     var mayday_misc_ofhs = maydayEl.find(".mayday_misc_ofhs");
-    if (hoseline_mayday_btn.hasClass("glowgreen")) {
-        mayday_misc_onhs.addClass("glowgreen");
+    if (mayday_misc_onhs.hasClass("glowgreen")) {
+        hoseline_mayday_btn.addClass("glowgreen");
     } else {
-        mayday_misc_onhs.removeClass("glowgreen");
+        hoseline_mayday_btn.removeClass("glowgreen");
     }
-    if (offhoseline_mayday_btn.hasClass("glowred")) {
-        mayday_misc_ofhs.addClass("glowred");
+    if (mayday_misc_ofhs.hasClass("glowred")) {
+        offhoseline_mayday_btn.addClass("glowred");
     } else {
-        mayday_misc_ofhs.removeClass("glowred");
+        offhoseline_mayday_btn.removeClass("glowred");
     }
+
+    // Update uninjured
+    var uninjured_mayday_btn = $("#uninjured_mayday_btn");
+    var injured_mayday_btn = $("#injured_mayday_btn");
+    var mayday_misc_unjr = maydayEl.find(".mayday_misc_unjr");
+    var mayday_misc_injr = maydayEl.find(".mayday_misc_injr");
+    if (mayday_misc_unjr.hasClass("glowgreen")) {
+        uninjured_mayday_btn.addClass("glowgreen");
+    } else {
+        uninjured_mayday_btn.removeClass("glowgreen");
+    }
+    if (mayday_misc_injr.hasClass("glowred")) {
+        injured_mayday_btn.addClass("glowred");
+    } else {
+        injured_mayday_btn.removeClass("glowred");
+    }
+
+    // Update options
+    var lost_mayday_btn = $("#lost_mayday_btn");
+    var trap_mayday_btn = $("#trap_mayday_btn");
+    var oair_mayday_btn = $("#oair_mayday_btn");
+    var regi_mayday_btn = $("#regi_mayday_btn");
+    var lair_mayday_btn = $("#lair_mayday_btn");
+    var pack_mayday_btn = $("#pack_mayday_btn");
+    var mayday_misc_lost = maydayEl.find(".mayday_misc_lost");
+    var mayday_misc_trap = maydayEl.find(".mayday_misc_trap");
+    var mayday_misc_oair = maydayEl.find(".mayday_misc_oair");
+    var mayday_misc_regi = maydayEl.find(".mayday_misc_regi");
+    var mayday_misc_lair = maydayEl.find(".mayday_misc_lair");
+    var mayday_misc_pack = maydayEl.find(".mayday_misc_pack");
+    lost_mayday_btn.toggleClass("glowlightgreen", mayday_misc_lost.hasClass("glowlightgreen"));
+    trap_mayday_btn.toggleClass("glowlightgreen", mayday_misc_trap.hasClass("glowlightgreen"));
+    oair_mayday_btn.toggleClass("glowlightgreen", mayday_misc_oair.hasClass("glowlightgreen"));
+    regi_mayday_btn.toggleClass("glowlightgreen", mayday_misc_regi.hasClass("glowlightgreen"));
+    lair_mayday_btn.toggleClass("glowlightgreen", mayday_misc_lair.hasClass("glowlightgreen"));
+    pack_mayday_btn.toggleClass("glowlightgreen", mayday_misc_pack.hasClass("glowlightgreen"));
 }
 var manyMaydays = 0;
 function addMaydayEventElement() {
@@ -873,18 +909,24 @@ function initMaydayDialog() {
     );
 
     // Injured Buttons
-    var uninjured_mayday_btn = mayday_info_edit_div.find(".uninjured_mayday_btn");
-    var injured_mayday_btn = mayday_info_edit_div.find(".injured_mayday_btn");
+    var uninjured_mayday_btn = $("#uninjured_mayday_btn");
+    var injured_mayday_btn = $("#injured_mayday_btn");
     uninjured_mayday_btn.click(
         function () {
             uninjured_mayday_btn.addClass("glowgreen");
             injured_mayday_btn.removeClass("glowred");
+            var mayday_el = $(".mayday_saved.mayday_saved_selected");
+            mayday_el.find(".mayday_misc_unjr").addClass("glowgreen");
+            mayday_el.find(".mayday_misc_injr").removeClass("glowred");
         }
     );
     injured_mayday_btn.click(
         function () {
             uninjured_mayday_btn.removeClass("glowgreen");
             injured_mayday_btn.addClass("glowred");
+            var mayday_el = $(".mayday_saved.mayday_saved_selected");
+            mayday_el.find(".mayday_misc_unjr").removeClass("glowgreen");
+            mayday_el.find(".mayday_misc_injr").addClass("glowred");
         }
     );
 
@@ -934,6 +976,26 @@ function initMaydayDialog() {
         mayday_sectors_select.addClass("glowred");
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
         mayday_saved_selected.find(".mayday_sector_value").html($(this).val());
+    });
+
+    // Option
+    $("#lost_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_lost").toggleClass("glowlightgreen", $(this).hasClass("glowlightgreen"));
+    });
+    $("#trap_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_trap").toggleClass("glowlightgreen", $(this).hasClass("glowlightgreen"));
+    });
+    $("#oair_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_oair").toggleClass("glowlightgreen", $(this).hasClass("glowlightgreen"));
+    });
+    $("#regi_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_regi").toggleClass("glowlightgreen", $(this).hasClass("glowlightgreen"));
+    });
+    $("#lair_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_lair").toggleClass("glowlightgreen", $(this).hasClass("glowlightgreen"));
+    });
+    $("#pack_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_pack").toggleClass("glowlightgreen", $(this).hasClass("glowlightgreen"));
     });
 }
 
