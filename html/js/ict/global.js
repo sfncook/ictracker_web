@@ -2663,6 +2663,8 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
                 $(".mayday_saved").removeClass("mayday_saved_selected");
                 var mayday_el = $(".mayday_saved").find(".mayday_unit_value:contains(" + unitName + ")").parents(".mayday_saved").find(".mayday_sector_value:contains(" + title_text + ")").parents(".mayday_saved");
                 selectMaydayEl(mayday_el);
+            } else if(unitBtn.hasClass("blink_unit_timer")) {
+                showUnitPeopleDialog(tbar, tbar_unit_info_btn);
             }
         });
     }
