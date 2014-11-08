@@ -875,6 +875,7 @@ td {
     text-align: right;
 }
 .mayday_info_tbl_r {
+    padding-left: 10px;
     text-align: left;
 }
 
@@ -1233,7 +1234,6 @@ td {
     box-shadow: 0 0 25px blue;
     border: 4px solid red;
     background: lightpink;
-    height: 124px;
 }
 .mayday_saved:hover {
     background: white;
@@ -1242,6 +1242,17 @@ td {
 .mayday_saved:active {
     background: darkgray;
     cursor: pointer;
+}
+.mayday_misc_value {
+    width:104px;
+    height: 20px;
+    font-size: 0.8rem;
+    float:left;
+    text-align: center;
+    border: 1px solid darkgray;
+    background: #EEE;
+    margin: 1px;
+    border-radius: 3px;
 }
 
 .select_on {
