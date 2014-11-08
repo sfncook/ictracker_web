@@ -879,6 +879,8 @@ function onOpenMaydayDialog() {
     } else {
         $("#clear_float_between_units_and_sectors").show();
     }
+
+    selectMaydayEl($(".mayday_saved.mayday_saved_selected"));
 }
 function initMaydayDialog() {
     var maydayBtn = $("#mayday_btn");
@@ -2637,7 +2639,8 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         pane2api.reinitialise();
 
         // Add event for report
-        addEvent_unit_to_sector(unitName, tbar.find(".title_text").text());
+        var title_text = tbar.find(".title_text").text();
+        addEvent_unit_to_sector(unitName, title_text);
 
         // Always select the most recently added unit
         showActionsForUnitBtn(unitBtn)();
@@ -2646,6 +2649,22 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
         // Only hide the units dialog if user did not the dispatch button first
         hideAllDialogs();
+
+        // Click unit btn
+        unitBtn.click(function () {
+            if (unitBtn.hasClass("has_mayday")) {
+                showDialog_withCallbacks(
+                    "#mayday_dialog",   // dialogId
+                    0,                  // parentDialog
+                    onOpenMaydayDialog, // onOpenCallback
+                    0,                  // onClickCallback
+                    0                   // onCloseCallback
+                )();
+                $(".mayday_saved").removeClass("mayday_saved_selected");
+                var mayday_el = $(".mayday_saved").find(".mayday_unit_value:contains(" + unitName + ")").parents(".mayday_saved").find(".mayday_sector_value:contains(" + title_text + ")").parents(".mayday_saved");
+                selectMaydayEl(mayday_el);
+            }
+        });
     }
 
     // Dispatched Units
