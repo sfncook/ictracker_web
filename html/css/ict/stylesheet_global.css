@@ -1141,6 +1141,7 @@ td {
 }
 .mayday_name_value {
     float:left;
+    padding-left:5px;
 }
 .mayday_psi_btn {
     margin-top: 1px;

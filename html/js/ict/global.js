@@ -750,6 +750,12 @@ function initMaydayDialog() {
     mayday_info_edit_div.find(".mayday_single_toggle").click(function () {
         $(this).toggleClass("glowlightgreen");
     });
+
+    // Name input box
+    mayday_info_edit_div.find(".mayday_name_input").on('input', function() {
+        var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
+        mayday_saved_selected.find(".mayday_name_value").html($(this).val());
+    });
 }
 
 
