@@ -2107,6 +2107,23 @@ function initOsrDialog() {
             showDialog(0, mode_btn, "#emergency_traffic_dialog")();
         }
     );
+
+    $("#osr_water_mode_res_btn").click(
+        function () {
+            $(this).toggleClass('glowlightgreen');
+            $("#osr_water_mode_rec_btn").toggleClass('glowlightgreen', !$(this).hasClass('glowlightgreen'));
+            $("#modewater_osr_btn").addClass('glowlightgreen');
+            updateOsrPercentComplete();
+        }
+    );
+    $("#osr_water_mode_rec_btn").click(
+        function () {
+            $(this).toggleClass('glowlightgreen');
+            $("#osr_water_mode_res_btn").toggleClass('glowlightgreen', !$(this).hasClass('glowlightgreen'));
+            $("#modewater_osr_btn").addClass('glowlightgreen');
+            updateOsrPercentComplete();
+        }
+    );
     $("#osr_select_type_of_aircraft").change(function () {
         $("#aircraft_osr_btn").addClass("glowlightgreen");
         updateOsrPercentComplete();
@@ -2663,7 +2680,7 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
                 $(".mayday_saved").removeClass("mayday_saved_selected");
                 var mayday_el = $(".mayday_saved").find(".mayday_unit_value:contains(" + unitName + ")").parents(".mayday_saved").find(".mayday_sector_value:contains(" + title_text + ")").parents(".mayday_saved");
                 selectMaydayEl(mayday_el);
-            } else if(unitBtn.hasClass("blink_unit_timer")) {
+            } else if (unitBtn.hasClass("blink_unit_timer")) {
                 showUnitPeopleDialog(tbar, tbar_unit_info_btn);
             }
         });

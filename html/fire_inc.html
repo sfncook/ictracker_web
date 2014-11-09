@@ -444,7 +444,7 @@
                 <td class="iap_label_td">Critical Fireground Factors:</td>
                 <td colspan="2">
                     <div id="bldg_iap_btn" class="fire iap_toggle_btn button">Building</div>
-                    <div id="airc_iap_btn" class="arff iap_toggle_btn button">Aircraft</div>
+                    <div id="airc_iap_btn" class="water arff iap_toggle_btn button">Aircraft</div>
                     <div id="fire_iap_btn" class="iap_toggle_btn button">Fire</div>
                     <div id="occu_iap_btn" class="iap_toggle_btn button">Occupancy</div>
                     <div id="life_iap_btn" class="iap_toggle_btn button">Life Hazard</div>
@@ -459,7 +459,7 @@
                 <td class="iap_red_label iap_label_td">Rescue:</td>
                 <td>
                     <textarea id="iap_rescfire_input" class="fire iap_input">Primary Search</textarea>
-                    <textarea id="iap_rescarff_input" class="arff iap_input">Egress Protection, Primary Search</textarea>
+                    <textarea id="iap_rescarff_input" class="water arff iap_input">Egress Protection, Primary Search</textarea>
                 </td>
                 <td></td>
             </tr>
@@ -467,7 +467,7 @@
                 <td class="iap_blue_label iap_label_td">Fire Control:</td>
                 <td>
                     <textarea id="iap_fire_input" class="fire iap_input">Supply line, attack +2</textarea>
-                    <textarea id="iap_firearff_input" class="arff iap_input">Water/Foam Resources, ARRF Truck Attack +1 Interior, 1 Exterior, Vent</textarea>
+                    <textarea id="iap_firearff_input" class="water arff iap_input">Water/Foam Resources, ARRF Truck Attack +1 Interior, 1 Exterior, Vent</textarea>
                 </td>
                 <td>
                     <div id="iap_vent_toggle_btn" class="iap_toggle_btn button">Vent</div>
@@ -478,7 +478,7 @@
                 <td class="iap_blue_label iap_label_td">Property/People:</td>
                 <td>
                     <textarea id="iap_propfire_input" class="fire iap_input">Salvage</textarea>
-                    <textarea id="iap_proparff_input" class="arff iap_input">Tx Location?, Transportation?</textarea>
+                    <textarea id="iap_proparff_input" class="water arff iap_input">Tx Location?, Transportation?</textarea>
 
                     <div class="clear_both"></div>
                     <div id="iap_evacloc_input_container">
@@ -838,6 +838,17 @@
     </div>
     <div id="objectives_dialog_body_water" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
         <div id="objective_left_col">
+            <div id="water_secr_objective_btn" class="water objective_btn button">Secure Responsible Party or Witness</div>
+            <div id="water_dloc_objective_btn" class="water objective_btn button">Determine location of victims</div>
+            <div id="water_dnum_objective_btn" class="water objective_btn button">Determine number of victims</div>
+            <div id="water_cond_objective_btn" class="water objective_btn button">Determine condition of victims </div>
+            <div id="water_resc_objective_btn" class="water objective_btn button">Rescue Mode or Recovery Mode</div>
+        </div>
+        <div id="objective_right_col">
+        </div>
+    </div>
+    <div id="objectives_dialog_body_water" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
+        <div id="objective_left_col">
             <div id="water_allc_objective_btn" class="water objective_btn button">All Clear</div>
         </div>
         <div id="objective_right_col">
@@ -852,19 +863,20 @@
     </div>
     <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
         <div id="osr_left_col">
-            <div id="address_left_osr_btn"  class="fire osr_btn button">Address</div>
-            <div id="location_left_osr_btn" class="arff osr_btn button">Location</div>
-            <div id="occupancy_osr_btn"     class="fire osr_btn button">Occupancy</div>
-            <div id="aircraft_osr_btn"      class="arff osr_btn button">Type of Aircraft</div>
-            <div id="construction_osr_btn"  class="fire osr_btn button">Construction</div>
-            <div id="conditions_osr_btn"    class="fire arff osr_btn button">Conditions</div>
-            <div id="assumecmd_osr_btn"     class="fire arff osr_btn button">Assume Command</div>
-            <div id="location_osr_btn"      class="fire arff osr_btn button">Location(mobile/cab)</div>
+            <div id="address_left_osr_btn"  class="water fire osr_btn button">Address</div>
+            <div id="location_left_osr_btn" class="water arff osr_btn button">Location</div>
+            <div id="occupancy_osr_btn"     class="water fire osr_btn button">Occupancy</div>
+            <div id="aircraft_osr_btn"      class="water arff osr_btn button">Type of Aircraft</div>
+            <div id="construction_osr_btn"  class="water fire osr_btn button">Construction</div>
+            <div id="conditions_osr_btn"    class="water fire arff osr_btn button">Conditions</div>
+            <div id="assumecmd_osr_btn"     class="water fire arff osr_btn button">Assume Command</div>
+            <div id="location_osr_btn"      class="water fire arff osr_btn button">Location(mobile/cab)</div>
             <div id="mode_osr_btn"          class="fire arff osr_btn button">Strategy (off./def.)</div>
+            <div id="modewater_osr_btn"     class="water osr_btn button">Strategy (resc./recov.)</div>
             <div id="attack_osr_btn"        class="fire arff osr_btn button">Attack line</div>
             <div id="water_osr_btn"         class="fire arff osr_btn button">Water supply</div>
             <div id="iric_osr_btn"          class="fire arff osr_btn button">IRIC</div>
-            <div id="acct_osr_btn"          class="fire arff osr_btn button">Accountability Unit</div>
+            <div id="acct_osr_btn"          class="water fire arff osr_btn button">Accountability Unit</div>
             <select id="osr_direction"      class="osr_select">
                 <option disabled="disabled" selected="selected">Accountability Location</option>
                 <option>North Side Accountability</option>
@@ -991,9 +1003,14 @@
                 <div id="osr_occupancy_stat_btn" class="osr_toggle_btn button">Stationary</div>
             </div>
 
-            <div class="osr_toggle_container_div">
+            <div class="fire arff osr_toggle_container_div">
                 <div id="osr_occupancy_off_btn" class="osr_toggle_btn button">Offensive</div>
                 <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
+            </div>
+
+            <div class="water osr_toggle_container_div">
+                <div id="osr_water_mode_res_btn" class="osr_toggle_btn button">Rescue</div>
+                <div id="osr_water_mode_rec_btn" class="osr_toggle_btn button">Recovery</div>
             </div>
 
             <div id="osr_foam_btn" class="arff button">Applying Foam</div>
