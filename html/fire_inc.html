@@ -42,7 +42,7 @@
 <div id="top_header_container">
     <img id="inc_type_icon" src=""/>
     <div id="inc_num" class="button_top button">INCIDENT #</div>
-    <div id="mode_btn" class="button_top button">Strategy</div>
+    <div id="mode_btn" class="fire arff button_top button">Strategy</div>
     <div id="inc_address" class="button_top button">ADDRESS</div>
     <div class="clear_float"></div>
 </div>
@@ -866,13 +866,15 @@
             <div id="address_left_osr_btn"  class="water fire osr_btn button">Address</div>
             <div id="location_left_osr_btn" class="water arff osr_btn button">Location</div>
             <div id="occupancy_osr_btn"     class="water fire osr_btn button">Occupancy</div>
-            <div id="aircraft_osr_btn"      class="water arff osr_btn button">Type of Aircraft</div>
+            <div id="aircraft_osr_btn"      class="arff osr_btn button">Type of Aircraft</div>
+            <div id="bodyofwater_osr_btn"   class="water osr_btn button">Body of Water</div>
             <div id="construction_osr_btn"  class="water fire osr_btn button">Construction</div>
-            <div id="conditions_osr_btn"    class="water fire arff osr_btn button">Conditions</div>
+            <div id="conditions_osr_btn"    class="fire arff osr_btn button">Conditions</div>
+            <div id="watervel_osr_btn"      class="water osr_btn button">Water Velocity</div>
             <div id="assumecmd_osr_btn"     class="water fire arff osr_btn button">Assume Command</div>
             <div id="location_osr_btn"      class="water fire arff osr_btn button">Location(mobile/cab)</div>
             <div id="mode_osr_btn"          class="fire arff osr_btn button">Strategy (off./def.)</div>
-            <div id="modewater_osr_btn"     class="water osr_btn button">Strategy (resc./recov.)</div>
+            <div id="modewater_osr_btn"     class="water osr_btn button">Strategy (Rescue/Recovery)</div>
             <div id="attack_osr_btn"        class="fire arff osr_btn button">Attack line</div>
             <div id="water_osr_btn"         class="fire arff osr_btn button">Water supply</div>
             <div id="iric_osr_btn"          class="fire arff osr_btn button">IRIC</div>
@@ -949,6 +951,14 @@
                 <option>Personal Jet</option>
             </select>
 
+            <select id="osr_select_bodyofwater" class="water osr_select">
+                <option disabled="disabled" selected="selected">Body of Water</option>
+                <option>River</option>
+                <option>Lake</option>
+                <option>Wash</option>
+                <option>Canal</option>
+            </select>
+
             <select id="osr_number_of_subfloors" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Sub Floors</option>
                 <option>None</option>
@@ -996,6 +1006,13 @@
                 <option>Smoke & Fire showing</option>
                 <option>Fully Involved</option>
                 <option>Attic Fire</option>
+            </select>
+
+            <select id="osr_select_watervel" class="water osr_select">
+                <option disabled="disabled" selected="selected">Water Velocity</option>
+                <option>Slow moving</option>
+                <option>Moderately moving</option>
+                <option>Fast moving</option>
             </select>
 
             <div class="osr_toggle_container_div">

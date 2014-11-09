@@ -2130,11 +2130,23 @@ function initOsrDialog() {
         var selected_text = $(this).find("option:selected").text();
         addEvent_osr("Type of aircraft: " + selected_text);
     });
+    $("#osr_select_bodyofwater").change(function () {
+        $("#bodyofwater_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Body of water: " + selected_text);
+    });
     $("#osr_select_conditions_arff").change(function () {
         $("#conditions_osr_btn").addClass("glowlightgreen");
         updateOsrPercentComplete();
         var selected_text = $(this).find("option:selected").text();
         addEvent_osr("Condition of aircraft: " + selected_text);
+    });
+    $("#osr_select_watervel").change(function () {
+        $("#watervel_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Water velocity: " + selected_text);
     });
 
 
