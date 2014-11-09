@@ -9,12 +9,10 @@ var MARGIN = 20;
 var RIGHT_SIDE = 209;
 var BOTTOM_SIDE = 300;
 var eventIndex = 0;
-
+var SECTOR_INSERT = "___SECTOR___";
 
 function getEventsBySector(events_) {
-    var eventsBySectorArray = [];
     var eventsBySector = {};
-
     for (var i = 0; i < events_.length; i++) {
         var event = events_[i];
         if (typeof event.sector != 'undefined') {
@@ -27,8 +25,14 @@ function getEventsBySector(events_) {
         }
     }
 
+    var eventsBySectorArray = new Array();
+    var prevSector = "";
     for (var sectorEvents in eventsBySector) {
+        if(prevSector!=sectorEvents) {
+            eventsBySectorArray.push(SECTOR_INSERT);
+        }
         eventsBySectorArray = eventsBySectorArray.concat(eventsBySector[sectorEvents]);
+        prevSector = sectorEvents;
     }
     return eventsBySectorArray;
 }
@@ -39,8 +43,12 @@ function getReportStr(eventArray) {
     var renderedStr = '<div class="div_report_block">';
     for (var i = 0; i < eventArray.length; i++) {
         var event = eventArray[i];
-        var eventStr = window[event.get_str_func](event);
-        renderedStr += eventStr + "<br>\n";
+        if(event===SECTOR_INSERT) {
+            renderedStr += "<br>\n";
+        } else {
+            var eventStr = window[event.get_str_func](event);
+            renderedStr += eventStr + "<br>\n";
+        }
     }
     renderedStr += '</div>'
     return renderedStr;
@@ -278,7 +286,7 @@ function getDateStr(date_) {
 function loadEvents(newEvents) {
     if (REPORT_COOKIES_ENABLED) {
         events = new Array();
-        if(newEvents!=null) {
+        if (newEvents != null) {
             for (var i = 0; i < newEvents.length; i++) {
                 events.push(newEvents[i]);
             }
