@@ -1922,6 +1922,9 @@ function initOsrDialog() {
         }
     });
 
+    $(".osr_btn").hide();
+    $(".osr_btn").filter("." + inc_type).show();
+
     $(".osr_btn").each(function () {
         $(this).click(toggleOsrBtn($(this)));
     });
