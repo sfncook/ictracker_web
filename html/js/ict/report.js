@@ -253,7 +253,9 @@ function drawOnePageOfEvents(doc, eventArray, startY) {
     for (; eventIndex < eventArray.length && (y < BOTTOM_SIDE - MARGIN - 15); eventIndex++) {
         var event = eventArray[eventIndex];
 //        event.render_func(y, event, doc);
-        window[event.render_func](y, event, doc);
+        if(event!=SECTOR_INSERT) {
+            window[event.render_func](y, event, doc);
+        }
         y += 8;
     }
 }
