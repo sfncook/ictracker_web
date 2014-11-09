@@ -127,6 +127,7 @@ function togglePar(btn, btnSelector) {
         // Report
         if (tbar_has_par) {
             addEvent_sector_has_par(tbar_clicked.find(".title_text").text());
+            hideAllDialogs();
         } else if (unit_has_par) {
             addEvent_unit_has_par(unit_name, tbar_clicked.find(".title_text").text());
         } else if (person_has_par) {
