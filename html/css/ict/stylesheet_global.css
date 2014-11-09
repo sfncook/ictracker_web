@@ -1586,7 +1586,7 @@ ul {
 }
 #inc_info_btn {
     font-size: 0.9rem;
-    float:right;
+    float:left;
     margin-right:5px;
     padding-top: 5px;
 }
