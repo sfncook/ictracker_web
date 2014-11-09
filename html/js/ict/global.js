@@ -1040,6 +1040,9 @@ function initMaydayDialog() {
     mayday_clear_btn.click(function () {
         clearMayday($(".mayday_saved.mayday_saved_selected"))();
     });
+
+    // Init Mayday
+    addMaydayEventElement();
 }
 
 
