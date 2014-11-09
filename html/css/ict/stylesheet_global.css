@@ -622,6 +622,10 @@ td {
 #sector_dialog.arff {
     width: 712px;
 }
+#sector_dialog.water {
+    width: 712px;
+}
+
 
 #dir_btns_container {
     padding: 4px 0;

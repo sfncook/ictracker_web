@@ -138,8 +138,7 @@ var incidentStartBtns = [
         row: 3
     },
     {
-//        type: 'water',
-        type: 'arff',
+        type: 'water',
         icon: "images/icons/water.png",
         text: "Water Rescue",
         url: "fire_inc.html",
