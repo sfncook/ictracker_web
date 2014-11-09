@@ -1827,13 +1827,14 @@ function initObjectivesDialog() {
 /**
  * Incident Num Dialog
  **/
-function initIncNumDialog() {
-    $("#inc_num").click(function () {
-        $("#inc_num_custom_input").val($("#inc_num").html());
-        showDialog(0, $("#inc_num"), "#inc_num_dialog")();
+function initIncInfoDialog() {
+    $("#inc_info_btn").click(function () {
+        $("#inc_num_custom_input").val(inc_num);
+        $("#inc_address_custom_input").val(inc_address);
+        showDialog(0, 0, "#inc_info_dialog")();
     });
 
-    $("#inc_num_dlg_ok").click(function () {
+    $("#inc_info_dlg_ok").click(function () {
         inc_num = $("#inc_num_custom_input").val()
         if (inc_num) {
             $("#inc_num").html(inc_num);
@@ -1842,26 +1843,7 @@ function initIncNumDialog() {
             $("#inc_num").html("INCIDENT #");
             hideAllDialogs();
         }
-        // Cookies
-        saveCookieState();
-    });
-    $("#inc_num_dlg_cancel").click(hideAllDialogs);
-    $("#inc_num_dlg_clear").click(function () {
-        $("#inc_num_custom_input").val("");
-    });
-}
 
-
-/**
- * Incident Address Dialog
- **/
-function initIncAddressDialog() {
-    $("#inc_address").click(function () {
-        $("#inc_address_custom_input").val($("#inc_address").html());
-        showDialog(0, $("#inc_address"), "#inc_address_dialog")();
-    });
-
-    $("#inc_address_dlg_ok").click(function () {
         inc_address = $("#inc_address_custom_input").val()
         if (inc_address) {
             $("#inc_address").html(inc_address);
@@ -1870,10 +1852,17 @@ function initIncAddressDialog() {
             $("#inc_address").html("ADDRESS");
             hideAllDialogs();
         }
+
         // Cookies
         saveCookieState();
     });
-    $("#inc_address_dlg_cancel").click(hideAllDialogs);
+
+    $("#inc_info_dlg_cancel").click(hideAllDialogs);
+
+    $("#inc_num_dlg_clear").click(function () {
+        $("#inc_num_custom_input").val("");
+    });
+
     $("#inc_address_dlg_clear").click(function () {
         $("#inc_address_custom_input").val("");
     });
@@ -3359,8 +3348,7 @@ function init() {
     init10KeyDialog();
     initDispatchedUnits();
     initUpgradeDialog();
-    initIncAddressDialog();
-    initIncNumDialog();
+    initIncInfoDialog();
     initCmdXfer();
     initModeDialog();
 

@@ -41,9 +41,11 @@
 
 <div id="top_header_container">
     <img id="inc_type_icon" src=""/>
-    <div id="inc_num" class="button_top button">INCIDENT #</div>
     <div id="mode_btn" class="fire arff button_top button">Strategy</div>
-    <div id="inc_address" class="button_top button">ADDRESS</div>
+    <div id="inc_info_btn" class="button_top button">
+        <div id="inc_num">INCIDENT #</div>
+        <div id="inc_address">ADDRESS</div>
+    </div>
     <div class="clear_float"></div>
 </div>
 <div id="top_header_mayday_container">
@@ -351,37 +353,26 @@
     </div>
 </div>
 
-<!-- Incident Number Dialog -->
-<div id="inc_num_dialog" class="dialog dialog_window container-fluid">
+<!-- Incident Info Dialog -->
+<div id="inc_info_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Incident Number<span class="close_btn dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Incident Info<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12 container-fluid">
-        <input type="text" id="inc_num_custom_input">
 
+        <div>Incident Number:</div>
+        <input type="text" id="inc_num_custom_input">
         <div id="inc_num_dlg_clear" class="button">Clear</div>
         <div class="clear_float"></div>
-        <div>
-            <div id="inc_num_dlg_ok" class="confirm_btn button">OK</div>
-            <div id="inc_num_dlg_cancel" class="confirm_btn button">Cancel</div>
-            <div class="clear_float"></div>
-        </div>
-    </div>
-</div>
 
-<!-- Incident Address Dialog -->
-<div id="inc_address_dialog" class="dialog dialog_window container-fluid">
-    <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Incident Address<span class="close_btn dialog_close_btn button">Close</span></div>
-    </div>
-    <div class="dialog_body col-xs-12 container-fluid">
+        <div>Address or Cross Streets:</div>
         <input type="text" id="inc_address_custom_input">
-
         <div id="inc_address_dlg_clear" class="button">Clear</div>
         <div class="clear_float"></div>
+
         <div>
-            <div id="inc_address_dlg_ok" class="confirm_btn button">OK</div>
-            <div id="inc_address_dlg_cancel" class="confirm_btn button">Cancel</div>
+            <div id="inc_info_dlg_ok"       class="confirm_btn button">OK</div>
+            <div id="inc_info_dlg_cancel"   class="confirm_btn button">Cancel</div>
             <div class="clear_float"></div>
         </div>
     </div>

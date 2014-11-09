@@ -416,22 +416,6 @@ td {
     top: 157px;
 }
 
-#inc_info_box {
-    float: left;
-    margin-left: 10px;
-    background: white;
-}
-#inc_num {
-    font-size: 1.05rem;
-    float:left;
-    margin-left:5px;
-}
-#inc_address {
-    font-size: 1.05rem;
-    float:right;
-    margin-right:5px;
-}
-
 #mode_btn {
     float: right;
     margin-right: 10px;
@@ -1588,11 +1572,23 @@ ul {
     background: red !important;
 }
 
-#inc_num_dialog {
+
+#inc_info_dialog {
     width: 450px;
 }
-#inc_num_dialog>*>input {
+#inc_info_dialog>*>input {
     margin: 5px;
+}
+#inc_info_box {
+    float: left;
+    margin-left: 10px;
+    background: white;
+}
+#inc_info_btn {
+    font-size: 0.9rem;
+    float:right;
+    margin-right:5px;
+    padding-top: 5px;
 }
 #inc_num_custom_input {
     margin-top: 5px;
@@ -1600,13 +1596,6 @@ ul {
 }
 #inc_num_dlg_clear {
     float: right;
-    margin: 5px;
-}
-
-#inc_address_dialog {
-    width: 450px;
-}
-#inc_address_dialog>*>input {
     margin: 5px;
 }
 #inc_address_custom_input {
