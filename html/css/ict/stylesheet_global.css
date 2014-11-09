@@ -767,9 +767,9 @@ td {
 }
 
 #top_header_container {
-    position: fixed;
-    top: 0;
-    left: 0;
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
     width: 100%;
     z-index: 50;
     padding-right: 100px;
@@ -1684,7 +1684,6 @@ ul {
 }
 
 #mayday_and_tbar_container {
-    padding-top: 50px;
     margin-bottom: 10px;
     padding-right: 105px;
 }
