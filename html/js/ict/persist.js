@@ -266,9 +266,12 @@ function saveCookieState() {
         var mode_btn = $("#mode_btn");
         localStorage.setItem('mode', mode_btn.html());
 
-        // Street Name
-//        var streetname_btn = $("#streetname_btn");
-//        localStorage.setItem('streetname_btn', streetname_btn.html());
+        // Cust Actions
+        var cust_actions = new Array();
+        $(".action_cust_btn").each(function () {
+            cust_actions.push($(this).html());
+        });
+        localStorage.setItem('cust_actions', JSON.stringify(cust_actions));
 
         // Dispatched Units
         var dispatched_units = new Array();
@@ -472,12 +475,10 @@ function loadCookieState() {
                 setMode(mode)
             }
 
-//            // Street Name
-//            else if (key == 'inc_address_btn') {
-//                var streetname_btn = value;
-//                $("#inc_address_btn").html(streetname_btn);
-//            }
-
+//            // Custom Actions
+            else if (key == 'cust_actions') {
+                // Handle in postLoad()
+            }
 
             // Dispatched Units
             else if (key == 'dispatched_units') {
@@ -620,6 +621,30 @@ function loadCookieState() {
             }
         } // for
         loadEvents(newEvents);
+        COOKIES_ENABLED = true;
+    }
+}
+
+function postLoadCookieState() {
+    if (COOKIES_ENABLED) {
+        COOKIES_ENABLED = false; // temporarily disable so we don't try to save cookies again.
+        for (var keyIndex = 0, len = localStorage.length; keyIndex < len; keyIndex++) {
+            var key = localStorage.key(keyIndex);
+            var value = localStorage[key];
+            // Custom Actions
+            if (key == 'cust_actions') {
+                var cust_actions_str = value;
+                var cust_actions = JSON.parse(cust_actions_str);
+                for (var i = 0; i < cust_actions.length; i++) {
+                    var cust_action = cust_actions[i];
+                    addCustAction(cust_action);
+                }
+            }
+
+            else {
+                // Do Nothing
+            }
+        } // for
         COOKIES_ENABLED = true;
     }
 }

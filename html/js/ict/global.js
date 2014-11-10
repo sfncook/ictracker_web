@@ -1418,6 +1418,13 @@ function addActionButtonToTbar(tbar, actionName) {
     var unit_name = tbar.find(".left_scroll_pane").find(".unit_row_div.glowlightyellow").find(".unit_text").text();
     addEvent_action_to_unit(actionName, unit_name, sector_title)
 }
+function addCustAction(actionName) {
+    var newBtn = $('<div class="action_all_dialog_btn action_cust_btn action_btn dialog_btn button">' + actionName + '</div>');
+    $("#cust_actions").append(newBtn);
+    newBtn.click(function () {
+        onClickCallback(actionName);
+    });
+}
 function initActionsDialog() {
     var actionsDialog = $("#dialog_prototype").clone().appendTo("#dialog_vertical_align_cell");
     var newId = "actions_dialog";
@@ -1468,16 +1475,11 @@ function initActionsDialog() {
     // Custom Actions
     var addCustActions = $('<div id="cust_actions"><input id="cust_action_input"/><div id="add_cust_action_btn" class="button">+ADD</div><div class="clear_float"></div></div>');
     actionsDialogBody.append(addCustActions);
-    var prototypeActionCustBtn = $('<div class="action_all_dialog_btn action_cust_btn action_btn dialog_btn button">PROTOTYPE</div>');
     $("#add_cust_action_btn").click(function () {
         var actionName = $("#cust_action_input").val();
         if (actionName != "") {
-            var newBtn = prototypeActionCustBtn.clone();
-            newBtn.html(actionName);
-            addCustActions.append(newBtn);
-            newBtn.click(function () {
-                onClickCallback(actionName);
-            });
+            addCustAction(actionName);
+            saveCookieState();
         }
     });
 }
@@ -3431,6 +3433,9 @@ function init() {
             }
         }
     });
+
+    // Load cookie items that need to go after everything else has loaded
+    postLoadCookieState();
 }
 
 //Call this to dismiss the dialogs
