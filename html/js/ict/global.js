@@ -1388,7 +1388,7 @@ function addActionButtonToTbar(tbar, actionName) {
 
     var is_font_red = action_dialog_btn.hasClass("font_red");
     // Add action button to TBar
-    var actionBtn = $("<div class='disabled action_btn button'>" + actionName + "</div>");
+    var actionBtn = $("<div class='action_btn button'>" + actionName + "</div>");
 
     if (is_font_red) {
         actionBtn.addClass("font_red");
@@ -1433,6 +1433,7 @@ function initActionsDialog() {
     actionsTitleDiv.append("Actions");
     var prototypeHeader = $("<div class=\"action_type_dialog_header col-xs-12\">PROTOTYPE</div>");
     var prototypeBtn = $("<div class=\"action_dialog_btn col-xs-2 action_btn dialog_btn button\">PROTOTYPE</div>");
+
     actions.forEach(function (actionObj, index, array) {
         var actionTypeHeader = prototypeHeader.clone();
         actionTypeHeader.html(actionObj.action_type);
@@ -1468,6 +1469,19 @@ function initActionsDialog() {
                 onClickCallback(actionName)
             });
         });
+    });
+
+    // Custom Actions
+    var addCustActions = $('<div id="cust_actions"><input id="cust_action_input"/><div id="add_cust_action_btn" class="button">+ADD</div><div class="clear_float"></div></div>');
+    actionsDialogBody.append(addCustActions);
+    var prototypeActionCustBtn = $('<div class="action_cust_btn action_btn dialog_btn button">PROTOTYPE</div>');
+    $("#add_cust_action_btn").click(function () {
+        var actionText = $("#cust_action_input").val();
+        if (actionText != "") {
+            var newBtn = prototypeActionCustBtn.clone();
+            newBtn.html(actionText);
+            addCustActions.append(newBtn);
+        }
     });
 }
 
@@ -2363,7 +2377,7 @@ function showActionsForUnitBtn(unitBtn) {
 
             if (typeof unitBtn.data('actions') != 'undefined') {
                 jQuery.each(unitBtn.data('actions'), function (index, actionName) {
-                    var actionBtn = $("<div class='disabled action_btn button'>" + actionName + "</div>");
+                    var actionBtn = $("<div class='action_btn button'>" + actionName + "</div>");
                     if (actionName.length > 15) {
                         actionBtn.addClass("btn_largetext");
                     }

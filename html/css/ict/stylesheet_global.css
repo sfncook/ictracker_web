@@ -216,10 +216,11 @@ td {
     background: #ddd !important;
     opacity: 100 !important;
 }
-.action_btn :hover {
-    color: black !important;
-    background: #ddd !important;
-    opacity: 100 !important;
+.action_btn:hover {
+    background: white !important;
+}
+.action_btn:active {
+    background: darkgray !important;
 }
 
 .hidden_div {
@@ -752,11 +753,9 @@ td {
 #actions_dialog {
     width: 708px;
 }
-
 .action_dialog_btn {
     margin: 5px !important;
 }
-
 .action_type_dialog_header {
     text-align: center;
     font-size: 1.1rem;
@@ -765,17 +764,48 @@ td {
     margin-top: 8px;
     border-top: 1px solid #DDD;
 }
+#cust_actions {
+    position: absolute;
+    top: 30px;
+    left: -164px;
+    width: 164px;
+    background: #EEE;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding-bottom: 10px;
+}
+#cust_actions>* {
+    margin:5px;
+    width: 153px;
+}
+#add_cust_action_btn {
+    height: 25px;
+    background: lightblue;
+    border: 1px white solid;
+    color: white;
+    padding-top:2px;
+    margin: 0 5px 10px 30px;
+    border-radius: 15px;
+    width: 100px;
+}
+#add_cust_action_btn:hover {
+    background: white;
+}
+#add_cust_action_btn:active {
+    background: darkblue;
+}
+#cust_action_input {
+}
 
 #top_header_container {
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*left: 0;*/
     width: 100%;
     z-index: 50;
     padding-right: 100px;
     padding-bottom: 5px;
     pointer-events: none;
-    /*background: #DDD;*/
 }
 #top_header_container>* {
     pointer-events: auto;
