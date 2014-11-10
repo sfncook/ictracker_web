@@ -2053,6 +2053,8 @@ function initOsrDialog() {
     });
 
 
+    $(".osr_select").hide();
+    $(".osr_select").filter("." + inc_type).show();
     $(".osr_select").change(
         function () {
             $(this).addClass("glowlightgreen");
@@ -3541,7 +3543,6 @@ var sectorsWithClock = [
     "Sector 8",
     "Sector 9",
     "RESCUE",
-    "Extrication",
     "Safety",
     "IRIC",
     "RIC",
