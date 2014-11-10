@@ -1002,7 +1002,8 @@ function initMaydayDialog() {
     mayday_unit_select.change(function () {
         mayday_unit_select.addClass("glowred");
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
-        mayday_saved_selected.find(".mayday_unit_value").html($(this).val());
+        var unit_text = $(this).val();
+        $(".mayday_unit_edit_btn:contains(" + unit_text + ")").click();
     });
 
     // Select sector
@@ -1011,7 +1012,6 @@ function initMaydayDialog() {
         mayday_sectors_select.addClass("glowred");
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
         var sector_title = $(this).val();
-//        mayday_saved_selected.find(".mayday_sector_value").html(sector_title);
         $(".mayday_sector_edit_btn:contains(" + sector_title + ")").click();
     });
 
