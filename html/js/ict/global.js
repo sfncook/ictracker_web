@@ -1338,19 +1338,20 @@ function updateSelectedUnitActionsData(tbar) {
 function onOpenActionsDialogFromTbar(tbar) {
     return function () {
         $(".action_dialog_btn").removeClass("glowlightgreen");
+        $(".action_cust_btn").removeClass("glowlightgreen");
         $.each(tbar.find(".action_btn"), function (index, tbarActionBtn) {
             var html = $(tbarActionBtn).html();
             $(".action_dialog_btn").filter(function () {
                 return $(this).text() == html;
             }).addClass("glowlightgreen");
+            $(".action_cust_btn:contains(" + html + ")").addClass("glowlightgreen");
+
         });
     }
 }
 function toggleActionButtonForTbar(tbar) {
     return function (actionName) {
-        if ($(".action_dialog_btn").filter(function () {
-            return $(this).text() == actionName;
-        }).hasClass("glowlightgreen")) {
+        if ($(".action_all_dialog_btn:contains(" + actionName + ")").hasClass("glowlightgreen")) {
             removeActionButtonFromTbar(tbar, actionName);
         } else {
             addActionButtonToTbar(tbar, actionName);
@@ -1362,15 +1363,10 @@ function toggleActionButtonForTbar(tbar) {
 }
 function removeActionButtonFromTbar(tbar, actionName) {
     // Update Actions Dialog
-    $(".action_dialog_btn").filter(function () {
-        return $(this).text() == actionName;
-    }).removeClass("glowlightgreen");
+    $(".action_all_dialog_btn:contains(" + actionName + ")").removeClass("glowlightgreen");
 
     // Remove action from TBar
-    var action_btn = tbar.find(".action_btn").filter(function () {
-        return $(this).text() == actionName;
-    });
-//    jQuery(action_btn).detach();
+    var action_btn = tbar.find(".action_btn:contains(" + actionName + ")");
     var scroll_pane = tbar.find(".right_scroll_pane");
     var pane2api = scroll_pane.data('jsp');
     action_btn.remove();
@@ -1381,9 +1377,7 @@ function removeActionButtonFromTbar(tbar, actionName) {
 }
 function addActionButtonToTbar(tbar, actionName) {
     // Update Actions Dialog
-    var action_dialog_btn = $(".action_dialog_btn").filter(function () {
-        return $(this).text() == actionName;
-    });
+    var action_dialog_btn = $(".action_all_dialog_btn:contains(" + actionName + ")");
     action_dialog_btn.addClass("glowlightgreen");
 
     var is_font_red = action_dialog_btn.hasClass("font_red");
@@ -1432,7 +1426,7 @@ function initActionsDialog() {
     var actionsTitleDiv = actionsDialog.find(".dialog_title_text");
     actionsTitleDiv.append("Actions");
     var prototypeHeader = $("<div class=\"action_type_dialog_header col-xs-12\">PROTOTYPE</div>");
-    var prototypeBtn = $("<div class=\"action_dialog_btn col-xs-2 action_btn dialog_btn button\">PROTOTYPE</div>");
+    var prototypeBtn = $("<div class=\"action_all_dialog_btn action_dialog_btn col-xs-2 action_btn dialog_btn button\">PROTOTYPE</div>");
 
     actions.forEach(function (actionObj, index, array) {
         var actionTypeHeader = prototypeHeader.clone();
@@ -1466,7 +1460,7 @@ function initActionsDialog() {
 
             actionsDialogBody.append(newBtn);
             newBtn.click(function () {
-                onClickCallback(actionName)
+                onClickCallback(actionName);
             });
         });
     });
@@ -1474,13 +1468,16 @@ function initActionsDialog() {
     // Custom Actions
     var addCustActions = $('<div id="cust_actions"><input id="cust_action_input"/><div id="add_cust_action_btn" class="button">+ADD</div><div class="clear_float"></div></div>');
     actionsDialogBody.append(addCustActions);
-    var prototypeActionCustBtn = $('<div class="action_cust_btn action_btn dialog_btn button">PROTOTYPE</div>');
+    var prototypeActionCustBtn = $('<div class="action_all_dialog_btn action_cust_btn action_btn dialog_btn button">PROTOTYPE</div>');
     $("#add_cust_action_btn").click(function () {
-        var actionText = $("#cust_action_input").val();
-        if (actionText != "") {
+        var actionName = $("#cust_action_input").val();
+        if (actionName != "") {
             var newBtn = prototypeActionCustBtn.clone();
-            newBtn.html(actionText);
+            newBtn.html(actionName);
             addCustActions.append(newBtn);
+            newBtn.click(function () {
+                onClickCallback(actionName);
+            });
         }
     });
 }
