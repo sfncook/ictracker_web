@@ -1182,6 +1182,13 @@ function setTbarTitle(tbar, title) {
     saveCookieState();
 
 }
+function addCustSector(sectorName) {
+    var newBtn = $('<div class="title_dialog_btn title_btn button col-xs-3">' + sectorName + '</div>');
+    $("#cust_sectors").append(newBtn);
+    newBtn.click(function () {
+        setTbarTitle(tbar_clicked, sectorName);
+    });
+}
 function initSectorDialog() {
     var sectorDialog = $("#dialog_prototype").clone().appendTo("#dialog_vertical_align_cell");
     var newId = "sector_dialog";
@@ -1280,6 +1287,18 @@ function initSectorDialog() {
         });
     });
 
+
+    // Custom Sectors
+    var addCustSectors = $('<div id="cust_sectors" class="cust_div"><input id="cust_sector_input"/><div id="add_cust_sector_btn" class="add_cust_btn button">+ADD</div><div class="clear_float"></div></div>');
+    dialog_body.append(addCustSectors);
+    $("#add_cust_sector_btn").click(function () {
+        var sectorName = $("#cust_sector_input").val();
+        if (sectorName != "") {
+            addCustSector(sectorName);
+            addCustAction(sectorName);
+            saveCookieState();
+        }
+    });
 }
 
 
@@ -1482,7 +1501,7 @@ function initActionsDialog() {
     });
 
     // Custom Actions
-    var addCustActions = $('<div id="cust_actions"><input id="cust_action_input"/><div id="add_cust_action_btn" class="button">+ADD</div><div class="clear_float"></div></div>');
+    var addCustActions = $('<div id="cust_actions" class="cust_div"><input id="cust_action_input"/><div id="add_cust_action_btn" class="add_cust_btn button">+ADD</div><div class="clear_float"></div></div>');
     actionsDialogBody.append(addCustActions);
     $("#add_cust_action_btn").click(function () {
         var actionName = $("#cust_action_input").val();

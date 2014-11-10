@@ -781,7 +781,7 @@ td {
     margin:5px;
     width: 153px;
 }
-#add_cust_action_btn {
+.add_cust_btn {
     height: 25px;
     background: lightblue;
     border: 1px white solid;
@@ -791,13 +791,28 @@ td {
     border-radius: 15px;
     width: 100px;
 }
-#add_cust_action_btn:hover {
+.add_cust_btn:hover {
     background: white;
 }
-#add_cust_action_btn:active {
+.add_cust_btn:active {
     background: darkblue;
 }
-#cust_action_input {
+#cust_sectors {
+    position: absolute;
+    top: 30px;
+    left: -180px;
+    width: 180px;
+    background: #EEE;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 5px;
+}
+#cust_sectors>* {
+    margin:5px;
+    width: 153px;
 }
 
 #top_header_container {
