@@ -16,17 +16,6 @@ function blinkUnit() {
         }
     });
 
-    $(".unit_btn.has_mayday").each(function () {
-        var btn = $(this);
-        if (btn.hasClass("glowred")) {
-            btn.removeClass("glowred");
-            btn.addClass("glowpink");
-        } else {
-            btn.addClass("glowred");
-            btn.removeClass("glowpink");
-        }
-    });
-
     window.setTimeout(blinkUnit, 500);
 }
 
@@ -207,7 +196,7 @@ function showParDialog(tbar, btn, parentDialog_) {
                     }
                 });
 //                $(".mayday_par_btn").click(showMaydayDialog);
-                $(".mayday_par_btn").click(showDialog_withCallbacks("#mayday_dialog", parDialog, 0, 0, onCloseMaydayDialog));
+                $(".mayday_par_btn").click(showDialog_withCallbacks("#mayday_dialog", parDialog, 0, 0, 0));
             }
 
             parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
@@ -415,72 +404,10 @@ function initUnitPeopleDialog() {
 }
 
 
-function onCloseMaydayDialog() {
-    $(".mayday_info_div").not("#mayday_info_div_prototype").each(function (i) {
-        var maydayEl = $(this);
-        var mayday_select = maydayEl.find(".mayday_sector_select");
-        var mayday_sector_title = maydayEl.find(".mayday_sector_title");
-        var mayday_sector_title_text = mayday_select.find("option:selected").text();
-        var unit_btns = $(".tbar").find(".title_text:contains(" + mayday_sector_title_text + ")").parents(".tbar").find(".unit_btn");
-        var found_unit_btn_mayday = false;
-        unit_btns.each(function (i) {
-            var unit_btn = $(this);
-            var unit_text = unit_btn.find(".unit_text").text();
-            var maydayUnitBtn = maydayEl.find(".unit_text:contains(" + unit_text + ")").parents(".unit_btn");
-            if (maydayUnitBtn.hasClass("has_mayday")) {
-                maydayUnitBtn.addClass("disabled");
-                found_unit_btn_mayday = true;
-            } else {
-                maydayUnitBtn.remove();
-            }
-        });
 
-        if (found_unit_btn_mayday) {
-            mayday_select.hide();
-            mayday_sector_title.show();
-            mayday_sector_title.html("Sector: " + mayday_sector_title_text);
-        } else {
-            maydayEl.remove();
-        }
-    });
-}
-function resetMayday(maydayEl) {
-    var prev_unit_btn = maydayEl.data('unit_btn');
-    if (typeof prev_unit_btn != 'undefined') {
-        prev_unit_btn.removeClass("has_mayday");
-        prev_unit_btn.removeClass("glowred");
-        prev_unit_btn.removeClass("glowpink");
-    }
-    var prev_mayday_unit_btn = maydayEl.data('mayday_unit_btn');
-    if (typeof prev_mayday_unit_btn != 'undefined') {
-        prev_mayday_unit_btn.removeClass("has_mayday");
-        prev_mayday_unit_btn.removeClass("glowred");
-        prev_mayday_unit_btn.removeClass("glowpink");
-    }
-}
 /**
  * Mayday Dialog
  **/
-function removeMaydayEvent(maydayEvent) {
-    allMaydayEvents.remByVal(maydayEvent);
-    maydayEvent.maydayUnitBtn.removeClass("has_mayday");
-    maydayEvent.maydayUnitBtn.removeClass("glowred");
-    maydayEvent.maydayUnitBtn.removeClass("glowpink");
-
-    var unitHasOtherMayday = false;
-    for (i = 0; i < allMaydayEvents.length; i++) {
-        var maydayEventObj = allMaydayEvents[i];
-        if (maydayEventObj.unitBtn.find(".unit_text").html() === maydayEvent.unitBtn.find(".unit_text").html()) {
-            unitHasOtherMayday = true;
-        }
-    }
-
-    if (!unitHasOtherMayday) {
-        maydayEvent.unitBtn.removeClass("has_mayday");
-        maydayEvent.unitBtn.removeClass("glowred");
-        maydayEvent.unitBtn.removeClass("glowpink");
-    }
-}
 function clearMayday(maydayEl) {
     return function () {
         var prevEl = maydayEl.prev();
@@ -664,9 +591,6 @@ function addMaydayEventElement() {
     maydayEl.attr("id", "mayday_info_div_" + manyMaydays);
     maydayEl.find(".mayday_box_title").html("Mayday #" + manyMaydays);
 
-//    var mayday_clear_btn = maydayEl.find(".mayday_clear_btn");
-//    mayday_clear_btn.click(clearMayday(maydayEl));
-
     // Mayday Timer
     var mayday_t0 = (new Date()).getTime();
     maydayTimers.push({'mayday_t0': mayday_t0, 'mayday_el': maydayEl});
@@ -703,16 +627,25 @@ function selectMaydayTab(tab, color) {
     $("#mayday_right_td").removeClass("blue_bg");
     $("#mayday_right_td").addClass(color);
 }
+function findTbarUnitBtnForMayday(maydayEl) {
+    var tbarUnitBtn = 0;
+    var unit_text = maydayEl.find(".mayday_unit_value").html();
+    var sector_title = maydayEl.find(".mayday_sector_value").html();
+    if (unit_text != '' && sector_title != '') {
+        var tbar = $(".title_text:contains(" + sector_title + ")").parents(".tbar");
+        tbarUnitBtn = tbar.find(".unit_text:contains(" + unit_text + ")").parent();
+    }
+    return tbarUnitBtn;
+}
 function updateUnitMaydays() {
     $(".tbar_unit_btn").removeClass("has_mayday");
     $(".tbar_unit_btn").removeClass("glowred");
     $(".tbar_unit_btn").removeClass("glowpink");
     $(".mayday_saved").each(function () {
-        var unit_text = $(this).find(".mayday_unit_value").html();
-        var sector_title = $(this).find(".mayday_sector_value").html();
-        if (unit_text != '' && sector_title != '') {
-            var tbar = $(".title_text:contains(" + sector_title + ")").parents(".tbar");
-            tbar.find(".unit_text:contains(" + unit_text + ")").parent().addClass("has_mayday");
+        var maydayEl = $(this);
+        var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
+        if(tbarUnitBtn!=0) {
+            tbarUnitBtn.addClass("has_mayday");
         }
     });
 }
