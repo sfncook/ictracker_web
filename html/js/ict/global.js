@@ -404,31 +404,30 @@ function initUnitPeopleDialog() {
 }
 
 
-
 /**
  * Mayday Dialog
  **/
 function resetMaydayEditBox() {
-    var mayday_info_edit_div =  $("#mayday_info_edit_div");
-    var mayday_mayday_title =   $("#mayday_mayday_title");
-    var mayday_name_input =     $("#mayday_name_input");
-    var mayday_edit_psi_btn =   $("#mayday_edit_psi_btn");
-    var mayday_units_all =      $("#mayday_units_all");
-    var mayday_unit_select =    $("#mayday_unit_select");
-    var mayday_sectors_all =    $("#mayday_sectors_all");
+    var mayday_info_edit_div = $("#mayday_info_edit_div");
+    var mayday_mayday_title = $("#mayday_mayday_title");
+    var mayday_name_input = $("#mayday_name_input");
+    var mayday_edit_psi_btn = $("#mayday_edit_psi_btn");
+    var mayday_units_all = $("#mayday_units_all");
+    var mayday_unit_select = $("#mayday_unit_select");
+    var mayday_sectors_all = $("#mayday_sectors_all");
     var mayday_sectors_select = $("#mayday_sectors_select");
     var mayday_channel_select = $("#mayday_channel_select");
-    var mayday_rank_select =    $("#mayday_rank_select");
-    var hoseline_mayday_btn =   $("#hoseline_mayday_btn");
+    var mayday_rank_select = $("#mayday_rank_select");
+    var hoseline_mayday_btn = $("#hoseline_mayday_btn");
     var offhoseline_mayday_btn = $("#offhoseline_mayday_btn");
-    var uninjured_mayday_btn =  $("#uninjured_mayday_btn");
-    var injured_mayday_btn =    $("#injured_mayday_btn");
-    var lost_mayday_btn =       $("#lost_mayday_btn");
-    var trap_mayday_btn =       $("#trap_mayday_btn");
-    var oair_mayday_btn =       $("#oair_mayday_btn");
-    var regi_mayday_btn =       $("#regi_mayday_btn");
-    var lair_mayday_btn =       $("#lair_mayday_btn");
-    var pack_mayday_btn =       $("#pack_mayday_btn");
+    var uninjured_mayday_btn = $("#uninjured_mayday_btn");
+    var injured_mayday_btn = $("#injured_mayday_btn");
+    var lost_mayday_btn = $("#lost_mayday_btn");
+    var trap_mayday_btn = $("#trap_mayday_btn");
+    var oair_mayday_btn = $("#oair_mayday_btn");
+    var regi_mayday_btn = $("#regi_mayday_btn");
+    var lair_mayday_btn = $("#lair_mayday_btn");
+    var pack_mayday_btn = $("#pack_mayday_btn");
 
     mayday_mayday_title.html("Mayday #");
     mayday_name_input.val("");
@@ -467,13 +466,13 @@ function clearMayday(maydayEl) {
             resetMaydayEditBox();
         }
         var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
-        if(tbarUnitBtn!=0){
+        if (tbarUnitBtn != 0) {
             tbarUnitBtn.removeClass("has_mayday");
         }
 
         maydayEl.remove();
 
-        if($(".mayday_saved").not("#mayday_prototype").length==0) {
+        if ($(".mayday_saved").not("#mayday_prototype").length == 0) {
             addMaydayEventElement();
         }
         showDialog(0, 0, "#mayday_clear_dialog")();
@@ -702,7 +701,7 @@ function updateUnitMaydays() {
     $(".mayday_saved").each(function () {
         var maydayEl = $(this);
         var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
-        if(tbarUnitBtn!=0) {
+        if (tbarUnitBtn != 0) {
             tbarUnitBtn.addClass("has_mayday");
         }
     });
@@ -1606,6 +1605,10 @@ function initBenchmarkDialog() {
         updateTbarBenchmarkIcon(tbar_clicked);
         saveCookieState();
     });
+
+    $("#benchmark_vent_3").click(function () {
+        $("#benchmark_vent_4").toggleClass("disabled", !$(this).hasClass("glowlightgreen"));
+    });
 }
 function toggleBenchmarkBtn(bnchBtn, toggleClass) {
     bnchBtn.toggleClass(toggleClass);
@@ -1722,6 +1725,9 @@ function updateTbarBenchmarkIcon(tbar) {
         }
         if (tbar.data("benchmark_vent_3")) {
             tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_vent_4")) {
+            tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
         }
     }
 }
@@ -2521,6 +2527,7 @@ function updateTbar(tbar) {
         tbar.find(".benchmark_bar_img_1").show();
         tbar.find(".benchmark_bar_img_2").show();
         tbar.find(".benchmark_bar_img_3").show();
+        tbar.find(".benchmark_bar_img_4").show();
     }
     updateTbarBenchmarkIcon(tbar);
 
