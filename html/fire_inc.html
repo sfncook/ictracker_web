@@ -573,12 +573,12 @@
                     </div>
                     <div id="mayday_info_edit_div" class="yellow_bg mayday_info_div">
                         <div id="mayday_clear_btn" class="glowbabyblue mayday_clear_btn button">Clear</div>
-                        <div class="mayday_box_title_edit mayday_box_title">Mayday #</div>
-                        <div class="mayday_timer">00:00</div>
+                        <div id="mayday_mayday_title" class="mayday_box_title_edit mayday_box_title">Mayday #</div>
+                        <div id="mayday_timer" class="mayday_timer">00:00</div>
                         <div class="clear_float"></div>
                         <div>
                             <span class="mayday_name_label">Name:</span>
-                            <input class="mayday_name_input" type="text"/>
+                            <input id="mayday_name_input" class="mayday_name_input" type="text"/>
 
                             <div id="mayday_edit_psi_btn" class="mayday_psi_btn psi_btn button">PSI</div>
                             <div class="clear_float"></div>
@@ -586,7 +586,7 @@
 
                         <div id="mayday_units_all" class="mayday_row_div mayday_units_div"></div>
                         <select id="mayday_unit_select" class="mayday_select_half mayday_select">
-                            <option disabled='disabled' selected='selected' class='default_option'>Unit</option>
+                            <option id="mayday_unit_option_default" disabled='disabled' selected='selected' class='default_option'>Unit</option>
                         </select>
                         <div id="clear_float_between_units_and_sectors" class="clear_float"></div>
 
@@ -597,7 +597,7 @@
                         <div class="clear_float"></div>
 
                         <select id="mayday_channel_select" class="mayday_select_half mayday_channel_select mayday_select">
-                            <option disabled='disabled' selected='selected' class='default_option'>Channel</option>
+                            <option id="mayday_channel_opt_default" disabled='disabled' selected='selected' class='default_option'>Channel</option>
                             <option class='mayday_channel_1'>Channel 1</option>
                             <option class='mayday_channel_2'>Channel 2</option>
                             <option class='mayday_channel_3'>Channel 3</option>

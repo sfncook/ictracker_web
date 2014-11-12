@@ -408,6 +408,53 @@ function initUnitPeopleDialog() {
 /**
  * Mayday Dialog
  **/
+function resetMaydayEditBox() {
+    var mayday_info_edit_div =  $("#mayday_info_edit_div");
+    var mayday_mayday_title =   $("#mayday_mayday_title");
+    var mayday_name_input =     $("#mayday_name_input");
+    var mayday_edit_psi_btn =   $("#mayday_edit_psi_btn");
+    var mayday_units_all =      $("#mayday_units_all");
+    var mayday_unit_select =    $("#mayday_unit_select");
+    var mayday_sectors_all =    $("#mayday_sectors_all");
+    var mayday_sectors_select = $("#mayday_sectors_select");
+    var mayday_channel_select = $("#mayday_channel_select");
+    var mayday_rank_select =    $("#mayday_rank_select");
+    var hoseline_mayday_btn =   $("#hoseline_mayday_btn");
+    var offhoseline_mayday_btn = $("#offhoseline_mayday_btn");
+    var uninjured_mayday_btn =  $("#uninjured_mayday_btn");
+    var injured_mayday_btn =    $("#injured_mayday_btn");
+    var lost_mayday_btn =       $("#lost_mayday_btn");
+    var trap_mayday_btn =       $("#trap_mayday_btn");
+    var oair_mayday_btn =       $("#oair_mayday_btn");
+    var regi_mayday_btn =       $("#regi_mayday_btn");
+    var lair_mayday_btn =       $("#lair_mayday_btn");
+    var pack_mayday_btn =       $("#pack_mayday_btn");
+
+    mayday_mayday_title.html("Mayday #");
+    mayday_name_input.val("");
+    mayday_edit_psi_btn.removeClass("psi_red");
+    mayday_edit_psi_btn.removeClass("psi_yellow");
+    mayday_edit_psi_btn.removeClass("psi_green");
+    mayday_edit_psi_btn.html("PSI");
+    mayday_units_all.empty();
+    mayday_unit_select.children().not("#mayday_unit_option_default").remove();
+    mayday_unit_select.removeClass("glowred");
+    mayday_sectors_all.empty();
+    mayday_sectors_select.children().not("#mayday_sector_opt_default").remove();
+    mayday_sectors_select.removeClass("glowred");
+    mayday_channel_select.val("Channel");
+    mayday_rank_select.val("Rank");
+    hoseline_mayday_btn.removeClass("glowlightgreen");
+    offhoseline_mayday_btn.removeClass("glowred");
+    uninjured_mayday_btn.removeClass("glowlightgreen");
+    injured_mayday_btn.removeClass("glowred");
+    lost_mayday_btn.removeClass("glowred");
+    trap_mayday_btn.removeClass("glowred");
+    oair_mayday_btn.removeClass("glowred");
+    regi_mayday_btn.removeClass("glowred");
+    lair_mayday_btn.removeClass("glowred");
+    pack_mayday_btn.removeClass("glowred");
+}
 function clearMayday(maydayEl) {
     return function () {
         var prevEl = maydayEl.prev();
@@ -416,8 +463,19 @@ function clearMayday(maydayEl) {
             selectMaydayEl(prevEl);
         } else if (nextEl.hasClass("mayday_saved")) {
             selectMaydayEl(nextEl);
+        } else {
+            resetMaydayEditBox();
         }
+        var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
+        if(tbarUnitBtn!=0){
+            tbarUnitBtn.removeClass("has_mayday");
+        }
+
         maydayEl.remove();
+
+        if($(".mayday_saved").not("#mayday_prototype").length==0) {
+            addMaydayEventElement();
+        }
         showDialog(0, 0, "#mayday_clear_dialog")();
     }
 }
