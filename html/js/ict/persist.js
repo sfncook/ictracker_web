@@ -273,6 +273,13 @@ function saveCookieState() {
         });
         localStorage.setItem('cust_actions', JSON.stringify(cust_actions));
 
+        // Cust Sectors
+        var cust_sectors = new Array();
+        $(".sector_cust_btn").each(function () {
+            cust_sectors.push($(this).html());
+        });
+        localStorage.setItem('cust_sectors', JSON.stringify(cust_sectors));
+
         // Dispatched Units
         var dispatched_units = new Array();
         $(".dispatched_unit_btn").each(function (index, dispatched_unit_btn) {
@@ -648,11 +655,11 @@ function postLoadCookieState() {
 
             // Custom Sectors
             if (key == 'cust_sectors') {
-                var cust_secots_str = value;
-                var cust_actions = JSON.parse(cust_actions_str);
-                for (var i = 0; i < cust_actions.length; i++) {
-                    var cust_action = cust_actions[i];
-                    addCustAction(cust_action);
+                var cust_sectors_str = value;
+                var cust_sectors = JSON.parse(cust_sectors_str);
+                for (var i = 0; i < cust_sectors.length; i++) {
+                    var cust_sector = cust_sectors[i];
+                    addCustSector(cust_sector);
                 }
             }
 

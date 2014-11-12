@@ -1183,7 +1183,7 @@ function setTbarTitle(tbar, title) {
 
 }
 function addCustSector(sectorName) {
-    var newBtn = $('<div class="title_dialog_btn title_btn button col-xs-3">' + sectorName + '</div>');
+    var newBtn = $('<div class="sector_cust_btn title_dialog_btn title_btn button col-xs-3">' + sectorName + '</div>');
     $("#cust_sectors").append(newBtn);
     newBtn.click(function () {
         setTbarTitle(tbar_clicked, sectorName);
