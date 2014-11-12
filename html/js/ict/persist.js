@@ -480,6 +480,11 @@ function loadCookieState() {
                 // Handle in postLoad()
             }
 
+//            // Custom Sectors
+            else if (key == 'cust_sectors') {
+                // Handle in postLoad()
+            }
+
             // Dispatched Units
             else if (key == 'dispatched_units') {
                 var dispatched_units_str = value;
@@ -634,6 +639,16 @@ function postLoadCookieState() {
             // Custom Actions
             if (key == 'cust_actions') {
                 var cust_actions_str = value;
+                var cust_actions = JSON.parse(cust_actions_str);
+                for (var i = 0; i < cust_actions.length; i++) {
+                    var cust_action = cust_actions[i];
+                    addCustAction(cust_action);
+                }
+            }
+
+            // Custom Sectors
+            if (key == 'cust_sectors') {
+                var cust_secots_str = value;
                 var cust_actions = JSON.parse(cust_actions_str);
                 for (var i = 0; i < cust_actions.length; i++) {
                     var cust_action = cust_actions[i];
