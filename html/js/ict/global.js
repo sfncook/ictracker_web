@@ -2185,6 +2185,10 @@ function initOsrDialog() {
     var osr_btn = $("#osr_header_btn");
     osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
 
+    $(".osr_toggle_container_div").hide();
+    $(".osr_toggle_container_div").filter("." + inc_type).show();
+    $(".osr_toggle_btn").hide();
+    $(".osr_toggle_btn").filter("." + inc_type).show();
     $(".osr_toggle_btn").each(function () {
         $(this).click(saveCookieState);
     });
