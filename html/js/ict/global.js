@@ -1609,6 +1609,11 @@ function initBenchmarkDialog() {
     $("#benchmark_vent_3").click(function () {
         $("#benchmark_vent_4").toggleClass("disabled", !$(this).hasClass("glowlightgreen"));
     });
+
+    $("#benchmark_vent_4").click(function() {
+        showParDialog(tbar_clicked, btn_clicked, dialog)();
+    });
+
 }
 function toggleBenchmarkBtn(bnchBtn, toggleClass) {
     bnchBtn.toggleClass(toggleClass);
