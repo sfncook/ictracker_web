@@ -732,6 +732,12 @@ function filterMaydayUnitsForSector(sector_title) {
     }
 }
 function onOpenMaydayDialog() {
+    // Init mayday (if needed)
+    var manyMaydays = $(".mayday_saved").not("#mayday_prototype").length;
+    if(manyMaydays==0) {
+        addMaydayEventElement();
+    }
+
     // Collect all units and sort them
     var allUnitNames = new Array();
     $(".tbar_unit_btn").each(function () {
@@ -1030,9 +1036,6 @@ function initMaydayDialog() {
     mayday_clear_btn.click(function () {
         clearMayday($(".mayday_saved.mayday_saved_selected"))();
     });
-
-    // Init Mayday
-    addMaydayEventElement();
 }
 
 
