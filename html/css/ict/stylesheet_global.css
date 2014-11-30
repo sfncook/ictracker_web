@@ -324,9 +324,8 @@ td {
 .glowlightgreen {
     background: LightGreen !important;
 }
-
 .glowlightgreen:hover {
-    background: DarkGreen;
+    background: #b8ffaf !important;
     color: white;
 }
 
