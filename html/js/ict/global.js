@@ -454,29 +454,22 @@ function resetMaydayEditBox() {
     lair_mayday_btn.removeClass("glowred");
     pack_mayday_btn.removeClass("glowred");
 }
-function clearMayday(maydayEl) {
-    return function () {
-        var prevEl = maydayEl.prev();
-        var nextEl = maydayEl.next();
-        if (prevEl.hasClass("mayday_saved")) {
-            selectMaydayEl(prevEl);
-        } else if (nextEl.hasClass("mayday_saved")) {
-            selectMaydayEl(nextEl);
-        } else {
-            resetMaydayEditBox();
-        }
-        var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
-        if (tbarUnitBtn != 0) {
-            tbarUnitBtn.removeClass("has_mayday");
-        }
-
-        maydayEl.remove();
-
-        if ($(".mayday_saved").not("#mayday_prototype").length == 0) {
-            addMaydayEventElement();
-        }
-        showDialog(0, 0, "#mayday_clear_dialog")();
+function removeMaydayEl(maydayEl) {
+    var prevEl = maydayEl.prev();
+    var nextEl = maydayEl.next();
+    if (prevEl.hasClass("mayday_saved")) {
+        selectMaydayEl(prevEl);
+    } else if (nextEl.hasClass("mayday_saved")) {
+        selectMaydayEl(nextEl);
+    } else {
+        resetMaydayEditBox();
     }
+    var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
+    if (tbarUnitBtn != 0) {
+        tbarUnitBtn.removeClass("has_mayday");
+    }
+
+    maydayEl.remove();
 }
 var maydayTimers = new Array();
 function updateAllMaydayTimers() {
@@ -890,10 +883,6 @@ function initMaydayDialog() {
         selectMaydayTab("build", "blue_bg")
     });
 
-    $(".mayday_clear_item_btn").click(function () {
-        hideAllDialogs();
-    });
-
     $(".mayday_check").change(function () {
         if ($(this).is(":checked")) {
             $(this).parent().addClass("glowlightgreen")
@@ -1033,8 +1022,15 @@ function initMaydayDialog() {
 
     // Clear Btn
     var mayday_clear_btn = $("#mayday_clear_btn");
-    mayday_clear_btn.click(function () {
-        clearMayday($(".mayday_saved.mayday_saved_selected"))();
+    mayday_clear_btn.click(
+        showDialog(0, 0, "#mayday_clear_dialog")
+    );
+    $(".mayday_clear_item_btn").not("#mayday_clear_cancel_btn").click(function () {
+        removeMaydayEl($(".mayday_saved.mayday_saved_selected"));
+        hideAllDialogs();
+    });
+    $("#mayday_clear_cancel_btn").click(function () {
+        hideAllDialogs();
     });
 }
 

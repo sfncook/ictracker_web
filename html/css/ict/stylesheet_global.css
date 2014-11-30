@@ -2035,3 +2035,14 @@ ul {
     cursor: default;
     opacity: 0.5;
 }
+
+.cancel_btn {
+    background: lightblue;
+    color: #666;
+}
+.cancel_btn:hover {
+    background: #c1f0ff;
+}
+.cancel_btn:active {
+    background: #92b6c3;
+}
