@@ -234,7 +234,7 @@ function initParDialog() {
  * Psi Dialog
  **/
 function setPsiText_WithBtn(text, btn_, suppressMaydayCheck) {
-    if (text != "") {
+    if (text.toString() != "") {
         var btn;
         if (btn_.hasClass("psi_btn")) {
             btn = btn_;
