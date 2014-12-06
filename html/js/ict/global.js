@@ -473,6 +473,7 @@ function removeMaydayEl(maydayEl) {
     }
 
     maydayEl.remove();
+    $("#new_mayday_btn").removeClass("disabled");
 }
 var maydayTimers = new Array();
 function updateAllMaydayTimers() {
