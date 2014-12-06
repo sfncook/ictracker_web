@@ -341,25 +341,34 @@ function saveCookieState() {
         var maydays = new Array();
         $(".mayday_saved:not(#mayday_prototype)").each(function(index, mayday_saved){
             var mayday_infoOBj = {
-                'mayday_box_title': $(this).find(".mayday_box_title").html(),
-                //TODO Mayday timer
-                'mayday_name_value': $(this).find(".mayday_name_value").html(),
-                'mayday_psi_value': $(this).find(".mayday_psi_value").html(),
-                'mayday_unit_value': $(this).find(".mayday_unit_value").html(),
-                'mayday_sector_value': $(this).find(".mayday_sector_value").html(),
+                'mayday_box_title':     $(this).find(".mayday_box_title").html(),
+                'mayday_t0':            $(this).data("mayday_t0"),
+                'mayday_name_value':    $(this).find(".mayday_name_value").html(),
+                'mayday_psi_value':     $(this).find(".mayday_psi_value").html(),
+                'mayday_unit_value':    $(this).find(".mayday_unit_value").html(),
+                'mayday_sector_value':  $(this).find(".mayday_sector_value").html(),
                 'mayday_channel_value': $(this).find(".mayday_channel_value").html(),
-                'mayday_rank_value': $(this).find(".mayday_rank_value").html(),
-                'mayday_misc_onhs': $(this).find(".mayday_misc_onhs").hasClass("glowgreen"),
-                'mayday_misc_ofhs': $(this).find(".mayday_misc_ofhs").hasClass("glowgreen"),
-                'mayday_misc_unjr': $(this).find(".mayday_misc_unjr").hasClass("glowgreen"),
-                'mayday_misc_injr': $(this).find(".mayday_misc_injr").hasClass("glowgreen"),
-                'mayday_misc_lost': $(this).find(".mayday_misc_lost").hasClass("glowgreen"),
-                'mayday_misc_trap': $(this).find(".mayday_misc_trap").hasClass("glowgreen"),
-                'mayday_misc_oair': $(this).find(".mayday_misc_oair").hasClass("glowgreen"),
-                'mayday_misc_regi': $(this).find(".mayday_misc_regi").hasClass("glowgreen"),
-                'mayday_misc_lair': $(this).find(".mayday_misc_lair").hasClass("glowgreen"),
-                'mayday_misc_pack': $(this).find(".mayday_misc_pack").hasClass("glowgreen")
+                'mayday_rank_value':    $(this).find(".mayday_rank_value").html(),
+                'mayday_misc_onhs':     $(this).find(".mayday_misc_onhs").hasClass("glowgreen"),
+                'mayday_misc_ofhs':     $(this).find(".mayday_misc_ofhs").hasClass("glowgreen"),
+                'mayday_misc_unjr':     $(this).find(".mayday_misc_unjr").hasClass("glowgreen"),
+                'mayday_misc_injr':     $(this).find(".mayday_misc_injr").hasClass("glowgreen"),
+                'mayday_misc_lost':     $(this).find(".mayday_misc_lost").hasClass("glowgreen"),
+                'mayday_misc_trap':     $(this).find(".mayday_misc_trap").hasClass("glowgreen"),
+                'mayday_misc_oair':     $(this).find(".mayday_misc_oair").hasClass("glowgreen"),
+                'mayday_misc_regi':     $(this).find(".mayday_misc_regi").hasClass("glowgreen"),
+                'mayday_misc_lair':     $(this).find(".mayday_misc_lair").hasClass("glowgreen"),
+                'mayday_misc_pack':     $(this).find(".mayday_misc_pack").hasClass("glowgreen")
             };
+//            for (i = 0; i < maydayTimers.length; i++) {
+//                var maydayTimer = maydayTimers[i];
+//                var mayday_t0 = maydayTimer['mayday_t0'];
+//                var maydayEl = maydayTimer['mayday_el'];
+//                if($(this)==maydayEl) {
+//                    mayday_infoOBj['mayday_t0'] = mayday_t0;
+//                    break;
+//                }
+//            }
             maydays.push(mayday_infoOBj);
         });
         localStorage.setItem('maydays', JSON.stringify(maydays));
@@ -634,6 +643,7 @@ function loadCookieState() {
                 for (var i = 0; i < maydays.length; i++) {
                     var mayday = maydays[i];
                     var maydayEl = addMaydayEventElement();
+                    maydayEl.data({'mayday_t0': mayday.mayday_t0});
                     maydayEl.find(".mayday_box_title").html(mayday.mayday_box_title);
                     maydayEl.find(".mayday_name_value").html(mayday.mayday_name_value);
                     maydayEl.find(".mayday_psi_value").html(mayday.mayday_psi_value);

@@ -478,10 +478,9 @@ function removeMaydayEl(maydayEl) {
 var maydayTimers = new Array();
 function updateAllMaydayTimers() {
     if (isIncidentRunning) {
-        for (i = 0; i < maydayTimers.length; i++) {
-            var maydayTimer = maydayTimers[i];
-            var mayday_t0 = maydayTimer['mayday_t0'];
-            var maydayEl = maydayTimer['mayday_el'];
+        $(".mayday_saved:not(#mayday_prototype)").each(function(){
+            var maydayEl = $(this);
+            var mayday_t0 = maydayEl.data("mayday_t0");
             var mayday_timer = maydayEl.find(".mayday_timer");
 
             var t1 = (new Date()).getTime();
@@ -507,7 +506,7 @@ function updateAllMaydayTimers() {
             if (maydayEl.hasClass("mayday_saved_selected")) {
                 $("#mayday_info_edit_div").find(".mayday_timer").html(mayday_timer.html());
             }
-        }
+        });
     }
 }
 function selectMaydayEl(maydayEl) {
@@ -647,7 +646,7 @@ function addMaydayEventElement() {
 
     // Mayday Timer
     var mayday_t0 = (new Date()).getTime();
-    maydayTimers.push({'mayday_t0': mayday_t0, 'mayday_el': maydayEl});
+    maydayEl.data({'mayday_t0': mayday_t0});
 
     selectMaydayEl(maydayEl);
     $("#mayday_info_edit_div").show();
@@ -667,6 +666,7 @@ function addMaydayEventElement() {
     if (right + width >= viewport.right) {
         $("#new_mayday_btn").addClass("disabled");
     }
+    saveCookieState();
     return maydayEl;
 }
 function selectMaydayTab(tab, color) {
@@ -784,6 +784,7 @@ function onOpenMaydayDialog() {
             mayday_unit_select.append(maydayUnitOpt);
 
             maydayUnitBtn.click(function () {
+                saveCookieState();
                 var clicked_unit_text = $(this).html();
                 var mayday_el = $(".mayday_saved.mayday_saved_selected");
                 var mayday_unit_value = mayday_el.find(".mayday_unit_value");
@@ -834,6 +835,7 @@ function onOpenMaydayDialog() {
             mayday_sectors_all.append(maydaySectorBtn);
 
             maydaySectorBtn.click(function () {
+                saveCookieState();
                 var clicked_sector_text = $(this).html();
                 var mayday_el = $(".mayday_saved.mayday_saved_selected");
                 var mayday_sector_value = mayday_el.find(".mayday_sector_value");
@@ -922,6 +924,7 @@ function initMaydayDialog() {
     var mayday_psi_btn = mayday_info_edit_div.find(".mayday_psi_btn");
     mayday_psi_btn.click(showDialog(0, [mayday_psi_btn], "#psi_dialog", $("#mayday_dialog")));
     mayday_psi_btn.appendChild = function (node) {
+        saveCookieState();
         console.log("change mayday psi");
         // call the .appendChild() function of some other div
         // and pass the current (this) to let the function affect it.
@@ -975,17 +978,20 @@ function initMaydayDialog() {
     // Select DDLB
     mayday_info_edit_div.find(".mayday_select").not("#mayday_unit_select").not("#mayday_sectors_select").change(
         function () {
+            saveCookieState();
             $(this).addClass("glowlightgreen");
         }
     );
 
     // Mayday Single Toggle Btns
     mayday_info_edit_div.find(".mayday_single_toggle").click(function () {
+        saveCookieState();
         $(this).toggleClass("glowred");
     });
 
     // Name input box
     mayday_info_edit_div.find(".mayday_name_input").on('input', function () {
+        saveCookieState();
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
         mayday_saved_selected.find(".mayday_name_value").html($(this).val());
     });
@@ -993,6 +999,7 @@ function initMaydayDialog() {
     // Select channel
     var mayday_channel_select = $("#mayday_channel_select");
     mayday_channel_select.change(function () {
+        saveCookieState();
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
         mayday_saved_selected.find(".mayday_channel_value").html($(this).val());
     });
@@ -1000,6 +1007,7 @@ function initMaydayDialog() {
     // Select rank
     var mayday_rank_select = $("#mayday_rank_select");
     mayday_rank_select.change(function () {
+        saveCookieState();
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
         mayday_saved_selected.find(".mayday_rank_value").html($(this).val());
     });
@@ -1007,6 +1015,7 @@ function initMaydayDialog() {
     // Select unit
     var mayday_unit_select = $("#mayday_unit_select");
     mayday_unit_select.change(function () {
+        saveCookieState();
         mayday_unit_select.addClass("glowred");
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
         var unit_text = $(this).val();
@@ -1016,6 +1025,7 @@ function initMaydayDialog() {
     // Select sector
     var mayday_sectors_select = $("#mayday_sectors_select");
     mayday_sectors_select.change(function () {
+        saveCookieState();
         mayday_sectors_select.addClass("glowred");
         var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
         var sector_title = $(this).val();
