@@ -28,7 +28,8 @@ var actions_fire = [
             "Secondary Search"
         ],
         actions_warning: [
-            "*Victim Found"
+            "*Victim Found",
+            "*Firefighter Located"
         ]
     },
     {action_type: "Ladder",

@@ -337,6 +337,33 @@ function saveCookieState() {
         });
         localStorage.setItem('iap_inputs', JSON.stringify(iap_inputs));
 
+        // Mayday
+        var maydays = new Array();
+        $(".mayday_saved").each(function(index, mayday_saved){
+            var mayday_infoOBj = {
+                'mayday_box_title': $(this).find(".mayday_box_title").html(),
+                //TODO Mayday timer
+                'mayday_name_value': $(this).find(".mayday_name_value").html(),
+                'mayday_psi_value': $(this).find(".mayday_psi_value").html(),
+                'mayday_unit_value': $(this).find(".mayday_unit_value").html(),
+                'mayday_sector_value': $(this).find(".mayday_sector_value").html(),
+                'mayday_channel_value': $(this).find(".mayday_channel_value").html(),
+                'mayday_rank_value': $(this).find(".mayday_rank_value").html(),
+                'mayday_misc_onhs': $(this).find(".mayday_misc_onhs").hasClass("glowgreen"),
+                'mayday_misc_ofhs': $(this).find(".mayday_misc_ofhs").hasClass("glowgreen"),
+                'mayday_misc_unjr': $(this).find(".mayday_misc_unjr").hasClass("glowgreen"),
+                'mayday_misc_injr': $(this).find(".mayday_misc_injr").hasClass("glowgreen"),
+                'mayday_misc_lost': $(this).find(".mayday_misc_lost").hasClass("glowgreen"),
+                'mayday_misc_trap': $(this).find(".mayday_misc_trap").hasClass("glowgreen"),
+                'mayday_misc_oair': $(this).find(".mayday_misc_oair").hasClass("glowgreen"),
+                'mayday_misc_regi': $(this).find(".mayday_misc_regi").hasClass("glowgreen"),
+                'mayday_misc_lair': $(this).find(".mayday_misc_lair").hasClass("glowgreen"),
+                'mayday_misc_pack': $(this).find(".mayday_misc_pack").hasClass("glowgreen")
+            };
+            maydays.push(mayday_infoOBj);
+        });
+        localStorage.setItem('maydays', JSON.stringify(maydays));
+
         // Report
         localStorage.setItem('events', eventsJson);
 
