@@ -464,9 +464,12 @@ function removeMaydayEl(maydayEl) {
     } else {
         resetMaydayEditBox();
     }
+
     var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
     if (tbarUnitBtn != 0) {
-        tbarUnitBtn.removeClass("has_mayday");
+        if(manyMaydaysForUnit(tbarUnitBtn)==1) {
+            tbarUnitBtn.removeClass("has_mayday");
+        }
     }
 
     maydayEl.remove();
@@ -676,6 +679,23 @@ function selectMaydayTab(tab, color) {
     $("#mayday_right_td").removeClass("gray_bg");
     $("#mayday_right_td").removeClass("blue_bg");
     $("#mayday_right_td").addClass(color);
+}
+function manyMaydaysForUnit(tbarUnitBtn) {
+    var title_text = tbarUnitBtn.parents(".tbar").find(".title_text").html();
+    var unitName = tbarUnitBtn.find(".unit_text").html();
+
+    var mayday_saveds =
+        $(".mayday_saved")
+            .find(".mayday_unit_value:contains("+unitName+")")
+            .parents(".mayday_saved")
+            .filter(function() {
+                return $(this)
+                    .find(".mayday_sector_value:contains("+title_text+")")
+                    .parents(".mayday_saved")
+                    .exists();
+            });
+
+    return mayday_saveds.length;
 }
 function findTbarUnitBtnForMayday(maydayEl) {
     var tbarUnitBtn = 0;
