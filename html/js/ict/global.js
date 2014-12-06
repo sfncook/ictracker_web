@@ -667,6 +667,7 @@ function addMaydayEventElement() {
     if (right + width >= viewport.right) {
         $("#new_mayday_btn").addClass("disabled");
     }
+    return maydayEl;
 }
 function selectMaydayTab(tab, color) {
     var tabEl = $("#mayday_right_tab_" + tab);

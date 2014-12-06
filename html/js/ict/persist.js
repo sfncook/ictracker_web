@@ -339,7 +339,7 @@ function saveCookieState() {
 
         // Mayday
         var maydays = new Array();
-        $(".mayday_saved").each(function(index, mayday_saved){
+        $(".mayday_saved:not(#mayday_prototype)").each(function(index, mayday_saved){
             var mayday_infoOBj = {
                 'mayday_box_title': $(this).find(".mayday_box_title").html(),
                 //TODO Mayday timer
@@ -624,6 +624,33 @@ function loadCookieState() {
                 for (var i = 0; i < iap_toggle_btns.length; i++) {
                     var objFromJson = iap_toggle_btns[i];
                     $("#" + objFromJson['id']).val(objFromJson['text']);
+                }
+            }
+
+            // Mayday
+            else if (key == 'maydays') {
+                var maydaysStr = value;
+                var maydays = JSON.parse(maydaysStr);
+                for (var i = 0; i < maydays.length; i++) {
+                    var mayday = maydays[i];
+                    var maydayEl = addMaydayEventElement();
+                    maydayEl.find(".mayday_box_title").html(mayday.mayday_box_title);
+                    maydayEl.find(".mayday_name_value").html(mayday.mayday_name_value);
+                    maydayEl.find(".mayday_psi_value").html(mayday.mayday_psi_value);
+                    maydayEl.find(".mayday_unit_value").html(mayday.mayday_unit_value);
+                    maydayEl.find(".mayday_sector_value").html(mayday.mayday_sector_value);
+                    maydayEl.find(".mayday_channel_value").html(mayday.mayday_channel_value);
+                    maydayEl.find(".mayday_rank_value").html(mayday.mayday_rank_value);
+                    if (mayday['mayday_misc_onhs']) {maydayEl.find(".mayday_misc_onhs").addClass("glowgreen");}
+                    if (mayday['mayday_misc_ofhs']) {maydayEl.find(".mayday_misc_ofhs").addClass("glowgreen");}
+                    if (mayday['mayday_misc_unjr']) {maydayEl.find(".mayday_misc_unjr").addClass("glowgreen");}
+                    if (mayday['mayday_misc_injr']) {maydayEl.find(".mayday_misc_injr").addClass("glowgreen");}
+                    if (mayday['mayday_misc_lost']) {maydayEl.find(".mayday_misc_lost").addClass("glowgreen");}
+                    if (mayday['mayday_misc_trap']) {maydayEl.find(".mayday_misc_trap").addClass("glowgreen");}
+                    if (mayday['mayday_misc_oair']) {maydayEl.find(".mayday_misc_oair").addClass("glowgreen");}
+                    if (mayday['mayday_misc_regi']) {maydayEl.find(".mayday_misc_regi").addClass("glowgreen");}
+                    if (mayday['mayday_misc_lair']) {maydayEl.find(".mayday_misc_lair").addClass("glowgreen");}
+                    if (mayday['mayday_misc_pack']) {maydayEl.find(".mayday_misc_pack").addClass("glowgreen");}
                 }
             }
 
