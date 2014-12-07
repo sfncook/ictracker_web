@@ -1,0 +1,28 @@
+.bottom_tab {
+    z-index: 49;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 150px;
+    max-height: 50%;
+    background: white;
+    border-top: 4px #DDD solid;
+}
+
+#medical_triage_table {
+    margin: auto;
+}
+#medical_triage_table td {
+    padding: 5px 10px;
+    border-top: 1px #DDD solid;
+    border-bottom: 1px #DDD solid;
+}
+#medical_triage_table thead td {
+    font-weight: bold;
+    font-size: 1.01rem;
+    text-align: center;
+}
+.med_ptage {
+    width: 50px;
+}

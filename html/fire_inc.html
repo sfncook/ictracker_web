@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_tbar.css"/>
     <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_animation.css"/>
     <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_reports.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_medical.css"/>
 
     <!--JS-->
     <script src="js/pace.min.js"></script>
@@ -202,6 +203,59 @@
 <!-- mayday_and_tbar_container -->
 
 <div id="move_unit_screen_cover"></div>
+
+<div id="medical_triage_list" class="bottom_tab">
+    <table id="medical_triage_table">
+        <thead><tr>
+            <td>Patient</td>
+            <td>Age</td>
+            <td>Gender</td>
+            <td>Triage</td>
+            <td>Hospital</td>
+            <td>Mode</td>
+            <td>Depart Time</td>
+        </tr></thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="number" class="med_ptage">
+                </td>
+                <td>
+                    <select class="med_gndr">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Undetermined</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="med_triag">
+                        <option>Imm.</option>
+                        <option>Del.</option>
+                        <option>Minor</option>
+                        <option>Dead</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="med_hopst">
+                        <option>Mesa Lutherin</option>
+                        <option>Desert Samaritan</option>
+                        <option>St Joe's</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="med_hmode">
+                        <option>Helo</option>
+                        <option>Ambo</option>
+                    </select>
+                </td>
+                <td>
+                    <input class="med_dtime">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
 <!-- DIALOGS -->

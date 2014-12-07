@@ -3318,6 +3318,18 @@ function initCmdXfer() {
 
 
 /**
+ * Medical
+ **/
+function initMedical() {
+    if(inc_type=='medical') {
+        $("#medical_triage_list").show();
+    } else {
+        $("#medical_triage_list").hide();
+    }
+}
+
+
+/**
  * Coookies
  **/
 function initReportDialog() {
@@ -3502,6 +3514,7 @@ function init() {
     initActionsDialog();
     initObjectivesDialog();
     initOsrDialog();
+    initMedical();
 
     Array.prototype.remByVal = function (val) {
         for (var i = 0; i < this.length; i++) {
