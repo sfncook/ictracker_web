@@ -86,7 +86,7 @@ function initSplash() {
                 localStorage.setItem('inc_icon', btnObj.icon);
                 localStorage.setItem('inc_type', btnObj.type);
 
-                var urlLink = btnObj.url;
+                var urlLink = btnObj.url+"?inc_type="+btnObj.type;
                 window.location.href = urlLink;
             });
         }
@@ -119,7 +119,7 @@ var incidentStartBtns = [
         type: 'medical',
         icon: "images/icons/medical.png",
         text: "Medical Incident",
-        disabled: "true",
+        url: "fire_inc.html",
         row: 2
     },
     {

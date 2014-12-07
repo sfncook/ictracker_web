@@ -2593,24 +2593,59 @@ function updateTbar(tbar) {
     updateObjectivePercentComplete();
 }
 function initTbars() {
-    var rescue_tbar = addTbar(gridster.cols, 1);
-    var safety_tbar = addTbar(gridster.cols, 2);
-    var rehab_tbar = addTbar(gridster.cols, 3);
 
-    rescue_tbar.find(".title_text").html("RESCUE");
-    safety_tbar.find(".title_text").html("Safety");
-    rehab_tbar.find(".title_text").html("ReHab");
+    inc_type = getHttpRequestByName('inc_type');
+    if(inc_type!='medical') {
+        var rescue_tbar = addTbar(gridster.cols, 1);
+        var safety_tbar = addTbar(gridster.cols, 2);
+        var rehab_tbar = addTbar(gridster.cols, 3);
 
-    updateTbar(rescue_tbar);
-    updateTbar(safety_tbar);
-    updateTbar(rehab_tbar);
+        rescue_tbar.find(".title_text").html("RESCUE");
+        safety_tbar.find(".title_text").html("Safety");
+        rehab_tbar.find(".title_text").html("ReHab");
 
-    rehab_tbar.find(".benchmark_btn").hide();
+        updateTbar(rescue_tbar);
+        updateTbar(safety_tbar);
+        updateTbar(rehab_tbar);
 
-    // Make three rows of TBars
-    for (var row = 1; row <= 3; row++) {
-        for (var col = 1; col <= (gridster.cols - 1); col++) {
-            addTbar(col, row);
+        rehab_tbar.find(".benchmark_btn").hide();
+
+        // Make three rows of TBars
+        for (var row = 1; row <= 3; row++) {
+            for (var col = 1; col <= (gridster.cols - 1); col++) {
+                addTbar(col, row);
+            }
+        }
+
+    } else {
+        var trtmt_tbar = addTbar(gridster.cols-2, 1);
+        var extrc_tbar = addTbar(gridster.cols-1, 1);
+        var trans_tbar = addTbar(gridster.cols, 1);
+        var lndgz_tbar = addTbar(gridster.cols-1, 2);
+        var firec_tbar = addTbar(gridster.cols, 2);
+
+        trtmt_tbar.find(".title_text").html("Treatment");
+        extrc_tbar.find(".title_text").html("Extrication");
+        trans_tbar.find(".title_text").html("Transportaion");
+        lndgz_tbar.find(".title_text").html("LZ");
+        firec_tbar.find(".title_text").html("Fire Control");
+
+        updateTbar(trtmt_tbar);
+        updateTbar(extrc_tbar);
+        updateTbar(trans_tbar);
+        updateTbar(lndgz_tbar);
+        updateTbar(firec_tbar);
+
+        updateTbar(trtmt_tbar);
+        updateTbar(extrc_tbar);
+        updateTbar(trans_tbar);
+        updateTbar(lndgz_tbar);
+        updateTbar(firec_tbar);
+
+        // Make three rows of TBars
+        var manyTbars = gridster.cols*3;
+        for(var i=0; i<manyTbars-5; i++) {
+            addTbar();
         }
     }
 }
