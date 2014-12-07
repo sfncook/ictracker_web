@@ -26,3 +26,6 @@
 .med_ptage {
     width: 50px;
 }
+#med_add_tr td {
+    border-bottom: 0 !important;
+}

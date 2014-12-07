@@ -162,11 +162,12 @@ td {
     cursor: pointer;
     box-shadow: 1px 1px 2px #888;
 }
-button:hover {
-    background: white;
+.button:hover {
+    background-color: #EEE;
+    color: #999;
 }
-button:active {
-    background: #CCC;
+.button:active {
+    background-color: #BBB;
 }
 
 .button_top {
