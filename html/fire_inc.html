@@ -92,6 +92,8 @@
         <div>Triage</div>
         <div>Report</div>
     </div>
+    <div id="functions_btn" class="medical header_item button">Functions</div>
+    <div id="resources_btn" class="medical header_item button">Resources</div>
 
     <div id="iap_btn" class="fire arff water header_item button">IAP</div>
 
@@ -265,8 +267,8 @@
                 <td>
                     <select class="med_hmode">
                         <option></option>
-                        <option>Helo</option>
-                        <option>Ambo</option>
+                        <option>Helicopter</option>
+                        <option>Ambulence</option>
                     </select>
                 </td>
                 <td>
@@ -403,6 +405,67 @@
         <div id="mode_dlg_off" class="offensive_btn button">OFFENSIVE</div>
         <div id="mode_dlg_def" class="defensive_btn button">DEFENSIVE</div>
         <div class="clear_float"></div>
+    </div>
+</div>
+
+<!-- Resources Dialog -->
+<div id="resources_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Extrication<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="resources_dialog_body_medical" class="dialog_body col-xs-12 container-fluid">
+        <div id="resources_utilt_btn" class="medical medical_toggle_btn button">Utility truck</div>
+        <div id="resources_rehab_btn" class="medical medical_toggle_btn button">Rehab unit</div>
+        <div id="resources_safet_btn" class="medical medical_toggle_btn button">Safety</div>
+        <div id="resources_inves_btn" class="medical medical_toggle_btn button">Investigator</div>
+        <div id="resources_piobt_btn" class="medical medical_toggle_btn button">PIO</div>
+        <div id="resources_cmdvn_btn" class="medical medical_toggle_btn button">Command Van</div>
+        <div id="resources_pdspr_btn" class="medical medical_toggle_btn button">PD Supervisor</div>
+        <div id="resources_ambsp_btn" class="medical medical_toggle_btn button">Amb Supervisor</div>
+        <div id="resources_crtcn_btn" class="medical medical_toggle_btn button">CRT/Connectors</div>
+    </div>
+</div>
+
+<!-- Functions Dialog -->
+<div id="functions_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Extrication<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="functions_dialog_body_medical" class="dialog_body col-xs-12 container-fluid">
+        <div id="functions_triag_btn" class="medical medical_toggle_btn button">Triage Tags</div>
+        <div id="functions_massc_btn" class="medical medical_toggle_btn button">Mass Casualty?</div>
+        <div id="functions_cmdlc_btn" class="medical medical_toggle_btn button">Command Location</div>
+        <div id="functions_helic_btn" class="medical medical_toggle_btn button">Helicopter(s)</div>
+        <div id="functions_hospa_btn" class="medical medical_toggle_btn button">Hospital Alert</div>
+        <div id="functions_ambos_btn" class="medical medical_toggle_btn button">Ambulence Staging</div>
+        <div id="functions_trafc_btn" class="medical medical_toggle_btn button">Traffic Control</div>
+        <div id="functions_pdasl_btn" class="medical medical_toggle_btn button">PD Assistance For LZ</div>
+    </div>
+</div>
+
+<!-- Extrication Dialog -->
+<div id="extrication_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Extrication<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="extrication_dialog_body_medical" class="dialog_body col-xs-12 container-fluid">
+        <div id="extricate_lineg_btn" class="medical medical_toggle_btn button">Line on ground</div>
+        <div id="extricate_ensrs_btn" class="medical medical_toggle_btn button">Ensure scene safety</div>
+        <div id="extricate_acctv_btn" class="medical medical_toggle_btn button">Account for victims</div>
+        <div id="extricate_movec_btn" class="medical medical_toggle_btn button">Move critical first</div>
+        <div id="extricate_allpt_btn" class="medical medical_toggle_btn button">All Pts to Tx</div>
+        <div id="extricate_geosc_btn" class="medical medical_toggle_btn button">Geographic Sectors</div>
+    </div>
+</div>
+
+<!-- Initial Triage Report Dialog -->
+<div id="initial_triage_report_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Initial Triage Report<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="extrication_dialog_body_medical" class="dialog_body col-xs-12 container-fluid">
+        <div id="extricate_lineg_btn" class="medical medical_toggle_btn button">Initial Triage Report</div>
+        <div id="extricate_ensrs_btn" class="medical medical_toggle_btn button">All pts. Found</div>
     </div>
 </div>
 

@@ -3328,6 +3328,15 @@ function addMedPatient() {
     $("#med_add_tr").before(med_patient_tr_prototype);
     med_patient_tr_prototype.find(".med_patient_id").html(manyMedPatients);
 }
+function toggleMedBtn(btn) {
+    return function () {
+        btn.toggleClass("glowlightgreen");
+//        if (btn.hasClass("glowlightgreen")) {
+//            addEvent_objective(btn.text());
+//        }
+        saveCookieState();
+    }
+}
 function initMedical() {
     if(inc_type=='medical') {
         $("#medical_triage_list").show();
@@ -3336,6 +3345,16 @@ function initMedical() {
         });
         $("#med_patient_tr_prototype").hide();
         addMedPatient();
+
+        $("#extrication_btn").click( showDialog(0, 0, "#extrication_dialog") );
+        $("#init_triage_btn").click( showDialog(0, 0, "#initial_triage_report_dialog") );
+        $("#functions_btn").click( showDialog(0, 0, "#functions_dialog") );
+        $("#resources_btn").click( showDialog(0, 0, "#resources_dialog") );
+
+        $(".medical_toggle_btn").each(function () {
+            $(this).click(toggleMedBtn($(this)));
+        });
+
     } else {
         $("#medical_triage_list").hide();
     }

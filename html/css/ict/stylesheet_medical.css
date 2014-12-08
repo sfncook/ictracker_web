@@ -11,6 +11,9 @@
     overflow: scroll;
 }
 
+#medical_triage_list {
+    padding-right:100px;
+}
 #medical_triage_table {
     margin: auto;
 }
@@ -43,4 +46,20 @@
 }
 #init_triage_btn {
     height: 70px;
+}
+
+#extrication_dialog {
+    width: 232px;
+}
+.medical_toggle_btn {
+    margin: 5px 10px;
+}
+#initial_triage_report_dialog {
+    width: 300px;
+}
+#functions_dialog {
+    width: 200px;
+}
+#resources_dialog {
+    width: 200px;
 }
