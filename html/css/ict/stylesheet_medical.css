@@ -8,6 +8,7 @@
     max-height: 50%;
     background: white;
     border-top: 4px #DDD solid;
+    overflow: scroll;
 }
 
 #medical_triage_table {
@@ -28,4 +29,5 @@
 }
 #med_add_tr td {
     border-bottom: 0 !important;
+    text-align: center;
 }

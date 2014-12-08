@@ -216,8 +216,8 @@
             <td>Depart Time</td>
         </tr></thead>
         <tbody>
-            <tr>
-                <td></td>
+            <tr id="med_patient_tr_prototype">
+                <td class="med_patient_id"></td>
                 <td>
                     <input type="number" class="med_ptage">
                 </td>
@@ -225,7 +225,6 @@
                     <select class="med_gndr">
                         <option>Male</option>
                         <option>Female</option>
-                        <option>Undetermined</option>
                     </select>
                 </td>
                 <td>
@@ -255,7 +254,7 @@
             </tr>
             <tr id="med_add_tr">
                 <td>
-                    <div class="med_add_btn button">+ADD</div>
+                    <div id="med_add_btn" class="med_add_btn button">+ADD</div>
                 </td>
             </tr>
         </tbody>

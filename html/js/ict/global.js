@@ -3320,9 +3320,22 @@ function initCmdXfer() {
 /**
  * Medical
  **/
+var manyMedPatients = 0;
+function addMedPatient() {
+    manyMedPatients++;
+    var med_patient_tr_prototype = $("#med_patient_tr_prototype").clone();
+    med_patient_tr_prototype.show();
+    $("#med_add_tr").before(med_patient_tr_prototype);
+    med_patient_tr_prototype.find(".med_patient_id").html(manyMedPatients);
+}
 function initMedical() {
     if(inc_type=='medical') {
         $("#medical_triage_list").show();
+        $("#med_add_btn").click(function(){
+            addMedPatient();
+        });
+        $("#med_patient_tr_prototype").hide();
+        addMedPatient();
     } else {
         $("#medical_triage_list").hide();
     }
