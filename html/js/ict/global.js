@@ -3355,6 +3355,8 @@ function initMedical() {
             $(this).click(toggleMedBtn($(this)));
         });
 
+        $("#mayday_and_tbar_container").addClass("med_bottom_pad");
+
     } else {
         $("#medical_triage_list").hide();
     }

@@ -4,8 +4,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    min-height: 150px;
-    max-height: 50%;
+    height: 150px;
     background: white;
     border-top: 4px #DDD solid;
     overflow: scroll;
@@ -62,4 +61,7 @@
 }
 #resources_dialog {
     width: 200px;
+}
+.med_bottom_pad {
+    padding-bottom: 150px;
 }
