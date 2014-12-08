@@ -73,7 +73,7 @@
         <div>Transferred</div>
     </div>
     <div id="branch_btn" class="disabled header_item button">Branch</div>
-    <div id="osr_header_btn" class="header_item button">
+    <div id="osr_header_btn" class="fire arff water header_item button">
         <div class="perc_horz_bar_bg">
             <div id="osr_perc_bar" class="perc_horz_bar"></div>
         </div>
@@ -86,8 +86,14 @@
         </div>
         <div style="margin-top:-1px">Objectives</div>
     </div>
+    <div id="extrication_btn" class="medical header_item button">Extrication</div>
+    <div id="init_triage_btn" class="medical header_item button">
+        <div>Initial</div>
+        <div>Triage</div>
+        <div>Report</div>
+    </div>
 
-    <div id="iap_btn" class="header_item button">IAP</div>
+    <div id="iap_btn" class="fire arff water header_item button">IAP</div>
 
     <div id="cmd_term_btn" class="header_item button">
         <img class="terminate_icon" src="images/terminate.png"/>
@@ -223,27 +229,42 @@
                 </td>
                 <td>
                     <select class="med_gndr">
+                        <option></option>
                         <option>Male</option>
                         <option>Female</option>
                     </select>
                 </td>
                 <td>
                     <select class="med_triag">
-                        <option>Imm.</option>
-                        <option>Del.</option>
+                        <option></option>
+                        <option>Immediate</option>
+                        <option>Delayed</option>
                         <option>Minor</option>
                         <option>Dead</option>
                     </select>
                 </td>
                 <td>
                     <select class="med_hopst">
-                        <option>Mesa Lutherin</option>
-                        <option>Desert Samaritan</option>
-                        <option>St Joe's</option>
+                        <option></option>
+                        <option>Banner Baywood Medical Center</option>
+                        <option>Banner Desert Medical Center</option>
+                        <option>Banner Gateway Medical Center</option>
+                        <option>Mountain Vista Hospital</option>
+                        <option>Banner Goldfield Medical Center</option>
+                        <option>Chandler Regional Hospital</option>
+                        <option>Gilbert Emergency Hospital </option>
+                        <option>Banner Good Sam Medical Center</option>
+                        <option>Maricopa Medical Center</option>
+                        <option>Mercy Gilbert Medical Center</option>
+                        <option>Phoenix Children's Hospital </option>
+                        <option>St. Joseph's Hospital & Medical Center</option>
+                        <option>Scottsdale Healthcare - Osborn</option>
+                        <option>Tempe St. Luke's Hospital</option>
                     </select>
                 </td>
                 <td>
                     <select class="med_hmode">
+                        <option></option>
                         <option>Helo</option>
                         <option>Ambo</option>
                     </select>
@@ -897,6 +918,18 @@
             <div id="water_dnum_objective_btn" class="water objective_btn button">Determine number of victims</div>
             <div id="water_cond_objective_btn" class="water objective_btn button">Determine condition of victims </div>
             <div id="water_resc_objective_btn" class="water objective_btn button">Rescue Mode or Recovery Mode</div>
+        </div>
+        <div id="objective_right_col">
+        </div>
+    </div>
+    <div id="objectives_dialog_body_medical" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
+        <div id="objective_left_col">
+            <div id="med_obj_trigr_btn"  class="medical objective_btn button">Triage Report</div>
+            <div id="med_obj_allcl_btn"  class="medical objective_btn button">ALL CLEAR</div>
+            <div id="med_obj_ptsex_btn"  class="medical objective_btn button">Pts Extricated</div>
+            <div id="med_obj_scnsc_btn"  class="medical objective_btn button">SCENE SECURE</div>
+            <div id="med_obj_vehhz_btn"  class="medical objective_btn button">Vehicle Hazards</div>
+            <div id="med_obj_pattr_btn"  class="medical objective_btn button">PATIENTS TRANSPORTED</div>
         </div>
         <div id="objective_right_col">
         </div>

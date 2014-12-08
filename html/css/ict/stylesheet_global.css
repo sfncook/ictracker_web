@@ -123,6 +123,9 @@ td {
 #ict_header > .button {
     background: white;
 }
+#ict_header > .button:active {
+    background: #DDD;
+}
 
 #title_icon {
     width: 29px;
@@ -1886,10 +1889,12 @@ ul {
 }
 #osr_header_btn {
     height: 30px;
-    margin-top: 50px;
 }
 #objectives_header_btn {
     height: 30px;
+}
+#branch_btn {
+    margin-bottom: 50px;
 }
 
 #inc_type_icon {
