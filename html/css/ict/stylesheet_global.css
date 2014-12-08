@@ -610,6 +610,9 @@ td {
 #sector_dialog.water {
     width: 712px;
 }
+#sector_dialog.medical {
+    width: 712px;
+}
 
 
 #dir_btns_container {

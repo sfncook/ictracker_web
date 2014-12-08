@@ -88,9 +88,13 @@ function tbarToJson(tbarEl) {
 
     // TBar
     var title_text = tbarEl.find(".title_text").html();
+    var title_dir = tbarEl.find(".title_dir").html();
+    var title_num = tbarEl.find(".title_num").html();
     var col = tbarEl.data("col");
     var row = tbarEl.data("row");
     tbarObj['title_text'] = title_text;
+    tbarObj['title_dir'] = title_dir;
+    tbarObj['title_num'] = title_num;
     tbarObj['col'] = col;
     tbarObj['row'] = row;
 
@@ -444,6 +448,8 @@ function loadTbarFromCookie(tbarObj) {
     var tbarEl = findTbarElementByColRow(col, row);
     if (typeof tbarEl != 'undefined') {
         tbarEl.find(".title_text").html(tbarObj['title_text']);
+        tbarEl.find(".title_dir").html(tbarObj['title_dir']);
+        tbarEl.find(".title_num").html(tbarObj['title_num']);
     } else {
         tbarEl = addTbar(col, row);
         var title_text = tbarObj['title_text'];

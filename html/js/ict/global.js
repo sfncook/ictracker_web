@@ -3364,6 +3364,15 @@ function initMedical() {
 
 
 /**
+ * Init Header Buttons
+ **/
+function initHeaderBtns() {
+    $(".header_item").hide();
+    $(".header_item." + inc_type).show();
+}
+
+
+/**
  * Coookies
  **/
 function initReportDialog() {
@@ -3549,6 +3558,7 @@ function init() {
     initObjectivesDialog();
     initOsrDialog();
     initMedical();
+    initHeaderBtns();
 
     Array.prototype.remByVal = function (val) {
         for (var i = 0; i < this.length; i++) {
