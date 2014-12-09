@@ -3455,7 +3455,6 @@ var t0;
 var hourRollOverDone = false;
 function startIncidentTimer() {
     t0 = (new Date()).getTime();
-    saveCookieState();
 }
 function updateTimer() {
     if (isIncidentRunning) {
@@ -3537,7 +3536,6 @@ function init() {
     init10KeyDialog();
     initDispatchedUnits();
     initUpgradeDialog();
-    initIncInfoDialog();
     initCmdXfer();
     initModeDialog();
 
@@ -3574,6 +3572,7 @@ function init() {
     initOsrDialog();
     initMedical();
     initHeaderBtns();
+    initIncInfoDialog();
 
     Array.prototype.remByVal = function (val) {
         for (var i = 0; i < this.length; i++) {
