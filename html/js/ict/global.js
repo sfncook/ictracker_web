@@ -472,6 +472,12 @@ function removeMaydayEl(maydayEl) {
         }
     }
 
+    // Event
+    if (COOKIES_ENABLED) {
+        var maydayName = maydayEl.find(".mayday_box_title").html();
+        addEvent_maydayEnded(maydayName);
+    }
+
     maydayEl.remove();
     $("#new_mayday_btn").removeClass("disabled");
 }
@@ -642,7 +648,8 @@ function addMaydayEventElement() {
     maydayEl.appendTo("#mayday_list_box");
     maydayEl.show();
     maydayEl.attr("id", "mayday_info_div_" + manyMaydays);
-    maydayEl.find(".mayday_box_title").html("Mayday #" + manyMaydays);
+    var maydayName = "Mayday #" + manyMaydays;
+    maydayEl.find(".mayday_box_title").html(maydayName);
 
     // Mayday Timer
     var mayday_t0 = (new Date()).getTime();
@@ -666,6 +673,12 @@ function addMaydayEventElement() {
     if (right + width >= viewport.right) {
         $("#new_mayday_btn").addClass("disabled");
     }
+
+    // Event
+    if (COOKIES_ENABLED) {
+        addEvent_maydayStarted(maydayName);
+    }
+
     saveCookieState();
     return maydayEl;
 }
@@ -3369,6 +3382,7 @@ function initMedical() {
 function initHeaderBtns() {
     $(".header_item").hide();
     $(".header_item." + inc_type).show();
+    $("#time").show();
 }
 
 
@@ -3441,6 +3455,7 @@ var t0;
 var hourRollOverDone = false;
 function startIncidentTimer() {
     t0 = (new Date()).getTime();
+    saveCookieState();
 }
 function updateTimer() {
     if (isIncidentRunning) {

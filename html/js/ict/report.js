@@ -590,3 +590,46 @@ function render_cmdxfer(y, event, doc) {
 function get_str_cmdxfer(event) {
     return getDateStr(event.datetime) + "  Command Transferred From:" + event.from_unit + " To:" + event.to_unit;
 }
+
+function addEvent_maydayStarted(mayday) {
+    addEvent_maydayStarted_with_date(mayday, new Date());
+}
+function addEvent_maydayStarted_with_date(mayday, date) {
+    var event = {
+        "render_func": 'render_maydayStarted',
+        "get_str_func": 'get_str_maydayStarted',
+        "datetime": date,
+        "mayday": mayday
+    };
+
+    pushEvent_toQueues(event);
+    saveEvents();
+}
+function render_maydayStarted(y, event, doc) {
+    doc.text(get_str_maydayStarted(event), MARGIN, y);
+}
+function get_str_maydayStarted(event) {
+    return getDateStr(event.datetime) + "  Mayday Started:" + event.mayday;
+}
+
+function addEvent_maydayEnded(mayday) {
+    addEvent_maydayEnded_with_date(mayday, new Date());
+}
+function addEvent_maydayEnded_with_date(mayday, date) {
+    var event = {
+        "render_func": 'render_maydayEnded',
+        "get_str_func": 'get_str_maydayEnded',
+        "datetime": date,
+        "mayday": mayday
+    };
+
+    pushEvent_toQueues(event);
+    saveEvents();
+}
+function render_maydayEnded(y, event, doc) {
+    doc.text(get_str_maydayEnded(event), MARGIN, y);
+}
+function get_str_maydayEnded(event) {
+    return getDateStr(event.datetime) + "  Mayday Ended:" + event.mayday;
+}
+
