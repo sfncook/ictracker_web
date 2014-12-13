@@ -2776,6 +2776,19 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         } else if (unitName.length > 4) {
             unit_text.addClass("btn_medtext");
         }
+        unitBtn.draggable({
+            start: function() {
+                console.log("start dragging");
+            },
+            drag: function() {
+//                console.log("start dragging");
+            },
+            stop: function() {
+                console.log("stop dragging");
+                $(".tbar_unit_btn").removeClass("blink_me");
+                $(".tbar_unit_btn").draggable('disable');
+            }
+        });
 
         // Move checkbox
         tbar.find(".unit_move_btn").show();
@@ -2935,6 +2948,8 @@ function addTbar(col_x, row_y) {
     var unit_move_cancel_btn = tbar.find(".unit_move_cancel_btn");
     unit_move_btn.click(function () {
         $(".tbar_unit_btn").addClass("blink_me");
+        $(".tbar_unit_btn").draggable();
+        $(".tbar_unit_btn").draggable('enable');
 //        tbar_moving = tbar;
 //        tbar.find(".tbar_unit_info_btn").fadeOut(100, "linear", function () {
 //            tbar.find(".unit_move_checkbox").fadeIn(100)
