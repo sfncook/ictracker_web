@@ -1450,12 +1450,11 @@ td {
 
 .osr_select {
     text-align: center;
-    background: #CCC;
-    color: #666;
-    border: none;
+    background: #FFF;
+    color: #000;
+    border: 1px solid #9a9a9a;
     border-radius: 3px;
     padding: 4px 4px 4px 4px;
-    text-shadow: 1px 1px #AAA;
     cursor: pointer;
     box-shadow: 1px 1px 2px #888;
     width: 220px;
