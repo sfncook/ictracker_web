@@ -2918,53 +2918,6 @@ function addTbar(col_x, row_y) {
     action_add_btn.hide();//Button is shown once units have been added
     action_add_btn.click(showDialog_withCallbacks("#actions_dialog", 0/*parentDialog*/, onOpenActionsDialogFromTbar(tbar), toggleActionButtonForTbar(tbar)));
 
-    // Move Btn
-    var unit_move_btn = tbar.find(".unit_move_btn");
-    unit_move_btn.click(function () {
-        $(".tbar_unit_btn").addClass("wiggle");
-        $(".tbar_unit_btn").draggable();
-        $(".tbar_unit_btn").draggable('enable');
-//        tbar_moving = tbar;
-//        tbar.find(".tbar_unit_info_btn").fadeOut(100, "linear", function () {
-//            tbar.find(".unit_move_checkbox").fadeIn(100)
-//        });
-//        $(".unit_col:visible").each(function () {
-//            var unit_col_destination = $(this);
-//
-//            var thisTbarId = unit_col_destination.parents(".tbar").attr("id");
-//            if (thisTbarId != newTbarId) {
-//                unit_move_btn.hide();
-//                unit_move_cancel_btn.show();
-//                var tbar_cover = $("<div class='tbar_move_unit_cover'></div>");
-//                tbar_cover.appendTo($('#mayday_and_tbar_container'));
-//                tbar_cover.width(unit_col_destination.width() + 1);
-//                tbar_cover.height(unit_col_destination.height() + 1);
-//                tbar_cover.offset(unit_col_destination.offset());
-//                tbar_cover.click(function () {
-//                    tbar.find(".unit_move_checkbox>*:checkbox:checked").each(function () {
-//                        var unit_move_checkbox = $(this);
-//                        var unit_btn = unit_move_checkbox.parents(".unit_row_div").find(".unit_btn");
-//                        var unit_col = unit_move_checkbox.parents(".unit_col");
-//                        moveUnitButton(unit_col, unit_col_destination, unit_btn);
-//                    });
-//
-//                    // Show action list
-//                    var first_unit_btn = tbar.find(".unit_btn").first();
-//                    if (typeof first_unit_btn != 'undefined') {
-//                        showActionsForUnitBtn(first_unit_btn);
-//                    }
-//                    var first_unit_btn_dst = unit_col_destination.find(".unit_btn").first();
-//                    if (typeof first_unit_btn_dst != 'undefined') {
-//                        showActionsForUnitBtn(first_unit_btn_dst);
-//                    }
-//
-//                    // Close all TBar covers
-//                    cancelUnitMove();
-//                });
-//            }//if not this tbar
-//        });
-    });
-
     // Droppable for unit move
     tbar.find(".unit_col").droppable({
         hoverClass: "unit_move_hover",
@@ -3166,6 +3119,18 @@ function setMode(mode_text) {
         hideAllDialogs();
     }
     saveCookieState();
+}
+
+
+/**
+ * Move Unit Button
+ **/
+function initMoveUnitButton() {
+    $("#move_unit_btn").click(function () {
+        $(".tbar_unit_btn").addClass("wiggle");
+        $(".tbar_unit_btn").draggable();
+        $(".tbar_unit_btn").draggable('enable');
+    });
 }
 
 
@@ -3572,6 +3537,7 @@ function init() {
     initMedical();
     initHeaderBtns();
     initIncInfoDialog();
+    initMoveUnitButton();
 
     Array.prototype.remByVal = function (val) {
         for (var i = 0; i < this.length; i++) {

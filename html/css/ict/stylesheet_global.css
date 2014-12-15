@@ -1485,10 +1485,11 @@ td {
     cursor: pointer !important;
 }
 
-#move_unit_btn {
-    width: 108px;
-    float: left;
-    margin: 10px;
+#move_unit_btn img {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 #unit_people_dialog_row3_center_div {
