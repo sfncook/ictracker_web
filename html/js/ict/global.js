@@ -2778,6 +2778,7 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         }
         unitBtn.draggable({
             helper: "clone",
+            appendTo:"#mayday_and_tbar_container",
             start: function() {
                 console.log("start dragging");
             },

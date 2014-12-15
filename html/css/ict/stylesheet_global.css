@@ -2041,4 +2041,5 @@ ul {
 
 .tbar_unit_btn.unit_btn.button.ui-draggable.wiggle.ui-draggable-dragging {
     border: 4px red solid !important;
+    z-index: 250;
 }
