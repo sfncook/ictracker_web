@@ -2777,6 +2777,7 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
             unit_text.addClass("btn_medtext");
         }
         unitBtn.draggable({
+            helper: "clone",
             start: function() {
                 console.log("start dragging");
             },
@@ -2785,10 +2786,11 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
             },
             stop: function() {
                 console.log("stop dragging");
-                $(".tbar_unit_btn").removeClass("blink_me");
-                $(".tbar_unit_btn").draggable('disable');
+                $(".tbar_unit_btn").removeClass("wiggle");
+                $(".tbar_unit_btn").not(".ui-draggable-dragging").draggable('disable');
             }
         });
+        unitBtn.draggable('disable');
 
         // Move checkbox
         tbar.find(".unit_move_btn").show();
@@ -2947,7 +2949,7 @@ function addTbar(col_x, row_y) {
     unit_move_btn.hide();
     var unit_move_cancel_btn = tbar.find(".unit_move_cancel_btn");
     unit_move_btn.click(function () {
-        $(".tbar_unit_btn").addClass("blink_me");
+        $(".tbar_unit_btn").addClass("wiggle");
         $(".tbar_unit_btn").draggable();
         $(".tbar_unit_btn").draggable('enable');
 //        tbar_moving = tbar;

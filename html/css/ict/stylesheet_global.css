@@ -2038,3 +2038,7 @@ ul {
 .cancel_btn:active {
     background: #92b6c3;
 }
+
+.tbar_unit_btn.unit_btn.button.ui-draggable.wiggle.ui-draggable-dragging {
+    border: 4px red solid !important;
+}
