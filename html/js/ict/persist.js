@@ -448,10 +448,24 @@ function loadTbarFromCookie(tbarObj) {
     var tbarEl = findTbarElementByColRow(col, row);
     if (typeof tbarEl != 'undefined') {
         tbarEl.find(".title_text").html(tbarObj['title_text']);
+
         tbarEl.find(".title_dir").html(tbarObj['title_dir']);
+        if(tbarObj['title_dir']!='X') {
+            tbarEl.find(".title_dir").show();
+        }
+
         tbarEl.find(".title_num").html(tbarObj['title_num']);
+        if(tbarObj['title_num']!='X') {
+            tbarEl.find(".title_num").show();
+        }
     } else {
         tbarEl = addTbar(col, row);
+        var title_text = tbarObj['title_text'];
+        tbarEl.find(".title_text").html(title_text);
+
+        var title_dir = tbarObj['title_dir'];
+        tbarEl.find(".title_dir").html(title_dir);
+
         var title_text = tbarObj['title_text'];
         tbarEl.find(".title_text").html(title_text);
     }

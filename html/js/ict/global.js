@@ -3601,7 +3601,6 @@ $(document).keyup(function (e) {
         }
         onCloseCallback = 0;
         hideAllDialogs();
-        cancelUnitMove();
         if (typeof parentDialog != 'undefined' && parentDialog != 0) {
             $("#dialogContainer").show();
             parentDialog.show();
