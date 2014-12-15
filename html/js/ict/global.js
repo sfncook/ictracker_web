@@ -2725,11 +2725,6 @@ function removeUnitButton(unit_col_container, unitName) {
         var pane2api = scroll_pane.data('jsp');
         unit_row_div.remove();
         pane2api.reinitialise();
-
-        // Move unit button
-        if (unit_col_container.find(".unit_btn").length == 0) {
-            tbar.find(".unit_move_btn").hide();
-        }
     }
 
     updateTbar(tbar);
@@ -2779,23 +2774,15 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         unitBtn.draggable({
             helper: "clone",
             appendTo:"#mayday_and_tbar_container",
-            start: function() {
-                console.log("start dragging");
-            },
-            drag: function() {
+//            start: function() {
 //                console.log("start dragging");
-            },
+//            },
             stop: function() {
-                console.log("stop dragging");
                 $(".tbar_unit_btn").removeClass("wiggle");
                 $(".tbar_unit_btn").not(".ui-draggable-dragging").draggable('disable');
             }
         });
         unitBtn.draggable('disable');
-
-        // Move checkbox
-        tbar.find(".unit_move_btn").show();
-        unit_row_div.find(".unit_move_checkbox").hide();
 
         // Unit Timer
         var unit_timer_bg = unitBtn.find(".unit_timer_bg");
@@ -2838,29 +2825,15 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
     // Dispatched Units
     addDispatchedUnit(unitName);
 }
-function moveUnitButton(unit_col, unit_col_destination, unitBtn) {
+function moveUnitButton(unit_colSrc, unit_col_destination, unitBtn) {
     var unitName = unitBtn.find(".unit_text").html();
     var personnel_btn_text = unitBtn.parents(".unit_row_div").find(".personnel_btn").html();
 
-    removeUnitButton(unit_col, unitName)
+    removeUnitButton(unit_colSrc, unitName)
     addUnitButton(unit_col_destination, unitName, personnel_btn_text);
 
     // Cookies
     saveCookieState();
-}
-function cancelUnitMove() {
-    if (typeof tbar_moving != 'undefined') {
-        // Move unit button
-        if (tbar_moving.find(".unit_btn").length == 0) {
-            tbar_moving.find(".unit_move_btn").hide();
-        } else {
-            tbar_moving.find(".unit_move_btn").show();
-        }
-    }
-    jQuery($(".tbar_move_unit_cover")).detach();
-    $(".unit_move_cancel_btn").hide();
-    $(".unit_move_checkbox").hide();
-    $(".tbar_unit_info_btn").show();
 }
 
 var tbarIndex = 0;
@@ -2947,8 +2920,6 @@ function addTbar(col_x, row_y) {
 
     // Move Btn
     var unit_move_btn = tbar.find(".unit_move_btn");
-    unit_move_btn.hide();
-    var unit_move_cancel_btn = tbar.find(".unit_move_cancel_btn");
     unit_move_btn.click(function () {
         $(".tbar_unit_btn").addClass("wiggle");
         $(".tbar_unit_btn").draggable();
@@ -2994,10 +2965,19 @@ function addTbar(col_x, row_y) {
 //        });
     });
 
-    // Move Cancel Btn
-    unit_move_cancel_btn.hide();
-    unit_move_cancel_btn.click(function () {
-        cancelUnitMove();
+    // Droppable for unit move
+    tbar.find(".unit_col").droppable({
+        hoverClass: "unit_move_hover",
+        drop: function( event, ui ) {
+            var unit_btn = ui.draggable;
+            var unit_colSrc = unit_btn.parents(".unit_col");
+            var unit_colDst = $(this);
+            moveUnitButton(unit_colSrc, unit_colDst, unit_btn);
+            var helper = ui.helper;
+            helper.remove();
+            $(".tbar_unit_btn").removeClass("wiggle");
+            $(".tbar_unit_btn").not(".ui-draggable-dragging").draggable('disable');
+        }
     });
 
     tbar.show();

@@ -2043,3 +2043,6 @@ ul {
     border: 4px red solid !important;
     z-index: 250;
 }
+.unit_move_hover {
+    background: #94ff97;
+}
