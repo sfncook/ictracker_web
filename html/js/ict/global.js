@@ -1077,6 +1077,7 @@ function initMaydayDialog() {
     $("#mayday_clear_cancel_btn").click(function () {
         hideAllDialogs();
     });
+
 }
 
 
@@ -2930,6 +2931,7 @@ function addTbar(col_x, row_y) {
             helper.remove();
             $(".tbar_unit_btn").removeClass("wiggle");
             $(".tbar_unit_btn").not(".ui-draggable-dragging").draggable('disable');
+            updateUnitMaydays();
         }
     });
 
@@ -3610,6 +3612,7 @@ $(document).keyup(function (e) {
 });
 
 document.addEventListener('click', function (event) {
+
     if ($(event.target).hasClass("disabled") || $(event.target).parents(".disabled").length > 0) {
         event.stopPropagation();
     }

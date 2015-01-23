@@ -751,6 +751,10 @@ function postLoadCookieState() {
                 // Do Nothing
             }
         } // for
+
+        // Init unit buttons to flash if they are in mayday
+        updateUnitMaydays();
+
         COOKIES_ENABLED = true;
     }
 }
