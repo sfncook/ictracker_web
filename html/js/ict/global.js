@@ -2829,6 +2829,9 @@ function moveUnitButton(unit_colSrc, unit_col_destination, unitBtn) {
     var unitName = unitBtn.find(".unit_text").html();
     var personnel_btn_text = unitBtn.parents(".unit_row_div").find(".personnel_btn").html();
 
+    var tbar = unit_colSrc.parents(".tbar");
+    tbar.find(".action_btn").remove();
+
     removeUnitButton(unit_colSrc, unitName)
     addUnitButton(unit_col_destination, unitName, personnel_btn_text);
 
