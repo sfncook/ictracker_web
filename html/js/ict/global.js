@@ -1077,7 +1077,6 @@ function initMaydayDialog() {
     $("#mayday_clear_cancel_btn").click(function () {
         hideAllDialogs();
     });
-
 }
 
 
@@ -2833,6 +2832,8 @@ function moveUnitButton(unit_colSrc, unit_col_destination, unitBtn) {
     removeUnitButton(unit_colSrc, unitName)
     addUnitButton(unit_col_destination, unitName, personnel_btn_text);
 
+    updateUnitMaydays();
+
     // Cookies
     saveCookieState();
 }
@@ -2929,9 +2930,7 @@ function addTbar(col_x, row_y) {
             moveUnitButton(unit_colSrc, unit_colDst, unit_btn);
             var helper = ui.helper;
             helper.remove();
-            $(".tbar_unit_btn").removeClass("wiggle");
-            $(".tbar_unit_btn").not(".ui-draggable-dragging").draggable('disable');
-            updateUnitMaydays();
+            terminateDragging();
         }
     });
 
@@ -3128,11 +3127,21 @@ function setMode(mode_text) {
  * Move Unit Button
  **/
 function initMoveUnitButton() {
-    $("#move_unit_btn").click(function () {
-        $(".tbar_unit_btn").addClass("wiggle");
-        $(".tbar_unit_btn").draggable();
-        $(".tbar_unit_btn").draggable('enable');
+    $("#move_unit_btn").click(function (event) {
+        if($("#move_unit_btn_text").html()=="Move Unit") {
+            $(".tbar_unit_btn:not(.has_mayday)").addClass("wiggle");
+            $(".tbar_unit_btn:not(.has_mayday)").draggable();
+            $(".tbar_unit_btn:not(.has_mayday)").draggable('enable');
+            $("#move_unit_btn_text").html("Cancel");
+        } else {
+            terminateDragging();
+        }
     });
+}
+function terminateDragging() {
+    $(".tbar_unit_btn").removeClass("wiggle");
+    $(".tbar_unit_btn").not(".ui-draggable-dragging").draggable('disable');
+    $("#move_unit_btn_text").html("Move Unit");
 }
 
 
@@ -3595,8 +3604,8 @@ $.fn.exists = function () {
 }
 
 $(document).ready(init);
-//Esc Key Press
 $(document).keyup(function (e) {
+    //Esc Key Press
     if (e.keyCode == 27 && isIncidentRunning) {
         if (typeof onCloseCallback != 'undefined' && onCloseCallback != 0) {
             onCloseCallback();
@@ -3612,8 +3621,14 @@ $(document).keyup(function (e) {
 });
 
 document.addEventListener('click', function (event) {
-
     if ($(event.target).hasClass("disabled") || $(event.target).parents(".disabled").length > 0) {
+        event.stopPropagation();
+    }
+
+    // Terminate dragging if units are being moved
+    var isUnitsMoving = $(".tbar_unit_btn.wiggle").length>1;
+    if(isUnitsMoving) {
+        terminateDragging();
         event.stopPropagation();
     }
 }, true);
