@@ -65,3 +65,4 @@
 .med_bottom_pad {
     padding-bottom: 150px;
 }
+.med_helicopter, .med_ambulance{ display: none; margin-top: 5px; }

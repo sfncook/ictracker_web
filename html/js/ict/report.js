@@ -98,31 +98,10 @@ function getTitleStr(inc_num, dept_name, inc_start_time, osr_unit, inc_address) 
     return titleStr
 }
 function msEpochToDateString(msEpoch) {
-//    var date = new Date(parseInt(msEpoch));
-//    var hr = date.getHours();
-//    var hrStr = hr + "";
-//
-//    var date = new Date(parseInt(msEpoch));
-//    var min = date.getMinutes();
-//    var minStr = (min < 10) ? ("0" + min) : min;
-//
-//    var timeStr = hrStr + ":" + minStr;
-//
-//    if (hr < 12) {
-//        timeStr += "AM";
-//    }
-//
-//    return timeStr;
-
-//    var date = new Date();
-//    var dayStr = weekday[date.getDay()];
-//    var monthStr = month[date.getMonth()];
-//    var dateStr = date.getDate();
-//    var yearStr = date.getFullYear();
-//    var fullDateStr = dayStr + " " + monthStr + " " + dateStr + ", " + yearStr;
-//    doc.text(fullDateStr, RIGHT_SIDE - MARGIN - 60, BOTTOM_SIDE - MARGIN);
-//
-    return "Saturday November 1, 2014"
+	var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+	var dayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+	var date = new Date(parseInt(msEpoch));
+    return dayNames[date.getDay()] + ", " + monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
 }
 
 function msEpochToTimeString(msEpoch) {
