@@ -1962,8 +1962,10 @@ function initIncInfoDialog() {
 function updateOsrPercentComplete() {
     if (inc_type != '') {
         var many_osr_btn = $("." + inc_type).filter(".osr_btn").length;
+		var many_osr_toggle_btn = $("."  + inc_type + '.osr_toggle_left').length;
         var many_osr_btn_green = $("." + inc_type).filter(".osr_btn.glowlightgreen").length;
-        var percent_complete = many_osr_btn_green / many_osr_btn;
+        var many_osr_toggle_btn_green = $(".osr_toggle_left." + inc_type + " .osr_toggle_btn.glowlightgreen").length;
+        var percent_complete = (many_osr_btn_green + many_osr_toggle_btn_green) / (many_osr_btn + many_osr_toggle_btn);
         var width = percent_complete * 78.0;
         $("#osr_perc_bar").width(width);
     } else {
@@ -2077,7 +2079,18 @@ function initOsrDialog() {
         $("#osr_subfloor_btn").toggleClass("glowlightgreen");
         addEvent_osr("Occupancy: Sub Floor (1-2)");
     });
-
+    $("#iric_osr_btn").click(function () {
+        $("#iric_osr_btn").addClass("glowlightgreen");
+        $("#noir_osr_btn").removeClass("glowlightgreen");
+        updateOsrPercentComplete();
+        //addEvent_osr("IRIC");
+    });
+    $("#noir_osr_btn").click(function () {
+        $("#iric_osr_btn").removeClass("glowlightgreen");
+        $("#noir_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        //addEvent_osr("No IRIC");
+    });
     $("#osr_occupancy_basement_btn").click(function () {
         $("#osr_occupancy_basement_btn").addClass("glowlightgreen");
         $("#osr_occupancy_nobasement_btn").removeClass("glowlightgreen");
@@ -3345,6 +3358,15 @@ function initMedical() {
         $(".medical_toggle_btn").each(function () {
             $(this).click(toggleMedBtn($(this)));
         });
+		$(document.body).on("change", "select.med_hmode", function(e){
+			$(this).parent().find('.med_helicopter').css('display', 'none');
+			$(this).parent().find('.med_ambulance').css('display', 'none');
+			if ($(this).val().toLowerCase()=='ambulance'){
+				$(this).parent().find('.med_ambulance').css('display', 'block');
+			}else if ($(this).val().toLowerCase()=='helicopter'){
+				$(this).parent().find('.med_helicopter').css('display', 'block');
+			}
+		});
 
         $("#mayday_and_tbar_container").addClass("med_bottom_pad");
 
