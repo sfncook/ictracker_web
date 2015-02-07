@@ -3,22 +3,10 @@ var tbar_clicked;
 var tbar_moving;
 var parentDialog = 0;
 var isIncidentRunning = true;
-var inc_num_input = "";
 
 var btnsToBlink = new Array();
 function blinkUnit() {
     $.each(btnsToBlink, function (index, btn) {
-        if (btn.hasClass("glowred")) {
-            btn.removeClass("glowred");
-            btn.addClass("glowpink");
-        } else {
-            btn.addClass("glowred");
-            btn.removeClass("glowpink");
-        }
-    });
-
-    $(".unit_btn.has_mayday").each(function () {
-        var btn = $(this);
         if (btn.hasClass("glowred")) {
             btn.removeClass("glowred");
             btn.addClass("glowpink");
@@ -128,6 +116,7 @@ function togglePar(btn, btnSelector) {
         // Report
         if (tbar_has_par) {
             addEvent_sector_has_par(tbar_clicked.find(".title_text").text());
+            hideAllDialogs();
         } else if (unit_has_par) {
             addEvent_unit_has_par(unit_name, tbar_clicked.find(".title_text").text());
         } else if (person_has_par) {
@@ -207,7 +196,7 @@ function showParDialog(tbar, btn, parentDialog_) {
                     }
                 });
 //                $(".mayday_par_btn").click(showMaydayDialog);
-                $(".mayday_par_btn").click(showDialog_withCallbacks("#mayday_dialog", parDialog, 0, 0, onCloseMaydayDialog));
+                $(".mayday_par_btn").click(showDialog_withCallbacks("#mayday_dialog", parDialog, 0, 0, 0));
             }
 
             parDialog.find('.button:not(.dialog_close_btn)').removeClass('has_par');
@@ -244,15 +233,26 @@ function initParDialog() {
 /**
  * Psi Dialog
  **/
-function setPsiText_WithBtn(text, btn_) {
-    var btn;
-    if (btn_.hasClass("psi_btn")) {
-        btn = btn_;
+function setPsiText_WithBtn(text, btn_, suppressMaydayCheck) {
+    if (text.toString() != "") {
+        var btn;
+        if (btn_.hasClass("psi_btn")) {
+            btn = btn_;
+            if (btn_.hasClass("mayday_psi_btn") && !suppressMaydayCheck) {
+                var mayday_el = $(".mayday_saved.mayday_saved_selected");
+                mayday_el.find(".mayday_psi_value").html(text);
+            }
+        } else {
+            btn = btn_.find(".psi_btn");
+        }
+        btn.html(text);
+        updateBgColor(text, btn);
     } else {
-        btn = btn_.find(".psi_btn");
+        btn_.html("PSI");
+        btn_.removeClass("psi_red");
+        btn_.removeClass("psi_yellow");
+        btn_.removeClass("psi_green");
     }
-    btn.html(text);
-    updateBgColor(text, btn);
 }
 function setPsiText(text) {
     return function () {
@@ -404,184 +404,283 @@ function initUnitPeopleDialog() {
 }
 
 
-function onCloseMaydayDialog() {
-    $(".mayday_info_div").not("#mayday_info_div_prototype").each(function (i) {
-        var maydayEl = $(this);
-        var mayday_select = maydayEl.find(".mayday_select");
-        var mayday_sector_title = maydayEl.find(".mayday_sector_title");
-        var mayday_sector_title_text = mayday_select.find("option:selected").text();
-        var unit_btns = $(".tbar").find(".title_text:contains(" + mayday_sector_title_text + ")").parents(".tbar").find(".unit_btn");
-        var found_unit_btn_mayday = false;
-        unit_btns.each(function (i) {
-            var unit_btn = $(this);
-            var unit_text = unit_btn.find(".unit_text").text();
-            var maydayUnitBtn = maydayEl.find(".unit_text:contains(" + unit_text + ")").parents(".unit_btn");
-            if (maydayUnitBtn.hasClass("has_mayday")) {
-                maydayUnitBtn.addClass("disabled");
-                found_unit_btn_mayday = true;
-            } else {
-                maydayUnitBtn.remove();
-            }
-        });
-
-        if (found_unit_btn_mayday) {
-            mayday_select.hide();
-            mayday_sector_title.show();
-            mayday_sector_title.html("Sector: " + mayday_sector_title_text);
-        } else {
-            maydayEl.remove();
-        }
-    });
-}
-function resetMayday(maydayEl) {
-    var prev_unit_btn = maydayEl.data('unit_btn');
-    if (typeof prev_unit_btn != 'undefined') {
-        prev_unit_btn.removeClass("has_mayday");
-        prev_unit_btn.removeClass("glowred");
-        prev_unit_btn.removeClass("glowpink");
-    }
-    var prev_mayday_unit_btn = maydayEl.data('mayday_unit_btn');
-    if (typeof prev_mayday_unit_btn != 'undefined') {
-        prev_mayday_unit_btn.removeClass("has_mayday");
-        prev_mayday_unit_btn.removeClass("glowred");
-        prev_mayday_unit_btn.removeClass("glowpink");
-    }
-}
 /**
  * Mayday Dialog
  **/
-var allMaydayEvents = new Array();
-function addMaydayEvent(tbar, unitBtn, maydayUnitBtn) {
-    var maydayEvent = new MaydayEvent(tbar, unitBtn, maydayUnitBtn);
-    allMaydayEvents.push(maydayEvent);
-    unitBtn.addClass("has_mayday");
-    maydayUnitBtn.addClass("has_mayday");
-    return maydayEvent;
-}
-function removeMaydayEvent(maydayEvent) {
-    allMaydayEvents.remByVal(maydayEvent);
-    maydayEvent.maydayUnitBtn.removeClass("has_mayday");
-    maydayEvent.maydayUnitBtn.removeClass("glowred");
-    maydayEvent.maydayUnitBtn.removeClass("glowpink");
+function resetMaydayEditBox() {
+    var mayday_info_edit_div = $("#mayday_info_edit_div");
+    var mayday_mayday_title = $("#mayday_mayday_title");
+    var mayday_name_input = $("#mayday_name_input");
+    var mayday_edit_psi_btn = $("#mayday_edit_psi_btn");
+    var mayday_units_all = $("#mayday_units_all");
+    var mayday_unit_select = $("#mayday_unit_select");
+    var mayday_sectors_all = $("#mayday_sectors_all");
+    var mayday_sectors_select = $("#mayday_sectors_select");
+    var mayday_channel_select = $("#mayday_channel_select");
+    var mayday_rank_select = $("#mayday_rank_select");
+    var hoseline_mayday_btn = $("#hoseline_mayday_btn");
+    var offhoseline_mayday_btn = $("#offhoseline_mayday_btn");
+    var uninjured_mayday_btn = $("#uninjured_mayday_btn");
+    var injured_mayday_btn = $("#injured_mayday_btn");
+    var lost_mayday_btn = $("#lost_mayday_btn");
+    var trap_mayday_btn = $("#trap_mayday_btn");
+    var oair_mayday_btn = $("#oair_mayday_btn");
+    var regi_mayday_btn = $("#regi_mayday_btn");
+    var lair_mayday_btn = $("#lair_mayday_btn");
+    var pack_mayday_btn = $("#pack_mayday_btn");
 
-    var unitHasOtherMayday = false;
-    for (i = 0; i < allMaydayEvents.length; i++) {
-        var maydayEventObj = allMaydayEvents[i];
-        if (maydayEventObj.unitBtn.find(".unit_text").html() === maydayEvent.unitBtn.find(".unit_text").html()) {
-            unitHasOtherMayday = true;
+    mayday_mayday_title.html("Mayday #");
+    mayday_name_input.val("");
+    mayday_edit_psi_btn.removeClass("psi_red");
+    mayday_edit_psi_btn.removeClass("psi_yellow");
+    mayday_edit_psi_btn.removeClass("psi_green");
+    mayday_edit_psi_btn.html("PSI");
+    mayday_units_all.empty();
+    mayday_unit_select.children().not("#mayday_unit_option_default").remove();
+    mayday_unit_select.removeClass("glowred");
+    mayday_sectors_all.empty();
+    mayday_sectors_select.children().not("#mayday_sector_opt_default").remove();
+    mayday_sectors_select.removeClass("glowred");
+    mayday_channel_select.val("Channel");
+    mayday_rank_select.val("Rank");
+    hoseline_mayday_btn.removeClass("glowlightgreen");
+    offhoseline_mayday_btn.removeClass("glowred");
+    uninjured_mayday_btn.removeClass("glowlightgreen");
+    injured_mayday_btn.removeClass("glowred");
+    lost_mayday_btn.removeClass("glowred");
+    trap_mayday_btn.removeClass("glowred");
+    oair_mayday_btn.removeClass("glowred");
+    regi_mayday_btn.removeClass("glowred");
+    lair_mayday_btn.removeClass("glowred");
+    pack_mayday_btn.removeClass("glowred");
+}
+function removeMaydayEl(maydayEl) {
+    var prevEl = maydayEl.prev();
+    var nextEl = maydayEl.next();
+    if (prevEl.hasClass("mayday_saved")) {
+        selectMaydayEl(prevEl);
+    } else if (nextEl.hasClass("mayday_saved")) {
+        selectMaydayEl(nextEl);
+    } else {
+        resetMaydayEditBox();
+    }
+
+    var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
+    if (tbarUnitBtn != 0) {
+        if(manyMaydaysForUnit(tbarUnitBtn)==1) {
+            tbarUnitBtn.removeClass("has_mayday");
         }
     }
 
-    if (!unitHasOtherMayday) {
-        maydayEvent.unitBtn.removeClass("has_mayday");
-        maydayEvent.unitBtn.removeClass("glowred");
-        maydayEvent.unitBtn.removeClass("glowpink");
+    // Event
+    if (COOKIES_ENABLED) {
+        var maydayName = maydayEl.find(".mayday_box_title").html();
+        addEvent_maydayEnded(maydayName);
     }
+
+    maydayEl.remove();
+    $("#new_mayday_btn").removeClass("disabled");
 }
-function updateMaydaySector(maydayEl) {
-    var selectedSectorTitle = maydayEl.find(".mayday_select").find("option:selected").text();
-    var tbar = $(".tbar").find(".title_text:contains(" + selectedSectorTitle + ")").parents(".tbar");
-    var mayday_units_div = maydayEl.find(".mayday_units_div");
+var maydayTimers = new Array();
+function updateAllMaydayTimers() {
+    if (isIncidentRunning) {
+        $(".mayday_saved:not(#mayday_prototype)").each(function(){
+            var maydayEl = $(this);
+            var mayday_t0 = maydayEl.data("mayday_t0");
+            var mayday_timer = maydayEl.find(".mayday_timer");
 
-    resetMayday(maydayEl);
-    maydayEl.data("tbar", tbar);
+            var t1 = (new Date()).getTime();
+            var elapsed = parseInt(t1 - mayday_t0);
+            var elapsedSec = parseInt((elapsed / 1000) % 60);
+            var elapsedMin = parseInt((elapsed / (1000 * 60)) % 60);
+            var elapsedHr = parseInt((elapsed / (1000 * 60 * 60)) % 60);
 
-    tbar.find(".unit_btn").each(function (i) {
-        var unitBtn = $(this);
-        var unitText = unitBtn.html();
-        var maydayUnitBtn = $("<div class='mayday_unit_btn unit_btn button'>" + unitText + "</div>");
-        mayday_units_div.append(maydayUnitBtn);
+            var secStr = (elapsedSec < 10) ? ("0" + elapsedSec) : elapsedSec;
+            var minStr = (elapsedMin < 10) ? ("0" + elapsedMin) : elapsedMin;
+            var hrStr = (elapsedHr < 10) ? ("0" + elapsedHr) : elapsedHr;
 
-        // Set Mayday for clicked unit button
-        maydayUnitBtn.click(function () {
-            var prevMaydayEventObj = maydayEl.data("maydayEventObj");
-
-            // Remove previous mayday
-            if (typeof prevMaydayEventObj != 'undefined' && prevMaydayEventObj != null) {
-                removeMaydayEvent(prevMaydayEventObj);
-                maydayEl.data("maydayEventObj", null);
+            if (elapsedHr > 0) {
+                if (!hourRollOverDone) {
+                    mayday_timer.removeClass("time_lg");
+                    hourRollOverDone = true;
+                }
+                mayday_timer.html(hrStr + ":" + minStr + ":" + secStr);
+            } else {
+                mayday_timer.html(minStr + ":" + secStr);
             }
 
-            // Add new mayday
-            var newMaydayEventObj = addMaydayEvent(tbar, unitBtn, maydayUnitBtn);
-            maydayEl.data("maydayEventObj", newMaydayEventObj);
+            if (maydayEl.hasClass("mayday_saved_selected")) {
+                $("#mayday_info_edit_div").find(".mayday_timer").html(mayday_timer.html());
+            }
         });
-
-    });
-}
-function clearMayday(maydayEl) {
-    return function () {
-        var maydayEventObj = maydayEl.data("maydayEventObj");
-        removeMaydayEvent(maydayEventObj);
-        maydayEl.remove();
-        showDialog(0, 0, "#mayday_clear_dialog")();
     }
+}
+function selectMaydayEl(maydayEl) {
+    $(".mayday_saved").removeClass("mayday_saved_selected");
+    maydayEl.addClass("mayday_saved_selected");
+
+    var mayday_info_edit_div = $("#mayday_info_edit_div");
+    var mayday_box_title = mayday_info_edit_div.find(".mayday_box_title");
+    var mayday_timer = mayday_info_edit_div.find(".mayday_timer");
+    var mayday_name_input = mayday_info_edit_div.find(".mayday_name_input");
+
+    mayday_box_title.html(maydayEl.find(".mayday_box_title").html());
+    mayday_timer.html(maydayEl.find(".mayday_timer").html());
+    mayday_name_input.val(maydayEl.find(".mayday_name_value").html());
+
+    // Update unit
+    var mayday_unit_value = maydayEl.find(".mayday_unit_value").html();
+    mayday_info_edit_div.find(".mayday_unit_btn").removeClass("glowred");
+    var mayday_unit_select = $("#mayday_unit_select");
+    if (mayday_unit_value != "") {
+        mayday_info_edit_div.find(".mayday_unit_btn:contains(" + mayday_unit_value + ")").addClass("glowred");
+        mayday_unit_select.val(mayday_unit_value);
+        mayday_unit_select.addClass("glowred");
+        filterMaydaySectorsForUnit(mayday_unit_value);
+    } else {
+        mayday_unit_select.removeClass("glowred");
+        mayday_unit_select.val("Unit");
+        filterMaydaySectorsForUnit("");
+    }
+
+    // Update sector
+    var mayday_sector_value = maydayEl.find(".mayday_sector_value").html();
+    mayday_info_edit_div.find(".mayday_sector_edit_btn").removeClass("glowred");
+    var mayday_sectors_select = $("#mayday_sectors_select");
+    if (mayday_sector_value != "") {
+        mayday_info_edit_div.find(".mayday_sector_edit_btn:contains(" + mayday_sector_value + ")").addClass("glowred");
+        mayday_sectors_select.val(mayday_sector_value);
+        mayday_sectors_select.addClass("glowred");
+        filterMaydayUnitsForSector(mayday_sector_value);
+    } else {
+        mayday_sectors_select.removeClass("glowred");
+        mayday_sectors_select.val("Sector");
+        filterMaydayUnitsForSector("");
+    }
+
+    updateUnitMaydays();
+
+    // Update PSI
+    var psiText = maydayEl.find(".mayday_psi_value").html();
+    setPsiText_WithBtn(psiText, $("#mayday_edit_psi_btn"), true);
+
+    // Update channel
+    var mayday_channel_select = mayday_info_edit_div.find(".mayday_channel_select");
+    var mayday_channel_value = maydayEl.find(".mayday_channel_value").html();
+    if (mayday_channel_value != "") {
+        mayday_channel_select.val(mayday_channel_value);
+        mayday_channel_select.addClass("glowlightgreen");
+    } else {
+        mayday_channel_select.val("Channel");
+        mayday_channel_select.removeClass("glowlightgreen");
+    }
+
+    // Update rank
+    var mayday_rank_select = mayday_info_edit_div.find(".mayday_rank_select");
+    var mayday_rank_value = maydayEl.find(".mayday_rank_value").html();
+    if (mayday_rank_value != "") {
+        mayday_rank_select.val(mayday_rank_value);
+        mayday_rank_select.addClass("glowlightgreen");
+    } else {
+        mayday_rank_select.val("Rank");
+        mayday_rank_select.removeClass("glowlightgreen");
+    }
+
+    // Update hoseline
+    var hoseline_mayday_btn = $("#hoseline_mayday_btn");
+    var offhoseline_mayday_btn = $("#offhoseline_mayday_btn");
+    var mayday_misc_onhs = maydayEl.find(".mayday_misc_onhs");
+    var mayday_misc_ofhs = maydayEl.find(".mayday_misc_ofhs");
+    if (mayday_misc_onhs.hasClass("glowgreen")) {
+        hoseline_mayday_btn.addClass("glowgreen");
+    } else {
+        hoseline_mayday_btn.removeClass("glowgreen");
+    }
+    if (mayday_misc_ofhs.hasClass("glowred")) {
+        offhoseline_mayday_btn.addClass("glowred");
+    } else {
+        offhoseline_mayday_btn.removeClass("glowred");
+    }
+
+    // Update uninjured
+    var uninjured_mayday_btn = $("#uninjured_mayday_btn");
+    var injured_mayday_btn = $("#injured_mayday_btn");
+    var mayday_misc_unjr = maydayEl.find(".mayday_misc_unjr");
+    var mayday_misc_injr = maydayEl.find(".mayday_misc_injr");
+    if (mayday_misc_unjr.hasClass("glowgreen")) {
+        uninjured_mayday_btn.addClass("glowgreen");
+    } else {
+        uninjured_mayday_btn.removeClass("glowgreen");
+    }
+    if (mayday_misc_injr.hasClass("glowred")) {
+        injured_mayday_btn.addClass("glowred");
+    } else {
+        injured_mayday_btn.removeClass("glowred");
+    }
+
+
+    // Update options
+    var lost_mayday_btn = $("#lost_mayday_btn");
+    var trap_mayday_btn = $("#trap_mayday_btn");
+    var oair_mayday_btn = $("#oair_mayday_btn");
+    var regi_mayday_btn = $("#regi_mayday_btn");
+    var lair_mayday_btn = $("#lair_mayday_btn");
+    var pack_mayday_btn = $("#pack_mayday_btn");
+    var mayday_misc_lost = maydayEl.find(".mayday_misc_lost");
+    var mayday_misc_trap = maydayEl.find(".mayday_misc_trap");
+    var mayday_misc_oair = maydayEl.find(".mayday_misc_oair");
+    var mayday_misc_regi = maydayEl.find(".mayday_misc_regi");
+    var mayday_misc_lair = maydayEl.find(".mayday_misc_lair");
+    var mayday_misc_pack = maydayEl.find(".mayday_misc_pack");
+    lost_mayday_btn.toggleClass("glowred", mayday_misc_lost.hasClass("glowred"));
+    trap_mayday_btn.toggleClass("glowred", mayday_misc_trap.hasClass("glowred"));
+    oair_mayday_btn.toggleClass("glowred", mayday_misc_oair.hasClass("glowred"));
+    regi_mayday_btn.toggleClass("glowred", mayday_misc_regi.hasClass("glowred"));
+    lair_mayday_btn.toggleClass("glowred", mayday_misc_lair.hasClass("glowred"));
+    pack_mayday_btn.toggleClass("glowred", mayday_misc_pack.hasClass("glowred"));
 }
 var manyMaydays = 0;
 function addMaydayEventElement() {
     manyMaydays++;
-    var maydayEl = $("#mayday_info_div_prototype").clone();
-    maydayEl.appendTo("#mayday_scroll_div");
+
+    // Add new mayday info to list (bottom of mayday window)
+    var maydayEl = $("#mayday_prototype").clone();
+    maydayEl.appendTo("#mayday_list_box");
     maydayEl.show();
     maydayEl.attr("id", "mayday_info_div_" + manyMaydays);
-    maydayEl.find(".mayday_box_title").html("Mayday #" + manyMaydays);
+    var maydayName = "Mayday #" + manyMaydays;
+    maydayEl.find(".mayday_box_title").html(maydayName);
 
+    // Mayday Timer
+    var mayday_t0 = (new Date()).getTime();
+    maydayEl.data({'mayday_t0': mayday_t0});
 
-    // PSI button
-    var mayday_psi_btn = maydayEl.find(".mayday_psi_btn");
-    mayday_psi_btn.click(showDialog(0, [mayday_psi_btn], "#psi_dialog", $("#mayday_dialog")));
+    selectMaydayEl(maydayEl);
+    $("#mayday_info_edit_div").show();
 
-    var mayday_clear_btn = maydayEl.find(".mayday_clear_btn");
-    mayday_clear_btn.click(clearMayday(maydayEl));
+    maydayEl.click(function () {
+        return selectMaydayEl($(this));
+    });
 
+    var bounds = maydayEl.offset();
+    var width = maydayEl.outerWidth();
+    var right = bounds.left + width;
+    var win = $(window);
+    var viewport = {
+        left: win.scrollLeft()
+    };
+    viewport.right = viewport.left + win.width();
+    if (right + width >= viewport.right) {
+        $("#new_mayday_btn").addClass("disabled");
+    }
 
-    // Hoseline Buttons
-    var hoseline_mayday_btn = maydayEl.find(".hoseline_mayday_btn");
-    var offhoseline_mayday_btn = maydayEl.find(".offhoseline_mayday_btn");
-    hoseline_mayday_btn.click(
-        function () {
-            hoseline_mayday_btn.addClass("glowgreen");
-            offhoseline_mayday_btn.removeClass("glowred");
-        }
-    );
+    // Event
+    if (COOKIES_ENABLED) {
+        addEvent_maydayStarted(maydayName);
+    }
 
-    offhoseline_mayday_btn.click(
-        function () {
-            hoseline_mayday_btn.removeClass("glowgreen");
-            offhoseline_mayday_btn.addClass("glowred");
-        }
-    );
-
-
-    // Injured Buttons
-    var uninjured_mayday_btn = maydayEl.find(".uninjured_mayday_btn");
-    var injured_mayday_btn = maydayEl.find(".injured_mayday_btn");
-    uninjured_mayday_btn.click(
-        function () {
-            uninjured_mayday_btn.addClass("glowgreen");
-            injured_mayday_btn.removeClass("glowred");
-        }
-    );
-    injured_mayday_btn.click(
-        function () {
-            uninjured_mayday_btn.removeClass("glowgreen");
-            injured_mayday_btn.addClass("glowred");
-        }
-    );
-
-
-    // Select DDLB
-    $(".mayday_select").change(
-        function () {
-            $(this).addClass("glowlightgreen");
-            $("#mayday_units_div").find(".unit_btn").hide();
-            updateMaydaySector(maydayEl);
-        }
-    );
-
-
-    // Sector Div
-    maydayEl.find(".mayday_sector_title").hide();
+    saveCookieState();
+    return maydayEl;
 }
 function selectMaydayTab(tab, color) {
     var tabEl = $("#mayday_right_tab_" + tab);
@@ -596,16 +695,218 @@ function selectMaydayTab(tab, color) {
     $("#mayday_right_td").removeClass("blue_bg");
     $("#mayday_right_td").addClass(color);
 }
+function manyMaydaysForUnit(tbarUnitBtn) {
+    var title_text = tbarUnitBtn.parents(".tbar").find(".title_text").html();
+    var unitName = tbarUnitBtn.find(".unit_text").html();
+
+    var mayday_saveds =
+        $(".mayday_saved")
+            .find(".mayday_unit_value:contains("+unitName+")")
+            .parents(".mayday_saved")
+            .filter(function() {
+                return $(this)
+                    .find(".mayday_sector_value:contains("+title_text+")")
+                    .parents(".mayday_saved")
+                    .exists();
+            });
+
+    return mayday_saveds.length;
+}
+function findTbarUnitBtnForMayday(maydayEl) {
+    var tbarUnitBtn = 0;
+    var unit_text = maydayEl.find(".mayday_unit_value").html();
+    var sector_title = maydayEl.find(".mayday_sector_value").html();
+    if (unit_text != '' && sector_title != '') {
+        var tbar = $(".title_text:contains(" + sector_title + ")").parents(".tbar");
+        tbarUnitBtn = tbar.find(".unit_text:contains(" + unit_text + ")").parent();
+    }
+    return tbarUnitBtn;
+}
+function updateUnitMaydays() {
+    $(".tbar_unit_btn").removeClass("has_mayday");
+    $(".tbar_unit_btn").removeClass("glowred");
+    $(".tbar_unit_btn").removeClass("glowpink");
+    $(".mayday_saved").each(function () {
+        var maydayEl = $(this);
+        var tbarUnitBtn = findTbarUnitBtnForMayday(maydayEl);
+        if (tbarUnitBtn != 0) {
+            tbarUnitBtn.addClass("has_mayday");
+        }
+    });
+}
+function filterMaydaySectorsForUnit(unit_text) {
+    if (unit_text == "") {
+        $(".mayday_sector_title").removeClass("disabled");
+        $(".mayday_sector_opt").not("#mayday_sector_opt_default").show();
+    } else {
+        var sectorTitles = $(".unit_text:contains(" + unit_text + ")").parents(".tbar").find(".title_text");
+        $(".mayday_sector_title").addClass("disabled");
+        $(".mayday_sector_opt").not("#mayday_sector_opt_default").hide();
+        sectorTitles.each(function () {
+            $(".mayday_sector_title:contains(" + $(this).html() + ")").removeClass("disabled");
+            $(".mayday_sector_opt:contains(" + $(this).html() + ")").show();
+        });
+    }
+}
+function filterMaydayUnitsForSector(sector_title) {
+    if (sector_title == "") {
+        $(".mayday_unit_btn").removeClass("disabled");
+    } else {
+        var unitTexts = $(".title_text:contains(" + sector_title + ")").parents(".tbar").find(".unit_text");
+        $(".mayday_unit_btn").addClass("disabled");
+        unitTexts.each(function () {
+            $(".mayday_unit_btn:contains(" + $(this).html() + ")").removeClass("disabled");
+        });
+    }
+}
+function onOpenMaydayDialog() {
+    // Init mayday (if needed)
+    var manyMaydays = $(".mayday_saved").not("#mayday_prototype").length;
+    if(manyMaydays==0) {
+        addMaydayEventElement();
+    }
+
+    // Collect all units and sort them
+    var allUnitNames = new Array();
+    $(".tbar_unit_btn").each(function () {
+        var tbar_parent = $(this).parents("#unit_row_div_prototype");
+        var isProtoType = tbar_parent.length > 0;
+
+        if (!isProtoType) {
+            var unit_textEl = $(this).find(".unit_text");
+            var unit_text = unit_textEl.html();
+            allUnitNames.push(unit_text);
+        }
+    });
+    var mayday_units_all = $("#mayday_units_all");
+    var mayday_unit_select = $("#mayday_unit_select");
+    mayday_units_all.empty();
+    allUnitNames = allUnitNames.sort();
+    for (var i = 0; i < allUnitNames.length; i++) {
+        var unit_text = allUnitNames[i];
+        var unitBtnExists = $(".mayday_unit_edit_btn:contains('" + unit_text + "')").exists();
+        if (!unitBtnExists) {
+            var maydayUnitBtn = $("<div class='mayday_unit_edit_btn mayday_unit_btn unit_btn button'>" + unit_text + "</div>");
+            mayday_units_all.append(maydayUnitBtn);
+            if (unit_text.length > 5) {
+                maydayUnitBtn.addClass("btn_largetext");
+            } else if (unit_text.length > 4) {
+                maydayUnitBtn.addClass("btn_medtext");
+            }
+            var maydayUnitOpt = $("<option class='mayday_unit_opt'>" + unit_text + "</option>");
+            mayday_unit_select.append(maydayUnitOpt);
+
+            maydayUnitBtn.click(function () {
+                saveCookieState();
+                var clicked_unit_text = $(this).html();
+                var mayday_el = $(".mayday_saved.mayday_saved_selected");
+                var mayday_unit_value = mayday_el.find(".mayday_unit_value");
+                if ($(this).hasClass("glowred")) {
+                    $(this).removeClass("glowred");
+                    mayday_unit_value.html("");
+                    filterMaydaySectorsForUnit("");
+                } else {
+                    $(".mayday_unit_edit_btn").removeClass("glowred");
+                    $(this).addClass("glowred");
+                    mayday_unit_value.html(clicked_unit_text);
+
+                    var tbars_with_unit = $(".tbar").filter(function () {
+                        return $(this).find(".unit_text:contains('" + clicked_unit_text + "')").exists();
+                    });
+                    filterMaydaySectorsForUnit(clicked_unit_text);
+                }
+                updateUnitMaydays();
+            });
+        }
+    }
+    mayday_units_all.append('<div class="clear_float"></div>');
+    if (allUnitNames.length > 12) {
+        mayday_units_all.hide();
+        mayday_unit_select.show();
+    } else {
+        mayday_units_all.show();
+        mayday_unit_select.hide();
+    }
+
+
+    // Collect all sectors and sort them
+    var allSectorNames = new Array();
+    $(".tbar").not("#tbar_prototype").each(function () {
+        var sector_title = $(this).find(".title_text").html();
+        allSectorNames.push(sector_title);
+    });
+    var mayday_sectors_all = $("#mayday_sectors_all");
+    mayday_sectors_all.empty();
+    var mayday_sectors_select = $("#mayday_sectors_select");
+    mayday_sectors_select.children().not("#mayday_sector_opt_default").remove();
+    allSectorNames = allSectorNames.sort();
+    for (var i = 0; i < allSectorNames.length; i++) {
+        var sector_title = allSectorNames[i];
+        var sectorBtnExists = $(".mayday_sector_edit_btn:contains('" + sector_title + "')").exists();
+        if (!sectorBtnExists && sector_title != "Sector Title") {
+            var maydaySectorBtn = $("<div class='mayday_sector_edit_btn mayday_sector_title button'>" + sector_title + "</div>");
+            mayday_sectors_all.append(maydaySectorBtn);
+
+            maydaySectorBtn.click(function () {
+                saveCookieState();
+                var clicked_sector_text = $(this).html();
+                var mayday_el = $(".mayday_saved.mayday_saved_selected");
+                var mayday_sector_value = mayday_el.find(".mayday_sector_value");
+                if ($(this).hasClass("glowred")) {
+                    $(this).removeClass("glowred");
+                    mayday_sector_value.html("");
+                    filterMaydayUnitsForSector("");
+                } else {
+                    $(".mayday_sector_edit_btn").removeClass("glowred");
+                    $(this).addClass("glowred");
+                    mayday_sector_value.html(clicked_sector_text);
+
+                    var tbars_with_sector = $(".tbar").filter(function () {
+                        return $(this).find(".title_text:contains('" + clicked_sector_text + "')").exists();
+                    });
+                    filterMaydayUnitsForSector(clicked_sector_text);
+                }
+                updateUnitMaydays();
+            });
+        }
+        var sectorOptExists = $(".mayday_sector_opt:contains('" + sector_title + "')").exists();
+        if (!sectorOptExists && sector_title != "Sector Title") {
+            var maydaySectorOpt = $("<option class='mayday_sector_opt'>" + sector_title + "</option>");
+            mayday_sectors_select.append(maydaySectorOpt);
+        }
+    }
+    mayday_sectors_all.append('<div class="clear_float"></div>');
+    if (mayday_sectors_all.children().length - 1 > 6) {
+        mayday_sectors_all.hide();
+        mayday_sectors_select.show();
+    } else {
+        mayday_sectors_all.show();
+        mayday_sectors_select.hide();
+    }
+
+    if (allSectorNames.length > 6 && allUnitNames.length > 12) {
+        $("#clear_float_between_units_and_sectors").hide();
+    } else {
+        $("#clear_float_between_units_and_sectors").show();
+    }
+
+    selectMaydayEl($(".mayday_saved.mayday_saved_selected"));
+}
 function initMaydayDialog() {
     var maydayBtn = $("#mayday_btn");
-    maydayBtn.click(showDialog_withCallbacks("#mayday_dialog", 0/*parentDialog*/, 0, 0, onCloseMaydayDialog));
+    maydayBtn.click(showDialog_withCallbacks(
+        "#mayday_dialog",   // dialogId
+        0,                  // parentDialog
+        onOpenMaydayDialog, // onOpenCallback
+        0,                  // onClickCallback
+        0                   // onCloseCallback
+    ));
 
-    $("#mayday_info_div_prototype").hide();
+
+    // Init mayday tabs
     $("#new_mayday_btn").click(addMaydayEventElement);
-
     $(".mayday_tab_div").hide();
     selectMaydayTab("radio", "tan_bg");
-
     $("#mayday_right_tab_radio").click(function () {
         selectMaydayTab("radio", "tan_bg")
     });
@@ -619,8 +920,162 @@ function initMaydayDialog() {
         selectMaydayTab("build", "blue_bg")
     });
 
-    $(".mayday_clear_item_btn").click(function () {
-        hideAllDialogs()
+    $(".mayday_check").change(function () {
+        if ($(this).is(":checked")) {
+            $(this).parent().addClass("glowlightgreen")
+        } else {
+            $(this).parent().removeClass("glowlightgreen")
+        }
+    });
+
+    // Init edit box
+    var mayday_info_edit_div = $("#mayday_info_edit_div");
+    mayday_info_edit_div.hide();
+    $("#mayday_prototype").hide();
+
+    // PSI button
+    var mayday_psi_btn = mayday_info_edit_div.find(".mayday_psi_btn");
+    mayday_psi_btn.click(showDialog(0, [mayday_psi_btn], "#psi_dialog", $("#mayday_dialog")));
+    mayday_psi_btn.appendChild = function (node) {
+        saveCookieState();
+        console.log("change mayday psi");
+        // call the .appendChild() function of some other div
+        // and pass the current (this) to let the function affect it.
+        document.createElement("div").appendChild.call(this, node);
+    };
+
+// Hoseline Buttons
+    var hoseline_mayday_btn = mayday_info_edit_div.find(".hoseline_mayday_btn");
+    var offhoseline_mayday_btn = mayday_info_edit_div.find(".offhoseline_mayday_btn");
+    hoseline_mayday_btn.click(
+        function () {
+            hoseline_mayday_btn.addClass("glowgreen");
+            offhoseline_mayday_btn.removeClass("glowred");
+            var mayday_el = $(".mayday_saved.mayday_saved_selected");
+            mayday_el.find(".mayday_misc_onhs").addClass("glowgreen");
+            mayday_el.find(".mayday_misc_ofhs").removeClass("glowred");
+        }
+    );
+    offhoseline_mayday_btn.click(
+        function () {
+            hoseline_mayday_btn.removeClass("glowgreen");
+            offhoseline_mayday_btn.addClass("glowred");
+            var mayday_el = $(".mayday_saved.mayday_saved_selected");
+            mayday_el.find(".mayday_misc_onhs").removeClass("glowgreen");
+            mayday_el.find(".mayday_misc_ofhs").addClass("glowred");
+        }
+    );
+
+    // Injured Buttons
+    var uninjured_mayday_btn = $("#uninjured_mayday_btn");
+    var injured_mayday_btn = $("#injured_mayday_btn");
+    uninjured_mayday_btn.click(
+        function () {
+            uninjured_mayday_btn.addClass("glowgreen");
+            injured_mayday_btn.removeClass("glowred");
+            var mayday_el = $(".mayday_saved.mayday_saved_selected");
+            mayday_el.find(".mayday_misc_unjr").addClass("glowgreen");
+            mayday_el.find(".mayday_misc_injr").removeClass("glowred");
+        }
+    );
+    injured_mayday_btn.click(
+        function () {
+            uninjured_mayday_btn.removeClass("glowgreen");
+            injured_mayday_btn.addClass("glowred");
+            var mayday_el = $(".mayday_saved.mayday_saved_selected");
+            mayday_el.find(".mayday_misc_unjr").removeClass("glowgreen");
+            mayday_el.find(".mayday_misc_injr").addClass("glowred");
+        }
+    );
+
+    // Select DDLB
+    mayday_info_edit_div.find(".mayday_select").not("#mayday_unit_select").not("#mayday_sectors_select").change(
+        function () {
+            saveCookieState();
+            $(this).addClass("glowlightgreen");
+        }
+    );
+
+    // Mayday Single Toggle Btns
+    mayday_info_edit_div.find(".mayday_single_toggle").click(function () {
+        saveCookieState();
+        $(this).toggleClass("glowred");
+    });
+
+    // Name input box
+    mayday_info_edit_div.find(".mayday_name_input").on('input', function () {
+        saveCookieState();
+        var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
+        mayday_saved_selected.find(".mayday_name_value").html($(this).val());
+    });
+
+    // Select channel
+    var mayday_channel_select = $("#mayday_channel_select");
+    mayday_channel_select.change(function () {
+        saveCookieState();
+        var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
+        mayday_saved_selected.find(".mayday_channel_value").html($(this).val());
+    });
+
+    // Select rank
+    var mayday_rank_select = $("#mayday_rank_select");
+    mayday_rank_select.change(function () {
+        saveCookieState();
+        var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
+        mayday_saved_selected.find(".mayday_rank_value").html($(this).val());
+    });
+
+    // Select unit
+    var mayday_unit_select = $("#mayday_unit_select");
+    mayday_unit_select.change(function () {
+        saveCookieState();
+        mayday_unit_select.addClass("glowred");
+        var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
+        var unit_text = $(this).val();
+        $(".mayday_unit_edit_btn:contains(" + unit_text + ")").click();
+    });
+
+    // Select sector
+    var mayday_sectors_select = $("#mayday_sectors_select");
+    mayday_sectors_select.change(function () {
+        saveCookieState();
+        mayday_sectors_select.addClass("glowred");
+        var mayday_saved_selected = $(".mayday_saved.mayday_saved_selected");
+        var sector_title = $(this).val();
+        $(".mayday_sector_edit_btn:contains(" + sector_title + ")").click();
+    });
+
+    // Option
+    $("#lost_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_lost").toggleClass("glowred", $(this).hasClass("glowred"));
+    });
+    $("#trap_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_trap").toggleClass("glowred", $(this).hasClass("glowred"));
+    });
+    $("#oair_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_oair").toggleClass("glowred", $(this).hasClass("glowred"));
+    });
+    $("#regi_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_regi").toggleClass("glowred", $(this).hasClass("glowred"));
+    });
+    $("#lair_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_lair").toggleClass("glowred", $(this).hasClass("glowred"));
+    });
+    $("#pack_mayday_btn").click(function () {
+        $(".mayday_saved.mayday_saved_selected").find(".mayday_misc_pack").toggleClass("glowred", $(this).hasClass("glowred"));
+    });
+
+    // Clear Btn
+    var mayday_clear_btn = $("#mayday_clear_btn");
+    mayday_clear_btn.click(
+        showDialog(0, 0, "#mayday_clear_dialog")
+    );
+    $(".mayday_clear_item_btn").not("#mayday_clear_cancel_btn").click(function () {
+        removeMaydayEl($(".mayday_saved.mayday_saved_selected"));
+        hideAllDialogs();
+    });
+    $("#mayday_clear_cancel_btn").click(function () {
+        hideAllDialogs();
     });
 }
 
@@ -664,17 +1119,16 @@ var onCloseCallback;
 function showDialog_withCallbacks(dialogId, parentDialog_, onOpenCallback_, onClickCallback_, onCloseCallback_) {
     return function () {
         parentDialog = parentDialog_;
-
-        if (typeof onOpenCallback_ != 'undefined' && onOpenCallback_ != 0) {
-            onOpenCallback_();
-        }
-
         onClickCallback = onClickCallback_;
         onCloseCallback = onCloseCallback_;
 
         $(".dialog").hide();
         $("#dialogContainer").show();
         $(dialogId).show();
+
+        if (typeof onOpenCallback_ != 'undefined' && onOpenCallback_ != 0) {
+            onOpenCallback_();
+        }
     }
 }
 function showDialog(tbar, btn, dialogId, parentDialog_) {
@@ -755,21 +1209,19 @@ function setTbarTitle(tbar, title) {
         addTbar();
     }
 
-    // Update any Maydays for this sector
-    var maydaysSelected = $(".mayday_sector_select").find("option:selected:contains(" + title_text_prev + ")").parents(".mayday_sector_select");
-    $(".mayday_sector_select").find("option:contains(" + title_text_prev + ")").remove();
-    $(".mayday_sector_select").each(function () {
-        $(this).append($("<option value='" + title + "'>" + title + "</option>"));
-    });
-    maydaysSelected.each(function () {
-        $(this).find("option:contains(" + title + ")").attr('selected', 'selected');
-    });
-
     // Report
     addEvent_title_to_sector(title);
 
     // Update Cookies
     saveCookieState();
+
+}
+function addCustSector(sectorName) {
+    var newBtn = $('<div class="sector_cust_btn title_dialog_btn title_btn button col-xs-3">' + sectorName + '</div>');
+    $("#cust_sectors").append(newBtn);
+    newBtn.click(function () {
+        setTbarTitle(tbar_clicked, sectorName);
+    });
 }
 function initSectorDialog() {
     var sectorDialog = $("#dialog_prototype").clone().appendTo("#dialog_vertical_align_cell");
@@ -779,52 +1231,56 @@ function initSectorDialog() {
     dialog_title_text.append("Sectors");
     var dialog_body = sectorDialog.find(".dialog_body");
 
-    var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
-    dialog_body.append(dir_btns_container);
-    var suplInfoPrototypeBtn = $("<div class=\"button col-xs-3 sm_round_btn\">PROTOTYPE</div>");
+    $("#sector_dialog").addClass(inc_type);
 
-    //Sub button
-    var newBtn = $('<div id="sub_sector_btn" class="button">Sub</div>').clone();
-    dir_btns_container.append(newBtn);
-    newBtn.click(function () {
-        var tbarDirBtn = tbar_clicked.find(".title_dir");
-        if (newBtn.hasClass("glow_orange")) {
-            $("#sub_sector_btn").removeClass("glow_orange");
-            $(".dir_supl_info_dir_btn").removeClass("glow_orange");
-            tbar_clicked.prefix_dir = 'X';
-            tbarDirBtn.hide();
-        } else {
-            $("#sub_sector_btn").removeClass("glow_orange");
-            $(".dir_supl_info_dir_btn").removeClass("glow_orange");
-            newBtn.addClass("glow_orange");
-            tbar_clicked.prefix_dir = newBtn.html();
-            tbarDirBtn.show();
-            tbarDirBtn.html("Sub");
-        }
-    });
+    if (inc_type == "fire") {
+        var dir_btns_container = $('<div id="dir_btns_container" class="col-xs-12 container-fluid"/>').clone();
+        dialog_body.append(dir_btns_container);
+        var suplInfoPrototypeBtn = $("<div class=\"button col-xs-3 sm_round_btn\">PROTOTYPE</div>");
 
-    //Suplimental buttons
-    ["N", "E", "S", "W"].forEach(function (btnText, index, array) {
-        var newBtn = suplInfoPrototypeBtn.clone();
-        newBtn.addClass("dir_supl_info_dir_btn");
-        newBtn.addClass(btnText + "_supl_btn");
-        newBtn.html(btnText);
+        //Sub button
+        var newBtn = $('<div id="sub_sector_btn" class="button">Sub</div>').clone();
         dir_btns_container.append(newBtn);
         newBtn.click(function () {
-            toggleDirBtn(newBtn);
+            var tbarDirBtn = tbar_clicked.find(".title_dir");
+            if (newBtn.hasClass("glow_orange")) {
+                $("#sub_sector_btn").removeClass("glow_orange");
+                $(".dir_supl_info_dir_btn").removeClass("glow_orange");
+                tbar_clicked.prefix_dir = 'X';
+                tbarDirBtn.hide();
+            } else {
+                $("#sub_sector_btn").removeClass("glow_orange");
+                $(".dir_supl_info_dir_btn").removeClass("glow_orange");
+                newBtn.addClass("glow_orange");
+                tbar_clicked.prefix_dir = newBtn.html();
+                tbarDirBtn.show();
+                tbarDirBtn.html("Sub");
+            }
         });
-    });
 
-    ["1", "2", "3", "4", "5", "6", "7", "8", "9"].forEach(function (btnText, index, array) {
-        var newBtn = suplInfoPrototypeBtn.clone();
-        newBtn.addClass("dir_supl_info_num_btn");
-        newBtn.addClass(btnText + "_supl_btn");
-        newBtn.html(btnText);
-        dir_btns_container.append(newBtn);
-        newBtn.click(function () {
-            clickNumBtn(newBtn);
+        //Suplimental buttons
+        ["N", "E", "S", "W"].forEach(function (btnText, index, array) {
+            var newBtn = suplInfoPrototypeBtn.clone();
+            newBtn.addClass("dir_supl_info_dir_btn");
+            newBtn.addClass(btnText + "_supl_btn");
+            newBtn.html(btnText);
+            dir_btns_container.append(newBtn);
+            newBtn.click(function () {
+                toggleDirBtn(newBtn);
+            });
         });
-    });
+
+        ["1", "2", "3", "4", "5", "6", "7", "8", "9"].forEach(function (btnText, index, array) {
+            var newBtn = suplInfoPrototypeBtn.clone();
+            newBtn.addClass("dir_supl_info_num_btn");
+            newBtn.addClass(btnText + "_supl_btn");
+            newBtn.html(btnText);
+            dir_btns_container.append(newBtn);
+            newBtn.click(function () {
+                clickNumBtn(newBtn);
+            });
+        });
+    }
 
 
     var title_btns_container = $('<div id="title_btns_container" class="col-xs-12 container-fluid"/>').clone();
@@ -854,23 +1310,29 @@ function initSectorDialog() {
 
         newBtn.click(function () {
             if (!newBtn.hasClass("hidden_sector_btn")) {
-                if (!newBtn.hasClass("glowlightgreen")) {
-                    if (sectorName == "Sector ####") {
-                        key_replace_char_at_index = 7;
-                        $("#key_output_value").html("Sector ####");
-                        showDialog(tbar_clicked, btn_clicked, "#key_dialog")();
-                    } else {
-                        setTbarTitle(tbar_clicked, sectorName);
-                    }
+                if (sectorName == "Sector ####") {
+                    key_replace_char_at_index = 7;
+                    $("#key_output_value").html("Sector ####");
+                    showDialog(tbar_clicked, btn_clicked, "#key_dialog")();
                 } else {
-                    tbar_clicked.find(".title_text").html("Sector Title");
-                    hideAllDialogs();
-                    saveCookieState();
+                    setTbarTitle(tbar_clicked, sectorName);
                 }
             }
         });
     });
 
+
+    // Custom Sectors
+    var addCustSectors = $('<div id="cust_sectors" class="cust_div"><input id="cust_sector_input"/><div id="add_cust_sector_btn" class="add_cust_btn button">+ADD</div><div class="clear_float"></div></div>');
+    dialog_body.append(addCustSectors);
+    $("#add_cust_sector_btn").click(function () {
+        var sectorName = $("#cust_sector_input").val();
+        if (sectorName != "") {
+            addCustSector(sectorName);
+            addCustAction(sectorName);
+            saveCookieState();
+        }
+    });
 }
 
 
@@ -929,11 +1391,14 @@ function updateSelectedUnitActionsData(tbar) {
 function onOpenActionsDialogFromTbar(tbar) {
     return function () {
         $(".action_dialog_btn").removeClass("glowlightgreen");
+        $(".action_cust_btn").removeClass("glowlightgreen");
         $.each(tbar.find(".action_btn"), function (index, tbarActionBtn) {
             var html = $(tbarActionBtn).html();
-            $(".action_dialog_btn").filter(function () {
+            $(".action_all_dialog_btn").filter(function () {
                 return $(this).text() == html;
             }).addClass("glowlightgreen");
+            $(".action_cust_btn:contains(" + html + ")").addClass("glowlightgreen");
+
         });
     }
 }
@@ -972,14 +1437,14 @@ function removeActionButtonFromTbar(tbar, actionName) {
 }
 function addActionButtonToTbar(tbar, actionName) {
     // Update Actions Dialog
-    var action_dialog_btn = $(".action_dialog_btn").filter(function () {
+    var action_dialog_btn = $(".action_all_dialog_btn").filter(function () {
         return $(this).text() == actionName;
     });
     action_dialog_btn.addClass("glowlightgreen");
 
     var is_font_red = action_dialog_btn.hasClass("font_red");
     // Add action button to TBar
-    var actionBtn = $("<div class='disabled action_btn button'>" + actionName + "</div>");
+    var actionBtn = $("<div class='action_btn button'>" + actionName + "</div>");
 
     if (is_font_red) {
         actionBtn.addClass("font_red");
@@ -1015,6 +1480,13 @@ function addActionButtonToTbar(tbar, actionName) {
     var unit_name = tbar.find(".left_scroll_pane").find(".unit_row_div.glowlightyellow").find(".unit_text").text();
     addEvent_action_to_unit(actionName, unit_name, sector_title)
 }
+function addCustAction(actionName) {
+    var newBtn = $('<div class="action_all_dialog_btn action_cust_btn action_btn dialog_btn button">' + actionName + '</div>');
+    $("#cust_actions").append(newBtn);
+    newBtn.click(function () {
+        onClickCallback(actionName);
+    });
+}
 function initActionsDialog() {
     var actionsDialog = $("#dialog_prototype").clone().appendTo("#dialog_vertical_align_cell");
     var newId = "actions_dialog";
@@ -1023,7 +1495,8 @@ function initActionsDialog() {
     var actionsTitleDiv = actionsDialog.find(".dialog_title_text");
     actionsTitleDiv.append("Actions");
     var prototypeHeader = $("<div class=\"action_type_dialog_header col-xs-12\">PROTOTYPE</div>");
-    var prototypeBtn = $("<div class=\"action_dialog_btn col-xs-2 action_btn dialog_btn button\">PROTOTYPE</div>");
+    var prototypeBtn = $("<div class=\"action_all_dialog_btn action_dialog_btn col-xs-2 action_btn dialog_btn button\">PROTOTYPE</div>");
+
     actions.forEach(function (actionObj, index, array) {
         var actionTypeHeader = prototypeHeader.clone();
         actionTypeHeader.html(actionObj.action_type);
@@ -1056,9 +1529,20 @@ function initActionsDialog() {
 
             actionsDialogBody.append(newBtn);
             newBtn.click(function () {
-                onClickCallback(actionName)
+                onClickCallback(actionName);
             });
         });
+    });
+
+    // Custom Actions
+    var addCustActions = $('<div id="cust_actions" class="cust_div"><input id="cust_action_input"/><div id="add_cust_action_btn" class="add_cust_btn button">+ADD</div><div class="clear_float"></div></div>');
+    actionsDialogBody.append(addCustActions);
+    $("#add_cust_action_btn").click(function () {
+        var actionName = $("#cust_action_input").val();
+        if (actionName != "") {
+            addCustAction(actionName);
+            saveCookieState();
+        }
     });
 }
 
@@ -1140,9 +1624,40 @@ function initBenchmarkDialog() {
     var dialogBody = dialog.children(".dialog_body");
     dialogBody.remove();
     dialog.append($("#benchmarks_dialog_body"));
+    dialog.append($("#benchmarks_vent_dialog_body"));
+    dialog.append($("#benchmarks_iric_dialog_body"));
+    dialog.append($("#benchmarks_safety_dialog_body"));
+    dialog.append($("#benchmarks_treatment_dialog_body"));
+    dialog.append($("#benchmarks_lz_dialog_body"));
+    dialog.append($("#benchmarks_triage_dialog_body"));
 
     $(".benchmark_2nd_col_container").hide();
     btnsToBlink.push($("#bnch_primary_challenge"));
+
+    $('.benchmark_item_btn_2').click(function () {
+        $(this).toggleClass("glowlightgreen");
+        var isOn = $(this).hasClass("glowlightgreen");
+        var btnId = $(this).attr("id");
+        tbar_clicked.data(btnId, isOn);
+        updateTbarBenchmarkIcon(tbar_clicked);
+        saveCookieState();
+    });
+
+    $(".benchmark_triage_input").on("input", function () {
+        var btnId = $(this).attr("id");
+        tbar_clicked.data(btnId, $(this).val());
+        updateTbarBenchmarkIcon(tbar_clicked);
+        saveCookieState();
+    });
+
+    $("#benchmark_vent_3").click(function () {
+        $("#benchmark_vent_4").toggleClass("disabled", !$(this).hasClass("glowlightgreen"));
+    });
+
+    $("#benchmark_vent_4").click(function() {
+        showParDialog(tbar_clicked, btn_clicked, dialog)();
+    });
+
 }
 function toggleBenchmarkBtn(bnchBtn, toggleClass) {
     bnchBtn.toggleClass(toggleClass);
@@ -1167,6 +1682,7 @@ function toggleBenchmarkBtn(bnchBtn, toggleClass) {
     }
 
     updateTbarBenchmarkIcon(tbar_clicked);
+    saveCookieState();
 }
 function updateTbarBenchmarkIcon(tbar) {
     tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_black.png");
@@ -1174,28 +1690,94 @@ function updateTbarBenchmarkIcon(tbar) {
     tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_black.png");
     tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_black.png");
 
-    if ($("#benchmark_unable_primary").hasClass("glowpink")) {
-        tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
-    } else {
-        if ($("#bnch_primary").hasClass("glowlightgreen")) {
+    var sectorName = tbar.find(".title_text").html();
+    if (sectorsWithClassicBnch.indexOf(sectorName) >= 0 || sectorName.indexOf("Sector ") == 0 && sectorName != "Sector Title") {
+        if (tbar.data("benchmark_unable_primary")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_red.png");
+        } else {
+            if (tbar.data("bnch_primary")) {
+                tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+            }
+        }
+
+        if (tbar.data("bnch_underctl")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+
+        if (tbar.data("benchmark_unable_secondary")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_red.png");
+        } else {
+            if (tbar.data("bnch_secondary")) {
+                tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+            }
+        }
+
+        if (tbar.data("bnch_lossstop")) {
+            tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithIricBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_iric_1")) {
             tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
         }
-    }
-
-    if ($("#bnch_underctl").hasClass("glowlightgreen")) {
-        tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
-    }
-
-    if ($("#benchmark_unable_secondary").hasClass("glowpink")) {
-        tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_red.png");
-    } else {
-        if ($("#bnch_secondary").hasClass("glowlightgreen")) {
+        if (tbar.data("benchmark_iric_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_iric_3")) {
             tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
         }
-    }
-
-    if ($("#bnch_lossstop").hasClass("glowlightgreen")) {
-        tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
+        if (tbar.data("benchmark_iric_4")) {
+            tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithLzBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_lz_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_lz_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_lz_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithSafetyBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_safety_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_safety_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithTreatmentBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_treatment_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_treatment_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_treatment_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithTriageBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_triage_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_triage_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_triage_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+    } else if (sectorsWithVentBnch.indexOf(sectorName) >= 0) {
+        if (tbar.data("benchmark_vent_1")) {
+            tbar.find(".benchmark_bar_img_1").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_vent_2")) {
+            tbar.find(".benchmark_bar_img_2").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_vent_3")) {
+            tbar.find(".benchmark_bar_img_3").attr("src", "images/benchmark_bar_green.png");
+        }
+        if (tbar.data("benchmark_vent_4")) {
+            tbar.find(".benchmark_bar_img_4").attr("src", "images/benchmark_bar_green.png");
+        }
     }
 }
 function showBenchmarkDialog(tbar, benchmarkBtn) {
@@ -1208,11 +1790,31 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             $("#benchmarks_dialog").find(".dialog_title_text_span").html("Benchmarks");
         }
 
+        $(".benchmarks_dialog_body").hide();
+        if (sectorsWithClassicBnch.indexOf(title) >= 0 || title.indexOf("Sector ") == 0 && title != "Sector Title") {
+            $("#benchmarks_dialog_body").show();
+            $("#benchmarks_dialog").width(515);
+        } else if (sectorsWithIricBnch.indexOf(title) >= 0) {
+            $("#benchmarks_iric_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
+        } else if (sectorsWithLzBnch.indexOf(title) >= 0) {
+            $("#benchmarks_lz_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
+        } else if (sectorsWithSafetyBnch.indexOf(title) >= 0) {
+            $("#benchmarks_safety_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
+        } else if (sectorsWithTreatmentBnch.indexOf(title) >= 0) {
+            $("#benchmarks_treatment_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
+        } else if (sectorsWithTriageBnch.indexOf(title) >= 0) {
+            $("#benchmarks_triage_dialog_body").show();
+            $("#benchmarks_dialog").width(225);
+        } else if (sectorsWithVentBnch.indexOf(title) >= 0) {
+            $("#benchmarks_vent_dialog_body").show();
+            $("#benchmarks_dialog").width(200);
+        }
+
         // Set all button states
-        var bnchBtnIds_unable = [
-            "benchmark_unable_primary",
-            "benchmark_unable_secondary"
-        ];
         for (i = 0; i < bnchBtnIds_unable.length; i++) {
             var bnchBtnId = bnchBtnIds_unable[i];
             var bnchBtn = $("#" + bnchBtnId);
@@ -1227,22 +1829,6 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
             }
         }
 
-        var bnchBtnIds = [
-            "bnch_primary",
-            "bnch_underctl",
-            "bnch_secondary",
-            "bnch_lossstop",
-            "bnch_primary_par",
-            "bnch_primary_notify",
-            "bnch_primary_challenge",
-            "bnch_underctl_par",
-            "bnch_underctl_notify",
-            "bnch_underctl_obtain",
-            "bnch_secondary_par",
-            "bnch_secondary_notify",
-            "bnch_lossstop_par",
-            "bnch_lossstop_notify"
-        ];
         for (i = 0; i < bnchBtnIds.length; i++) {
             var bnchBtnId = bnchBtnIds[i];
             var bnchBtn = $("#" + bnchBtnId);
@@ -1254,6 +1840,17 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
                 }
             } else {
                 bnchBtn.removeClass("glowlightgreen");
+            }
+        }
+
+        // Triage Benchmarks
+        for (i = 0; i < triageBtnIds.length; i++) {
+            var bnchBtnId = triageBtnIds[i];
+            var bnchBtn = $("#" + bnchBtnId);
+            if (typeof tbar.data(bnchBtnId) != 'undefined' && tbar.data(bnchBtnId) != '') {
+                bnchBtn.val(tbar.data(bnchBtnId));
+            } else {
+                bnchBtn.val("");
             }
         }
 
@@ -1283,10 +1880,13 @@ function showBenchmarkDialog(tbar, benchmarkBtn) {
  * Objectives Dialog
  **/
 function updateObjectivePercentComplete() {
-    var many_objective_btn = $(".objective_btn").length;
-    var many_objective_btn_green = $(".objective_btn.glowlightgreen").length;
-    var percent_complete = Math.floor((many_objective_btn_green / many_objective_btn) * 100);
-    $("#objectives_btn_perccomplete").html("(" + percent_complete + "% Complete)");
+    if (inc_type != "") {
+        var many_objective_btn = $(".objective_btn." + inc_type).length;
+        var many_objective_btn_green = $(".objective_btn.glowlightgreen." + inc_type).length;
+        var percent_complete = many_objective_btn_green / many_objective_btn;
+        var width = percent_complete * 78.0;
+        $("#objectives_perc_bar").width(width);
+    }
 }
 function toggleObjBtn(btn) {
     return function () {
@@ -1304,29 +1904,54 @@ function initObjectivesDialog() {
     });
     var objectives_header_btn = $("#objectives_header_btn");
     objectives_header_btn.click(showDialog(0, objectives_header_btn, "#objectives_dialog"));
+
+    $(".objectives_dialog_body").hide();
+    $("#objectives_dialog_body_" + inc_type).show();
+    updateObjectivePercentComplete();
 }
 
 
 /**
- * Street Name Dialog
+ * Incident Num Dialog
  **/
-function initStreetNameDialog() {
-    $("#streetname_btn").click(showDialog(0, $("#streetname_btn"), "#streetname_dialog"));
-    $("#streetname_dlg_ok").click(function () {
-        var input = $("#streetname_custom_input").val()
-        if (input) {
-            $("#streetname_btn").html(input);
+function initIncInfoDialog() {
+    $("#inc_info_btn").click(function () {
+        $("#inc_num_custom_input").val(inc_num);
+        $("#inc_address_custom_input").val(inc_address);
+        showDialog(0, 0, "#inc_info_dialog")();
+    });
+
+    $("#inc_info_dlg_ok").click(function () {
+        inc_num = $("#inc_num_custom_input").val()
+        if (inc_num) {
+            $("#inc_num").html(inc_num);
             hideAllDialogs();
         } else {
-            $("#streetname_btn").html("Street Name");
+            $("#inc_num").html("INCIDENT #");
             hideAllDialogs();
         }
+
+        inc_address = $("#inc_address_custom_input").val()
+        if (inc_address) {
+            $("#inc_address").html(inc_address);
+            hideAllDialogs();
+        } else {
+            $("#inc_address").html("ADDRESS");
+            hideAllDialogs();
+        }
+
         // Cookies
         saveCookieState();
     });
-    $("#streetname_dlg_cancel").click(hideAllDialogs);
-    $("#streetname_dlg_clear").click(function () {
-        $("#streetname_custom_input").val("");
+
+    $("#inc_info_dlg_cancel").click(hideAllDialogs);
+
+    $("#inc_num_dlg_clear").click(function () {
+        $("#inc_num_custom_input").val("");
+    });
+
+    $("#inc_address_dlg_clear").click(function () {
+        $("#inc_address_custom_input").val("");
     });
 }
 
@@ -1335,10 +1960,17 @@ function initStreetNameDialog() {
  * OSR Dialog
  **/
 function updateOsrPercentComplete() {
-    var many_osr_btn = $(".osr_btn").length;
-    var many_osr_btn_green = $(".osr_btn.glowlightgreen").length;
-    var percent_complete = Math.floor((many_osr_btn_green / many_osr_btn) * 100);
-    $("#osr_btn_perccomplete").html("(" + percent_complete + "% Complete)");
+    if (inc_type != '') {
+        var many_osr_btn = $("." + inc_type).filter(".osr_btn").length;
+		var many_osr_toggle_btn = $("."  + inc_type + '.osr_toggle_left').length;
+        var many_osr_btn_green = $("." + inc_type).filter(".osr_btn.glowlightgreen").length;
+        var many_osr_toggle_btn_green = $(".osr_toggle_left." + inc_type + " .osr_toggle_btn.glowlightgreen").length;
+        var percent_complete = (many_osr_btn_green + many_osr_toggle_btn_green) / (many_osr_btn + many_osr_toggle_btn);
+        var width = percent_complete * 78.0;
+        $("#osr_perc_bar").width(width);
+    } else {
+        $("#osr_perc_bar").width(0);
+    }
 }
 function toggleOsrBtn(btn) {
     return function () {
@@ -1373,10 +2005,14 @@ function initOsrDialog() {
                     $("#units_dialog").hide();
                     $("#osr_dialog").show();
                     saveCookieState();
+                    updateOsrPercentComplete();
                 }
             )();
         }
     });
+
+    $(".osr_btn").hide();
+    $(".osr_btn").filter("." + inc_type).show();
 
     $(".osr_btn").each(function () {
         $(this).click(toggleOsrBtn($(this)));
@@ -1411,12 +2047,14 @@ function initOsrDialog() {
             $("#osr_address_btn").html(address);
             $("#osr_address_btn").addClass("glowlightgreen");
             $("#address_left_osr_btn").addClass("glowlightgreen");
+            $("#location_left_osr_btn").addClass("glowlightgreen");
             $("#address_dialog").hide();
             $("#osr_dialog").show();
         } else {
             $("#osr_address_btn").html("Dispatch Address");
             $("#osr_address_btn").removeClass("glowlightgreen");
             $("#address_left_osr_btn").removeClass("glowlightgreen");
+            $("#location_left_osr_btn").removeClass("glowlightgreen");
             $("#address_dialog").hide();
             $("#osr_dialog").show();
         }
@@ -1429,6 +2067,7 @@ function initOsrDialog() {
     $("#dispatch_address_btn_btn").click(function () {
         $("#dispatch_address_btn_btn").addClass("glowlightgreen");
         $("#address_left_osr_btn").addClass("glowlightgreen");
+        $("#location_left_osr_btn").addClass("glowlightgreen");
         $("#address_custom_input").val("");
         $("#osr_address_btn").html("Dispatch Address");
         $("#osr_address_btn").addClass("glowlightgreen");
@@ -1440,7 +2079,18 @@ function initOsrDialog() {
         $("#osr_subfloor_btn").toggleClass("glowlightgreen");
         addEvent_osr("Occupancy: Sub Floor (1-2)");
     });
-
+    $("#iric_osr_btn").click(function () {
+        $("#iric_osr_btn").addClass("glowlightgreen");
+        $("#noir_osr_btn").removeClass("glowlightgreen");
+        updateOsrPercentComplete();
+        //addEvent_osr("IRIC");
+    });
+    $("#noir_osr_btn").click(function () {
+        $("#iric_osr_btn").removeClass("glowlightgreen");
+        $("#noir_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        //addEvent_osr("No IRIC");
+    });
     $("#osr_occupancy_basement_btn").click(function () {
         $("#osr_occupancy_basement_btn").addClass("glowlightgreen");
         $("#osr_occupancy_nobasement_btn").removeClass("glowlightgreen");
@@ -1481,6 +2131,8 @@ function initOsrDialog() {
     });
 
 
+    $(".osr_select").hide();
+    $(".osr_select").filter("." + inc_type).show();
     $(".osr_select").change(
         function () {
             $(this).addClass("glowlightgreen");
@@ -1550,11 +2202,64 @@ function initOsrDialog() {
         }
     );
 
+    $("#osr_water_mode_res_btn").click(
+        function () {
+            $(this).toggleClass('glowlightgreen');
+            $("#osr_water_mode_rec_btn").toggleClass('glowlightgreen', !$(this).hasClass('glowlightgreen'));
+            $("#modewater_osr_btn").addClass('glowlightgreen');
+            updateOsrPercentComplete();
+        }
+    );
+    $("#osr_water_mode_rec_btn").click(
+        function () {
+            $(this).toggleClass('glowlightgreen');
+            $("#osr_water_mode_res_btn").toggleClass('glowlightgreen', !$(this).hasClass('glowlightgreen'));
+            $("#modewater_osr_btn").addClass('glowlightgreen');
+            updateOsrPercentComplete();
+        }
+    );
+    $("#osr_select_type_of_aircraft").change(function () {
+        $("#aircraft_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Type of aircraft: " + selected_text);
+    });
+    $("#osr_select_bodyofwater").change(function () {
+        $("#bodyofwater_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Body of water: " + selected_text);
+    });
+    $("#osr_select_conditions_arff").change(function () {
+        $("#conditions_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Condition of aircraft: " + selected_text);
+    });
+    $("#osr_select_watervel").change(function () {
+        $("#watervel_osr_btn").addClass("glowlightgreen");
+        updateOsrPercentComplete();
+        var selected_text = $(this).find("option:selected").text();
+        addEvent_osr("Water velocity: " + selected_text);
+    });
+
+
     var osr_btn = $("#osr_header_btn");
     osr_btn.click(showDialog(0, osr_btn, "#osr_dialog"));
 
+    $(".osr_toggle_container_div").hide();
+    $(".osr_toggle_container_div").filter("." + inc_type).show();
+    $(".osr_toggle_btn").hide();
+    $(".osr_toggle_btn").filter("." + inc_type).show();
     $(".osr_toggle_btn").each(function () {
         $(this).click(saveCookieState);
+    });
+
+    $("#osr_foam_btn").click(function () {
+        $(this).toggleClass('glowlightgreen')
+    });
+    $("#osr_egress_btn").click(function () {
+        $(this).toggleClass('glowlightgreen')
     });
 }
 
@@ -1764,7 +2469,7 @@ function showActionsForUnitBtn(unitBtn) {
 
             if (typeof unitBtn.data('actions') != 'undefined') {
                 jQuery.each(unitBtn.data('actions'), function (index, actionName) {
-                    var actionBtn = $("<div class='disabled action_btn button'>" + actionName + "</div>");
+                    var actionBtn = $("<div class='action_btn button'>" + actionName + "</div>");
                     if (actionName.length > 15) {
                         actionBtn.addClass("btn_largetext");
                     }
@@ -1840,6 +2545,59 @@ function updateTbar(tbar) {
         }
     }
 
+    // Benchmarks
+    if (
+        sectorsWithClassicBnch.indexOf(sectorName) >= 0 ||
+            (sectorName.indexOf("Sector ") == 0 && sectorName != "Sector Title") ||
+            sectorsWithIricBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithLzBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithSafetyBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithTreatmentBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithTriageBnch.indexOf(sectorName) >= 0 ||
+            sectorsWithVentBnch.indexOf(sectorName) >= 0
+        ) {
+        tbar.find(".benchmark_btn").show();
+    } else {
+        tbar.find(".benchmark_btn").hide();
+    }
+    tbar.find(".benchmark_bar_img_1").hide();
+    tbar.find(".benchmark_bar_img_2").hide();
+    tbar.find(".benchmark_bar_img_3").hide();
+    tbar.find(".benchmark_bar_img_4").hide();
+    if (sectorsWithClassicBnch.indexOf(sectorName) >= 0 || sectorName.indexOf("Sector ") == 0 && sectorName != "Sector Title") {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+        tbar.find(".benchmark_bar_img_4").show();
+    } else if (sectorsWithIricBnch.indexOf(sectorName) >= 0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+        tbar.find(".benchmark_bar_img_4").show();
+    } else if (sectorsWithLzBnch.indexOf(sectorName) >= 0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+    } else if (sectorsWithSafetyBnch.indexOf(sectorName) >= 0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+    } else if (sectorsWithTreatmentBnch.indexOf(sectorName) >= 0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+    } else if (sectorsWithTriageBnch.indexOf(sectorName) >= 0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+    } else if (sectorsWithVentBnch.indexOf(sectorName) >= 0) {
+        tbar.find(".benchmark_bar_img_1").show();
+        tbar.find(".benchmark_bar_img_2").show();
+        tbar.find(".benchmark_bar_img_3").show();
+        tbar.find(".benchmark_bar_img_4").show();
+    }
+    updateTbarBenchmarkIcon(tbar);
+
+
     if (manyUnits > 0) {
         if (sectorName == "RESCUE") {
             $("#rescue_objective_btn").addClass("glowlightgreen");
@@ -1861,24 +2619,59 @@ function updateTbar(tbar) {
     updateObjectivePercentComplete();
 }
 function initTbars() {
-    var rescue_tbar = addTbar(gridster.cols, 1);
-    var safety_tbar = addTbar(gridster.cols, 2);
-    var rehab_tbar = addTbar(gridster.cols, 3);
 
-    rescue_tbar.find(".title_text").html("RESCUE");
-    safety_tbar.find(".title_text").html("Safety");
-    rehab_tbar.find(".title_text").html("ReHab");
+    inc_type = getHttpRequestByName('inc_type');
+    if(inc_type!='medical') {
+        var rescue_tbar = addTbar(gridster.cols, 1);
+        var safety_tbar = addTbar(gridster.cols, 2);
+        var rehab_tbar = addTbar(gridster.cols, 3);
 
-    updateTbar(rescue_tbar);
-    updateTbar(safety_tbar);
-    updateTbar(rehab_tbar);
+        rescue_tbar.find(".title_text").html("RESCUE");
+        safety_tbar.find(".title_text").html("Safety");
+        rehab_tbar.find(".title_text").html("ReHab");
 
-    rehab_tbar.find(".benchmark_btn").hide();
+        updateTbar(rescue_tbar);
+        updateTbar(safety_tbar);
+        updateTbar(rehab_tbar);
 
-    // Make three rows of TBars
-    for (var row = 1; row <= 3; row++) {
-        for (var col = 1; col <= (gridster.cols - 1); col++) {
-            addTbar(col, row);
+        rehab_tbar.find(".benchmark_btn").hide();
+
+        // Make three rows of TBars
+        for (var row = 1; row <= 3; row++) {
+            for (var col = 1; col <= (gridster.cols - 1); col++) {
+                addTbar(col, row);
+            }
+        }
+
+    } else {
+        var trtmt_tbar = addTbar(gridster.cols-2, 1);
+        var extrc_tbar = addTbar(gridster.cols-1, 1);
+        var trans_tbar = addTbar(gridster.cols, 1);
+        var lndgz_tbar = addTbar(gridster.cols-1, 2);
+        var firec_tbar = addTbar(gridster.cols, 2);
+
+        trtmt_tbar.find(".title_text").html("Treatment");
+        extrc_tbar.find(".title_text").html("Extrication");
+        trans_tbar.find(".title_text").html("Transportaion");
+        lndgz_tbar.find(".title_text").html("LZ");
+        firec_tbar.find(".title_text").html("Fire Control");
+
+        updateTbar(trtmt_tbar);
+        updateTbar(extrc_tbar);
+        updateTbar(trans_tbar);
+        updateTbar(lndgz_tbar);
+        updateTbar(firec_tbar);
+
+        updateTbar(trtmt_tbar);
+        updateTbar(extrc_tbar);
+        updateTbar(trans_tbar);
+        updateTbar(lndgz_tbar);
+        updateTbar(firec_tbar);
+
+        // Make three rows of TBars
+        var manyTbars = gridster.cols*3;
+        for(var i=0; i<manyTbars-5; i++) {
+            addTbar();
         }
     }
 }
@@ -1886,11 +2679,14 @@ function initTbars() {
 
 function updateDispatchUnitsHighlight() {
     $(".dispatched_unit_btn").removeClass("glowlightgreen");
+
     $(".tbar").each(function (index, tbar) {
         $(tbar).find(".unit_text").each(function (index, tbarUnitBtn) {
             var html = $(tbarUnitBtn).html();
             $(".dispatched_unit_btn").filter(function () {
-                return $(this).text() === html;
+                var html_noclosebtn = $(this).html();
+                html_noclosebtn = html_noclosebtn.replace("<div class=\"delete_dispatched_unit_btn\" style=\"display: none;\">X</div>", "");
+                return html_noclosebtn === html;
             }).addClass("glowlightgreen");
         });
     });
@@ -1898,26 +2694,30 @@ function updateDispatchUnitsHighlight() {
 function onOpenUnitsDialogFromTbar(tbar) {
     return function () {
         $(".unit_dialog_btn").removeClass("glowlightgreen");
-        $.each(tbar.find(".unit_text"), function (index, tbarUnitBtn) {
+
+        $.each($(".unit_text"), function (index, tbarUnitBtn) {
             var html = $(tbarUnitBtn).html();
+
             $(".unit_dialog_btn").filter(function () {
                 return $(this).text() === html;
             }).addClass("glowlightgreen");
         });
+
         updateDispatchUnitsHighlight();
     }
 }
 function toggleUnitButtonForTbar(unit_col_container) {
     return function (unitName) {
-
-        var unit_dialog_btn = $(".unit_dialog_btn").filter(function () {
-            return $(this).text() === unitName;
-        });
-
-        if (unit_dialog_btn.hasClass("glowlightgreen")) {
-            removeUnitButton(unit_col_container, unitName);
+        if (typeof unit_col_container != 'undefined' && unit_col_container != 0) {
+            var addUnit = unit_col_container.find(".unit_btn:contains('" + unitName + "')").length == 0;
         } else {
+            var addUnit = $(".dispatched_unit_btn:contains('" + unitName + "')").length == 0;
+        }
+
+        if (addUnit) {
             addUnitButton(unit_col_container, unitName);
+        } else {
+            removeUnitButton(unit_col_container, unitName);
         }
 
         // Update Cookies
@@ -1938,11 +2738,6 @@ function removeUnitButton(unit_col_container, unitName) {
         var pane2api = scroll_pane.data('jsp');
         unit_row_div.remove();
         pane2api.reinitialise();
-
-        // Move unit button
-        if (unit_col_container.find(".unit_btn").length == 0) {
-            tbar.find(".unit_move_btn").hide();
-        }
     }
 
     updateTbar(tbar);
@@ -1989,10 +2784,18 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         } else if (unitName.length > 4) {
             unit_text.addClass("btn_medtext");
         }
-
-        // Move checkbox
-        tbar.find(".unit_move_btn").show();
-        unit_row_div.find(".unit_move_checkbox").hide();
+        unitBtn.draggable({
+            helper: "clone",
+            appendTo:"#mayday_and_tbar_container",
+//            start: function() {
+//                console.log("start dragging");
+//            },
+            stop: function() {
+                $(".tbar_unit_btn").removeClass("wiggle");
+                $(".tbar_unit_btn").not(".ui-draggable-dragging").draggable('disable');
+            }
+        });
+        unitBtn.draggable('disable');
 
         // Unit Timer
         var unit_timer_bg = unitBtn.find(".unit_timer_bg");
@@ -2002,7 +2805,8 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
         pane2api.reinitialise();
 
         // Add event for report
-        addEvent_unit_to_sector(unitName, tbar.find(".title_text").text());
+        var title_text = tbar.find(".title_text").text();
+        addEvent_unit_to_sector(unitName, title_text);
 
         // Always select the most recently added unit
         showActionsForUnitBtn(unitBtn)();
@@ -2011,34 +2815,43 @@ function addUnitButton(unit_col_container, unitName, personnel_btn_text) {
 
         // Only hide the units dialog if user did not the dispatch button first
         hideAllDialogs();
+
+        // Click unit btn
+        unitBtn.click(function () {
+            if (unitBtn.hasClass("has_mayday")) {
+                showDialog_withCallbacks(
+                    "#mayday_dialog",   // dialogId
+                    0,                  // parentDialog
+                    onOpenMaydayDialog, // onOpenCallback
+                    0,                  // onClickCallback
+                    0                   // onCloseCallback
+                )();
+                $(".mayday_saved").removeClass("mayday_saved_selected");
+                var mayday_el = $(".mayday_saved").find(".mayday_unit_value:contains(" + unitName + ")").parents(".mayday_saved").find(".mayday_sector_value:contains(" + title_text + ")").parents(".mayday_saved");
+                selectMaydayEl(mayday_el);
+            } else if (unitBtn.hasClass("blink_unit_timer")) {
+                showUnitPeopleDialog(tbar, tbar_unit_info_btn);
+            }
+        });
     }
 
     // Dispatched Units
     addDispatchedUnit(unitName);
 }
-function moveUnitButton(unit_col, unit_col_destination, unitBtn) {
+function moveUnitButton(unit_colSrc, unit_col_destination, unitBtn) {
     var unitName = unitBtn.find(".unit_text").html();
     var personnel_btn_text = unitBtn.parents(".unit_row_div").find(".personnel_btn").html();
 
-    removeUnitButton(unit_col, unitName)
+    var tbar = unit_colSrc.parents(".tbar");
+    tbar.find(".action_btn").remove();
+
+    removeUnitButton(unit_colSrc, unitName)
     addUnitButton(unit_col_destination, unitName, personnel_btn_text);
+
+    updateUnitMaydays();
 
     // Cookies
     saveCookieState();
-}
-function cancelUnitMove() {
-    if (typeof tbar_moving != 'undefined') {
-        // Move unit button
-        if (tbar_moving.find(".unit_btn").length == 0) {
-            tbar_moving.find(".unit_move_btn").hide();
-        } else {
-            tbar_moving.find(".unit_move_btn").show();
-        }
-    }
-    jQuery($(".tbar_move_unit_cover")).detach();
-    $(".unit_move_cancel_btn").hide();
-    $(".unit_move_checkbox").hide();
-    $(".tbar_unit_info_btn").show();
 }
 
 var tbarIndex = 0;
@@ -2054,8 +2867,6 @@ function addTbar(col_x, row_y) {
 
     var tbar = $("#tbar_prototype").clone();
     tbar.max_size_x = 1;
-//    tbar.attr("data-col", col_x);
-//    tbar.attr("data-row", row_y);
     var retObj = gridster.add_widget.apply(gridster, [tbar, 1, 1, col_x, row_y]);
     tbar.prefix_dir = 'X';
     tbar.prefix_num = 'X';
@@ -2106,6 +2917,7 @@ function addTbar(col_x, row_y) {
     var benchmarkBtnId = "tbar_benchmark_" + tbarIndex;
     benchmarkBtn.attr("id", benchmarkBtnId);
     benchmarkBtn.click(showBenchmarkDialog(tbar, benchmarkBtn));
+    benchmarkBtn.hide();
 
     // Add Unit Btn
     var unit_col_left = tbar.find(".unit_col_left");
@@ -2124,59 +2936,24 @@ function addTbar(col_x, row_y) {
     action_add_btn.hide();//Button is shown once units have been added
     action_add_btn.click(showDialog_withCallbacks("#actions_dialog", 0/*parentDialog*/, onOpenActionsDialogFromTbar(tbar), toggleActionButtonForTbar(tbar)));
 
-    // Move Btn
-    var unit_move_btn = tbar.find(".unit_move_btn");
-    unit_move_btn.hide();
-    var unit_move_cancel_btn = tbar.find(".unit_move_cancel_btn");
-    unit_move_btn.click(function () {
-        tbar_moving = tbar;
-        tbar.find(".tbar_unit_info_btn").fadeOut(100, "linear", function () {
-            tbar.find(".unit_move_checkbox").fadeIn(100)
-        });
-        $(".unit_col:visible").each(function () {
-            var unit_col_destination = $(this);
-
-            var thisTbarId = unit_col_destination.parents(".tbar").attr("id");
-            if (thisTbarId != newTbarId) {
-                unit_move_btn.hide();
-                unit_move_cancel_btn.show();
-                var tbar_cover = $("<div class='tbar_move_unit_cover'></div>");
-                tbar_cover.appendTo($('#mayday_and_tbar_container'));
-                tbar_cover.width(unit_col_destination.width() + 1);
-                tbar_cover.height(unit_col_destination.height() + 1);
-                tbar_cover.offset(unit_col_destination.offset());
-                tbar_cover.click(function () {
-                    tbar.find(".unit_move_checkbox>*:checkbox:checked").each(function () {
-                        var unit_move_checkbox = $(this);
-                        var unit_btn = unit_move_checkbox.parents(".unit_row_div").find(".unit_btn");
-                        var unit_col = unit_move_checkbox.parents(".unit_col");
-                        moveUnitButton(unit_col, unit_col_destination, unit_btn);
-                    });
-
-                    // Show action list
-                    var first_unit_btn = tbar.find(".unit_btn").first();
-                    if (typeof first_unit_btn != 'undefined') {
-                        showActionsForUnitBtn(first_unit_btn);
-                    }
-                    var first_unit_btn_dst = unit_col_destination.find(".unit_btn").first();
-                    if (typeof first_unit_btn_dst != 'undefined') {
-                        showActionsForUnitBtn(first_unit_btn_dst);
-                    }
-
-                    // Close all TBar covers
-                    cancelUnitMove();
-                });
-            }//if not this tbar
-        });
-    });
-
-    // Move Cancel Btn
-    unit_move_cancel_btn.hide();
-    unit_move_cancel_btn.click(function () {
-        cancelUnitMove();
+    // Droppable for unit move
+    tbar.find(".unit_col").droppable({
+        hoverClass: "unit_move_hover",
+        drop: function( event, ui ) {
+            var unit_btn = ui.draggable;
+            var unit_colSrc = unit_btn.parents(".unit_col");
+            var unit_colDst = $(this);
+            moveUnitButton(unit_colSrc, unit_colDst, unit_btn);
+            var helper = ui.helper;
+            helper.remove();
+            terminateDragging();
+        }
     });
 
     tbar.show();
+
+    // Init scroll bar
+    tbar.find('.scroll-pane').jScrollPane();
 
     return tbar;
 }
@@ -2251,6 +3028,8 @@ function terminateCommand() {
     showDialog(0, 0, "#resume_dialog")();
 
     saveCookieState();
+
+    archiveCurrentInc();
 }
 function dontTerminateCommand() {
     hideAllDialogs();
@@ -2286,10 +3065,10 @@ function initCmdTerminateDialog() {
     });
 
     $("#new_incident_cmd_btn").click(function () {
-        deleteAllCookies();
+//        archiveCurrentInc();
+//        deleteAllCookies();
         var newlocation = document.location.href.replace("fire_inc.html", "index.html");
         document.location.href = newlocation;
-//        document.location.href = '../';
     });
 }
 
@@ -2307,6 +3086,34 @@ function initEmergTrafficDialog() {
         })
     });
 }
+
+
+/**
+ * Init Mode Dialog
+ **/
+function initModeDialog() {
+    $("#mode_btn").click(showDialog_withCallbacks(
+        "#mode_dialog", //  dialogId
+        0, // parent_dialog
+        function () {
+            if ($("#mode_btn").hasClass("offensive_btn")) {
+                $("#mode_dlg_def").removeClass("outer_glow");
+                $("#mode_dlg_off").addClass("outer_glow");
+            } else {
+                $("#mode_dlg_def").addClass("outer_glow");
+                $("#mode_dlg_off").removeClass("outer_glow");
+            }
+        }
+    ));
+
+    $("#mode_dlg_def").click(function () {
+        setMode("DEFENSE");
+    });
+
+    $("#mode_dlg_off").click(function () {
+        setMode("OFFENSE");
+    });
+}
 function setMode(mode_text) {
     var mode_btn = $("#mode_btn");
     if (mode_text == 'DEFENSE') {
@@ -2315,27 +3122,42 @@ function setMode(mode_text) {
         mode_btn.html("DEFENSE");
         $("#osr_occupancy_off_btn").removeClass("glowlightgreen");
         $("#osr_occupancy_def_btn").addClass("glowlightgreen");
+
+        addEvent_mode("DEFENSE");
+        showDialog(0, mode_btn, "#emergency_traffic_dialog")();
     } else {
         mode_btn.addClass("offensive_btn");
         mode_btn.removeClass("defensive_btn");
         mode_btn.html("OFFENSE");
         $("#osr_occupancy_off_btn").addClass("glowlightgreen");
         $("#osr_occupancy_def_btn").removeClass("glowlightgreen");
-    }
-}
-function clickModeButton() {
-    var mode_btn = $("#mode_btn");
-    if (mode_btn.hasClass("offensive_btn")) {
-        setMode('DEFENSE');
-        addEvent_mode("DEFENSE");
-        showDialog(0, mode_btn, "#emergency_traffic_dialog")();
-    } else {
-        setMode('OFFENSE');
-        addEvent_mode("OFFENSE");
-    }
 
-    // Cookie
+        addEvent_mode("OFFENSE");
+        hideAllDialogs();
+    }
     saveCookieState();
+}
+
+
+/**
+ * Move Unit Button
+ **/
+function initMoveUnitButton() {
+    $("#move_unit_btn").click(function (event) {
+        if($("#move_unit_btn_text").html()=="Move Unit") {
+            $(".tbar_unit_btn:not(.has_mayday)").addClass("wiggle");
+            $(".tbar_unit_btn:not(.has_mayday)").draggable();
+            $(".tbar_unit_btn:not(.has_mayday)").draggable('enable');
+            $("#move_unit_btn_text").html("Cancel");
+        } else {
+            terminateDragging();
+        }
+    });
+}
+function terminateDragging() {
+    $(".tbar_unit_btn").removeClass("wiggle");
+    $(".tbar_unit_btn").not(".ui-draggable-dragging").draggable('disable');
+    $("#move_unit_btn_text").html("Move Unit");
 }
 
 
@@ -2343,16 +3165,25 @@ function clickModeButton() {
  * Init Incident Info
  **/
 function initIncidentInfo() {
-    inc_num_input = getHttpRequestByName("inc_num_input");
-    inc_num_input = decodeURIComponent(inc_num_input);
-    $("#inc_num").html("Incident #: " + inc_num_input);
-    if (inc_num_input == "") {
-        $("#inc_num").hide();
+    $("#inc_num").html(inc_num);
+    if (inc_num == "") {
+        $("#inc_num").html("INCIDENT #");
     }
 
-//	var address_input = getHttpRequestByName("address_input");
-//	address_input = decodeURIComponent(address_input);
-//	$("#address").html(address_input);
+    $("#inc_address").html(inc_address);
+    if (inc_address == "") {
+        $("#inc_address").html("ADDRESS");
+    }
+
+    $("#inc_type_icon").attr("src", inc_icon);
+
+    sectors = window['sectors_' + inc_type];
+    actions = window['actions_' + inc_type];
+
+    $(".fire").hide();
+    $(".arff").hide();
+    $('.' + inc_type).show();
+
 }
 function getHttpRequestByName(name) {
     get_string = document.location.search;
@@ -2491,6 +3322,71 @@ function initCmdXfer() {
 
 
 /**
+ * Medical
+ **/
+var manyMedPatients = 0;
+function addMedPatient() {
+    manyMedPatients++;
+    var med_patient_tr_prototype = $("#med_patient_tr_prototype").clone();
+    med_patient_tr_prototype.show();
+    $("#med_add_tr").before(med_patient_tr_prototype);
+    med_patient_tr_prototype.find(".med_patient_id").html(manyMedPatients);
+}
+function toggleMedBtn(btn) {
+    return function () {
+        btn.toggleClass("glowlightgreen");
+//        if (btn.hasClass("glowlightgreen")) {
+//            addEvent_objective(btn.text());
+//        }
+        saveCookieState();
+    }
+}
+function initMedical() {
+    if(inc_type=='medical') {
+        $("#medical_triage_list").show();
+        $("#med_add_btn").click(function(){
+            addMedPatient();
+        });
+        $("#med_patient_tr_prototype").hide();
+        addMedPatient();
+
+        $("#extrication_btn").click( showDialog(0, 0, "#extrication_dialog") );
+        $("#init_triage_btn").click( showDialog(0, 0, "#initial_triage_report_dialog") );
+        $("#functions_btn").click( showDialog(0, 0, "#functions_dialog") );
+        $("#resources_btn").click( showDialog(0, 0, "#resources_dialog") );
+
+        $(".medical_toggle_btn").each(function () {
+            $(this).click(toggleMedBtn($(this)));
+        });
+		$(document.body).on("change", "select.med_hmode", function(e){
+			$(this).parent().find('.med_helicopter').css('display', 'none');
+			$(this).parent().find('.med_ambulance').css('display', 'none');
+			if ($(this).val().toLowerCase()=='ambulance'){
+				$(this).parent().find('.med_ambulance').css('display', 'block');
+			}else if ($(this).val().toLowerCase()=='helicopter'){
+				$(this).parent().find('.med_helicopter').css('display', 'block');
+			}
+		});
+
+        $("#mayday_and_tbar_container").addClass("med_bottom_pad");
+
+    } else {
+        $("#medical_triage_list").hide();
+    }
+}
+
+
+/**
+ * Init Header Buttons
+ **/
+function initHeaderBtns() {
+    $(".header_item").hide();
+    $(".header_item." + inc_type).show();
+    $("#time").show();
+}
+
+
+/**
  * Coookies
  **/
 function initReportDialog() {
@@ -2522,23 +3418,22 @@ function initReportDialog() {
     });
 
     $("#print_report_btn").click(function () {
+        var osr_unit = $("#unit_osr_btn").html();
+        osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
+
         if ($("#time_report_btn").hasClass("glowlightgreen")) {
-            generateReportSortByTime();
+            generateReportSortByTime(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address);
         } else {
-            generateReportSortBySector();
+            generateReportSortBySector(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address);
         }
     });
 
-//	$("#report_btn").click(function(){generateReportSortByTime();});
     $("#report_btn").click(function () {
         var osr_unit = $("#unit_osr_btn").html();
         osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
 
-        var inc_address = $("#streetname_btn").html();
-        inc_address = (inc_address != "Street Name") ? inc_address : "";
-
-        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num_input, DEPARTMENT_NAME, t0, osr_unit, inc_address));
-        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num_input, DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address));
         showDialog(0, 0, "#time_report_dialog")();
     });
 
@@ -2546,479 +3441,10 @@ function initReportDialog() {
         var osr_unit = $("#unit_osr_btn").html();
         osr_unit = (osr_unit != "Unit ID") ? osr_unit : "";
 
-        var inc_address = $("#streetname_btn").html();
-        inc_address = (inc_address != "Street Name") ? inc_address : "";
-
-        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num_input, DEPARTMENT_NAME, t0, osr_unit, inc_address));
-        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num_input, DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#time_report_dialog_body").html(getReportStrSortByTime(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address));
+        $("#sector_report_dialog_body").html(getReportStrSortBySector(inc_num, DEPARTMENT_NAME, t0, osr_unit, inc_address));
         showDialog(0, 0, "#time_report_dialog", $("#resume_dialog"))();
     });
-}
-
-
-/**
- * Coookies
- **/
-function actionObjForJson(unitBtn) {
-    var unitObj = {};
-
-    var unit_text = unitBtn.find(".unit_text").html();
-    unitObj['unit_text'] = unit_text;
-
-    return unitObj;
-}
-function unitToObjForJson(unitBtn) {
-    var unitObj = {};
-
-    var unit_text = unitBtn.find(".unit_text").html();
-    unitObj['unit_text'] = unit_text;
-
-    // Actions
-    unitObj['actions'] = [];
-    if (typeof unitBtn.data('actions') != 'undefined') {
-        jQuery.each(unitBtn.data('actions'), function (index, actionName) {
-            unitObj['actions'].push(actionName);
-        });
-    }
-
-    // par
-    var unit_par = unitBtn.parent().find('.personnel_btn').html();
-    unitObj['unit_par'] = unit_par;
-
-    // psi
-    var psi_btn = unitBtn.parent().find('.psi_btn').html();
-    unitObj['psi_btn'] = psi_btn;
-
-    // TODO:
-    // unit timer
-
-    return unitObj;
-}
-function tbarToJson(tbarEl) {
-    var tbarObj = {};
-
-    // TBar
-    var title_text = tbarEl.find(".title_text").html();
-    var col = tbarEl.data("col");
-    var row = tbarEl.data("row");
-    tbarObj['title_text'] = title_text;
-    tbarObj['col'] = col;
-    tbarObj['row'] = row;
-
-    // Units
-    var units = new Array();
-    tbarEl.find(".unit_btn").each(function (index, unitBtn) {
-        var unitBtnJson = unitToObjForJson($(unitBtn));
-        units.push(unitBtnJson);
-    });
-    tbarObj['units'] = units;
-
-    // Par Tbar
-    var btn_ids_with_par = new Array();
-    if (typeof tbarEl.data('btn_ids_with_par') != 'undefined') {
-        jQuery.each(tbarEl.data('btn_ids_with_par'), function (index, parName) {
-            btn_ids_with_par.push(parName);
-        });
-    }
-    tbarObj['btn_ids_with_par'] = btn_ids_with_par;
-
-    return JSON.stringify(tbarObj);
-}
-function deleteAllCookies() {
-    for (var key in $.cookie()) {
-        $.removeCookie(key);
-    }
-}
-function osrToJson() {
-    var osr = {};
-
-    var osr_btns = new Array();
-    $(".osr_btn").each(function (index, osr_btn) {
-        var objToAdd = {
-            'id': $(osr_btn).attr("id"),
-            'green': $(osr_btn).hasClass("glowlightgreen"),
-            'html': $(osr_btn).html()
-        };
-        osr_btns.push(objToAdd);
-    });
-    osr['osr_btns'] = osr_btns;
-
-    osr['unit_osr_btn'] = {
-        'html': $("#unit_osr_btn").html(),
-        'green': $("#unit_osr_btn").hasClass("glowlightgreen")
-    };
-    osr['osr_address_btn'] = {
-        'html': $("#osr_address_btn").html(),
-        'green': $("#osr_address_btn").hasClass("glowlightgreen")
-    };
-
-    var osr_toggle_btns = new Array();
-    $(".osr_toggle_btn").each(function (index, osr_btn) {
-        var objToAdd = {
-            'id': $(osr_btn).attr("id"),
-            'green': $(osr_btn).hasClass("glowlightgreen")
-        };
-        osr_toggle_btns.push(objToAdd);
-    });
-    osr['osr_toggle_btns'] = osr_toggle_btns;
-
-    var osr_selects = new Array();
-    $(".osr_select").each(function (index, osr_select) {
-        osr_selects.push({
-            'id': $(osr_select).attr('id'),
-            'selected': $(osr_select).find("option:selected").html(),
-            'green': $(osr_select).hasClass("glowlightgreen")
-        });
-    });
-    osr['osr_selects'] = osr_selects;
-
-    return JSON.stringify(osr);
-}
-function saveCookieState() {
-    if (COOKIES_ENABLED) {
-        // Reset cookies
-        deleteAllCookies();
-
-        // App version
-        $.cookie('previous_app_version', $('#version_text').html());
-
-        $.cookie('is_incident_running', isIncidentRunning);
-
-        // Tbars
-        $(".tbar").each(function (index, tbar) {
-            if ($(tbar).attr('id') != 'tbar_prototype') {
-                var tbarJson = tbarToJson($(tbar));
-                var tbar_key = "tbar_" + $(tbar).data("col") + "_" + $(tbar).data("row");
-                $.cookie('tbar_' + tbar_key, tbarJson);
-            }
-        });
-
-        // Timer
-        $.cookie('t0', t0);
-
-        // Mode
-        var mode_btn = $("#mode_btn");
-        $.cookie('mode', mode_btn.html());
-
-        // Mayday
-        // Street Name
-        var streetname_btn = $("#streetname_btn");
-        $.cookie('streetname_btn', streetname_btn.html());
-
-        // Dispatched Units
-        var dispatched_units = new Array();
-        $(".dispatched_unit_btn").each(function (index, dispatched_unit_btn) {
-            var dispatched_unit_text = $(dispatched_unit_btn).text();
-            dispatched_unit_text = dispatched_unit_text.substring(0, dispatched_unit_text.length - 1);
-            dispatched_units.push(dispatched_unit_text);
-        });
-        $.cookie('dispatched_units', JSON.stringify(dispatched_units));
-
-        // Upgrade
-        var upgrade_btns = new Array();
-        $(".upgrade_btn").each(function (index, upgrade_btn) {
-            var objToAdd = {
-                'id': $(upgrade_btn).attr("id"),
-                'disabled': $(upgrade_btn).hasClass("disabled"),
-                'green': $(upgrade_btn).hasClass("glowlightgreen")
-            };
-            upgrade_btns.push(objToAdd);
-        });
-        $.cookie('upgrade_btns', JSON.stringify(upgrade_btns));
-
-        // OSR
-        $.cookie('osr', osrToJson());
-
-        // Objectives
-        var objective_btns = new Array();
-        $(".objective_btn").each(function (index, objective_btn) {
-            var objToAdd = {
-                'id': $(objective_btn).attr("id"),
-                'green': $(objective_btn).hasClass("glowlightgreen")
-            };
-            objective_btns.push(objToAdd);
-        });
-        $.cookie('objective_btns', JSON.stringify(objective_btns));
-
-        // IAP
-        var iap_toggle_btns = new Array();
-        $(".iap_toggle_btn").each(function (index, iap_toggle_btn) {
-            var objToAdd = {
-                'id': $(iap_toggle_btn).attr("id"),
-                'orange': $(iap_toggle_btn).hasClass("glow_orange"),
-                'green': $(iap_toggle_btn).hasClass("glowlightgreen")
-            };
-            iap_toggle_btns.push(objToAdd);
-        });
-        $.cookie('iap_toggle_btns', JSON.stringify(iap_toggle_btns));
-
-        var iap_inputs = new Array();
-        $(".iap_input").each(function (index, iap_input) {
-            var objToAdd = {
-                'id': $(iap_input).attr("id"),
-                'text': $(iap_input).val()
-            };
-            iap_inputs.push(objToAdd);
-        });
-        $.cookie('iap_inputs', JSON.stringify(iap_inputs));
-
-        // Report
-//        $.cookie('events', eventsToJsonObj());
-
-        // Command Transferred
-        var unit_cmdxfer_btns = new Array();
-        $(".unit_cmdxfer_btn").each(function (index, unit_cmdxfer_btn) {
-            var objToAdd = {
-                'id': $(unit_cmdxfer_btn).attr("id"),
-                'html': $(unit_cmdxfer_btn).html(),
-                'green': $(unit_cmdxfer_btn).hasClass("glowlightgreen")
-            };
-            unit_cmdxfer_btns.push(objToAdd);
-        });
-        $.cookie('unit_cmdxfer_btns', JSON.stringify(unit_cmdxfer_btns));
-
-        console.log($.cookie());
-    }
-}
-function findTbarElementByColRow(col, row) {
-    var retTbar;
-    $(".tbar").each(function (index, tbar) {
-        if ($(tbar).attr('id') != 'tbar_prototype') {
-            var colTbar = $(tbar).data("col");
-            var rowTbar = $(tbar).data("row");
-            if (col == colTbar && row == rowTbar) {
-                retTbar = tbar;
-            }
-        }
-    });
-    if (typeof retTbar != 'undefined') {
-        return $(retTbar);
-    } else {
-        return retTbar;
-    }
-}
-function addAllUnitsToTbar(tbarEl, units) {
-    var unit_col_left = tbarEl.find(".unit_col_left");
-    //TODO: Need to distinguish between left and right containers
-//    var unit_col_right = tbarEl.find(".unit_col_right");
-    for (var i = 0; i < units.length; i++) {
-        var unit = units[i];
-        var unit_text = unit['unit_text'];
-        addUnitButton(unit_col_left, unit_text);
-        var unitBtn = unit_col_left.find(".unit_btn:contains('" + unit_text + "')");
-
-        // Actions
-        var actions = unit['actions'];
-        unitBtn.data({'actions': actions});
-
-        // Par
-        if (typeof unit['unit_par'] != 'undefined') {
-            unitBtn.parent().find('.personnel_btn').html(unit['unit_par']);
-        }
-
-        // PSI
-        if (typeof unit['psi_btn'] != 'undefined') {
-            setPsiText_WithBtn(unit['psi_btn'], unitBtn.parent().find('.psi_btn'));
-        }
-
-    }
-}
-function loadTbarFromCookie(tbarObj) {
-    var col = tbarObj['col'];
-    var row = tbarObj['row'];
-    var units = tbarObj['units'];
-    var tbarEl = findTbarElementByColRow(col, row);
-    if (typeof tbarEl != 'undefined') {
-        tbarEl.find(".title_text").html(tbarObj['title_text']);
-    } else {
-        tbarEl = addTbar(col, row);
-        var title_text = tbarObj['title_text'];
-        tbarEl.find(".title_text").html(title_text);
-    }
-    addAllUnitsToTbar(tbarEl, units);
-
-    // Par Tbar
-    if (typeof tbarObj['btn_ids_with_par'] != 'undefined') {
-        tbarEl.data({'btn_ids_with_par': tbarObj['btn_ids_with_par']});
-    }
-    // TODO: Turn tbar par btn green if needed
-    // TODO: Update tbar par timer (?)
-
-    if (units.length > 0) {
-        showActionsForUnitBtn(tbarEl.find(".unit_row_div").first().find(".unit_btn"))();
-    }
-}
-function loadCookieState() {
-    if (COOKIES_ENABLED) {
-        for (var key in $.cookie()) {
-            // TODO:
-            if (key == 'previous_app_version') {
-
-            }
-
-            else if (key == 'is_incident_running') {
-                isIncidentRunning = JSON.parse($.cookie(key));
-            }
-
-            // Timer
-            else if (key == 't0') {
-                t0 = $.cookie(key);
-            }
-
-            // Mode
-            else if (key == 'mode') {
-                var mode = $.cookie(key);
-                setMode(mode)
-            }
-
-            // Mayday
-            // Street Name
-            else if (key == 'streetname_btn') {
-                var streetname_btn = $.cookie(key);
-                $("#streetname_btn").html(streetname_btn);
-            }
-
-
-            // Dispatched Units
-            else if (key == 'dispatched_units') {
-                var dispatched_units_str = $.cookie(key);
-                var dispatched_units = JSON.parse(dispatched_units_str);
-                for (var i = 0; i < dispatched_units.length; i++) {
-                    var dispatched_unit = dispatched_units[i];
-                    addDispatchedUnit(dispatched_unit);
-                }
-            }
-
-            // Upgrade
-            else if (key == 'upgrade_btns') {
-                var upgradeBtnsStr = $.cookie(key);
-                var upgrade_btns = JSON.parse(upgradeBtnsStr);
-                for (var i = 0; i < upgrade_btns.length; i++) {
-                    var objFromJson = upgrade_btns[i];
-                    if (objFromJson['green']) {
-                        $("#" + objFromJson['id']).addClass("glowlightgreen");
-                    }
-                    if (objFromJson['disabled']) {
-                        $("#" + objFromJson['id']).addClass("disabled");
-                    } else {
-                        $("#" + objFromJson['id']).removeClass("disabled");
-                    }
-                }
-            }
-
-            // OSR
-            else if (key == 'osr') {
-                var osrStr = $.cookie(key);
-                var osrObj = JSON.parse(osrStr);
-                if (typeof osrObj['osr_btns'] != 'undefined') {
-                    var osr_btns = osrObj['osr_btns'];
-                    for (var i = 0; i < osr_btns.length; i++) {
-                        var objFromJson = osr_btns[i];
-                        if (objFromJson['green']) {
-                            $("#" + objFromJson['id']).addClass("glowlightgreen");
-                        }
-                        $("#" + objFromJson['id']).html(objFromJson['html']);
-                    }
-                }
-                $("#unit_osr_btn").html(osrObj['unit_osr_btn']['html']);
-                if (osrObj['unit_osr_btn']['green']) {
-                    $("#unit_osr_btn").addClass('glowlightgreen');
-                }
-                $("#osr_address_btn").html(osrObj['osr_address_btn']['html']);
-                if (osrObj['osr_address_btn']['green']) {
-                    $("#osr_address_btn").addClass('glowlightgreen');
-                }
-                if (typeof osrObj['osr_toggle_btns'] != 'undefined') {
-                    var osr_btns = osrObj['osr_toggle_btns'];
-                    for (var i = 0; i < osr_btns.length; i++) {
-                        var objFromJson = osr_btns[i];
-                        if (objFromJson['green']) {
-                            $("#" + objFromJson['id']).addClass("glowlightgreen");
-                        }
-                    }
-                }
-
-                if (typeof osrObj['osr_selects'] != 'undefined') {
-                    var osr_selects = osrObj['osr_selects'];
-                    for (var i = 0; i < osr_selects.length; i++) {
-                        var objFromJson = osr_selects[i];
-                        if (objFromJson['green']) {
-                            $("#" + objFromJson['id']).addClass("glowlightgreen");
-                        }
-                        $("#" + objFromJson['id']).find("option:contains(" + objFromJson['selected'] + ")").attr('selected', 'selected');
-                    }
-                }
-                updateOsrPercentComplete();
-            }// OSR
-
-            // Objectives
-            else if (key == 'objective_btns') {
-                var objectiveBtnStr = $.cookie(key);
-                var objective_btns = JSON.parse(objectiveBtnStr);
-                for (var i = 0; i < objective_btns.length; i++) {
-                    var objFromJson = objective_btns[i];
-                    if (objFromJson['green']) {
-                        $("#" + objFromJson['id']).addClass("glowlightgreen");
-                    }
-                }
-                updateObjectivePercentComplete();
-            }
-
-            // IAP
-            else if (key == 'iap_toggle_btns') {
-                var iapBtnStr = $.cookie(key);
-                var iap_toggle_btns = JSON.parse(iapBtnStr);
-                for (var i = 0; i < iap_toggle_btns.length; i++) {
-                    var objFromJson = iap_toggle_btns[i];
-                    if (objFromJson['orange']) {
-                        $("#" + objFromJson['id']).addClass("glow_orange");
-                    }
-                    if (objFromJson['green']) {
-                        $("#" + objFromJson['id']).addClass("glowlightgreen");
-                    }
-                }
-            }
-            else if (key == 'iap_inputs') {
-                var iapBtnStr = $.cookie(key);
-                var iap_toggle_btns = JSON.parse(iapBtnStr);
-                for (var i = 0; i < iap_toggle_btns.length; i++) {
-                    var objFromJson = iap_toggle_btns[i];
-                    $("#" + objFromJson['id']).val(objFromJson['text']);
-                }
-            }
-
-            // Report
-//            else if (key == 'events') {
-//                var newEventsStr = $.cookie(key);
-//                var newEvents = JSON.parse(newEventsStr);
-//                setEvents(newEvents);
-//            }
-
-            // Command Transferred
-            else if (key == 'unit_cmdxfer_btns') {
-                var unit_cmdxfer_btnstr = $.cookie(key);
-                var unit_cmdxfer_btns = JSON.parse(unit_cmdxfer_btnstr);
-                for (var i = 0; i < unit_cmdxfer_btns.length; i++) {
-                    var objFromJson = unit_cmdxfer_btns[i];
-                    $("#" + objFromJson['id']).html(objFromJson['html']);
-                    if (objFromJson['green']) {
-                        $("#" + objFromJson['id']).addClass("glowlightgreen");
-                    }
-                }
-            }
-
-            else if (key.indexOf("tbar_") == 0) {
-                var tbarObj = JSON.parse($.cookie(key));
-                loadTbarFromCookie(tbarObj);
-            }
-
-            else {
-                console.log("Unhandled cookie:");
-                console.log($.cookie(key));
-            }
-        }
-        console.log($.cookie());
-    }
 }
 
 
@@ -3071,9 +3497,16 @@ function updateTimer() {
     }
 }
 
+function supports_html5_storage() {
+    try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+        return false;
+    }
+}
+
 var gridster;
 function init() {
-
     var log = document.getElementById('log');
 
     gridster = $(".gridster ul").gridster({
@@ -3086,10 +3519,8 @@ function init() {
     initTbars();
 
     //Init Dialogs
-    initSectorDialog();
     initParDialog();
     initPsiDialog();
-    initActionsDialog();
     initUnitsDialog();
     initUnitPeopleDialog();
     initBenchmarkDialog();
@@ -3100,24 +3531,66 @@ function init() {
     initCmdTerminateDialog();
 //    $("#cmd_term_btn").hide();
     initMaydayDialog();
-    initObjectivesDialog();
-    initOsrDialog();
     initIapDialog();
-    initIncidentInfo();
     initEmergTrafficDialog();
     init10KeyDialog();
     initDispatchedUnits();
     initUpgradeDialog();
-    initStreetNameDialog();
     initCmdXfer();
+    initModeDialog();
 
     $("#unit_row_div_prototype").hide();
     $("#unit_row_div_prototype>*").hide();
     $("#tbar_prototype").hide();
     $("#dialogContainer").hide();
     $("#dialog_prototype").hide();
-    $(".dialog_close_btn").click(function () {
-        if ($(this).parents(".dialog").attr("id") == "nda_reminder_dialog" && !isIncidentRunning) {
+    $("#move_unit_screen_cover").hide();
+    hideAllDialogs();
+
+    window.setTimeout(blinkUnit, 500);
+    window.setInterval(updateTimer, 1000);
+    window.setInterval(updateAllMaydayTimers, 1000);
+
+
+    if (COOKIES_ENABLED) {
+        if (supports_html5_storage()) {
+            loadCookieState();
+            $(".tbar").each(function () {
+                updateTbar($(this));
+            });
+        } else {
+            COOKIES_ENABLED = false;
+            console.log("Your browser does not support HTML 5 local storage.  State will not be persisted.");
+        }
+    }
+
+    // Init everything dependant on the cookies data
+    initIncidentInfo();
+    initSectorDialog();
+    initActionsDialog();
+    initObjectivesDialog();
+    initOsrDialog();
+    initMedical();
+    initHeaderBtns();
+    initIncInfoDialog();
+    initMoveUnitButton();
+
+    Array.prototype.remByVal = function (val) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] === val) {
+                this.splice(i, 1);
+                i--;
+            }
+        }
+        return this;
+    }
+
+    Array.prototype.clone = function () {
+        return this.slice(0);
+    };
+
+    $(".close_btn").click(function () {
+        if (!isIncidentRunning) {
             hideAllDialogs();
             terminateCommand();
         } else {
@@ -3136,33 +3609,8 @@ function init() {
         }
     });
 
-    $("#move_unit_screen_cover").hide();
-    $("#mode_btn").click(clickModeButton);
-
-    hideAllDialogs();
-
-    window.setTimeout(blinkUnit, 500);
-    window.setInterval(updateTimer, 1000);
-
-    $('.scroll-pane').jScrollPane();
-
-    Array.prototype.remByVal = function (val) {
-        for (var i = 0; i < this.length; i++) {
-            if (this[i] === val) {
-                this.splice(i, 1);
-                i--;
-            }
-        }
-        return this;
-    }
-
-    Array.prototype.clone = function () {
-        return this.slice(0);
-    };
-
-    loadCookieState();
-
-    showDialog(0, 0, "#nda_reminder_dialog", 0)();
+    // Load cookie items that need to go after everything else has loaded
+    postLoadCookieState();
 }
 
 //Call this to dismiss the dialogs
@@ -3181,15 +3629,14 @@ $.fn.exists = function () {
 }
 
 $(document).ready(init);
-//Esc Key Press
 $(document).keyup(function (e) {
+    //Esc Key Press
     if (e.keyCode == 27 && isIncidentRunning) {
         if (typeof onCloseCallback != 'undefined' && onCloseCallback != 0) {
             onCloseCallback();
         }
         onCloseCallback = 0;
         hideAllDialogs();
-        cancelUnitMove();
         if (typeof parentDialog != 'undefined' && parentDialog != 0) {
             $("#dialogContainer").show();
             parentDialog.show();
@@ -3202,90 +3649,56 @@ document.addEventListener('click', function (event) {
     if ($(event.target).hasClass("disabled") || $(event.target).parents(".disabled").length > 0) {
         event.stopPropagation();
     }
+
+    // Terminate dragging if units are being moved
+    var isUnitsMoving = $(".tbar_unit_btn.wiggle").length>1;
+    if(isUnitsMoving) {
+        terminateDragging();
+        event.stopPropagation();
+    }
 }, true);
 
 var actions = [
-    {action_type: "Engine",
-        actions: [
-            "Supply",
-            "Take a Line",
-            "Search/Rescue",
-            "Fire Attack",
-            "IRIC",
-            "Check Extension",
-            "Protect Exposures",
-            "Overhaul",
-            "Deck Gun",
-            "Portable Monitor",
-            "Secondary Search"
-        ],
-        actions_warning: [
-            "*Victim Found"
-        ]
-    },
-    {action_type: "Ladder",
-        actions: [
-            "Secure Utilities",
-            "Vert Ventilation",
-            "2nd Hole",
-            "Trench Cut",
-            "Roof Profile",
-            "Fan to the Door",
-            "Pressurize Exposures",
-            "Soften Building",
-            "Open Building",
-            "Open Rollup",
-            "Salvage",
-            "Position for Def. Ops",
-            "Put Stick Up",
-            "Elevated Master"
-        ],
-        actions_warning: []
-    },
-    {action_type: "Safety",
-        actions: [
-            "Agrees With Strategy",
-            "360 recon"
-        ],
-        actions_warning: [
-            "*Pool",
-            "*Empty Pool",
-            "*Powerlines",
-            "*Powerlines Down",
-            "*Bars on Windows",
-            "*Dogs in Yard",
-            "*Hoarders House",
-            "*Basement",
-            "*Flashover",
-            "*Backdraft",
-            "*Eminent Collapse",
-            "*Collapse"
-        ]},
-    {action_type: "Rescue",
-        actions: [
-            "Grab RIC Bag",
-            "Accountability Update",
-            "Throw Ladders",
-            "Monitor Ch. 16"
-        ],
-        actions_warning: []
-    },
-    {action_type: "Lines",
-        actions: [
-            "1-3/4",
-            "2\"",
-            "2-1/2",
-            "3\"",
-            "Piercing Nozzle",
-            "Horizontal Standpipe",
-            "Support Sprinklers",
-            "Standpipe"
-        ],
-        actions_warning: []
-    }
 ];
 
 
+var sectorsWithClassicBnch = [
+    "Interior",
+    "Sector 1",
+    "Sector 2",
+    "Sector 3",
+    "Sector 4",
+    "Sector 5",
+    "Sector 6",
+    "Sector 7",
+    "Sector 8",
+    "Sector 9",
+    "North Sector",
+    "East Sector",
+    "South Sector",
+    "West Sector"
+];
+var sectorsWithVentBnch = [
+    "Ventilation",
+    "Roof"
+];
+var sectorsWithIricBnch = [
+    "IRIC",
+    "RIC",
+    "RESCUE"
+];
+var sectorsWithSafetyBnch = [
+    "Safety"
+];
+var sectorsWithTreatmentBnch = [
+    "Treatment"
+];
+var sectorsWithLzBnch = [
+    "LZ"
+];
+var sectorsWithTriageBnch = [
+    "Triage"
+];
 var sectorsWithClock = [
     "Interior",
     "Roof",
@@ -3300,7 +3713,6 @@ var sectorsWithClock = [
     "Sector 8",
     "Sector 9",
     "RESCUE",
-    "Extrication",
     "Safety",
     "IRIC",
     "RIC",
@@ -3322,16 +3734,6 @@ var sectorsWithOutActions = [
 ];
 
 var sectors = [
-    "Interior", "Sector 1", "Alpha Sector", "Salvage", "",
-    "Ventilation", "Sector 2", "Bravo Sector", "Overhaul", "",
-    "Roof", "Sector 3", "Charlie Sector", "Evacuation", "",
-    "On Deck", "Sector 4", "Delta Sector", "Customer Service", "ReHab",
-    "Staging", "Sector 5", "", "", "",
-    "", "Sector 6", "North Sector", "", "Medical",
-    "IRIC", "Sector 7", "East Sector", "Lobby", "Triage",
-    "RIC", "Sector 8", "South Sector", "Resource", "Treatment",
-    "RESCUE", "Sector 9", "West Sector", "Accountability", "Transportation",
-    "Safety", "Sector ####", "", "", "LZ"
 ];
 
 var Engine = "Engine";

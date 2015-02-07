@@ -28,3 +28,6 @@ ssh whitehel@whitehelmettech.com "mkdir -p $dirDestName; rm -rf $dirDestName/*; 
 
 linkName="~/public_html/app_${suffix}"
 ssh whitehel@whitehelmettech.com "rm -rf $linkName; ln -s $dirDestName $linkName"
+
+ssh whitehel@whitehelmettech.com "rm -rf ~/deploy_pkgs/$tarfileName"
+rm -rf "../../deploy_pkgs/$tarfileName"
