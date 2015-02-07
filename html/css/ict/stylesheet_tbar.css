@@ -4,7 +4,7 @@
 
 .tbar {
 	background: #FFF;
-	border:1px solid #999;
+	border:1px solid #AAA;
 	margin: 5px 0 5px 10px;
     width: 278px;
 	height: 275px;
@@ -13,7 +13,7 @@
 	z-index:0;
 }
 .tbar_title_container {
-	background: #BBB;
+	background: #DDD;
 	height: 29px;
 }
 .title_btn {
@@ -113,6 +113,7 @@
 .move_btn_img {
     width: 15px;
     height: 15px;
+    margin
 }
 .unit_move_checkbox {
     float:left;
@@ -239,25 +240,12 @@
 	border-radius: 10px;
 }
 
-
-.action_btn {
-	width: 126px;
-	height: 26px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	margin: 4px;
-	box-shadow: none;
-	font-size: 100%;
-	padding-bottom: 2px;
-    color: black;
-}
-
 .hidden_sector_btn, .hidden_sector_btn:hover, .hidden_sector_btn:active {
     height: 24px;
     opacity:0;
     cursor: default;
 }
+
 
 .personnel_btn {
     width: 20px;

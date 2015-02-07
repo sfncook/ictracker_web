@@ -12,13 +12,14 @@
 
         <!--JS-->
         <script src="js/jquery-1.11.0.js"></script>
-        <script src="js/jquery.cookie.js"></script>
+        <script src="js/ict/persist.js"></script>
         <script src="js/ict/splash.js"></script>
         <script src="version.js"></script>
 
     </head>
     
     <body class="splashpage">
+
         <div id="splash_outer_outer_div">
         <div id="splash_outer_inner_div">
             <div id="splash_row1">
@@ -29,10 +30,10 @@
                         <div>Incident #:</div>
                         <input id="inc_num_input" name="inc_num_input" type="text"/>
                     </div>
-                    <!--<div class="incident_info_entry">-->
-                        <!--<div>Address:</div>-->
-                        <!--<input id="address_input" name="address_input" type="text"/>-->
-                    <!--</div>-->
+                    <div class="incident_info_entry">
+                        <div>Address:</div>
+                        <input id="address_input" name="address_input" type="text"/>
+                    </div>
                 </div>
                 <div class="clear_float"></div>
                 <!--<input type="submit" class="button splash_start_btn" value="Start Fire Incident">-->
@@ -43,10 +44,33 @@
         </div>
         </div>
 
-        <div id="version_text">Version: 0.0</div>
+        <div id="previnc_container" class="previnc_closed">
+            <div id="view_previnc_btn" class="view_previnc_btn button">
+                <img class="previnc_btn_logo" src="images/table_logo.png"/>
+                <div id="view_previn_open">View Previous<br>Incidents</div>
+                <div id="view_previn_clos">Close</div>
+            </div>
+
+            <div id="no_previnc_btn" class="disabled view_previnc_btn button">
+                <img class="previnc_btn_logo" src="images/table_logo.png"/>
+                <div id="no_previn_open">No Previous<br>Incidents</div>
+            </div>
+
+            <div id="previnc_right_col" class="previnc_right_col">
+                <table id="previnc_table" class="previnc_table">
+                    <thead>
+                        <td><!-- Load Btn col --></td>
+                        <td>Inc #</td>
+                        <td>Inc Type</td>
+                        <td>Address</td>
+                    </thead>
+                    <tbody id="previnc_right_col_body"></tbody>
+                </table>
+            </div>
+            <div class="clear_float"></div>
+        </div>
+
+        <div id="version_text" class="splash_version">Version: 0.0</div>
     </body>
+    <script></script>
 </html>
-
-<script>
-
-</script>

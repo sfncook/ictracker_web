@@ -6,6 +6,7 @@
     <link href="images/logo/ict_logo_29x29.png" rel="icon"/>
 
     <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="css/pace.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.gridster.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/ict/reset.css"/>
@@ -13,18 +14,26 @@
     <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_global.css"/>
     <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_tbar.css"/>
     <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_animation.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_reports.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ict/stylesheet_medical.css"/>
 
     <!--JS-->
+    <script src="js/pace.min.js"></script>
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/jquery-ui-1.10.4.js"></script>
+    <script src="js/jquery.ui.touch-punch.js"></script>
     <script src="js/jquery.mousewheel.js"></script>
     <script src="js/jquery.jscrollpane.min.js"></script>
     <script src="js/jsPDF/jspdf.js"></script>
     <script src="js/jquery.gridster.js"></script>
-    <script src="js/jquery.cookie.js"></script>
     <script src="js/ict/MaydayEvent.js"></script>
     <script src="js/ict/config.js"></script>
     <script src="js/ict/report.js"></script>
+    <script src="js/ict/persist.js"></script>
+    <script src="js/ict/data_fire.js"></script>
+    <script src="js/ict/data_arff.js"></script>
+    <script src="js/ict/data_water.js"></script>
+    <script src="js/ict/data_medical.js"></script>
     <script src="js/ict/global.js"></script>
     <script src="version.js"></script>
     <script>
@@ -33,40 +42,73 @@
 </head>
 
 <body>
+
+
+<div id="top_header_container">
+    <div id="inc_info_btn" class="button_top button">
+        <div id="inc_num">INCIDENT #</div>
+        <div id="inc_address">ADDRESS</div>
+    </div>
+    <img id="inc_type_icon" src=""/>
+    <div id="mode_btn" class="button_top button">Strategy</div>
+    <div class="clear_float"></div>
+</div>
+<div id="top_header_mayday_container">
+    <div id="mayday_btn" class="button_top button">MAYDAY</div>
+</div>
+
+
 <div id="ict_header">
     <div id="time" class="time_lg header_item">00:00</div>
-    <img id="title_icon" class="header_item" src="images/logo/ict_logo_100x100.png"/>
 
-    <div id="dispatched_units_btn" class="header_item button">
+    <div id="dispatched_units_btn" class="fire arff water medical header_item button">
         <div>Dispatched</div>
         <div>Units</div>
     </div>
-    <div id="upgrade_btn" class="header_item button">
+    <div id="move_unit_btn" class="fire arff water medical header_item button">
+        <img class="move_btn_img" src="images/move_cross.png"/>
+        <span id="move_unit_btn_text">Move Unit</span>
+    </div>
+    <div id="upgrade_btn" class="fire arff water medical header_item button">
         <div>Upgrade</div>
         <div id="upgrade_btn_sub_label" class="hidden_div"></div>
     </div>
-    <div id="cmdxfer_units_btn" class="header_item button">
+    <div id="cmdxfer_units_btn" class="fire arff water medical header_item button">
         <div>Command</div>
         <div>Transferred</div>
     </div>
-    <div id="branch_btn" class="header_item button">Branch</div>
-    <div id="osr_header_btn" class="header_item button">
+    <div id="branch_btn" class="fire arff water medical disabled header_item button">Branch</div>
+    <div id="osr_header_btn" class="fire arff water header_item button">
+        <div class="perc_horz_bar_bg">
+            <div id="osr_perc_bar" class="perc_horz_bar"></div>
+        </div>
         <div>OSR</div>
-        <div id="osr_btn_perccomplete">(0% Complete)</div>
     </div>
-    <div id="objectives_header_btn" class="header_item button">
-        <div>Objectives</div>
-        <div id="objectives_btn_perccomplete">(0% Complete)</div>
-    </div>
-    <div id="iap_btn" class="header_item button">IAP</div>
 
-    <div id="cmd_term_btn" class="header_item button">
+    <div id="objectives_header_btn" class="fire arff water medical header_item button">
+        <div class="perc_horz_bar_bg">
+            <div id="objectives_perc_bar" class="perc_horz_bar"></div>
+        </div>
+        <div style="margin-top:-1px">Objectives</div>
+    </div>
+    <div id="extrication_btn" class="medical header_item button">Extrication</div>
+    <div id="init_triage_btn" class="medical header_item button">
+        <div>Initial</div>
+        <div>Triage</div>
+        <div>Report</div>
+    </div>
+    <div id="functions_btn" class="medical header_item button">Functions</div>
+    <div id="resources_btn" class="medical header_item button">Resources</div>
+
+    <div id="iap_btn" class="fire arff water header_item button">IAP</div>
+
+    <div id="cmd_term_btn" class="fire arff water medical header_item button">
         <img class="terminate_icon" src="images/terminate.png"/>
 
         <div>Command</div>
         <div>Terminated</div>
     </div>
-    <div id="report_btn" class="header_item button">
+    <div id="report_btn" class="fire arff water medical header_item button">
         <img class="report_icon" src="images/report.png"/>
 
         <div>Reports</div>
@@ -74,16 +116,6 @@
 </div>
 <!-- ict_header-->
 
-
-<div id="top_header_container">
-    <div id="streetname_btn" class="button_top button">Street Name</div>
-    <div id="inc_num">Incident #:</div>
-    <div id="mode_btn" class="offensive_btn button_top button">OFFENSE</div>
-    <div class="clear_float"></div>
-</div>
-<div id="top_header_mayday_container">
-    <div id="mayday_btn" class="button_top button">MAYDAY</div>
-</div>
 
 <div id="mayday_and_tbar_container">
     <div id="tbar_grid_layout_container" class="gridster">
@@ -102,13 +134,13 @@
                 <table>
                     <tr>
                         <td class="tbar_title_dir_td">
-                            <div class="title_dir  title_btn_comp">N</div>
+                            <div class="title_dir  title_btn_comp">X</div>
                         </td>
                         <td class="tbar_title_td">
                             <div class="title_text title_btn_comp">Sector Title</div>
                         </td>
                         <td class="tbar_title_num_td">
-                            <div class="title_num  title_btn_comp">8</div>
+                            <div class="title_num  title_btn_comp">X</div>
                         </td>
                     </tr>
                 </table>
@@ -130,8 +162,7 @@
             <div class="clear_float"></div>
         </div>
         <div class="unit_col_left unit_col tbar_col_left_div tbar_col_div">
-            <div class="unit_move_btn button"><img class="move_btn_img" src="images/move_cross.png"/></div>
-            <div class="unit_move_cancel_btn button">Cancel</div>
+            <!--<div class="unit_move_btn button"><img class="move_btn_img" src="images/move_cross.png"/></div>-->
             <div class="unit_add_btn button">+Unit</div>
             <div class="clear_float"></div>
             <div class="left_scroll_pane scroll-pane jspScrollable">
@@ -170,7 +201,6 @@
             <div class="psi_green tbar_psi_btn psi_btn button_no_hover">4000</div>
             <div class="clear_float"></div>
         </div>
-        <label class="unit_move_checkbox"><input type="checkbox"/>Move?</label>
 
         <div class="tbar_unit_btn unit_btn button">
             <div class="unit_timer_bg">
@@ -180,10 +210,226 @@
         </div>
         <div class="clear_float"></div>
     </div>
+
+    <div id="copyright_text">&copy; Copyright 2014 White Helmet Tech, LLC</div>
+    <div id="version_text">Version: 0.0</div>
 </div>
 <!-- mayday_and_tbar_container -->
 
 <div id="move_unit_screen_cover"></div>
+
+<div id="medical_triage_list" class="bottom_tab">
+    <table id="medical_triage_table">
+        <thead><tr>
+            <td>Patient</td>
+            <td>Age</td>
+            <td>Gender</td>
+            <td>Triage</td>
+            <td>Hospital</td>
+            <td>Transport</td>
+            <td>Department</td>
+            <td>Depart Time</td>
+        </tr></thead>
+        <tbody>
+            <tr id="med_patient_tr_prototype">
+                <td class="med_patient_id"></td>
+                <td>
+                    <select class="med_age">
+                        <option></option>
+                        <option>1 month</option>
+                        <option>2 months</option>
+                        <option>3 months</option>
+                        <option>4 months</option>
+                        <option>5 months</option>
+                        <option>6 months</option>
+                        <option>7 months</option>
+                        <option>8 months</option>
+                        <option>9 months</option>
+                        <option>10 months</option>
+                        <option>11 months</option>
+                        <option>1 year</option>
+                        <option>2 years</option>
+                        <option>3 years</option>
+                        <option>4 years</option>
+                        <option>5 years</option>
+                        <option>6 years</option>
+                        <option>7 years</option>
+                        <option>8 years</option>
+                        <option>9 years</option>
+                        <option>10 years</option>
+                        <option>11 years</option>
+                        <option>12 years</option>
+                        <option>13 years</option>
+                        <option>14 years</option>
+                        <option>15 years</option>
+                        <option>16 years</option>
+                        <option>17 years</option>
+                        <option>18 years</option>
+                        <option>19 years</option>
+                        <option>20 years</option>
+                        <option>21 years</option>
+                        <option>22 years</option>
+                        <option>23 years</option>
+                        <option>24 years</option>
+                        <option>25 years</option>
+                        <option>26 years</option>
+                        <option>27 years</option>
+                        <option>28 years</option>
+                        <option>29 years</option>
+                        <option>30 years</option>
+                        <option>31 years</option>
+                        <option>32 years</option>
+                        <option>33 years</option>
+                        <option>34 years</option>
+                        <option>35 years</option>
+                        <option>36 years</option>
+                        <option>37 years</option>
+                        <option>38 years</option>
+                        <option>39 years</option>
+                        <option>40 years</option>
+                        <option>41 years</option>
+                        <option>42 years</option>
+                        <option>43 years</option>
+                        <option>44 years</option>
+                        <option>45 years</option>
+                        <option>46 years</option>
+                        <option>47 years</option>
+                        <option>48 years</option>
+                        <option>49 years</option>
+                        <option>50 years</option>
+                        <option>51 years</option>
+                        <option>52 years</option>
+                        <option>53 years</option>
+                        <option>54 years</option>
+                        <option>55 years</option>
+                        <option>56 years</option>
+                        <option>57 years</option>
+                        <option>58 years</option>
+                        <option>59 years</option>
+                        <option>60 years</option>
+                        <option>61 years</option>
+                        <option>62 years</option>
+                        <option>63 years</option>
+                        <option>64 years</option>
+                        <option>65 years</option>
+                        <option>66 years</option>
+                        <option>67 years</option>
+                        <option>68 years</option>
+                        <option>69 years</option>
+                        <option>70 years</option>
+                        <option>71 years</option>
+                        <option>72 years</option>
+                        <option>73 years</option>
+                        <option>74 years</option>
+                        <option>75 years</option>
+                        <option>76 years</option>
+                        <option>77 years</option>
+                        <option>78 years</option>
+                        <option>79 years</option>
+                        <option>80 years</option>
+                        <option>81 years</option>
+                        <option>82 years</option>
+                        <option>83 years</option>
+                        <option>84 years</option>
+                        <option>85 years</option>
+                        <option>86 years</option>
+                        <option>87 years</option>
+                        <option>88 years</option>
+                        <option>89 years</option>
+                        <option>90 years</option>
+                        <option>91 years</option>
+                        <option>92 years</option>
+                        <option>93 years</option>
+                        <option>94 years</option>
+                        <option>95 years</option>
+                        <option>96 years</option>
+                        <option>97 years</option>
+                        <option>98 years</option>
+                        <option>99 years</option>
+                        <option>100 years</option>
+                        <option>101 years</option>
+                        <option>102 years</option>
+                        <option>103 years</option>
+                        <option>104 years</option>
+                        <option>105 years</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="med_gndr">
+                        <option></option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="med_triag">
+                        <option></option>
+                        <option>Immediate</option>
+                        <option>Delayed</option>
+                        <option>Minor</option>
+                        <option>Dead</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="med_hopst">
+                        <option></option>
+                        <option>Banner Baywood Medical Center</option>
+                        <option>Banner Desert Medical Center</option>
+                        <option>Banner Gateway Medical Center</option>
+                        <option>Mountain Vista Hospital</option>
+                        <option>Banner Goldfield Medical Center</option>
+                        <option>Chandler Regional Hospital</option>
+                        <option>Gilbert Emergency Hospital </option>
+                        <option>Banner Good Sam Medical Center</option>
+                        <option>Maricopa Medical Center</option>
+                        <option>Mercy Gilbert Medical Center</option>
+                        <option>Phoenix Children's Hospital </option>
+                        <option>St. Joseph's Hospital & Medical Center</option>
+                        <option>Scottsdale Healthcare - Osborn</option>
+                        <option>Tempe St. Luke's Hospital</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="med_hmode">
+                        <option></option>
+                        <option>Helicopter</option>
+                        <option>Ambulance</option>
+                    </select>
+                    <select class="med_helicopter">
+                        <option>Helo_01</option>
+                        <option>Helo_02</option>
+                        <option>Helo_03</option>
+                    </select>
+                    <select class="med_ambulance">
+                        <option>Ambo_01</option>
+                        <option>Ambo_02</option>
+                        <option>Ambo_03</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="med_dept">
+                        <option></option>
+                        <option>Mesa</option>
+                        <option>Gilbert</option>
+                        <option>Chandler</option>
+                        <option>Tempe</option>
+                        <option>Superstition</option>
+                        <option>Phoenix</option>
+                        <option>Scottsdale</option>
+                    </select>
+                </td>
+                <td>
+                    <input class="med_dtime">
+                </td>
+            </tr>
+            <tr id="med_add_tr">
+                <td>
+                    <div id="med_add_btn" class="med_add_btn button">+ADD</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
 <!-- DIALOGS -->
@@ -192,15 +438,14 @@
 <!-- This is a Dialog PROTOTYPE.  It will be hidden and cloned for some T-Bar's.-->
 <div id="dialog_prototype" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text"><span class="dialog_title_text_span"></span><span
-                class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text"><span class="dialog_title_text_span"></span><span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12 container-fluid"></div>
 </div>
 
 
 <!-- Benchmarks Dialog Body -->
-<div id="benchmarks_dialog_body" class="dialog_body col-xs-12 container-fluid">
+<div id="benchmarks_dialog_body" class="benchmarks_dialog_body dialog_body col-xs-12 container-fluid">
     <div class="benchmark_col_container benchmark_0th_col_container">
         <div id='benchmark_unable_primary' class='benchmark_double_btn benchmark_item_btn button'>Unable to Obtain
             Primary
@@ -255,15 +500,130 @@
         <div id="bnch_lossstop_notify" class="benchmark_item_btn_secondary benchmark_item_btn button">Notify Alarm</div>
     </div>
 </div>
+<div id="benchmarks_vent_dialog_body" class="benchmarks_dialog_body dialog_body col-xs-12 container-fluid">
+    <div id='benchmark_vent_1' class='benchmark_1 benchmark_item_btn_2 button'>Holes Cut</div>
+    <div id='benchmark_vent_2' class='benchmark_2 benchmark_item_btn_2 button'>Positive Return</div>
+    <div id='benchmark_vent_3' class='benchmark_3 benchmark_item_btn_2 button'>Off the Roof</div>
+    <div id='benchmark_vent_4' class='disabled benchmark_4 benchmark_item_btn_2 button'>PAR</div>
+</div>
+<div id="benchmarks_iric_dialog_body" class="benchmarks_dialog_body dialog_body col-xs-12 container-fluid">
+    <div id='benchmark_iric_1' class='benchmark_1 benchmark_item_btn_2 button'>Entering Structure</div>
+    <div id='benchmark_iric_2' class='benchmark_2 benchmark_item_btn_2 button'>Located Down FF</div>
+    <div id='benchmark_iric_3' class='benchmark_3 benchmark_item_btn_2 button'>Trans Fill Complete</div>
+    <div id='benchmark_iric_4' class='benchmark_4 benchmark_item_btn_2 button'>Exiting Structure </div>
+</div>
+<div id="benchmarks_safety_dialog_body" class="benchmarks_dialog_body dialog_body col-xs-12 container-fluid">
+    <div id='benchmark_safety_1' class='benchmark_1 benchmark_item_btn_2 button'>Agrees With Strategy</div>
+    <div id='benchmark_safety_2' class='benchmark_2 benchmark_item_btn_2 button'>360 Recon</div>
+</div>
+<div id="benchmarks_treatment_dialog_body" class="benchmarks_dialog_body dialog_body col-xs-12 container-fluid">
+    <div id='benchmark_treatment_1' class='benchmark_1 benchmark_item_btn_2 button'>All Immediates Tx</div>
+    <div id='benchmark_treatment_2' class='benchmark_2 benchmark_item_btn_2 button'>All Delayed Txt</div>
+    <div id='benchmark_treatment_3' class='benchmark_3 benchmark_item_btn_2 button'>All PT's treated or Tx</div>
+</div>
+<div id="benchmarks_lz_dialog_body" class="benchmarks_dialog_body dialog_body col-xs-12 container-fluid">
+    <div id='benchmark_lz_1' class='benchmark_1 benchmark_item_btn_2 button'>Hilo Landed</div>
+    <div id='benchmark_lz_2' class='benchmark_2 benchmark_item_btn_2 button'>PT Care Transferred</div>
+    <div id='benchmark_lz_3' class='benchmark_3 benchmark_item_btn_2 button'>Hilo Taken Off</div>
+</div>
+<div id="benchmarks_triage_dialog_body" class="benchmarks_dialog_body dialog_body col-xs-12 container-fluid">
+    <table style="margin-left:10px">
+        <tr>
+            <td style="text-align: right">Immediates:</td>
+            <td><input id="benchmark_triage_1" type="number" class="benchmark_triage_input"/></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Delayed:</td>
+            <td><input id="benchmark_triage_2" type="number" class="benchmark_triage_input"/></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Total Number of PT:</td>
+            <td><input id="benchmark_triage_3" type="number" class="benchmark_triage_input"/></td>
+        </tr>
+    </table>
+</div>
+
+<!-- Strategy Mode Dialog -->
+<div id="mode_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Strategy<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div class="dialog_body col-xs-12 container-fluid">
+        <div id="mode_dlg_off" class="offensive_btn button">OFFENSIVE</div>
+        <div id="mode_dlg_def" class="defensive_btn button">DEFENSIVE</div>
+        <div class="clear_float"></div>
+    </div>
+</div>
+
+<!-- Resources Dialog -->
+<div id="resources_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Extrication<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="resources_dialog_body_medical" class="dialog_body col-xs-12 container-fluid">
+        <div id="resources_utilt_btn" class="medical medical_toggle_btn button">Utility truck</div>
+        <div id="resources_rehab_btn" class="medical medical_toggle_btn button">Rehab unit</div>
+        <div id="resources_safet_btn" class="medical medical_toggle_btn button">Safety</div>
+        <div id="resources_inves_btn" class="medical medical_toggle_btn button">Investigator</div>
+        <div id="resources_piobt_btn" class="medical medical_toggle_btn button">PIO</div>
+        <div id="resources_cmdvn_btn" class="medical medical_toggle_btn button">Command Van</div>
+        <div id="resources_pdspr_btn" class="medical medical_toggle_btn button">PD Supervisor</div>
+        <div id="resources_ambsp_btn" class="medical medical_toggle_btn button">Amb Supervisor</div>
+        <div id="resources_crtcn_btn" class="medical medical_toggle_btn button">CRT/Connectors</div>
+    </div>
+</div>
+
+<!-- Functions Dialog -->
+<div id="functions_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Extrication<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="functions_dialog_body_medical" class="dialog_body col-xs-12 container-fluid">
+        <div id="functions_triag_btn" class="medical medical_toggle_btn button">Triage Tags</div>
+        <div id="functions_massc_btn" class="medical medical_toggle_btn button">Mass Casualty?</div>
+        <div id="functions_cmdlc_btn" class="medical medical_toggle_btn button">Command Location</div>
+        <div id="functions_helic_btn" class="medical medical_toggle_btn button">Helicopter(s)</div>
+        <div id="functions_hospa_btn" class="medical medical_toggle_btn button">Hospital Alert</div>
+        <div id="functions_ambos_btn" class="medical medical_toggle_btn button">Ambulence Staging</div>
+        <div id="functions_trafc_btn" class="medical medical_toggle_btn button">Traffic Control</div>
+        <div id="functions_pdasl_btn" class="medical medical_toggle_btn button">PD Assistance For LZ</div>
+    </div>
+</div>
+
+<!-- Extrication Dialog -->
+<div id="extrication_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Extrication<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="extrication_dialog_body_medical" class="dialog_body col-xs-12 container-fluid">
+        <div id="extricate_lineg_btn" class="medical medical_toggle_btn button">Line on ground</div>
+        <div id="extricate_ensrs_btn" class="medical medical_toggle_btn button">Ensure scene safety</div>
+        <div id="extricate_acctv_btn" class="medical medical_toggle_btn button">Account for victims</div>
+        <div id="extricate_movec_btn" class="medical medical_toggle_btn button">Move critical first</div>
+        <div id="extricate_allpt_btn" class="medical medical_toggle_btn button">All Pts to Tx</div>
+        <div id="extricate_geosc_btn" class="medical medical_toggle_btn button">Geographic Sectors</div>
+    </div>
+</div>
+
+<!-- Initial Triage Report Dialog -->
+<div id="initial_triage_report_dialog" class="dialog dialog_window container-fluid">
+    <div class="dialog_title col-xs-12">
+        <div class="dialog_title_text">Initial Triage Report<span class="close_btn dialog_close_btn button">Close</span></div>
+    </div>
+    <div id="extrication_dialog_body_medical" class="dialog_body col-xs-12 container-fluid">
+        <div id="extricate_lineg_btn" class="medical medical_toggle_btn button">Initial Triage Report</div>
+        <div id="extricate_ensrs_btn" class="medical medical_toggle_btn button">All pts. Found</div>
+    </div>
+</div>
+
 
 <!-- Resume Command Dialog -->
 <div id="resume_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_body col-xs-12 container-fluid">
         <div id="cmd_term_label">Command terminated at:</div>
         <div id="resume_cmd_btn" class="button">Resume Command</div>
-        <div id="report_btn_2" class="header_item button">
+        <div id="report_btn_2" class="button">
             <img class="report_icon" src="images/report.png"/>
-
             <div>Reports</div>
         </div>
         <div id="new_incident_cmd_btn" class="button">Start New Incident</div>
@@ -274,7 +634,7 @@
 <!-- Command Transfer Dialog -->
 <div id="cmdxfer_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Command Transferred<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Command Transferred<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12 container-fluid">
         <div id="from_unit_cmdxfer_btn" class="unit_cmdxfer_btn unit_btn dialog_btn button">UNIT</div>
@@ -285,19 +645,26 @@
     </div>
 </div>
 
-<!-- Street Name Dialog -->
-<div id="streetname_dialog" class="dialog dialog_window container-fluid">
+<!-- Incident Info Dialog -->
+<div id="inc_info_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Street Name<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Incident Info<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12 container-fluid">
-        <input type="text" id="streetname_custom_input">
 
-        <div id="streetname_dlg_clear" class="button">Clear</div>
+        <div>Incident Number:</div>
+        <input type="text" id="inc_num_custom_input">
+        <div id="inc_num_dlg_clear" class="button">Clear</div>
         <div class="clear_float"></div>
+
+        <div>Address or Cross Streets:</div>
+        <input type="text" id="inc_address_custom_input">
+        <div id="inc_address_dlg_clear" class="button">Clear</div>
+        <div class="clear_float"></div>
+
         <div>
-            <div id="streetname_dlg_ok" class="confirm_btn button">OK</div>
-            <div id="streetname_dlg_cancel" class="confirm_btn button">Cancel</div>
+            <div id="inc_info_dlg_ok"       class="confirm_btn button">OK</div>
+            <div id="inc_info_dlg_cancel"   class="confirm_btn button">Cancel</div>
             <div class="clear_float"></div>
         </div>
     </div>
@@ -306,7 +673,7 @@
 <!-- Address Dialog -->
 <div id="address_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Dispatch Address<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Dispatch Address<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12 container-fluid">
         <input type="text" id="address_custom_input">
@@ -327,7 +694,7 @@
 <!-- Unit People Dialog -->
 <div id="unit_people_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Unit<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Unit<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12">
         <div id="unit_people_dialog_row1" class="unit_people_dialog_row1"></div>
@@ -339,7 +706,7 @@
 <!-- Emergency Traffic Dialog -->
 <div id="emergency_traffic_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Emergency Traffic<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Emergency Traffic<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12 container-fluid">
         <div class="emergency_traffic_item_btn button">"Command to all units, switching to defensive operations."</div>
@@ -352,14 +719,15 @@
 <div id="iap_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
         <div class="dialog_title_text">Action Plan = Offensive or Defensive?<span
-                class="dialog_close_btn button">Close</span></div>
+                class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12">
         <table id="iap_table_main">
             <tr>
                 <td class="iap_label_td">Critical Fireground Factors:</td>
                 <td colspan="2">
-                    <div id="bldg_iap_btn" class="iap_toggle_btn button">Building</div>
+                    <div id="bldg_iap_btn" class="fire iap_toggle_btn button">Building</div>
+                    <div id="airc_iap_btn" class="water arff iap_toggle_btn button">Aircraft</div>
                     <div id="fire_iap_btn" class="iap_toggle_btn button">Fire</div>
                     <div id="occu_iap_btn" class="iap_toggle_btn button">Occupancy</div>
                     <div id="life_iap_btn" class="iap_toggle_btn button">Life Hazard</div>
@@ -372,13 +740,17 @@
             </tr>
             <tr>
                 <td class="iap_red_label iap_label_td">Rescue:</td>
-                <td><textarea id="iap_resc_input" class="iap_input">Primary search</textarea></td>
+                <td>
+                    <textarea id="iap_rescfire_input" class="fire iap_input">Primary Search</textarea>
+                    <textarea id="iap_rescarff_input" class="water arff iap_input">Egress Protection, Primary Search</textarea>
+                </td>
                 <td></td>
             </tr>
             <tr>
                 <td class="iap_blue_label iap_label_td">Fire Control:</td>
                 <td>
-                    <textarea id="iap_fire_input" class="iap_input">Supply line, attack +2</textarea>
+                    <textarea id="iap_fire_input" class="fire iap_input">Supply line, attack +2</textarea>
+                    <textarea id="iap_firearff_input" class="water arff iap_input">Water/Foam Resources, ARRF Truck Attack +1 Interior, 1 Exterior, Vent</textarea>
                 </td>
                 <td>
                     <div id="iap_vent_toggle_btn" class="iap_toggle_btn button">Vent</div>
@@ -388,7 +760,8 @@
             <tr>
                 <td class="iap_blue_label iap_label_td">Property/People:</td>
                 <td>
-                    <textarea id="iap_prop_input" class="iap_input">Salvage</textarea>
+                    <textarea id="iap_propfire_input" class="fire iap_input">Salvage</textarea>
+                    <textarea id="iap_proparff_input" class="water arff iap_input">Tx Location?, Transportation?</textarea>
 
                     <div class="clear_both"></div>
                     <div id="iap_evacloc_input_container">
@@ -401,8 +774,7 @@
             </tr>
             <tr>
                 <td class="iap_red_label iap_label_td">Firefighter Safety:</td>
-                <td><textarea id="iap_safe_input" class="iap_input">IRIC to Recue, Acct. locations, Safety, Rehab +1
-                    unit</textarea></td>
+                <td><textarea id="iap_safe_input" class="iap_input">IRIC to Recue, Acct. locations, Safety, Rehab +1 unit</textarea></td>
                 <td></td>
             </tr>
         </table>
@@ -414,7 +786,7 @@
 <!-- Time Report Dialog -->
 <div id="time_report_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Reports<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Reports<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12 container-fluid">
         <div class="col-xs-12 container-fluid">
@@ -439,7 +811,7 @@
 <!-- 10key keyboard Dialog -->
 <div id="key_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12 container-fluid">
-        <div class="dialog_title_text"><span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text"><span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12">
         <div id="key_output_value">Sector ####</div>
@@ -467,34 +839,152 @@
 <!-- Mayday Clear Dialog -->
 <div id="mayday_clear_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Clear Mayday<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Clear Mayday<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div class="dialog_body col-xs-12 container-fluid">
         <div class="mayday_clear_item_btn button">"Firefighter self rescued"</div>
         <div class="mayday_clear_item_btn button">"Firefighter rescued"</div>
         <div class="mayday_clear_item_btn button">"Firefighter MIA"</div>
+        <div id="mayday_clear_cancel_btn" class="cancel_btn mayday_clear_item_btn button">Cancel</div>
     </div>
 </div>
 
 <!-- Mayday Dialog -->
 <div id="mayday_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">MAYDAY<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">MAYDAY<span class="close_btn dialog_close_btn_inside button">Close</span></div>
     </div>
     <div id="mayday_dialog_body" class="dialog_body col-xs-12">
         <table id="mayday_table_main">
             <tr>
                 <td id="mayday_left_td">
-                    <div id="mayday_scroll_div">
-                        <div id="new_mayday_btn" class="glowpink button">
-                            <img id="new_mayday_btn_icon" class='plus_icon' src='images/plus.png'/>
+                    <div id="new_mayday_btn" class="glowpink button">
+                        <img id="new_mayday_btn_icon" class='plus_icon' src='images/plus.png'/>
 
-                            <div id="new_mayday_btn_text">New Mayday</div>
+                        <div id="new_mayday_btn_text">New Mayday</div>
+                        <div class="clear_float"></div>
+                    </div>
+                    <div id="mayday_info_edit_div" class="yellow_bg mayday_info_div">
+                        <div id="mayday_clear_btn" class="glowbabyblue mayday_clear_btn button">Clear</div>
+                        <div id="mayday_mayday_title" class="mayday_box_title_edit mayday_box_title">Mayday #</div>
+                        <div id="mayday_timer" class="mayday_timer">00:00</div>
+                        <div class="clear_float"></div>
+                        <div>
+                            <span class="mayday_name_label">Name:</span>
+                            <input id="mayday_name_input" class="mayday_name_input" type="text"/>
+
+                            <div id="mayday_edit_psi_btn" class="mayday_psi_btn psi_btn button">PSI</div>
+                            <div class="clear_float"></div>
+                        </div>
+
+                        <div id="mayday_units_all" class="mayday_row_div mayday_units_div"></div>
+                        <select id="mayday_unit_select" class="mayday_select_half mayday_select">
+                            <option id="mayday_unit_option_default" disabled='disabled' selected='selected' class='default_option'>Unit</option>
+                        </select>
+                        <div id="clear_float_between_units_and_sectors" class="clear_float"></div>
+
+                        <div id="mayday_sectors_all" class="mayday_row_div"></div>
+                        <select id="mayday_sectors_select" class="mayday_select_half mayday_select">
+                            <option id="mayday_sector_opt_default" disabled='disabled' selected='mayday_sector_opt selected' class='default_option'>Sector</option>
+                        </select>
+                        <div class="clear_float"></div>
+
+                        <select id="mayday_channel_select" class="mayday_select_half mayday_channel_select mayday_select">
+                            <option id="mayday_channel_opt_default" disabled='disabled' selected='selected' class='default_option'>Channel</option>
+                            <option class='mayday_channel_1'>Channel 1</option>
+                            <option class='mayday_channel_2'>Channel 2</option>
+                            <option class='mayday_channel_3'>Channel 3</option>
+                            <option class='mayday_channel_4'>Channel 4</option>
+                            <option class='mayday_channel_5'>Channel 5</option>
+                            <option class='mayday_channel_6'>Channel 6</option>
+                            <option class='mayday_channel_7'>Channel 7</option>
+                            <option class='mayday_channel_8'>Channel 8</option>
+                            <option class='mayday_channel_9'>Channel 9</option>
+                            <option class='mayday_channel_10'>Channel 10</option>
+                            <option class='mayday_channel_11'>Channel 11</option>
+                            <option class='mayday_channel_12'>Channel 12</option>
+                            <option class='mayday_channel_13'>Channel 13</option>
+                            <option class='mayday_channel_14'>Channel 14</option>
+                            <option class='mayday_channel_15'>Channel 15</option>
+                            <option class='mayday_channel_16'>Channel 16</option>
+                        </select>
+
+                        <select id="mayday_rank_select" class="mayday_select_half mayday_rank_select mayday_select">
+                            <option disabled='disabled' selected='selected' class='default_option'>Rank</option>
+                            <option class='mayday_rank_capt'>Captain</option>
+                            <option class='mayday_rank_eng'>Engineer</option>
+                            <option class='mayday_rank_ff'>Fire Fighter</option>
+                        </select>
+                        <div class="clear_float"></div>
+
+                        <div class="mayday_row_div">
+                            <div id="hoseline_mayday_btn" class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
+                            <div id="offhoseline_mayday_btn" class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
+
+                            <div id="uninjured_mayday_btn" class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
+                            <div id="injured_mayday_btn" class="injured_mayday_btn mayday_toggle button">Injured</div>
+                            <div class="clear_float"></div>
+                        </div>
+
+                        <div class="mayday_row_div">
+                            <div id="lost_mayday_btn" class="lost_mayday_btn mayday_single_toggle mayday_toggle button">Lost</div>
+                            <div id="trap_mayday_btn" class="trap_mayday_btn mayday_single_toggle mayday_toggle button">Trapped</div>
+                            <div id="oair_mayday_btn" class="oair_mayday_btn mayday_single_toggle mayday_toggle button">Out of Air</div>
+                            <div id="regi_mayday_btn" class="regi_mayday_btn mayday_single_toggle mayday_toggle button">Regulator Issue</div>
+                            <div id="lair_mayday_btn" class="lair_mayday_btn mayday_single_toggle mayday_toggle button">Low Air</div>
+                            <div id="pack_mayday_btn" class="pack_mayday_btn mayday_single_toggle mayday_toggle button">Pack Issue</div>
                             <div class="clear_float"></div>
                         </div>
                     </div>
                 </td>
                 <td id="mayday_right_td">
+                    <div id="mayday_list_box">
+                        <div id="mayday_prototype" class="mayday_saved">
+                            <div class="mayday_box_title">Mayday:</div>
+                            <div class="mayday_timer">00:00</div>
+                            <div class="clear_float"></div>
+
+                            <table>
+                                <tr>
+                                    <td class="mayday_info_tbl_l">Name:</td>
+                                    <td class="mayday_info_tbl_r"><div class="mayday_name_value mayday_value"></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="mayday_info_tbl_l">PSI:</td>
+                                    <td class="mayday_info_tbl_r"><div class="mayday_psi_value mayday_value"></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="mayday_info_tbl_l">Unit:</td>
+                                    <td class="mayday_info_tbl_r"><div class="mayday_unit_value mayday_value"></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="mayday_info_tbl_l">Sector:</td>
+                                    <td class="mayday_info_tbl_r"><div class="mayday_sector_value mayday_value"></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="mayday_info_tbl_l">Channel:</td>
+                                    <td class="mayday_info_tbl_r"><div class="mayday_channel_value mayday_value"></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="mayday_info_tbl_l">Rank:</td>
+                                    <td class="mayday_info_tbl_r"><div class="mayday_rank_value mayday_value"></div></td>
+                                </tr>
+                            </table>
+                            <div class="mayday_misc_onhs mayday_misc_value">ON Hoseline</div>
+                            <div class="mayday_misc_ofhs mayday_misc_value">OFF Hoseline</div>
+                            <div class="mayday_misc_unjr mayday_misc_value">UNinjured</div>
+                            <div class="mayday_misc_injr mayday_misc_value">Injured</div>
+                            <div class="mayday_misc_lost mayday_misc_value">Lost</div>
+                            <div class="mayday_misc_trap mayday_misc_value">Trapped</div>
+                            <div class="mayday_misc_oair mayday_misc_value">Out of Air</div>
+                            <div class="mayday_misc_regi mayday_misc_value">Regulator Issue</div>
+                            <div class="mayday_misc_lair mayday_misc_value">Low Air</div>
+                            <div class="mayday_misc_pack mayday_misc_value">Pack Issue</div>
+                            <div class="clear_float"></div>
+                        </div>
+                        <div class="clear_float"></div>
+                    </div>
+                    <div class="clear_float"></div>
                     <div id="mayday_right_tab_div">
                         <div id="mayday_right_tab_radio" class="mayday_right_tab_text tan_bg   button">Radio
                             Transition
@@ -507,65 +997,65 @@
                     <div id="mayday_tab_div_radio" class="mayday_tab_div tan_bg">
                         <span class="mayday_list_title">Radio Transition and Alert</span>
                         <ul class="mayday_list">
-                            <li class="">Emergency Traffic Declaration: Alert fireground that a MAYDAY has been
+                            <li class="list_med_font_size"><input type="checkbox" class="mayday_check">Emergency Traffic Declaration: Alert fireground that a MAYDAY has been
                                 declared
                             </li>
-                            <li class="">If needed move non-affected units to secondary radio channel</li>
-                            <li class="list_level_2">Support officer/runs ongiong operations</li>
-                            <li class="list_level_2">Fireground channel/command directs rescue</li>
-                            <li class="">PAR conducted by Operations on secondary channel</li>
-                            <li class="">Immediately request additional alarm(s)</li>
+                            <li class="list_med_font_size"><input type="checkbox" class="mayday_check">If needed move non-affected units to secondary radio channel</li>
+                            <li class="list_med_font_size list_level_2"><input type="checkbox" class="mayday_check">Support officer/runs ongiong operations</li>
+                            <li class="list_med_font_size list_level_2"><input type="checkbox" class="mayday_check">Fireground channel/command directs rescue</li>
+                            <li class="list_med_font_size"><input type="checkbox" class="mayday_check">PAR conducted by Operations on secondary channel</li>
+                            <li class="list_med_font_size"><input type="checkbox" class="mayday_check">Immediately request additional alarm(s)</li>
                         </ul>
                     </div>
                     <div id="mayday_tab_div_grab" class="mayday_tab_div green_bg">
                         <span class="mayday_list_title">GRAB-LIVES</span>
                         <ul id="mayday_list_grablives" class="mayday_list">
-                            <li class="first_char_red list_med_font_size">Gauge <span class="sm_font">(CHECK AIR)</span>
+                            <li class="first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Gauge <span class="sm_font">(CHECK AIR)</span>
                             </li>
-                            <li class="first_char_red list_med_font_size">Radio <span
+                            <li class="first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Radio <span
                                     class="sm_font">(CALL for Help)</span></li>
-                            <li class="first_char_red list_med_font_size">Activate <span class="sm_font">(Pass)</span>
+                            <li class="first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Activate <span class="sm_font">(Pass)</span>
                             </li>
-                            <li class="list_space_below first_char_red list_med_font_size">Breathing <span
+                            <li class="list_space_below first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Breathing <span
                                     class="sm_font">(Control)</span></li>
-                            <li class="first_char_red list_med_font_size">Low <span class="sm_font">(Stay Low)</span>
+                            <li class="first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Low <span class="sm_font">(Stay Low)</span>
                             </li>
-                            <li class="first_char_red list_med_font_size">Illuminate <span
+                            <li class="first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Illuminate <span
                                     class="sm_font">(Flashlight)</span></li>
-                            <li class="first_char_red list_med_font_size">Volume <span
+                            <li class="first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Volume <span
                                     class="sm_font">(Make Noise)</span></li>
-                            <li class="first_char_red list_med_font_size">Exit <span class="sm_font">(Find Exit)</span>
+                            <li class="first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Exit <span class="sm_font">(Find Exit)</span>
                             </li>
-                            <li class="list_space_below first_char_red list_med_font_size">Shield Airway</li>
-                            <li class="first_char_red list_med_font_size">Air Level:_______</li>
+                            <li class="list_space_below first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Shield Airway</li>
+                            <li class="first_char_red list_med_font_size"><input type="checkbox" class="mayday_check">Air Level:_______</li>
                         </ul>
                     </div>
                     <div id="mayday_tab_div_deploy" class="mayday_tab_div gray_bg">
                         <span class="mayday_list_title">Deployment Considerations</span>
                         <ul class="mayday_list">
-                            <li class="list_space_below list_med_font_size">Deploy Rescue</li>
-                            <li class="list_space_below list_med_font_size">Commit additional resources to the Rapid
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Deploy Rescue</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Commit additional resources to the Rapid
                                 Intervention Team
                             </li>
-                            <li class="list_space_below list_med_font_size">Change Plan to a high priority rescue
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Change Plan to a high priority rescue
                                 effort
                             </li>
-                            <li class="list_space_below list_med_font_size">Consider withdrawing companies from affected
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Consider withdrawing companies from affected
                                 areas
                             </li>
-                            <li class="list_space_below list_med_font_size">Re-enforce firefighting positions</li>
-                            <li class="list_space_below list_med_font_size">Open / Unlock all doors</li>
-                            <li class="list_space_below list_med_font_size">Ventilate - maintain tenability</li>
-                            <li class="list_space_below list_med_font_size">Provide additional lighting</li>
-                            <li class="list_space_below list_med_font_size">Closely coordinate and control search
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Re-enforce firefighting positions</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Open / Unlock all doors</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Ventilate - maintain tenability</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Provide additional lighting</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Closely coordinate and control search
                                 efforts
                             </li>
-                            <li class="list_space_below list_med_font_size">Special call for TRT teams if needed</li>
-                            <li class="list_space_below list_med_font_size">Monitor structural stability</li>
-                            <li class="list_space_below list_med_font_size">Maintain strong supervision and control of
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Special call for TRT teams if needed</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Monitor structural stability</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Maintain strong supervision and control of
                                 crews
                             </li>
-                            <li class="list_space_below list_med_font_size">Assign additional chief officers to area of
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Assign additional chief officers to area of
                                 rescue
                             </li>
                         </ul>
@@ -573,68 +1063,82 @@
                     <div id="mayday_tab_div_build" class="mayday_tab_div blue_bg">
                         <span class="mayday_list_title">Build out command and Control</span>
                         <ul class="mayday_list">
-                            <li class="list_space_below list_med_font_size">Use chief officers is critical location,
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Use chief officers is critical location,
                                 fill out command team
                             </li>
-                            <li class="list_space_below list_med_font_size">Build/effective rehab</li>
-                            <li class="list_space_below list_med_font_size">Control the media</li>
-                            <li class="list_space_below list_med_font_size">Put medical sector in place</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Build/effective rehab</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Control the media</li>
+                            <li class="list_space_below list_med_font_size"><input type="checkbox" class="mayday_check">Put medical sector in place</li>
                         </ul>
                     </div>
+                    <div class="clear_float"></div>
                 </td>
             </tr>
         </table>
     </div>
-</div>
-
-<div id="mayday_info_div_prototype" class="yellow_bg mayday_info_div">
-    <div class="mayday_box_title">Mayday #</div>
-    <div class="glowbabyblue mayday_clear_btn button">Clear</div>
-    <div class="clear_float"></div>
-    <div>
-        <span class="mayday_name_label">Name:</span>
-        <input class="mayday_name_input" type="text"/>
-
-        <div class="mayday_psi_btn psi_btn button">PSI</div>
-        <div class="clear_float"></div>
-    </div>
-
-    <select class="mayday_sector_select mayday_select">
-        <option disabled='disabled' selected='selected' class='default_option'>Sector</option>
-    </select>
-
-    <div class="mayday_sector_title"></div>
-    <div class="mayday_units_div"></div>
-    <div class="clear_float"></div>
-
-    <div class="hoseline_mayday_btn mayday_toggle button">ON Hoseline</div>
-    <div class="offhoseline_mayday_btn mayday_toggle button">OFF Hoseline</div>
-    <div class="clear_float"></div>
-
-    <div class="uninjured_mayday_btn mayday_toggle button">UNinjured</div>
-    <div class="injured_mayday_btn mayday_toggle button">Injured</div>
-    <div class="clear_float"></div>
 </div>
 <!-- Mayday Dialog -->
 
 <!-- Objectives Dialog Unit Component Prototype -->
 <div id="objectives_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Objectives<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Objectives<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
-    <div id="objectives_dialog_body" class="dialog_body col-xs-12 container-fluid">
+    <div id="objectives_dialog_body_fire" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
         <div id="objective_left_col">
-            <div id="rescue_objective_btn" class="objective_btn button">Upgrade to full recue</div>
-            <div id="safety_objective_btn" class="objective_btn button">Assing safety</div>
-            <div id="establish_supply_objective_btn" class="objective_btn button">Establish supply line</div>
-            <div id="secure_objective_btn" class="objective_btn button">Secure utilities</div>
-            <div id="vent_objective_btn" class="objective_btn button">Ventilation</div>
-            <div id="ondeck_objective_btn" class="objective_btn button">Create "On deck"</div>
-            <div id="pressure_objective_btn" class="objective_btn button">Pressurize exposures</div>
-            <div id="monitor_objective_btn" class="objective_btn button">Monitor channel 16</div>
-            <div id="salvage_objective_btn" class="objective_btn button">Salvage</div>
-            <div id="rehab_objective_btn" class="objective_btn button">Establish rehab</div>
-            <div id="custsvc_objective_btn" class="objective_btn button">Customer service</div>
+            <div id="rescue_objective_btn"              class="fire objective_btn button">Upgrade to full recue</div>
+            <div id="safety_objective_btn"              class="fire objective_btn button">Assing safety</div>
+            <div id="establish_supply_objective_btn"    class="fire objective_btn button">Establish supply line</div>
+            <div id="secure_objective_btn"              class="fire objective_btn button">Secure utilities</div>
+            <div id="vent_objective_btn"                class="fire objective_btn button">Ventilation</div>
+            <div id="ondeck_objective_btn"              class="fire objective_btn button">Create "On deck"</div>
+            <div id="pressure_objective_btn"            class="fire objective_btn button">Pressurize exposures</div>
+            <div id="monitor_objective_btn"             class="fire objective_btn button">Monitor channel 16</div>
+            <div id="salvage_objective_btn"             class="fire objective_btn button">Salvage</div>
+            <div id="rehab_objective_btn"               class="fire objective_btn button">Establish rehab</div>
+            <div id="custsvc_objective_btn"             class="fire objective_btn button">Customer service</div>
+        </div>
+        <div id="objective_right_col">
+        </div>
+    </div>
+    <div id="objectives_dialog_body_arff" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
+        <div id="objective_left_col">
+            <div id="arff_allc_objective_btn" class="arff objective_btn button">All Clear</div>
+            <div id="arff_undc_objective_btn" class="arff objective_btn button">Under Control</div>
+            <div id="arff_loss_objective_btn" class="arff objective_btn button">Loss Stop</div>
+            <div id="arff_fire_objective_btn" class="arff objective_btn button">Fire Control Group</div>
+            <div id="arff_escr_objective_btn" class="arff objective_btn button">Escort Additional Units</div>
+            <div id="arff_trig_objective_btn" class="arff objective_btn button">Triage</div>
+            <div id="arff_vent_objective_btn" class="arff objective_btn button">Ventilation</div>
+            <div id="arff_pres_objective_btn" class="arff objective_btn button">Pressurize Cabin</div>
+            <div id="arff_watr_objective_btn" class="arff objective_btn button">Water-Foam Resource group</div>
+            <div id="arff_asgn_objective_btn" class="arff objective_btn button">Assign Safety</div>
+            <div id="arff_stab_objective_btn" class="arff objective_btn button">Stabilize/Safety of Aircraft</div>
+            <div id="arff_estb_objective_btn" class="arff objective_btn button">Establish ReHab</div>
+            <div id="arff_vict_objective_btn" class="arff objective_btn button">Patient/Victim Services</div>
+        </div>
+        <div id="objective_right_col">
+        </div>
+    </div>
+    <div id="objectives_dialog_body_water" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
+        <div id="objective_left_col">
+            <div id="water_secr_objective_btn" class="water objective_btn button">Secure Responsible Party or Witness</div>
+            <div id="water_dloc_objective_btn" class="water objective_btn button">Determine location of victims</div>
+            <div id="water_dnum_objective_btn" class="water objective_btn button">Determine number of victims</div>
+            <div id="water_cond_objective_btn" class="water objective_btn button">Determine condition of victims </div>
+            <div id="water_resc_objective_btn" class="water objective_btn button">Rescue Mode or Recovery Mode</div>
+        </div>
+        <div id="objective_right_col">
+        </div>
+    </div>
+    <div id="objectives_dialog_body_medical" class="objectives_dialog_body dialog_body col-xs-12 container-fluid">
+        <div id="objective_left_col">
+            <div id="med_obj_trigr_btn"  class="medical objective_btn button">Triage Report</div>
+            <div id="med_obj_allcl_btn"  class="medical objective_btn button">ALL CLEAR</div>
+            <div id="med_obj_ptsex_btn"  class="medical objective_btn button">Pts Extricated</div>
+            <div id="med_obj_scnsc_btn"  class="medical objective_btn button">SCENE SECURE</div>
+            <div id="med_obj_vehhz_btn"  class="medical objective_btn button">Vehicle Hazards</div>
+            <div id="med_obj_pattr_btn"  class="medical objective_btn button">PATIENTS TRANSPORTED</div>
         </div>
         <div id="objective_right_col">
         </div>
@@ -644,23 +1148,32 @@
 <!-- OSR Dialog Unit Component Prototype -->
 <div id="osr_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">On Scene Report (OSR)<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">On Scene Report (OSR)<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div id="osr_dialog_body" class="dialog_body col-xs-12 container-fluid">
         <div id="osr_left_col">
-            <div id="address_left_osr_btn" class="osr_btn button">Address</div>
-            <div id="occupancy_osr_btn" class="osr_btn button">Occupancy</div>
-            <div id="construction_osr_btn" class="osr_btn button">Construction</div>
-            <div id="conditions_osr_btn" class="osr_btn button">Conditions</div>
-            <div id="assumecmd_osr_btn" class="osr_btn button">Assume Command</div>
-            <div id="location_osr_btn" class="osr_btn button">Location(mobile/cab)</div>
-            <div id="mode_osr_btn" class="osr_btn button">Strategy (off./def.)</div>
-            <div id="attack_osr_btn" class="osr_btn button">Attack line</div>
-            <div id="water_osr_btn" class="osr_btn button">Water supply</div>
-            <div id="iric_osr_btn" class="osr_btn button">IRIC</div>
-            <div id="acct_osr_btn" class="osr_btn button">Accountability</div>
-            <select id="osr_direction" class="osr_select">
-                <option disabled="disabled" selected="selected">Accountability Direction</option>
+            <div id="address_left_osr_btn"  class="water fire osr_btn button">Address</div>
+            <div id="location_left_osr_btn" class="water arff osr_btn button">Location</div>
+            <div id="occupancy_osr_btn"     class="fire osr_btn button">Occupancy</div>
+            <div id="aircraft_osr_btn"      class="arff osr_btn button">Type of Aircraft</div>
+            <div id="bodyofwater_osr_btn"   class="water osr_btn button">Body of Water</div>
+            <div id="construction_osr_btn"  class="fire osr_btn button">Construction</div>
+            <div id="conditions_osr_btn"    class="fire arff osr_btn button">Conditions</div>
+            <div id="watervel_osr_btn"      class="water osr_btn button">Water Velocity</div>
+            <div id="assumecmd_osr_btn"     class="water fire arff osr_btn button">Assume Command</div>
+            <div id="location_osr_btn"      class="water fire arff osr_btn button">Location(mobile/cab)</div>
+            <div id="mode_osr_btn"          class="fire arff osr_btn button">Strategy (off./def.)</div>
+            <div id="modewater_osr_btn"     class="water osr_btn button">Strategy (Rescue/Recovery)</div>
+            <div id="attack_osr_btn"        class="fire arff osr_btn button">Attack line</div>
+            <div id="water_osr_btn"         class="fire arff osr_btn button">Water supply</div>
+            <div id="osr_iric_toggles" class="fire arff osr_toggle_container_div osr_toggle_left">
+                <div id="iric_osr_btn" class="fire osr_toggle_btn osr_toggle_btn_left button">IRIC</div>
+                <div id="noir_osr_btn" class="fire osr_toggle_btn osr_toggle_btn_left button">No IRIC</div>
+            </div>
+            
+            <div id="acct_osr_btn"          class="water fire arff osr_btn button">Accountability Unit</div>
+            <select id="osr_direction"      class="fire water arff osr_select">
+                <option disabled="disabled" selected="selected">Accountability Location</option>
                 <option>North Side Accountability</option>
                 <option>East Side Accountability</option>
                 <option>South Side Accountability</option>
@@ -675,14 +1188,14 @@
             <div id="unit_osr_btn" class="button">Unit ID</div>
             <div id="osr_address_btn" class="button">Dispatch Address</div>
 
-            <select id="osr_size_of_building" class="osr_select">
+            <select id="osr_size_of_building" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Size of building</option>
                 <option>Small building</option>
                 <option>Medium building</option>
                 <option>Large building</option>
             </select>
 
-            <select id="osr_number_of_floors" class="osr_select">
+            <select id="osr_number_of_floors" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Number of floors</option>
                 <option>1 floor</option>
                 <option>2 floors</option>
@@ -711,8 +1224,8 @@
                 <option>25 floors</option>
             </select>
 
-            <select id="osr_select_type_of_building" class="osr_select">
-                <option disabled="disabled" selected="selected">Type of building</option>
+            <select id="osr_select_type_of_building" class="fire osr_select">
+                <option disabled="disabled" selected="selected">Type of Building</option>
                 <option>Residential Home</option>
                 <option>Duplex</option>
                 <option>Mobile Home</option>
@@ -725,19 +1238,33 @@
                 <option>Specialized/Other</option>
             </select>
 
-            <select id="osr_number_of_subfloors" class="osr_select">
+            <select id="osr_select_type_of_aircraft" class="arff osr_select">
+                <option disabled="disabled" selected="selected">Type of Aircraft</option>
+                <option>Single Engine</option>
+                <option>Personal Jet</option>
+            </select>
+
+            <select id="osr_select_bodyofwater" class="water osr_select">
+                <option disabled="disabled" selected="selected">Body of Water</option>
+                <option>River</option>
+                <option>Lake</option>
+                <option>Wash</option>
+                <option>Canal</option>
+            </select>
+
+            <select id="osr_number_of_subfloors" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Sub Floors</option>
                 <option>None</option>
                 <option>-1 floor</option>
                 <option>-2 floors</option>
             </select>
 
-            <div class="osr_toggle_container_div">
-                <div id="osr_occupancy_basement_btn" class="osr_toggle_btn button">Basement</div>
-                <div id="osr_occupancy_nobasement_btn" class="osr_toggle_btn button">No Basement</div>
+            <div id="osr_basement_toggles" class="fire osr_toggle_container_div">
+                <div id="osr_occupancy_basement_btn" class="fire osr_toggle_btn button">Basement</div>
+                <div id="osr_occupancy_nobasement_btn" class="fire osr_toggle_btn button">No Basement</div>
             </div>
 
-            <select id="osr_select_type_of_construction" class="osr_select">
+            <select id="osr_select_type_of_construction" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Construction type</option>
                 <option>Light weight construction</option>
                 <option>Wood frame construction</option>
@@ -747,7 +1274,7 @@
                 <option>Specialized/Other construction</option>
             </select>
 
-            <select id="osr_select_roof" class="osr_select">
+            <select id="osr_select_roof" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Roof</option>
                 <option>Pitched - tile roof</option>
                 <option>Pitched - asphalt roof</option>
@@ -756,7 +1283,7 @@
                 <option>Arched roof</option>
             </select>
 
-            <select id="osr_select_conditions" class="osr_select">
+            <select id="osr_select_conditions" class="fire osr_select">
                 <option disabled="disabled" selected="selected">Conditions</option>
                 <option>Nothing showing</option>
                 <option>Smoke showing</option>
@@ -765,37 +1292,49 @@
                 <option>Attic Fire</option>
             </select>
 
-            <div class="osr_toggle_container_div">
-                <div id="osr_occupancy_mob_btn" class="osr_toggle_btn button">Mobile</div>
-                <div id="osr_occupancy_stat_btn" class="osr_toggle_btn button">Stationary</div>
+            <select id="osr_select_conditions_arff" class="arff osr_select">
+                <option disabled="disabled" selected="selected">Aircraft Conditions</option>
+                <option>Nothing showing</option>
+                <option>Smoke showing</option>
+                <option>Smoke & Fire showing</option>
+                <option>Fully Involved</option>
+                <option>Attic Fire</option>
+            </select>
+
+            <select id="osr_select_watervel" class="water osr_select">
+                <option disabled="disabled" selected="selected">Water Velocity</option>
+                <option>Slow moving</option>
+                <option>Moderately moving</option>
+                <option>Fast moving</option>
+            </select>
+
+            <div class="fire water arff osr_toggle_container_div">
+                <div id="osr_occupancy_mob_btn" class="fire arff water osr_toggle_btn button">Mobile</div>
+                <div id="osr_occupancy_stat_btn" class="fire arff water osr_toggle_btn button">Stationary</div>
             </div>
 
-            <div class="osr_toggle_container_div">
-                <div id="osr_occupancy_off_btn" class="osr_toggle_btn button">Offensive</div>
-                <div id="osr_occupancy_def_btn" class="osr_toggle_btn button">Defensive</div>
+            <div class="fire arff osr_toggle_container_div">
+                <div id="osr_occupancy_off_btn" class="fire arff water osr_toggle_btn button">Offensive</div>
+                <div id="osr_occupancy_def_btn" class="fire arff water osr_toggle_btn button">Defensive</div>
             </div>
+
+            <div class="water osr_toggle_container_div">
+                <div id="osr_water_mode_res_btn" class="water osr_toggle_btn button">Rescue</div>
+                <div id="osr_water_mode_rec_btn" class="water osr_toggle_btn button">Recovery</div>
+            </div>
+
+            <div id="osr_foam_btn" class="arff button">Applying Foam</div>
+            <div id="osr_egress_btn" class="arff button">Protecting Egress</div>
         </div>
         <div style="width:100%" class="clear_float"></div>
     </div>
 </div>
 <!-- OSR Dialog Unit Component Prototype -->
 
-<!-- NDA Reminder Dialog -->
-<div id="nda_reminder_dialog" class="dialog dialog_window container-fluid">
-    <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Reminder<span class="dialog_close_btn button">Close</span></div>
-    </div>
-    <div class="dialog_body col-xs-12 container-fluid">
-        Just a reminder that you have signed an NDA agreement in order to use this software. Sharing this software,
-        discussing its details or providing visual, logical or technical details of it with unauthorized people and
-        organizations is prohibited. Thank you for helping us improve!
-    </div>
-</div>
-
 <!-- Upgrade Dialog -->
 <div id="upgrade_dialog" class="dialog dialog_window container-fluid">
     <div class="dialog_title col-xs-12">
-        <div class="dialog_title_text">Upgrade<span class="dialog_close_btn button">Close</span></div>
+        <div class="dialog_title_text">Upgrade<span class="close_btn dialog_close_btn button">Close</span></div>
     </div>
     <div id="upgrade_dialog_body" class="dialog_body col-xs-12 container-fluid">
         <div id="upgrade_left_col">
@@ -835,6 +1374,5 @@
 </div>
 <!--dialogContainer-->
 
-<div id="version_text">Version: 0.0</div>
 </body>
 </html>

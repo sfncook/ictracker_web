@@ -1,0 +1,68 @@
+.bottom_tab {
+    z-index: 49;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: white;
+    border-top: 4px #DDD solid;
+    overflow: scroll;
+}
+
+#medical_triage_list {
+    padding-right:100px;
+}
+#medical_triage_table {
+    margin: auto;
+}
+#medical_triage_table td {
+    padding: 5px 10px;
+    border-top: 1px #DDD solid;
+    border-bottom: 1px #DDD solid;
+    text-align: center;
+}
+#medical_triage_table thead td {
+    font-weight: bold;
+    font-size: 1.01rem;
+    text-align: center;
+}
+.med_ptage {
+    width: 50px;
+}
+#med_add_tr td {
+    border-bottom: 0 !important;
+    text-align: center;
+}
+#med_obj_allcl_btn {
+    font-weight: bold;
+}
+#med_obj_scnsc_btn {
+    font-weight: bold;
+}
+#med_obj_pattr_btn {
+    font-weight: bold;
+}
+#init_triage_btn {
+    height: 70px;
+}
+
+#extrication_dialog {
+    width: 232px;
+}
+.medical_toggle_btn {
+    margin: 5px 10px;
+}
+#initial_triage_report_dialog {
+    width: 300px;
+}
+#functions_dialog {
+    width: 200px;
+}
+#resources_dialog {
+    width: 200px;
+}
+.med_bottom_pad {
+    padding-bottom: 150px;
+}
+.med_helicopter, .med_ambulance{ display: none; margin-top: 5px; }

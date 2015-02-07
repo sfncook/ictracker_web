@@ -112,7 +112,7 @@ td {
 }
 
 #ict_header {
-    background: #BBB;
+    background: #DDD;
     position: fixed;
     right: 0;
     top: 0;
@@ -120,16 +120,22 @@ td {
     z-index: 50;
     padding: 4px;
 }
-
-#title_icon {
-    width: 90px;
-    height: 90px;
-    border: 1px solid #AAA;
-    border-radius: 3px;
+#ict_header > .button {
+    background: white;
+}
+#ict_header > .button:active {
+    background: #DDD;
 }
 
-#title_icon:hover {
-    /*cursor: pointer;*/
+#title_icon {
+    width: 29px;
+    height: 29px;
+    border: 1px solid #AAA;
+    border-radius: 3px;
+    position: fixed;
+    bottom: 30px;
+    left: 10px;
+    z-index: 150;
 }
 
 .footer {
@@ -151,7 +157,7 @@ td {
  */
 .button {
     text-align: center;
-    background: #CCC;
+    background: white;
     color: black;
     border: 1px solid #9a9a9a;
     border-radius: 3px;
@@ -159,12 +165,10 @@ td {
     cursor: pointer;
     box-shadow: 1px 1px 2px #888;
 }
-
 .button:hover {
     background-color: #EEE;
     color: #999;
 }
-
 .button:active {
     background-color: #BBB;
 }
@@ -177,7 +181,7 @@ td {
     border-top: none;
     margin: 0 10px;
 
-    width: 130px;
+    /*width: 130px;*/
     height: 50px;
     margin-right: 10px;
     display: inline-block;
@@ -199,10 +203,25 @@ td {
     box-shadow: 1px 1px 2px #888;
 }
 
-.disabled, .disabled:hover, .disabled:active {
-    background: #DDD !important;
-    color: #AAA;
-    cursor: default;
+.action_btn {
+    width: 126px;
+    height: 26px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 4px;
+    box-shadow: none;
+    font-size: 100%;
+    padding-bottom: 2px;
+    color: black !important;
+    background: #ddd !important;
+    opacity: 100 !important;
+}
+.action_btn:hover {
+    background: white !important;
+}
+.action_btn:active {
+    background: darkgray !important;
 }
 
 .hidden_div {
@@ -275,14 +294,12 @@ td {
 
 .glowred {
     background: red !important;
-    color: white;
+    color: white !important;
 }
-
 .glowred:hover {
     background: darkred !important;
     color: white;
 }
-
 .glowred:active {
     background: #666 !important;
     color: white;
@@ -292,19 +309,12 @@ td {
     background: pink !important;
     color: #666;
 }
-
 .glowpink:hover {
     background: red !important;
     color: white;
 }
-
-.glowpink:hover {
-    background: red !important;
-    color: white;
-}
-
 .glowpink:active {
-    background: #666;
+    background: #666 !important;
     color: white;
 }
 
@@ -315,26 +325,11 @@ td {
 .glowlightgreen {
     background: LightGreen !important;
 }
-
 .glowlightgreen:hover {
-    background: DarkGreen;
+    background: #b8ffaf !important;
     color: white;
 }
 
-.glowgreen {
-    background: green;
-    color: white;
-}
-
-.glowgreen:hover {
-    background: DarkGreen;
-    color: white;
-}
-
-.glowgreen:active {
-    background: #666;
-    color: white;
-}
 
 .glowbabyblue {
     background: #99e5ff;
@@ -366,13 +361,14 @@ td {
 .header_item {
     margin-bottom: 4px;
     height: 25px;
+    width: 90px;
 }
 
 #time {
     text-align: center;
     font-family: 'Carrois Gothic SC';
     font-size: 1.45rem;
-    color: white;
+    color: black;
 }
 
 .time_lg {
@@ -421,56 +417,41 @@ td {
     top: 157px;
 }
 
-#streetname_btn {
-    float: left;
-    margin-left: 10px;
-    pointer-events: auto;
-    background: #a56c15 !important;
-    color: white;
-    font-size: 1.2rem;
-}
-
-#streetname_btn:hover {
-    background: #E89A1B !important;
-}
-
-#streetname_btn:active {
-    background: #69430f !important;
-}
-
-#inc_num {
-    float: left;
-    margin-left: 10px;
-    font-size: 1.05rem;
-}
-
 #mode_btn {
     float: right;
     margin-right: 10px;
     pointer-events: auto;
+    background: #e4b32d;
+    color: white;
+    font-size: 1.2rem;
 }
-
-#mode_side_dialog {
-    top: 197px;
-}
-
-#mode_side_dialog_arm {
-    top: 197px;
-}
-
 .offensive_btn {
     background: green !important;
     color: white;
 }
-
 .defensive_btn {
     background: #FF2B21 !important;
     color: white;
+}
+#mode_dialog {
+    width: 250px;
+}
+#mode_dlg_off {
+    margin: 10px;
+}
+#mode_dlg_def {
+    margin: 10px;
+}
+.outer_glow {
+    box-shadow: 0px 0px 20px darkred;
+    border:2px solid yellow;
 }
 
 #report_btn {
     z-index: 100;
     height: 45px;
+    position: fixed;
+    bottom: 10px;
 }
 
 #sectorreport_btn {
@@ -486,7 +467,7 @@ td {
 #dispatched_units_btn {
     z-index: 100;
     height: 46px;
-    margin: 5px 0;
+    margin: 13px 0 5px 0;
 }
 
 #upgrade_btn {
@@ -496,13 +477,15 @@ td {
 #cmdxfer_units_btn {
     z-index: 100;
     height: 46px;
-    margin: 5px 0;
+    margin: 50px 0 5px 0;
 }
 
 #cmd_term_btn {
     z-index: 100;
     font-size: 0.75rem;
     height: 53px;
+    position: fixed;
+    bottom: 60px;
 }
 
 #cmd_term_btn > div {
@@ -569,13 +552,38 @@ td {
     font-size: 1.1rem;
     color: white;
     float: left;
-    width: 100%
+    width: 100%;
 }
 
 .dialog_close_btn {
+    position: absolute;
+    top:0;
+    right:-40;
     background: #F67574;
-    height: 20px;
-    padding: 3px 2px;
+    height: 42px;
+    padding-top: 13px;
+    padding-left: 2px;
+    line-height: 1.0em;
+    margin: 0;
+    color: white;
+
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    text-shadow: none;
+    width: 40px;
+    float: right;
+    font-size: 0.8rem;
+    z-index: 200;
+}
+
+.dialog_close_btn_inside {
+    background: #F67574;
+    height: 42px;
+    padding-top: 13px;
+    padding-left: 2px;
     line-height: 1.0em;
     margin: 2px;
     color: white;
@@ -590,13 +598,22 @@ td {
 .dialog_body {
     padding: 0;
     border-right: 1px solid #666;
-    border-bottom: 1px solid #666;
     border-left: 1px solid #666;
 }
 
-#sector_dialog {
-    width: 890px;
+#sector_dialog.fire {
+    width: 887px;
 }
+#sector_dialog.arff {
+    width: 712px;
+}
+#sector_dialog.water {
+    width: 712px;
+}
+#sector_dialog.medical {
+    width: 712px;
+}
+
 
 #dir_btns_container {
     padding: 4px 0;
@@ -739,11 +756,9 @@ td {
 #actions_dialog {
     width: 708px;
 }
-
 .action_dialog_btn {
     margin: 5px !important;
 }
-
 .action_type_dialog_header {
     text-align: center;
     font-size: 1.1rem;
@@ -752,15 +767,66 @@ td {
     margin-top: 8px;
     border-top: 1px solid #DDD;
 }
+#cust_actions {
+    position: absolute;
+    top: 30px;
+    left: -164px;
+    width: 164px;
+    background: #EEE;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding-bottom: 10px;
+}
+#cust_actions>* {
+    margin:5px;
+    width: 153px;
+}
+.add_cust_btn {
+    height: 25px;
+    background: lightblue;
+    border: 1px white solid;
+    color: white;
+    padding-top:2px;
+    margin: 0 5px 10px 30px;
+    border-radius: 15px;
+    width: 100px;
+}
+.add_cust_btn:hover {
+    background: white;
+}
+.add_cust_btn:active {
+    background: darkblue;
+}
+#cust_sectors {
+    position: absolute;
+    top: 30px;
+    left: -180px;
+    width: 180px;
+    background: #EEE;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 5px;
+}
+#cust_sectors>* {
+    margin:5px;
+    width: 153px;
+}
 
 #top_header_container {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     z-index: 50;
     padding-right: 100px;
+    padding-bottom: 5px;
     pointer-events: none;
+}
+#top_header_container>* {
+    pointer-events: auto;
 }
 
 #top_header_mayday_container {
@@ -806,12 +872,29 @@ td {
 }
 
 .mayday_sector_title {
-    font-size: 1.1rem;
+    width:124px;
+    height: 27px;
+    padding: 4px 0 0 2px;
+    font-size: 0.7rem;
+    float:left;
+    margin:4px 2px;
 }
+.mayday_sector_btn_list {
+    float:right;
+}
+.mayday_row_div {
+    margin-top: 10px;
+}
+.mayday_info_tbl_l {
+    font-weight: bold;
+    text-align: right;
+}
+.mayday_info_tbl_r {
+    padding-left: 10px;
+    text-align: left;
+}
+.has_mayday {
 
-#mayday_scroll_div {
-    overflow: scroll;
-    height: 400px;
 }
 
 #osr_dialog {
@@ -819,7 +902,7 @@ td {
 }
 
 #objectives_dialog {
-    width: 190px;
+    width: 235px;
 }
 
 #iap_dialog {
@@ -928,6 +1011,12 @@ td {
     margin: 0 10px;
 }
 
+.benchmark_item_btn_2 {
+    width: 150px;
+    margin: 10 10px;
+}
+
+
 .benchmark_btn_parent_div {
     padding: 5px 0 5px 0;
 }
@@ -1003,17 +1092,14 @@ td {
 }
 
 #mayday_dialog {
-    width: 900px;
-    background: white;
+    width: 100%;
+    height: 100%;
+    background: #EEE;
 }
 
 #mayday_dialog_body {
     padding: 0;
-}
-
-#mayday_scroll_div {
-    min-height: 370px;
-    overflow: scroll;
+    background: #EEE;
 }
 
 .mayday_list li {
@@ -1033,35 +1119,23 @@ td {
 .mayday_toggle {
     display: inline-block;
     float: left;
-    padding: 0;
-    height: 20px;
+    padding: 6px 0 0 0;
+    height: 35px;
     width: 120px;
     font-size: 0.9rem;
-    margin: 4px;
+    margin: 5px;
 }
 
-.mayday_select {
-    text-align: center;
-    background: #CCC;
-    color: #666;
-    border: none;
-    border-radius: 3px;
-    padding: 4px 4px 4px 4px;
-    text-shadow: 1px 1px #AAA;
-    cursor: pointer;
-    box-shadow: 1px 1px 2px #888;
-    width: 250px;
-    display: block;
-    margin: 10px 4px 5px 4px;
+#mayday_table_main {
+    height:95%;
 }
-
 #mayday_table_main td {
     vertical-align: top;
 }
 
 #mayday_left_td {
     padding: 0;
-    width: 285px;
+    width: 285px !important;
     background: #EEE;
 }
 
@@ -1072,42 +1146,55 @@ td {
 }
 
 .mayday_name_label {
-    padding-top: 3px;
     float: left;
+    font-weight: bold;
 }
-
+.mayday_value {
+    padding-left:5px;
+}
 .mayday_psi_btn {
     margin-top: 1px;
-    float: left;
+    margin-right: 4px;
+    float: right;
 }
 
+.mayday_box_title_edit {
+    margin-left:40px;
+}
 .mayday_box_title {
     font-size: 1.1rem;
+    font-weight: bold;
     color: #666;
     margin-bottom: 5px;
     text-align: center;
-    float: left;
+    width: 100px;
+    float:left;
 }
 
 .mayday_clear_btn {
     height: 24px;
     padding: 2px;
-    margin-right: 6px;
-    float: right;
+    margin-right: 4px;
+    float: left;
 }
 
 #new_mayday_btn {
-    width: 116px;
+    width: 272px;
     margin: 4px;
 }
-
+.mayday_timer {
+    font-size: 1.1rem;
+    color: #666;
+    float: right;
+    margin-right: 5px;
+}
 #new_mayday_btn_icon {
     height: 12px;
     width: 12px;
     margin: 4px;
 }
 
-.mayday_info_div {
+#mayday_info_edit_div {
     padding: 5px;
     border: 1px solid #666;
     margin: 4px 4;
@@ -1115,7 +1202,7 @@ td {
 }
 
 #mayday_right_td {
-    width: 613px;
+    width: 100%;
     height: 100%;
 }
 
@@ -1123,6 +1210,7 @@ td {
     height: 100%;
     width: 100%;
     padding: 10px;
+    float: left;
 }
 
 #mayday_right_tab_div {
@@ -1136,6 +1224,43 @@ td {
     box-shadow: none;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+}
+#mayday_list_box {
+    width: 100%;
+    background: #EEE;
+    float: left;
+}
+.mayday_saved {
+    width: 228px;
+    background: #fff8f3;
+    float: left;
+    margin: 10px;
+    padding: 4px;
+    border: 3px double #999;
+}
+.mayday_saved_selected {
+    box-shadow: 0 0 25px blue;
+    border: 4px solid red;
+    background: lightpink;
+}
+.mayday_saved:hover {
+    background: white;
+    cursor: pointer;
+}
+.mayday_saved:active {
+    background: darkgray;
+    cursor: pointer;
+}
+.mayday_misc_value {
+    width:104px;
+    height: 20px;
+    font-size: 0.8rem;
+    float:left;
+    text-align: center;
+    border: 1px solid darkgray;
+    background: #EEE;
+    margin: 1px;
+    border-radius: 3px;
 }
 
 .select_on {
@@ -1155,7 +1280,7 @@ td {
 }
 
 .list_med_font_size {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     font-weight: 500;
 }
 
@@ -1171,7 +1296,6 @@ td {
 #mayday_td_left {
     width: 270px;
 }
-
 .mayday_name_input {
     width: 175px;
     margin: 0 4px;
@@ -1181,16 +1305,13 @@ td {
     color: black;
     float: left;
 }
-
 .mayday_unit_btn {
     float: left;
     margin: 4px;
 }
-
 #mayday_list_grablives li {
     padding: 0px;
 }
-
 #mayday_list_grablives {
     background: #CCFFCC;
 }
@@ -1228,12 +1349,8 @@ td {
 }
 
 .objective_btn {
-    width: 165px;
+    width: 210px;
     margin: 5px 10px 5px 10px;
-}
-
-#objectives_header_btn {
-    height: 45px;
 }
 
 #objective_right_col {
@@ -1247,10 +1364,6 @@ td {
 
 #objectives_btn_perccomplete {
     font-size: 0.6rem;
-}
-
-#osr_header_btn {
-    height: 45px;
 }
 
 #osr_btn_perccomplete {
@@ -1291,6 +1404,10 @@ td {
     float: left;
     margin: 0 5px;
 }
+.osr_toggle_btn_left {
+    width: 92px;
+    margin: 0 10px;
+}
 
 #osr_subfloor_btn {
     width: 215px;
@@ -1303,12 +1420,12 @@ td {
 
 #osr_address_btn {
     width: 220px;
-    margin: 5px 0 15px 0;
+    margin: 5px 0 10px 0;
 }
 
 #unit_osr_btn {
     width: 220px;
-    margin: 5px 0 15px 0;
+    margin: 5px 0 10px 0;
 }
 
 #emergency_traffic_dialog {
@@ -1318,6 +1435,22 @@ td {
 .emergency_traffic_item_btn {
     margin: 5px 0 5px 10px;
     width: 450px;
+}
+
+.mayday_select {
+    text-align: center;
+    background: #FFF;
+    color: #000;
+    border: 1px solid #9a9a9a;
+    border-radius: 3px;
+    padding: 4px 4px 4px 4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px #888;
+    display: block;
+    margin-bottom: 15px;
+    width: 250px;
+    height: 25px;
+    margin: 15px 4px 5px 4px;
 }
 
 .osr_select {
@@ -1336,7 +1469,8 @@ td {
 }
 
 #unit_people_dialog {
-    width: 400px;
+    width: 532px;
+    font-size: 1.1rem;
 }
 
 .unit_people_dialog_btn {
@@ -1370,10 +1504,10 @@ td {
     cursor: pointer !important;
 }
 
-#move_unit_btn {
-    width: 108px;
-    float: left;
-    margin: 10px;
+#move_unit_btn img {
+    width: 10px;
+    height: 10px;
+    margin-bottom: 5px;
 }
 
 #unit_people_dialog_row3_center_div {
@@ -1384,10 +1518,9 @@ td {
 
 .reset_clock_btn {
     float: right;
-    width: 120px;
-    height: 20px;
-    height: 22px;
-    margin: 4px 10px;
+    width: 150px;
+    height: 30px;
+    margin: 7px 10px 0 10px;
     padding: 0 4px;
 }
 
@@ -1429,7 +1562,7 @@ td {
 }
 
 #key_dialog {
-    width: 175px;
+    width: 234px;
 }
 
 #key_dialog > .dialog_body {
@@ -1437,12 +1570,12 @@ td {
 }
 
 .key_btn {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     float: left;
     margin: 5px;
-    font-size: 1.3rem;
-    padding: 5px;
+    font-size: 1.7rem;
+    padding: 7px;
 }
 
 #key_output_value {
@@ -1451,7 +1584,7 @@ td {
     height: 40px;
     background: #DDD;
     padding: 0 10px;
-    text-align: right;
+    text-align: center;
 }
 
 #key_input {
@@ -1492,20 +1625,37 @@ ul {
     background: red !important;
 }
 
-#streetname_dialog {
+
+#inc_info_dialog {
     width: 450px;
 }
-
-#streetname_dialog>*>input {
+#inc_info_dialog>*>input {
     margin: 5px;
 }
-
-#streetname_custom_input {
+#inc_info_box {
+    float: left;
+    margin-left: 10px;
+    background: white;
+}
+#inc_info_btn {
+    font-size: 0.9rem;
+    float:left;
+    margin-right:5px;
+    padding-top: 5px;
+}
+#inc_num_custom_input {
     margin-top: 5px;
     width: 380px;
 }
-
-#streetname_dlg_clear {
+#inc_num_dlg_clear {
+    float: right;
+    margin: 5px;
+}
+#inc_address_custom_input {
+    margin-top: 5px;
+    width: 380px;
+}
+#inc_address_dlg_clear {
     float: right;
     margin: 5px;
 }
@@ -1536,11 +1686,20 @@ ul {
 }
 
 #version_text {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    background: white;
+    /*position: fixed;*/
+    /*bottom: 30px;*/
+    /*left: 10px;*/
     z-index: 150;
+    background: white;
+    margin: 0 10px;
+}
+#copyright_text {
+    /*position: fixed;*/
+    /*bottom: 10px;*/
+    /*left: 10px;*/
+    z-index: 150;
+    background: white;
+    margin: 0 10px;
 }
 
 .top_header_btn {
@@ -1578,9 +1737,8 @@ ul {
 }
 
 #mayday_and_tbar_container {
-    padding-top: 50px;
-    margin-bottom: 50px;
-    padding-right: 90px;
+    margin-bottom: 10px;
+    padding-right: 105px;
 }
 
 #address_dlg_clear {
@@ -1713,11 +1871,197 @@ ul {
     margin-left: 50px;
 }
 
-.report_div_header_span {
-    font-size: 1.05rem;
-    font-weight: bold;
+.perc_bar_bg {
+    border: 1px solid black;
+    background: black;
+    width: 3px;
+    height: 15px;
+    float: left;
+}
+.perc_bar_fg {
+    background: lightgreen;
+    width: 1px;
+    height: 13px;
 }
 
-.report_div_header_value_span {
-    font-size: 1.05rem;
+.perc_horz_bar_bg {
+    background: black;
+    border: 1px solid black;
+    height: 3px;
+    width: 80px;
+}
+.perc_horz_bar {
+    background: lightgreen;
+    height: 1px;
+    width: 78px;
+}
+#osr_header_btn {
+    height: 30px;
+}
+#objectives_header_btn {
+    height: 30px;
+}
+#branch_btn {
+    margin-bottom: 50px;
+}
+
+#inc_type_icon {
+    width: 52px;
+    height: 51px;
+    float:left;
+    border: none;
+    background: white;
+}
+
+.benchmark_triage_input {
+    width: 50px;
+    margin: 10px;
+}
+
+.vert_spacer {
+    height:15px;
+}
+
+.mayday_select_half {
+    float:left;
+    width:120px;
+}
+
+.mayday_check {
+    width: 15px;
+    height: 15px;
+    margin: 5px !important;
+}
+
+#osr_foam_btn {
+    width:220px;
+    margin: 5px 0 10px 0;
+}
+#osr_egress_btn {
+    width:220px;
+    margin: 5px 0 10px 0;
+}
+
+.splash_version {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: transparent !important;
+}
+
+.psi_btn.unit_people_dialog_btn {
+    font-size:1.1rem;
+    width: 50px;
+    margin: 8px !important;
+}
+
+.unit_people_dialog_btn.button.sm_round_btn {
+    font-size:1.2rem;
+    width:30px;
+    height:30px;
+    border-radius: 20px;
+    margin-right: 10px !important;
+}
+
+#previnc_container {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top: 1px black solid;
+    border-left: 1px black solid;
+    border-bottom: 1px black solid;
+    background: #ccd6e4;
+}
+.view_previnc_btn {
+    width:100px;
+    float:left;
+    margin: 20px;
+}
+.previnc_btn_logo {
+    width:15px;
+    height:15px;
+}
+.previnc_right_col {
+    float:left;
+    overflow: scroll;
+    max-height: 600px;
+    max-width:550px;
+}
+.previnc_table {
+    border:5px double black;
+    background: white;
+    margin: 20px;
+}
+.previnc_table td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.delbtn {
+    border:1px solid darkgray;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+}
+.delbtn:hover {
+    cursor: pointer;
+}
+.delbtn:active {
+    cursor: pointer;
+    border: 2px solid black;
+}
+.load_btn {
+    background: lightgreen;
+}
+.del_btn {
+    background: deeppink;
+}
+.prev_table_type_icon {
+    width:30px;
+    height:30px;
+}
+
+
+.glowgreen {
+    background: green;
+    color: white;
+}
+
+.glowgreen:hover {
+    background: DarkGreen;
+    color: white;
+}
+
+.glowgreen:active {
+    background: #666;
+    color: white;
+}
+
+.disabled, .disabled:hover, .disabled:active {
+    background: #999 !important;
+    color: #EEE;
+    cursor: default;
+    opacity: 0.5;
+}
+
+.cancel_btn {
+    background: lightblue;
+    color: #666;
+}
+.cancel_btn:hover {
+    background: #c1f0ff;
+}
+.cancel_btn:active {
+    background: #92b6c3;
+}
+
+.tbar_unit_btn.unit_btn.button.ui-draggable.wiggle.ui-draggable-dragging {
+    border: 4px red solid !important;
+    z-index: 250;
+}
+.unit_move_hover {
+    background: #94ff97;
 }

@@ -1,0 +1,28 @@
+
+.div_report_title_block {
+    float:right;
+    text-align: right;
+    padding:10px;
+    background: #CCC;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: none;
+
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-right: 1px solid #999;
+}
+.div_report_block {
+    float:left;
+}
+
+.report_div_header_span {
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.report_div_header_value_span {
+    font-size: 1.05rem;
+}
