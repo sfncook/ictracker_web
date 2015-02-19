@@ -1953,6 +1953,10 @@ function initIncInfoDialog() {
     $("#inc_address_dlg_clear").click(function () {
         $("#inc_address_custom_input").val("");
     });
+
+    $("#inc_info_btn").click(function () { // init map pop-up
+    	window.open('https://maps.google.com/?daddr=' + encodeURI(inc_address), '_blank');
+    });
 }
 
 

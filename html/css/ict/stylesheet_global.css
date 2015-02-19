@@ -425,6 +425,11 @@ td {
     color: white;
     font-size: 1.2rem;
 }
+#maps_btn {
+    float: left;
+    background: #dfd;
+    font-size: 1.2rem;
+}
 .offensive_btn {
     background: green !important;
     color: white;
