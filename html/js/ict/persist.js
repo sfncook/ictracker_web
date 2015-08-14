@@ -480,6 +480,15 @@ function loadTbarFromCookie(tbarObj) {
     // Par Tbar
     if (typeof tbarObj['btn_ids_with_par'] != 'undefined') {
         tbarEl.data({'btn_ids_with_par': tbarObj['btn_ids_with_par']});
+        many_par_unit_btns = 0
+        tbarObj['btn_ids_with_par'].forEach(function(par_item) {
+            if(par_item.indexOf("par_unit_btn")===0) {
+                many_par_unit_btns++;
+            }
+        });
+        if(tbarEl.find(".tbar_unit_btn").length===many_par_unit_btns && many_par_unit_btns>0) {
+            tbarEl.find(".par_btn").addClass("has_par");
+        }
     }
     // TODO: Turn tbar par btn green if needed
     // TODO: Update tbar par timer (?)
