@@ -106,6 +106,9 @@ function tbarToJson(tbarEl) {
     });
     tbarObj['units'] = units;
 
+    // Acct button
+    tbarObj['acct_unit_btn'] = tbarEl.find(".acct_unit_btn").html();
+
     // Par Tbar
     var btn_ids_with_par = new Array();
     if (typeof tbarEl.data('btn_ids_with_par') != 'undefined') {
@@ -470,6 +473,9 @@ function loadTbarFromCookie(tbarObj) {
         tbarEl.find(".title_text").html(title_text);
     }
     addAllUnitsToTbar(tbarEl, units);
+
+    // Acct button
+    tbarEl.find(".acct_unit_btn").html(tbarObj['acct_unit_btn']);
 
     // Par Tbar
     if (typeof tbarObj['btn_ids_with_par'] != 'undefined') {
