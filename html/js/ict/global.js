@@ -2912,6 +2912,7 @@ function addTbar(col_x, row_y) {
 //                $("#acct_osr_btn").addClass("glowlightgreen");
 //                updateOsrPercentComplete();
                 hideAllDialogs();
+                saveCookieState();
             }
         )
     );
