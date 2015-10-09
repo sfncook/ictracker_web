@@ -3798,6 +3798,25 @@ var unitTypes = [
     AirVac];
 
 var unitsByTypeByCity = {
+    "BlueCard": {
+        Engine: [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6"],
+        Ladder: [
+            "L1",
+            "L2",
+            "L3",
+            "L4"],
+        BC: [
+            "BC1",
+            "BC2",
+            "BC3",
+            "BC4"]
+    },
     "Chandler": {
         Engine: [
             "E282",
